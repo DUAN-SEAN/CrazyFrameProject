@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Crazy.ServerBase
+namespace Crazy.NetSharp
 {
     public interface IServiceEventHandler
     {

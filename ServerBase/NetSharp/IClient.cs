@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Crazy.ServerBase
+namespace Crazy.NetSharp
 {
     /// <summary>
     /// 服务器消息封装

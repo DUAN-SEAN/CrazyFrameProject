@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Crazy.NetSharp
+namespace BlackJack.Utils
 {
     /// <summary>
     /// 可锁现场接口
