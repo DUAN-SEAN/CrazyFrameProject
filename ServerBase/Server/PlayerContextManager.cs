@@ -58,6 +58,7 @@ namespace Crazy.ServerBase
             }
 
             /// 创建一个新现场对象
+            /// 之后可以建立对象池 而不需要每次都实例化
             IManagedContext newCtx = Activator.CreateInstance(m_contextType) as IManagedContext;
 
             /// 生成新的ContexId并绑定到新的Context对象上

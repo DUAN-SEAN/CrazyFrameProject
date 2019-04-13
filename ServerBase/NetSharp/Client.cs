@@ -164,7 +164,8 @@ namespace Crazy.NetSharp
         }
 
         /// <summary>
-        /// Posts the local message. Blocking operation.
+        /// 将本地消息发送给Client
+        /// Client接收到消息将在虚拟线程的任务1中交给玩家现场处理
         /// </summary>
         /// <param name="msg">Message.</param>
         public Boolean PostLocalMessage(ILocalMessage msg)
@@ -325,6 +326,7 @@ namespace Crazy.NetSharp
                                 tempHandler = client.m_clientEventHandler;
                                 using (await ContextLock.Create(tempHandler))
                                 {
+                                    //将从网络得来的数据交给玩家现场处理  
                                     bytesHandled = await client.m_clientEventHandler.OnData(buffer, bytesLeft);
                                 }
                             }
@@ -386,6 +388,7 @@ namespace Crazy.NetSharp
                                 tempHandler = client.m_clientEventHandler;
                                 using (await ContextLock.Create(tempHandler))
                                 {
+                                    //将本地消息丢到玩家现场处理
                                     await client.m_clientEventHandler.OnMessage(taskMessaging.Result);
                                 }
                                 break;

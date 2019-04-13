@@ -20,6 +20,12 @@ namespace Crazy.ServerBase
         public virtual bool Initialize<GlobalConfigureType>(string globalPath,Type plyaerContextType,Protocol.MessageDispather messageDispather,Protocol.OpcodeTypeDictionary opcodeTypeDictionary,string serverName)
              where GlobalConfigureType : ServerBaseGlobalConfigure, new()
         {
+            if (!InitlizeLogConfigure())
+            {
+                Log.Error("初始化日志系统失败");
+                return false;
+            }
+
             if(messageDispather == null)
             {
                 Log.Error("messageDispather = null");
@@ -85,10 +91,43 @@ namespace Crazy.ServerBase
         {
             return true;
         }
-
+        /// <summary>
+        /// 由网络层Service触发的事件
+        /// 内部将注册玩家上下文
+        /// </summary>
+        /// <param name="client">网络层Client</param>
+        /// <returns></returns>
         public Task<IClientEventHandler> OnConnect(IClient client)
         {
-            throw new NotImplementedException();
+            if (client == null)
+            {
+                Log.Error("OnConnect, but client is null");
+            }
+
+            Log.Debug("Ready one OnConnect");
+
+            // 创建一个PlayerContext对象
+            // 注意这里的PlayerConetext和玩家逻辑线程上下文不一样 这里只允许客户端与服务器的上下文注册
+            var playerCtx = PlayerCtxManager.AllocPlayerContext() as PlayerConetextBase;
+            if (playerCtx == null)
+            {
+                Log.Error("OnConnect player context allocted failed");
+                return Task.FromResult<IClientEventHandler>(null);
+
+            }
+
+       
+            client.SetSocketRecvBufferSize(m_globalConfigure.Global.Network.SocketInputBufferLen);
+            client.SetSocketSendBufferSize(m_globalConfigure.Global.Network.SocketOutputBufferLen);
+
+            // 将client和ctx关联起来
+            playerCtx.AttachClient(client,OpcodeTypeDic);
+
+            // 通知玩家现场连接完成
+            playerCtx.OnConnected();
+
+            // 包装一个完成的Task返回 
+            return Task.FromResult<IClientEventHandler>(playerCtx);
         }
 
         public void OnException(Exception ex)
@@ -130,8 +169,10 @@ namespace Crazy.ServerBase
             string serverDNName)
             where TGlobalConfigClass :ServerBaseGlobalConfigure, new()
         {
-            //读取本地配置文件
-            //通过查找serverName这唯一的服务器名称查找对应的服务配置并初始化m_server(Global.Server)
+            //1:读取本地配置文件
+
+
+            //2:通过查找serverName这唯一的服务器名称查找对应的服务配置并初始化m_server(Global.Server)
 
 
             return true;

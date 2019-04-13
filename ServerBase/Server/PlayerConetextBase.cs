@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Crazy.NetSharp;
+using Crazy.ServerBase.Protocol;
 namespace Crazy.ServerBase
 {
     /// <summary>
@@ -16,17 +17,24 @@ namespace Crazy.ServerBase
         /// </summary>
         /// <param name="client">client对象</param>
         /// <param name="clientProtoDictionary">协议字典</param>
-        /// <param name="clientProtoHandlerDictionary">协议实现句柄字典</param>
-        public void AttachClient(IClient client)
+        public void AttachClient(IClient client,OpcodeTypeDictionary opcodeTypeDictionary)
         {
             if (m_client != null)
             {
                 m_client.Close();
             }
+            m_OpcodeTypeDictionary = opcodeTypeDictionary;
             m_client = client;
           
         }
-
+        /// <summary>
+        /// 通知玩家现场对象连接完成
+        /// 由ServerBase::OnConnect()来发起call
+        /// </summary>
+        public virtual void OnConnected()
+        {
+            Log.Debug("PlayerContextBase::OnConnected");
+        }
         #region ILockableContext
         public Task EnterLock()
         {
@@ -96,10 +104,17 @@ namespace Crazy.ServerBase
         /// 玩家现场和通信体绑定
         /// </summary>
         private IClient m_client;
+        /// <summary>
+        /// 
+        /// </summary>
+        private OpcodeTypeDictionary m_OpcodeTypeDictionary;
         #region IManagedContext
         public ulong ContextId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public string ContextStringName => throw new NotImplementedException();
         #endregion
+
+
+
     }
 }

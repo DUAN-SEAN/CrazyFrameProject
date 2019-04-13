@@ -12,6 +12,9 @@ namespace Crazy.NetSharp
 {
     /// <summary>
     /// 用来提供网络服务，提供Ip和端口服务
+    /// 
+    /// 服务器使用TcpListener进行端口监听
+    /// 并用TcpClient 与客户端进行面向连接
     /// </summary>
     public class Service
     {
@@ -22,6 +25,12 @@ namespace Crazy.NetSharp
             m_priority = priority;
             IncomingBufferSize = incomingBufferSize;
         }
+        /// <summary>
+        /// 启动服务 并将GameServer交给Service回调OnConeection and OnException
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="port"></param>
+        /// <param name="handler"></param>
         public void Start(IPAddress address, int port, IServiceEventHandler handler)
         {
             if (handler == null)
@@ -104,8 +113,12 @@ namespace Crazy.NetSharp
             Client client = new Client(tcpClient, m_priority);
             // 通知应用层OnConnect
             if (m_serviceEventHandler == null)
+            {
+                Log.Error("m_serviceEventHandler null");
                 return;
-
+            }
+                
+            //通知Server注册玩家 返回玩家现场
             var clientEventHandler = await m_serviceEventHandler.OnConnect(client);
             if (clientEventHandler == null)
             {
