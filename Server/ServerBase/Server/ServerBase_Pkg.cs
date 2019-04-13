@@ -6,16 +6,12 @@ using System.Threading.Tasks;
 
 namespace Crazy.ServerBase
 {
-    public interface IMessagePraser
-    {
-
-
-    }
     /// <summary>
-    /// 用于对protobuf的数据进行解析或者封装
+    /// ServerBase Package 
+    /// 所有关于消息解析封装的方法都在这
     /// </summary>
-    public class PortobufMessagePraser:IMessagePraser
+    public partial class ServerBase
     {
-
+        
     }
 }

@@ -9,7 +9,7 @@ using Crazy.NetSharp;
 
 namespace Crazy.ServerBase
 {
-    public class ServerBase:IServiceEventHandler
+    public partial class ServerBase:IServiceEventHandler
     {
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace Crazy.ServerBase
         /// <param name="messagePraser"></param>
         /// <param name="serverName"></param>
         /// <returns></returns>
-        public virtual bool Initialize<GlobalConfigureType>(string globalPath,Type plyaerContextType,Protocol.MessageDispather messageDispather,Protocol.OpcodeTypeDictionary opcodeTypeDictionary,IMessagePraser messagePraser,string serverName)
+        public virtual bool Initialize<GlobalConfigureType>(string globalPath,Type plyaerContextType,Protocol.MessageDispather messageDispather,Protocol.OpcodeTypeDictionary opcodeTypeDictionary,IMessagePacker messagePraser,string serverName)
              where GlobalConfigureType : ServerBaseGlobalConfigure, new()
         {
             if (!InitlizeLogConfigure())
@@ -199,7 +199,7 @@ namespace Crazy.ServerBase
 
         //服务器解包和封包机制 采取protobuf
 
-        private IMessagePraser m_messagePraser;
+        private IMessagePacker m_messagePraser;
         /// <summary>
         /// 玩家现场管理类
         /// </summary>

@@ -61,7 +61,11 @@ namespace Crazy.ServerBase
         /// <returns></returns>
         public Task<int> OnData(byte[] buffer, int dataAvailable)
         {
-            
+            //由ServerBase提供消息解析方法
+
+
+
+            return Task.FromResult<int>(0);
         }
 
         public Task OnDisconnected()
