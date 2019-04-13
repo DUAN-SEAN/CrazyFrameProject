@@ -20,5 +20,6 @@ namespace Crazy.Common
         {
             throw new NotImplementedException();
         }
+
     }
 }

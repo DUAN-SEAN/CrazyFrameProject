@@ -117,7 +117,7 @@ namespace Crazy.ServerBase
 
             // 创建一个PlayerContext对象
             // 注意这里的PlayerConetext和玩家逻辑线程上下文不一样 这里只允许客户端与服务器的上下文注册
-            var playerCtx = PlayerCtxManager.AllocPlayerContext() as PlayerConetextBase;
+            var playerCtx = PlayerCtxManager.AllocPlayerContext() as PlayerContextBase;
             if (playerCtx == null)
             {
                 Log.Error("OnConnect player context allocted failed");

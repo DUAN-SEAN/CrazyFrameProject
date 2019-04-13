@@ -12,7 +12,7 @@ namespace Crazy.ServerBase
     /// <summary>
     /// 玩家现场基类
     /// </summary>
-    public class PlayerConetextBase : IClientEventHandler,ILocalMessageHandler,ILockableContext,IManagedContext
+    public class PlayerContextBase : IClientEventHandler,ILocalMessageHandler,ILockableContext,IManagedContext
     {
         /// <summary>
         /// 将玩家现场和一个client对象关联在一起
@@ -101,6 +101,9 @@ namespace Crazy.ServerBase
                         Log.Error($"Message Deserialize FAIL MessageType = {deserializeObject.GetType()}");
                         return 0;
                     }
+                    //在这里将消息进行分发
+
+
                 }
                 catch (Exception ex)
                 {
