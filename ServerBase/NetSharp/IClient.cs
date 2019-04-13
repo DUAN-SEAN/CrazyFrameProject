@@ -126,7 +126,14 @@ namespace Crazy.NetSharp
 
         private static DateTime m_lastLockTime;
     }
-
+    /// <summary>
+    /// 本地消息接收者
+    /// </summary>
+    public interface ILocalMessageClient
+    {
+        // 向消息队列发送消息
+        bool PostLocalMessage(ILocalMessage msg);
+    }
     public interface IClient
     {
         // 发起对连接的断开

@@ -64,9 +64,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocol\MessageDispather.cs" />
     <Compile Include="Protocol\OpcodeTypeDictionary.cs" />
+    <Compile Include="Server\ContextAsyncAction.cs" />
     <Compile Include="Server\PlayerConetextBase.cs" />
+    <Compile Include="Server\PlayerContextManager.cs" />
     <Compile Include="Server\ServerBase.cs" />
     <Compile Include="NetSharp\Service.cs" />
+    <Compile Include="Server\ServerBaseLocalMesssageIDDef.cs" />
+    <Compile Include="Server\SessionFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Libs\ParallelExtensionsExtras\ParallelExtensionsExtras.csproj">

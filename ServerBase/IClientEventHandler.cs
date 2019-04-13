@@ -6,14 +6,7 @@ using System.Threading.Tasks;
 using Crazy.NetSharp;
 namespace Crazy.ServerBase
 {
-    /// <summary>
-    /// 本地消息继承的接口
-    /// 只要是本地消息都要继承这个接口
-    /// </summary>
-    public interface ILocalMessage
-    {
-        Int32 MessageId { get; }
-    }
+    
     /// <summary>
     /// 本地消息接口
     /// </summary>
