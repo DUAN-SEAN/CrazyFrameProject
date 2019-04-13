@@ -66,6 +66,31 @@ namespace Crazy.ServerBase
         {
             throw new NotImplementedException();
         }
+
+        public bool IsAvaliable()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddRef4AsyncAction()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetRef4AsyncAction()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveRef4AsyncAction()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool PostLocalMessage(ILocalMessage msg)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
         /// <summary>
         /// 玩家现场和通信体绑定

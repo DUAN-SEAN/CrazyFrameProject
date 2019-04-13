@@ -17,7 +17,8 @@ namespace Crazy.ServerBase
         /// </summary>
         /// <param name="globalPath">全局配置文件路径</param>
         /// <returns></returns>
-        public virtual bool Initialize(string globalPath,Protocol.MessageDispather messageDispather,Protocol.OpcodeTypeDictionary opcodeTypeDictionary)
+        public virtual bool Initialize<GlobalConfigureType>(string globalPath,Type plyaerContextType,Protocol.MessageDispather messageDispather,Protocol.OpcodeTypeDictionary opcodeTypeDictionary,string serverName)
+             where GlobalConfigureType : ServerBaseGlobalConfigure, new()
         {
             if(messageDispather == null)
             {
@@ -32,6 +33,19 @@ namespace Crazy.ServerBase
             MessageDispather = messageDispather;
             OpcodeTypeDic = opcodeTypeDictionary;
 
+            //初始化配置文件
+            if (!InitlizeServerConfigure<GlobalConfigureType>(globalPath,serverName))
+            {
+                Log.Error("初始化配置文件失败");
+                return false;
+            }
+            //初始化上下文管理器
+            if (!InitializePlayerContextManager(plyaerContextType,m_configServer.maxPlayerCtx))
+            {
+                Log.Error("初始化玩家上下文管理器失败");
+                return false;
+            }
+            //初始化网络
             if (!InitializeNetWork())
             {
                 Log.Error("配置网络出现错误");
@@ -50,6 +64,7 @@ namespace Crazy.ServerBase
                 Log.Error("配置文件未找到当前服务器的配置信息");
                 return false;
             }
+            
             //生成服务 监听端口
             m_service = new Service();
             if(m_service == null)
@@ -80,7 +95,27 @@ namespace Crazy.ServerBase
         {
             throw new NotImplementedException();
         }
+        /// <summary>
+        /// 初始化底层的玩家上下文对象管理器。
+        /// </summary>
+        /// <param name="playerContextType">业务层最终玩家上下文对象类型，必须有无参数的构造函数。</param>
+        /// <param name="playerContextMax"></param>
+        /// <returns>初始化是否成功。</returns>
+        protected virtual bool InitializePlayerContextManager(Type playerContextType, int playerContextMax = int.MaxValue)
+        {
+            try
+            {
+                PlayerCtxManager = new PlayerContextManager();
+                PlayerCtxManager.Initialize(playerContextType, m_serverId, playerContextMax);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"ServerBase::InitializePlayerContextManager{e}");
+                return false;
+            }
 
+            return true;
+        }
 
         //配置文件读取 服务器全局配置、游戏配置、NLog配置、mongoDB配置
 
@@ -95,6 +130,9 @@ namespace Crazy.ServerBase
             string serverDNName)
             where TGlobalConfigClass :ServerBaseGlobalConfigure, new()
         {
+            //读取本地配置文件
+            //通过查找serverName这唯一的服务器名称查找对应的服务配置并初始化m_server(Global.Server)
+
 
             return true;
 
@@ -115,6 +153,10 @@ namespace Crazy.ServerBase
         //服务器解包和封包机制 采取protobuf
 
 
+        /// <summary>
+        /// 玩家现场管理类
+        /// </summary>
+        private PlayerContextManager PlayerCtxManager;
 
         /// <summary>
         /// 提供网络服务
@@ -127,7 +169,7 @@ namespace Crazy.ServerBase
         /// <summary>
         /// 服务器Id
         /// </summary>
-        private Int32 m_id;
+        private Int32 m_serverId;
         /// <summary>
         /// 服务器名称
         /// </summary>

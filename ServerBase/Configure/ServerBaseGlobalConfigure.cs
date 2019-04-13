@@ -106,6 +106,12 @@ namespace Crazy.ServerBase.Configure
         /// </summary>
         [XmlAttribute("Port")]
         public Int32 EndPortPort { get; set; }
-    
+
+        /// <summary>
+        /// 最大玩家人数
+        /// </summary>
+        [XmlAttribute("maxPlayerCtx")]
+        public Int32 maxPlayerCtx { get; set; }
+
     }
 }
