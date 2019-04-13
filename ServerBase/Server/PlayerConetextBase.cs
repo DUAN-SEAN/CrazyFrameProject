@@ -53,9 +53,15 @@ namespace Crazy.ServerBase
 
 
         #region IClientEventHandler
+        /// <summary>
+        /// 由
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <param name="dataAvailable"></param>
+        /// <returns></returns>
         public Task<int> OnData(byte[] buffer, int dataAvailable)
         {
-            throw new NotImplementedException();
+            
         }
 
         public Task OnDisconnected()

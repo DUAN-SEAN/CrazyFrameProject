@@ -11,13 +11,19 @@ namespace Crazy.ServerBase
 {
     public class ServerBase:IServiceEventHandler
     {
+
         /// <summary>
         /// 服务器初始化 配置文件初始化、协议字典初始化、网络初始化
-
         /// </summary>
-        /// <param name="globalPath">全局配置文件路径</param>
+        /// <typeparam name="GlobalConfigureType"></typeparam>
+        /// <param name="globalPath"></param>
+        /// <param name="plyaerContextType"></param>
+        /// <param name="messageDispather"></param>
+        /// <param name="opcodeTypeDictionary"></param>
+        /// <param name="messagePraser"></param>
+        /// <param name="serverName"></param>
         /// <returns></returns>
-        public virtual bool Initialize<GlobalConfigureType>(string globalPath,Type plyaerContextType,Protocol.MessageDispather messageDispather,Protocol.OpcodeTypeDictionary opcodeTypeDictionary,string serverName)
+        public virtual bool Initialize<GlobalConfigureType>(string globalPath,Type plyaerContextType,Protocol.MessageDispather messageDispather,Protocol.OpcodeTypeDictionary opcodeTypeDictionary,IMessagePraser messagePraser,string serverName)
              where GlobalConfigureType : ServerBaseGlobalConfigure, new()
         {
             if (!InitlizeLogConfigure())
@@ -38,7 +44,7 @@ namespace Crazy.ServerBase
             }
             MessageDispather = messageDispather;
             OpcodeTypeDic = opcodeTypeDictionary;
-
+            m_messagePraser = messagePraser;
             //初始化配置文件
             if (!InitlizeServerConfigure<GlobalConfigureType>(globalPath,serverName))
             {
@@ -193,7 +199,7 @@ namespace Crazy.ServerBase
 
         //服务器解包和封包机制 采取protobuf
 
-
+        private IMessagePraser m_messagePraser;
         /// <summary>
         /// 玩家现场管理类
         /// </summary>

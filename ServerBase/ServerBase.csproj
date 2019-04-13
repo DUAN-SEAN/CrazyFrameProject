@@ -67,6 +67,7 @@
     <Compile Include="Server\ContextAsyncAction.cs" />
     <Compile Include="Server\PlayerConetextBase.cs" />
     <Compile Include="Server\PlayerContextManager.cs" />
+    <Compile Include="Server\MessagePraser.cs" />
     <Compile Include="Server\ServerBase.cs" />
     <Compile Include="NetSharp\Service.cs" />
     <Compile Include="Server\ServerBaseLocalMesssageIDDef.cs" />
