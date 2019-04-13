@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NLog;
 using Crazy.NetSharp;
-
+using Crazy.Common;
 namespace Crazy.ServerBase
 {
     public partial class ServerBase:IServiceEventHandler
@@ -23,7 +23,7 @@ namespace Crazy.ServerBase
         /// <param name="messagePraser"></param>
         /// <param name="serverName"></param>
         /// <returns></returns>
-        public virtual bool Initialize<GlobalConfigureType>(string globalPath,Type plyaerContextType,Protocol.MessageDispather messageDispather,Protocol.OpcodeTypeDictionary opcodeTypeDictionary,IMessagePacker messagePraser,string serverName)
+        public virtual bool Initialize<GlobalConfigureType>(string globalPath,Type plyaerContextType,MessageDispather messageDispather,OpcodeTypeDictionary opcodeTypeDictionary,IMessagePacker messagePraser,string serverName)
              where GlobalConfigureType : ServerBaseGlobalConfigure, new()
         {
             if (!InitlizeLogConfigure())
@@ -228,10 +228,10 @@ namespace Crazy.ServerBase
         /// <summary>
         /// 消息分发 所有走网络的消息都通过这个进行分发
         /// </summary>
-        private Protocol.MessageDispather MessageDispather;
+        private MessageDispather MessageDispather;
         /// <summary>
         /// 协议字典
         /// </summary>
-        private Protocol.OpcodeTypeDictionary OpcodeTypeDic;
+        private OpcodeTypeDictionary OpcodeTypeDic;
     }
 }

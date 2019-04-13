@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Crazy.ServerBase.Protocol
+namespace Crazy.Common
 {
     /// <summary>
     /// 所有走网络的消息类型都在此加载

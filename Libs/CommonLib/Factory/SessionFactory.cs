@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Crazy.ServerBase
+namespace Crazy.Common
 {
     /// <summary>
     /// sessionid生成工厂

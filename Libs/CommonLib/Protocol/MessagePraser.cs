@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Google.Protobuf;
 
-namespace Crazy.ServerBase
+namespace Crazy.Common
 {
     public interface IMessagePacker
     {

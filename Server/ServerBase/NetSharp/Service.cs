@@ -7,7 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-
+using Crazy.Common;
 namespace Crazy.NetSharp
 {
     /// <summary>
