@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Crazy.NetSharp;
 using Crazy.Common;
 using System.IO;
+using System.Threading;
 
 namespace Crazy.ServerBase
 {
@@ -38,9 +39,15 @@ namespace Crazy.ServerBase
             Log.Debug("PlayerContextBase::OnConnected");
         }
         #region ILockableContext
-        public Task EnterLock()
+        public async Task EnterLock()
         {
-            throw new NotImplementedException();
+            await m_ctxLock.WaitAsync();
+
+            m_lockedBindStubLock = m_bindStubLock;
+            if (m_lockedBindStubLock != null)
+            {
+                await m_lockedBindStubLock.WaitAsync();
+            }
         }
         public long GetInstanceId()
         {
@@ -49,7 +56,12 @@ namespace Crazy.ServerBase
         
         public void LeaveLock()
         {
-            throw new NotImplementedException();
+            if (m_lockedBindStubLock != null)
+            {
+                m_lockedBindStubLock.Release();
+                m_lockedBindStubLock = null;
+            }
+            m_ctxLock.Release();
         }
         #endregion
 
@@ -172,6 +184,21 @@ namespace Crazy.ServerBase
         /// </summary>
         private OpcodeTypeDictionary m_OpcodeTypeDictionary;
         private byte[] dataBuff;
+
+        /// <summary>
+        /// 现场锁
+        /// </summary>
+        protected SemaphoreSlim m_ctxLock = new SemaphoreSlim(1);
+        /// <summary>
+        /// 用来保存ExchangeLock时传入的lock
+        /// </summary>
+        protected SemaphoreSlim m_bindStubLock = null;
+        /// <summary>
+        /// 已经处于锁定状态的stublock,见EnterLock
+        /// </summary>
+        protected SemaphoreSlim m_lockedBindStubLock = null;
+
+
         #region IManagedContext
         public ulong ContextId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
