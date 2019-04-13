@@ -11,7 +11,14 @@ namespace Crazy.Common
     /// </summary>
     public class OpcodeTypeDictionary
     {
+        public ushort GetIdByType(Type type)
+        {
+            throw new NotImplementedException();
+        }
 
-
+        public Type GetTypeById(ushort msgId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

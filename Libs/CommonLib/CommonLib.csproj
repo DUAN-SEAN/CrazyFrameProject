@@ -55,5 +55,8 @@
     <Compile Include="Protocol\MessagePraser.cs" />
     <Compile Include="Protocol\OpcodeTypeDictionary.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Message\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

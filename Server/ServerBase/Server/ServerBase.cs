@@ -11,7 +11,10 @@ namespace Crazy.ServerBase
 {
     public partial class ServerBase:IServiceEventHandler
     {
-
+        public ServerBase()
+        {
+            m_instance = this;
+        }
         /// <summary>
         /// 服务器初始化 配置文件初始化、协议字典初始化、网络初始化
         /// </summary>
@@ -233,5 +236,15 @@ namespace Crazy.ServerBase
         /// 协议字典
         /// </summary>
         private OpcodeTypeDictionary OpcodeTypeDic;
+
+        /// <summary>
+        /// 获取关联ServerBase类的句柄。
+        /// 继承类可以覆盖来获得更具体的类型。
+        /// </summary>
+        protected static ServerBase m_instance;
+        public static ServerBase Instance
+        {
+            get { return m_instance; }
+        }
     }
 }

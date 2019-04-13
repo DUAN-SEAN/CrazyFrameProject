@@ -69,6 +69,7 @@
     <Compile Include="Server\ServerBase.cs" />
     <Compile Include="NetSharp\Service.cs" />
     <Compile Include="LocalMessage\ServerBaseLocalMesssageIDDef.cs" />
+    <Compile Include="Server\ServerBase_Pkg.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Libs\CommonLib\CommonLib.csproj">
