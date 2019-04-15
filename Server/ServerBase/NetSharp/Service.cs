@@ -51,7 +51,7 @@ namespace Crazy.NetSharp
                 () => { ServiceStart().Wait(); },
                 TaskCreationOptions.LongRunning
             );
-            result.ContinueWith(OnException, TaskContinuationOptions.OnlyOnFaulted);
+            result.ContinueWith(OnException, TaskContinuationOptions.OnlyOnFaulted);//发生错误就通知ServerBase
             result.Start(TaskSchedulerHelper.TaskSchedulers[m_priority]);
             m_mainTask = result;
 

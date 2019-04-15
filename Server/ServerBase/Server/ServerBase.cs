@@ -9,7 +9,7 @@ using Crazy.NetSharp;
 using Crazy.Common;
 namespace Crazy.ServerBase
 {
-    public partial class ServerBase:IServiceEventHandler
+    public partial class ServerBase:IServiceEventHandler //提供Service使用事件
     {
         public ServerBase()
         {
@@ -48,6 +48,7 @@ namespace Crazy.ServerBase
             MessageDispather = messageDispather;
             OpcodeTypeDic = opcodeTypeDictionary;
             m_messagePraser = messagePraser;
+     
             //初始化配置文件
             if (!InitlizeServerConfigure<GlobalConfigureType>(globalPath,serverName))
             {
@@ -203,10 +204,7 @@ namespace Crazy.ServerBase
         //服务器解包和封包机制 采取protobuf
 
         private IMessagePacker m_messagePraser;
-        /// <summary>
-        /// 玩家现场管理类
-        /// </summary>
-        private PlayerContextManager PlayerCtxManager;
+       
 
         /// <summary>
         /// 提供网络服务
@@ -237,6 +235,10 @@ namespace Crazy.ServerBase
         /// </summary>
         private OpcodeTypeDictionary OpcodeTypeDic;
 
+        /// <summary>
+        /// 获取当前服务器的玩家上下文管理对象。
+        /// </summary>
+        public PlayerContextManager PlayerCtxManager { get; private set; }
         /// <summary>
         /// 获取关联ServerBase类的句柄。
         /// 继承类可以覆盖来获得更具体的类型。

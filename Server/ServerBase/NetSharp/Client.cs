@@ -168,7 +168,7 @@ namespace Crazy.NetSharp
         /// Client接收到消息将在虚拟线程的任务1中交给玩家现场处理
         /// </summary>
         /// <param name="msg">Message.</param>
-        public Boolean PostLocalMessage(ILocalMessage msg)
+        public bool PostLocalMessage(ILocalMessage msg)
         {
             if (!Closed)
             {
@@ -381,12 +381,12 @@ namespace Crazy.NetSharp
                             break;
                         case 1:
                             {
-                                // 从消息队列取消息
+                                // 继续从消息队列取新的消息
                                 tasks[1] = client.m_localMessages.DequeueAsync();
                                 var taskMessaging = (Task<ILocalMessage>)completedTask;
                                 // 取得锁调用回调
                                 tempHandler = client.m_clientEventHandler;
-                                using (await ContextLock.Create(tempHandler))
+                                using (await ContextLock.Create(tempHandler))//将玩家现场锁住 如果当前玩家现场正在处理消息就等着
                                 {
                                     //将本地消息丢到玩家现场处理
                                     await client.m_clientEventHandler.OnMessage(taskMessaging.Result);

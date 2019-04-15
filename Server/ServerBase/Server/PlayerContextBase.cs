@@ -132,47 +132,81 @@ namespace Crazy.ServerBase
 
             }
         }
-
+        //玩家上下文切断与客户端的联系
         public Task OnDisconnected()
         {
-            throw new NotImplementedException();
+            Log.Debug("PlayerContextBase::OnDisconnected");
+            // 默认直接关闭客户端对象并释放现场
+            m_client.Close();
+            Release();
+            return Task.CompletedTask;
         }
 
-        public void OnException(Exception e)
+        public virtual void OnException(Exception e)
         {
-            throw new NotImplementedException();
+            if (e != null)
+            {
+                Log.Error($"PlayerContextBase::OnException{e}");
+            }
+
+            // 默认直接关闭客户端对象并释放现场
+            m_client.Close();
+            Release();
         }
         #endregion
 
         #region ILocalMessageHandler
-        public Task OnMessage(ILocalMessage msg)
+        /// <summary>
+        /// 消息都走这里，从网络来的消息 或者是内部产生的消息 都走这里 
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <returns></returns>
+        public virtual async Task OnMessage(ILocalMessage msg)
         {
-            throw new NotImplementedException();
-        }
+            //在这里将处理一系列消息
 
-        public bool IsAvaliable()
+
+
+            //本地消息和网络消息分开
+
+
+            return;
+        }
+        /// <summary>
+        /// 从资源上释放玩家现场
+        /// </summary>
+        public virtual void Release()
         {
-            throw new NotImplementedException();
+            m_isReleased = true;
+            ServerBase.Instance.PlayerCtxManager.FreePlayerContext(this);
+        }
+        public virtual bool IsAvaliable()
+        {
+            return !m_isReleased;
         }
 
         public void AddRef4AsyncAction()
         {
-            throw new NotImplementedException();
+            Interlocked.Increment(ref m_asyncActionRef);
         }
 
         public int GetRef4AsyncAction()
         {
-            throw new NotImplementedException();
+            return m_asyncActionRef;
         }
 
         public void RemoveRef4AsyncAction()
         {
-            throw new NotImplementedException();
+            Interlocked.Decrement(ref m_asyncActionRef);
         }
 
-        public bool PostLocalMessage(ILocalMessage msg)
+        public virtual bool PostLocalMessage(ILocalMessage msg)
         {
-            throw new NotImplementedException();
+            if (IsAvaliable())
+            {
+                return m_client.PostLocalMessage(msg);
+            }
+            return false;
         }
         #endregion
         /// <summary>
@@ -180,11 +214,18 @@ namespace Crazy.ServerBase
         /// </summary>
         private IClient m_client;
         /// <summary>
-        /// 
+        /// 协议字典集
         /// </summary>
         private OpcodeTypeDictionary m_OpcodeTypeDictionary;
         private byte[] dataBuff;
-
+        /// <summary>
+        /// 是否已经释放
+        /// </summary>
+        protected bool m_isReleased = false;
+        /// <summary>
+        /// 针对asyncaction的ref
+        /// </summary>
+        protected int m_asyncActionRef = 0;
         /// <summary>
         /// 现场锁
         /// </summary>

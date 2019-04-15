@@ -134,7 +134,7 @@ namespace Crazy.NetSharp
         // 向消息队列发送消息
         bool PostLocalMessage(ILocalMessage msg);
     }
-    public interface IClient
+    public interface IClient:ILocalMessageClient
     {
         // 发起对连接的断开
         void Disconnect();
