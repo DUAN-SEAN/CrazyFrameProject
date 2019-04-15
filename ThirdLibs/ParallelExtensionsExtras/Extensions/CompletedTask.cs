@@ -20,6 +20,7 @@ namespace System.Threading.Tasks
     /// <remarks>A completed task can be useful for using ContinueWith overloads where there aren't StartNew equivalents.</remarks>
     public static class CompletedTask<TResult>
     {
+
         /// <summary>Initializes a Task.</summary>
         static CompletedTask()
         {

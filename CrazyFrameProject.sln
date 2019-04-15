@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ThirdLibs", "ThirdLibs", "{06EC4518-5D86-4567-8069-DBFA34D67963}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ThridLibs", "ThridLibs", "{06EC4518-5D86-4567-8069-DBFA34D67963}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{5CE1B740-46A8-4F15-89E5-C91747197F76}"
 EndProject
@@ -18,6 +18,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerBase", "Server\ServerBase\ServerBase.csproj", "{C62BC39F-6932-45F2-A626-4FAF7F836E6F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "ThirdLibs\Utils\Utils.csproj", "{484C2786-1F72-47AC-892A-1FAF8F85EFF5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{1298B84D-B05A-4CF4-9116-50CDE7F34437}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientBase", "Client\ClientBase\ClientBase.csproj", "{74BABE28-9DFB-495A-ABAF-1BCD9285AE63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +81,18 @@ Global
 		{484C2786-1F72-47AC-892A-1FAF8F85EFF5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{484C2786-1F72-47AC-892A-1FAF8F85EFF5}.Release|x64.ActiveCfg = Release|x64
 		{484C2786-1F72-47AC-892A-1FAF8F85EFF5}.Release|x64.Build.0 = Release|x64
+		{74BABE28-9DFB-495A-ABAF-1BCD9285AE63}.ClientAssertExport|Any CPU.ActiveCfg = Release|Any CPU
+		{74BABE28-9DFB-495A-ABAF-1BCD9285AE63}.ClientAssertExport|Any CPU.Build.0 = Release|Any CPU
+		{74BABE28-9DFB-495A-ABAF-1BCD9285AE63}.ClientAssertExport|x64.ActiveCfg = Release|Any CPU
+		{74BABE28-9DFB-495A-ABAF-1BCD9285AE63}.ClientAssertExport|x64.Build.0 = Release|Any CPU
+		{74BABE28-9DFB-495A-ABAF-1BCD9285AE63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74BABE28-9DFB-495A-ABAF-1BCD9285AE63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74BABE28-9DFB-495A-ABAF-1BCD9285AE63}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{74BABE28-9DFB-495A-ABAF-1BCD9285AE63}.Debug|x64.Build.0 = Debug|Any CPU
+		{74BABE28-9DFB-495A-ABAF-1BCD9285AE63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74BABE28-9DFB-495A-ABAF-1BCD9285AE63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74BABE28-9DFB-495A-ABAF-1BCD9285AE63}.Release|x64.ActiveCfg = Release|Any CPU
+		{74BABE28-9DFB-495A-ABAF-1BCD9285AE63}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +102,7 @@ Global
 		{C45218F8-09E7-4F57-85BC-5D8D2AC736A3} = {06EC4518-5D86-4567-8069-DBFA34D67963}
 		{C62BC39F-6932-45F2-A626-4FAF7F836E6F} = {31D259FF-49C2-45AE-B6E2-A1C789144175}
 		{484C2786-1F72-47AC-892A-1FAF8F85EFF5} = {06EC4518-5D86-4567-8069-DBFA34D67963}
+		{74BABE28-9DFB-495A-ABAF-1BCD9285AE63} = {1298B84D-B05A-4CF4-9116-50CDE7F34437}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {08FC3851-454A-42ED-9471-52790202813C}

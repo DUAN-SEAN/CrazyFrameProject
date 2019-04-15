@@ -24,6 +24,7 @@ namespace Crazy.ServerBase
     /// </summary>
     public class PlayerContextManager
     {
+
         public void Initialize(Type playerContextType, Int32 serverId, Int32 sizeMax)
         {
             // 保存最终PlayerContext的类型
