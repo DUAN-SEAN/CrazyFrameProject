@@ -156,6 +156,7 @@ namespace Crazy.ServerBase
             if (m_needResult && m_onResultLocalMsgClient != null && m_onResultLocalMsgClient.IsAvaliable())
             {
                 m_onResultLocalMsgClient.PostLocalMessage(this);
+                
             }
         }
 
