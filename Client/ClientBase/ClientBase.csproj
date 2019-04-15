@@ -53,5 +53,11 @@
     <Compile Include="CrazyNetSharp\ProtoHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Libs\CommonLib\CommonLib.csproj">
+      <Project>{0f3ecc0f-e8f4-434e-aaf9-95a912f2f565}</Project>
+      <Name>CommonLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

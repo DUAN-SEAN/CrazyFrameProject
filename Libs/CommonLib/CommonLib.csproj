@@ -50,6 +50,8 @@
     <Compile Include="Factory\SessionFactory.cs" />
     <Compile Include="Log\Log.cs" />
     <Compile Include="Log\NLogAdapter.cs" />
+    <Compile Include="Message\BaseAttribute.cs" />
+    <Compile Include="Message\DoubleMap.cs" />
     <Compile Include="Message\IFrameMessage.cs" />
     <Compile Include="Message\IMessage.cs" />
     <Compile Include="Message\IMessageDispatcher.cs" />
@@ -57,10 +59,15 @@
     <Compile Include="Message\IMHandler.cs" />
     <Compile Include="Message\IRequest.cs" />
     <Compile Include="Message\IRespone.cs" />
+    <Compile Include="Message\MessageAttribute.cs" />
+    <Compile Include="Message\MessageDispatherComponent.cs" />
+    <Compile Include="Message\MessageHandlerAttribute.cs" />
+    <Compile Include="Message\OpcodeTypeComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocol\MessageDispather.cs" />
     <Compile Include="Protocol\MessagePraser.cs" />
     <Compile Include="Protocol\OpcodeTypeDictionary.cs" />
+    <Compile Include="Tools\AssemblyHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Proto\" />
