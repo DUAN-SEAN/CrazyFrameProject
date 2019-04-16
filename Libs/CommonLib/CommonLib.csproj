@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\Assembly\TypeManager.cs" />
     <Compile Include="Base\Factory\SessionFactory.cs" />
     <Compile Include="Base\Log\Log.cs" />
     <Compile Include="Base\Log\NLogAdapter.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Protocol\MessagePraser.cs" />
     <Compile Include="Protocol\OpcodeTypeDictionary.cs" />
     <Compile Include="Tools\AssemblyHelper.cs" />
+    <Compile Include="Base\Assembly\UnOrderMultiMap.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
