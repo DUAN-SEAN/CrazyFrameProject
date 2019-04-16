@@ -14,6 +14,23 @@ namespace Crazy.Common
     }
     public class TypeManager
     {
+        private static TypeManager _instance;
+        public static TypeManager Instance
+        {
+            protected set {
+                 
+            }
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new TypeManager();
+                    return _instance;
+                }
+                return _instance;
+            }
+        }
+        
         //字典保存所有的类型，key：attribute Type ，value： Type of List
         private readonly UnOrderMultiMap<Type, Type> types = new UnOrderMultiMap<Type, Type>();
         //字典保存所有的程序集的实例，key：程序集枚举类型值 ，value：程序集
@@ -41,10 +58,20 @@ namespace Crazy.Common
                     BaseAttribute baseAttribute = (BaseAttribute)objects[0];
                     this.types.Add(baseAttribute.AttributeType, type);
                 }
+            }         
+        }
+        /// <summary>
+        /// 获取所有的类型
+        /// </summary>
+        /// <param name="systemAttributeType">Attribute Type</param>
+        /// <returns></returns>
+        public List<Type> GetTypes(Type systemAttributeType)
+        {
+            if (!this.types.ContainsKey(systemAttributeType))
+            {
+                return new List<Type>();
             }
-            
-           
-
+            return this.types[systemAttributeType];
         }
 
     }

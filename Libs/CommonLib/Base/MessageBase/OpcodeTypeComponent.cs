@@ -23,7 +23,7 @@ namespace Crazy.Common
             this.opcodeTypes.Clear();
             this.typeMessages.Clear();
 
-            List<Type> types = Game.EventSystem.GetTypes(typeof(MessageAttribute));
+            List<Type> types =TypeManager.Instance.GetTypes(typeof(MessageAttribute));
             foreach (Type type in types)
             {
                 object[] attrs = type.GetCustomAttributes(typeof(MessageAttribute), false);
