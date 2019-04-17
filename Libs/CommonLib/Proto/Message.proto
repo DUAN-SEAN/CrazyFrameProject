@@ -1,0 +1,9 @@
+syntax = "proto3";
+package Crazy.Common;
+
+message ChatOneMessage // IMessage
+{
+	int32 RpcId = 90;
+	string message = 1;
+}
+

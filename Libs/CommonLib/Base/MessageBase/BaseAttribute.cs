@@ -18,7 +18,7 @@ namespace Crazy.Common
         /// </summary>
         public BaseAttribute()
         {
-            this.AttributeType = this.GetType();
+            this.AttributeType = this.GetType();//获得attribute的实际类型
         }
     }
 }
