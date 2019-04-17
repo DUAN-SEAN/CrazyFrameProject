@@ -12,25 +12,17 @@ namespace Crazy.Common
     {
         Crazy
     }
+    /// <summary>
+    /// 用来管理所有打了标签的类型
+    /// </summary>
     public class TypeManager
     {
-        private static TypeManager _instance;
-        public static TypeManager Instance
-        {
-            protected set {
-                 
-            }
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new TypeManager();
-                    return _instance;
-                }
-                return _instance;
-            }
-        }
         
+
+        public TypeManager()
+        {
+
+        }
         //字典保存所有的类型，key：attribute Type ，value： Type of List
         private readonly UnOrderMultiMap<Type, Type> types = new UnOrderMultiMap<Type, Type>();
         //字典保存所有的程序集的实例，key：程序集枚举类型值 ，value：程序集
@@ -74,5 +66,23 @@ namespace Crazy.Common
             return this.types[systemAttributeType];
         }
 
+
+        private static TypeManager _instance;
+        public static TypeManager Instance
+        {
+            protected set
+            {
+
+            }
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new TypeManager();
+                    return _instance;
+                }
+                return _instance;
+            }
+        }
     }
 }
