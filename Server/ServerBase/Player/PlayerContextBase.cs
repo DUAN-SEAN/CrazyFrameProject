@@ -7,6 +7,7 @@ using Crazy.NetSharp;
 using Crazy.Common;
 using System.IO;
 using System.Threading;
+using Crazy.ServerBase.Protocol;
 
 namespace Crazy.ServerBase
 {

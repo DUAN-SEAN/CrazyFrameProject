@@ -1,25 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-
-namespace Crazy.Common
+using System.Threading.Tasks;
+using Crazy.Common;
+namespace Crazy.ServerBase.Protocol
 {
     /// <summary>
-    /// 消息分发组件，服务器所有的消息由此进行分发
+    /// 消息分发类型，将网络消息和handler进行绑定
+    ///
     /// </summary>
-    public class MessageDispatherComponent
+    public class MessageDispather
     {
-        public readonly Dictionary<ushort, List<IMHandler>> Handlers = new Dictionary<ushort, List<IMHandler>>();
         /// <summary>
         /// Load 在组件启动时调用
         /// </summary>
-        public  void Load()
+        public void Init()
         {
             Handlers.Clear();
 
-           // AppType appType = StartConfigComponent.Instance.StartConfig.AppType;
+            // AppType appType = StartConfigComponent.Instance.StartConfig.AppType;
 
-            List<Type> types = Game.EventSystem.GetTypes(typeof(MessageHandlerAttribute));
+            List<Type> types = TypeManager.Instance.GetTypes(typeof(MessageHandlerAttribute));
 
             foreach (Type type in types)
             {
@@ -43,7 +45,7 @@ namespace Crazy.Common
                 }
 
                 Type messageType = iMHandler.GetMessageType();//获取消息的类型
-                ushort opcode = Game.Scene.GetComponent<OpcodeTypeComponent>().GetOpcode(messageType);
+                ushort opcode = OpcodeTypeDictionary.Instance.GetIdByType(messageType);
                 if (opcode == 0)
                 {
                     Log.Error($"消息opcode为0: {messageType.Name}");
@@ -52,7 +54,6 @@ namespace Crazy.Common
                 RegisterHandler(opcode, iMHandler);
             }
         }
-
         public void RegisterHandler(ushort opcode, IMHandler handler)
         {
             if (!Handlers.ContainsKey(opcode))
@@ -64,7 +65,7 @@ namespace Crazy.Common
             Handlers[opcode].Add(handler);
         }
 
-        public void Handle(Session session, MessageInfo messageInfo)
+        public void Handle(PlayerContextBase playerContextBase, MessageInfo messageInfo)
         {
             List<IMHandler> handlers;
             if (!Handlers.TryGetValue(messageInfo.Opcode, out handlers))
@@ -77,7 +78,8 @@ namespace Crazy.Common
             {
                 try
                 {
-                    ev.Handle(session, messageInfo.Message);
+
+                    ev.Handle(playerContextBase, messageInfo.Message);
                 }
                 catch (Exception e)
                 {
@@ -85,5 +87,7 @@ namespace Crazy.Common
                 }
             }
         }
+        public readonly Dictionary<ushort, List<IMHandler>> Handlers = new Dictionary<ushort, List<IMHandler>>();
+
     }
 }

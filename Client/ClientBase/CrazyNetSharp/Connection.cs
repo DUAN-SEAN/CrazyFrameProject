@@ -1,5 +1,3 @@
-
-
 using BlackJack.LibClient.Protocol;
 using System;
 using System.Collections.Generic;
