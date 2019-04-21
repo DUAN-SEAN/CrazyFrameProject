@@ -55,6 +55,7 @@
     <Compile Include="Configure\ConfigLoader.cs" />
     <Compile Include="Configure\ServerBaseGlobalConfigure.cs" />
     <Compile Include="Configure\Util.cs" />
+    <Compile Include="Handler\C2S_LoginMessageHandler.cs" />
     <Compile Include="NetSharp\AwaitableQueue.cs" />
     <Compile Include="NetSharp\Client.cs" />
     <Compile Include="NetSharp\IClient.cs" />
@@ -63,12 +64,9 @@
     <Compile Include="NetSharp\Service.cs" />
     <Compile Include="Player\ContextAsyncAction.cs" />
     <Compile Include="Player\ILockableContext.cs" />
+    <Compile Include="Player\AHandler.cs" />
     <Compile Include="Player\PlayerContextBase.cs" />
     <Compile Include="Player\PlayerContextManager.cs" />
-    <Compile Include="Protocol\IMHandler.cs" />
-    <Compile Include="Protocol\MessageDispather.cs" />
-    <Compile Include="Protocol\MessagePraser.cs" />
-    <Compile Include="Protocol\OpcodeTypeDictionary.cs" />
     <Compile Include="Server\IClientEventHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\ServerBase.cs" />

@@ -6,6 +6,8 @@ using System.Text;
 
 namespace ProtobufComplier
 {
+    
+    
     internal class OpcodeInfo
     {
         public string Name;
@@ -28,15 +30,17 @@ namespace ProtobufComplier
         static void Main(string[] args)
         {
             Console.WriteLine("开始生成Opcode类!");
-           
+
             AllProto2CS();
             Console.WriteLine("开始生成Message类！");
             //string path = args[0];
-            
-            
+
+
             CommandRun(serverProtocPath, "");
             CommandRun(clientProtocPath, "");
             //CommandRun($"ProtocBat", "");
+           
+            
             Console.WriteLine("按下结束！");
             Console.ReadKey();
         }

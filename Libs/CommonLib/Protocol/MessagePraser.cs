@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Google.Protobuf;
 using Crazy.Common;
-namespace Crazy.ServerBase.Protocol
+namespace Crazy.Common
 {
     /// <summary>
     /// 用于对protobuf的数据进行解析或者封装

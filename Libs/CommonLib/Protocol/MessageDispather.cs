@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Crazy.Common;
-namespace Crazy.ServerBase.Protocol
+namespace Crazy.Common
 {
     /// <summary>
     /// 消息分发类型，将网络消息和handler进行绑定
     ///
     /// </summary>
-    public class MessageDispather
+    public class MessageDispather<PlayerContext>
     {
         /// <summary>
         /// Load 在组件启动时调用
@@ -65,7 +65,7 @@ namespace Crazy.ServerBase.Protocol
             Handlers[opcode].Add(handler);
         }
 
-        public void Handle(PlayerContextBase playerContextBase, MessageInfo messageInfo)
+        public void Handle(PlayerContext sender, MessageInfo messageInfo)
         {
             List<IMHandler> handlers;
             if (!Handlers.TryGetValue(messageInfo.Opcode, out handlers))
@@ -79,7 +79,7 @@ namespace Crazy.ServerBase.Protocol
                 try
                 {
 
-                    ev.Handle(playerContextBase, messageInfo.Message);
+                    ev.Handle<PlayerContext>(sender, messageInfo.Message);
                 }
                 catch (Exception e)
                 {

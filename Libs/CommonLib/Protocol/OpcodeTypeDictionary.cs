@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Crazy.Common;
-namespace Crazy.ServerBase.Protocol
+namespace Crazy.Common
 {
     /// <summary>
     /// 所有走网络的消息类型都在此加载
@@ -60,6 +60,7 @@ namespace Crazy.ServerBase.Protocol
         {
 
 			var type = this.GetTypeById(opcode);
+            Google.Protobuf.IMessage  message = typeMessages[opcode]as Google.Protobuf.IMessage;
 			return Activator.CreateInstance(type);
 
         }
