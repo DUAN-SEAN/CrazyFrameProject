@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Crazy.Common { 
     /// <summary>
-    /// 类型映射字典集
+    /// 类型映射字典集 一对多的映射关系
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="K"></typeparam>
