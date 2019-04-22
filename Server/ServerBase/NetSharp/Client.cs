@@ -158,6 +158,7 @@ namespace Crazy.NetSharp
             }
             finally
             {
+                //将buff放入缓存队列中
                 ClientOutputBuffer.UnlockSendBuffer(data);
             }
             return sendOk;

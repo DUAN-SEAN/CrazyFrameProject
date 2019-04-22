@@ -12,7 +12,7 @@ namespace Crazy.ServerBase
 {
     /// <summary>
     /// 玩家现场基类
-    public class PlayerContextBase : IClientEventHandler,ILocalMessageHandler,ILockableContext,IManagedContext,ISession
+    public class PlayerContextBase : IClientEventHandler,ILocalMessageHandler,ILockableContext,IManagedContext
     /// </summary>
     {
         /// <summary>
@@ -88,7 +88,7 @@ namespace Crazy.ServerBase
             // 以下的任何处理都使用异常传递机制表示这里出现问题，由调用上层处理该状况。
 
 
-            int dataOffset = 0;
+            int dataOffset = 0;//处理的消息长度
             const int uint16Length = sizeof(ushort);
             //由ServerBase提供消息解析方法
             while (true)
@@ -100,20 +100,49 @@ namespace Crazy.ServerBase
                 Type msgType = null;
                 Object deserializeObject = null;
                 MemoryStream deserializeBuff = null;
-
-                var byteHandled = ServerBase.Instance.UnpackProtobufObject(dataBuff, dataAvailable, dataOffset, out msgType, out deserializeObject, out deserializeBuff);
+                bool flag;
+                var byteHandled = ServerBase.Instance.UnpackProtobufObject(dataBuff, dataAvailable, dataOffset, out msgType, out deserializeObject, out deserializeBuff,out flag);
                 if (byteHandled == 0) return dataOffset;
 
                 try
                 {
                     //这里调用消息处理
-                    Google.Protobuf.IMessage message = deserializeObject as Google.Protobuf.IMessage;
+                    IMessage message = deserializeObject as IMessage;
                     if(message == null)
                     {
                         Log.Error($"Message Deserialize FAIL MessageType = {deserializeObject.GetType()}");
                         return 0;
                     }
-                    //在这里将消息进行分发
+                    var opcode = OpcodeTypeDictionary.Instance.GetIdByType(msgType);
+                    if (!flag)//普通消息
+                    {
+                        //在这里将消息进行分发
+                        MessageDispather.Instance.
+                            Handle(this, new MessageInfo
+                            {
+                                Message = message,
+                                Opcode = opcode
+                            });
+                    }
+                    else
+                    {
+                        IResponse response = message as IResponse;
+                        if (response == null)
+                        {
+                            throw new Exception($"flag is response, but message is not! {opcode}");
+                        }
+                        Action<IResponse> action;
+                        if (!m_requestCallback.TryGetValue(response.RpcId, out action))
+                        {
+                            return -1;
+                        }
+                        m_requestCallback.Remove(response.RpcId);
+
+                        action(response);
+                    }
+                    
+
+                   
 
 
                 }
@@ -219,42 +248,69 @@ namespace Crazy.ServerBase
 
         public void Reply(IResponse message)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Send(IMessage message)
+            Send(message);
+        }  
+        //一次发送多个消息
+        public int Send(List<IMessage> messages)
         {
-            this.Send(0x00, message);
+            foreach (var item in messages)
+            {
+                Send(item);
+            }
+
+            return 0;
         }
-
-       
-
-        public void Send(byte flag, IMessage message)
+        public int Send(IMessage message)
         {
+            // 包检查
+            if (message == null)
+                throw new ArgumentNullException("PlayerContextBase::SendPackage packageObj");
 
-            ushort opcode = OpcodeTypeDictionary.Instance.GetIdByType(message.GetType());
-            // Log.Info(opcode.ToString()+"  "+message);
-            
+            // 客户端代理不可用
+            if (m_client == null || m_client.Disconnected)
+                return -1;
 
-           
+            Send(ServerBase.Instance.PackProtobufObject(message));
+            return 0;
         }
-
-        public void Send(byte flag, ushort opcode, object message)
+        public void Send(ClientOutputBuffer buff)
         {
-            throw new NotImplementedException();
-        }
-        public void Send(MemoryStream message)
-        {
-            throw new NotImplementedException();
+            //这里可以写一个发包统计
+            if (buff != null)
+            {
+                
+            }
+            else
+            {
+                Log.Error("SendPackageImpl error buff==null");
+            }
+            m_client.Send(buff);
         }
         public Task<IResponse> Call(IRequest request)
         {
-            throw new NotImplementedException();
-        }
+            int rpcId = ++RpcId;
+            var tcs = new TaskCompletionSource<IResponse>();
 
-        public Task<IResponse> Call(IRequest request, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
+            this.m_requestCallback[rpcId] = (response) =>
+            {
+                try
+                {
+                    if (ErrorCode.IsRpcNeedThrowException(response.Error))
+                    {
+                        throw new RpcException(response.Error, response.Message);
+                    }
+
+                    tcs.SetResult(response);
+                }
+                catch (Exception e)
+                {
+                    tcs.SetException(new Exception($"Rpc Error: {request.GetType().FullName}", e));
+                }
+            };
+
+            request.RpcId = rpcId;
+            this.Send(request);
+            return tcs.Task;
         }
 
         public Dictionary<int, Action<IResponse>> GetRPCActionDic()
@@ -302,6 +358,15 @@ namespace Crazy.ServerBase
         #endregion
 
         private Dictionary<int, Action<IResponse>> m_requestCallback = new Dictionary<int, Action<IResponse>>();
+        private static int c_rpcId;
+        private static int RpcId { get {
+                if (c_rpcId >= Int32.MaxValue)
+                {
+                    c_rpcId = 0;
+                    
+                }
+                return c_rpcId;
 
+            }set { c_rpcId = value; } }
     }
 }

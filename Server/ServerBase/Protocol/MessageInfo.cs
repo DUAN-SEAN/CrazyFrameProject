@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Crazy.Common
 {
-    public class MessageInfo
+    public struct MessageInfo
     {
         public ushort Opcode;
         public IMessage Message;

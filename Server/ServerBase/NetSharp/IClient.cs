@@ -38,7 +38,7 @@ namespace Crazy.NetSharp
             }
             else
             {
-                // 如果长度不够，重新分配一下
+                //如果池子里没有则 新生成一个 如果长度不够，重新分配一下
                 if (buf.m_maxLen < size)
                 {
                     Array.Resize(ref buf.m_buffer, size);
@@ -67,6 +67,7 @@ namespace Crazy.NetSharp
         /// <param name="buf"></param>
         public static void UnlockSendBuffer(ClientOutputBuffer buf)
         {
+            //如果当前池子的buff过多就清理一次缓存
             if (m_outputBufferPool.Count > m_maxPoolLength)
             {
                 if ((DateTime.Now - m_lastLockTime).TotalMinutes > m_maxPoolFreeWaitMinutes)
@@ -87,7 +88,7 @@ namespace Crazy.NetSharp
         /// <summary>
         /// 默认发送缓存大小
         /// </summary>
-        public static int m_maxLenDefault = 8 * 1024;
+        public static int m_maxLenDefault = 8 * 1024;//16位
 
         /// <summary>
         /// 最大的pool长度

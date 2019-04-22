@@ -15,13 +15,39 @@ namespace Crazy.ServerBase
     public partial class ServerBase
     {
         /// <summary>
+        /// 将一个package消息打包到ClientOutputBuffer中
+        /// </summary>
+        /// <param name="packageObj"></param>
+        /// <returns></returns>
+        public ClientOutputBuffer PackProtobufObject(object packageObj)
+        {
+            // 包检查
+            System.Diagnostics.Debug.Assert(packageObj != null, "PackProtobufObject error: packageObj is null");
+
+            // 获取一个固定长度的buff，作为存储包数据的缓冲
+            var bufferLen = Instance.m_globalConfigure.Global.Network.OutputBufferLen;
+            var buffer = ClientOutputBuffer.LockSendBuffer(bufferLen);
+
+            if (PackProtobufObjectInternal(packageObj, buffer))
+            {
+                return buffer;
+            }
+
+            Log.Error($"PackProtobufObject packageObj is too large for ClientOutputBuffer! package={packageObj.ToString()}");
+            ClientOutputBuffer.UnlockSendBuffer(buffer);
+            return null; // 组包失败，原因是package包长度太大，不能用一个ClientOutputBuffer打包
+        }
+
+
+
+        /// <summary>
         /// 打包并压缩单个包
         /// </summary>
         /// <param name="packageObj"></param>
         /// <param name="buffer"></param>
         /// <param name="bufferOffest"></param>
         /// <returns></returns>
-        private bool PackProtobufObjectInternal(object packageObj, ClientOutputBuffer buffer,bool isRpc = false ,int bufferOffest = 0)
+        public bool PackProtobufObjectInternal(object packageObj, ClientOutputBuffer buffer ,int bufferOffest = 0)
         {
             System.Diagnostics.Debug.Assert(packageObj != null, "PackProtobufObjectInternal error: packageObj is null");
             System.Diagnostics.Debug.Assert(buffer != null, "PackProtobufObjectInternal error: buffer is null");
@@ -62,15 +88,16 @@ namespace Crazy.ServerBase
                 return false;
             }
 
-            // 再将包头的内容写入到缓冲里，包头内容包括是否压缩的标志位、包长度和协议id，包长度在这里才能计算出来
+            // 再将包头的内容写入到缓冲里，包头内容包括是否是RPC消息、包长度和协议id，包长度在这里才能计算出来
             using (var headerStream = new MemoryStream(buffer.m_buffer, bufferOffest, headLen))
             {
                 using (var writer = new BinaryWriter(headerStream))
                 {
                     // 获取协议id
                     ushort protocolId = (ushort)(OpcodeTypeDic.GetIdByType(packageObj.GetType()));
-                    // 将协议id的最高位修改为压缩标记位
-                    ushort finalyProtocolId = (ushort)protocolId;
+                    //协议最高位为是否是Response 
+                    ushort finalyProtocolId =(ushort)((packageObj is IResponse) ? (protocolId | 0x8000):(protocolId & 0x7FFF));
+    
                     writer.Write(pkgLen);
                     writer.Write(finalyProtocolId);
 
@@ -92,17 +119,18 @@ namespace Crazy.ServerBase
         /// <param name="deserializeObject">反序列化后的数据类型</param>
         /// <param name="deserializeBuff">无压缩的序列化二进制数据</param>
         /// <returns>已经处理的数据长度</returns>
-        public int UnpackProtobufObject(byte[] orgDataBuff, int totalDataAvailable, int dataOffset, out Type msgType, out object deserializeObject, out MemoryStream deserializeBuff)
+        public int UnpackProtobufObject(byte[] orgDataBuff, int totalDataAvailable, int dataOffset, out Type msgType, out object deserializeObject, out MemoryStream deserializeBuff,out bool flag )
         {
             System.Diagnostics.Debug.Assert(
                 orgDataBuff != null && orgDataBuff.Length != 0 && orgDataBuff.Length >= totalDataAvailable &&
                 dataOffset <= totalDataAvailable, "UnPackProtobufObject error: dataBuff is null or empty!");
 
             var startDataOffset = dataOffset;
+            flag = false;
             msgType = null;
             deserializeObject = null;
             deserializeBuff = null;
-            const int uint16Length = sizeof(ushort);
+            const int uint16Length = sizeof(ushort);//4字节表示包头所占长度
             var dataLength = totalDataAvailable - dataOffset;
 
             // 读取完整包的长度
@@ -114,8 +142,10 @@ namespace Crazy.ServerBase
             // 包足够一个完整包
             dataOffset += uint16Length;
 
-            // 消息ID字段，从该字段获取到压缩标志位以及消息ID信息
+            // 消息ID字段，从该字段获取到RPC标志位以及消息ID信息
             var msgIdField = BitConverter.ToUInt16(orgDataBuff, dataOffset);
+            flag = msgIdField >> (uint16Length * 8 - 1) == 1;
+
             // 获取消息的ID
             var msgId = (ushort)msgIdField ;
             dataOffset += uint16Length;

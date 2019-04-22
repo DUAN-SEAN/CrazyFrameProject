@@ -62,6 +62,7 @@
     <Compile Include="Base\MessageBase\IRespone.cs" />
     <Compile Include="Base\MessageBase\MessageAttribute.cs" />
     <Compile Include="Base\MessageBase\MessageHandlerAttribute.cs" />
+    <Compile Include="Base\MessageBase\RpcException.cs" />
     <Compile Include="Message\Message.cs" />
     <Compile Include="Message\MessageOpcode.cs" />
     <Compile Include="Message\RpcMessage.cs" />
