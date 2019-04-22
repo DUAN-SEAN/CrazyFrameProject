@@ -4,18 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Crazy.Common;
+using Crazy.ServerBase;
 namespace Crazy.Common
 {
     /// <summary>
     /// 消息分发类型，将网络消息和handler进行绑定
     ///
     /// </summary>
-    public class MessageDispather<PlayerContext>
+    public class MessageDispather
     {
         /// <summary>
         /// Load 在组件启动时调用
         /// </summary>
-        public void Init()
+        public MessageDispather()
+        {
+            m_instance = this;
+        }
+        public bool Init()
         {
             Handlers.Clear();
 
@@ -53,6 +58,7 @@ namespace Crazy.Common
                 }
                 RegisterHandler(opcode, iMHandler);
             }
+            return true;
         }
         public void RegisterHandler(ushort opcode, IMHandler handler)
         {
@@ -65,7 +71,7 @@ namespace Crazy.Common
             Handlers[opcode].Add(handler);
         }
 
-        public void Handle(PlayerContext sender, MessageInfo messageInfo)
+        public void Handle(PlayerContextBase sender, MessageInfo messageInfo)
         {
             List<IMHandler> handlers;
             if (!Handlers.TryGetValue(messageInfo.Opcode, out handlers))
@@ -87,7 +93,10 @@ namespace Crazy.Common
                 }
             }
         }
+
         public readonly Dictionary<ushort, List<IMHandler>> Handlers = new Dictionary<ushort, List<IMHandler>>();
 
+        private static  MessageDispather m_instance;
+        public static MessageDispather Instance { get => m_instance; }
     }
 }

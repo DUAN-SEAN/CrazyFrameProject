@@ -15,13 +15,13 @@ namespace Crazy.Common
 
         public OpcodeTypeDictionary()
         {
-            Instance = this;
+            m_instance = this;
         }
 
         /// <summary>
         /// 初始化message type 
         /// </summary>
-        public void Init()
+        public bool Init()
         {
             this.opcodeTypes.Clear();
             this.typeMessages.Clear();
@@ -44,6 +44,7 @@ namespace Crazy.Common
                 this.opcodeTypes.Add(messageAttribute.Opcode, type);
                 this.typeMessages.Add(messageAttribute.Opcode, Activator.CreateInstance(type));
             }
+            return true;
         }
 
         public ushort GetIdByType(Type type)
@@ -64,7 +65,15 @@ namespace Crazy.Common
 			return Activator.CreateInstance(type);
 
         }
-        public static OpcodeTypeDictionary Instance;
+        private static OpcodeTypeDictionary m_instance;
+
+        public static OpcodeTypeDictionary Instance
+        {
+            get
+            {
+                return m_instance;
+            }
+        }
 
         /// <summary>
         /// 协议 和 消息类型双映射

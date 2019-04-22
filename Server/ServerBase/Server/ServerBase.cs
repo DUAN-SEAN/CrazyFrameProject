@@ -27,7 +27,7 @@ namespace Crazy.ServerBase
         /// <param name="messagePraser"></param>
         /// <param name="serverName"></param>
         /// <returns></returns>
-        public virtual bool Initialize<GlobalConfigureType>(string globalPath,Type plyaerContextType,MessageDispather messageDispather,OpcodeTypeDictionary opcodeTypeDictionary,IMessagePacker messagePraser,string serverName)
+        public virtual bool Initialize<GlobalConfigureType,PlayerContextBase>(string globalPath,Type plyaerContextType,IMessagePacker messagePraser,string serverName)
              where GlobalConfigureType : ServerBaseGlobalConfigure, new()
         {
             if (!InitlizeLogConfigure())
@@ -36,18 +36,8 @@ namespace Crazy.ServerBase
                 return false;
             }
 
-            if(messageDispather == null)
-            {
-                Log.Error("messageDispather = null");
-                return false;
-            }
-            if(opcodeTypeDictionary == null)
-            {
-                Log.Error("opcodeTypeDictionary = null");
-                return false;
-            }
-            MessageDispather = messageDispather;
-            OpcodeTypeDic = opcodeTypeDictionary;
+            MessageDispather = new MessageDispather();
+            OpcodeTypeDic = new OpcodeTypeDictionary();
             m_messagePraser = messagePraser;
      
             //初始化配置文件
@@ -62,6 +52,7 @@ namespace Crazy.ServerBase
                 Log.Error("初始化玩家上下文管理器失败");
                 return false;
             }
+
             //初始化网络
             if (!InitializeNetWork())
             {
@@ -76,7 +67,12 @@ namespace Crazy.ServerBase
         /// </summary>
         private bool InitializeNetWork()
         {
-            if(m_configServer == null)
+            if (!InitlizeServerProtobuf())
+            {
+                Log.Error("初始化protobuf消息组件失败");
+                return false;
+            }
+            if (m_configServer == null)
             {
                 Log.Error("配置文件未找到当前服务器的配置信息");
                 return false;
@@ -194,7 +190,20 @@ namespace Crazy.ServerBase
             Log.Info("初始化日志成功");
             return true;
         }
+        /// <summary>
+        /// 用来初始化两个组件
+        /// </summary>
+        /// <returns></returns>
+        protected virtual bool InitlizeServerProtobuf()
+        {
+            if (!MessageDispather.Init() || !OpcodeTypeDic.Init())
+            {
+                Log.Error("InitlizeServerProtobuf FAIL!!!");
+                return false;
+            }
 
+            return true;
+        }
         Task<NetSharp.IClientEventHandler> IServiceEventHandler.OnConnect(IClient client)
         {
             throw new NotImplementedException();

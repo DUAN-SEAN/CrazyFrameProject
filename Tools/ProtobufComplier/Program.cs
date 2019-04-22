@@ -164,7 +164,7 @@ namespace ProtobufComplier
 
         private static void GenerateOpcode(string ns, string outputFileName, string outputPath, StringBuilder sb)
         {
-            sb.AppendLine($"namespace {ns}");
+            sb.AppendLine($"namespace {ns}");          
             sb.AppendLine("{");
             sb.AppendLine($"\tpublic static partial class {outputFileName}");
             sb.AppendLine("\t{");
@@ -177,7 +177,7 @@ namespace ProtobufComplier
 
             string csPath = Path.Combine(outputPath, outputFileName + ".cs");
             File.WriteAllText(csPath, sb.ToString());
-        }
+                        }
     }
 }
 

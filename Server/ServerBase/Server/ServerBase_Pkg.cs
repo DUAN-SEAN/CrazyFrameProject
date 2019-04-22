@@ -31,7 +31,7 @@ namespace Crazy.ServerBase
             // 整个包的长度
             ushort pkgLen;
             var dataOffset = bufferOffest;
-            bool needCompress;
+            bool isRpc;
             try
             {
                 // 先将协议的内容写入到缓冲里

@@ -12,8 +12,8 @@ namespace Crazy.ServerBase
 {
     /// <summary>
     /// 玩家现场基类
-    /// </summary>
     public class PlayerContextBase : IClientEventHandler,ILocalMessageHandler,ILockableContext,IManagedContext,ISession
+    /// </summary>
     {
         /// <summary>
         /// 将玩家现场和一个client对象关联在一起
@@ -214,6 +214,9 @@ namespace Crazy.ServerBase
             return false;
         }
         #endregion
+
+        #region ISession
+
         public void Reply(IResponse message)
         {
             throw new NotImplementedException();
@@ -221,24 +224,29 @@ namespace Crazy.ServerBase
 
         public void Send(IMessage message)
         {
-            throw new NotImplementedException();
+            this.Send(0x00, message);
         }
 
-        public void Send(MemoryStream message)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public void Send(byte flag, IMessage message)
         {
-            throw new NotImplementedException();
+
+            ushort opcode = OpcodeTypeDictionary.Instance.GetIdByType(message.GetType());
+            // Log.Info(opcode.ToString()+"  "+message);
+            
+
+           
         }
 
         public void Send(byte flag, ushort opcode, object message)
         {
             throw new NotImplementedException();
         }
-
+        public void Send(MemoryStream message)
+        {
+            throw new NotImplementedException();
+        }
         public Task<IResponse> Call(IRequest request)
         {
             throw new NotImplementedException();
@@ -248,7 +256,12 @@ namespace Crazy.ServerBase
         {
             throw new NotImplementedException();
         }
-    
+
+        public Dictionary<int, Action<IResponse>> GetRPCActionDic()
+        {
+            return m_requestCallback;
+        }
+        #endregion
         /// <summary>
         /// 玩家现场和通信体绑定
         /// </summary>
@@ -284,9 +297,11 @@ namespace Crazy.ServerBase
         public ulong ContextId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public string ContextStringName => throw new NotImplementedException();
+
+
         #endregion
 
-
+        private Dictionary<int, Action<IResponse>> m_requestCallback = new Dictionary<int, Action<IResponse>>();
 
     }
 }
