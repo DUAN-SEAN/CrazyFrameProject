@@ -21,7 +21,7 @@ namespace Crazy.ServerBase
         /// <param name="buffer"></param>
         /// <param name="bufferOffest"></param>
         /// <returns></returns>
-        private bool PackProtobufObjectInternal(object packageObj, ClientOutputBuffer buffer, int bufferOffest = 0)
+        private bool PackProtobufObjectInternal(object packageObj, ClientOutputBuffer buffer,bool isRpc = false ,int bufferOffest = 0)
         {
             System.Diagnostics.Debug.Assert(packageObj != null, "PackProtobufObjectInternal error: packageObj is null");
             System.Diagnostics.Debug.Assert(buffer != null, "PackProtobufObjectInternal error: buffer is null");
@@ -31,7 +31,7 @@ namespace Crazy.ServerBase
             // 整个包的长度
             ushort pkgLen;
             var dataOffset = bufferOffest;
-            bool isRpc;
+            
             try
             {
                 // 先将协议的内容写入到缓冲里
