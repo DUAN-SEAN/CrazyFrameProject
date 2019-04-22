@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProtobufComplier", "Tools\P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtobufAutoComplier", "Tools\ProtobufAutoComplier\ProtobufAutoComplier.csproj", "{E999129C-9C38-4396-8415-6DF1F1E6E853}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleGameServer", "Server\SampleGameServer\SampleGameServer.csproj", "{5A12CD80-491B-4EC5-BDB6-BBC2442BA71C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		ClientAssertExport|Any CPU = ClientAssertExport|Any CPU
@@ -121,6 +123,18 @@ Global
 		{E999129C-9C38-4396-8415-6DF1F1E6E853}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E999129C-9C38-4396-8415-6DF1F1E6E853}.Release|x64.ActiveCfg = Release|Any CPU
 		{E999129C-9C38-4396-8415-6DF1F1E6E853}.Release|x64.Build.0 = Release|Any CPU
+		{5A12CD80-491B-4EC5-BDB6-BBC2442BA71C}.ClientAssertExport|Any CPU.ActiveCfg = Release|Any CPU
+		{5A12CD80-491B-4EC5-BDB6-BBC2442BA71C}.ClientAssertExport|Any CPU.Build.0 = Release|Any CPU
+		{5A12CD80-491B-4EC5-BDB6-BBC2442BA71C}.ClientAssertExport|x64.ActiveCfg = Release|Any CPU
+		{5A12CD80-491B-4EC5-BDB6-BBC2442BA71C}.ClientAssertExport|x64.Build.0 = Release|Any CPU
+		{5A12CD80-491B-4EC5-BDB6-BBC2442BA71C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A12CD80-491B-4EC5-BDB6-BBC2442BA71C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A12CD80-491B-4EC5-BDB6-BBC2442BA71C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5A12CD80-491B-4EC5-BDB6-BBC2442BA71C}.Debug|x64.Build.0 = Debug|Any CPU
+		{5A12CD80-491B-4EC5-BDB6-BBC2442BA71C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A12CD80-491B-4EC5-BDB6-BBC2442BA71C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A12CD80-491B-4EC5-BDB6-BBC2442BA71C}.Release|x64.ActiveCfg = Release|Any CPU
+		{5A12CD80-491B-4EC5-BDB6-BBC2442BA71C}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -133,6 +147,7 @@ Global
 		{74BABE28-9DFB-495A-ABAF-1BCD9285AE63} = {1298B84D-B05A-4CF4-9116-50CDE7F34437}
 		{714D7EFD-F2B2-467A-8965-B53CEDBFC771} = {5CE1B740-46A8-4F15-89E5-C91747197F76}
 		{E999129C-9C38-4396-8415-6DF1F1E6E853} = {5CE1B740-46A8-4F15-89E5-C91747197F76}
+		{5A12CD80-491B-4EC5-BDB6-BBC2442BA71C} = {31D259FF-49C2-45AE-B6E2-A1C789144175}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {08FC3851-454A-42ED-9471-52790202813C}

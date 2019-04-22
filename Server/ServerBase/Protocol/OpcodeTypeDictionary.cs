@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Crazy.Common;
 namespace Crazy.Common
 {
     /// <summary>
@@ -60,6 +60,7 @@ namespace Crazy.Common
         {
 
 			var type = this.GetTypeById(opcode);
+            Google.Protobuf.IMessage  message = typeMessages[opcode]as Google.Protobuf.IMessage;
 			return Activator.CreateInstance(type);
 
         }

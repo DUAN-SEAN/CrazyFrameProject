@@ -13,7 +13,7 @@ namespace Crazy.ServerBase
     /// <summary>
     /// 玩家现场基类
     /// </summary>
-    public class PlayerContextBase : IClientEventHandler,ILocalMessageHandler,ILockableContext,IManagedContext
+    public class PlayerContextBase : IClientEventHandler,ILocalMessageHandler,ILockableContext,IManagedContext,ISession
     {
         /// <summary>
         /// 将玩家现场和一个client对象关联在一起
@@ -165,9 +165,14 @@ namespace Crazy.ServerBase
         {
             //在这里将处理一系列消息
 
+            
 
 
             //本地消息和网络消息分开
+
+            //收到的如果是网络消息就通过分发器进行分发 分发器由ServerBase维护
+
+            //收到的是本地消息就在本地进行处理
 
 
             return;
@@ -209,6 +214,41 @@ namespace Crazy.ServerBase
             return false;
         }
         #endregion
+        public void Reply(IResponse message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Send(IMessage message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Send(MemoryStream message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Send(byte flag, IMessage message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Send(byte flag, ushort opcode, object message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IResponse> Call(IRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IResponse> Call(IRequest request, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+    
         /// <summary>
         /// 玩家现场和通信体绑定
         /// </summary>

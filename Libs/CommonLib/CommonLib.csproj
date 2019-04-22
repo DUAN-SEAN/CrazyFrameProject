@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Base\Assembly\TypeManager.cs" />
     <Compile Include="Base\Factory\SessionFactory.cs" />
+    <Compile Include="Base\Log\ILog.cs" />
     <Compile Include="Base\Log\Log.cs" />
     <Compile Include="Base\Log\NLogAdapter.cs" />
     <Compile Include="Base\MessageBase\BaseAttribute.cs" />
@@ -57,24 +58,28 @@
     <Compile Include="Base\MessageBase\IMessage.cs" />
     <Compile Include="Base\MessageBase\IMessageDispatcher.cs" />
     <Compile Include="Base\MessageBase\IMessagePacker.cs" />
-    <Compile Include="Base\MessageBase\IMHandler.cs" />
     <Compile Include="Base\MessageBase\IRequest.cs" />
     <Compile Include="Base\MessageBase\IRespone.cs" />
     <Compile Include="Base\MessageBase\MessageAttribute.cs" />
-    <Compile Include="Base\MessageBase\MessageDispatherComponent.cs" />
     <Compile Include="Base\MessageBase\MessageHandlerAttribute.cs" />
     <Compile Include="Message\Message.cs" />
     <Compile Include="Message\MessageOpcode.cs" />
     <Compile Include="Message\RpcMessage.cs" />
     <Compile Include="Message\RpcMessageOpcode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Protocol\MessageDispather.cs" />
-    <Compile Include="Protocol\MessagePraser.cs" />
-    <Compile Include="Protocol\OpcodeTypeDictionary.cs" />
     <Compile Include="Tools\AssemblyHelper.cs" />
     <Compile Include="Base\Assembly\UnOrderMultiMap.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\ThirdLibs\ParallelExtensionsExtras\ParallelExtensionsExtras.csproj">
+      <Project>{C45218F8-09E7-4F57-85BC-5D8D2AC736A3}</Project>
+      <Name>ParallelExtensionsExtras</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdLibs\Utils\Utils.csproj">
+      <Project>{484C2786-1F72-47AC-892A-1FAF8F85EFF5}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="Proto\RpcMessage.proto" />
     <None Include="Proto\Message.proto" />
