@@ -79,7 +79,7 @@ namespace Crazy.Common
                 try
                 {
 
-                    ev.Handle<PlayerContext>(sender, messageInfo.Message);
+                    ev.Handle(sender, messageInfo.Message);
                 }
                 catch (Exception e)
                 {

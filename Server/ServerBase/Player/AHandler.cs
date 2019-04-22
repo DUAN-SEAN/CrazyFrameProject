@@ -13,7 +13,7 @@ namespace Crazy.ServerBase
             return typeof(Message);
         }
 
-        public void Handle(object sender, object msg)
+        public void Handle(PlayerContextBase sender, object msg)
         {
             Message message = msg as Message;
             PlayerContextBase playerContext = sender as PlayerContextBase;
@@ -44,7 +44,7 @@ namespace Crazy.ServerBase
 
         protected abstract void Run(PlayerContextBase playerContext, Request message, Action<Response> reply);
 
-        public void Handle(object sender, object message)
+        public void Handle(PlayerContextBase sender, object message)
         {
             try
             {
@@ -59,10 +59,10 @@ namespace Crazy.ServerBase
 
                 long instanceId = playerContext.GetInstanceId();
 
-                this.Run(session, request, response =>
+                this.Run(playerContext, request, response =>
                 {
                     // 等回调回来,session可以已经断开了,所以需要判断session InstanceId是否一样
-                    if (session.InstanceId != instanceId)
+                    if (playerContext.GetInstanceId() != instanceId)
                     {
                         return;
                     }
