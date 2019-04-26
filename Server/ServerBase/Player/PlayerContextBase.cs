@@ -207,7 +207,7 @@ namespace Crazy.ServerBase
             return;
         }
         /// <summary>
-        /// 从资源上释放玩家现场
+        /// 从资源上释放玩家现场 (管理器中移除)
         /// </summary>
         public virtual void Release()
         {
