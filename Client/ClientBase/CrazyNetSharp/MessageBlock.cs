@@ -55,7 +55,9 @@ namespace BlackJack.LibClient
                 return 0;
 
             /// Copy to cache
+            /// 将datablock写入当前流中
             Array.Copy(dataBlock, 0, _cache, _wrPtr, dataLen);
+            
             _wrPtr += dataLen;
 
             /// Return copied length

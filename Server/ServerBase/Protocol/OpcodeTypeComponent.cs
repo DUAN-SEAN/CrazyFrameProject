@@ -59,7 +59,7 @@ namespace Crazy.Common
         // 客户端为了0GC需要消息池，服务端消息需要跨协程不需要消息池
         public object GetInstance(ushort opcode)
         {
-
+            //暂时先不用控制GC的方式
 			var type = this.GetTypeById(opcode);
             Google.Protobuf.IMessage  message = typeMessages[opcode]as Google.Protobuf.IMessage;
 			return Activator.CreateInstance(type);

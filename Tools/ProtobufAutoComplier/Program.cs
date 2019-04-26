@@ -50,7 +50,7 @@ namespace ProtobufComplier
 
 
 
-            ProtoWork(args[0],args[2],ar           gs[1]);
+            ProtoWork(args[0],args[2],args[1]);
 
             Console.WriteLine("按下结束！");
             Console.ReadKey();

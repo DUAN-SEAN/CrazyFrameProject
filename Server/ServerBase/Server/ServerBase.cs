@@ -36,8 +36,7 @@ namespace Crazy.ServerBase
                 return false;
             }
 
-            MessageDispather = new MessageDispather();
-            OpcodeTypeDic = new OpcodeTypeDictionary();
+            
             m_messagePraser = messagePraser;
      
             //初始化配置文件
@@ -177,8 +176,12 @@ namespace Crazy.ServerBase
             where TGlobalConfigClass :ServerBaseGlobalConfigure, new()
         {
             //1:读取本地配置文件
+            m_globalConfigure =  Util.Deserialize<ServerBaseGlobalConfigure>(globalConfPath);
+            if(m_globalConfigure == null)
+            {
 
-
+                return false;
+            }
             //2:通过查找serverName这唯一的服务器名称查找对应的服务配置并初始化m_server(Global.Server)
 
 
@@ -196,6 +199,9 @@ namespace Crazy.ServerBase
         /// <returns></returns>
         protected virtual bool InitlizeServerProtobuf()
         {
+            MessageDispather = new MessageDispather();
+            OpcodeTypeDic = new OpcodeTypeDictionary();
+
             if (!MessageDispather.Init() || !OpcodeTypeDic.Init())
             {
                 Log.Error("InitlizeServerProtobuf FAIL!!!");

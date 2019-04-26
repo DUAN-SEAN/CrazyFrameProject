@@ -71,7 +71,6 @@
     <Compile Include="Protocol\ISession.cs" />
     <Compile Include="Protocol\MessageDispatherComponent.cs" />
     <Compile Include="Protocol\MessageInfo.cs" />
-    <Compile Include="Protocol\MessagePraser.cs" />
     <Compile Include="Protocol\OpcodeTypeComponent.cs" />
     <Compile Include="Server\IClientEventHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
