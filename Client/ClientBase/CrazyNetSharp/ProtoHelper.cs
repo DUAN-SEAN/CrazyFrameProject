@@ -73,6 +73,7 @@ namespace BlackJack.LibClient
             {
                 using (MemoryStream readStream = rCache.GetStream(pakBodyLength))
                 {
+                    //将消息序列化，根据所提供的序列化器进行序列化和反序列化
                     //Debug.WriteLine(String.Format("DecodeMessage readStream={0}", printByteArray(readStream.ToArray())));
                     //RuntimeTypeModel.Default.Deserialize(readStream, ccMsg, pakType);
                 }
@@ -175,17 +176,6 @@ namespace BlackJack.LibClient
         }
     }
 
-    /// <summary>
-    /// 当接收到一条在ProtocolDic找不到的新协议时，将新协议的数据作为DefaultProtocolType类型进行Deserialize
-    /// </summary>
-    [global::System.Serializable, global::ProtoBuf.ProtoContract(Name = @"DefaultProtocolType")]
-    public partial class DefaultProtocolType : global::ProtoBuf.IExtensible
-    {
-        public DefaultProtocolType() { }
-
-        private global::ProtoBuf.IExtension extensionObject;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-        { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
-    }
+ 
 }
 
