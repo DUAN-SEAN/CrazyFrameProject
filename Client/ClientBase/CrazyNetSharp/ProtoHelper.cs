@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using ProtoBuf.Meta;
 using BlackJack.LibClient.Protocol;
 using System.Diagnostics;
 
