@@ -54,6 +54,7 @@
     <Compile Include="Base\Log\NLogAdapter.cs" />
     <Compile Include="Base\MessageBase\BaseAttribute.cs" />
     <Compile Include="Base\MessageBase\DoubleMap.cs" />
+    <Compile Include="Base\MessageBase\ErrorCode.cs" />
     <Compile Include="Base\MessageBase\IFrameMessage.cs" />
     <Compile Include="Base\MessageBase\IMessage.cs" />
     <Compile Include="Base\MessageBase\IMessageDispatcher.cs" />
