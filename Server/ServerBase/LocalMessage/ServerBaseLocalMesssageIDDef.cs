@@ -15,16 +15,5 @@ namespace Crazy.ServerBase
 
 
     }
-    public class ErrorCode
-    {
-        public const Int32 MessageOk = 0;
-        public const Int32 RpcResponseError = 1;
 
-        public static bool IsRpcNeedThrowException(int errorCode)
-        {
-            if (errorCode == RpcResponseError)
-                return true;
-            return false;
-        }
-    }
 }
