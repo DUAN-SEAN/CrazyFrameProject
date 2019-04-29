@@ -68,7 +68,7 @@ namespace Crazy.ServerBase
                     }
 
                     response.RpcId = rpcId;
-                    session.Reply(response);
+                    sender.Reply(response);
                 });
             }
             catch (Exception e)

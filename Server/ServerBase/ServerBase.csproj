@@ -52,9 +52,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configure\ConfigLoader.cs" />
-    <Compile Include="Configure\ServerBaseGlobalConfigure.cs" />
-    <Compile Include="Configure\Util.cs" />
     <Compile Include="Handler\C2S_LoginMessageHandler.cs" />
     <Compile Include="NetSharp\AwaitableQueue.cs" />
     <Compile Include="NetSharp\Client.cs" />

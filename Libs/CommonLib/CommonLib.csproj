@@ -63,6 +63,9 @@
     <Compile Include="Base\MessageBase\MessageAttribute.cs" />
     <Compile Include="Base\MessageBase\MessageHandlerAttribute.cs" />
     <Compile Include="Base\MessageBase\RpcException.cs" />
+    <Compile Include="Configure\ConfigLoader.cs" />
+    <Compile Include="Configure\ServerBaseGlobalConfigure.cs" />
+    <Compile Include="Configure\Util.cs" />
     <Compile Include="Message\Message.cs" />
     <Compile Include="Message\MessageOpcode.cs" />
     <Compile Include="Message\RpcMessage.cs" />

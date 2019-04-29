@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace Crazy.ServerBase.Configure
+namespace Crazy.Common
 {
 
     public class XmlAttributeOverridesItem

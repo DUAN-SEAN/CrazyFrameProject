@@ -241,7 +241,7 @@ namespace Crazy.ServerBase
         /// <summary>
         ///当前服务器的配置
         /// </summary>
-        private Crazy.ServerBase.Configure.Server m_configServer;
+        private Crazy.Common.Server m_configServer;
         /// <summary>
         /// 消息分发 所有走网络的消息都通过这个进行分发
         /// </summary>

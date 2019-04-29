@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Crazy.ServerBase.Configure
+namespace Crazy.Common
 {
     /// <summary>
     /// 服务器全局配置基类

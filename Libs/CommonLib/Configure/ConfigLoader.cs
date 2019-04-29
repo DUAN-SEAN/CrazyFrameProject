@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Xml.Serialization;
 
 
-namespace Crazy.ServerBase.Configure
+namespace Crazy.Common
 {
     /// <summary>
     /// 操作全局配置对象。
