@@ -1,4 +1,4 @@
-﻿using Crazy.ServerBase.Configure;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;

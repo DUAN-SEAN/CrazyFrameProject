@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameServer.cs" />
+    <Compile Include="GameServerContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -51,6 +52,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Libs\CommonLib\CommonLib.csproj">
+      <Project>{0f3ecc0f-e8f4-434e-aaf9-95a912f2f565}</Project>
+      <Name>CommonLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServerBase\ServerBase.csproj">
       <Project>{c62bc39f-6932-45f2-a626-4faf7f836e6f}</Project>
       <Name>ServerBase</Name>

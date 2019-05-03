@@ -10,7 +10,10 @@ namespace Crazy.Common
 {
     public enum DLLType
     {
-        Crazy
+        Crazy,
+        Client,
+        ServerBase,
+        GameServer,
     }
     /// <summary>
     /// 用来管理所有打了标签的类型
