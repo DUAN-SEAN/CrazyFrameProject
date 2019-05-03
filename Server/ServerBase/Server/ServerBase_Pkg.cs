@@ -135,6 +135,7 @@ namespace Crazy.ServerBase
 
             // 读取完整包的长度
             var msgFullLength = BitConverter.ToUInt16(orgDataBuff, dataOffset);
+            
             // 包为半包或者不足包头长度uint16Length*2
             if (dataLength < msgFullLength || dataLength < uint16Length * 2)
                 return 0;
@@ -145,9 +146,9 @@ namespace Crazy.ServerBase
             // 消息ID字段，从该字段获取到RPC标志位以及消息ID信息
             var msgIdField = BitConverter.ToUInt16(orgDataBuff, dataOffset);
             flag = msgIdField >> (uint16Length * 8 - 1) == 1;
-
+            
             // 获取消息的ID
-            var msgId = (ushort)msgIdField ;
+            var msgId = (ushort)(msgIdField &0x7FFF);
             dataOffset += uint16Length;
 
             // 消息运行时类型
@@ -163,17 +164,25 @@ namespace Crazy.ServerBase
                 Log.Error($"WRONG MSG ID ==============================={msgId}");
                 throw;
             }
-
+            Log.Info($"{msgType} Count = " + msgFullLength);
             // 获取协议内容的长度
             var protoLength = msgFullLength - uint16Length * 2;
-         
-            deserializeBuff = new MemoryStream(orgDataBuff, dataOffset, protoLength);
+            try
+            {
+                using (deserializeBuff = new MemoryStream(orgDataBuff, dataOffset, protoLength,true,true))
+                {
+                    deserializeObject = m_messagePraser.DeserializeFrom(deserializeObject, deserializeBuff);
+                }
+                dataOffset += protoLength;
+            }
+            catch(Exception e)
+            {
+                Log.Error(e);
+                return 0;
+            }
+            
 
-            deserializeObject =  m_messagePraser.DeserializeFrom(deserializeObject, deserializeBuff);
-       
-            dataOffset += protoLength;
-
-            return dataOffset - startDataOffset;
+            return dataOffset - startDataOffset;//返回读取的字节数
         }
     }
 }

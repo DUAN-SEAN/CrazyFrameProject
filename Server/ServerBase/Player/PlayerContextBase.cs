@@ -75,7 +75,7 @@ namespace Crazy.ServerBase
         /// <returns></returns>
         public virtual async Task<int> OnData(byte[] buffer, int dataAvailable)
         {
-            if (dataBuff == null || dataAvailable < 1)
+            if (buffer == null || dataAvailable < 1)
             {
                 Log.Error("PlayerContextBase::OnData, but checked buffer failed");
                 return 0;
@@ -101,7 +101,7 @@ namespace Crazy.ServerBase
                 Object deserializeObject = null;
                 MemoryStream deserializeBuff = null;
                 bool flag;
-                var byteHandled = ServerBase.Instance.UnpackProtobufObject(dataBuff, dataAvailable, dataOffset, out msgType, out deserializeObject, out deserializeBuff,out flag);
+                var byteHandled = ServerBase.Instance.UnpackProtobufObject(buffer, dataAvailable, dataOffset, out msgType, out deserializeObject, out deserializeBuff,out flag);
                 if (byteHandled == 0) return dataOffset;
 
                 try
@@ -113,6 +113,7 @@ namespace Crazy.ServerBase
                         Log.Error($"Message Deserialize FAIL MessageType = {deserializeObject.GetType()}");
                         return 0;
                     }
+                    Log.Msg(message);
                     var opcode = OpcodeTypeDictionary.Instance.GetIdByType(msgType);
                     if (!flag)//普通消息
                     {
@@ -326,7 +327,7 @@ namespace Crazy.ServerBase
         /// 协议字典集
         /// </summary>
         private OpcodeTypeDictionary m_OpcodeTypeDictionary;
-        private byte[] dataBuff;
+   
         /// <summary>
         /// 是否已经释放
         /// </summary>
@@ -350,13 +351,13 @@ namespace Crazy.ServerBase
 
 
         #region IManagedContext
-        public ulong ContextId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ulong ContextId { get => m_contextId; set => m_contextId = value; }
 
         public string ContextStringName => throw new NotImplementedException();
 
 
         #endregion
-
+        private ulong m_contextId;
         private Dictionary<int, Action<IResponse>> m_requestCallback = new Dictionary<int, Action<IResponse>>();
         private static int c_rpcId;
         private static int RpcId { get {

@@ -58,6 +58,7 @@ namespace Crazy.Common
                 }
                 RegisterHandler(opcode, iMHandler);
             }
+            Log.Info("Handler Count = " + Handlers.Values.Count);
             return true;
         }
         public void RegisterHandler(ushort opcode, IMHandler handler)

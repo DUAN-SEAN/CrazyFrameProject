@@ -12,7 +12,7 @@ namespace SampleGameServer
         {
             GameServer gameServer = new GameServer();
             if(!gameServer.Initialize<ServerBaseGlobalConfigure,GameServerContext>
-                (@"GameServerConfigure.config",typeof(ServerBaseGlobalConfigure),new ProtobufPacker(), "GameServer"))
+                (@"GameServerConfigure.config",typeof(GameServerContext),new ProtobufPacker(), "GameServer"))
             {
                 Log.Error("初始化服务器错误");
             }

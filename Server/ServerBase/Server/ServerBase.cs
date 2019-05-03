@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using NLog;
 using Crazy.NetSharp;
 using Crazy.Common;
+using System.Net;
 
 namespace Crazy.ServerBase
 {
@@ -27,16 +28,19 @@ namespace Crazy.ServerBase
         /// <param name="messagePraser"></param>
         /// <param name="serverName"></param>
         /// <returns></returns>
-        public virtual bool Initialize<GlobalConfigureType,PlayerContextBase>(string globalPath,Type plyaerContextType,IMessagePacker messagePraser,string serverName)
+        public virtual bool Initialize<GlobalConfigureType,PlayerContextBase>(string globalPath,Type plyaerContextType,IMessagePacker messagePraser,string serverName
+        )
              where GlobalConfigureType : ServerBaseGlobalConfigure, new()
         {
+
+
             if (!InitlizeLogConfigure())
             {
                 Log.Error("初始化日志系统失败");
                 return false;
             }
 
-            
+            //默认为protobufPraser
             m_messagePraser = messagePraser;
      
             //初始化配置文件
@@ -84,7 +88,8 @@ namespace Crazy.ServerBase
                 Log.Error("服务启动失败");
                 return false;
             }
-            m_service.Start(System.Net.IPAddress.Any, 20001, this);
+            m_service.Start(IPAddress.Parse(m_configServer.EndPortIP), m_configServer.EndPortPort, this);
+            Log.Info($"服务启动成功！\nIP<{m_configServer.EndPortIP}>:Port<{m_configServer.EndPortPort}>");
             return true;
         }
 
@@ -183,7 +188,7 @@ namespace Crazy.ServerBase
                 return false;
             }
             //2:通过查找serverName这唯一的服务器名称查找对应的服务配置并初始化m_server(Global.Server)
-
+            m_configServer = m_globalConfigure.Global.Servers[0];
 
             return true;
 
@@ -202,7 +207,7 @@ namespace Crazy.ServerBase
             MessageDispather = new MessageDispather();
             OpcodeTypeDic = new OpcodeTypeDictionary();
 
-            if (!MessageDispather.Init() || !OpcodeTypeDic.Init())
+            if (!OpcodeTypeDic.Init()||!MessageDispather.Init())
             {
                 Log.Error("InitlizeServerProtobuf FAIL!!!");
                 return false;
@@ -210,10 +215,7 @@ namespace Crazy.ServerBase
 
             return true;
         }
-        Task<NetSharp.IClientEventHandler> IServiceEventHandler.OnConnect(IClient client)
-        {
-            throw new NotImplementedException();
-        }
+    
 
 
 

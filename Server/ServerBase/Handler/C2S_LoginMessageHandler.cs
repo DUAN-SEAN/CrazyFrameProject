@@ -7,9 +7,9 @@ using Crazy.Common;
 namespace Crazy.ServerBase
 {
     [MessageHandler]
-    public class C2S_LoginMessageHandler : AMHandler<C2S_SearchUser>
+    public class C2S_ChatOneMessageHandler : AMHandler<ChatOneMessage>
     {
-        protected override void Run(PlayerContextBase playerContext, C2S_SearchUser message)
+        protected override void Run(PlayerContextBase playerContext, ChatOneMessage message)
         {
             
         }

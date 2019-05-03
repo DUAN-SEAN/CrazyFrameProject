@@ -10,7 +10,7 @@ namespace Crazy.Common
 {
     public enum DLLType
     {
-        Crazy,
+        Common,
         Client,
         ServerBase,
         GameServer,

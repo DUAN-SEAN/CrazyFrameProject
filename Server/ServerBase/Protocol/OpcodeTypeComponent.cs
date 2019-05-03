@@ -43,7 +43,21 @@ namespace Crazy.Common
 
                 this.opcodeTypes.Add(messageAttribute.Opcode, type);
                 this.typeMessages.Add(messageAttribute.Opcode, Activator.CreateInstance(type));
+                //Log.Info(((Google.Protobuf.IMessage)(Activator.CreateInstance(type))).Descriptor.FullName);
+                //var message = Activator.CreateInstance(type) as Google.Protobuf.IMessage;
+                //foreach (var field in message.Descriptor.Fields.InDeclarationOrder())
+                //{
+                //    Console.WriteLine(
+                //        "Field {0} ({1}): {2}",
+                //        field.FieldNumber,
+                //        field.Name,
+                //        field.Accessor.GetValue(message));
+                //}
+             
+     
+
             }
+            Log.Info("Message Count = " + opcodeTypes.Values.Count);
             return true;
         }
 
