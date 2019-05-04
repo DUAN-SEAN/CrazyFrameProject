@@ -57,7 +57,7 @@ namespace Crazy.ServerBase
 
                 int rpcId = request.RpcId;
 
-                long instanceId = playerContext.GetInstanceId();
+                ulong instanceId = playerContext.GetInstanceId();
 
                 this.Run(playerContext, request, response =>
                 {

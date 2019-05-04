@@ -11,7 +11,7 @@ namespace Crazy.ServerBase
     {
         protected override void Run(PlayerContextBase playerContext, ChatOneMessage message)
         {
-            
+            Log.Msg($"{playerContext.ContextId}:"+message);
         }
     }
 }

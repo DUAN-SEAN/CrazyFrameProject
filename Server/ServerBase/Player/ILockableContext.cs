@@ -25,7 +25,7 @@ namespace Crazy.NetSharp
         /// 获取现场的实例id
         /// </summary>
         /// <returns></returns>
-        Int64 GetInstanceId();
+        ulong GetInstanceId();
     }
 
     /// <summary>

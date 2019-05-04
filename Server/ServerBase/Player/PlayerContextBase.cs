@@ -36,6 +36,7 @@ namespace Crazy.ServerBase
         /// </summary>
         public virtual void OnConnected()
         {
+            Send(new C2S_SearchUser { Account = "Sean Duan",UserId = 00001});
             Log.Debug("PlayerContextBase::OnConnected");
         }
         #region ILockableContext
@@ -49,9 +50,9 @@ namespace Crazy.ServerBase
                 await m_lockedBindStubLock.WaitAsync();
             }
         }
-        public long GetInstanceId()
+        public ulong GetInstanceId()
         {
-            throw new NotImplementedException();
+            return m_contextId;
         }
         
         public void LeaveLock()
@@ -113,7 +114,7 @@ namespace Crazy.ServerBase
                         Log.Error($"Message Deserialize FAIL MessageType = {deserializeObject.GetType()}");
                         return 0;
                     }
-                    Log.Msg(message);
+                    //Log.Msg(message);
                     var opcode = OpcodeTypeDictionary.Instance.GetIdByType(msgType);
                     if (!flag)//普通消息
                     {
@@ -271,10 +272,10 @@ namespace Crazy.ServerBase
             if (m_client == null || m_client.Disconnected)
                 return -1;
 
-            Send(ServerBase.Instance.PackProtobufObject(message));
+            Task t = SendAsync(ServerBase.Instance.PackProtobufObject(message));
             return 0;
         }
-        public void Send(ClientOutputBuffer buff)
+        public async Task SendAsync(ClientOutputBuffer buff)
         {
             //这里可以写一个发包统计
             if (buff != null)
@@ -285,7 +286,11 @@ namespace Crazy.ServerBase
             {
                 Log.Error("SendPackageImpl error buff==null");
             }
-            m_client.Send(buff);
+            var flag = await m_client.Send(buff);
+            if(flag == false)
+            {
+                Log.Error("发送消息失败");
+            }
         }
         public Task<IResponse> Call(IRequest request)
         {

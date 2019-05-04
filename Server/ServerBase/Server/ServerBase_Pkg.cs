@@ -173,6 +173,8 @@ namespace Crazy.ServerBase
                 {
                     deserializeObject = m_messagePraser.DeserializeFrom(deserializeObject, deserializeBuff);
                 }
+                //deserializeObject = m_messagePraser.DeserializeFrom(deserializeObject, orgDataBuff, dataOffset, protoLength);
+
                 dataOffset += protoLength;
             }
             catch(Exception e)

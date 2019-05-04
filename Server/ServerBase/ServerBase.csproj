@@ -52,7 +52,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Handler\C2S_LoginMessageHandler.cs" />
     <Compile Include="NetSharp\AwaitableQueue.cs" />
     <Compile Include="NetSharp\Client.cs" />
     <Compile Include="NetSharp\IClient.cs" />
@@ -90,6 +89,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Handler\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

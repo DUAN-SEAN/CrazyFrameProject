@@ -102,7 +102,7 @@ namespace Crazy.Common
         {
             object message = Activator.CreateInstance(type);
             //(int)stream.Position
-            ((Google.Protobuf.IMessage)message).MergeFrom(stream.GetBuffer());
+            ((Google.Protobuf.IMessage)message).MergeFrom(stream.ToArray());
             return message;
         }
         /// <summary>
@@ -114,9 +114,10 @@ namespace Crazy.Common
         public static object FromStream(object message, MemoryStream stream)
         {
             // 这个message可以从池中获取，减少gc
-
-            //((Google.Protobuf.IMessage)message).MergeFrom(stream.GetBuffer(), (int)stream.Position, (int)stream.Length);
-            ((Google.Protobuf.IMessage)message).MergeFrom(stream.GetBuffer());
+       
+            
+            ((Google.Protobuf.IMessage)message).MergeFrom(stream.ToArray(), (int)stream.Position, (int)stream.Length);
+            //((Google.Protobuf.IMessage)message).MergeFrom(stream.GetBuffer());
             return message;
         }
     }
