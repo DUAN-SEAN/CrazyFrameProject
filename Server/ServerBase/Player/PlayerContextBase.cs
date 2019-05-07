@@ -69,7 +69,7 @@ namespace Crazy.ServerBase
 
         #region IClientEventHandler
         /// <summary>
-        /// 由
+        /// 默认网络消息的处理是解析protobuf消息 
         /// </summary>
         /// <param name="buffer"></param>
         /// <param name="dataAvailable"></param>
@@ -155,7 +155,7 @@ namespace Crazy.ServerBase
                 }
                 finally
                 {
-                    // 移动到下一个消息头
+                    //无论 移动到下一个消息头
                     dataOffset += byteHandled;
                 }
 

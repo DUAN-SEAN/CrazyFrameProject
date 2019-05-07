@@ -228,10 +228,11 @@ namespace Crazy.ServerBase
         /// 提供网络服务
         /// </summary>
         private Service m_service;
+        
         /// <summary>
         /// 配置文件
         /// </summary>
-        private ServerBaseGlobalConfigure m_globalConfigure;
+        protected ServerBaseGlobalConfigure m_globalConfigure;
         /// <summary>
         /// 服务器Id
         /// </summary>

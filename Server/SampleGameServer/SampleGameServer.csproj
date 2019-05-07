@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configure\GameServerConfig.cs" />
+    <Compile Include="DBContextAsyncAction\VerifyContextAsyncAction.cs" />
     <Compile Include="GameServer.cs" />
     <Compile Include="GameServerContext.cs" />
     <Compile Include="Handler\C2S_ChatOneMessageHandler.cs" />
@@ -60,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Configure\XML\GameServerConfig.config" />
     <None Include="NLog.config" />
   </ItemGroup>
   <ItemGroup>
