@@ -9,6 +9,7 @@ using Crazy.Common;
 namespace SampleGameServer.Configure
 {
     [Serializable]
+    [XmlRoot("Configure")]
     public class GameServerGlobalConfig:ServerBaseGlobalConfigure
     {
 
