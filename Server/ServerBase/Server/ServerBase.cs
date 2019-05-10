@@ -181,7 +181,7 @@ namespace Crazy.ServerBase
             where TGlobalConfigClass :ServerBaseGlobalConfigure, new()
         {
             //1:读取本地配置文件
-            m_globalConfigure =  Util.Deserialize<ServerBaseGlobalConfigure>(globalConfPath);
+            m_globalConfigure =  Util.Deserialize<TGlobalConfigClass>(globalConfPath);
             if(m_globalConfigure == null)
             {
 
@@ -228,10 +228,11 @@ namespace Crazy.ServerBase
         /// 提供网络服务
         /// </summary>
         private Service m_service;
+        
         /// <summary>
         /// 配置文件
         /// </summary>
-        private ServerBaseGlobalConfigure m_globalConfigure;
+        protected ServerBaseGlobalConfigure m_globalConfigure;
         /// <summary>
         /// 服务器Id
         /// </summary>

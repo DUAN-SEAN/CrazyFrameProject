@@ -60,14 +60,8 @@
     <Compile Include="NetSharp\Service.cs" />
     <Compile Include="Player\ContextAsyncAction.cs" />
     <Compile Include="Player\ILockableContext.cs" />
-    <Compile Include="Player\AHandler.cs" />
     <Compile Include="Player\PlayerContextBase.cs" />
     <Compile Include="Player\PlayerContextManager.cs" />
-    <Compile Include="Protocol\IMHandler.cs" />
-    <Compile Include="Protocol\ISession.cs" />
-    <Compile Include="Protocol\MessageDispatherComponent.cs" />
-    <Compile Include="Protocol\MessageInfo.cs" />
-    <Compile Include="Protocol\OpcodeTypeComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\ServerBase.cs" />
     <Compile Include="LocalMessage\ServerBaseLocalMesssageIDDef.cs" />

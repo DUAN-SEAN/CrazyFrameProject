@@ -10,5 +10,6 @@ namespace Crazy.Common
     {
         public ushort Opcode;
         public IMessage Message;
+        public bool flag;
     }
 }

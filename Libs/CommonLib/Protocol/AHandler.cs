@@ -2,32 +2,32 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-namespace Crazy.ServerBase
+namespace Crazy.Common
 {
   
     public abstract class AMHandler<Message> : IMHandler where Message : class 
     {
-        protected abstract void Run(PlayerContextBase playerContext, Message message);
+        protected abstract void Run(ISession playerContext, Message message);
         public Type GetMessageType()
         {
             return typeof(Message);
         }
 
-        public void Handle(PlayerContextBase sender, object msg)
+        public void Handle(ISession sender, object msg)
         {
             Message message = msg as Message;
-            PlayerContextBase playerContext = sender as PlayerContextBase;
+            
             if (message == null)
             {
                 Log.Error($"消息类型转换错误: {msg.GetType().Name} to {typeof(Message).Name}");
                 return;
             }
-            if (playerContext == null)
+            if(sender.SessionId == 0)
             {
-                Log.Error($"玩家上下文转换错误: {playerContext.GetType().Name} to {typeof(PlayerContextBase).Name}");
+                Log.Error("Session ID is 0");
                 return;
             }
-            Run(playerContext, message);
+            Run(sender, message);
         }
     }
 
@@ -42,14 +42,14 @@ namespace Crazy.ServerBase
             reply(response);
         }
 
-        protected abstract void Run(PlayerContextBase playerContext, Request message, Action<Response> reply);
+        protected abstract void Run(ISession playerContext, Request message, Action<Response> reply);
 
-        public void Handle(PlayerContextBase sender, object message)
+        public void Handle(ISession sender, object message)
         {
             try
             {
                 Request request = message as Request;
-                PlayerContextBase playerContext = sender as PlayerContextBase;
+                
                 if (request == null)
                 {
                     Log.Error($"消息类型转换错误: {message.GetType().Name} to {typeof(Request).Name}");
@@ -57,13 +57,14 @@ namespace Crazy.ServerBase
 
                 int rpcId = request.RpcId;
 
-                ulong instanceId = playerContext.GetInstanceId();
+                ulong instanceId = sender.SessionId;
 
-                this.Run(playerContext, request, response =>
+                this.Run(sender, request, response =>
                 {
                     // 等回调回来,session可以已经断开了,所以需要判断session InstanceId是否一样
-                    if (playerContext.GetInstanceId() != instanceId)
+                    if (sender.SessionId!= instanceId)
                     {
+                        Log.Error("Session Id is FAIL");
                         return;
                     }
 

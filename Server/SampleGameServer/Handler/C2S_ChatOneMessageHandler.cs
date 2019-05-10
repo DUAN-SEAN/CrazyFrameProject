@@ -9,9 +9,9 @@ namespace Crazy.ServerBase
     [MessageHandler]
     public class C2S_ChatOneMessageHandler : AMHandler<ChatOneMessage>
     {
-        protected override void Run(PlayerContextBase playerContext, ChatOneMessage message)
+        protected override void Run(ISession playerContext, ChatOneMessage message)
         {
-            Log.Msg($"{playerContext.ContextId}:"+message);
+            
         }
     }
 }

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Crazy.Common;
-using Crazy.ServerBase;
 namespace Crazy.Common
 {
     /// <summary>
@@ -72,7 +71,7 @@ namespace Crazy.Common
             Handlers[opcode].Add(handler);
         }
 
-        public void Handle(PlayerContextBase sender, MessageInfo messageInfo)
+        public void Handle(ISession sender, MessageInfo messageInfo)
         {
             List<IMHandler> handlers;
             if (!Handlers.TryGetValue(messageInfo.Opcode, out handlers))

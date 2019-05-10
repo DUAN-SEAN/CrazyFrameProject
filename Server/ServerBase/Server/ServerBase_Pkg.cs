@@ -164,7 +164,7 @@ namespace Crazy.ServerBase
                 Log.Error($"WRONG MSG ID ==============================={msgId}");
                 throw;
             }
-            Log.Info($"{msgType} Count = " + msgFullLength);
+            Log.Info($"{msgType} Count = " + msgFullLength);//TODO:print
             // 获取协议内容的长度
             var protoLength = msgFullLength - uint16Length * 2;
             try
