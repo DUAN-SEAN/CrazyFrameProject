@@ -362,6 +362,8 @@ namespace Crazy.ServerBase
 
 
         #endregion
+
+
         private ulong m_contextId;
         private Dictionary<int, Action<IResponse>> m_requestCallback = new Dictionary<int, Action<IResponse>>();
         private static int c_rpcId;
