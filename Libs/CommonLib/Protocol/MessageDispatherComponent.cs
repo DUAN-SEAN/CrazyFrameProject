@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Crazy.Common;
-using Crazy.ServerBase;
 namespace Crazy.Common
 {
     /// <summary>

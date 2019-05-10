@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-namespace Crazy.ServerBase
+namespace Crazy.Common
 {
   
     public abstract class AMHandler<Message> : IMHandler where Message : class 
