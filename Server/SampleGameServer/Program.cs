@@ -8,8 +8,16 @@ namespace SampleGameServer
 {
     class Program
     {
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
+            
+
+
             GameServer gameServer = new GameServer();
             if(!gameServer.Initialize<ServerBaseGlobalConfigure,GameServerContext>
                 (@"GameServerConfigure.config",typeof(GameServerContext),new ProtobufPacker(), "GameServer"))

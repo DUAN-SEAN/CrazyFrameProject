@@ -15,11 +15,11 @@ namespace SampleGameServer
         {
             m_instance = this;
         }
-        protected static new ServerBase m_instance;
-        public static new ServerBase Instance
-        {
-            get { return m_instance; }
-        }
+        /// <summary>
+        /// 静态实例
+        /// </summary>
+        public static new GameServer Instance
+        { get { return (GameServer)(ServerBase.Instance); } }
 
         public override bool Initialize<GlobalConfigureType, PlayerContextBase>(string globalPath, Type plyaerContextType, IMessagePacker messagePraser, string serverName)
         {
@@ -38,7 +38,12 @@ namespace SampleGameServer
 
             //下面可以写启动逻辑线程 将上述游戏逻辑丢到逻辑线程中处理
 
+
             return true;
+        }
+        public async Task TestAsync()
+        {
+            //await new LoginVerifyContextAsyncAction(new GameServerContext(), "111", "111").Start();
         }
         /// <summary>
         /// 获取当前服务器特定配置数据

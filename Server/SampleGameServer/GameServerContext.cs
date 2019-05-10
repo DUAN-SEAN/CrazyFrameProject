@@ -12,6 +12,8 @@ namespace SampleGameServer
         public override Task OnMessage(ILocalMessage msg)
         {
 
+
+
             return Task.CompletedTask;
         }
     }

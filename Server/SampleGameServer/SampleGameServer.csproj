@@ -51,11 +51,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsyncActions\DBContextAsyncAction\LoginVerifyContextAsyncAction.cs" />
     <Compile Include="Configure\GameServerConfig.cs" />
-    <Compile Include="DBContextAsyncAction\VerifyContextAsyncAction.cs" />
+    <Compile Include="AsyncActions\DBContextAsyncAction\VerifyContextAsyncAction.cs" />
     <Compile Include="GameServer.cs" />
     <Compile Include="GameServerContext.cs" />
     <Compile Include="Handler\C2S_ChatOneMessageHandler.cs" />
+    <Compile Include="Handler\RPC\C2S_LoginHandler.cs" />
     <Compile Include="Handler\RPC\C2S_SearchUserHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

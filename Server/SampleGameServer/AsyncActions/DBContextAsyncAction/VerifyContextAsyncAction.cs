@@ -22,10 +22,11 @@ namespace SampleGameServer
             : base(context, GameServer.Instance.AsyncActionQueuePool.GetAdaptedQueueByUserId(targetQueueUserId), needResult, needSeq)
         {
 
-
+            ContextUserId = context.ContextId;
         }
 
-       
+        public ulong ContextUserId { get; private set; }
+
     }
     public class VerifyAsyncActionSequenceQueuePool
     {

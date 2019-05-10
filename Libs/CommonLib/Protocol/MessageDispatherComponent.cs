@@ -72,7 +72,7 @@ namespace Crazy.Common
             Handlers[opcode].Add(handler);
         }
 
-        public void Handle(PlayerContextBase sender, MessageInfo messageInfo)
+        public void Handle(ISession sender, MessageInfo messageInfo)
         {
             List<IMHandler> handlers;
             if (!Handlers.TryGetValue(messageInfo.Opcode, out handlers))

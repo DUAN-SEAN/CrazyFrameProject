@@ -7,7 +7,7 @@ namespace Crazy.Common
 {
     public interface IMHandler
     {
-        void Handle(PlayerContextBase sender, object message);
+        void Handle(ISession sender, object message);
         Type GetMessageType();
     }
 

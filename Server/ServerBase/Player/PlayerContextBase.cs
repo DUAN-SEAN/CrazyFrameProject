@@ -12,7 +12,7 @@ namespace Crazy.ServerBase
 {
     /// <summary>
     /// 玩家现场基类
-    public class PlayerContextBase : IClientEventHandler,ILocalMessageHandler,ILockableContext,IManagedContext
+    public class PlayerContextBase : IClientEventHandler,ILocalMessageHandler,ILockableContext,IManagedContext,ISession
     /// </summary>
     {
         /// <summary>
@@ -196,7 +196,17 @@ namespace Crazy.ServerBase
         {
             //在这里将处理一系列消息
 
-            
+            switch (msg.MessageId)
+            {
+                //AsyncAction消息的回调
+                case ServerBaseLocalMesssageIDDef.LocalMsgAsyncActionResult:
+                    ContextAsyncAction contextAsyncAction = msg as ContextAsyncAction;
+                    contextAsyncAction.OnResultInternal();//执行回调
+
+                    break;
+
+                default:break;
+            }
 
 
             //本地消息和网络消息分开
@@ -358,11 +368,14 @@ namespace Crazy.ServerBase
         #region IManagedContext
         public ulong ContextId { get => m_contextId; set => m_contextId = value; }
 
-        public string ContextStringName => throw new NotImplementedException();
-
-
+        public string ContextStringName { get => m_gameUserId; }
+        /// <summary>
+        /// 对象标识，有应用层设定并且由应用层保证其唯一。
+        /// </summary>
+        public String m_gameUserId;
+        public ulong m_contextId;
         #endregion
-        private ulong m_contextId;
+
         private Dictionary<int, Action<IResponse>> m_requestCallback = new Dictionary<int, Action<IResponse>>();
         private static int c_rpcId;
         private static int RpcId { get {
@@ -374,5 +387,7 @@ namespace Crazy.ServerBase
                 return c_rpcId;
 
             }set { c_rpcId = value; } }
+
+        public ulong SessionId { get => m_contextId; }
     }
 }

@@ -10,21 +10,11 @@ namespace SampleGameServer
     [MessageHandler]
     public class C2S_SearchUserHandler : AMRpcHandler<C2S_SearchUser, S2C_SearchUser>
     {
-        protected override void Run(PlayerContextBase playerContext, C2S_SearchUser message, Action<S2C_SearchUser> reply)
+
+        protected override void Run(ISession playerContext, C2S_SearchUser message, Action<S2C_SearchUser> reply)
         {
-            var response = new S2C_SearchUser();
-            try
-            {
-                Log.Msg(message);
-
-                response.Account = "Sean Duan";
-
-            }catch(Exception e)
-            {
-                ReplyError(response,e,reply);
-                return;
-            }
-            reply(response);
+            
         }
+
     }
 }
