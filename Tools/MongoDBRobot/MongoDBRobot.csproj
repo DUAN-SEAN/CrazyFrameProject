@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5A12CD80-491B-4EC5-BDB6-BBC2442BA71C}</ProjectGuid>
+    <ProjectGuid>{7C20A006-C5DA-4A65-897F-D0CEED346123}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SampleGameServer</RootNamespace>
-    <AssemblyName>SampleGameServer</AssemblyName>
+    <RootNamespace>MongoDBRobot</RootNamespace>
+    <AssemblyName>MongoDBRobot</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -36,10 +36,6 @@
     <Reference Include="DnsClient, Version=1.2.0.0, Culture=neutral, PublicKeyToken=4574bb5573c51424, processorArchitecture=MSIL">
       <HintPath>..\..\packages\DnsClient.1.2.0\lib\net45\DnsClient.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Protobuf, Version=3.7.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Google.Protobuf.3.7.0\lib\net45\Google.Protobuf.dll</HintPath>
-    </Reference>
     <Reference Include="MongoDB.Bson, Version=2.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\MongoDB.Bson.2.8.0\lib\net452\MongoDB.Bson.dll</HintPath>
     </Reference>
@@ -48,10 +44,6 @@
     </Reference>
     <Reference Include="MongoDB.Driver.Core, Version=2.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\MongoDB.Driver.Core.2.8.0\lib\net452\MongoDB.Driver.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\NLog.4.6.2\lib\net45\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -71,34 +63,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AsyncActions\DBContextAsyncAction\LoginVerifyContextAsyncAction.cs" />
-    <Compile Include="Configure\GameServerConfig.cs" />
-    <Compile Include="AsyncActions\DBContextAsyncAction\VerifyContextAsyncAction.cs" />
-    <Compile Include="DB\MongoDBHelper.cs" />
-    <Compile Include="GameServer.cs" />
-    <Compile Include="GameServerContext.cs" />
-    <Compile Include="Handler\C2S_ChatOneMessageHandler.cs" />
-    <Compile Include="Handler\RPC\C2S_LoginHandler.cs" />
-    <Compile Include="Handler\RPC\C2S_SearchUserHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Configure\XML\GameServerConfig.config" />
-    <None Include="NLog.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Libs\CommonLib\CommonLib.csproj">
-      <Project>{0f3ecc0f-e8f4-434e-aaf9-95a912f2f565}</Project>
-      <Name>CommonLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ServerBase\ServerBase.csproj">
-      <Project>{c62bc39f-6932-45f2-a626-4faf7f836e6f}</Project>
-      <Name>ServerBase</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
