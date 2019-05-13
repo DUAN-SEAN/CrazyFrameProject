@@ -7,7 +7,7 @@ using Crazy.NetSharp;
 using Crazy.ServerBase;
 namespace SampleGameServer
 {
-    public class GameServerContext:PlayerContextBase
+    public sealed class GameServerContext:PlayerContextBase
     {
         public override Task OnMessage(ILocalMessage msg)
         {

@@ -9,7 +9,7 @@ using Crazy.ServerBase;
 
 namespace SampleGameServer
 {
-    public class GameServer:ServerBase
+    public sealed class GameServer:ServerBase
     {
         public GameServer():base()
         {
@@ -35,6 +35,12 @@ namespace SampleGameServer
             m_gameServerGlobalConfig = base.m_globalConfigure as SampleGameServer.Configure.GameServerGlobalConfig;
             //设置AsyncActionQueuePool
             AsyncActionQueuePool = new VerifyAsyncActionSequenceQueuePool(m_gameServerGlobalConfig.ServerContext.AsyncActionQueueCount);
+
+            //数据库配置
+            var dbConfig = m_gameServerGlobalConfig.DBConfigInfo[0];
+            Log.Info($"ip:{dbConfig.ConnectHost} port:{dbConfig.Port} serviceName:{dbConfig.DataBase} username:{dbConfig.UserName} password:{dbConfig.Password}");
+
+            MongoDBHelper.CreateDBClient();
 
             //下面可以写启动逻辑线程 将上述游戏逻辑丢到逻辑线程中处理
 
