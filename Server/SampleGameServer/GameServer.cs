@@ -41,10 +41,7 @@ namespace SampleGameServer
 
             return true;
         }
-        public async Task TestAsync()
-        {
-            //await new LoginVerifyContextAsyncAction(new GameServerContext(), "111", "111").Start();
-        }
+       
         /// <summary>
         /// 获取当前服务器特定配置数据
         /// </summary>
