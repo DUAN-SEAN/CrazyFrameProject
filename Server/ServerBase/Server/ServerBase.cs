@@ -31,6 +31,7 @@ namespace Crazy.ServerBase
         public virtual bool Initialize<GlobalConfigureType,PlayerContextBase>(string globalPath,Type plyaerContextType,IMessagePacker messagePraser,string serverName
         )
              where GlobalConfigureType : ServerBaseGlobalConfigure, new()
+             where PlayerContextBase:class
         {
 
 

@@ -71,9 +71,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AsyncActions\DBContextAsyncAction\LoginVerifyContextAsyncAction.cs" />
+    <Compile Include="AsyncActions\DBContextAsyncAction\GameServerDBOperationDefine.cs" />
+    <Compile Include="AsyncActions\DBDataDefine\GameServerDBarrierRecord.cs" />
+    <Compile Include="AsyncActions\DBDataDefine\GameServerDBPlayer.cs" />
     <Compile Include="Configure\GameServerConfig.cs" />
-    <Compile Include="AsyncActions\DBContextAsyncAction\VerifyContextAsyncAction.cs" />
+    <Compile Include="AsyncActions\DBContextAsyncAction\GameServerContextAsyncAction.cs" />
     <Compile Include="DB\MongoDBHelper.cs" />
     <Compile Include="GameServerConstDefine.cs" />
     <Compile Include="GameServer.cs" />

@@ -96,7 +96,7 @@ namespace Crazy.ServerBase
         {
             if (m_needInSeq)
             {
-                // 入队的状态检查
+                // 入队的状态检查  返回原始值   比较m_state 是否等于 0  等于0 则设置为1
                 if (Interlocked.CompareExchange(ref m_state, 1, 0) != 0)
                 {
                     return;
@@ -105,7 +105,7 @@ namespace Crazy.ServerBase
                 // 首先将自己压入队列
                 m_sequenceQueue.EnqueueActionSeqQueue(this);
 
-                // 设置对现场的ref
+                // 设置对现场的ref  需要执行结果处理的并且有玩家上下文的
                 if (m_needResult && m_onResultLocalMsgClient != null)
                 {
                     m_onResultLocalMsgClient.AddRef4AsyncAction();
@@ -145,14 +145,14 @@ namespace Crazy.ServerBase
             try
             {
                 // 执行真正的操作
-                await Execute();
+                await ExecuteAsync();
             }
             catch(Exception e)
             {
                 Log.Error(e);
                 m_executingException = e;
             }         
-
+            //执行完成后将消息发送给玩家现场
             if (m_needResult && m_onResultLocalMsgClient != null && m_onResultLocalMsgClient.IsAvaliable())
             {
                 m_onResultLocalMsgClient.PostLocalMessage(this);
@@ -163,7 +163,7 @@ namespace Crazy.ServerBase
         /// <summary>
         /// 业务逻辑
         /// </summary>
-        virtual public Task Execute()
+        virtual public Task ExecuteAsync()
         {
             // dongsomthing
             return Task.CompletedTask;

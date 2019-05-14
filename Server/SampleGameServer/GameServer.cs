@@ -34,13 +34,16 @@ namespace SampleGameServer
             //获取当前服务器的配置文件
             m_gameServerGlobalConfig = base.m_globalConfigure as SampleGameServer.Configure.GameServerGlobalConfig;
             //设置AsyncActionQueuePool
-            AsyncActionQueuePool = new VerifyAsyncActionSequenceQueuePool(m_gameServerGlobalConfig.ServerContext.AsyncActionQueueCount);
+            AsyncActionQueuePool = new SampleGameServerAsyncActionSequenceQueuePool(m_gameServerGlobalConfig.ServerContext.AsyncActionQueueCount);
 
             //数据库配置
             var dbConfig = m_gameServerGlobalConfig.DBConfigInfo[0];
             Log.Info($"ip:{dbConfig.ConnectHost} port:{dbConfig.Port} serviceName:{dbConfig.DataBase} username:{dbConfig.UserName} password:{dbConfig.Password}");
 
-            MongoDBHelper.CreateDBClient();
+            //MongoDBHelper.CreateDBClient(); //测试
+            
+
+            MongoDBHelper.Test();
 
             //下面可以写启动逻辑线程 将上述游戏逻辑丢到逻辑线程中处理
 
@@ -55,6 +58,6 @@ namespace SampleGameServer
         /// <summary>
         /// 服务器用于顺序化AsyncAction的队列池，根据每个Context的UserId来分配该Context对应的AsyncAction所属的队列
         /// </summary>
-        public VerifyAsyncActionSequenceQueuePool AsyncActionQueuePool { get; private set; }
+        public SampleGameServerAsyncActionSequenceQueuePool AsyncActionQueuePool { get; private set; }
     }
 }

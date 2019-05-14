@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SampleGameServer.DB
+namespace SampleGameServer
 {
     //Game服务器的消息字段声明
     public class GameServerConstDefine
@@ -14,17 +14,22 @@ namespace SampleGameServer.DB
     /// <summary>
     /// playercollecion各个字段的定义key
     /// </summary>
-    public class SampleGamePlayerDBItemDefine
+    public class SampleGameServerDBItemDefine
     {
         /// <summary>
         /// 所属的数据库
         /// </summary>
-        public const String DATABASE = "Space Shooter";
+        public const String DATABASE = "SpaceShooter";
 
         /// <summary>
-        /// 数据库collection的名字
+        /// 玩家集合
         /// </summary>
-        public const String COLLECTION = "Players";
+        public const String COLLECTION_PLAYERS = "Players";
+        /// <summary>
+        /// 关卡战斗记录集合
+        /// </summary>
+        public const String COLLECTION_BARRIERRECORD = "BarrierRecords";
+
 
         /// <summary>
         /// 数据库记录自生成id
@@ -34,8 +39,21 @@ namespace SampleGameServer.DB
         /// <summary>
         /// 玩家id
         /// </summary>
-        public const String PLAYER_USERID = "UserId";
+        public const String PLAYER_USERID = "userId";
 
-        
+        /// <summary>
+        /// 玩家昵称
+        /// </summary>
+        public const String PLAYER_USERNAME = "userName";
+
+        /// <summary>
+        /// 玩家密码
+        /// </summary>
+        public const String PLAYER_PASSWORD = "passWord";
+
+        /// <summary>
+        /// 玩家创建时间
+        /// </summary>
+        public const String PLAYER_CREATETIME = "createTime";
     }
 }

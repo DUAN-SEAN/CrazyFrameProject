@@ -9,7 +9,7 @@ using Crazy.ServerBase;
 
 namespace SampleGameServer
 {
-    public class VerifyContextAsyncAction:ContextAsyncAction
+    public class SampleGameServerContextAsyncAction:ContextAsyncAction
     {
         /// <summary>
         /// 
@@ -18,7 +18,7 @@ namespace SampleGameServer
         /// <param name="targetQueueUserId"></param>
         /// <param name="needResult"></param>
         /// <param name="needSeq"></param>
-        public VerifyContextAsyncAction(GameServerContext context, String targetQueueUserId, Boolean needResult = false, Boolean needSeq = false)
+        public SampleGameServerContextAsyncAction(GameServerContext context, String targetQueueUserId, Boolean needResult = false, Boolean needSeq = false)
             : base(context, GameServer.Instance.AsyncActionQueuePool.GetAdaptedQueueByUserId(targetQueueUserId), needResult, needSeq)
         {
 
@@ -28,35 +28,36 @@ namespace SampleGameServer
         public ulong ContextUserId { get; private set; }
 
     }
-    public class VerifyAsyncActionSequenceQueuePool
+    public class SampleGameServerAsyncActionSequenceQueuePool
     {
-        public VerifyAsyncActionSequenceQueuePool(UInt32 poolSize)
+        public SampleGameServerAsyncActionSequenceQueuePool(UInt32 poolSize)
         {
-            _queuePool = new VerifyAsyncActionSequenceQueue[poolSize];
+            _queuePool = new SampleGameServerAsyncActionSequenceQueue[poolSize];
             for (Int32 pos = 0; pos < poolSize; ++pos)
             {
-                _queuePool[pos] = new VerifyAsyncActionSequenceQueue();
+                _queuePool[pos] = new SampleGameServerAsyncActionSequenceQueue();
             }
         }
 
-        public VerifyAsyncActionSequenceQueue GetAdaptedQueueByUserId(String userId)
+        public SampleGameServerAsyncActionSequenceQueue GetAdaptedQueueByUserId(String userId)
         {
+            if (userId == null) return _queuePool[0];//如果userid为null  表示为非现场耗时任务
             Int32 hash = userId.GetHashCode();
             return _queuePool[Math.Abs(hash) % (_queuePool.GetLength(0))];
         }
 
-        private VerifyAsyncActionSequenceQueue[] _queuePool;
+        private SampleGameServerAsyncActionSequenceQueue[] _queuePool;
     }
 
     /// <summary>
     /// 用于顺序化FriendContextAsyncAction的队列
     /// </summary>
-    public class VerifyAsyncActionSequenceQueue : IContextAsyncActionSequenceQueue
+    public class SampleGameServerAsyncActionSequenceQueue : IContextAsyncActionSequenceQueue
     {
         /// <summary>
         /// 构造函数
         /// </summary>
-        public VerifyAsyncActionSequenceQueue()
+        public SampleGameServerAsyncActionSequenceQueue()
         {
             _queue = new ConcurrentQueue<ContextAsyncAction>();
         }

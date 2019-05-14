@@ -372,8 +372,8 @@ namespace Crazy.ServerBase
         /// <summary>
         /// 对象标识，有应用层设定并且由应用层保证其唯一。
         /// </summary>
-        public String m_gameUserId;
-        public ulong m_contextId;
+        private String m_gameUserId;
+        private ulong m_contextId;
         #endregion
 
         private Dictionary<int, Action<IResponse>> m_requestCallback = new Dictionary<int, Action<IResponse>>();

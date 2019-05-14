@@ -7,13 +7,49 @@ using MongoDB.Driver;
 using Crazy.Common;
 using MongoDB.Bson;
 using System.Collections;
+using SampleGameServer.Configure;
 
 namespace SampleGameServer
 {
     public sealed class MongoDBHelper
     {
-        
+        static MongoDBHelper()
+        {
+            _dbConfigDic = new Dictionary<string, DBConfigInfo>();
+            foreach (var elem in GameServer.Instance.m_gameServerGlobalConfig.DBConfigInfo)
+            {
+                _dbConfigDic[elem.DataBase] = elem;
+            }
+            _dbEntityDic = new Dictionary<string, IMongoDatabase>();
+        }
+        /// <summary>
+        /// 根据数据库名获得数据库实体
+        /// </summary>
+        /// <param name="dbName"></param>
+        /// <returns></returns>
+        public static IMongoDatabase GetDataBaseEntity(string dbName)
+        {
+            IMongoDatabase mongoDatabase = null;
+            if(_dbEntityDic.TryGetValue(dbName,out mongoDatabase))
+            {
+                return mongoDatabase;
+            }
+            DBConfigInfo dBConfigInfo = null;
+            // 之前没有记录，说明是第一次构造这个MongoDatabase
+            if (!_dbConfigDic.TryGetValue(dbName, out dBConfigInfo))
+            {
+                Log.Fatal("DBConfig is Empty");
+                return null;
+            }
+            string connection = $"mongodb://{dBConfigInfo.ConnectHost}:{dBConfigInfo.Port}/{dBConfigInfo.DataBase}";//暂时不需要验证
+            var client = new MongoClient(connection);
+            mongoDatabase = client.GetDatabase(dbName);
+            _dbEntityDic[dbName] = mongoDatabase;
 
+            return mongoDatabase;
+
+
+        }
         public static void CreateDBClient()
         {
             try
@@ -59,10 +95,23 @@ namespace SampleGameServer
 
         public static void Test()
         {
-            BsonElement bsonElement = new BsonElement();
-            
-                
+            var gameContext = GameServer.Instance.PlayerCtxManager.AllocPlayerContext() as GameServerContext;
+            //new RegsiterVerifyContextAsyncAction(gameContext, gameContext.ContextId.ToString(), "duanrui", "123456").Start();
+
+            //new LoginVerifyContextAsyncAction(gameContext, "duanrui", "123456").Start();
+
+
         }
+
+        /// <summary>
+        /// 配置文件读到的数据库配置
+        /// </summary>
+        private static Dictionary<String, DBConfigInfo> _dbConfigDic ;
+
+        /// <summary>
+        /// 由配置文件配置数据生成的数据库entry，保存在这里，后面再使用的时候直接从这里取，提升效率
+        /// </summary>
+        private static Dictionary<String, IMongoDatabase> _dbEntityDic;
 
     }
 }
