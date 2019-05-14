@@ -14,7 +14,7 @@ namespace SampleGameServer
     /// </summary>
     public class RegsiterVerifyContextAsyncAction : SampleGameServerContextAsyncAction
     {
-        public RegsiterVerifyContextAsyncAction(GameServerContext context, string targetQueueUserId,string username,string password, bool needResult = false, bool needSeq = false) : base(context, targetQueueUserId, needResult, needSeq)
+        public RegsiterVerifyContextAsyncAction(GameServerContext context, string targetQueueUserId, string username, string password, bool needResult = false, bool needSeq = false) : base(context, targetQueueUserId, needResult, needSeq)
         {
             m_username = username;
             m_password = password;
@@ -45,10 +45,10 @@ namespace SampleGameServer
                     m_state = false;
                     m_errorInfo += "已经存在用户了\n";
                     return;
-                    
+
                 }
                 var player = new GameServerDBPlayer();
-                
+
                 player.userName = m_username;
 
                 player.passWord = m_password;
@@ -59,7 +59,7 @@ namespace SampleGameServer
                 await collection.InsertOneAsync(player);//插入
                 m_errorInfo += "插入成功\n";
                 m_state = true;
-            }catch(Exception e)
+            } catch (Exception e)
             {
                 m_errorInfo += e.ToString();
                 m_state = false;
@@ -68,7 +68,7 @@ namespace SampleGameServer
             {
                 Log.Info(m_errorInfo);
             }
-           
+
 
         }
         /// <summary>
@@ -90,9 +90,9 @@ namespace SampleGameServer
     /// <summary>
     /// 登陆验证
     /// </summary>
-    public class LoginVerifyContextAsyncAction:SampleGameServerContextAsyncAction
+    public class LoginVerifyContextAsyncAction : SampleGameServerContextAsyncAction
     {
-        public LoginVerifyContextAsyncAction(GameServerContext gameServerContext,string account,string password, bool needResult = false, bool needSeq = false) : base(gameServerContext,gameServerContext.ContextId.ToString(),false,false)
+        public LoginVerifyContextAsyncAction(GameServerContext gameServerContext, string account, string password, bool needResult = false, bool needSeq = false) : base(gameServerContext, gameServerContext.ContextId.ToString(), false, false)
         {
             this.m_username = account;
             this.m_password = password;
@@ -114,7 +114,7 @@ namespace SampleGameServer
 
                 var filter = filterBuilder.Eq(SampleGameServerDBItemDefine.PLAYER_USERNAME, m_username) & filterBuilder.Eq(SampleGameServerDBItemDefine.PLAYER_PASSWORD, m_password);
 
-                var result = (await(collection.FindAsync(filter))).ToList();
+                var result = (await (collection.FindAsync(filter))).ToList();
 
                 if (result != null && result.Count > 0)
                 {
@@ -126,13 +126,13 @@ namespace SampleGameServer
 
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
 
             }
 
 
-            return ;
+            return;
         }
         public override void OnResult()
         {
@@ -148,10 +148,12 @@ namespace SampleGameServer
 
         private string m_password;
     }
-
+    /// <summary>
+    /// 上传一场战斗数据
+    /// </summary>
     public class UpLoadBarrierRecordAsyncAction : SampleGameServerContextAsyncAction
     {
-        public UpLoadBarrierRecordAsyncAction(GameServerDBarrierRecord data,bool needResult = false, bool needSeq = false) : base(null,null , needResult, needSeq)
+        public UpLoadBarrierRecordAsyncAction(GameServerDBarrierRecord data, GameServerContext gameServerContext, bool needResult = false, bool needSeq = false) : base(gameServerContext, null, needResult, needSeq)
         {
             m_data = data;
         }
@@ -180,4 +182,34 @@ namespace SampleGameServer
         }
     }
 
+
+    public class GetAllBarrierRecordAsyncAction : SampleGameServerContextAsyncAction
+    {
+        public GetAllBarrierRecordAsyncAction(GameServerContext context, string targetQueueUserId, bool needResult = false, bool needSeq = false) : base(context, targetQueueUserId, needResult, needSeq)
+        {
+
+        }
+
+        public override Task ExecuteAsync()
+        {
+            var dataBase = MongoDBHelper.GetDataBaseEntity(SampleGameServerDBItemDefine.DATABASE);
+
+            var collection = dataBase.GetCollection<GameServerDBarrierRecord>(SampleGameServerDBItemDefine.COLLECTION_BARRIERRECORD);//获取Players集合
+
+            var datas = collection.Find(new BsonDocument()).ToList();
+
+            foreach (var item in datas)
+            {
+                Log.Info(item.Tojson());
+
+            }
+
+            return base.ExecuteAsync();
+        }
+
+        public override void OnResult()
+        {
+            base.OnResult();
+        }
+    }
 }

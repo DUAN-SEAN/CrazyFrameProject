@@ -15,11 +15,11 @@ namespace SampleGameServer
 
         public long number;
 
-        public List<GameServerDBarrierRecordPlayer> players = new List<GameServerDBarrierRecordPlayer>();//关卡记录中玩家信息
+        public List<GameServerDBarrierRecordPlayer> players ;//关卡记录中玩家信息
 
         public DateTime startTime;
 
-        public DateTime costTime;
+        public long costTime;//毫秒
 
         public DateTime endTime;
 

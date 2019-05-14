@@ -96,9 +96,18 @@ namespace SampleGameServer
         public static void Test()
         {
             var gameContext = GameServer.Instance.PlayerCtxManager.AllocPlayerContext() as GameServerContext;
-            //new RegsiterVerifyContextAsyncAction(gameContext, gameContext.ContextId.ToString(), "duanrui", "123456").Start();
 
+            //1
+            //new RegsiterVerifyContextAsyncAction(gameContext, gameContext.ContextId.ToString(), "duanrui", "123456").Start();
+            //2
             //new LoginVerifyContextAsyncAction(gameContext, "duanrui", "123456").Start();
+            //3
+            //var data = new GameServerDBarrierRecord { battleId = 1, number = 1, grade = 100, costTime = 600000,endTime = DateTime.Now, startTime = DateTime.Now,
+            //    players = new List<GameServerDBarrierRecordPlayer>() };
+            //data.players.Add(  new GameServerDBarrierRecordPlayer {userName = "zhuying" });
+            //new UpLoadBarrierRecordAsyncAction(data,gameContext).Start();
+            //4
+            new GetAllBarrierRecordAsyncAction(gameContext, null).Start();
 
 
         }
