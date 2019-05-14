@@ -75,6 +75,7 @@
     <Compile Include="Configure\GameServerConfig.cs" />
     <Compile Include="AsyncActions\DBContextAsyncAction\VerifyContextAsyncAction.cs" />
     <Compile Include="DB\MongoDBHelper.cs" />
+    <Compile Include="GameServerConstDefine.cs" />
     <Compile Include="GameServer.cs" />
     <Compile Include="GameServerContext.cs" />
     <Compile Include="Handler\C2S_ChatOneMessageHandler.cs" />
