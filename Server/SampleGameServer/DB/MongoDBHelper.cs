@@ -55,9 +55,13 @@ namespace SampleGameServer
                 Log.Error(e);
             }
             
+        }
+
+        public static void Test()
+        {
+            BsonElement bsonElement = new BsonElement();
             
-
-
+                
         }
 
     }
