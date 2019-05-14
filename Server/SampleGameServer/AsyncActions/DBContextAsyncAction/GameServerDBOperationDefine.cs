@@ -182,7 +182,7 @@ namespace SampleGameServer
         }
     }
 
-
+    //获取所有战斗数据
     public class GetAllBarrierRecordAsyncAction : SampleGameServerContextAsyncAction
     {
         public GetAllBarrierRecordAsyncAction(GameServerContext context, string targetQueueUserId, bool needResult = false, bool needSeq = false) : base(context, targetQueueUserId, needResult, needSeq)
@@ -212,4 +212,6 @@ namespace SampleGameServer
             base.OnResult();
         }
     }
+    
+
 }
