@@ -11,27 +11,44 @@ namespace SampleGameServer
     /// <summary>
     /// 匹配管理器
     /// </summary>
-    public class MatchManager
+    public class GameMatchManager
     {
+        /// <summary>
+        /// 保证只执行一次赋值
+        /// </summary>
+        static GameMatchManager()
+        {
+            m_instance = new GameMatchManager();
+        }
+
+        public GameMatchManager()
+        {
+            m_gameMatchPlayerCtxQueDic = new ConcurrentDictionary<int, GameMatchPlayerContextQueue>();
+        }
         /// <summary>
         /// 根据配置文件初始化匹配管理器
         /// </summary>
         public void Initialize()
         {
-            
+            //获取游戏匹配的配置文件,获取
 
+            
+            
         }
 
 
-       
 
 
-        private MatchManager m_instance;
-        public MatchManager Instance { get => m_instance; set => m_instance = value; }
+        private readonly ConcurrentDictionary<int, GameMatchPlayerContextQueue> m_gameMatchPlayerCtxQueDic;//玩家匹配队列字典，服务器有若干个匹配队列，由配置文件进行配置
+
+        private static GameMatchManager m_instance;
+        public static GameMatchManager Instance { get => m_instance; set => m_instance = value; }
     }
 
-
-    public class MatchPlayerContextQueue
+    /// <summary>
+    /// 游戏匹配的玩家队列
+    /// </summary>
+    public class GameMatchPlayerContextQueue
     {
         public void AllocPlayerContext(IClientEventHandler playercontext)
         {
