@@ -20,7 +20,7 @@ namespace Crazy.Common
 
         public UInt64 AllocateSessionId()
         {
-            return (m_serverId << 32) + (UInt32)Interlocked.Increment(ref m_ctxId);
+            return (m_serverId << 32) + (UInt32)Interlocked.Increment(ref m_ctxId);//线程安全的递增
         }
 
         public static Int32 GetServerIdFromSessionId(UInt64 sessionId)

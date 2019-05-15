@@ -16,7 +16,7 @@ namespace SampleGameServer
         static MongoDBHelper()
         {
             _dbConfigDic = new Dictionary<string, DBConfigInfo>();
-            foreach (var elem in GameServer.Instance.m_gameServerGlobalConfig.DBConfigInfo)
+            foreach (var elem in GameServer.Instance.m_gameServerGlobalConfig.DBConfigInfos)
             {
                 _dbConfigDic[elem.DataBase] = elem;
             }
@@ -54,7 +54,7 @@ namespace SampleGameServer
         {
             try
             {
-                var dbConfig = GameServer.Instance.m_gameServerGlobalConfig.DBConfigInfo[0];
+                var dbConfig = GameServer.Instance.m_gameServerGlobalConfig.DBConfigInfos[0];
 
                 // 连接到单实例MongoDB服务
                 // 这种连接方式不会自动检测连接的节点是主节点还是复制集的成员节点

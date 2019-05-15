@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SampleGameServer
@@ -30,7 +31,11 @@ namespace SampleGameServer
         /// </summary>
         public void Initialize()
         {
-            //获取游戏匹配的配置文件,获取
+            //获取游戏匹配的配置文件,获取所有的游戏匹配信息
+
+            Configure.GameMacthConfig item = GameServer.Instance.m_gameServerGlobalConfig;
+
+
 
             
             
@@ -50,6 +55,15 @@ namespace SampleGameServer
     /// </summary>
     public class GameMatchPlayerContextQueue
     {
+        /// <summary>
+        /// 初始化匹配队列
+        /// </summary>
+        /// <param name="maxCount"></param>
+        public GameMatchPlayerContextQueue(int maxCount)
+        {
+            m_maxMemberCount = maxCount;
+        }
+
         public void AllocPlayerContext(IClientEventHandler playercontext)
         {
             var playerId = playercontext.GetInstanceId();
@@ -59,7 +73,20 @@ namespace SampleGameServer
 
 
         }
+        /// <summary>
+        /// 一个玩家现场选择退出匹配队列 那么整个团队就退出
+        /// </summary>
+        /// <param name="playerId"></param>
+        public void OnExitMatchQueue(ulong playerId)
+        {
+            OnEnterLock();
 
+
+
+
+
+            LeaveLock();
+        }
         public void ReleasePlayerContext(ulong playerId)
         {
             IClientEventHandler playerContext;
@@ -74,11 +101,51 @@ namespace SampleGameServer
             
         }
 
+        private void OnEnterLock()
+        {
+            m_queueLock.Wait();
 
-        private ConcurrentQueue<IClientEventHandler> m_playerQue;//玩家匹配队列
-        private ConcurrentDictionary<ulong, IClientEventHandler> m_playerDic;//玩家字典
+        }
+
+        private void LeaveLock()
+        {
+            m_queueLock.Release();
+        }
+
+
+        private List<MatchTeam> m_matchTeamQue;//玩家匹配队列
+
+        /// <summary>
+        /// 队列锁 每次只能有一个线程去处理
+        /// 这是一个混合锁，在playerContext中使用该锁锁住玩家现场
+        /// 该锁将在内核模式自旋 while；然后在一定的阈值过后进行内核模式ThreadSleep
+        /// </summary>
+        protected SemaphoreSlim m_queueLock = new SemaphoreSlim(1);
+
+        /// <summary>
+        /// 该匹配队列所拥有的所有玩家现场
+        /// </summary>
+        private ConcurrentDictionary<ulong, IClientEventHandler> m_playerDic;
+
+        /// <summary>
+        /// 队列中支持最多的队伍人数
+        /// </summary>
+        private readonly int m_maxMemberCount;
+
+
+        public class MatchTeam {
+
+
+            public readonly List<IClientEventHandler> Member = new List<IClientEventHandler>();
+
+            
+
+        }
+
 
     }
+
+
 
 
 

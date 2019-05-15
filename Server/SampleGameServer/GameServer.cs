@@ -37,7 +37,7 @@ namespace SampleGameServer
             AsyncActionQueuePool = new SampleGameServerAsyncActionSequenceQueuePool(m_gameServerGlobalConfig.ServerContext.AsyncActionQueueCount);
 
             //数据库配置
-            var dbConfig = m_gameServerGlobalConfig.DBConfigInfo[0];
+            var dbConfig = m_gameServerGlobalConfig.DBConfigInfos[0];
             Log.Info($"ip:{dbConfig.ConnectHost} port:{dbConfig.Port} serviceName:{dbConfig.DataBase} username:{dbConfig.UserName} password:{dbConfig.Password}");
 
             //MongoDBHelper.CreateDBClient(); //测试
