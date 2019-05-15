@@ -12,8 +12,11 @@ namespace Crazy.ServerBase
 {
     /// <summary>
     /// 玩家现场基类
-    public class PlayerContextBase : IClientEventHandler,ILocalMessageHandler,ILockableContext,IManagedContext,ISession
+    /// 目前玩家现场的逻辑由Client的任务链管理，同一个玩家的逻辑保证先后执行的顺序。
+    /// 只要调用玩家的PostLocalMessage即可，在Onmessage中写逻辑代码。
     /// </summary>
+    public class PlayerContextBase : IClientEventHandler,ILocalMessageHandler,ILockableContext,IManagedContext,ISession
+    
     {
         /// <summary>
         /// 将玩家现场和一个client对象关联在一起
@@ -36,8 +39,12 @@ namespace Crazy.ServerBase
         /// </summary>
         public virtual void OnConnected()
         {
-            Send(new C2S_SearchUser { Account = "Sean Duan",UserId = 00001});
-            Log.Debug("PlayerContextBase::OnConnected");
+            //连接成功在这里写连接成功逻辑
+
+
+
+            //Send(new C2S_SearchUser { Account = "Sean Duan",UserId = 00001});
+            //Log.Debug("PlayerContextBase::OnConnected");
         }
         #region ILockableContext
         public async Task EnterLock()
@@ -118,31 +125,29 @@ namespace Crazy.ServerBase
                     var opcode = OpcodeTypeDictionary.Instance.GetIdByType(msgType);
                     if (!flag)//普通消息
                     {
-                        //在这里将消息进行分发
-                        MessageDispather.Instance.
-                            Handle(this, new MessageInfo
+
+
+                        PostLocalMessage(new NetClientMessage {
+                            MessageInfo = new MessageInfo
                             {
                                 Message = message,
-                                Opcode = opcode
-                            });
-
-                        //PostLocalMessage()
+                                Opcode = opcode,
+                                flag = flag
+                                
+                            }
+                        });
                     }
                     else
                     {
-                        IResponse response = message as IResponse;
-                        if (response == null)
+                        PostLocalMessage(new RpcNetClientMessage
                         {
-                            throw new Exception($"flag is response, but message is not! {opcode}");
-                        }
-                        Action<IResponse> action;
-                        if (!m_requestCallback.TryGetValue(response.RpcId, out action))
-                        {
-                            return -1;
-                        }
-                        m_requestCallback.Remove(response.RpcId);
-
-                        action(response);
+                            MessageInfo = new MessageInfo
+                            {
+                                Message = message,
+                                Opcode = opcode,
+                                flag = flag
+                            }
+                        });
                     }
                     
 
@@ -207,10 +212,31 @@ namespace Crazy.ServerBase
 
                     break;
                 case ServerBaseLocalMesssageIDDef.NetMessage://如何是网络消息就通过分发器进行分发
+                    NetClientMessage message = msg as NetClientMessage;                                     
+                    MessageDispather.Instance.Handle(this, message.MessageInfo); //在这里将消息进行分发  直接调用逻辑handler
+                    break;
+                case ServerBaseLocalMesssageIDDef.RpcNetMessage:
+                    RpcNetClientMessage rpcmessage = msg as RpcNetClientMessage;
 
+
+
+                    IResponse response = rpcmessage.MessageInfo.Message as IResponse;
+                    if (response == null)
+                    {
+                        throw new Exception($"flag is response, but message is not! {rpcmessage.MessageInfo.Opcode}");
+                    }
+                    Action<IResponse> action;
+                    if (!m_requestCallback.TryGetValue(response.RpcId, out action))
+                    {
+                        return ;
+                    }
+                    m_requestCallback.Remove(response.RpcId);
+
+                    action(response);//这里处理逻辑 返回await
 
 
                     break;
+
                 default:break;
             }
 

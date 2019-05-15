@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LocalMessage\PlayerCtxBaseLocalMessage.cs" />
     <Compile Include="NetSharp\AwaitableQueue.cs" />
     <Compile Include="NetSharp\Client.cs" />
     <Compile Include="NetSharp\IClient.cs" />

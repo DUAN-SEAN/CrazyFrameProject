@@ -10,7 +10,9 @@ namespace Crazy.ServerBase
     {
         public const Int32 LocalMsgAsyncActionResult = 2;
 
-        public const Int32 NetMessage = 1001;
+        public const Int32 NetMessage = 3;
+
+        public const Int32 RpcNetMessage = 4;
 
         //从1002开始由逻辑业务控制
 
