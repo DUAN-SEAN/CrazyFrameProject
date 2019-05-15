@@ -29,8 +29,6 @@ namespace SampleGameServer
         /// 关卡战斗记录集合
         /// </summary>
         public const String COLLECTION_BARRIERRECORD = "BarrierRecords";
-
-
         /// <summary>
         /// 数据库记录自生成id
         /// </summary>

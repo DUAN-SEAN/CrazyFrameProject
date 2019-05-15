@@ -42,11 +42,13 @@ namespace SampleGameServer
 
             //MongoDBHelper.CreateDBClient(); //测试
             
-
+            //mongodb测试
             MongoDBHelper.Test();
 
-            //下面可以写启动逻辑线程 将上述游戏逻辑丢到逻辑线程中处理
+            //初始化物理系统
 
+            //下面可以写启动逻辑线程 将上述游戏逻辑丢到逻辑线程中处理
+             
 
             return true;
         }
@@ -54,7 +56,7 @@ namespace SampleGameServer
         /// <summary>
         /// 获取当前服务器特定配置数据
         /// </summary>
-        public SampleGameServer.Configure.GameServerGlobalConfig m_gameServerGlobalConfig { get; private set; }
+        public Configure.GameServerGlobalConfig m_gameServerGlobalConfig { get; private set; }
         /// <summary>
         /// 服务器用于顺序化AsyncAction的队列池，根据每个Context的UserId来分配该Context对应的AsyncAction所属的队列
         /// </summary>
