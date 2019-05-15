@@ -83,6 +83,7 @@
     <Compile Include="HandlerSystem\C2S_ChatOneMessageHandler.cs" />
     <Compile Include="HandlerSystem\RPC\C2S_LoginHandler.cs" />
     <Compile Include="HandlerSystem\RPC\C2S_SearchUserHandler.cs" />
+    <Compile Include="LocalMessage\PlayerCtxLocalMessage.cs" />
     <Compile Include="MatchSystem\MatchManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

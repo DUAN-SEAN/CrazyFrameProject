@@ -125,6 +125,8 @@ namespace Crazy.ServerBase
                                 Message = message,
                                 Opcode = opcode
                             });
+
+                        //PostLocalMessage()
                     }
                     else
                     {
@@ -204,7 +206,11 @@ namespace Crazy.ServerBase
                     contextAsyncAction.OnResultInternal();//执行回调
 
                     break;
+                case ServerBaseLocalMesssageIDDef.NetMessage://如何是网络消息就通过分发器进行分发
 
+
+
+                    break;
                 default:break;
             }
 

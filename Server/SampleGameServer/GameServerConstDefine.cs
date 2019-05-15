@@ -9,6 +9,10 @@ namespace SampleGameServer
     //Game服务器的消息字段声明
     public class GameServerConstDefine
     {
+        public const Int32 MacthQueuePlayerCtxDic = 1002;//从匹配队列的字典中删除
+
+
+
 
     }
     /// <summary>

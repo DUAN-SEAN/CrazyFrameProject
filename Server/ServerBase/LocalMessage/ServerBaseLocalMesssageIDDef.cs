@@ -12,7 +12,7 @@ namespace Crazy.ServerBase
 
         public const Int32 NetMessage = 1001;
 
-
+        //从1002开始由逻辑业务控制
 
     }
 
