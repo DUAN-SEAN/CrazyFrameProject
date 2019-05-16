@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SampleGameServer
+namespace GameServer
 {
     /// <summary>
     /// 注册验证

@@ -7,9 +7,9 @@ using MongoDB.Driver;
 using Crazy.Common;
 using MongoDB.Bson;
 using System.Collections;
-using SampleGameServer.Configure;
+using GameServer.Configure;
 
-namespace SampleGameServer
+namespace GameServer
 {
     public sealed class MongoDBHelper
     {

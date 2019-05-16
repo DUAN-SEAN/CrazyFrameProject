@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Crazy.Common;
-using SampleGameServer.Configure;
-namespace SampleGameServer
+using GameServer.Configure;
+namespace GameServer
 {
     class Program
     {

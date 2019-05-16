@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Crazy.NetSharp;
 using Crazy.ServerBase;
 
-namespace SampleGameServer
+namespace GameServer
 {
     public class SampleGameServerContextAsyncAction:ContextAsyncAction
     {

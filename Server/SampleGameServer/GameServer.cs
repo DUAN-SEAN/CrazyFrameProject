@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Crazy.Common;
 using Crazy.ServerBase;
 
-namespace SampleGameServer
+namespace GameServer
 {
     public sealed class GameServer:ServerBase
     {
@@ -32,7 +32,7 @@ namespace SampleGameServer
                 return false;
             }
             //获取当前服务器的配置文件
-            m_gameServerGlobalConfig = base.m_globalConfigure as SampleGameServer.Configure.GameServerGlobalConfig;
+            m_gameServerGlobalConfig = base.m_globalConfigure as global::GameServer.Configure.GameServerGlobalConfig;
             //设置AsyncActionQueuePool
             AsyncActionQueuePool = new SampleGameServerAsyncActionSequenceQueuePool(m_gameServerGlobalConfig.ServerContext.AsyncActionQueueCount);
 
@@ -45,14 +45,23 @@ namespace SampleGameServer
             //mongodb测试
             MongoDBHelper.Test();
 
-            //初始化物理系统
+            //初始化各个模块系统
+
+
 
             //下面可以写启动逻辑线程 将上述游戏逻辑丢到逻辑线程中处理
              
 
             return true;
         }
-       
+        /// <summary>
+        /// 初始化服务器的各个系统
+        /// </summary>
+        public void InitializeSystem()
+        {
+
+        }
+        
         /// <summary>
         /// 获取当前服务器特定配置数据
         /// </summary>

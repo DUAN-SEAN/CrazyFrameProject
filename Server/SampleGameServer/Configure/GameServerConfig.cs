@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Crazy.Common;
 
-namespace SampleGameServer.Configure
+namespace GameServer.Configure
 {
     [Serializable]
     [XmlRoot("Configure")]

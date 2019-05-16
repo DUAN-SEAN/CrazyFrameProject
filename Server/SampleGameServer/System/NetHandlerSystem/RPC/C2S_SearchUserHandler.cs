@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Crazy.Common;
 using Crazy.ServerBase;
-namespace SampleGameServer
+namespace GameServer
 {
     [MessageHandler]
     public class C2S_SearchUserHandler : AMRpcHandler<C2S_SearchUser, S2C_SearchUser>

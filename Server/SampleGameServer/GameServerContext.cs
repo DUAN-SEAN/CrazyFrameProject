@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Crazy.NetSharp;
 using Crazy.ServerBase;
-namespace SampleGameServer
+namespace GameServer
 {
     public sealed class GameServerContext:PlayerContextBase
     {

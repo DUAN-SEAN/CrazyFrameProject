@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SampleGameServer
+namespace GameServer
 {
     //Game服务器的消息字段声明
     public class GameServerConstDefine
