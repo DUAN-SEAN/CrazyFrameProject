@@ -59,7 +59,7 @@ namespace GameServer
         /// </summary>
         public bool InitializeSystem()
         {
-
+            return true;
         }
         
         /// <summary>
