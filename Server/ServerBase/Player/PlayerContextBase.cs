@@ -277,7 +277,7 @@ namespace Crazy.ServerBase
         {
             Interlocked.Decrement(ref m_asyncActionRef);
         }
-
+        #endregion
         public virtual bool PostLocalMessage(ILocalMessage msg)
         {
             if (IsAvaliable())
@@ -286,8 +286,6 @@ namespace Crazy.ServerBase
             }
             return false;
         }
-        #endregion
-
         #region ISession
 
         public void Reply(IResponse message)

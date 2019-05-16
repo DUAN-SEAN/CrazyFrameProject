@@ -12,6 +12,7 @@ namespace Crazy.NetSharp
     public interface ILocalMessageHandler
     {
         Task OnMessage(ILocalMessage msg);
+        bool PostLocalMessage(ILocalMessage msg);
     }
 
     /// <summary>

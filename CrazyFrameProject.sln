@@ -27,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProtobufComplier", "Tools\P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtobufAutoComplier", "Tools\ProtobufAutoComplier\ProtobufAutoComplier.csproj", "{E999129C-9C38-4396-8415-6DF1F1E6E853}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleGameServer", "Server\SampleGameServer\SampleGameServer.csproj", "{5A12CD80-491B-4EC5-BDB6-BBC2442BA71C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameServer", "Server\SampleGameServer\GameServer.csproj", "{5A12CD80-491B-4EC5-BDB6-BBC2442BA71C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDBRobot", "Tools\MongoDBRobot\MongoDBRobot.csproj", "{7C20A006-C5DA-4A65-897F-D0CEED346123}"
 EndProject

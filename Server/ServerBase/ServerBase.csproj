@@ -67,6 +67,7 @@
     <Compile Include="Server\ServerBase.cs" />
     <Compile Include="LocalMessage\ServerBaseLocalMesssageIDDef.cs" />
     <Compile Include="Server\ServerBase_Pkg.cs" />
+    <Compile Include="System\BaseSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Libs\CommonLib\CommonLib.csproj">

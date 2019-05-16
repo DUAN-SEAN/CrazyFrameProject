@@ -69,6 +69,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="XMLDataLib">
+      <HintPath>..\..\..\..\..\Documents\Tencent Files\404064259\FileRecv\XMLDataLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsyncActions\DBContextAsyncAction\GameServerDBOperationDefine.cs" />
@@ -76,15 +79,15 @@
     <Compile Include="AsyncActions\DBDataDefine\GameServerDBPlayer.cs" />
     <Compile Include="Configure\GameServerConfig.cs" />
     <Compile Include="AsyncActions\DBContextAsyncAction\GameServerContextAsyncAction.cs" />
-    <Compile Include="DBSystem\MongoDBHelper.cs" />
+    <Compile Include="System\DBSystem\MongoDBHelper.cs" />
     <Compile Include="GameServerConstDefine.cs" />
     <Compile Include="GameServer.cs" />
     <Compile Include="GameServerContext.cs" />
-    <Compile Include="HandlerSystem\C2S_ChatOneMessageHandler.cs" />
-    <Compile Include="HandlerSystem\RPC\C2S_LoginHandler.cs" />
-    <Compile Include="HandlerSystem\RPC\C2S_SearchUserHandler.cs" />
+    <Compile Include="System\NetHandlerSystem\C2S_ChatOneMessageHandler.cs" />
+    <Compile Include="System\NetHandlerSystem\RPC\C2S_LoginHandler.cs" />
+    <Compile Include="System\NetHandlerSystem\RPC\C2S_SearchUserHandler.cs" />
     <Compile Include="LocalMessage\PlayerCtxLocalMessage.cs" />
-    <Compile Include="MatchSystem\MatchManager.cs" />
+    <Compile Include="System\MatchSystem\GameMacthSystem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
