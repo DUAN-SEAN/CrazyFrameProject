@@ -57,7 +57,7 @@ namespace GameServer
         /// <summary>
         /// 初始化服务器的各个系统
         /// </summary>
-        public void InitializeSystem()
+        public bool InitializeSystem()
         {
 
         }
