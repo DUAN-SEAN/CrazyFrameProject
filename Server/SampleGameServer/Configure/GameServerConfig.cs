@@ -60,8 +60,12 @@ namespace GameServer.Configure
     [Serializable]
     public class GameMacthConfig 
     {
-        [XmlAttribute("Type")]
-        public int Type { get; set; }
+        [XmlAttribute("Id")]
+        public int Id { get; set; }
+
+        [XmlAttribute("Level")]
+        public int Level { get; set; }
+
 
         [XmlAttribute("Name")]
         public string Name { get; set; }

@@ -23,7 +23,7 @@ namespace GameServer
             m_instance = new GameMatchSystem();
         }
 
-        public GameMatchSystem()
+        public GameMatchSystem():base()
         {
             
         }
@@ -41,15 +41,30 @@ namespace GameServer
         public override void Update()
         {
             base.Update();//基类的update 负责驱动本地消息
+
+            foreach (var item in m_gameMatchPlayerCtxQueDic.Values)
+            {
+                item.MatchUpdate();// 每一个匹配队列进行刷新   队列元素已经上锁 放心使用
+            }
+
+
         }
 
         public override void Dispose()
         {
             base.Dispose();//基类的Diopse 负责销毁本地消息队列
         }
-
+        /// <summary>
+        /// 以下要处理收到的消息
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <returns></returns>
         public override Task OnMessage(ILocalMessage msg)
         {
+            //写正常的逻辑代码，1  先
+
+
+
             return base.OnMessage(msg);
         }
 
@@ -63,12 +78,15 @@ namespace GameServer
         /// <summary>
         /// 根据配置文件初始化匹配管理器
         /// </summary>
-        public void Initialize()
+        public bool Initialize()
         {
             //获取游戏匹配的配置文件,获取所有的游戏匹配信息
             m_gameMacthConfigs = GameServer.Instance.m_gameServerGlobalConfig.GameMacthConfigs;
             //根据配置文件初始化若干个匹配队列
 
+
+
+            return true;
         }
 
 
