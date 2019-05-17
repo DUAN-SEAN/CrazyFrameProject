@@ -22,6 +22,8 @@ namespace GameServer
             m_id = id;
             m_level = level;
             m_maxMemberCount = maxCount;
+            m_matchingQue = new List<MatchTeam>();
+          
         }
         /// <summary>
         /// 匹配算法 操作m_matchTeamQue
@@ -49,14 +51,7 @@ namespace GameServer
         }
         public void ReleasePlayerContext(ulong playerId)
         {
-            IClientEventHandler playerContext;
-
-
-
-            if (m_playerDic.TryRemove(playerId, out playerContext))
-            {
-                playerContext.OnMessage(null);//向玩家现场发送从队列字典中清除的消息
-            }
+            
 
 
         }
@@ -73,7 +68,11 @@ namespace GameServer
         }
 
 
-        private List<MatchTeam> m_matchTeamQue;//玩家匹配队列
+        private List<MatchTeam> m_matchingQue;//玩家匹配队列  主要操控这个队列进行
+
+        private ConcurrentQueue<MatchTeam> m_waitMatchQue; 
+
+
 
         /// <summary>
         /// 队列锁 每次只能有一个线程去处理
@@ -81,11 +80,6 @@ namespace GameServer
         /// 该锁将在内核模式自旋 while；然后在一定的阈值过后进行内核模式ThreadSleep
         /// </summary>
         protected SemaphoreSlim m_queueLock = new SemaphoreSlim(1);
-
-        /// <summary>
-        /// 该匹配队列所拥有的所有玩家现场
-        /// </summary>
-        private ConcurrentDictionary<ulong, IClientEventHandler> m_playerDic;
 
         /// <summary>
         /// 关卡Id
