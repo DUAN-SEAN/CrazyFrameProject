@@ -67,11 +67,30 @@ namespace GameServer
         public bool InitializeSystem()
         {
             // 匹配系统初始化
-            if (!m_gameMatchSystem.Initialize())
+            var gameMatchSystem = new GameMatchSystem();
+            if (!gameMatchSystem.Initialize(m_serverId))
             {
                 Log.Error("初始化匹配系统失败");
                 return false;
             }
+            m_systemDic.Add(gameMatchSystem.GetType(), gameMatchSystem);
+
+
+
+            //otherSystem.Start
+            m_systemDic[gameMatchSystem.GetType()].Start();//启动 
+            
+
+
+
+            Task.Run(() =>
+            {
+                gameMatchSystem.Update();
+                //otherSystem.Update()
+            });//由线程池进行驱动
+
+
+
 
             return true;
         }
@@ -93,7 +112,7 @@ namespace GameServer
 
         private readonly Dictionary<Type, BaseSystem> m_systemDic = new Dictionary<Type, BaseSystem>();
 
-        private GameMatchSystem m_gameMatchSystem;
+       
         /// <summary>
         /// 获取当前服务器特定配置数据
         /// </summary>

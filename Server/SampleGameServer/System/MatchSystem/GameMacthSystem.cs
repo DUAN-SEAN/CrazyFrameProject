@@ -1,4 +1,5 @@
-﻿using Crazy.NetSharp;
+﻿using Crazy.Common;
+using Crazy.NetSharp;
 using Crazy.ServerBase;
 using System;
 using System.Collections.Concurrent;
@@ -18,10 +19,7 @@ namespace GameServer
         /// <summary>
         /// 保证只执行一次赋值
         /// </summary>
-        static GameMatchSystem()
-        {
-            m_instance = new GameMatchSystem();
-        }
+     
 
         public GameMatchSystem():base()
         {
@@ -31,11 +29,10 @@ namespace GameServer
         #region BaseSystem
         public override void Start()
         {
-            base.Start();
+            base.Start();//初始化本地消息队列
 
 
-            m_gameMatchPlayerCtxQueDic = new ConcurrentDictionary<int, GameMatchPlayerContextQueue>();
-
+            
         }
 
         public override void Update()
@@ -78,12 +75,22 @@ namespace GameServer
         /// <summary>
         /// 根据配置文件初始化匹配管理器
         /// </summary>
-        public bool Initialize()
+        public bool Initialize(int serverId)
         {
+            //初始化匹配队列字典
+            m_gameMatchPlayerCtxQueDic = new ConcurrentDictionary<int, GameMatchPlayerContextQueue>();
+            //初始化队伍字典
+            m_teamDic = new ConcurrentDictionary<UInt64, MatchTeam>();
             //获取游戏匹配的配置文件,获取所有的游戏匹配信息
             m_gameMacthConfigs = GameServer.Instance.m_gameServerGlobalConfig.GameMacthConfigs;
-            //根据配置文件初始化若干个匹配队列
-
+            //根据配置文件初始化若干个匹配队列  存入字典中
+            foreach (var config in m_gameMacthConfigs)
+            {
+                var queue = new GameMatchPlayerContextQueue(config.Id, config.Level, config.MemberCount);
+                m_gameMatchPlayerCtxQueDic.TryAdd(config.Id, queue);
+            }
+            //初始化设置Id生成工具  ps:id由线程安全进行累加 
+            m_roomIdFactory = new SessionIdFactory(serverId);
 
 
             return true;
@@ -105,18 +112,50 @@ namespace GameServer
         {
             return m_teamDic.Count;
         }
-        
+
 
         /// <summary>
         /// 创建一个匹配队伍，由玩家发起的本地消息
+        /// 创建的队伍并不直接放入匹配队列，而是通过匹配系统进行管理
+        /// 每个MatchTeam 有若干个状态进行控制
         /// </summary>
         public void OnCreateMatchTeam()
+        {
+            //创建队伍，返回队伍id 
+            UInt64 id = m_roomIdFactory.AllocateSessionId();
+            MatchTeam matchTeam = new MatchTeam(id);//生成一个房间，并通知对应的玩家队伍生成好了
+            //加入队伍字典中
+            m_teamDic.TryAdd(id, matchTeam);
+
+        }
+        /// <summary>
+        /// 玩家离开队伍
+        /// </summary>
+        public void OnLeaveMatchTeam(UInt64 roomId,UInt64 playerId)
+        {
+            //如果离开队伍后 房间人数为0 那么就执行清除任务 并设置房间的状态为Close
+        }
+        /// <summary>
+        /// 队伍进入匹配队列
+        /// 保证是队长发起 保证队伍人数大于0人
+        /// </summary>
+        public void OnJoinMatchQueue()
+        {
+
+        }
+        /// <summary>
+        /// 队伍离开匹配队列
+        /// 任何队伍中的玩家都能发起队伍离开匹配队列
+        /// </summary>
+        public void OnLeaveMatchQueue()
         {
 
         }
 
-      
-
+        /// <summary>
+        /// 用来生成唯一的房间Id 
+        /// </summary>
+        private SessionIdFactory m_roomIdFactory;
 
         /// <summary>
         /// 本地匹配配置
@@ -129,122 +168,20 @@ namespace GameServer
         private  ConcurrentDictionary<int, GameMatchPlayerContextQueue> m_gameMatchPlayerCtxQueDic;
 
         /// <summary>
-        /// 队伍保存字典
+        /// 队伍保存字典 该队伍和关卡无关
         /// </summary>
-        private readonly ConcurrentDictionary<int, MatchTeam> m_teamDic = new ConcurrentDictionary<int, MatchTeam>();
+        private ConcurrentDictionary<UInt64, MatchTeam> m_teamDic;
 
 
-        #region 单例
-        private static GameMatchSystem m_instance;
-        public static GameMatchSystem Instance { get => m_instance; set => m_instance = value; }
-        #endregion
+        
     }
 
     /// <summary>
     /// 游戏匹配的玩家队列
     /// </summary>
-    public class GameMatchPlayerContextQueue
-    {
-        /// <summary>
-        /// 初始化匹配队列
-        /// </summary>
-        /// <param name="maxCount"></param>
-        public GameMatchPlayerContextQueue(int maxCount)
-        {
-            m_maxMemberCount = maxCount;
-        }
-        /// <summary>
-        /// 匹配算法 操作m_matchTeamQue
-        /// </summary>
-        public void MatchUpdate()
-        {
-            
-        }
-
-
-        /// <summary>
-        /// 一个玩家现场选择退出匹配队列 那么整个团队就退出
-        /// 
-        /// </summary>
-        /// <param name="playerId"></param>
-        public void OnExitMatchQueue(ulong playerId)
-        {
-            OnEnterLock();
-
-
-
-
-
-            LeaveLock();
-        }
-        public void ReleasePlayerContext(ulong playerId)
-        {
-            IClientEventHandler playerContext;
-
-            
-
-            if (m_playerDic.TryRemove(playerId,out playerContext))
-            {
-                playerContext.OnMessage(null);//向玩家现场发送从队列字典中清除的消息
-            }
-
-            
-        }
-
-        private void OnEnterLock()
-        {
-            m_queueLock.Wait();
-
-        }
-
-        private void LeaveLock()
-        {
-            m_queueLock.Release();
-        }
-
-
-        private List<MatchTeam> m_matchTeamQue;//玩家匹配队列
-
-        /// <summary>
-        /// 队列锁 每次只能有一个线程去处理
-        /// 这是一个混合锁，在playerContext中使用该锁锁住玩家现场
-        /// 该锁将在内核模式自旋 while；然后在一定的阈值过后进行内核模式ThreadSleep
-        /// </summary>
-        protected SemaphoreSlim m_queueLock = new SemaphoreSlim(1);
-
-        /// <summary>
-        /// 该匹配队列所拥有的所有玩家现场
-        /// </summary>
-        private ConcurrentDictionary<ulong, IClientEventHandler> m_playerDic;
-
-        /// <summary>
-        /// 队列中支持最多的队伍人数
-        /// </summary>
-        private readonly int m_maxMemberCount;
-
-
-       
-
-
-    }
-    public class MatchTeam
-    {
-
-        public enum MatchTeamState
-        {
-            OPEN,//开放房间
-            CLOSE,//关闭房间
-            INBATTLE//在战斗
-        }
-
-        /// <summary>
-        /// 房间玩家列表
-        /// </summary>
-        public readonly List<IClientEventHandler> Member = new List<IClientEventHandler>();
-
-        public MatchTeamState State { get; set; }
-
-    }
+   
+   
+   
 
 
 

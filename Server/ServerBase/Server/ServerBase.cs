@@ -191,6 +191,8 @@ namespace Crazy.ServerBase
             //2:通过查找serverName这唯一的服务器名称查找对应的服务配置并初始化m_server(Global.Server)
             m_configServer = m_globalConfigure.Global.Servers[0];
 
+            m_serverId = m_configServer.Id;
+
             return true;
 
         }
@@ -237,7 +239,7 @@ namespace Crazy.ServerBase
         /// <summary>
         /// 服务器Id
         /// </summary>
-        private Int32 m_serverId;
+        protected Int32 m_serverId;
         /// <summary>
         /// 服务器名称
         /// </summary>

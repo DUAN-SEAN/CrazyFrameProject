@@ -84,6 +84,8 @@
     <Compile Include="GameServerConstDefine.cs" />
     <Compile Include="GameServer.cs" />
     <Compile Include="GameServerContext.cs" />
+    <Compile Include="System\MatchSystem\GameMatchPlayerContextQueue.cs" />
+    <Compile Include="System\MatchSystem\MatchTeam.cs" />
     <Compile Include="System\NetHandlerSystem\C2S_ChatOneMessageHandler.cs" />
     <Compile Include="System\NetHandlerSystem\RPC\C2S_LoginHandler.cs" />
     <Compile Include="System\NetHandlerSystem\RPC\C2S_SearchUserHandler.cs" />
