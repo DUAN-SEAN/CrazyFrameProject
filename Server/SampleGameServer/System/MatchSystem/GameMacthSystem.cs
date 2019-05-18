@@ -63,13 +63,17 @@ namespace GameServer
             switch (msg.MessageId)
             {
                 case GameServerConstDefine.MatchSystemCreateMatchTeam:
-                    CreateMatchTeamMessage message = msg as CreateMatchTeamMessage;
-                    OnCreateMatchTeam(message.playerId);
+                    CreateMatchTeamMessage createMatchTeamMessage = msg as CreateMatchTeamMessage;
+                    OnCreateMatchTeam(createMatchTeamMessage.playerId);
                     break;
                 case GameServerConstDefine.MatchSystemJoinMatchTeam:
-
+                    JoinMatchTeamMessage joinMatchTeamMessage = msg as JoinMatchTeamMessage;
+                    OnJoinMatchTeam(joinMatchTeamMessage.teamId, joinMatchTeamMessage.playerId);
                     break;
                 case GameServerConstDefine.MatchSystemExitMatchTeam:
+                    ExitMatchTeamMessage exitMatchTeamMessage = msg as ExitMatchTeamMessage;
+                    OnExitMatchTeam(exitMatchTeamMessage.teamId, exitMatchTeamMessage.playerId);
+
 
                     break;
             }

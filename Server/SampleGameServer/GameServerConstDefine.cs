@@ -15,6 +15,8 @@ namespace GameServer
         public const Int32 MatchSystemCreateMatchTeam = 1002;//创建队伍
         public const Int32 MatchSystemJoinMatchTeam = 1003;//进入队伍
         public const Int32 MatchSystemExitMatchTeam = 1004;//退出队伍
+        public const Int32 MatchSystemJoinMatchQueue = 1005;//进入匹配队列
+        public const Int32 MatchSystemExitMatchQueue = 1006;//退出匹配队列
         #endregion
 
 

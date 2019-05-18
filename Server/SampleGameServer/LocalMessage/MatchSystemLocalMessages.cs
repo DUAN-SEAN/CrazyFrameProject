@@ -40,4 +40,9 @@ namespace GameServer
 
         public UInt64 teamId;//队伍Id
     }
+
+    public class JoinMatchQueueMessage : ILocalMessage
+    {
+        public int MessageId => GameServerConstDefine.;
+    }
 }
