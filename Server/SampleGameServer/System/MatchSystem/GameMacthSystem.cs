@@ -72,7 +72,7 @@ namespace GameServer
                     break;
                 case GameServerConstDefine.MatchSystemJoinMatchQueue:
                     JoinMatchQueueMessage joinMatchQueueMessage = msg as JoinMatchQueueMessage;
-                    OnJoinMatchQueue(joinMatchQueueMessage.teamId,joinMatchQueueMessage.playerId);
+                    OnJoinMatchQueue(joinMatchQueueMessage.teamId,joinMatchQueueMessage.playerId,joinMatchQueueMessage.barrierId);
                     break;
                 case GameServerConstDefine.MatchSystemExitMatchQueue:
                     ExitMatchQueueMessage exitMatchQueueMessage = msg as ExitMatchQueueMessage;
@@ -110,6 +110,7 @@ namespace GameServer
             //根据配置文件初始化若干个匹配队列  存入字典中
             foreach (var config in m_gameBarrierConfigs)
             {
+                //配置关卡Id 关卡等级 关卡容纳人数
                 var queue = new GameMatchPlayerContextQueue(config.Id, config.Level, config.MemberCount);
                 m_gameMatchPlayerCtxQueDic.TryAdd(config.Id, queue);
             }
@@ -217,8 +218,21 @@ namespace GameServer
         /// 队伍进入匹配队列
         /// 保证是队长发起 保证队伍人数大于0人
         /// </summary>
-        public void OnJoinMatchQueue(ulong teamId, ulong playerId)
+        public void OnJoinMatchQueue(ulong teamId, ulong playerId, int barrierId)
         {
+            //1 验证
+
+            //1 验证队长是否合法
+
+            
+
+
+            GameMatchPlayerContextQueue gameMatchPlayerContextQueue;
+            if(!m_gameMatchPlayerCtxQueDic.TryGetValue(barrierId,out gameMatchPlayerContextQueue))
+            {
+                return;
+            }
+
 
         }
         /// <summary>

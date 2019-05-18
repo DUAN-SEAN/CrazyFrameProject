@@ -46,6 +46,7 @@ namespace GameServer
         public int MessageId => GameServerConstDefine.MatchSystemJoinMatchQueue;
         public UInt64 teamId;//队伍Id
         public UInt64 playerId;//队长Id 意思就是队伍发起人 也可以只有一个人
+        public Int32 barrierId;//关卡Id 每一个关卡都有对应的Id  
     }
 
     public class ExitMatchQueueMessage : ILocalMessage
