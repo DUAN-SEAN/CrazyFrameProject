@@ -13,6 +13,7 @@ namespace GameServer
 {
     /// <summary>
     /// 匹配系统
+    /// 包含了队伍模块和匹配模块
     /// </summary>
     public class GameMatchSystem:BaseSystem
     {
@@ -59,7 +60,19 @@ namespace GameServer
         public override Task OnMessage(ILocalMessage msg)
         {
             //写正常的逻辑代码，1  先
+            switch (msg.MessageId)
+            {
+                case GameServerConstDefine.MatchSystemCreateMatchTeam:
+                    CreateMatchTeamMessage message = msg as CreateMatchTeamMessage;
+                    OnCreateMatchTeam(message.playerId);
+                    break;
+                case GameServerConstDefine.MatchSystemJoinMatchTeam:
 
+                    break;
+                case GameServerConstDefine.MatchSystemExitMatchTeam:
+
+                    break;
+            }
 
 
             return base.OnMessage(msg);
@@ -74,6 +87,7 @@ namespace GameServer
 
         /// <summary>
         /// 根据配置文件初始化匹配管理器
+        /// 该方法由Server 唯一调用
         /// </summary>
         public bool Initialize(int serverId)
         {
@@ -81,10 +95,12 @@ namespace GameServer
             m_gameMatchPlayerCtxQueDic = new ConcurrentDictionary<int, GameMatchPlayerContextQueue>();
             //初始化队伍字典
             m_teamDic = new ConcurrentDictionary<UInt64, MatchTeam>();
-            //获取游戏匹配的配置文件,获取所有的游戏匹配信息
-            m_gameMacthConfigs = GameServer.Instance.m_gameServerGlobalConfig.GameMacthConfigs;
+            //获取关卡配置文件,获取所有的游戏匹配信息
+            m_gameBarrierConfigs = GameServer.Instance.m_gameServerGlobalConfig.BarrierConfigs;
+            //获取队伍配置文件
+            m_gameMatchTeamConfig = GameServer.Instance.m_gameServerGlobalConfig.GameMatchTeam;
             //根据配置文件初始化若干个匹配队列  存入字典中
-            foreach (var config in m_gameMacthConfigs)
+            foreach (var config in m_gameBarrierConfigs)
             {
                 var queue = new GameMatchPlayerContextQueue(config.Id, config.Level, config.MemberCount);
                 m_gameMatchPlayerCtxQueDic.TryAdd(config.Id, queue);
@@ -105,36 +121,94 @@ namespace GameServer
         /// <returns></returns>
         public int CountMatchQueue()
         {
-            return m_gameMacthConfigs.Length;
+            return m_gameBarrierConfigs.Length;
         }
-
+        /// <summary>
+        /// 队伍总数
+        /// </summary>
+        /// <returns></returns>
         public int CountTeam()
         {
             return m_teamDic.Count;
         }
-
-
         /// <summary>
         /// 创建一个匹配队伍，由玩家发起的本地消息
         /// 创建的队伍并不直接放入匹配队列，而是通过匹配系统进行管理
         /// 每个MatchTeam 有若干个状态进行控制
         /// </summary>
-        public void OnCreateMatchTeam()
+        private void OnCreateMatchTeam(UInt64 playerId)
         {
+            if(m_teamDic.Values.Count>m_gameMatchTeamConfig.MaxCount)
+            {
+                Log.Error("服务器队伍容量过载");
+                return;
+            }
+
             //创建队伍，返回队伍id 
             UInt64 id = m_roomIdFactory.AllocateSessionId();
-            MatchTeam matchTeam = new MatchTeam(id);//生成一个房间，并通知对应的玩家队伍生成好了
+            MatchTeam matchTeam = new MatchTeam(id,m_gameMatchTeamConfig.TeamCapacity);//生成一个房间，并通知对应的玩家队伍生成好了
             //加入队伍字典中
             m_teamDic.TryAdd(id, matchTeam);
+
+            matchTeam.Add(playerId);
+            
+
+            //向玩家发送 创建并且加入到队伍的消息
+
+
 
         }
         /// <summary>
         /// 玩家离开队伍
         /// </summary>
-        public void OnLeaveMatchTeam(UInt64 roomId,UInt64 playerId)
+        private void OnExitMatchTeam(UInt64 teamId,UInt64 playerId)
         {
             //如果离开队伍后 房间人数为0 那么就执行清除任务 并设置房间的状态为Close
+            MatchTeam matchTeam = null;
+            if (!m_teamDic.TryGetValue(teamId, out matchTeam))
+            {
+                return;
+            }
+            if(matchTeam.State != MatchTeam.MatchTeamState.OPEN)//队伍不开放 不能进入
+            {
+                return;
+            }
+
+            if (!matchTeam.Remove(playerId))//从队伍中移除
+            {
+                return;
+            }
+            if (matchTeam.CurrentCount <=0)//如果这时候队伍的人数为空 则执行清除工作 并设置队伍的状态为关闭
+            {
+                //可以执行清除任务了
+                if(m_teamDic.TryRemove(matchTeam.Id,out matchTeam))
+                {
+                    matchTeam.State = MatchTeam.MatchTeamState.CLOSE;
+                }
+            }
+
         }
+        /// <summary>
+        /// 玩家加入队伍
+        /// </summary>
+        /// <param name="teamId"></param>
+        /// <param name="playerId"></param>
+        private void OnJoinMatchTeam(UInt64 teamId,UInt64 playerId)
+        {
+            MatchTeam matchTeam = null;
+            if(!m_teamDic.TryGetValue(teamId,out matchTeam))
+            {
+                return;
+            }
+            //队伍状态检测
+            if (matchTeam.State != MatchTeam.MatchTeamState.OPEN) return;
+
+            //检测队伍容量
+            if (!matchTeam.IsFull()) return;
+
+            matchTeam.Add(playerId);
+        }
+
         /// <summary>
         /// 队伍进入匹配队列
         /// 保证是队长发起 保证队伍人数大于0人
@@ -158,9 +232,15 @@ namespace GameServer
         private SessionIdFactory m_roomIdFactory;
 
         /// <summary>
-        /// 本地匹配配置
+        /// 关卡配置文件
         /// </summary>
-        private Configure.GameMacthConfig[] m_gameMacthConfigs;
+        private Configure.GameBarrierConfig[] m_gameBarrierConfigs;
+        
+        
+        /// <summary>
+        /// 队伍配置文件
+        /// </summary>
+        private Configure.GameMatchTeamConfig m_gameMatchTeamConfig;
 
         /// <summary>
         /// 玩家匹配队列字典，服务器有若干个匹配队列，由配置文件进行配置
@@ -176,9 +256,6 @@ namespace GameServer
         
     }
 
-    /// <summary>
-    /// 游戏匹配的玩家队列
-    /// </summary>
    
    
    

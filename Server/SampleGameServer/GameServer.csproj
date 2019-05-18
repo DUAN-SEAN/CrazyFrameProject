@@ -85,11 +85,11 @@
     <Compile Include="GameServer.cs" />
     <Compile Include="GameServerContext.cs" />
     <Compile Include="System\MatchSystem\GameMatchPlayerContextQueue.cs" />
+    <Compile Include="LocalMessage\MatchSystemLocalMessages.cs" />
     <Compile Include="System\MatchSystem\MatchTeam.cs" />
     <Compile Include="System\NetHandlerSystem\C2S_ChatOneMessageHandler.cs" />
     <Compile Include="System\NetHandlerSystem\RPC\C2S_LoginHandler.cs" />
     <Compile Include="System\NetHandlerSystem\RPC\C2S_SearchUserHandler.cs" />
-    <Compile Include="LocalMessage\PlayerCtxLocalMessage.cs" />
     <Compile Include="System\MatchSystem\GameMacthSystem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -11,9 +11,11 @@ namespace GameServer
     {
         //为了与ServerBase进行区分 这里只做了
 
-
-        public const Int32 MacthQueuePlayerCtxDic = 1002;//从匹配队列的字典中删除
-
+        #region MatchSystem        
+        public const Int32 MatchSystemCreateMatchTeam = 1002;//创建队伍
+        public const Int32 MatchSystemJoinMatchTeam = 1003;//进入队伍
+        public const Int32 MatchSystemExitMatchTeam = 1004;//退出队伍
+        #endregion
 
 
 

@@ -23,8 +23,11 @@ namespace GameServer.Configure
         [XmlElement("ServerContext")]
         public GameServerContext ServerContext { get; set; }
 
-        [XmlArray("MatchConfig"), XmlArrayItem("GameMatch")]
-        public GameMacthConfig[] GameMacthConfigs { get; set; }
+        [XmlArray("BarrierConfig"), XmlArrayItem("Barrier")]
+        public GameBarrierConfig[] BarrierConfigs { get; set; }
+
+        [XmlElement("GameMatchTeam")]
+        public GameMatchTeamConfig GameMatchTeam { get; set; }
 
     }
     [Serializable]
@@ -58,7 +61,7 @@ namespace GameServer.Configure
     /// 游戏匹配配置信息，实例代表一个匹配队列
     /// </summary>
     [Serializable]
-    public class GameMacthConfig 
+    public class GameBarrierConfig 
     {
         [XmlAttribute("Id")]
         public int Id { get; set; }
@@ -74,6 +77,14 @@ namespace GameServer.Configure
         public int MemberCount { get; set; }
 
     }
-          
+    [Serializable]
+    public class GameMatchTeamConfig
+    {
+        [XmlAttribute("TeamMaxCount")]
+        public int MaxCount { get; set; }
+
+        [XmlAttribute("TeamCapacity")]
+        public int TeamCapacity { get; set; }
+    }
 
 }
