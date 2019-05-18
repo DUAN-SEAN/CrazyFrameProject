@@ -9,11 +9,11 @@ namespace GameServer
 {
     public class MatchTeam
     {
-        public MatchTeam(UInt64 id,int MaxCount)
+        public MatchTeam(UInt64 id,int maxCount)
         {
             Id = id;//设置Id
             State = MatchTeamState.OPEN;
-
+            m_maxCount = maxCount;
         }
 
 

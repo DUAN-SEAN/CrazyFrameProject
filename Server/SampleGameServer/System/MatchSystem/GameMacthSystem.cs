@@ -3,10 +3,6 @@ using Crazy.NetSharp;
 using Crazy.ServerBase;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace GameServer
@@ -73,8 +69,16 @@ namespace GameServer
                 case GameServerConstDefine.MatchSystemExitMatchTeam:
                     ExitMatchTeamMessage exitMatchTeamMessage = msg as ExitMatchTeamMessage;
                     OnExitMatchTeam(exitMatchTeamMessage.teamId, exitMatchTeamMessage.playerId);
-
-
+                    break;
+                case GameServerConstDefine.MatchSystemJoinMatchQueue:
+                    JoinMatchQueueMessage joinMatchQueueMessage = msg as JoinMatchQueueMessage;
+                    OnJoinMatchQueue(joinMatchQueueMessage.teamId,joinMatchQueueMessage.playerId);
+                    break;
+                case GameServerConstDefine.MatchSystemExitMatchQueue:
+                    ExitMatchQueueMessage exitMatchQueueMessage = msg as ExitMatchQueueMessage;
+                    OnExitMatchQueue(exitMatchQueueMessage.teamId, exitMatchQueueMessage.playerId);
+                    break;
+                default:
                     break;
             }
 
@@ -114,11 +118,7 @@ namespace GameServer
 
 
             return true;
-        }
-
-
-
-     
+        }     
         /// <summary>
         /// 获取匹配队列的个数
         /// </summary>
@@ -217,7 +217,7 @@ namespace GameServer
         /// 队伍进入匹配队列
         /// 保证是队长发起 保证队伍人数大于0人
         /// </summary>
-        public void OnJoinMatchQueue()
+        public void OnJoinMatchQueue(ulong teamId, ulong playerId)
         {
 
         }
@@ -225,7 +225,7 @@ namespace GameServer
         /// 队伍离开匹配队列
         /// 任何队伍中的玩家都能发起队伍离开匹配队列
         /// </summary>
-        public void OnLeaveMatchQueue()
+        public void OnExitMatchQueue(ulong teamId, ulong playerId)
         {
 
         }
