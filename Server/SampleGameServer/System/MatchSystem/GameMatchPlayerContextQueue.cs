@@ -31,7 +31,35 @@ namespace GameServer
         /// </summary>
         public void MatchUpdate()
         {
+            //这里执行匹配算法
+            //1 关卡容量maxCount
+            //2 队伍人数  
+            //3 贪心算法
+
+            // 初始化
+            List<MatchBucket> matchBuckets = new List<MatchBucket>();
+            List<MatchTeamArg> matchTeamArgs = new List<MatchTeamArg>();
+            foreach (var item in m_matchingQue)
+            {
+                MatchTeamArg matchTeamArg = new MatchTeamArg { MatchTeam = item, index = -1 };
+                matchTeamArgs.Add(matchTeamArg);
+            }
             
+            //装桶
+            for (int i = 0; i < matchTeamArgs.Count;i++)
+            {
+                MatchTeamArg matchTeamArg = matchTeamArgs[i];
+                if (matchTeamArg.index != -1) continue;
+                for(int j = 0; j < matchBuckets.Count; j++)
+                {
+                    MatchBucket matchBucket = matchBuckets[j];
+                    if()
+                }
+
+            }
+
+
+
         }
 
         public void OnJoinMatchQueue(MatchTeam matchTeam)
@@ -118,4 +146,10 @@ namespace GameServer
 
 
     }
+
+    struct MatchTeamArg {
+        public MatchTeam MatchTeam;
+        public int index;
+    }
+
 }
