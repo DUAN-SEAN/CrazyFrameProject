@@ -7,11 +7,17 @@ using System.Threading.Tasks;
 
 namespace GameServer
 {
+    /// <summary>
+    /// 匹配队伍的类型，用于保留一份队伍Id名单和队伍最大容量
+    /// 后期匹配队伍可能需要状态机控制，但目前不使用状态机，简单。
+    /// 匹配队伍目前的状态为线性态
+    /// 注意：该类型的实例不是线程安全，出现异常现状优先检测它
+    /// </summary>
     public class MatchTeam
     {
         public MatchTeam(UInt64 id,int maxCount)
         {
-            Id = id;//设置Id
+            
             State = MatchTeamState.OPEN;
             m_maxCount = maxCount;
         }
@@ -52,7 +58,7 @@ namespace GameServer
 
 
 
-        public readonly UInt64 Id;//表示队伍的唯一Id表示，不可被更改
+        public UInt64 Id { get => Member.ElementAt(0); }//表示队伍的唯一Id表示，不可被更改
 
         public int CurrentCount { get => Member.Count; }//当前队伍人数
 
@@ -69,7 +75,8 @@ namespace GameServer
             OPEN,//开放房间
             CLOSE,//关闭房间
             INBATTLE,//在战斗中
-            Matching//在匹配中
+            Matching,//在匹配中
+            WaitMatchQue//在匹配等待队列中
         }
     }
 }

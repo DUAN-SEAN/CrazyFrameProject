@@ -8,16 +8,12 @@ using System.Threading.Tasks;
 namespace GameServer
 {
     /// <summary>
-    /// 匹配系统
-    /// 包含了队伍模块和匹配模块
+    /// 1 匹配系统
+    /// 2 包含了队伍模块和匹配模块
+    /// 3 保证system的运转是线程安全的
     /// </summary>
     public class GameMatchSystem:BaseSystem
     {
-        /// <summary>
-        /// 保证只执行一次赋值
-        /// </summary>
-     
-
         public GameMatchSystem():base()
         {
             
@@ -27,11 +23,10 @@ namespace GameServer
         public override void Start()
         {
             base.Start();//初始化本地消息队列
-
-
-            
         }
 
+
+     
         public override void Update()
         {
             base.Update();//基类的update 负责驱动本地消息
@@ -220,18 +215,30 @@ namespace GameServer
         /// </summary>
         public void OnJoinMatchQueue(ulong teamId, ulong playerId, int barrierId)
         {
-            //1 验证
-
-            //1 验证队长是否合法
-
-            
-
-
+            //1 验证 队伍是否存在
+            MatchTeam matchTeam = null;
+            if (!m_teamDic.TryGetValue(teamId, out matchTeam))
+            {
+                return;
+            }
+            //2 验证队长是否合法
+            if (matchTeam.Id != playerId)
+            {
+                return;
+            }
+            //3 验证team状态是否满足
+            if(matchTeam.State!= MatchTeam.MatchTeamState.OPEN)
+            {
+                return;
+            }
+            //4 验证是否有对应的关卡匹配队列
             GameMatchPlayerContextQueue gameMatchPlayerContextQueue;
             if(!m_gameMatchPlayerCtxQueDic.TryGetValue(barrierId,out gameMatchPlayerContextQueue))
             {
                 return;
             }
+            //5 向匹配队列加入该队伍  方法内修改matchTeam的状态
+            gameMatchPlayerContextQueue.OnJoinMatchQueue(matchTeam);
 
 
         }

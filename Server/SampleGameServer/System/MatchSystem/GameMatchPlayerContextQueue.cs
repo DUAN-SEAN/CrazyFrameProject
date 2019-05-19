@@ -27,35 +27,54 @@ namespace GameServer
         }
         /// <summary>
         /// 匹配算法 操作m_matchTeamQue
+        /// 这个Update由MatchSystem进行调用  
         /// </summary>
         public void MatchUpdate()
         {
-
+            
         }
 
+        public void OnJoinMatchQueue(MatchTeam matchTeam)
+        {
+            OnEnterLock();
+            //先做状态检查  再执行逻辑
+            if (matchTeam.State != MatchTeam.MatchTeamState.OPEN) return;
 
+
+
+            //将队伍添加到队列中  这个状态属于中间态  客户端感知不到这个状态的存在
+            m_waitMatchQue.Enqueue(matchTeam);
+            matchTeam.State = MatchTeam.MatchTeamState.WaitMatchQue;
+
+
+            LeaveLock();
+        }
         /// <summary>
-        /// 一个玩家现场选择退出匹配队列 那么整个团队就退出
+        /// 由于队伍的主动退出或者异常状态，导致队伍离开匹配队列
+        /// 队列所有操作进行上锁
         /// 
         /// </summary>
         /// <param name="playerId"></param>
-        public void OnExitMatchQueue(ulong playerId)
+        public void OnExitMatchQueue(MatchTeam matchTeam)
         {
             OnEnterLock();
+            switch (matchTeam.State)
+            {
+                case MatchTeam.MatchTeamState.WaitMatchQue:
+                    //无法退出 必须等服务器将队伍添加到匹配集合中 
+                    break;
+                case MatchTeam.MatchTeamState.Matching:
 
-
+                    break;
+                default:break;
+            }
+            
 
 
 
             LeaveLock();
         }
-        public void ReleasePlayerContext(ulong playerId)
-        {
-            
-
-
-        }
-
+     
         private void OnEnterLock()
         {
             m_queueLock.Wait();
@@ -67,6 +86,7 @@ namespace GameServer
             m_queueLock.Release();
         }
 
+        //private Dictionary<int, List<MatchTeam>> m_matchingQueDic;//后期由于每个玩家的能力值 进行能力匹配
 
         private List<MatchTeam> m_matchingQue;//玩家匹配队列  主要操控这个队列进行
 

@@ -24,6 +24,7 @@ namespace Crazy.ServerBase
         }
         /// <summary>
         /// 驱动更新
+        /// 工作线程调用的方法，线程模型为单线程驱动，保证系统的逻辑安全
         /// </summary>
         public virtual void Update()
         {
