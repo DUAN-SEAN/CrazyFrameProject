@@ -54,6 +54,7 @@ namespace GameServer
         public int MessageId => GameServerConstDefine.MatchSystemJoinMatchQueue;
         public UInt64 teamId;//队伍Id
         public UInt64 playerId;//玩家Id 队伍中的玩家都能退出匹配队列
+        public Int32 barrierId;//关卡Id 每一个关卡都有对应的Id 
     }
 
 

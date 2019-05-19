@@ -56,6 +56,10 @@ namespace GameServer
             return true;
         }
 
+        public bool IsContain(UInt64 playerId)
+        {
+            return Member.Contains(playerId);
+        }
 
 
         public UInt64 Id { get => Member.ElementAt(0); }//表示队伍的唯一Id表示，不可被更改
@@ -76,7 +80,6 @@ namespace GameServer
             CLOSE,//关闭房间
             INBATTLE,//在战斗中
             Matching,//在匹配中
-            WaitMatchQue//在匹配等待队列中
         }
     }
 }

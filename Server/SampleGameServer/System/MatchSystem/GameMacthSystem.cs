@@ -71,7 +71,7 @@ namespace GameServer
                     break;
                 case GameServerConstDefine.MatchSystemExitMatchQueue:
                     ExitMatchQueueMessage exitMatchQueueMessage = msg as ExitMatchQueueMessage;
-                    OnExitMatchQueue(exitMatchQueueMessage.teamId, exitMatchQueueMessage.playerId);
+                    OnExitMatchQueue(exitMatchQueueMessage.teamId, exitMatchQueueMessage.playerId,exitMatchQueueMessage.barrierId);
                     break;
                 default:
                     break;
@@ -246,8 +246,24 @@ namespace GameServer
         /// 队伍离开匹配队列
         /// 任何队伍中的玩家都能发起队伍离开匹配队列
         /// </summary>
-        public void OnExitMatchQueue(ulong teamId, ulong playerId)
+        public void OnExitMatchQueue(ulong teamId, ulong playerId,int barrierId)
         {
+            //1 验证 队伍是否存在
+            MatchTeam matchTeam = null;
+            if (!m_teamDic.TryGetValue(teamId, out matchTeam))
+            {
+                return;
+            }
+            //2 验证队伍是否包含该玩家
+            if (!matchTeam.IsContain(playerId))
+            {
+                return;
+            }
+            //3 检查队伍状态是否合法
+            if(matchTeam.State != MatchTeam.MatchTeamState.Matching)
+            {
+                return;
+            }
 
         }
 

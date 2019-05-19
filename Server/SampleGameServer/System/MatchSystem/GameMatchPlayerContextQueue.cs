@@ -39,12 +39,9 @@ namespace GameServer
             OnEnterLock();
             //先做状态检查  再执行逻辑
             if (matchTeam.State != MatchTeam.MatchTeamState.OPEN) return;
-
-
-
             //将队伍添加到队列中  这个状态属于中间态  客户端感知不到这个状态的存在
-            m_waitMatchQue.Enqueue(matchTeam);
-            matchTeam.State = MatchTeam.MatchTeamState.WaitMatchQue;
+            m_matchingQue.Add(matchTeam);
+            matchTeam.State = MatchTeam.MatchTeamState.Matching;
 
 
             LeaveLock();
@@ -60,10 +57,11 @@ namespace GameServer
             OnEnterLock();
             switch (matchTeam.State)
             {
-                case MatchTeam.MatchTeamState.WaitMatchQue:
-                    //无法退出 必须等服务器将队伍添加到匹配集合中 
-                    break;
                 case MatchTeam.MatchTeamState.Matching:
+                    //这个状态是客户端能够感知
+                    m_matchingQue.Remove(matchTeam);
+
+                    matchTeam.State = MatchTeam.MatchTeamState.OPEN;//退出匹配队列后 队伍开放
 
                     break;
                 default:break;
@@ -89,9 +87,6 @@ namespace GameServer
         //private Dictionary<int, List<MatchTeam>> m_matchingQueDic;//后期由于每个玩家的能力值 进行能力匹配
 
         private List<MatchTeam> m_matchingQue;//玩家匹配队列  主要操控这个队列进行
-
-        private ConcurrentQueue<MatchTeam> m_waitMatchQue; 
-
 
 
         /// <summary>
