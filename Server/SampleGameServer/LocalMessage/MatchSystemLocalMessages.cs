@@ -67,7 +67,7 @@ namespace GameServer
     public class MatchQueueCompleteSingleMessage : ILocalMessage
     {
         public int MessageId => GameServerConstDefine.MatchQueueCompleteSingle;
-        public List<ulong> teamIds;
+        public List<ulong> teamIds = new List<ulong>();
         public int barrierId;
     }
 

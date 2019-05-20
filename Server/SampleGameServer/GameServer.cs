@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Crazy.Common;
 using Crazy.NetSharp;
@@ -82,10 +83,18 @@ namespace GameServer
             
 
 
-
+            //注意：目前先这样写个一般的驱动方法，后期再改
             Task.Run(() =>
             {
-                gameMatchSystem.Update();
+                while (true)
+                {
+                    Thread.Sleep(1);
+                    foreach (var item in m_systemDic.Values)
+                    {
+                        item.Update();
+                    }
+                }
+                
                 //otherSystem.Update()
             });//由线程池进行驱动
 
@@ -101,8 +110,7 @@ namespace GameServer
         /// </summary>
         /// <typeparam name="System"></typeparam>
         /// <param name="msg"></param>
-        public void PostMessageToSystem<System>(ILocalMessage msg) where System:BaseSystem
-        
+        public void PostMessageToSystem<System>(ILocalMessage msg) where System:BaseSystem   
         {
             BaseSystem baseSystem = m_systemDic[typeof(System)];
             if (baseSystem == null) return;

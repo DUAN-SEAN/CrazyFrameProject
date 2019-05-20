@@ -406,7 +406,7 @@ namespace Crazy.ServerBase
         private ulong m_contextId;
         #endregion
 
-        private Dictionary<int, Action<IResponse>> m_requestCallback = new Dictionary<int, Action<IResponse>>();
+        protected Dictionary<int, Action<IResponse>> m_requestCallback = new Dictionary<int, Action<IResponse>>();
         private static int c_rpcId;
         private static int RpcId { get {
                 if (c_rpcId >= Int32.MaxValue)

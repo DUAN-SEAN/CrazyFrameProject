@@ -18,7 +18,7 @@ namespace GameServer
         /// <param name="targetQueueUserId"></param>
         /// <param name="needResult"></param>
         /// <param name="needSeq"></param>
-        public SampleGameServerContextAsyncAction(GameServerContext context, String targetQueueUserId, Boolean needResult = false, Boolean needSeq = false)
+        public SampleGameServerContextAsyncAction(GameServerPlayerContext context, String targetQueueUserId, Boolean needResult = false, Boolean needSeq = false)
             : base(context, GameServer.Instance.AsyncActionQueuePool.GetAdaptedQueueByUserId(targetQueueUserId), needResult, needSeq)
         {
 

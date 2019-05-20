@@ -95,7 +95,7 @@ namespace GameServer
 
         public static void Test()
         {
-            var gameContext = GameServer.Instance.PlayerCtxManager.AllocPlayerContext() as GameServerContext;
+            var gameContext = GameServer.Instance.PlayerCtxManager.AllocPlayerContext() as GameServerPlayerContext;
 
             //1
             //new RegsiterVerifyContextAsyncAction(gameContext, gameContext.ContextId.ToString(), "duanrui", "123456").Start();

@@ -12,7 +12,7 @@ namespace GameServer
     {
         protected override void Run(ISession playerContext, C2S_Login message, Action<S2C_Login> reply)
         {
-            GameServerContext gameServerContext = playerContext as GameServerContext;
+            GameServerPlayerContext gameServerContext = playerContext as GameServerPlayerContext;
             S2C_Login response = new S2C_Login();
 
 

@@ -14,7 +14,7 @@ namespace GameServer
     /// </summary>
     public class RegsiterVerifyContextAsyncAction : SampleGameServerContextAsyncAction
     {
-        public RegsiterVerifyContextAsyncAction(GameServerContext context, string targetQueueUserId, string username, string password, bool needResult = false, bool needSeq = false) : base(context, targetQueueUserId, needResult, needSeq)
+        public RegsiterVerifyContextAsyncAction(GameServerPlayerContext context, string targetQueueUserId, string username, string password, bool needResult = false, bool needSeq = false) : base(context, targetQueueUserId, needResult, needSeq)
         {
             m_username = username;
             m_password = password;
@@ -92,7 +92,7 @@ namespace GameServer
     /// </summary>
     public class LoginVerifyContextAsyncAction : SampleGameServerContextAsyncAction
     {
-        public LoginVerifyContextAsyncAction(GameServerContext gameServerContext, string account, string password, bool needResult = false, bool needSeq = false) : base(gameServerContext, gameServerContext.ContextId.ToString(), false, false)
+        public LoginVerifyContextAsyncAction(GameServerPlayerContext gameServerContext, string account, string password, bool needResult = false, bool needSeq = false) : base(gameServerContext, gameServerContext.ContextId.ToString(), false, false)
         {
             this.m_username = account;
             this.m_password = password;
@@ -142,7 +142,7 @@ namespace GameServer
         // RPC消息的任务完成句柄
         private TaskCompletionSource<bool> completionSource;
 
-        private GameServerContext gameServerContext;
+        private GameServerPlayerContext gameServerContext;
 
         private string m_username;
 
@@ -153,7 +153,7 @@ namespace GameServer
     /// </summary>
     public class UpLoadBarrierRecordAsyncAction : SampleGameServerContextAsyncAction
     {
-        public UpLoadBarrierRecordAsyncAction(GameServerDBarrierRecord data, GameServerContext gameServerContext, bool needResult = false, bool needSeq = false) : base(gameServerContext, null, needResult, needSeq)
+        public UpLoadBarrierRecordAsyncAction(GameServerDBarrierRecord data, GameServerPlayerContext gameServerContext, bool needResult = false, bool needSeq = false) : base(gameServerContext, null, needResult, needSeq)
         {
             m_data = data;
         }
@@ -185,7 +185,7 @@ namespace GameServer
     //获取所有战斗数据
     public class GetAllBarrierRecordAsyncAction : SampleGameServerContextAsyncAction
     {
-        public GetAllBarrierRecordAsyncAction(GameServerContext context, string targetQueueUserId, bool needResult = false, bool needSeq = false) : base(context, targetQueueUserId, needResult, needSeq)
+        public GetAllBarrierRecordAsyncAction(GameServerPlayerContext context, string targetQueueUserId, bool needResult = false, bool needSeq = false) : base(context, targetQueueUserId, needResult, needSeq)
         {
 
         }

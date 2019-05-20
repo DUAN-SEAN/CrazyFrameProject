@@ -3,6 +3,7 @@ using Crazy.NetSharp;
 using Crazy.ServerBase;
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GameServer
@@ -73,9 +74,9 @@ namespace GameServer
                     ExitMatchQueueMessage exitMatchQueueMessage = msg as ExitMatchQueueMessage;
                     OnExitMatchQueue(exitMatchQueueMessage.teamId, exitMatchQueueMessage.playerId,exitMatchQueueMessage.barrierId);
                     break;
-                case GameServerConstDefine.MatchQueueCompleteSingle:
+                case GameServerConstDefine.MatchQueueCompleteSingle://by MatcingSystemQueue
                     MatchQueueCompleteSingleMessage matchQueueCompleteSingleMessage = msg as MatchQueueCompleteSingleMessage;
-                    
+                    OnCompleteMatching(matchQueueCompleteSingleMessage.teamIds,matchQueueCompleteSingleMessage.barrierId);
                     break;
                 default:
                     break;
@@ -269,6 +270,33 @@ namespace GameServer
                 return;
             }
 
+        }
+
+        /// <summary>
+        /// 匹配成功由MatchQueue触发事件
+        /// </summary>
+        public void OnCompleteMatching(List<ulong> teamIds, int barrierId)
+        {
+            //检查队伍状态是否合法  合法则修改队伍状态 并向GameServer 发送 启动物理模块开启战斗系统
+            foreach(var id in teamIds)
+            {
+                var team = m_teamDic[id];
+                if(team == null)
+                {
+                    Log.Error("找不到id对应的队伍 匹配出错");
+                    return;
+                }
+                if(team.State != MatchTeam.MatchTeamState.Matching)
+                {
+                    Log.Error("队伍状态错误 匹配出错");
+                    return;
+                }
+                //修改队伍状态 并通知GameServer 向战斗系统发送创建战斗模块的消息
+                team.State = MatchTeam.MatchTeamState.INBATTLE;
+                //向战斗系统发生生成消息 战斗系统内部会向队伍所有玩家发生 战斗生成消息
+                //GameServer.Instance.PostMessageToSystem<BaseSystem>(null);
+
+            }
         }
 
         /// <summary>

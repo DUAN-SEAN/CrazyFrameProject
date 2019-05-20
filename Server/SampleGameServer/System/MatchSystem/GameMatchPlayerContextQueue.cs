@@ -37,6 +37,7 @@ namespace GameServer
             //1 关卡容量maxCount
             //2 队伍人数  
             //3 贪心算法
+            // 注意 Queue 除了on开头的方法以外 其他的方法都不修改队伍的状态
 
             // 初始化
             List<MatchBucket> matchBuckets = new List<MatchBucket>();
@@ -86,15 +87,21 @@ namespace GameServer
                 var matchBucket = matchBuckets[i];
                 if (matchBucket.CurrentVolume == matchBucket.Capacity)
                 {
-                    Log.Info($"{i} 桶满足条件 向GameServer发送开启战斗请求");
+                    Log.Info($"第 {i} 桶满足条件 向GameServer发送开启战斗请求");
                     //向matchSystem发送这几个队伍的id
+
+                    MatchQueueCompleteSingleMessage matchQueueCompleteSingleMessage = new MatchQueueCompleteSingleMessage();
 
 
                     // 将matchteam从匹配列表中删除
                     foreach(var item in matchBucket.matchTeams)
                     {
+                        matchQueueCompleteSingleMessage.teamIds.Add(item.Id);
+                        matchQueueCompleteSingleMessage.barrierId = m_id;
                         m_matchingQue.Remove(item);//从匹配队列中清除
                     }
+                    //向MatchSystem发送队伍匹配完成消息
+                    m_matchSystemClient.PostLocalMessage(matchQueueCompleteSingleMessage);
 
                 }
                 else
