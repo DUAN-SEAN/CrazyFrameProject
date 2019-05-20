@@ -50,7 +50,7 @@ namespace GameServer
         /// <returns></returns>
         public override Task OnMessage(ILocalMessage msg)
         {
-            //写正常的逻辑代码，1  先
+            
             switch (msg.MessageId)
             {
                 case GameServerConstDefine.MatchSystemCreateMatchTeam:
@@ -72,6 +72,10 @@ namespace GameServer
                 case GameServerConstDefine.MatchSystemExitMatchQueue:
                     ExitMatchQueueMessage exitMatchQueueMessage = msg as ExitMatchQueueMessage;
                     OnExitMatchQueue(exitMatchQueueMessage.teamId, exitMatchQueueMessage.playerId,exitMatchQueueMessage.barrierId);
+                    break;
+                case GameServerConstDefine.MatchQueueCompleteSingle:
+                    MatchQueueCompleteSingleMessage matchQueueCompleteSingleMessage = msg as MatchQueueCompleteSingleMessage;
+                    
                     break;
                 default:
                     break;
@@ -106,7 +110,7 @@ namespace GameServer
             foreach (var config in m_gameBarrierConfigs)
             {
                 //配置关卡Id 关卡等级 关卡容纳人数
-                var queue = new GameMatchPlayerContextQueue(config.Id, config.Level, config.MemberCount);
+                var queue = new GameMatchPlayerContextQueue(config.Id, config.Level, config.MemberCount,this);
                 m_gameMatchPlayerCtxQueDic.TryAdd(config.Id, queue);
             }
             //初始化设置Id生成工具  ps:id由线程安全进行累加 

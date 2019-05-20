@@ -6,9 +6,6 @@ using System.Threading.Tasks;
 
 namespace GameServer
 {
-   
-
-
     /// <summary>
     /// 匹配 桶 池子
     /// 减少GC 给每个匹配队列中使用的水桶创建对象池
@@ -66,6 +63,7 @@ namespace GameServer
         public void Dispose()
         {
             matchTeams.Clear();
+            MatchBucketPool.Instance.Recycle(this);//放入池子
 
         }
         public int Capacity;

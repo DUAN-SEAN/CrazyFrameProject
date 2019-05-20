@@ -1,4 +1,5 @@
-﻿using Crazy.NetSharp;
+﻿using Crazy.Common;
+using Crazy.NetSharp;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -17,12 +18,13 @@ namespace GameServer
         /// <param name="id">关卡Id</param>
         /// <param name="level">关卡等级</param>
         /// <param name="maxCount">队伍容量</param>
-        public GameMatchPlayerContextQueue(int id,int level,int maxCount)
+        public GameMatchPlayerContextQueue(int id,int level,int maxCount,ILocalMessageClient matchSystemClient)
         {
             m_id = id;
             m_level = level;
             m_maxMemberCount = maxCount;
             m_matchingQue = new List<MatchTeam>();
+            m_matchSystemClient = matchSystemClient;//保留一个向系统发送消息的句柄
           
         }
         /// <summary>
@@ -50,13 +52,63 @@ namespace GameServer
             {
                 MatchTeamArg matchTeamArg = matchTeamArgs[i];
                 if (matchTeamArg.index != -1) continue;
-                for(int j = 0; j < matchBuckets.Count; j++)
+                int j = 0;
+                for (; j < matchBuckets.Count; j++)
                 {
                     MatchBucket matchBucket = matchBuckets[j];
-                    if()
+                    int count = matchBucket.CurrentVolume;
+                    if ((matchBucket.Capacity-matchBucket.CurrentVolume)>=matchTeamArg.MatchTeam.CurrentCount)//如果容量足够 则添加
+                    {
+                        matchBucket.matchTeams.Add(matchTeamArg.MatchTeam);
+                        matchTeamArg.index = j;//设置当前所在桶编号
+                    }
+                }
+                if (matchTeamArg.index < 0)//需要新的桶
+                {
+
+                    var matchBucket =  MatchBucketPool.Instance.Fetch(m_maxMemberCount);
+                    matchBucket.matchTeams.Add(matchTeamArg.MatchTeam);
+                    matchTeamArg.index = j;
+                    matchBuckets.Add(matchBucket);
+
+                    if (j != matchBuckets.Count - 1)
+                    {
+                        Log.Error("索引出现问题");
+                        return;
+                    }            
                 }
 
             }
+
+            // 把桶遍历
+            for(int i = 0; i < matchBuckets.Count; i++)
+            {
+                var matchBucket = matchBuckets[i];
+                if (matchBucket.CurrentVolume == matchBucket.Capacity)
+                {
+                    Log.Info($"{i} 桶满足条件 向GameServer发送开启战斗请求");
+                    //向matchSystem发送这几个队伍的id
+
+
+                    // 将matchteam从匹配列表中删除
+                    foreach(var item in matchBucket.matchTeams)
+                    {
+                        m_matchingQue.Remove(item);//从匹配队列中清除
+                    }
+
+                }
+                else
+                {
+                    //不符合 这里可以再进行一次桶合并策略，目前不做 进一步的算法优化
+                }
+            }
+            // 释放所有的桶
+            for(int i = 0; i < matchBuckets.Count; i++){
+                var matchBucket = matchBuckets[i];
+                matchBucket.Dispose();
+            }
+           
+
 
 
 
@@ -138,6 +190,8 @@ namespace GameServer
         /// 队列中支持最多的队伍人数
         /// </summary>
         private readonly int m_maxMemberCount;
+
+        private ILocalMessageClient m_matchSystemClient;
 
 
         public int Id { get => m_id; }

@@ -17,6 +17,7 @@ namespace GameServer
         public const Int32 MatchSystemExitMatchTeam = 1004;//退出队伍
         public const Int32 MatchSystemJoinMatchQueue = 1005;//进入匹配队列
         public const Int32 MatchSystemExitMatchQueue = 1006;//退出匹配队列
+        public const Int32 MatchQueueCompleteSingle = 1007;//匹配队列完成一项
         #endregion
 
 
