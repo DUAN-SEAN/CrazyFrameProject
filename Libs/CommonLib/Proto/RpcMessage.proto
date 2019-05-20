@@ -1,30 +1,21 @@
 syntax = "proto3";
 package Crazy.Common;
 
-message UnitInfo
-{
-	int64 UserId = 5;
-	int64 UnitId  = 1;
-	int32 X       = 2;
-	int32 Z       = 3;
-	int32 Y       = 4;
-	int32 FactionType = 6;
-}
 ////验证登陆消息
-message C2S_Login // IRequest
+message C2S_LoginMessage // IRequest
 {
 	int32 RpcId = 90;
 	string account = 1;
 	string password = 2;
 }
 
-message S2C_Login // IResponse
+message S2C_LoginMessage // IResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
 
-	int64 UserId = 1;
+	uint64 playerId = 1;
 	State state = 2;
 	enum State {
 		Fail = 0;
@@ -32,54 +23,23 @@ message S2C_Login // IResponse
 	}	
 }
 
-
-////创建Unit
-message CreateUnits // IMessage
+message C2S_RegisterMessage // IRequest
 {
 	int32 RpcId = 90;
-	int64 CopyId = 1;
-	int64 OwnUnitId = 2;
-    repeated UnitInfo Units = 3;
-}
-
-////帧消息
-message PositionFrameMsg // IFrameMessage
-{
-	int32 RpcId = 90;
-	int64 Id = 1;
-	float x = 2;
-	float y = 3;
-	float z = 4;
-	int64 CopyId = 5;
-	int64 UnitId = 6;
-}
-
-
-////心跳组件消息
-message HeartBeatMessage // IMessage
-{
-	int32 RpcId = 90;
-	int64 UserId = 1;
-}
-
-////好友系统
-message C2S_SearchUser // IRequest
-{
-	int32 RpcId = 90;
-	int64 UserId = 1;
-	string account = 2;
-}
-
-message S2C_SearchUser // IResponse
-{
-	int32 RpcId = 90;
-	int32 Error = 91;
-	string Message = 92;
-	
 	string account = 1;
+	string password = 2;
+}
+
+message S2C_RegisterMessage // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
 	State state = 2;
 	enum State {
 		Fail = 0;
 		OK = 1;
 	}	
 }
+

@@ -92,8 +92,7 @@
     <Compile Include="System\MatchSystem\MatchBucketPoolFactory.cs" />
     <Compile Include="System\MatchSystem\MatchTeam.cs" />
     <Compile Include="System\NetHandlerSystem\C2S_ChatOneMessageHandler.cs" />
-    <Compile Include="System\NetHandlerSystem\RPC\C2S_LoginHandler.cs" />
-    <Compile Include="System\NetHandlerSystem\RPC\C2S_SearchUserHandler.cs" />
+    <Compile Include="System\NetHandlerSystem\RPC\C2SRealmHandlers.cs" />
     <Compile Include="System\MatchSystem\GameMacthSystem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

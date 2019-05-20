@@ -11,7 +11,7 @@ namespace GameServer
     {
         //为了与ServerBase进行区分 这里只做了
 
-        #region MatchSystem        
+        #region MatchSystem 1002-1050    
         public const Int32 MatchSystemCreateMatchTeam = 1002;//创建队伍
         public const Int32 MatchSystemJoinMatchTeam = 1003;//进入队伍
         public const Int32 MatchSystemExitMatchTeam = 1004;//退出队伍

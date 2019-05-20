@@ -24,47 +24,39 @@ namespace Crazy.Common {
     static RpcMessageReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChBScGNNZXNzYWdlLnByb3RvEgxDcmF6eS5Db21tb24iYAoIVW5pdEluZm8S",
-            "DgoGVXNlcklkGAUgASgDEg4KBlVuaXRJZBgBIAEoAxIJCgFYGAIgASgFEgkK",
-            "AVoYAyABKAUSCQoBWRgEIAEoBRITCgtGYWN0aW9uVHlwZRgGIAEoBSI9CglD",
-            "MlNfTG9naW4SDQoFUnBjSWQYWiABKAUSDwoHYWNjb3VudBgBIAEoCRIQCghw",
-            "YXNzd29yZBgCIAEoCSKTAQoJUzJDX0xvZ2luEg0KBVJwY0lkGFogASgFEg0K",
-            "BUVycm9yGFsgASgFEg8KB01lc3NhZ2UYXCABKAkSDgoGVXNlcklkGAEgASgD",
-            "EiwKBXN0YXRlGAIgASgOMh0uQ3JhenkuQ29tbW9uLlMyQ19Mb2dpbi5TdGF0",
-            "ZSIZCgVTdGF0ZRIICgRGYWlsEAASBgoCT0sQASJmCgtDcmVhdGVVbml0cxIN",
-            "CgVScGNJZBhaIAEoBRIOCgZDb3B5SWQYASABKAMSEQoJT3duVW5pdElkGAIg",
-            "ASgDEiUKBVVuaXRzGAMgAygLMhYuQ3JhenkuQ29tbW9uLlVuaXRJbmZvIm4K",
-            "EFBvc2l0aW9uRnJhbWVNc2cSDQoFUnBjSWQYWiABKAUSCgoCSWQYASABKAMS",
-            "CQoBeBgCIAEoAhIJCgF5GAMgASgCEgkKAXoYBCABKAISDgoGQ29weUlkGAUg",
-            "ASgDEg4KBlVuaXRJZBgGIAEoAyIxChBIZWFydEJlYXRNZXNzYWdlEg0KBVJw",
-            "Y0lkGFogASgFEg4KBlVzZXJJZBgBIAEoAyJACg5DMlNfU2VhcmNoVXNlchIN",
-            "CgVScGNJZBhaIAEoBRIOCgZVc2VySWQYASABKAMSDwoHYWNjb3VudBgCIAEo",
-            "CSKeAQoOUzJDX1NlYXJjaFVzZXISDQoFUnBjSWQYWiABKAUSDQoFRXJyb3IY",
-            "WyABKAUSDwoHTWVzc2FnZRhcIAEoCRIPCgdhY2NvdW50GAEgASgJEjEKBXN0",
-            "YXRlGAIgASgOMiIuQ3JhenkuQ29tbW9uLlMyQ19TZWFyY2hVc2VyLlN0YXRl",
-            "IhkKBVN0YXRlEggKBEZhaWwQABIGCgJPSxABYgZwcm90bzM="));
+            "ChBScGNNZXNzYWdlLnByb3RvEgxDcmF6eS5Db21tb24iRAoQQzJTX0xvZ2lu",
+            "TWVzc2FnZRINCgVScGNJZBhaIAEoBRIPCgdhY2NvdW50GAEgASgJEhAKCHBh",
+            "c3N3b3JkGAIgASgJIqMBChBTMkNfTG9naW5NZXNzYWdlEg0KBVJwY0lkGFog",
+            "ASgFEg0KBUVycm9yGFsgASgFEg8KB01lc3NhZ2UYXCABKAkSEAoIcGxheWVy",
+            "SWQYASABKAQSMwoFc3RhdGUYAiABKA4yJC5DcmF6eS5Db21tb24uUzJDX0xv",
+            "Z2luTWVzc2FnZS5TdGF0ZSIZCgVTdGF0ZRIICgRGYWlsEAASBgoCT0sQASJH",
+            "ChNDMlNfUmVnaXN0ZXJNZXNzYWdlEg0KBVJwY0lkGFogASgFEg8KB2FjY291",
+            "bnQYASABKAkSEAoIcGFzc3dvcmQYAiABKAkilwEKE1MyQ19SZWdpc3Rlck1l",
+            "c3NhZ2USDQoFUnBjSWQYWiABKAUSDQoFRXJyb3IYWyABKAUSDwoHTWVzc2Fn",
+            "ZRhcIAEoCRI2CgVzdGF0ZRgCIAEoDjInLkNyYXp5LkNvbW1vbi5TMkNfUmVn",
+            "aXN0ZXJNZXNzYWdlLlN0YXRlIhkKBVN0YXRlEggKBEZhaWwQABIGCgJPSxAB",
+            "YgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.UnitInfo), global::Crazy.Common.UnitInfo.Parser, new[]{ "UserId", "UnitId", "X", "Z", "Y", "FactionType" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.C2S_Login), global::Crazy.Common.C2S_Login.Parser, new[]{ "RpcId", "Account", "Password" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_Login), global::Crazy.Common.S2C_Login.Parser, new[]{ "RpcId", "Error", "Message", "UserId", "State" }, null, new[]{ typeof(global::Crazy.Common.S2C_Login.Types.State) }, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.CreateUnits), global::Crazy.Common.CreateUnits.Parser, new[]{ "RpcId", "CopyId", "OwnUnitId", "Units" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.PositionFrameMsg), global::Crazy.Common.PositionFrameMsg.Parser, new[]{ "RpcId", "Id", "X", "Y", "Z", "CopyId", "UnitId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.HeartBeatMessage), global::Crazy.Common.HeartBeatMessage.Parser, new[]{ "RpcId", "UserId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.C2S_SearchUser), global::Crazy.Common.C2S_SearchUser.Parser, new[]{ "RpcId", "UserId", "Account" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SearchUser), global::Crazy.Common.S2C_SearchUser.Parser, new[]{ "RpcId", "Error", "Message", "Account", "State" }, null, new[]{ typeof(global::Crazy.Common.S2C_SearchUser.Types.State) }, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.C2S_LoginMessage), global::Crazy.Common.C2S_LoginMessage.Parser, new[]{ "RpcId", "Account", "Password" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_LoginMessage), global::Crazy.Common.S2C_LoginMessage.Parser, new[]{ "RpcId", "Error", "Message", "PlayerId", "State" }, null, new[]{ typeof(global::Crazy.Common.S2C_LoginMessage.Types.State) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.C2S_RegisterMessage), global::Crazy.Common.C2S_RegisterMessage.Parser, new[]{ "RpcId", "Account", "Password" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_RegisterMessage), global::Crazy.Common.S2C_RegisterMessage.Parser, new[]{ "RpcId", "Error", "Message", "State" }, null, new[]{ typeof(global::Crazy.Common.S2C_RegisterMessage.Types.State) }, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  public sealed partial class UnitInfo : pb::IMessage<UnitInfo> {
-    private static readonly pb::MessageParser<UnitInfo> _parser = new pb::MessageParser<UnitInfo>(() => new UnitInfo());
+  /// <summary>
+  /////验证登陆消息
+  /// </summary>
+  public sealed partial class C2S_LoginMessage : pb::IMessage<C2S_LoginMessage> {
+    private static readonly pb::MessageParser<C2S_LoginMessage> _parser = new pb::MessageParser<C2S_LoginMessage>(() => new C2S_LoginMessage());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<UnitInfo> Parser { get { return _parser; } }
+    public static pb::MessageParser<C2S_LoginMessage> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -77,286 +69,14 @@ namespace Crazy.Common {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public UnitInfo() {
+    public C2S_LoginMessage() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public UnitInfo(UnitInfo other) : this() {
-      userId_ = other.userId_;
-      unitId_ = other.unitId_;
-      x_ = other.x_;
-      z_ = other.z_;
-      y_ = other.y_;
-      factionType_ = other.factionType_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public UnitInfo Clone() {
-      return new UnitInfo(this);
-    }
-
-    /// <summary>Field number for the "UserId" field.</summary>
-    public const int UserIdFieldNumber = 5;
-    private long userId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long UserId {
-      get { return userId_; }
-      set {
-        userId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "UnitId" field.</summary>
-    public const int UnitIdFieldNumber = 1;
-    private long unitId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long UnitId {
-      get { return unitId_; }
-      set {
-        unitId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "X" field.</summary>
-    public const int XFieldNumber = 2;
-    private int x_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int X {
-      get { return x_; }
-      set {
-        x_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "Z" field.</summary>
-    public const int ZFieldNumber = 3;
-    private int z_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Z {
-      get { return z_; }
-      set {
-        z_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "Y" field.</summary>
-    public const int YFieldNumber = 4;
-    private int y_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Y {
-      get { return y_; }
-      set {
-        y_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "FactionType" field.</summary>
-    public const int FactionTypeFieldNumber = 6;
-    private int factionType_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int FactionType {
-      get { return factionType_; }
-      set {
-        factionType_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as UnitInfo);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(UnitInfo other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (UserId != other.UserId) return false;
-      if (UnitId != other.UnitId) return false;
-      if (X != other.X) return false;
-      if (Z != other.Z) return false;
-      if (Y != other.Y) return false;
-      if (FactionType != other.FactionType) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (UserId != 0L) hash ^= UserId.GetHashCode();
-      if (UnitId != 0L) hash ^= UnitId.GetHashCode();
-      if (X != 0) hash ^= X.GetHashCode();
-      if (Z != 0) hash ^= Z.GetHashCode();
-      if (Y != 0) hash ^= Y.GetHashCode();
-      if (FactionType != 0) hash ^= FactionType.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (UnitId != 0L) {
-        output.WriteRawTag(8);
-        output.WriteInt64(UnitId);
-      }
-      if (X != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(X);
-      }
-      if (Z != 0) {
-        output.WriteRawTag(24);
-        output.WriteInt32(Z);
-      }
-      if (Y != 0) {
-        output.WriteRawTag(32);
-        output.WriteInt32(Y);
-      }
-      if (UserId != 0L) {
-        output.WriteRawTag(40);
-        output.WriteInt64(UserId);
-      }
-      if (FactionType != 0) {
-        output.WriteRawTag(48);
-        output.WriteInt32(FactionType);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (UserId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserId);
-      }
-      if (UnitId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(UnitId);
-      }
-      if (X != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(X);
-      }
-      if (Z != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Z);
-      }
-      if (Y != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Y);
-      }
-      if (FactionType != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(FactionType);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(UnitInfo other) {
-      if (other == null) {
-        return;
-      }
-      if (other.UserId != 0L) {
-        UserId = other.UserId;
-      }
-      if (other.UnitId != 0L) {
-        UnitId = other.UnitId;
-      }
-      if (other.X != 0) {
-        X = other.X;
-      }
-      if (other.Z != 0) {
-        Z = other.Z;
-      }
-      if (other.Y != 0) {
-        Y = other.Y;
-      }
-      if (other.FactionType != 0) {
-        FactionType = other.FactionType;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 8: {
-            UnitId = input.ReadInt64();
-            break;
-          }
-          case 16: {
-            X = input.ReadInt32();
-            break;
-          }
-          case 24: {
-            Z = input.ReadInt32();
-            break;
-          }
-          case 32: {
-            Y = input.ReadInt32();
-            break;
-          }
-          case 40: {
-            UserId = input.ReadInt64();
-            break;
-          }
-          case 48: {
-            FactionType = input.ReadInt32();
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  /// <summary>
-  /////验证登陆消息
-  /// </summary>
-  public sealed partial class C2S_Login : pb::IMessage<C2S_Login> {
-    private static readonly pb::MessageParser<C2S_Login> _parser = new pb::MessageParser<C2S_Login>(() => new C2S_Login());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<C2S_Login> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Crazy.Common.RpcMessageReflection.Descriptor.MessageTypes[1]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public C2S_Login() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public C2S_Login(C2S_Login other) : this() {
+    public C2S_LoginMessage(C2S_LoginMessage other) : this() {
       rpcId_ = other.rpcId_;
       account_ = other.account_;
       password_ = other.password_;
@@ -364,8 +84,8 @@ namespace Crazy.Common {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public C2S_Login Clone() {
-      return new C2S_Login(this);
+    public C2S_LoginMessage Clone() {
+      return new C2S_LoginMessage(this);
     }
 
     /// <summary>Field number for the "RpcId" field.</summary>
@@ -403,11 +123,11 @@ namespace Crazy.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as C2S_Login);
+      return Equals(other as C2S_LoginMessage);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(C2S_Login other) {
+    public bool Equals(C2S_LoginMessage other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -475,7 +195,7 @@ namespace Crazy.Common {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(C2S_Login other) {
+    public void MergeFrom(C2S_LoginMessage other) {
       if (other == null) {
         return;
       }
@@ -517,15 +237,15 @@ namespace Crazy.Common {
 
   }
 
-  public sealed partial class S2C_Login : pb::IMessage<S2C_Login> {
-    private static readonly pb::MessageParser<S2C_Login> _parser = new pb::MessageParser<S2C_Login>(() => new S2C_Login());
+  public sealed partial class S2C_LoginMessage : pb::IMessage<S2C_LoginMessage> {
+    private static readonly pb::MessageParser<S2C_LoginMessage> _parser = new pb::MessageParser<S2C_LoginMessage>(() => new S2C_LoginMessage());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<S2C_Login> Parser { get { return _parser; } }
+    public static pb::MessageParser<S2C_LoginMessage> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Crazy.Common.RpcMessageReflection.Descriptor.MessageTypes[2]; }
+      get { return global::Crazy.Common.RpcMessageReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -534,25 +254,25 @@ namespace Crazy.Common {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public S2C_Login() {
+    public S2C_LoginMessage() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public S2C_Login(S2C_Login other) : this() {
+    public S2C_LoginMessage(S2C_LoginMessage other) : this() {
       rpcId_ = other.rpcId_;
       error_ = other.error_;
       message_ = other.message_;
-      userId_ = other.userId_;
+      playerId_ = other.playerId_;
       state_ = other.state_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public S2C_Login Clone() {
-      return new S2C_Login(this);
+    public S2C_LoginMessage Clone() {
+      return new S2C_LoginMessage(this);
     }
 
     /// <summary>Field number for the "RpcId" field.</summary>
@@ -588,22 +308,22 @@ namespace Crazy.Common {
       }
     }
 
-    /// <summary>Field number for the "UserId" field.</summary>
-    public const int UserIdFieldNumber = 1;
-    private long userId_;
+    /// <summary>Field number for the "playerId" field.</summary>
+    public const int PlayerIdFieldNumber = 1;
+    private ulong playerId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long UserId {
-      get { return userId_; }
+    public ulong PlayerId {
+      get { return playerId_; }
       set {
-        userId_ = value;
+        playerId_ = value;
       }
     }
 
     /// <summary>Field number for the "state" field.</summary>
     public const int StateFieldNumber = 2;
-    private global::Crazy.Common.S2C_Login.Types.State state_ = 0;
+    private global::Crazy.Common.S2C_LoginMessage.Types.State state_ = 0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Crazy.Common.S2C_Login.Types.State State {
+    public global::Crazy.Common.S2C_LoginMessage.Types.State State {
       get { return state_; }
       set {
         state_ = value;
@@ -612,11 +332,11 @@ namespace Crazy.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as S2C_Login);
+      return Equals(other as S2C_LoginMessage);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(S2C_Login other) {
+    public bool Equals(S2C_LoginMessage other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -626,7 +346,7 @@ namespace Crazy.Common {
       if (RpcId != other.RpcId) return false;
       if (Error != other.Error) return false;
       if (Message != other.Message) return false;
-      if (UserId != other.UserId) return false;
+      if (PlayerId != other.PlayerId) return false;
       if (State != other.State) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -637,7 +357,7 @@ namespace Crazy.Common {
       if (RpcId != 0) hash ^= RpcId.GetHashCode();
       if (Error != 0) hash ^= Error.GetHashCode();
       if (Message.Length != 0) hash ^= Message.GetHashCode();
-      if (UserId != 0L) hash ^= UserId.GetHashCode();
+      if (PlayerId != 0UL) hash ^= PlayerId.GetHashCode();
       if (State != 0) hash ^= State.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -652,9 +372,9 @@ namespace Crazy.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (UserId != 0L) {
+      if (PlayerId != 0UL) {
         output.WriteRawTag(8);
-        output.WriteInt64(UserId);
+        output.WriteUInt64(PlayerId);
       }
       if (State != 0) {
         output.WriteRawTag(16);
@@ -689,8 +409,8 @@ namespace Crazy.Common {
       if (Message.Length != 0) {
         size += 2 + pb::CodedOutputStream.ComputeStringSize(Message);
       }
-      if (UserId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserId);
+      if (PlayerId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(PlayerId);
       }
       if (State != 0) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) State);
@@ -702,7 +422,7 @@ namespace Crazy.Common {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(S2C_Login other) {
+    public void MergeFrom(S2C_LoginMessage other) {
       if (other == null) {
         return;
       }
@@ -715,8 +435,8 @@ namespace Crazy.Common {
       if (other.Message.Length != 0) {
         Message = other.Message;
       }
-      if (other.UserId != 0L) {
-        UserId = other.UserId;
+      if (other.PlayerId != 0UL) {
+        PlayerId = other.PlayerId;
       }
       if (other.State != 0) {
         State = other.State;
@@ -733,11 +453,11 @@ namespace Crazy.Common {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            UserId = input.ReadInt64();
+            PlayerId = input.ReadUInt64();
             break;
           }
           case 16: {
-            state_ = (global::Crazy.Common.S2C_Login.Types.State) input.ReadEnum();
+            state_ = (global::Crazy.Common.S2C_LoginMessage.Types.State) input.ReadEnum();
             break;
           }
           case 720: {
@@ -757,7 +477,7 @@ namespace Crazy.Common {
     }
 
     #region Nested types
-    /// <summary>Container for nested types declared in the S2C_Login message type.</summary>
+    /// <summary>Container for nested types declared in the S2C_LoginMessage message type.</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static partial class Types {
       public enum State {
@@ -770,18 +490,15 @@ namespace Crazy.Common {
 
   }
 
-  /// <summary>
-  /////创建Unit
-  /// </summary>
-  public sealed partial class CreateUnits : pb::IMessage<CreateUnits> {
-    private static readonly pb::MessageParser<CreateUnits> _parser = new pb::MessageParser<CreateUnits>(() => new CreateUnits());
+  public sealed partial class C2S_RegisterMessage : pb::IMessage<C2S_RegisterMessage> {
+    private static readonly pb::MessageParser<C2S_RegisterMessage> _parser = new pb::MessageParser<C2S_RegisterMessage>(() => new C2S_RegisterMessage());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<CreateUnits> Parser { get { return _parser; } }
+    public static pb::MessageParser<C2S_RegisterMessage> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Crazy.Common.RpcMessageReflection.Descriptor.MessageTypes[3]; }
+      get { return global::Crazy.Common.RpcMessageReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -790,691 +507,23 @@ namespace Crazy.Common {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public CreateUnits() {
+    public C2S_RegisterMessage() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public CreateUnits(CreateUnits other) : this() {
+    public C2S_RegisterMessage(C2S_RegisterMessage other) : this() {
       rpcId_ = other.rpcId_;
-      copyId_ = other.copyId_;
-      ownUnitId_ = other.ownUnitId_;
-      units_ = other.units_.Clone();
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public CreateUnits Clone() {
-      return new CreateUnits(this);
-    }
-
-    /// <summary>Field number for the "RpcId" field.</summary>
-    public const int RpcIdFieldNumber = 90;
-    private int rpcId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int RpcId {
-      get { return rpcId_; }
-      set {
-        rpcId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "CopyId" field.</summary>
-    public const int CopyIdFieldNumber = 1;
-    private long copyId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long CopyId {
-      get { return copyId_; }
-      set {
-        copyId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "OwnUnitId" field.</summary>
-    public const int OwnUnitIdFieldNumber = 2;
-    private long ownUnitId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long OwnUnitId {
-      get { return ownUnitId_; }
-      set {
-        ownUnitId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "Units" field.</summary>
-    public const int UnitsFieldNumber = 3;
-    private static readonly pb::FieldCodec<global::Crazy.Common.UnitInfo> _repeated_units_codec
-        = pb::FieldCodec.ForMessage(26, global::Crazy.Common.UnitInfo.Parser);
-    private readonly pbc::RepeatedField<global::Crazy.Common.UnitInfo> units_ = new pbc::RepeatedField<global::Crazy.Common.UnitInfo>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::Crazy.Common.UnitInfo> Units {
-      get { return units_; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as CreateUnits);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(CreateUnits other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (RpcId != other.RpcId) return false;
-      if (CopyId != other.CopyId) return false;
-      if (OwnUnitId != other.OwnUnitId) return false;
-      if(!units_.Equals(other.units_)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (RpcId != 0) hash ^= RpcId.GetHashCode();
-      if (CopyId != 0L) hash ^= CopyId.GetHashCode();
-      if (OwnUnitId != 0L) hash ^= OwnUnitId.GetHashCode();
-      hash ^= units_.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (CopyId != 0L) {
-        output.WriteRawTag(8);
-        output.WriteInt64(CopyId);
-      }
-      if (OwnUnitId != 0L) {
-        output.WriteRawTag(16);
-        output.WriteInt64(OwnUnitId);
-      }
-      units_.WriteTo(output, _repeated_units_codec);
-      if (RpcId != 0) {
-        output.WriteRawTag(208, 5);
-        output.WriteInt32(RpcId);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (RpcId != 0) {
-        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
-      }
-      if (CopyId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(CopyId);
-      }
-      if (OwnUnitId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(OwnUnitId);
-      }
-      size += units_.CalculateSize(_repeated_units_codec);
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(CreateUnits other) {
-      if (other == null) {
-        return;
-      }
-      if (other.RpcId != 0) {
-        RpcId = other.RpcId;
-      }
-      if (other.CopyId != 0L) {
-        CopyId = other.CopyId;
-      }
-      if (other.OwnUnitId != 0L) {
-        OwnUnitId = other.OwnUnitId;
-      }
-      units_.Add(other.units_);
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 8: {
-            CopyId = input.ReadInt64();
-            break;
-          }
-          case 16: {
-            OwnUnitId = input.ReadInt64();
-            break;
-          }
-          case 26: {
-            units_.AddEntriesFrom(input, _repeated_units_codec);
-            break;
-          }
-          case 720: {
-            RpcId = input.ReadInt32();
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  /// <summary>
-  /////帧消息
-  /// </summary>
-  public sealed partial class PositionFrameMsg : pb::IMessage<PositionFrameMsg> {
-    private static readonly pb::MessageParser<PositionFrameMsg> _parser = new pb::MessageParser<PositionFrameMsg>(() => new PositionFrameMsg());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<PositionFrameMsg> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Crazy.Common.RpcMessageReflection.Descriptor.MessageTypes[4]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public PositionFrameMsg() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public PositionFrameMsg(PositionFrameMsg other) : this() {
-      rpcId_ = other.rpcId_;
-      id_ = other.id_;
-      x_ = other.x_;
-      y_ = other.y_;
-      z_ = other.z_;
-      copyId_ = other.copyId_;
-      unitId_ = other.unitId_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public PositionFrameMsg Clone() {
-      return new PositionFrameMsg(this);
-    }
-
-    /// <summary>Field number for the "RpcId" field.</summary>
-    public const int RpcIdFieldNumber = 90;
-    private int rpcId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int RpcId {
-      get { return rpcId_; }
-      set {
-        rpcId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "Id" field.</summary>
-    public const int IdFieldNumber = 1;
-    private long id_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long Id {
-      get { return id_; }
-      set {
-        id_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "x" field.</summary>
-    public const int XFieldNumber = 2;
-    private float x_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public float X {
-      get { return x_; }
-      set {
-        x_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "y" field.</summary>
-    public const int YFieldNumber = 3;
-    private float y_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public float Y {
-      get { return y_; }
-      set {
-        y_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "z" field.</summary>
-    public const int ZFieldNumber = 4;
-    private float z_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public float Z {
-      get { return z_; }
-      set {
-        z_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "CopyId" field.</summary>
-    public const int CopyIdFieldNumber = 5;
-    private long copyId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long CopyId {
-      get { return copyId_; }
-      set {
-        copyId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "UnitId" field.</summary>
-    public const int UnitIdFieldNumber = 6;
-    private long unitId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long UnitId {
-      get { return unitId_; }
-      set {
-        unitId_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as PositionFrameMsg);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(PositionFrameMsg other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (RpcId != other.RpcId) return false;
-      if (Id != other.Id) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(X, other.X)) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Y, other.Y)) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Z, other.Z)) return false;
-      if (CopyId != other.CopyId) return false;
-      if (UnitId != other.UnitId) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (RpcId != 0) hash ^= RpcId.GetHashCode();
-      if (Id != 0L) hash ^= Id.GetHashCode();
-      if (X != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(X);
-      if (Y != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Y);
-      if (Z != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Z);
-      if (CopyId != 0L) hash ^= CopyId.GetHashCode();
-      if (UnitId != 0L) hash ^= UnitId.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (Id != 0L) {
-        output.WriteRawTag(8);
-        output.WriteInt64(Id);
-      }
-      if (X != 0F) {
-        output.WriteRawTag(21);
-        output.WriteFloat(X);
-      }
-      if (Y != 0F) {
-        output.WriteRawTag(29);
-        output.WriteFloat(Y);
-      }
-      if (Z != 0F) {
-        output.WriteRawTag(37);
-        output.WriteFloat(Z);
-      }
-      if (CopyId != 0L) {
-        output.WriteRawTag(40);
-        output.WriteInt64(CopyId);
-      }
-      if (UnitId != 0L) {
-        output.WriteRawTag(48);
-        output.WriteInt64(UnitId);
-      }
-      if (RpcId != 0) {
-        output.WriteRawTag(208, 5);
-        output.WriteInt32(RpcId);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (RpcId != 0) {
-        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
-      }
-      if (Id != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
-      }
-      if (X != 0F) {
-        size += 1 + 4;
-      }
-      if (Y != 0F) {
-        size += 1 + 4;
-      }
-      if (Z != 0F) {
-        size += 1 + 4;
-      }
-      if (CopyId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(CopyId);
-      }
-      if (UnitId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(UnitId);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(PositionFrameMsg other) {
-      if (other == null) {
-        return;
-      }
-      if (other.RpcId != 0) {
-        RpcId = other.RpcId;
-      }
-      if (other.Id != 0L) {
-        Id = other.Id;
-      }
-      if (other.X != 0F) {
-        X = other.X;
-      }
-      if (other.Y != 0F) {
-        Y = other.Y;
-      }
-      if (other.Z != 0F) {
-        Z = other.Z;
-      }
-      if (other.CopyId != 0L) {
-        CopyId = other.CopyId;
-      }
-      if (other.UnitId != 0L) {
-        UnitId = other.UnitId;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 8: {
-            Id = input.ReadInt64();
-            break;
-          }
-          case 21: {
-            X = input.ReadFloat();
-            break;
-          }
-          case 29: {
-            Y = input.ReadFloat();
-            break;
-          }
-          case 37: {
-            Z = input.ReadFloat();
-            break;
-          }
-          case 40: {
-            CopyId = input.ReadInt64();
-            break;
-          }
-          case 48: {
-            UnitId = input.ReadInt64();
-            break;
-          }
-          case 720: {
-            RpcId = input.ReadInt32();
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  /// <summary>
-  /////心跳组件消息
-  /// </summary>
-  public sealed partial class HeartBeatMessage : pb::IMessage<HeartBeatMessage> {
-    private static readonly pb::MessageParser<HeartBeatMessage> _parser = new pb::MessageParser<HeartBeatMessage>(() => new HeartBeatMessage());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<HeartBeatMessage> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Crazy.Common.RpcMessageReflection.Descriptor.MessageTypes[5]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public HeartBeatMessage() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public HeartBeatMessage(HeartBeatMessage other) : this() {
-      rpcId_ = other.rpcId_;
-      userId_ = other.userId_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public HeartBeatMessage Clone() {
-      return new HeartBeatMessage(this);
-    }
-
-    /// <summary>Field number for the "RpcId" field.</summary>
-    public const int RpcIdFieldNumber = 90;
-    private int rpcId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int RpcId {
-      get { return rpcId_; }
-      set {
-        rpcId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "UserId" field.</summary>
-    public const int UserIdFieldNumber = 1;
-    private long userId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long UserId {
-      get { return userId_; }
-      set {
-        userId_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as HeartBeatMessage);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(HeartBeatMessage other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (RpcId != other.RpcId) return false;
-      if (UserId != other.UserId) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (RpcId != 0) hash ^= RpcId.GetHashCode();
-      if (UserId != 0L) hash ^= UserId.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (UserId != 0L) {
-        output.WriteRawTag(8);
-        output.WriteInt64(UserId);
-      }
-      if (RpcId != 0) {
-        output.WriteRawTag(208, 5);
-        output.WriteInt32(RpcId);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (RpcId != 0) {
-        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
-      }
-      if (UserId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserId);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(HeartBeatMessage other) {
-      if (other == null) {
-        return;
-      }
-      if (other.RpcId != 0) {
-        RpcId = other.RpcId;
-      }
-      if (other.UserId != 0L) {
-        UserId = other.UserId;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 8: {
-            UserId = input.ReadInt64();
-            break;
-          }
-          case 720: {
-            RpcId = input.ReadInt32();
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  /// <summary>
-  /////好友系统
-  /// </summary>
-  public sealed partial class C2S_SearchUser : pb::IMessage<C2S_SearchUser> {
-    private static readonly pb::MessageParser<C2S_SearchUser> _parser = new pb::MessageParser<C2S_SearchUser>(() => new C2S_SearchUser());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<C2S_SearchUser> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Crazy.Common.RpcMessageReflection.Descriptor.MessageTypes[6]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public C2S_SearchUser() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public C2S_SearchUser(C2S_SearchUser other) : this() {
-      rpcId_ = other.rpcId_;
-      userId_ = other.userId_;
       account_ = other.account_;
+      password_ = other.password_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public C2S_SearchUser Clone() {
-      return new C2S_SearchUser(this);
+    public C2S_RegisterMessage Clone() {
+      return new C2S_RegisterMessage(this);
     }
 
     /// <summary>Field number for the "RpcId" field.</summary>
@@ -1485,215 +534,6 @@ namespace Crazy.Common {
       get { return rpcId_; }
       set {
         rpcId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "UserId" field.</summary>
-    public const int UserIdFieldNumber = 1;
-    private long userId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long UserId {
-      get { return userId_; }
-      set {
-        userId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "account" field.</summary>
-    public const int AccountFieldNumber = 2;
-    private string account_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Account {
-      get { return account_; }
-      set {
-        account_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as C2S_SearchUser);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(C2S_SearchUser other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (RpcId != other.RpcId) return false;
-      if (UserId != other.UserId) return false;
-      if (Account != other.Account) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (RpcId != 0) hash ^= RpcId.GetHashCode();
-      if (UserId != 0L) hash ^= UserId.GetHashCode();
-      if (Account.Length != 0) hash ^= Account.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (UserId != 0L) {
-        output.WriteRawTag(8);
-        output.WriteInt64(UserId);
-      }
-      if (Account.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(Account);
-      }
-      if (RpcId != 0) {
-        output.WriteRawTag(208, 5);
-        output.WriteInt32(RpcId);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (RpcId != 0) {
-        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
-      }
-      if (UserId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserId);
-      }
-      if (Account.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Account);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(C2S_SearchUser other) {
-      if (other == null) {
-        return;
-      }
-      if (other.RpcId != 0) {
-        RpcId = other.RpcId;
-      }
-      if (other.UserId != 0L) {
-        UserId = other.UserId;
-      }
-      if (other.Account.Length != 0) {
-        Account = other.Account;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 8: {
-            UserId = input.ReadInt64();
-            break;
-          }
-          case 18: {
-            Account = input.ReadString();
-            break;
-          }
-          case 720: {
-            RpcId = input.ReadInt32();
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class S2C_SearchUser : pb::IMessage<S2C_SearchUser> {
-    private static readonly pb::MessageParser<S2C_SearchUser> _parser = new pb::MessageParser<S2C_SearchUser>(() => new S2C_SearchUser());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<S2C_SearchUser> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Crazy.Common.RpcMessageReflection.Descriptor.MessageTypes[7]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public S2C_SearchUser() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public S2C_SearchUser(S2C_SearchUser other) : this() {
-      rpcId_ = other.rpcId_;
-      error_ = other.error_;
-      message_ = other.message_;
-      account_ = other.account_;
-      state_ = other.state_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public S2C_SearchUser Clone() {
-      return new S2C_SearchUser(this);
-    }
-
-    /// <summary>Field number for the "RpcId" field.</summary>
-    public const int RpcIdFieldNumber = 90;
-    private int rpcId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int RpcId {
-      get { return rpcId_; }
-      set {
-        rpcId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "Error" field.</summary>
-    public const int ErrorFieldNumber = 91;
-    private int error_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Error {
-      get { return error_; }
-      set {
-        error_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "Message" field.</summary>
-    public const int MessageFieldNumber = 92;
-    private string message_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Message {
-      get { return message_; }
-      set {
-        message_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -1708,24 +548,24 @@ namespace Crazy.Common {
       }
     }
 
-    /// <summary>Field number for the "state" field.</summary>
-    public const int StateFieldNumber = 2;
-    private global::Crazy.Common.S2C_SearchUser.Types.State state_ = 0;
+    /// <summary>Field number for the "password" field.</summary>
+    public const int PasswordFieldNumber = 2;
+    private string password_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Crazy.Common.S2C_SearchUser.Types.State State {
-      get { return state_; }
+    public string Password {
+      get { return password_; }
       set {
-        state_ = value;
+        password_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as S2C_SearchUser);
+      return Equals(other as C2S_RegisterMessage);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(S2C_SearchUser other) {
+    public bool Equals(C2S_RegisterMessage other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -1733,10 +573,8 @@ namespace Crazy.Common {
         return true;
       }
       if (RpcId != other.RpcId) return false;
-      if (Error != other.Error) return false;
-      if (Message != other.Message) return false;
       if (Account != other.Account) return false;
-      if (State != other.State) return false;
+      if (Password != other.Password) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1744,10 +582,8 @@ namespace Crazy.Common {
     public override int GetHashCode() {
       int hash = 1;
       if (RpcId != 0) hash ^= RpcId.GetHashCode();
-      if (Error != 0) hash ^= Error.GetHashCode();
-      if (Message.Length != 0) hash ^= Message.GetHashCode();
       if (Account.Length != 0) hash ^= Account.GetHashCode();
-      if (State != 0) hash ^= State.GetHashCode();
+      if (Password.Length != 0) hash ^= Password.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1765,6 +601,201 @@ namespace Crazy.Common {
         output.WriteRawTag(10);
         output.WriteString(Account);
       }
+      if (Password.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Password);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (Account.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Account);
+      }
+      if (Password.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Password);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(C2S_RegisterMessage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.RpcId != 0) {
+        RpcId = other.RpcId;
+      }
+      if (other.Account.Length != 0) {
+        Account = other.Account;
+      }
+      if (other.Password.Length != 0) {
+        Password = other.Password;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Account = input.ReadString();
+            break;
+          }
+          case 18: {
+            Password = input.ReadString();
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class S2C_RegisterMessage : pb::IMessage<S2C_RegisterMessage> {
+    private static readonly pb::MessageParser<S2C_RegisterMessage> _parser = new pb::MessageParser<S2C_RegisterMessage>(() => new S2C_RegisterMessage());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<S2C_RegisterMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Crazy.Common.RpcMessageReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S2C_RegisterMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S2C_RegisterMessage(S2C_RegisterMessage other) : this() {
+      rpcId_ = other.rpcId_;
+      error_ = other.error_;
+      message_ = other.message_;
+      state_ = other.state_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S2C_RegisterMessage Clone() {
+      return new S2C_RegisterMessage(this);
+    }
+
+    /// <summary>Field number for the "RpcId" field.</summary>
+    public const int RpcIdFieldNumber = 90;
+    private int rpcId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Error" field.</summary>
+    public const int ErrorFieldNumber = 91;
+    private int error_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Error {
+      get { return error_; }
+      set {
+        error_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Message" field.</summary>
+    public const int MessageFieldNumber = 92;
+    private string message_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Message {
+      get { return message_; }
+      set {
+        message_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "state" field.</summary>
+    public const int StateFieldNumber = 2;
+    private global::Crazy.Common.S2C_RegisterMessage.Types.State state_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Crazy.Common.S2C_RegisterMessage.Types.State State {
+      get { return state_; }
+      set {
+        state_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as S2C_RegisterMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(S2C_RegisterMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (RpcId != other.RpcId) return false;
+      if (Error != other.Error) return false;
+      if (Message != other.Message) return false;
+      if (State != other.State) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (RpcId != 0) hash ^= RpcId.GetHashCode();
+      if (Error != 0) hash ^= Error.GetHashCode();
+      if (Message.Length != 0) hash ^= Message.GetHashCode();
+      if (State != 0) hash ^= State.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
       if (State != 0) {
         output.WriteRawTag(16);
         output.WriteEnum((int) State);
@@ -1798,9 +829,6 @@ namespace Crazy.Common {
       if (Message.Length != 0) {
         size += 2 + pb::CodedOutputStream.ComputeStringSize(Message);
       }
-      if (Account.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Account);
-      }
       if (State != 0) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) State);
       }
@@ -1811,7 +839,7 @@ namespace Crazy.Common {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(S2C_SearchUser other) {
+    public void MergeFrom(S2C_RegisterMessage other) {
       if (other == null) {
         return;
       }
@@ -1823,9 +851,6 @@ namespace Crazy.Common {
       }
       if (other.Message.Length != 0) {
         Message = other.Message;
-      }
-      if (other.Account.Length != 0) {
-        Account = other.Account;
       }
       if (other.State != 0) {
         State = other.State;
@@ -1841,12 +866,8 @@ namespace Crazy.Common {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 10: {
-            Account = input.ReadString();
-            break;
-          }
           case 16: {
-            state_ = (global::Crazy.Common.S2C_SearchUser.Types.State) input.ReadEnum();
+            state_ = (global::Crazy.Common.S2C_RegisterMessage.Types.State) input.ReadEnum();
             break;
           }
           case 720: {
@@ -1866,7 +887,7 @@ namespace Crazy.Common {
     }
 
     #region Nested types
-    /// <summary>Container for nested types declared in the S2C_SearchUser message type.</summary>
+    /// <summary>Container for nested types declared in the S2C_RegisterMessage message type.</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static partial class Types {
       public enum State {
