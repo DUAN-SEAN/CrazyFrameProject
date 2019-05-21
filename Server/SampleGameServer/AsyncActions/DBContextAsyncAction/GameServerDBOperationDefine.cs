@@ -14,13 +14,13 @@ namespace GameServer
     /// </summary>
     public class RegsiterVerifyContextAsyncAction : SampleGameServerContextAsyncAction
     {
-        public RegsiterVerifyContextAsyncAction(GameServerPlayerContext context, string targetQueueUserId, string username, string password, bool needResult = false, bool needSeq = false) : base(context, targetQueueUserId, needResult, needSeq)
+        public RegsiterVerifyContextAsyncAction(GameServerPlayerContext context,  string username, string password, Action<S2C_RegisterMessage> reply , bool needResult = false, bool needSeq = false) : base(context, context.ContextId.ToString(), needResult, needSeq)
         {
             m_username = username;
             m_password = password;
             m_state = false;
             m_errorInfo = "";
-
+            this.m_reply = reply;
         }
 
         public override async Task ExecuteAsync()
@@ -44,21 +44,26 @@ namespace GameServer
 
                     m_state = false;
                     m_errorInfo += "已经存在用户了\n";
-                    return;
-
+  
                 }
-                var player = new GameServerDBPlayer();
+                else
+                {
+                    var player = new GameServerDBPlayer();
 
-                player.userName = m_username;
+                    player.userName = m_username;
 
-                player.passWord = m_password;
+                    player.passWord = m_password;
 
 
-                player.createTime = DateTime.UtcNow;
+                    player.createTime = DateTime.UtcNow;
 
-                await collection.InsertOneAsync(player);//插入
-                m_errorInfo += "插入成功\n";
-                m_state = true;
+                    await collection.InsertOneAsync(player);//插入
+                    m_errorInfo += "插入成功\n";
+                    m_state = true;
+                }
+
+               
+                
             } catch (Exception e)
             {
                 m_errorInfo += e.ToString();
@@ -76,26 +81,33 @@ namespace GameServer
         /// </summary>
         public override void OnResult()
         {
-            if (m_state)
-                Log.Info("插入数据成功");
+            Log.Info("注册回调执行成功");
+            S2C_RegisterMessage response = new S2C_RegisterMessage { State = m_state? S2C_RegisterMessage.Types.State.Ok : S2C_RegisterMessage.Types.State.Fail };
+            m_reply(response);
+
             base.OnResult();
         }
         private bool m_state;
         private string m_errorInfo;
         private string m_username;
         private string m_password;
+        private Action<S2C_RegisterMessage> m_reply;
     }
 
 
     /// <summary>
     /// 登陆验证
+    /// 5.21 测试成功 要设置允许现场进行回调
     /// </summary>
     public class LoginVerifyContextAsyncAction : SampleGameServerContextAsyncAction
     {
-        public LoginVerifyContextAsyncAction(GameServerPlayerContext gameServerContext, string account, string password, bool needResult = false, bool needSeq = false) : base(gameServerContext, gameServerContext.ContextId.ToString(), false, false)
+        public LoginVerifyContextAsyncAction(GameServerPlayerContext gameServerContext, string account, string password, Action<S2C_LoginMessage> reply, bool needResult = false, bool needSeq = false) : base(gameServerContext, gameServerContext.ContextId.ToString(), needResult, needSeq)
         {
+            this.m_gameServerContext = gameServerContext;
             this.m_username = account;
             this.m_password = password;
+            this.m_reply = reply;
+            this.m_state = false;
         }
         /// <summary>
         /// 在这里写具体的登陆逻辑
@@ -118,8 +130,8 @@ namespace GameServer
 
                 if (result != null && result.Count > 0)
                 {
-
-                    Log.Info($"{m_username}:{m_password} 登陆成功！");
+                    m_state = true;
+                    Log.Info("{m_username}:{m_password} 登陆成功！");
                     return;
 
                 }
@@ -128,7 +140,7 @@ namespace GameServer
             }
             catch (Exception e)
             {
-
+                Log.Error($"登陆异常! \n{e}");
             }
 
 
@@ -136,17 +148,27 @@ namespace GameServer
         }
         public override void OnResult()
         {
-            completionSource.SetResult(true);
+            
+            
+            m_response = new S2C_LoginMessage { PlayerId = m_gameServerContext.ContextId, State = m_state? S2C_LoginMessage.Types.State.Ok:S2C_LoginMessage.Types.State.Fail};
+            Log.Info("Login 回调:"+m_response.ToJson());
+            m_reply(m_response);
             //gameServerContext.Send();
         }
         // RPC消息的任务完成句柄
-        private TaskCompletionSource<bool> completionSource;
+        
 
-        private GameServerPlayerContext gameServerContext;
+        private GameServerPlayerContext m_gameServerContext;
 
         private string m_username;
 
         private string m_password;
+
+        private bool m_state;
+
+        private Action<S2C_LoginMessage> m_reply;
+
+        private S2C_LoginMessage m_response;
     }
     /// <summary>
     /// 上传一场战斗数据
@@ -169,6 +191,8 @@ namespace GameServer
             var collection = dataBase.GetCollection<GameServerDBarrierRecord>(SampleGameServerDBItemDefine.COLLECTION_BARRIERRECORD);//获取Players集合
 
             await collection.InsertOneAsync(m_data);
+
+
 
             Log.Info("插入战绩成功");
             return;

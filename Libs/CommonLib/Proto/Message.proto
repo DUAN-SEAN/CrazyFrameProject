@@ -7,43 +7,43 @@ message ChatOneMessage // IMessage
 	string message = 1;
 }
 
-message C2S_CreateMatchTeam // IMeesage
+message C2S_CreateMatchTeam // IMessage
 {
 	int32 RpcId = 90;
 	uint64 PlayerId = 1;
 }
 
-message S2C_CreateMatchTeamComplete // IMeesage
+message S2C_CreateMatchTeamComplete // IMessage
 {
 	int32 RpcId = 90;
 	uint64 MatchTeamId = 1;
 }
-message C2S_InvitePlayerMatchTeam // IMeesage
+message C2S_InvitePlayerMatchTeam // IMessage
 {
 	int32 RpcId = 90;
 	uint64 LaunchPlayerId = 1;
 	uint64 AimPlayerId = 2
 	uint64 MatchTeamId = 3;
 }
-message S2C_InvitePlayerMatchTeam // IMeesage
+message S2C_InvitePlayerMatchTeam // IMessage
 {
 	int32 RpcId = 90;
 	uint64 LaunchPlayerId = 1;
 	uint64 MatchTeamId = 2;
 }
-message C2S_JoinMatchTeam // IMeesage
+message C2S_JoinMatchTeam // IMessage
 {
 	int32 RpcId = 90;
 	uint64 LaunchPlayerId = 1;
 	uint64 MatchTeamId = 2;
 }
-message S2C_JoinMatchTeamComplete // IMeesage
+message S2C_JoinMatchTeamComplete // IMessage
 {
 	int32 RpcId = 90;
 	uint64 LaunchPlayerId = 1;
 	uint64 MatchTeamId = 2;
 }
-message C2S_JoinMatchQueue  // IMeesage
+message C2S_JoinMatchQueue  // IMessage
 {
 	int32 RpcId = 90;
 	uint64 LaunchPlayerId = 1;

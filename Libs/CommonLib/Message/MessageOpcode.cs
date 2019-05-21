@@ -5,25 +5,25 @@ namespace Crazy.Common
 	public partial class ChatOneMessage : IMessage {}
 
 	[Message(MessageOpcode.C2S_CreateMatchTeam)]
-	public partial class C2S_CreateMatchTeam : IMeesage {}
+	public partial class C2S_CreateMatchTeam : IMessage {}
 
 	[Message(MessageOpcode.S2C_CreateMatchTeamComplete)]
-	public partial class S2C_CreateMatchTeamComplete : IMeesage {}
+	public partial class S2C_CreateMatchTeamComplete : IMessage {}
 
 	[Message(MessageOpcode.C2S_InvitePlayerMatchTeam)]
-	public partial class C2S_InvitePlayerMatchTeam : IMeesage {}
+	public partial class C2S_InvitePlayerMatchTeam : IMessage {}
 
 	[Message(MessageOpcode.S2C_InvitePlayerMatchTeam)]
-	public partial class S2C_InvitePlayerMatchTeam : IMeesage {}
+	public partial class S2C_InvitePlayerMatchTeam : IMessage {}
 
 	[Message(MessageOpcode.C2S_JoinMatchTeam)]
-	public partial class C2S_JoinMatchTeam : IMeesage {}
+	public partial class C2S_JoinMatchTeam : IMessage {}
 
 	[Message(MessageOpcode.S2C_JoinMatchTeamComplete)]
-	public partial class S2C_JoinMatchTeamComplete : IMeesage {}
+	public partial class S2C_JoinMatchTeamComplete : IMessage {}
 
 	[Message(MessageOpcode.C2S_JoinMatchQueue)]
-	public partial class C2S_JoinMatchQueue : IMeesage {}
+	public partial class C2S_JoinMatchQueue : IMessage {}
 
 }
 namespace Crazy.Common

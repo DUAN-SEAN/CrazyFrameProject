@@ -16,17 +16,13 @@ namespace GameServer
             S2C_LoginMessage response = new S2C_LoginMessage();
             try
             {
-
-                response.State = S2C_LoginMessage.Types.State.Ok;
-                response.PlayerId = gameServerContext.ContextId;//将当前玩家现场的Id发送给客户端
+                Log.Info($"登陆 {message} ");
+                new LoginVerifyContextAsyncAction(gameServerContext, message.Account, message.Password, reply,true,true).Start();
 
             }catch(Exception e)
             {
                 ReplyError(response, e, reply);
             }
-            reply(response);
-
-
         }
     }
     [MessageHandler]
@@ -34,17 +30,16 @@ namespace GameServer
     {
         protected override void Run(ISession playerContext, C2S_RegisterMessage message, Action<S2C_RegisterMessage> reply)
         {
+            GameServerPlayerContext gameServerContext = playerContext as GameServerPlayerContext;
             S2C_RegisterMessage response = new S2C_RegisterMessage();
             try
             {
-
-
-
-            }catch(Exception e)
+                new RegsiterVerifyContextAsyncAction(gameServerContext, message.Account, message.Password, reply,true,true).Start();
+            }
+            catch(Exception e)
             {
                 ReplyError(response, e, reply);
             }
-            reply(response);
         }
     }
 }

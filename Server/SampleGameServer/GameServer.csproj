@@ -82,7 +82,6 @@
     <Compile Include="AsyncActions\DBDataDefine\GameServerDBPlayer.cs" />
     <Compile Include="Configure\GameServerConfig.cs" />
     <Compile Include="AsyncActions\DBContextAsyncAction\GameServerContextAsyncAction.cs" />
-    <Compile Include="System\DBSystem\DataBaseSystem.cs" />
     <Compile Include="System\DBSystem\MongoDBHelper.cs" />
     <Compile Include="GameServerConstDefine.cs" />
     <Compile Include="GameServer.cs" />
@@ -92,7 +91,7 @@
     <Compile Include="System\MatchSystem\MatchBucketPoolFactory.cs" />
     <Compile Include="System\MatchSystem\MatchTeam.cs" />
     <Compile Include="System\NetHandlerSystem\MatchSystemHandlers.cs" />
-    <Compile Include="System\NetHandlerSystem\RPC\C2SRealmHandlers.cs" />
+    <Compile Include="System\NetHandlerSystem\RPC\RealmHandlers.cs" />
     <Compile Include="System\MatchSystem\GameMacthSystem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
