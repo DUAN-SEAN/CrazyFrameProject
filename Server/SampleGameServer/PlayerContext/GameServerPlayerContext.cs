@@ -53,6 +53,12 @@ namespace GameServer
 
             return Task.CompletedTask;
         }
+        /// <summary>
+        /// 该方法由Base回调，将实行本层在TimerManger注册的TimerNode
+        /// 例如 每隔500毫秒一次心跳包，5秒一次玩家现场状态检查等
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <returns></returns>
         protected override Task OnPlayerContextTimer(PlayerTimerMessage msg)
         {
 
