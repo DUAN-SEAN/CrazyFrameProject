@@ -56,7 +56,14 @@ namespace Crazy.ServerBase
                 Log.Error("初始化玩家上下文管理器失败");
                 return false;
             }
-
+            // 开启timer管理器
+            Log.Info("ServerBase::Initialization is starting timer manager");
+            TimerManager = new TimerManager(PlayerCtxManager);
+            if (TimerManager.Start() < 0)
+            {
+                Log.Error("ServerBase::Initialization started timer manager failed");
+                return false;
+            }
             //初始化网络
             if (!InitializeNetWork())
             {
@@ -261,6 +268,10 @@ namespace Crazy.ServerBase
         /// 获取当前服务器的玩家上下文管理对象。
         /// </summary>
         public PlayerContextManager PlayerCtxManager { get; private set; }
+        /// <summary>
+        /// 获取当前服务器的Timer管理
+        /// </summary>
+        public TimerManager TimerManager { get; protected set; }
         /// <summary>
         /// 获取关联ServerBase类的句柄。
         /// 继承类可以覆盖来获得更具体的类型。

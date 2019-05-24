@@ -14,6 +14,8 @@ namespace Crazy.ServerBase
 
         public const Int32 RpcNetMessage = 4;
 
+        public const Int32 LocalMsgPlayCtxTimer = 5;
+
         //从1002开始由逻辑业务控制
 
     }

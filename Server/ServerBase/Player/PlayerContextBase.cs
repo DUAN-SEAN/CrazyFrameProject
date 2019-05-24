@@ -236,7 +236,12 @@ namespace Crazy.ServerBase
 
 
                     break;
-
+                case ServerBaseLocalMesssageIDDef.LocalMsgPlayCtxTimer:
+                    {
+                        PlayerTimerMessage timerMsg = msg as PlayerTimerMessage;
+                        await OnPlayerContextTimer(timerMsg);
+                        return;
+                    }
                 default:break;
             }
 
@@ -250,6 +255,23 @@ namespace Crazy.ServerBase
 
             return;
         }
+        /// <summary>
+        /// 玩家现场timer回调
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <returns></returns>
+        protected virtual Task OnPlayerContextTimer(PlayerTimerMessage msg)
+        {
+            if (msg == null)
+            {
+                Log.Error("PlayerContextBase::OnPlayerContextTimer, but lmsg checked failed");
+                return Task.CompletedTask;
+            }
+            Log.Debug("PlayerContextBase::OnPlayerContextTimer, MessageId = "+
+                msg.MessageId.ToString());
+            return Task.CompletedTask;
+        }
+
         /// <summary>
         /// 从资源上释放玩家现场 (管理器中移除)
         /// </summary>

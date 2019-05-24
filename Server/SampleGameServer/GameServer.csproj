@@ -82,10 +82,11 @@
     <Compile Include="AsyncActions\DBDataDefine\GameServerDBPlayer.cs" />
     <Compile Include="Configure\GameServerConfig.cs" />
     <Compile Include="AsyncActions\DBContextAsyncAction\GameServerContextAsyncAction.cs" />
+    <Compile Include="PlayerContext\PlayerContextStateMachine.cs" />
     <Compile Include="System\DBSystem\MongoDBHelper.cs" />
     <Compile Include="GameServerConstDefine.cs" />
     <Compile Include="GameServer.cs" />
-    <Compile Include="GameServerPlayerContext.cs" />
+    <Compile Include="PlayerContext\GameServerPlayerContext.cs" />
     <Compile Include="System\MatchSystem\GameMatchPlayerContextQueue.cs" />
     <Compile Include="LocalMessage\MatchSystemLocalMessages.cs" />
     <Compile Include="System\MatchSystem\MatchBucketPoolFactory.cs" />
