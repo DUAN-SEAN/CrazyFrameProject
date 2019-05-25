@@ -18,6 +18,7 @@ namespace GameServer
         public GameServerPlayerContext()
         {
             m_csm = CreatePlayerContextStateMachine();
+            m_csm.SetStateWithoutCheck(PlayerContextStateMachine.StateIdle);
         }
         /// <summary>
         /// 创建玩家现场状态机
@@ -66,12 +67,24 @@ namespace GameServer
             string password = message.Password;
             S2C_LoginMessage response = null;
 
+            //设置现场状态
+            if(m_csm.SetStateCheck(PlayerContextStateMachine.EventOnAuthLoginReq) == -1)
+            {
+                Log.Info("OnAuthByLogin::PlayerContextStateMachine switch Fail to LoginReq");
+                return;
+            }
             // 进行数据库验证
             var authDB = await ValidateAuthLogin(account, password);
             
             //验证失败则通知客户端
             if (!authDB)
             {
+                //设置现场状态
+                if (m_csm.SetStateCheck(PlayerContextStateMachine.EventOnAuthLoginFail) == -1)
+                {
+                    Log.Info("OnAuthByLogin::PlayerContextStateMachine switch Fail to LoginFail");
+                    return;
+                }
                 Log.Info(account + " 验证失败");
                 response = new S2C_LoginMessage { PlayerGameId = null, State = authDB ? S2C_LoginMessage.Types.State.Ok : S2C_LoginMessage.Types.State.Fail };
                 reply(response);
@@ -99,13 +112,19 @@ namespace GameServer
                 }
             }
             //修改玩家现场状态机
-
-
-
-
+            if(m_csm.SetStateCheck(PlayerContextStateMachine.EventOnAuthLoginOK)== -1)
+            {
+                Log.Info("OnAuthByLogin::PlayerContextStateMachine switch Fail To LoginOk");
+                return;
+            }
+            //由于目前是单服 所以直接将玩家现场状态设置成验证成功状态
+            if (m_csm.SetStateCheck(PlayerContextStateMachine.EventOnSessionLoginOK) == -1)
+            {
+                Log.Info("OnAuthByLogin::PlayerContextStateMachine switch Fail To SessuibLoginOk");
+                return;
+            }
             //向客户端发送登陆验证成功
             response = new S2C_LoginMessage { PlayerGameId = this.m_gameUserId, State = authDB ? S2C_LoginMessage.Types.State.Ok : S2C_LoginMessage.Types.State.Fail };
-
             reply(response);
 
             return ;

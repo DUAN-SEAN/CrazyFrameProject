@@ -84,7 +84,84 @@ namespace GameServer
                         }
                     }
                     break;
-                default:break;
+                case StateSessionLoginOK:
+                    {
+                        switch (commingEvent)
+                        {
+                            case EventOnDisconnected:
+                                returnState = StateDisconnectedWaitForReconnect;     // 进入断线等待状态
+                                break;
+                            case EventDisconnect:
+                                returnState = StateDisconnecting;
+                                break;
+                            case EventOnGameLogicOPTAfterLogin:                      // 只有这个状态之下可以进行游戏逻辑操作
+                                returnState = newState == -1 ? State : newState;
+                                break;
+                            // 20180121 新修改逻辑，在正常登陆状态，也可以进行重连，接受Transform事件
+                            case EventOnConextTransformOK:
+                                returnState = State;
+                                break;
+                            default:
+                                return -1;
+                        }
+                    }
+                    break;
+                case StateEnteredGame:
+                    {
+                        switch (commingEvent)
+                        {
+                            case EventOnDisconnected://由不可预料的错误导致断线 由于玩家由进入了游戏 则进入重连状态
+                                returnState = StateDisconnectedWaitForReconnect;     // 可以进入断线等待状态
+                                break;
+                            case EventDisconnect:
+                                returnState = StateDisconnecting;
+                                break;
+                            case EventOnEnteredGameLogicOPT:                      // 只有这个状态之下可以进行游戏逻辑操作
+                                returnState = State;
+                                break;
+                            // 20180121 新修改逻辑，在正常登陆状态，也可以进行重连，接受Transform事件
+                            case EventOnConextTransformOK:
+                            case EventOnGameLogicOPTAfterLogin:
+                                returnState = State;
+                                break;
+                            default:
+                                return -1;
+                        }
+                    }
+                    break;
+                case StateDisconnecting:
+                    {
+                        switch (commingEvent)
+                        {
+                            case EventDisconnect://返回自己的状态
+                                returnState = State;
+                                break;
+                            case EventOnDisconnected:
+                                returnState = StateDisconnected;
+                                break;
+                            default:
+                                return -1;
+                        }
+                    }
+                    break;
+                case StateDisconnected:
+                    {
+                        return -1;
+                    }
+                case StateDisconnectedWaitForReconnect:
+                    {
+                        switch (commingEvent)
+                        {
+                            case EventOnConextTransformOK://重连成功则进入验证成功 
+                                returnState = StateSessionLoginOK;
+                                break;
+                            default:
+                                return -1;
+                        }
+                    }
+                    break;
+
+                default: return -1;
             }
 
             if (newState != -1 && returnState != newState)
