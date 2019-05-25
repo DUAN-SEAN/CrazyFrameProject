@@ -9,7 +9,7 @@ namespace Crazy.ServerBase
     /// <summary>
     /// 状态机基类，用于服务器上层实体绑定对应的状态机
     /// </summary>
-    public abstract class BaseStateMachine
+    public abstract class StateMachine
     {
         /// <summary>
         /// 设置新状态，并检查当前状态下是否接受commingEvent，并能够跳转到newState

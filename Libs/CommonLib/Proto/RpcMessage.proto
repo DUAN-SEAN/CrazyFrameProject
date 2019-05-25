@@ -15,7 +15,7 @@ message S2C_LoginMessage // IResponse
 	int32 Error = 91;
 	string Message = 92;
 
-	uint64 playerId = 1;
+	string playerGameId = 1;
 	State state = 2;
 	enum State {
 		Fail = 0;

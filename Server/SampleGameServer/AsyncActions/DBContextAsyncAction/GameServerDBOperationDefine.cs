@@ -150,7 +150,7 @@ namespace GameServer
         {
             
             
-            m_response = new S2C_LoginMessage { PlayerId = m_gameServerContext.ContextId, State = m_state? S2C_LoginMessage.Types.State.Ok:S2C_LoginMessage.Types.State.Fail};
+            m_response = new S2C_LoginMessage { PlayerGameId = m_gameServerContext.ContextStringName, State = m_state? S2C_LoginMessage.Types.State.Ok:S2C_LoginMessage.Types.State.Fail};
             Log.Info("Login 回调:"+m_response.ToJson());
             m_reply(m_response);
             //gameServerContext.Send();

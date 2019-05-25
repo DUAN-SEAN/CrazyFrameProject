@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Crazy.ServerBase;
 namespace GameServer
 {
-    public class PlayerContextStateMachine:BaseStateMachine
+    public class PlayerContextStateMachine:StateMachine
     {
         public PlayerContextStateMachine()
         {
@@ -37,6 +37,14 @@ namespace GameServer
         /// 完成连接状态
         /// </summary>
         public const Int32 StateConnected = 1;
+        /// <summary>
+        /// AuthTokenTest验证成功状态
+        /// </summary>
+        public const Int32 StateAuthLoginOK = 2;
+        /// <summary>
+        /// SessionToken验证成功状态
+        /// </summary>
+        public const Int32 StateSessionLoginOK = 4;
         /// <summary>
         /// 正在断开连接状态
         /// </summary>

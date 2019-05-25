@@ -61,7 +61,7 @@
     <Compile Include="NetSharp\Service.cs" />
     <Compile Include="Server\TimerManager.cs" />
     <Compile Include="Server\TimerNode.cs" />
-    <Compile Include="System\StateMachineBase.cs" />
+    <Compile Include="System\StateMachine.cs" />
     <Compile Include="Player\ContextAsyncAction.cs" />
     <Compile Include="Player\ILockableContext.cs" />
     <Compile Include="Player\PlayerContextBase.cs" />

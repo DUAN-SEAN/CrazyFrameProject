@@ -170,8 +170,12 @@ namespace Crazy.ServerBase
 
             }
         }
-        //玩家上下文切断与客户端的联系
-        public Task OnDisconnected()
+        /// <summary>
+        /// 玩家现场切断与客户端的连接
+        /// 服务器要重写这个方法满足最新的业务
+        /// </summary>
+        /// <returns></returns>
+        public virtual Task OnDisconnected()
         {
             Log.Debug("PlayerContextBase::OnDisconnected");
             // 默认直接关闭客户端对象并释放现场
@@ -389,7 +393,7 @@ namespace Crazy.ServerBase
         /// <summary>
         /// 玩家现场和通信体绑定
         /// </summary>
-        private IClient m_client;
+        protected IClient m_client;
         /// <summary>
         /// 协议字典集
         /// </summary>
@@ -424,7 +428,7 @@ namespace Crazy.ServerBase
         /// <summary>
         /// 对象标识，有应用层设定并且由应用层保证其唯一。
         /// </summary>
-        private String m_gameUserId;
+        protected String m_gameUserId;
         private ulong m_contextId;
         #endregion
 

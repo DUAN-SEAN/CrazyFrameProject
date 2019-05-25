@@ -42,7 +42,7 @@ namespace Crazy.Common
             reply(response);
         }
 
-        protected abstract void Run(ISession playerContext, Request message, Action<Response> reply);
+        protected abstract void RunAsync(ISession playerContext, Request message, Action<Response> reply);
 
         public void Handle(ISession sender, object message)
         {
@@ -59,7 +59,7 @@ namespace Crazy.Common
 
                 ulong instanceId = sender.SessionId;
 
-                this.Run(sender, request, response =>
+                this.RunAsync(sender, request, response =>
                 {
                     // 等回调回来,session可以已经断开了,所以需要判断session InstanceId是否一样
                     if (sender.SessionId!= instanceId)

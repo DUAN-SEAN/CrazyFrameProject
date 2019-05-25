@@ -26,21 +26,21 @@ namespace Crazy.Common {
           string.Concat(
             "ChBScGNNZXNzYWdlLnByb3RvEgxDcmF6eS5Db21tb24iRAoQQzJTX0xvZ2lu",
             "TWVzc2FnZRINCgVScGNJZBhaIAEoBRIPCgdhY2NvdW50GAEgASgJEhAKCHBh",
-            "c3N3b3JkGAIgASgJIqMBChBTMkNfTG9naW5NZXNzYWdlEg0KBVJwY0lkGFog",
-            "ASgFEg0KBUVycm9yGFsgASgFEg8KB01lc3NhZ2UYXCABKAkSEAoIcGxheWVy",
-            "SWQYASABKAQSMwoFc3RhdGUYAiABKA4yJC5DcmF6eS5Db21tb24uUzJDX0xv",
-            "Z2luTWVzc2FnZS5TdGF0ZSIZCgVTdGF0ZRIICgRGYWlsEAASBgoCT0sQASJH",
-            "ChNDMlNfUmVnaXN0ZXJNZXNzYWdlEg0KBVJwY0lkGFogASgFEg8KB2FjY291",
-            "bnQYASABKAkSEAoIcGFzc3dvcmQYAiABKAkilwEKE1MyQ19SZWdpc3Rlck1l",
-            "c3NhZ2USDQoFUnBjSWQYWiABKAUSDQoFRXJyb3IYWyABKAUSDwoHTWVzc2Fn",
-            "ZRhcIAEoCRI2CgVzdGF0ZRgCIAEoDjInLkNyYXp5LkNvbW1vbi5TMkNfUmVn",
-            "aXN0ZXJNZXNzYWdlLlN0YXRlIhkKBVN0YXRlEggKBEZhaWwQABIGCgJPSxAB",
-            "YgZwcm90bzM="));
+            "c3N3b3JkGAIgASgJIqcBChBTMkNfTG9naW5NZXNzYWdlEg0KBVJwY0lkGFog",
+            "ASgFEg0KBUVycm9yGFsgASgFEg8KB01lc3NhZ2UYXCABKAkSFAoMcGxheWVy",
+            "R2FtZUlkGAEgASgJEjMKBXN0YXRlGAIgASgOMiQuQ3JhenkuQ29tbW9uLlMy",
+            "Q19Mb2dpbk1lc3NhZ2UuU3RhdGUiGQoFU3RhdGUSCAoERmFpbBAAEgYKAk9L",
+            "EAEiRwoTQzJTX1JlZ2lzdGVyTWVzc2FnZRINCgVScGNJZBhaIAEoBRIPCgdh",
+            "Y2NvdW50GAEgASgJEhAKCHBhc3N3b3JkGAIgASgJIpcBChNTMkNfUmVnaXN0",
+            "ZXJNZXNzYWdlEg0KBVJwY0lkGFogASgFEg0KBUVycm9yGFsgASgFEg8KB01l",
+            "c3NhZ2UYXCABKAkSNgoFc3RhdGUYAiABKA4yJy5DcmF6eS5Db21tb24uUzJD",
+            "X1JlZ2lzdGVyTWVzc2FnZS5TdGF0ZSIZCgVTdGF0ZRIICgRGYWlsEAASBgoC",
+            "T0sQAWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.C2S_LoginMessage), global::Crazy.Common.C2S_LoginMessage.Parser, new[]{ "RpcId", "Account", "Password" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_LoginMessage), global::Crazy.Common.S2C_LoginMessage.Parser, new[]{ "RpcId", "Error", "Message", "PlayerId", "State" }, null, new[]{ typeof(global::Crazy.Common.S2C_LoginMessage.Types.State) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_LoginMessage), global::Crazy.Common.S2C_LoginMessage.Parser, new[]{ "RpcId", "Error", "Message", "PlayerGameId", "State" }, null, new[]{ typeof(global::Crazy.Common.S2C_LoginMessage.Types.State) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.C2S_RegisterMessage), global::Crazy.Common.C2S_RegisterMessage.Parser, new[]{ "RpcId", "Account", "Password" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_RegisterMessage), global::Crazy.Common.S2C_RegisterMessage.Parser, new[]{ "RpcId", "Error", "Message", "State" }, null, new[]{ typeof(global::Crazy.Common.S2C_RegisterMessage.Types.State) }, null)
           }));
@@ -265,7 +265,7 @@ namespace Crazy.Common {
       rpcId_ = other.rpcId_;
       error_ = other.error_;
       message_ = other.message_;
-      playerId_ = other.playerId_;
+      playerGameId_ = other.playerGameId_;
       state_ = other.state_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -308,14 +308,14 @@ namespace Crazy.Common {
       }
     }
 
-    /// <summary>Field number for the "playerId" field.</summary>
-    public const int PlayerIdFieldNumber = 1;
-    private ulong playerId_;
+    /// <summary>Field number for the "playerGameId" field.</summary>
+    public const int PlayerGameIdFieldNumber = 1;
+    private string playerGameId_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ulong PlayerId {
-      get { return playerId_; }
+    public string PlayerGameId {
+      get { return playerGameId_; }
       set {
-        playerId_ = value;
+        playerGameId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -346,7 +346,7 @@ namespace Crazy.Common {
       if (RpcId != other.RpcId) return false;
       if (Error != other.Error) return false;
       if (Message != other.Message) return false;
-      if (PlayerId != other.PlayerId) return false;
+      if (PlayerGameId != other.PlayerGameId) return false;
       if (State != other.State) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -357,7 +357,7 @@ namespace Crazy.Common {
       if (RpcId != 0) hash ^= RpcId.GetHashCode();
       if (Error != 0) hash ^= Error.GetHashCode();
       if (Message.Length != 0) hash ^= Message.GetHashCode();
-      if (PlayerId != 0UL) hash ^= PlayerId.GetHashCode();
+      if (PlayerGameId.Length != 0) hash ^= PlayerGameId.GetHashCode();
       if (State != 0) hash ^= State.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -372,9 +372,9 @@ namespace Crazy.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (PlayerId != 0UL) {
-        output.WriteRawTag(8);
-        output.WriteUInt64(PlayerId);
+      if (PlayerGameId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(PlayerGameId);
       }
       if (State != 0) {
         output.WriteRawTag(16);
@@ -409,8 +409,8 @@ namespace Crazy.Common {
       if (Message.Length != 0) {
         size += 2 + pb::CodedOutputStream.ComputeStringSize(Message);
       }
-      if (PlayerId != 0UL) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(PlayerId);
+      if (PlayerGameId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(PlayerGameId);
       }
       if (State != 0) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) State);
@@ -435,8 +435,8 @@ namespace Crazy.Common {
       if (other.Message.Length != 0) {
         Message = other.Message;
       }
-      if (other.PlayerId != 0UL) {
-        PlayerId = other.PlayerId;
+      if (other.PlayerGameId.Length != 0) {
+        PlayerGameId = other.PlayerGameId;
       }
       if (other.State != 0) {
         State = other.State;
@@ -452,8 +452,8 @@ namespace Crazy.Common {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            PlayerId = input.ReadUInt64();
+          case 10: {
+            PlayerGameId = input.ReadString();
             break;
           }
           case 16: {
