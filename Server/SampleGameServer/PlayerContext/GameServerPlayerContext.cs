@@ -305,6 +305,85 @@ namespace GameServer
             return Task.CompletedTask;
         }
         /// <summary>
+        /// 当断线重连恢复完成
+        /// </summary>
+        /// <param name="msg">恢复当前玩家现场本地消息</param>
+        /// <returns></returns>
+        private Task OnLMsgOnContextTransformOk(LocalMessageContextTransformOk msg)
+        {
+            Boolean bRet;
+         
+
+            if (msg == null)
+            {
+                Log.Error("GameServerPlayerContext::OnLMsgOnContextTransformOk, but lmsg is null");
+                return Task.CompletedTask;
+            }
+
+            // 先测试一下状态
+            //if (_csm.SetStateCheck(GamePlayerContextBaseStateMachine.EVENT_ONCONTEXTTRANSFORMOK, -1, true) == -1)
+            //{
+            //    this.LogError("GameServerBasePlayerContext::OnLMsgOnContextTransformOk SetStateCheck EVENT_ONCONTEXTTRANSFORMOK failed");
+            //    // 关键流程错误，状态不对不确认是否需要向客户端发送 sessionloginack，所以直接关闭
+            //    ShutdownContext(true);
+            //    return Task.CompletedTask;
+            //}
+
+            Log.Debug("GameServerPlayerContext::OnLMsgOnContextTransformOk, lmsg.MessageId="+ msg.MessageId.ToString());
+
+            // 发送LoginBySessionTokenAck，这里其实是发送给新联上的客户端对象的
+            //Send() 
+          
+
+            // 直到最后才能确认已经成功完成sessiontokenlogin
+            m_csm.SetStateCheck(PlayerContextStateMachine.EventOnConextTransformOK);
+
+            // 当从断线重联恢复
+            OnResumeFromWaitForReconnectStart();
+
+            return Task.CompletedTask;
+        }
+        /// <summary>
+        /// 当从断线重联恢复
+        /// </summary>
+        private void OnResumeFromWaitForReconnectStart()
+        {
+            // 重置状态时间
+            m_disconnectedTime = DateTime.MaxValue;
+            m_shutdownTime = DateTime.MaxValue;
+            m_disconnetedWaitTimeOutTime = DateTime.MaxValue;
+
+            m_resumingFromWaitForReconnect = true;
+        }
+
+        /// <summary>
+        /// 断线重联完成
+        /// </summary>
+        private void OnResumeFromWaitForReconnectEnd()
+        {
+            m_resumingFromWaitForReconnect = false;
+        }
+        /// <summary>
+        /// 关闭当前玩家现场事件
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <returns></returns>
+        private Task OnLMsgShutdownContext(LocalMessageShutdownContext msg)
+        {
+            if (msg == null)
+            {
+                Log.Error("GameServerPlayerContext::OnLMsgShutdownContext, but lmsg is null");
+                return Task.CompletedTask;
+            }
+            Log.Debug("GameServerPlayerContext::OnLMsgShutdownContext, lmsg.MessageId="+msg.MessageId.ToString());
+
+            // 通知客户端断开连接
+            //Send();
+            
+            return ShutdownContext(msg.m_shutdownRightNow);
+        }
+
+        /// <summary>
         /// 关闭现场
         /// 内部将切断与客户端的连接Client
         /// 如果设置立即切断 则不等待通信层Client通知
@@ -367,6 +446,8 @@ namespace GameServer
         }
         /// <summary>
         /// 由通信层Client调用 用于通知玩家现场 我要和客户端断开连接
+        /// 简单的说由Client感知客户端掉线情况
+        /// 后期会加上心跳包去激发Client的检测功能
         /// </summary>
         /// <returns></returns>
         public override Task OnDisconnected()
@@ -463,6 +544,18 @@ namespace GameServer
         /// 现场关闭用时
         /// </summary>
         private DateTime m_shutdownTime = DateTime.MaxValue;
+        /// <summary>
+        /// 记录断线的时间
+        /// </summary>
+        protected DateTime m_disconnectedTime = DateTime.MaxValue;
+        /// <summary>
+        /// 记录的断线超时时间
+        /// </summary>
+        protected DateTime m_disconnetedWaitTimeOutTime = DateTime.MaxValue;
+        /// <summary>
+        /// 是否正在断线重联的恢复中
+        /// </summary>
+        protected bool m_resumingFromWaitForReconnect;
 
         /// <summary>
         /// 用来tick玩家现场的timerid
