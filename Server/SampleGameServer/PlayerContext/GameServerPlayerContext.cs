@@ -38,7 +38,7 @@ namespace GameServer
 
 
         /// <summary>
-        /// 直接重写
+        /// 重写 但要保留基现场的逻辑
         /// </summary>
         /// <param name="msg">本地消息类型</param>
         /// <returns></returns>
@@ -320,15 +320,15 @@ namespace GameServer
         /// <summary>
         /// 现场关闭用时
         /// </summary>
-        protected DateTime m_shutdownTime = DateTime.MaxValue;
+        private DateTime m_shutdownTime = DateTime.MaxValue;
 
         /// <summary>
         /// 用来tick玩家现场的timerid
         /// </summary>
-        protected Int64 m_playerCtxTimerId = Int64.MinValue;
-        protected const Int32 PLAYERTIMER_INT32CODE_TICK = 1;
+        private Int64 m_playerCtxTimerId = Int64.MinValue;
+        private const Int32 PLAYERTIMER_INT32CODE_TICK = 1;
 
         private Int64 m_heartBeatTimerId = Int64.MinValue;
-        protected const Int32 HEARBEATTIMER_INT32CODE_TICK = 2;
+        private const Int32 HEARBEATTIMER_INT32CODE_TICK = 2;
     }
 }
