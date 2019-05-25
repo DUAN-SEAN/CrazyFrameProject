@@ -108,7 +108,7 @@ namespace Crazy.ServerBase
         {
             IManagedContext ctx;
 
-            /// 解除Id关联字典 
+            /// 解除Id关联字典 PS 由于使用了线程安全的字典所以不用担心
             m_playerSid2CtxDic.TryRemove(context.ContextId, out ctx);
             /// 解除String关联字典
             if (context.ContextStringName != null)

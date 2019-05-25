@@ -188,7 +188,7 @@ namespace System.Threading.Tasks
                         if (nextItem is Task)
                         {
                             var nextTask = (Task)nextItem;
-                            /**/ nextTask.IgnoreExceptions(); // TODO: Is this a good idea?
+                            /**/ nextTask.IgnoreExceptions(); //Is this a good idea?
                             nextTask.ContinueWith(recursiveBody).IgnoreExceptions();
                         }
                             // If we got a scheduler, continue iterating under the new scheduler,

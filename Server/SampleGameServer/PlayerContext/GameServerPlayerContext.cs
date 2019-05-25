@@ -36,8 +36,6 @@ namespace GameServer
         {
             m_csm.SetStateCheck(PlayerContextStateMachine.EventOnConnected);
         }
-
-
         /// <summary>
         /// 重写 但要保留基现场的逻辑
         /// </summary>
@@ -60,6 +58,7 @@ namespace GameServer
 
             return Task.CompletedTask;
         }
+        #region GameServerPlayerContext基础设施
         /// <summary>
         /// 验证信息 登陆
         /// 这是我们规定的硬登陆 无论服务器有无应用层的现场关闭否，都将覆盖之
@@ -112,7 +111,8 @@ namespace GameServer
                 var oldCtx = GameServer.Instance.PlayerCtxManager.FindPlayerContextByString(m_gameUserId);
                 if (oldCtx != null)
                 {
-                    //通知旧现场去关闭 逻辑先留着不写
+                    //TODO:通知旧现场去关闭 逻辑先留着不写
+                    oldCtx.PostLocalMessage(new LocalMessageShutdownContext {  m_shutdownRightNow= true});
                 }
             }
             //修改玩家现场状态机
@@ -130,9 +130,19 @@ namespace GameServer
             //向客户端发送登陆验证成功
             response = new S2C_LoginMessage { PlayerGameId = this.m_gameUserId, State = authDB ? S2C_LoginMessage.Types.State.Ok : S2C_LoginMessage.Types.State.Fail };
             reply(response);
-
+            //TODO:通知应用层登录流程完成
+            await OnLoginOk();
             return ;
         }
+        /// <summary>
+        /// 当登录成功时触发
+        /// </summary>
+        /// <returns></returns>
+        private async Task OnLoginOk()
+        {
+            await Task.CompletedTask;
+        }
+
         /// <summary>
         /// 软登陆，由于玩家掉线延迟导致断网，选择重连进行验证时候的登陆
         /// 如果存在旧现场需要恢复，则进行恢复现场上下文
@@ -156,14 +166,14 @@ namespace GameServer
             {
                 Log.Info("OnAuthReCByLogin::FAIL TO authDB");
                 //验证Session失败先不理会
-                return;
+                goto RETURN;
             }
             //获取数据库player的实体
             m_gameServerDBPlayer = await GetPlayerFromDBAsync(account);
             if (m_gameServerDBPlayer == null)
             {
                 Log.Info("gameServerDBPlayer is NULL");
-                return;
+                goto RETURN;
             }
             //DB的唯一标识符代表着这个玩家应用层的Id
             m_gameUserId = m_gameServerDBPlayer._id.ToString();
@@ -177,9 +187,23 @@ namespace GameServer
             if (oldCtx != null)
             {
 
+                bool ret = await ContextTransform(oldCtx);
+                if (!ret)
+                {
+                    
+                    
+                }
+                // 在现场转移之后不能执行任何代码了，立刻退出
+                return;
             }
-
-
+            //当前玩家验证成功且不存在断线则设置正确的玩家状态
+            RETURN:
+            if (authDB)
+            {
+                m_csm.SetStateCheck(PlayerContextStateMachine.EventOnSessionLoginOK);
+            }
+            //TODO:添加发给客户端的验证成功且不重连的消息
+            //Send(null); 
             return ;
         }
         private async Task<bool> ContextTransform(GameServerPlayerContext target)
@@ -377,7 +401,7 @@ namespace GameServer
             }
             Log.Debug("GameServerPlayerContext::OnLMsgShutdownContext, lmsg.MessageId="+msg.MessageId.ToString());
 
-            // 通知客户端断开连接
+            //TODO:通知客户端断开连接
             //Send();
             
             return ShutdownContext(msg.m_shutdownRightNow);
@@ -535,6 +559,12 @@ namespace GameServer
                     break;
             }
         }
+        #endregion
+
+
+        /// <summary>
+        /// 数据库代表玩家的实体player
+        /// </summary>
         private GameServerDBPlayer m_gameServerDBPlayer;
         /// <summary>
         /// 玩家现场状态机

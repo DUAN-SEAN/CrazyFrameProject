@@ -440,7 +440,7 @@ namespace Crazy.NetSharp
                 if (!client.Closed)
                 {
                     tempHandler = client.m_clientEventHandler;
-                    using (ContextLock.Create(tempHandler).Result) // todo:ouyang test
+                    using (ContextLock.Create(tempHandler).Result)
                     {
                         client.m_clientEventHandler.OnException(e);
                     }

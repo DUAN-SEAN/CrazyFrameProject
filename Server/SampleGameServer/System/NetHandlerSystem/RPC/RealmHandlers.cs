@@ -48,6 +48,9 @@ namespace GameServer
             }
         }
     }
+    /// <summary>
+    /// 玩家重连或验证发送给服务器的消息
+    /// </summary>
     [MessageHandler]
     public class C2S_ReConnectingByLoginMessageHandler : AMHandler<C2S_ReConnectByLogin>
     {
