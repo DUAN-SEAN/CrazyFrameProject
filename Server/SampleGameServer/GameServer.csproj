@@ -82,6 +82,7 @@
     <Compile Include="AsyncActions\DBDataDefine\GameServerDBPlayer.cs" />
     <Compile Include="Configure\GameServerConfig.cs" />
     <Compile Include="AsyncActions\DBContextAsyncAction\GameServerContextAsyncAction.cs" />
+    <Compile Include="LocalMessage\PlayerContextLocalMessages.cs" />
     <Compile Include="PlayerContext\PlayerContextStateMachine.cs" />
     <Compile Include="System\DBSystem\MongoDBHelper.cs" />
     <Compile Include="GameServerConstDefine.cs" />

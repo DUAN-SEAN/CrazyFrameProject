@@ -10,14 +10,24 @@ namespace GameServer
     public class GameServerConstDefine
     {
         //为了与ServerBase进行区分 这里只做了
+        #region GameServerPlayerCtx 1001-1050
+        /// <summary>
+        /// 服务器本地消息：当ContextTransform完成发送给目标ctx
+        /// </summary>
+        public const Int32 LocalMsgGameServerContextTransformOK = 1001;
+        /// <summary>
+        /// 服务器本地消息:关闭当前玩家现场
+        /// </summary>
+        public const Int32 LocalMsgShutdownContext = 1002;
 
-        #region MatchSystem 1002-1050    
-        public const Int32 MatchSystemCreateMatchTeam = 1002;//创建队伍
-        public const Int32 MatchSystemJoinMatchTeam = 1003;//进入队伍
-        public const Int32 MatchSystemExitMatchTeam = 1004;//退出队伍
-        public const Int32 MatchSystemJoinMatchQueue = 1005;//进入匹配队列
-        public const Int32 MatchSystemExitMatchQueue = 1006;//退出匹配队列
-        public const Int32 MatchQueueCompleteSingle = 1007;//匹配队列完成一项
+        #endregion
+        #region MatchSystem 1051-1100  
+        public const Int32 MatchSystemCreateMatchTeam = 1051;//创建队伍
+        public const Int32 MatchSystemJoinMatchTeam = 1052;//进入队伍
+        public const Int32 MatchSystemExitMatchTeam = 1053;//退出队伍
+        public const Int32 MatchSystemJoinMatchQueue = 1054;//进入匹配队列
+        public const Int32 MatchSystemExitMatchQueue = 1055;//退出匹配队列
+        public const Int32 MatchQueueCompleteSingle = 1056;//匹配队列完成一项
         #endregion
 
 

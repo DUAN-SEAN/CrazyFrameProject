@@ -47,10 +47,10 @@ namespace GameServer
         {
             switch (msg.MessageId)
             {
-                case ServerFrameworkLocalMessageIDDefine.LocalMsgGameServerContextTransformOK:
+                case GameServerConstDefine.LocalMsgGameServerContextTransformOK:
                     return OnLMsgOnContextTransformOk((LocalMessageContextTransformOk)msg);
 
-                case ServerBaseLocalMessageIDDefine.LocalMsgShutdownContext:
+                case GameServerConstDefine.LocalMsgShutdownContext:
                     return OnLMsgShutdownContext((LocalMessageShutdownContext)msg);
                 default:
                     return base.OnMessage(msg);
@@ -182,7 +182,7 @@ namespace GameServer
 
             return ;
         }
-        private virtual async Task<bool> ContextTransform(GameServerPlayerContext target)
+        private async Task<bool> ContextTransform(GameServerPlayerContext target)
         {
             await target.EnterLock();//要操作目标现场需要先把目标现场上锁
 
