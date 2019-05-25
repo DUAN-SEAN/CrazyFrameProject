@@ -25,6 +25,9 @@ namespace Crazy.Common
 	[Message(MessageOpcode.C2S_JoinMatchQueue)]
 	public partial class C2S_JoinMatchQueue : IMessage {}
 
+	[Message(MessageOpcode.C2S_ReConnectByLogin)]
+	public partial class C2S_ReConnectByLogin : IMessage {}
+
 }
 namespace Crazy.Common
 {
@@ -38,5 +41,6 @@ namespace Crazy.Common
 		 public const ushort C2S_JoinMatchTeam = 1006;
 		 public const ushort S2C_JoinMatchTeamComplete = 1007;
 		 public const ushort C2S_JoinMatchQueue = 1008;
+		 public const ushort C2S_ReConnectByLogin = 1009;
 	}
 }

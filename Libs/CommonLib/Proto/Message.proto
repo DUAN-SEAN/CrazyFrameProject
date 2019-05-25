@@ -50,3 +50,9 @@ message C2S_JoinMatchQueue  // IMessage
 	uint64 MatchTeamId = 2;
 	int32 barrierId = 3;
 }
+message C2S_ReConnectByLogin  // IMessage
+{
+	int32 RpcId = 90;
+	string account = 1;
+	string password = 2;
+}

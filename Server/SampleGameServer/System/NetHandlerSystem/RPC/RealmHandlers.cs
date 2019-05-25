@@ -7,10 +7,14 @@ using Crazy.Common;
 using Crazy.ServerBase;
 namespace GameServer
 {
+    /// <summary>
+    /// 由于网络消息handler由dispatcher分配调用，而dispatcher由玩家现场的OnMessage调用 所以保证了单个玩家现场
+    /// 消息执行顺序的次序
+    /// </summary>
     [MessageHandler]
     public class C2S_LoginMessageHandler : AMRpcHandler<C2S_LoginMessage, S2C_LoginMessage>
     {
-        protected override async void RunAsync(ISession playerContext, C2S_LoginMessage message, Action<S2C_LoginMessage> reply)
+        protected override async void Run(ISession playerContext, C2S_LoginMessage message, Action<S2C_LoginMessage> reply)
         {
             GameServerPlayerContext gameServerContext = playerContext as GameServerPlayerContext;
             S2C_LoginMessage response = new S2C_LoginMessage();
@@ -30,7 +34,7 @@ namespace GameServer
     [MessageHandler]
     public class C2S_RegisterMessageHandler : AMRpcHandler<C2S_RegisterMessage, S2C_RegisterMessage>
     {
-        protected override void RunAsync(ISession playerContext, C2S_RegisterMessage message, Action<S2C_RegisterMessage> reply)
+        protected override void Run(ISession playerContext, C2S_RegisterMessage message, Action<S2C_RegisterMessage> reply)
         {
             GameServerPlayerContext gameServerContext = playerContext as GameServerPlayerContext;
             S2C_RegisterMessage response = new S2C_RegisterMessage();
@@ -42,6 +46,15 @@ namespace GameServer
             {
                 ReplyError(response, e, reply);
             }
+        }
+    }
+    [MessageHandler]
+    public class C2S_ReConnectingByLoginMessageHandler : AMHandler<C2S_ReConnectByLogin>
+    {
+        protected override async void Run(ISession playerContext, C2S_ReConnectByLogin message)
+        {
+            GameServerPlayerContext gameServerContext = playerContext as GameServerPlayerContext;
+            await gameServerContext.OnAuthReCByLogin(message);
         }
     }
 }

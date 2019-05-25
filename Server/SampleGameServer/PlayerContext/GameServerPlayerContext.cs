@@ -115,7 +115,7 @@ namespace GameServer
         /// 如果存在旧现场需要恢复，则进行恢复现场上下文
         /// </summary>
         /// <returns></returns>
-        public Task OnAuthBySession()
+        public Task OnAuthReCByLogin(C2S_ReConnectByLogin message)
         {
 
 
@@ -241,17 +241,42 @@ namespace GameServer
             // 释放玩家现场
             if (needRelease)
             {
-                Release();
+                Release();//CtxManager Free Context
             }
 
 
             return Task.CompletedTask;
 
         }
+        /// <summary>
+        /// 由通信层Client调用 用于通知玩家现场 我要和客户端断开连接
+        /// </summary>
+        /// <returns></returns>
         public override Task OnDisconnected()
         {
+            // 由于基类调用了 ServerBase.Instance.PlayerCtxManager.FreePlayerContext(this); 
+            // 所以这里要实现延时删除必须覆盖基类实现,在Shutdown中 最终释放现场
 
-            return base.OnDisconnected();
+
+            // 设置状态，等待timer来进行删除
+            if (m_csm.SetStateCheck(PlayerContextStateMachine.EventOnDisconnected) == -1)
+            {
+                Log.Info("GameServerBasePlayerContext::OnDisconnected SetStateCheck EVENT_ONDISCONNECTED failed");
+                return Task.CompletedTask;
+            }
+            // 如果已经在shutdown过程中 
+            if (m_shutdownTime != DateTime.MaxValue)
+            {
+                ShutdownContext(true);
+                return Task.CompletedTask;
+            }
+            // 如果不处于断线等待状态也要关闭现场 也就是已经在断线状态了 也要关闭
+            if (m_csm.State == PlayerContextStateMachine.StateDisconnected)
+            {
+                ShutdownContext();
+                return Task.CompletedTask;
+            }
+            return Task.CompletedTask ;
         }
         /// <summary>
         /// 根据当前的状态机状态，得到在关闭ctx时后续处理标记
