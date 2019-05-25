@@ -47,7 +47,11 @@ namespace GameServer
         {
             switch (msg.MessageId)
             {
-                
+                case ServerFrameworkLocalMessageIDDefine.LocalMsgGameServerContextTransformOK:
+                    return OnLMsgOnContextTransformOk((LocalMessageContextTransformOk)msg);
+
+                case ServerBaseLocalMessageIDDefine.LocalMsgShutdownContext:
+                    return OnLMsgShutdownContext((LocalMessageShutdownContext)msg);
                 default:
                     return base.OnMessage(msg);
                    
@@ -134,14 +138,108 @@ namespace GameServer
         /// 如果存在旧现场需要恢复，则进行恢复现场上下文
         /// </summary>
         /// <returns></returns>
-        public Task OnAuthReCByLogin(C2S_ReConnectByLogin message)
+        public async Task OnAuthReCByLogin(C2S_ReConnectByLogin message)
         {
+            string account = message.Account;
+            string password = message.Password;
+            S2C_LoginMessage response = null;
+
+            //设置现场状态
+            if (m_csm.SetStateCheck(PlayerContextStateMachine.EventOnSessionLoginReq) == -1)
+            {
+                Log.Info("OnAuthByLogin::PlayerContextStateMachine switch Fail to SessionLoginReq");
+                return;
+            }
+            // 进行数据库验证
+            var authDB = await ValidateAuthLogin(account, password);
+            if (!authDB)
+            {
+                Log.Info("OnAuthReCByLogin::FAIL TO authDB");
+                //验证Session失败先不理会
+                return;
+            }
+            //获取数据库player的实体
+            m_gameServerDBPlayer = await GetPlayerFromDBAsync(account);
+            if (m_gameServerDBPlayer == null)
+            {
+                Log.Info("gameServerDBPlayer is NULL");
+                return;
+            }
+            //DB的唯一标识符代表着这个玩家应用层的Id
+            m_gameUserId = m_gameServerDBPlayer._id.ToString();
+
+            //开始验证是否已经存在userid对应的玩家现场
+            GameServerPlayerContext oldCtx = (GameServerPlayerContext)GameServer.
+                Instance.PlayerCtxManager.FindPlayerContextByString(m_gameUserId);
+            //如果存在 则判定为需要重连 需要恢复现场状态
+            //这里可以判断设备Id 判断是否需要重连 或者是挤掉原来老的现场设备
+            //PS：以后Session验证要更加完全 不能只验证账号密码
+            if (oldCtx != null)
+            {
+
+            }
 
 
-            return Task.CompletedTask;
+            return ;
         }
+        private virtual async Task<bool> ContextTransform(GameServerPlayerContext target)
+        {
+            await target.EnterLock();//要操作目标现场需要先把目标现场上锁
 
 
+            if (!target.CanAcceptContextTransform())
+            {
+                Log.Info("GameServerPlayerContext::ContextTransform can not AcceptContextTransform. target sessionId = "+ target.SessionId+" state = "+  target.m_csm.State);
+                // 释放访问权限
+                target.LeaveLock();
+                return false;
+            }
+            bool resetSucess = false;
+            if (!m_client.Closed && !m_client.Disconnected)
+            {
+                // 此处需要先处理掉前面一个现场的连接，因为close后不会再收到任何回调，所以不用调用m_client.ResetCientEventHandler(null);
+                target.m_client.Close();
+
+                target.m_client = m_client;
+                m_client.ResetCientEventHandler(target);
+                m_client = null;
+
+                resetSucess = true;
+            }
+
+            // 释放访问权限
+            target.LeaveLock();
+
+            Log.Info("GameServerBasePlayerContext::ContextTransform resetSucess="+ resetSucess);
+
+            // 向目标现场发送msg，来执行后续操作
+            if (resetSucess)
+            {
+                target.PostLocalMessage(new LocalMessageContextTransformOk());
+            }
+
+            // 由于已经没有client对象所以本现场不易久留
+            Release();
+
+            return resetSucess;
+        }
+        /// <summary>
+        /// 现场当前是否允许接受现场转移
+        /// </summary>
+        /// <returns></returns>
+        private bool CanAcceptContextTransform()
+        {
+            // 去除断线的判断逻辑，只通过状态机来检查状态
+            //if (!IsDisconnected())
+            //{
+            //    return false;
+            //}
+            if (m_csm.EventCheck(PlayerContextStateMachine.EventOnConextTransformOK) == false)
+            {
+                return false;
+            }
+            return true;
+        }
         /// <summary>
         /// 根据昵称获取数据库player的实体
         /// </summary>
