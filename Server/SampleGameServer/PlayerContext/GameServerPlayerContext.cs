@@ -397,6 +397,7 @@ namespace GameServer
         /// <returns></returns>
         private Task OnLMsgShutdownContext(LocalMessageShutdownContext msg)
         {
+
             if (msg == null)
             {
                 Log.Error("GameServerPlayerContext::OnLMsgShutdownContext, but lmsg is null");
