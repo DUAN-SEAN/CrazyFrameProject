@@ -42,6 +42,7 @@ namespace GameServer
         /// <param name="msg">本地消息类型</param>
         /// <returns></returns>
         public override Task OnMessage(ILocalMessage msg)
+
         {
             switch (msg.MessageId)
             {
@@ -376,6 +377,7 @@ namespace GameServer
             m_disconnectedTime = DateTime.MaxValue;
             m_shutdownTime = DateTime.MaxValue;
             m_disconnetedWaitTimeOutTime = DateTime.MaxValue;
+            //TODO:通知 Server 玩家线程需要恢复，要求各个系统得到感知
 
             m_resumingFromWaitForReconnect = true;
         }
@@ -385,6 +387,7 @@ namespace GameServer
         /// </summary>
         private void OnResumeFromWaitForReconnectEnd()
         {
+            //现场恢复完成后要标记重连完成记号
             m_resumingFromWaitForReconnect = false;
         }
         /// <summary>
