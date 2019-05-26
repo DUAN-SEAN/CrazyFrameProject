@@ -34,7 +34,20 @@ namespace GameServer
         /// </summary>
         public override void OnConnected()
         {
-            m_csm.SetStateCheck(PlayerContextStateMachine.EventOnConnected);
+            //设置状态
+            if (m_csm.SetStateCheck(PlayerContextStateMachine.EventOnConnected) == -1)
+            {
+                Log.Info("OnConnected::SetState OncOnnected FAILD");
+                return;
+            }
+            //打印一次客户端网络信息
+            Log.Info("Client::IP：" + m_client.GetClientIp() +
+                "|Port:" + m_client.GetClientPort().ToString());
+            base.OnConnected();
+
+            //switch(msg.)
+            //TODO:配置一些需要Tick的逻辑，使用TimeManager，目前暂时不需要
+               
         }
         /// <summary>
         /// 重写 但要保留基现场的逻辑

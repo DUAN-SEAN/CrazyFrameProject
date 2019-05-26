@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Crazy.Common;
 using Crazy.NetSharp;
 namespace Crazy.ServerBase
 {
@@ -28,6 +29,19 @@ namespace Crazy.ServerBase
         /// </summary>
         public virtual void Update()
         {
+            ILocalMessage localMessage;
+            if (p_localMessages.TryDequeue(out localMessage))
+            {
+                var nothing = OnMessage(localMessage);
+            }
+        }
+        /// <summary>
+        /// 驱动更新
+        /// 工作线程调用的方法，线程模型为单线程驱动，保证系统的逻辑安全
+        /// </summary>
+        public virtual void Update(Int32 data1 = 0,Int64 data2 = 0,object data3 = null)
+        {
+            
             ILocalMessage localMessage;
             if (p_localMessages.TryDequeue(out localMessage))
             {

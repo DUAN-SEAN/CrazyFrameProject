@@ -16,7 +16,7 @@ namespace GameServer
     {
         public int MessageId => GameServerConstDefine.MatchSystemCreateMatchTeam;
 
-        public UInt64 playerId;//玩家Id
+        public string playerId;//玩家Id
     }
     /// <summary>
     /// 进入队伍
@@ -25,7 +25,7 @@ namespace GameServer
     {
         public int MessageId => GameServerConstDefine.MatchSystemJoinMatchTeam;
 
-        public UInt64 playerId;//玩家Id
+        public string playerId;//玩家Id
 
         public UInt64 teamId;//队伍Id
     }
@@ -36,7 +36,7 @@ namespace GameServer
     {
         public int MessageId => GameServerConstDefine.MatchSystemExitMatchTeam;
 
-        public UInt64 playerId;//玩家Id
+        public string playerId;//玩家Id
 
         public UInt64 teamId;//队伍Id
     }
@@ -47,7 +47,7 @@ namespace GameServer
     {
         public int MessageId => GameServerConstDefine.MatchSystemJoinMatchQueue;
         public UInt64 teamId;//队伍Id
-        public UInt64 playerId;//队长Id 意思就是队伍发起人 也可以只有一个人
+        public string playerId;//队长Id 意思就是队伍发起人 也可以只有一个人
         public Int32 barrierId;//关卡Id 每一个关卡都有对应的Id  
     }
     /// <summary>
@@ -57,7 +57,7 @@ namespace GameServer
     {
         public int MessageId => GameServerConstDefine.MatchSystemJoinMatchQueue;
         public UInt64 teamId;//队伍Id
-        public UInt64 playerId;//玩家Id 队伍中的玩家都能退出匹配队列
+        public string playerId;//玩家Id 队伍中的玩家都能退出匹配队列
         public Int32 barrierId;//关卡Id 每一个关卡都有对应的Id 
     }
     /// <summary>
@@ -67,7 +67,7 @@ namespace GameServer
     public class MatchQueueCompleteSingleMessage : ILocalMessage
     {
         public int MessageId => GameServerConstDefine.MatchQueueCompleteSingle;
-        public List<ulong> teamIds = new List<ulong>();
+        public List<UInt64> teamIds = new List<UInt64>();
         public int barrierId;
     }
 

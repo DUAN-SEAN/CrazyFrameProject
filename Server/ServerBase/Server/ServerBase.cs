@@ -56,7 +56,7 @@ namespace Crazy.ServerBase
                 Log.Error("初始化玩家上下文管理器失败");
                 return false;
             }
-            // 开启timer管理器
+            // 开启timer管理器用于服务器Tick
             Log.Info("ServerBase::Initialization is starting timer manager");
             TimerManager = new TimerManager(PlayerCtxManager);
             if (TimerManager.Start() < 0)
@@ -225,7 +225,21 @@ namespace Crazy.ServerBase
 
             return true;
         }
-    
+
+
+        /// <summary>
+        /// 向功能系统发送本地消息
+        /// </summary>
+        /// <typeparam name="System"></typeparam>
+        /// <param name="msg"></param>
+        public void PostMessageToSystem<System>(ILocalMessage msg) where System : BaseSystem
+        {
+            BaseSystem baseSystem = m_systemDic[typeof(System)];
+            if (baseSystem == null) return;
+            baseSystem.PostLocalMessage(msg);
+        }
+
+        protected readonly Dictionary<Type, BaseSystem> m_systemDic = new Dictionary<Type, BaseSystem>();
 
 
 
