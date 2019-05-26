@@ -75,50 +75,26 @@ namespace GameServer
                 return false;
             }
             m_systemDic.Add(gameMatchSystem.GetType(), gameMatchSystem);
-
-
-
-            //otherSystem.Start
-            m_systemDic[gameMatchSystem.GetType()].Start();//启动 
-            
-
-
-            //注意：目前先这样写个一般的驱动方法，后期再改
-            Task.Run(() =>
+            // 战斗系统初始化
+            var battleSystem = new BattleSystem();
+            if (!battleSystem.Initialize())
             {
-                while (true)
-                {
-                    Thread.Sleep(1);
-                    foreach (var item in m_systemDic.Values)
-                    {
-                        item.Update();
-                    }
-                }
-                
-                //otherSystem.Update()
-            });//由线程池进行驱动
+                Log.Error("初始化战斗系统失败");
+                return false;
+            }
+            m_systemDic.Add(battleSystem.GetType(), battleSystem);
 
-
-
-
+            //启动各个系统的Tick功能
+            foreach (var item in m_systemDic.Values)
+            {
+                item.Start();//首先Start
+                TimerManager.SetLoopTimer(100, new TimerManager.OnTimerCallBack(item.Update)); 
+            }
             return true;
         }
 
 
-        /// <summary>
-        /// 向功能系统发送本地消息
-        /// </summary>
-        /// <typeparam name="System"></typeparam>
-        /// <param name="msg"></param>
-        public void PostMessageToSystem<System>(ILocalMessage msg) where System:BaseSystem   
-        {
-            BaseSystem baseSystem = m_systemDic[typeof(System)];
-            if (baseSystem == null) return;
-            baseSystem.PostLocalMessage(msg);
-        }
 
-
-        private readonly Dictionary<Type, BaseSystem> m_systemDic = new Dictionary<Type, BaseSystem>();
 
        
         /// <summary>

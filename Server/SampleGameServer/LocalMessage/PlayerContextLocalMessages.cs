@@ -1,4 +1,5 @@
-﻿using Crazy.NetSharp;
+﻿using Crazy.Common;
+using Crazy.NetSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,4 +34,5 @@ namespace GameServer
         /// </summary>
         public int m_shutdownReason;
     }
+
 }

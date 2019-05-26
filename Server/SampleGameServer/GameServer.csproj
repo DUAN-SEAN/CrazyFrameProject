@@ -82,8 +82,10 @@
     <Compile Include="AsyncActions\DBDataDefine\GameServerDBPlayer.cs" />
     <Compile Include="Configure\GameServerConfig.cs" />
     <Compile Include="AsyncActions\DBContextAsyncAction\GameServerContextAsyncAction.cs" />
+    <Compile Include="LocalMessage\BattleSystemLocalMessages.cs" />
     <Compile Include="LocalMessage\PlayerContextLocalMessages.cs" />
     <Compile Include="PlayerContext\PlayerContextStateMachine.cs" />
+    <Compile Include="System\BattleSystem\BattleSystem.cs" />
     <Compile Include="System\DBSystem\MongoDBHelper.cs" />
     <Compile Include="GameServerConstDefine.cs" />
     <Compile Include="GameServer.cs" />
@@ -114,8 +116,6 @@
       <Name>ServerBase</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="System\BattleSystem\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

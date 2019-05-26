@@ -283,6 +283,32 @@ namespace Crazy.ServerBase
             }
         }
         /// <summary>
+        /// 向一个玩家发送本地消息
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="playerId"></param>
+        public void SendSingleLocalMessage(ILocalMessage msg,string playerId)
+        {
+            var playerCtx = FindPlayerContextByString(playerId);
+            if (playerCtx != null)
+                playerCtx.PostLocalMessage(msg);
+        }
+        /// <summary>
+        /// 向多个玩家发送本地消息
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="playerId"></param>
+        public void BroadcastLocalMessagebyPlayerId(ILocalMessage msg, List<string> playerIds)
+        {
+            foreach(var id in playerIds)
+            {
+                var playerCtx = FindPlayerContextByString(id);
+                if (playerCtx != null)
+                    playerCtx.PostLocalMessage(msg);
+            }
+        
+        }
+        /// <summary>
         /// 玩家上下文实际类型。
         /// </summary>
         private Type m_contextType;

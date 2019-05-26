@@ -17,7 +17,7 @@ namespace GameServer
     {
         public MatchTeam(UInt64 id,int maxCount)
         {
-            
+            Id = id;
             State = MatchTeamState.OPEN;
             m_maxCount = maxCount;
         }
@@ -25,7 +25,7 @@ namespace GameServer
 
 
 
-        public void Add(UInt64 playerId)
+        public void Add(string playerId)
         {
             lock (Member)
             {
@@ -33,7 +33,7 @@ namespace GameServer
             }
         }
 
-        public bool Remove(UInt64 playerId)
+        public bool Remove(string playerId)
         {
             lock (Member)
             {
@@ -56,13 +56,17 @@ namespace GameServer
             return true;
         }
 
-        public bool IsContain(UInt64 playerId)
+        public bool IsContain(string playerId)
         {
             return Member.Contains(playerId);
         }
 
+        public string GetCaptainId()
+        {
+            return Member.First();
+        }
 
-        public UInt64 Id { get => Member.ElementAt(0); }//表示队伍的唯一Id表示，不可被更改
+        public UInt64 Id { get; protected set; }//表示队伍的唯一Id表示，不可被更改
 
         public int CurrentCount { get => Member.Count; }//当前队伍人数
 
@@ -71,7 +75,7 @@ namespace GameServer
         /// <summary>
         /// 房间玩家列表
         /// </summary>
-        private readonly HashSet<UInt64> Member = new HashSet<UInt64>();
+        private readonly HashSet<string> Member = new HashSet<string>();
 
         public MatchTeamState State { get; set; }
         public enum MatchTeamState

@@ -27,4 +27,17 @@ namespace Crazy.ServerBase
 
         public MessageInfo MessageInfo;
     }
+
+    public class SystemSendNetMessage : ILocalMessage
+    {
+        public int MessageId => ServerBaseLocalMesssageIDDef.SystemSendNetMessage;
+        /// <summary>
+        /// 玩家应用层Id
+        /// </summary>
+        public string PlayerId;
+        /// <summary>
+        /// 待发送的网络消息
+        /// </summary>
+        public IMessage Message;
+    }
 }
