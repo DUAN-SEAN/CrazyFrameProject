@@ -61,7 +61,7 @@ namespace GameServer
         /// </summary>
         private void OnCreateBattleBarrier(CreateBattleBarrierMessage msg)
         {
-
+            //TODO:战斗场景在此生成
 
 
 
