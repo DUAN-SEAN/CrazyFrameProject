@@ -47,12 +47,7 @@ namespace GameServer
             //mongodb测试
             MongoDBHelper.Test();
 
-            //初始化功能服务的各个模块系统
-            if (!InitializeSystem())
-            {
-                Log.Info("初始化模块系统失败");
-                return false;
-            }
+          
 
 
 
@@ -65,7 +60,7 @@ namespace GameServer
         /// <summary>
         /// 初始化服务器的各个系统
         /// </summary>
-        public bool InitializeSystem()
+        public override bool InitializeSystem()
         {
             // 匹配系统初始化
             var gameMatchSystem = new GameMatchSystem();

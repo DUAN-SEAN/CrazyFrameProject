@@ -70,7 +70,12 @@ namespace Crazy.ServerBase
                 Log.Error("配置网络出现错误");
                 return false;
             }
-
+            //初始化功能服务的各个模块系统
+            if (!InitializeSystem())
+            {
+                Log.Info("初始化模块系统失败");
+                return false;
+            }
             return true;
         }
         /// <summary>
@@ -225,7 +230,15 @@ namespace Crazy.ServerBase
 
             return true;
         }
-
+        /// <summary>
+        /// 初始化子系统
+        /// Server必须重写此方法
+        /// </summary>
+        /// <returns></returns>
+        public virtual bool InitializeSystem()
+        {
+            return true;
+        }
 
         /// <summary>
         /// 向功能系统发送本地消息
