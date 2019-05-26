@@ -19,10 +19,7 @@ namespace GameServer
         /// 服务器本地消息:关闭当前玩家现场
         /// </summary>
         public const Int32 LocalMsgShutdownContext = 1002;
-        /// <summary>
-        /// 服务器各系统要求玩家现场发送消息给客户端
-        /// </summary>
-        public const Int32 SystemSendNetMessage = 1003;
+      
 
         #endregion
         #region MatchSystem 1051-1100  

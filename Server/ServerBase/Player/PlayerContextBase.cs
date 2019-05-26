@@ -246,6 +246,11 @@ namespace Crazy.ServerBase
                         await OnPlayerContextTimer(timerMsg);
                         return;
                     }
+                case ServerBaseLocalMesssageIDDef.SystemSendNetMessage:
+                    var snm = (SystemSendNetMessage)msg;
+                    if(snm.PlayerId==m_gameUserId)//如果验证通过才允许向客户端发送
+                        Send(snm.Message);
+                    break;
                 default:break;
             }
 
@@ -304,6 +309,11 @@ namespace Crazy.ServerBase
             Interlocked.Decrement(ref m_asyncActionRef);
         }
         #endregion
+        /// <summary>
+        /// 线程安全的操作
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <returns></returns>
         public virtual bool PostLocalMessage(ILocalMessage msg)
         {
             if (IsAvaliable())

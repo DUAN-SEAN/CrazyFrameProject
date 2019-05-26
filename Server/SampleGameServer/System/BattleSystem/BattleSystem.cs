@@ -40,7 +40,6 @@ namespace GameServer
         /// <summary>
         /// GameServer初始化战斗系统
         /// 1 获取关卡配置文件
-        /// 
         /// </summary>
         /// <returns></returns>
         public bool Initialize()
@@ -64,7 +63,7 @@ namespace GameServer
         {
             
         }
-
+      
         private GameBarrierConfig[] m_gameBarrierConfigs;
 
     }

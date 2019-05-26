@@ -15,7 +15,10 @@ namespace Crazy.ServerBase
         public const Int32 RpcNetMessage = 4;
 
         public const Int32 LocalMsgPlayCtxTimer = 5;
-
+        /// <summary>
+        /// 服务器各系统要求玩家现场发送消息给客户端
+        /// </summary>
+        public const Int32 SystemSendNetMessage = 6;
         //从1002开始由逻辑业务控制
 
     }

@@ -34,16 +34,5 @@ namespace GameServer
         /// </summary>
         public int m_shutdownReason;
     }
-    public class SystemSendNetMessage : ILocalMessage
-    {
-        public int MessageId => GameServerConstDefine.SystemSendNetMessage;
-        /// <summary>
-        /// 玩家Id
-        /// </summary>
-        public string PlayerId;
-        /// <summary>
-        /// 待发送的网络消息
-        /// </summary>
-        public IMessage Message;
-    }
+
 }
