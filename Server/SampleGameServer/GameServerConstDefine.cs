@@ -19,20 +19,40 @@ namespace GameServer
         /// 服务器本地消息:关闭当前玩家现场
         /// </summary>
         public const Int32 LocalMsgShutdownContext = 1002;
-      
+
 
         #endregion
         #region MatchSystem 1051-1100  
-        public const Int32 MatchSystemCreateMatchTeam = 1051;//创建队伍
-        public const Int32 MatchSystemJoinMatchTeam = 1052;//进入队伍
-        public const Int32 MatchSystemExitMatchTeam = 1053;//退出队伍
-        public const Int32 MatchSystemJoinMatchQueue = 1054;//进入匹配队列
-        public const Int32 MatchSystemExitMatchQueue = 1055;//退出匹配队列
-        public const Int32 MatchQueueCompleteSingle = 1056;//匹配队列完成一项
+        /// <summary>
+        /// 创建队伍
+        /// </summary>
+        public const Int32 MatchSystemCreateMatchTeam = 1051;
+        /// <summary>
+        /// 进入队伍
+        /// </summary>
+        public const Int32 MatchSystemJoinMatchTeam = 1052;
+        /// <summary>
+        /// 退出队伍
+        /// </summary>
+        public const Int32 MatchSystemExitMatchTeam = 1053;
+        /// <summary>
+        /// 进入匹配队列
+        /// </summary>
+        public const Int32 MatchSystemJoinMatchQueue = 1054;
+        /// <summary>
+        /// 退出匹配队列
+        /// </summary>
+        public const Int32 MatchSystemExitMatchQueue = 1055;
+        /// <summary>
+        /// 匹配队列完成一项
+        /// </summary>
+        public const Int32 MatchQueueCompleteSingle = 1056;
         #endregion
         #region BattleSystem 1101-1200
-        public const Int32 BattleSystemCreateBattleBarrier = 1101;//创建战斗关卡
-
+        /// <summary>
+        /// 创建战斗关卡
+        /// </summary>
+        public const Int32 BattleSystemCreateBattleBarrier = 1101;
         #endregion
 
 
