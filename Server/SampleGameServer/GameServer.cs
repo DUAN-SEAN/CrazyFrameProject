@@ -42,18 +42,23 @@ namespace GameServer
             var dbConfig = m_gameServerGlobalConfig.DBConfigInfos[0];
             Log.Info($"ip:{dbConfig.ConnectHost} port:{dbConfig.Port} serviceName:{dbConfig.DataBase} username:{dbConfig.UserName} password:{dbConfig.Password}");
 
+
             //MongoDBHelper.CreateDBClient(); //测试
-            
             //mongodb测试
             MongoDBHelper.Test();
 
-          
 
+            //初始化功能服务的各个模块系统
+            if (!InitializeSystem())
+            {
+                Log.Info("初始化模块系统失败");
+                return false;
+            }
 
 
 
             //下面可以写启动逻辑线程 将上述游戏逻辑丢到逻辑线程中处理
-             
+
 
             return true;
         }

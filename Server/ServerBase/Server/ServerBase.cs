@@ -70,12 +70,7 @@ namespace Crazy.ServerBase
                 Log.Error("配置网络出现错误");
                 return false;
             }
-            //初始化功能服务的各个模块系统
-            if (!InitializeSystem())
-            {
-                Log.Info("初始化模块系统失败");
-                return false;
-            }
+           
             return true;
         }
         /// <summary>

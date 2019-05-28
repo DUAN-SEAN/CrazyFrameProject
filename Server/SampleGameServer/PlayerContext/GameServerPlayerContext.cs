@@ -35,14 +35,14 @@ namespace GameServer
         public override void OnConnected()
         {
             //设置状态
-            if (m_csm.SetStateCheck(PlayerContextStateMachine.EventOnConnected) == -1)
+            if(m_csm.SetStateCheck(PlayerContextStateMachine.EventOnConnected) == -1)
             {
                 Log.Info("OnConnected::SetState OncOnnected FAILD");
                 return;
             }
             //打印一次客户端网络信息
             Log.Info("Client::IP：" + m_client.GetClientIp() +
-                "|Port:" + m_client.GetClientPort().ToString());
+                "|Port:" + m_client.GetClientPort());
             base.OnConnected();
 
             //switch(msg.)
@@ -83,12 +83,13 @@ namespace GameServer
             string account = message.Account;
             string password = message.Password;
             S2C_LoginMessage response = null;
-
+            S2C_LoginMessage.Types.State result = S2C_LoginMessage.Types.State.Ok;
             //设置现场状态
             if(m_csm.SetStateCheck(PlayerContextStateMachine.EventOnAuthLoginReq) == -1)
             {
                 Log.Info("OnAuthByLogin::PlayerContextStateMachine switch Fail to LoginReq");
-                return;
+                result = S2C_LoginMessage.Types.State.Fail;
+                goto RETURN;
             }
             // 进行数据库验证
             var authDB = await ValidateAuthLogin(account, password);
@@ -103,16 +104,16 @@ namespace GameServer
                     return;
                 }
                 Log.Info(account + " 验证失败");
-                response = new S2C_LoginMessage { PlayerGameId = null, State = authDB ? S2C_LoginMessage.Types.State.Ok : S2C_LoginMessage.Types.State.Fail };
-                reply(response);
-                return;
+                result = S2C_LoginMessage.Types.State.Fail;
+                goto RETURN;
             }
             //获取数据库player的实体
             m_gameServerDBPlayer = await GetPlayerFromDBAsync(account);
             if (m_gameServerDBPlayer == null)
             {
                 Log.Info("gameServerDBPlayer is NULL");
-                return;
+                result = S2C_LoginMessage.Types.State.Fail;
+                goto RETURN;
             }
             //DB的唯一标识符代表着这个玩家应用层的Id
             m_gameUserId = m_gameServerDBPlayer._id.ToString();
@@ -133,16 +134,19 @@ namespace GameServer
             if(m_csm.SetStateCheck(PlayerContextStateMachine.EventOnAuthLoginOK)== -1)
             {
                 Log.Info("OnAuthByLogin::PlayerContextStateMachine switch Fail To LoginOk");
-                return;
+                result = S2C_LoginMessage.Types.State.Fail;
+                goto RETURN;
             }
             //由于目前是单服 所以直接将玩家现场状态设置成验证成功状态
             if (m_csm.SetStateCheck(PlayerContextStateMachine.EventOnSessionLoginOK) == -1)
             {
                 Log.Info("OnAuthByLogin::PlayerContextStateMachine switch Fail To SessuibLoginOk");
-                return;
+                result = S2C_LoginMessage.Types.State.Fail;
+                goto RETURN;
             }
             //向客户端发送登陆验证成功
-            response = new S2C_LoginMessage { PlayerGameId = this.m_gameUserId, State = authDB ? S2C_LoginMessage.Types.State.Ok : S2C_LoginMessage.Types.State.Fail };
+            RETURN:
+            response = new S2C_LoginMessage { PlayerGameId = this.m_gameUserId, State = result };
             reply(response);
             //TODO:通知应用层登录流程完成
             await OnLoginOk();
@@ -369,7 +373,7 @@ namespace GameServer
 
             Log.Debug("GameServerPlayerContext::OnLMsgOnContextTransformOk, lmsg.MessageId="+ msg.MessageId.ToString());
 
-            // 发送LoginBySessionTokenAck，这里其实是发送给新联上的客户端对象的
+            //TODO: 发送LoginBySessionTokenAck，这里其实是发送给新联上的客户端对象的
             //Send() 
           
 

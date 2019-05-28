@@ -12,6 +12,7 @@ namespace GameServer
     /// 1 匹配系统
     /// 2 包含了队伍模块和匹配模块
     /// 3 保证system的运转是线程安全的
+    /// 4 匹配系统面向匹配队伍不面向玩家，玩家在队伍里作为一个整体
     /// </summary>
     public class GameMatchSystem : BaseSystem
     {
@@ -81,7 +82,7 @@ namespace GameServer
                     ExitMatchQueueMessage exitMatchQueueMessage = msg as ExitMatchQueueMessage;
                     OnExitMatchQueue(exitMatchQueueMessage.teamId, exitMatchQueueMessage.playerId, exitMatchQueueMessage.barrierId);
                     break;
-                case GameServerConstDefine.MatchQueueCompleteSingle://by MatcingSystemQueue
+                case GameServerConstDefine.MatchQueueCompleteSingle://来自 MatcingSystemQueue 的消息，通知system匹配完成
                     MatchQueueCompleteSingleMessage matchQueueCompleteSingleMessage = msg as MatchQueueCompleteSingleMessage;
                     OnCompleteMatching(matchQueueCompleteSingleMessage.teamIds, matchQueueCompleteSingleMessage.barrierId);
                     break;
