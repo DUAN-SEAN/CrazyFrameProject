@@ -116,7 +116,7 @@ namespace GameServer
                 goto RETURN;
             }
             //DB的唯一标识符代表着这个玩家应用层的Id
-            m_gameUserId = m_gameServerDBPlayer._id.ToString();
+            m_gameUserId = m_gameServerDBPlayer.userName.ToString();
 
             //将玩家现场注册到应用层上
             var brpc = GameServer.Instance.PlayerCtxManager.RegisterPlayerContextByString(m_gameUserId, this);

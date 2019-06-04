@@ -33,6 +33,10 @@ namespace GameServer
         /// </summary>
         public void MatchUpdate()
         {
+            //TODO:首先要检测是否能够进行匹配
+
+
+
             //这里执行匹配算法
             //1 关卡容量maxCount
             //2 队伍人数  
@@ -85,7 +89,7 @@ namespace GameServer
             for(int i = 0; i < matchBuckets.Count; i++)
             {
                 var matchBucket = matchBuckets[i];
-                if (matchBucket.CurrentVolume == matchBucket.Capacity)
+                if (matchBucket.CurrentVolume == matchBucket.Capacity)//桶的容量满了
                 {
                     Log.Info($"第 {i} 桶满足条件 向GameServer发送开启战斗请求");
                     //向matchSystem发送这几个队伍的id

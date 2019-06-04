@@ -109,7 +109,7 @@ namespace GameServer
                         }
                     }
                     break;
-                case 89StateEnteredGame:
+                case StateEnteredGame:
                     {
                         switch (commingEvent)
                         {

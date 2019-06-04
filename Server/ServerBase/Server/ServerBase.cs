@@ -243,7 +243,11 @@ namespace Crazy.ServerBase
         public void PostMessageToSystem<System>(ILocalMessage msg) where System : BaseSystem
         {
             BaseSystem baseSystem = m_systemDic[typeof(System)];
-            if (baseSystem == null) return;
+            if (baseSystem == null)
+            {
+                Log.Fatal("TypeSystem::" + typeof(System) + "不存在，消息Message::" + msg.GetType() + "发送失败");
+                return;
+            }
             baseSystem.PostLocalMessage(msg);
         }
 

@@ -25,6 +25,7 @@ namespace GameServer
 
         public override bool Initialize<GlobalConfigureType, PlayerContextBase>(string globalPath, Type plyaerContextType, IMessagePacker messagePraser, string serverName)
         {
+            //初始化程序集
             TypeManager.Instance.Add(DLLType.Common,Assembly.GetAssembly(typeof(TypeManager)));
             TypeManager.Instance.Add(DLLType.ServerBase, Assembly.GetAssembly(typeof(ServerBase)));
             TypeManager.Instance.Add(DLLType.GameServer, Assembly.GetAssembly(typeof(GameServer)));
@@ -87,7 +88,7 @@ namespace GameServer
             //启动各个系统的Tick功能
             foreach (var item in m_systemDic.Values)
             {
-                item.Start();//首先Start
+                item.Start();//首先System.Start
                 TimerManager.SetLoopTimer(100, new TimerManager.OnTimerCallBack(item.Update)); 
             }
             return true;

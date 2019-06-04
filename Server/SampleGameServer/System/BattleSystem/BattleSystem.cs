@@ -72,7 +72,21 @@ namespace GameServer
                 PostLocalMessageToCtx(new SystemSendNetMessage { Message = null, PlayerId = item },item);
             }
         }
-      
+        /// <summary>
+        /// 释放关卡战斗资源：
+        /// 修改关卡战斗实体状态为正在关闭
+        /// 暂停所有物理层逻辑
+        /// 释放所有物理单位
+        /// 释放应用层玩家
+        /// 发送匹配队伍系统玩家更新状态
+        /// 修改关卡战斗实体状态为已关闭
+        /// 解除战斗系统关于关卡战斗实体的注册
+        /// PS 该方法可以由各层调用：实体自身、战斗系统、GameSever
+        /// </summary>
+        private void OnReleaseBattle()
+        {
+
+        }
         private GameBarrierConfig[] m_gameBarrierConfigs;
 
     }

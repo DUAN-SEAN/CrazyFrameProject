@@ -151,24 +151,32 @@ namespace GameServer
         /// </summary>
         private void OnCreateMatchTeam(string playerId)
         {
+            S2C_CreateMatchTeamComplete.Types.State state = S2C_CreateMatchTeamComplete.Types.State.Complete;
+            ulong teamId = default;
             if (m_teamDic.Values.Count > m_gameMatchTeamConfig.MaxCount)
             {
                 Log.Error("服务器队伍容量过载");
-                return;
+                state = S2C_CreateMatchTeamComplete.Types.State.SystemError;
+                goto Result;
             }
-
+            if ((teamId = FindMatchTeamById(playerId))!=default)
+            {
+                Log.Error("创建队伍失败，因为玩家已经在队伍中了");
+                state = S2C_CreateMatchTeamComplete.Types.State.HaveTeam;
+                goto Result;
+            }
             //创建队伍，返回队伍id 
             UInt64 id = m_roomIdFactory.AllocateSessionId();
             MatchTeam matchTeam = new MatchTeam(id, m_gameMatchTeamConfig.TeamCapacity);//生成一个房间，并通知对应的玩家队伍生成好了
+            teamId = matchTeam.Id;
             //加入队伍字典中
             m_teamDic.TryAdd(id, matchTeam);
-
             matchTeam.Add(playerId);
 
-
+            Result:
             //向玩家发送 创建并且加入到队伍的消息
-
-
+            PostLocalMessageToCtx(new SystemSendNetMessage { Message = new S2C_CreateMatchTeamComplete { State = state,MatchTeamId = teamId }, PlayerId = playerId }, playerId);
+            Log.Info("创建房间 执行完毕 state = "+state.ToString());
 
         }
         /// <summary>
@@ -177,28 +185,50 @@ namespace GameServer
         private void OnExitMatchTeam(UInt64 teamId, string playerId)
         {
             //如果离开队伍后 房间人数为0 那么就执行清除任务 并设置房间的状态为Close
+            S2CM_ExitMatchTeamComplete message = new S2CM_ExitMatchTeamComplete {State = S2CM_ExitMatchTeamComplete.Types.State.Ok  };
             MatchTeam matchTeam = null;
-            if (!m_teamDic.TryGetValue(teamId, out matchTeam))
+            if (!m_teamDic.TryGetValue(teamId, out matchTeam))//没有队伍
             {
-                return;
+                message.State = S2CM_ExitMatchTeamComplete.Types.State.Fail;
+                goto Result;
             }
-            if (matchTeam.State != MatchTeam.MatchTeamState.OPEN)//队伍不开放 不能进入
+            if (matchTeam.State != MatchTeam.MatchTeamState.OPEN)//队伍不开放暂时不能退出
             {
-                return;
+                message.State = S2CM_ExitMatchTeamComplete.Types.State.Fail;
+                goto Result;
             }
 
             if (!matchTeam.Remove(playerId))//从队伍中移除
             {
-                return;
+                message.State = S2CM_ExitMatchTeamComplete.Types.State.Fail;
+                goto Result;
             }
-            if (matchTeam.CurrentCount <= 0)//如果这时候队伍的人数为空 则执行清除工作 并设置队伍的状态为关闭
+            message.LaunchPlayerId = playerId;
+            message.MatchTeamId = teamId;
+            //TODO:还要向战斗系统发送玩家退出的请求
+
+
+            Result:
+            if (matchTeam == null)
             {
-                //可以执行清除任务了
-                if (m_teamDic.TryRemove(matchTeam.Id, out matchTeam))
+                PostLocalMessageToCtx(new SystemSendNetMessage { Message = message }, playerId);
+                
+            }
+            else
+            {
+                PostLocalMessageToCtx(new SystemSendNetMessage { Message = message }, matchTeam?.GetMembers());
+                if (matchTeam.CurrentCount <= 0)//如果这时候队伍的人数为空 则执行清除工作 并设置队伍的状态为关闭
                 {
-                    matchTeam.State = MatchTeam.MatchTeamState.CLOSE;
+                    //可以执行清除任务了
+                    if (m_teamDic.TryRemove(matchTeam.Id, out matchTeam))
+                    {
+                        matchTeam.State = MatchTeam.MatchTeamState.CLOSE;
+                    }
                 }
             }
+            
+
+            
 
         }
         /// <summary>
@@ -209,17 +239,51 @@ namespace GameServer
         private void OnJoinMatchTeam(UInt64 teamId, string playerId)
         {
             MatchTeam matchTeam = null;
+            S2CM_JoinMatchTeamComplete message = new S2CM_JoinMatchTeamComplete();
+            if ((teamId = FindMatchTeamById(playerId)) != default)
+            {
+                Log.Error("加入队伍失败，因为玩家已经在队伍中了");
+                message.State = S2CM_JoinMatchTeamComplete.Types.State.HaveTeam;
+                goto Result;
+            }
             if (!m_teamDic.TryGetValue(teamId, out matchTeam))
             {
-                return;
+                message.State = S2CM_JoinMatchTeamComplete.Types.State.SystemError;
+                goto Result;
             }
             //队伍状态检测
-            if (matchTeam.State != MatchTeam.MatchTeamState.OPEN) return;
+            if (matchTeam.State != MatchTeam.MatchTeamState.OPEN)
+            {
+                message.State = S2CM_JoinMatchTeamComplete.Types.State.SystemError;
+                goto Result;
+            }
 
             //检测队伍容量
-            if (!matchTeam.IsFull()) return;
+            if (!matchTeam.IsFull()) {
+                message.State = S2CM_JoinMatchTeamComplete.Types.State.SystemError;
+                goto Result;
+            }
+            matchTeam.Add(playerId);//向队伍内添加玩家
+            Result:
+            if (matchTeam == null)
+            {
+                PostLocalMessageToCtx(new SystemSendNetMessage { Message = message }, playerId);
 
-            matchTeam.Add(playerId);
+            }
+            else
+            {
+                PostLocalMessageToCtx(new SystemSendNetMessage { Message = message }, matchTeam?.GetMembers());
+                if (matchTeam.CurrentCount <= 0)//如果这时候队伍的人数为空 则执行清除工作 并设置队伍的状态为关闭
+                {
+                    //可以执行清除任务了
+                    if (m_teamDic.TryRemove(matchTeam.Id, out matchTeam))
+                    {
+                        matchTeam.State = MatchTeam.MatchTeamState.CLOSE;
+                    }
+                }
+            }
+
+
         }
 
         /// <summary>
@@ -277,6 +341,10 @@ namespace GameServer
             {
                 return;
             }
+            //4 获取匹配队列
+            //5 从匹配队列中删除
+            //6 
+
 
         }
 
@@ -287,26 +355,55 @@ namespace GameServer
         public void OnCompleteMatching(List<UInt64> teamIds, int barrierId)
         {
             //检查队伍状态是否合法  合法则修改队伍状态 并向GameServer 发送 启动物理模块开启战斗系统
+            bool flag = true;
             foreach (var id in teamIds)
             {
                 var team = m_teamDic[id];
                 if (team == null)
                 {
+                    flag = false;
                     Log.Error("找不到id对应的队伍 匹配出错");
                     return;
                 }
                 if (team.State != MatchTeam.MatchTeamState.Matching)
                 {
+                    flag = false;
                     Log.Error("队伍状态错误 匹配出错");
                     return;
                 }
-                //修改队伍状态 并通知GameServer 向战斗系统发送创建战斗模块的消息
-                team.State = MatchTeam.MatchTeamState.INBATTLE;
-                //TODO:向战斗系统发生生成消息 战斗系统内部会向队伍所有玩家发生 战斗生成消息
-                //GameServer.Instance.PostMessageToSystem<BaseSystem>(null);
+            }
+            if (!flag)
+            {
+                Log.Debug("创建关卡前检查合法队伍时，存在队伍不合法");
+                return;
 
             }
+            //TODO:向战斗系统发生生成消息 战斗系统内部会向队伍所有玩家发生 战斗生成消息
+            CreateBattleBarrierMessage createBattleBarrierMessage = new CreateBattleBarrierMessage();
+            foreach(var id in teamIds)
+            {
+                var team = m_teamDic[id];
+                createBattleBarrierMessage.Players.AddRange(team.GetMembers());
+                //修改队伍状态 并通知GameServer 向战斗系统发送创建战斗模块的消息
+                team.State = MatchTeam.MatchTeamState.INBATTLE;
+            }
+            createBattleBarrierMessage.BarrierId = barrierId;
+            GameServer.Instance.PostMessageToSystem<BattleSystem>(createBattleBarrierMessage);
         }
+        /// <summary>
+        /// 在查找玩家所在队伍
+        /// </summary>
+        /// <param name="playerId"></param>
+        /// <returns></returns>
+        private ulong FindMatchTeamById(string playerId)
+        {
+            foreach(var team in m_teamDic.Values)
+            {
+                if (team.IsContain(playerId)) return team.Id;
+            }
+            return default;
+        }
+
 
         /// <summary>
         /// 用来生成唯一的房间Id 

@@ -19,9 +19,9 @@ namespace Crazy.Common
 {
 	public static partial class RpcMessageOpcode
 	{
-		 public const ushort C2S_LoginMessage = 1010;
-		 public const ushort S2C_LoginMessage = 1011;
-		 public const ushort C2S_RegisterMessage = 1012;
-		 public const ushort S2C_RegisterMessage = 1013;
+		 public const ushort C2S_LoginMessage = 1018;
+		 public const ushort S2C_LoginMessage = 1019;
+		 public const ushort C2S_RegisterMessage = 1020;
+		 public const ushort S2C_RegisterMessage = 1021;
 	}
 }

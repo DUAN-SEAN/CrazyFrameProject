@@ -65,6 +65,14 @@ namespace GameServer
             }
            
         }
+        public string FindPlayer(string playerId)
+        {
+            lock (Member)
+            {
+               return  Member.Contains(playerId) ?playerId: null;
+            }
+           
+        }
         /// <summary>
         /// 获取队长的id
         /// </summary>
@@ -78,7 +86,18 @@ namespace GameServer
 
            
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>获取队伍</returns>
+        public List<string> GetMembers()
+        {
+            lock (Member)
+            {
+                return Member.ToList();
+            }
+            
+        }
         public UInt64 Id { get; protected set; }//表示队伍的唯一Id表示，不可被更改
 
         public int CurrentCount { get => Member.Count; }//当前队伍人数

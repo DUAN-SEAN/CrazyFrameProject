@@ -13,6 +13,10 @@ namespace GameServer
     /// </summary>
     public class CreateBattleBarrierMessage : ILocalMessage
     {
+        public CreateBattleBarrierMessage()
+        {
+            Players = new List<string>();
+        }
         public int MessageId => GameServerConstDefine.BattleSystemCreateBattleBarrier;
         public int BarrierId;//关卡Id
         public List<string> Players;//玩家Id集合
