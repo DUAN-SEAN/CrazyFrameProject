@@ -4,6 +4,7 @@ using Crazy.ServerBase;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GameServer
@@ -124,8 +125,7 @@ namespace GameServer
             }
             //初始化设置Id生成工具  ps:id由线程安全进行累加 
             m_roomIdFactory = new SessionIdFactory(serverId);
-
-
+            
             return true;
         }
         /// <summary>
@@ -186,13 +186,36 @@ namespace GameServer
         {
             //如果离开队伍后 房间人数为0 那么就执行清除任务 并设置房间的状态为Close
             S2CM_ExitMatchTeamComplete message = new S2CM_ExitMatchTeamComplete {State = S2CM_ExitMatchTeamComplete.Types.State.Ok  };
+            message.LaunchPlayerId = playerId;
+            message.MatchTeamId = teamId;
             MatchTeam matchTeam = null;
-            if (!m_teamDic.TryGetValue(teamId, out matchTeam))//没有队伍
+            ulong realTeamId = FindMatchTeamById(playerId);//首先不信任客户端 在服务器内找到玩家
+            if(realTeamId == default)//找不到说明是个野消息
             {
                 message.State = S2CM_ExitMatchTeamComplete.Types.State.Fail;
                 goto Result;
             }
-            if (matchTeam.State != MatchTeam.MatchTeamState.OPEN)//队伍不开放暂时不能退出
+            else
+            {
+                if (realTeamId == teamId)//如果队伍一样 说明是真实消息
+                {
+                    if (!m_teamDic.TryGetValue(teamId, out matchTeam))//没有队伍
+                    {
+                        message.State = S2CM_ExitMatchTeamComplete.Types.State.Fail;
+                        goto Result;
+                    }
+                }
+                else//否则 就是虚假消息，目前决策是这个用户是个脏用户，也需要被清除，直接从找到的真是队伍中删除
+                {
+                    if (!m_teamDic.TryGetValue(realTeamId, out matchTeam))//没有队伍
+                    {
+                        message.State = S2CM_ExitMatchTeamComplete.Types.State.Fail;
+                        goto Result;
+                    }
+                }
+            }
+            
+            if (matchTeam.State != MatchTeam.MatchTeamState.OPEN)//队伍不开放暂时不能退出，脏的也不让退
             {
                 message.State = S2CM_ExitMatchTeamComplete.Types.State.Fail;
                 goto Result;
@@ -204,19 +227,15 @@ namespace GameServer
                 goto Result;
             }
             message.LaunchPlayerId = playerId;
-            message.MatchTeamId = teamId;
+            message.MatchTeamId = matchTeam.Id;
             //TODO:还要向战斗系统发送玩家退出的请求
 
 
             Result:
-            if (matchTeam == null)
+            PostLocalMessageToCtx(new SystemSendNetMessage { Message = message }, playerId);//向发起者发送
+            if (matchTeam != null)
             {
-                PostLocalMessageToCtx(new SystemSendNetMessage { Message = message }, playerId);
-                
-            }
-            else
-            {
-                PostLocalMessageToCtx(new SystemSendNetMessage { Message = message }, matchTeam?.GetMembers());
+                PostLocalMessageToCtx(new SystemSendNetMessage { Message = message }, matchTeam.GetMembers());
                 if (matchTeam.CurrentCount <= 0)//如果这时候队伍的人数为空 则执行清除工作 并设置队伍的状态为关闭
                 {
                     //可以执行清除任务了
@@ -226,9 +245,10 @@ namespace GameServer
                     }
                 }
             }
-            
+           
 
-            
+
+
 
         }
         /// <summary>
@@ -240,12 +260,18 @@ namespace GameServer
         {
             MatchTeam matchTeam = null;
             S2CM_JoinMatchTeamComplete message = new S2CM_JoinMatchTeamComplete();
-            if ((teamId = FindMatchTeamById(playerId)) != default)
+            message.State = S2CM_JoinMatchTeamComplete.Types.State.Complete;
+            message.LaunchPlayerId = playerId;
+            
+            ulong realTeamId = 0;
+            if ((realTeamId = FindMatchTeamById(playerId)) != default)
             {
                 Log.Error("加入队伍失败，因为玩家已经在队伍中了");
                 message.State = S2CM_JoinMatchTeamComplete.Types.State.HaveTeam;
+                message.MatchTeamId = realTeamId;
                 goto Result;
             }
+            
             if (!m_teamDic.TryGetValue(teamId, out matchTeam))
             {
                 message.State = S2CM_JoinMatchTeamComplete.Types.State.SystemError;
@@ -264,6 +290,8 @@ namespace GameServer
                 goto Result;
             }
             matchTeam.Add(playerId);//向队伍内添加玩家
+            message.LaunchPlayerId = playerId;
+            message.MatchTeamId = matchTeam.Id;
             Result:
             if (matchTeam == null)
             {

@@ -98,6 +98,10 @@ namespace GameServer
             }
             
         }
+        public void Clear()
+        {
+            Member.Clear();
+        }
         public UInt64 Id { get; protected set; }//表示队伍的唯一Id表示，不可被更改
 
         public int CurrentCount { get => Member.Count; }//当前队伍人数

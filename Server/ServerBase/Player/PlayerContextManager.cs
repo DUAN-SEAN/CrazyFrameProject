@@ -292,7 +292,10 @@ namespace Crazy.ServerBase
             if (playerId == null || playerId == default) return;
             var playerCtx = FindPlayerContextByString(playerId);
             if (playerCtx != null)
+            {
                 playerCtx.PostLocalMessage(msg);
+            }
+                
         }
         /// <summary>
         /// 向多个玩家发送本地消息

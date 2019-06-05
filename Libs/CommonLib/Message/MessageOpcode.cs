@@ -23,6 +23,15 @@ namespace Crazy.Common
 	[Message(MessageOpcode.S2CM_JoinMatchTeamComplete)]
 	public partial class S2CM_JoinMatchTeamComplete : IMessage {}
 
+	[Message(MessageOpcode.C2S_GetMatchTeamInfo)]
+	public partial class C2S_GetMatchTeamInfo : IMessage {}
+
+	[Message(MessageOpcode.S2C_UpdateMatchTeamInfo)]
+	public partial class S2C_UpdateMatchTeamInfo : IMessage {}
+
+	[Message(MessageOpcode.MatchTeamInfo)]
+	public partial class MatchTeamInfo {}
+
 	[Message(MessageOpcode.C2S_ExitMatchTeam)]
 	public partial class C2S_ExitMatchTeam : IMessage {}
 
@@ -67,15 +76,18 @@ namespace Crazy.Common
 		 public const ushort S2C_InvitePlayerMatchTeam = 1005;
 		 public const ushort C2S_JoinMatchTeam = 1006;
 		 public const ushort S2CM_JoinMatchTeamComplete = 1007;
-		 public const ushort C2S_ExitMatchTeam = 1008;
-		 public const ushort S2CM_ExitMatchTeamComplete = 1009;
-		 public const ushort C2S_JoinMatchQueue = 1010;
-		 public const ushort S2CM_JoinMatchQueueComplete = 1011;
-		 public const ushort C2S_ExitMatchQueue = 1012;
-		 public const ushort S2CM_ExitMatchQueue = 1013;
-		 public const ushort S2CM_MatchingFinish = 1014;
-		 public const ushort S2CM_CreateBattleBarrier = 1015;
-		 public const ushort CreateBattleBarrierInfo = 1016;
-		 public const ushort C2S_ReConnectByLogin = 1017;
+		 public const ushort C2S_GetMatchTeamInfo = 1008;
+		 public const ushort S2C_UpdateMatchTeamInfo = 1009;
+		 public const ushort MatchTeamInfo = 1010;
+		 public const ushort C2S_ExitMatchTeam = 1011;
+		 public const ushort S2CM_ExitMatchTeamComplete = 1012;
+		 public const ushort C2S_JoinMatchQueue = 1013;
+		 public const ushort S2CM_JoinMatchQueueComplete = 1014;
+		 public const ushort C2S_ExitMatchQueue = 1015;
+		 public const ushort S2CM_ExitMatchQueue = 1016;
+		 public const ushort S2CM_MatchingFinish = 1017;
+		 public const ushort S2CM_CreateBattleBarrier = 1018;
+		 public const ushort CreateBattleBarrierInfo = 1019;
+		 public const ushort C2S_ReConnectByLogin = 1020;
 	}
 }

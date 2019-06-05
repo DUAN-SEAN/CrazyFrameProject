@@ -42,34 +42,40 @@ namespace Crazy.Common {
             "TWF0Y2hUZWFtSWQYAiABKAQSPQoFc3RhdGUYAyABKA4yLi5DcmF6eS5Db21t",
             "b24uUzJDTV9Kb2luTWF0Y2hUZWFtQ29tcGxldGUuU3RhdGUiNAoFU3RhdGUS",
             "DAoIQ29tcGxldGUQABIPCgtTeXN0ZW1FcnJvchABEgwKCEhhdmVUZWFtEAIi",
-            "TwoRQzJTX0V4aXRNYXRjaFRlYW0SDQoFUnBjSWQYWiABKAUSFgoOTGF1bmNo",
-            "UGxheWVySWQYASABKAkSEwoLTWF0Y2hUZWFtSWQYAiABKAQisgEKGlMyQ01f",
-            "RXhpdE1hdGNoVGVhbUNvbXBsZXRlEg0KBVJwY0lkGFogASgFEhYKDkxhdW5j",
-            "aFBsYXllcklkGAEgASgJEhMKC01hdGNoVGVhbUlkGAIgASgEEj0KBXN0YXRl",
-            "GAMgASgOMi4uQ3JhenkuQ29tbW9uLlMyQ01fRXhpdE1hdGNoVGVhbUNvbXBs",
-            "ZXRlLlN0YXRlIhkKBVN0YXRlEgYKAk9LEAASCAoERmFpbBABImMKEkMyU19K",
-            "b2luTWF0Y2hRdWV1ZRINCgVScGNJZBhaIAEoBRIWCg5MYXVuY2hQbGF5ZXJJ",
-            "ZBgBIAEoCRITCgtNYXRjaFRlYW1JZBgCIAEoCRIRCglCYXJyaWVySWQYAyAB",
-            "KAUirwEKG1MyQ01fSm9pbk1hdGNoUXVldWVDb21wbGV0ZRINCgVScGNJZBha",
-            "IAEoBRITCgtNYXRjaFRlYW1JZBgBIAEoBBIRCglCYXJyaWVySWQYAiABKAUS",
-            "PgoFc3RhdGUYAyABKA4yLy5DcmF6eS5Db21tb24uUzJDTV9Kb2luTWF0Y2hR",
-            "dWV1ZUNvbXBsZXRlLlN0YXRlIhkKBVN0YXRlEgYKAk9rEAASCAoERmFpbBAB",
-            "IlAKEkMyU19FeGl0TWF0Y2hRdWV1ZRINCgVScGNJZBhaIAEoBRIWCg5MYXVu",
-            "Y2hQbGF5ZXJJZBgBIAEoCRITCgtNYXRjaFRlYW1JZBgCIAEoBCKqAQoTUzJD",
-            "TV9FeGl0TWF0Y2hRdWV1ZRINCgVScGNJZBhaIAEoBRIWCg5MYXVuY2hQbGF5",
-            "ZXJJZBgBIAEoCRITCgtNYXRjaFRlYW1JZBgCIAEoBBI2CgVzdGF0ZRgDIAEo",
-            "DjInLkNyYXp5LkNvbW1vbi5TMkNNX0V4aXRNYXRjaFF1ZXVlLlN0YXRlIh8K",
-            "BVN0YXRlEgoKBkNsaWVudBAAEgoKBlNlcnZlchABIp8BChNTMkNNX01hdGNo",
-            "aW5nRmluaXNoEg0KBVJwY0lkGFogASgFEhMKC01hdGNoVGVhbUlkGAEgASgE",
-            "EhEKCUJhcnJpZXJJZBgCIAEoBRI2CgVzdGF0ZRgDIAEoDjInLkNyYXp5LkNv",
-            "bW1vbi5TMkNNX01hdGNoaW5nRmluaXNoLlN0YXRlIhkKBVN0YXRlEgYKAk9r",
-            "EAASCAoERmFpbBABIs8BChhTMkNNX0NyZWF0ZUJhdHRsZUJhcnJpZXISDQoF",
-            "UnBjSWQYWiABKAUSEAoIQmF0dGxlSWQYASABKAQSUgoKQmF0dGxlSW5mbxgC",
-            "IAEoCzI+LkNyYXp5LkNvbW1vbi5TMkNNX0NyZWF0ZUJhdHRsZUJhcnJpZXIu",
-            "Q3JlYXRlQmF0dGxlQmFycmllckluZm8aPgoXQ3JlYXRlQmF0dGxlQmFycmll",
-            "ckluZm8SEAoIQmF0dGxlSWQYASABKAQSEQoJUGxheWVySWRzGAIgAygJIkgK",
-            "FEMyU19SZUNvbm5lY3RCeUxvZ2luEg0KBVJwY0lkGFogASgFEg8KB0FjY291",
-            "bnQYASABKAkSEAoIUGFzc3dvcmQYAiABKAliBnByb3RvMw=="));
+            "UgoUQzJTX0dldE1hdGNoVGVhbUluZm8SDQoFUnBjSWQYWiABKAUSFgoOTGF1",
+            "bmNoUGxheWVySWQYASABKAkSEwoLTWF0Y2hUZWFtSWQYAiABKAQihAEKF1My",
+            "Q19VcGRhdGVNYXRjaFRlYW1JbmZvEg0KBVJwY0lkGFogASgFEhYKDkxhdW5j",
+            "aFBsYXllcklkGAEgASgJEhMKC01hdGNoVGVhbUlkGAIgASgEEi0KCFRlYW1J",
+            "bmZvGAMgASgLMhsuQ3JhenkuQ29tbW9uLk1hdGNoVGVhbUluZm8iNwoNTWF0",
+            "Y2hUZWFtSW5mbxITCgtNYXRjaFRlYW1JZBgBIAEoBBIRCglQbGF5ZXJJZHMY",
+            "AiADKAkiTwoRQzJTX0V4aXRNYXRjaFRlYW0SDQoFUnBjSWQYWiABKAUSFgoO",
+            "TGF1bmNoUGxheWVySWQYASABKAkSEwoLTWF0Y2hUZWFtSWQYAiABKAQisgEK",
+            "GlMyQ01fRXhpdE1hdGNoVGVhbUNvbXBsZXRlEg0KBVJwY0lkGFogASgFEhYK",
+            "DkxhdW5jaFBsYXllcklkGAEgASgJEhMKC01hdGNoVGVhbUlkGAIgASgEEj0K",
+            "BXN0YXRlGAMgASgOMi4uQ3JhenkuQ29tbW9uLlMyQ01fRXhpdE1hdGNoVGVh",
+            "bUNvbXBsZXRlLlN0YXRlIhkKBVN0YXRlEgYKAk9LEAASCAoERmFpbBABImMK",
+            "EkMyU19Kb2luTWF0Y2hRdWV1ZRINCgVScGNJZBhaIAEoBRIWCg5MYXVuY2hQ",
+            "bGF5ZXJJZBgBIAEoCRITCgtNYXRjaFRlYW1JZBgCIAEoCRIRCglCYXJyaWVy",
+            "SWQYAyABKAUirwEKG1MyQ01fSm9pbk1hdGNoUXVldWVDb21wbGV0ZRINCgVS",
+            "cGNJZBhaIAEoBRITCgtNYXRjaFRlYW1JZBgBIAEoBBIRCglCYXJyaWVySWQY",
+            "AiABKAUSPgoFc3RhdGUYAyABKA4yLy5DcmF6eS5Db21tb24uUzJDTV9Kb2lu",
+            "TWF0Y2hRdWV1ZUNvbXBsZXRlLlN0YXRlIhkKBVN0YXRlEgYKAk9rEAASCAoE",
+            "RmFpbBABIlAKEkMyU19FeGl0TWF0Y2hRdWV1ZRINCgVScGNJZBhaIAEoBRIW",
+            "Cg5MYXVuY2hQbGF5ZXJJZBgBIAEoCRITCgtNYXRjaFRlYW1JZBgCIAEoBCKq",
+            "AQoTUzJDTV9FeGl0TWF0Y2hRdWV1ZRINCgVScGNJZBhaIAEoBRIWCg5MYXVu",
+            "Y2hQbGF5ZXJJZBgBIAEoCRITCgtNYXRjaFRlYW1JZBgCIAEoBBI2CgVzdGF0",
+            "ZRgDIAEoDjInLkNyYXp5LkNvbW1vbi5TMkNNX0V4aXRNYXRjaFF1ZXVlLlN0",
+            "YXRlIh8KBVN0YXRlEgoKBkNsaWVudBAAEgoKBlNlcnZlchABIp8BChNTMkNN",
+            "X01hdGNoaW5nRmluaXNoEg0KBVJwY0lkGFogASgFEhMKC01hdGNoVGVhbUlk",
+            "GAEgASgEEhEKCUJhcnJpZXJJZBgCIAEoBRI2CgVzdGF0ZRgDIAEoDjInLkNy",
+            "YXp5LkNvbW1vbi5TMkNNX01hdGNoaW5nRmluaXNoLlN0YXRlIhkKBVN0YXRl",
+            "EgYKAk9rEAASCAoERmFpbBABIs8BChhTMkNNX0NyZWF0ZUJhdHRsZUJhcnJp",
+            "ZXISDQoFUnBjSWQYWiABKAUSEAoIQmF0dGxlSWQYASABKAQSUgoKQmF0dGxl",
+            "SW5mbxgCIAEoCzI+LkNyYXp5LkNvbW1vbi5TMkNNX0NyZWF0ZUJhdHRsZUJh",
+            "cnJpZXIuQ3JlYXRlQmF0dGxlQmFycmllckluZm8aPgoXQ3JlYXRlQmF0dGxl",
+            "QmFycmllckluZm8SEAoIQmF0dGxlSWQYASABKAQSEQoJUGxheWVySWRzGAIg",
+            "AygJIkgKFEMyU19SZUNvbm5lY3RCeUxvZ2luEg0KBVJwY0lkGFogASgFEg8K",
+            "B0FjY291bnQYASABKAkSEAoIUGFzc3dvcmQYAiABKAliBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -80,6 +86,9 @@ namespace Crazy.Common {
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_InvitePlayerMatchTeam), global::Crazy.Common.S2C_InvitePlayerMatchTeam.Parser, new[]{ "RpcId", "LaunchPlayerId", "MatchTeamId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.C2S_JoinMatchTeam), global::Crazy.Common.C2S_JoinMatchTeam.Parser, new[]{ "RpcId", "LaunchPlayerId", "MatchTeamId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2CM_JoinMatchTeamComplete), global::Crazy.Common.S2CM_JoinMatchTeamComplete.Parser, new[]{ "RpcId", "LaunchPlayerId", "MatchTeamId", "State" }, null, new[]{ typeof(global::Crazy.Common.S2CM_JoinMatchTeamComplete.Types.State) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.C2S_GetMatchTeamInfo), global::Crazy.Common.C2S_GetMatchTeamInfo.Parser, new[]{ "RpcId", "LaunchPlayerId", "MatchTeamId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_UpdateMatchTeamInfo), global::Crazy.Common.S2C_UpdateMatchTeamInfo.Parser, new[]{ "RpcId", "LaunchPlayerId", "MatchTeamId", "TeamInfo" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.MatchTeamInfo), global::Crazy.Common.MatchTeamInfo.Parser, new[]{ "MatchTeamId", "PlayerIds" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.C2S_ExitMatchTeam), global::Crazy.Common.C2S_ExitMatchTeam.Parser, new[]{ "RpcId", "LaunchPlayerId", "MatchTeamId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2CM_ExitMatchTeamComplete), global::Crazy.Common.S2CM_ExitMatchTeamComplete.Parser, new[]{ "RpcId", "LaunchPlayerId", "MatchTeamId", "State" }, null, new[]{ typeof(global::Crazy.Common.S2CM_ExitMatchTeamComplete.Types.State) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.C2S_JoinMatchQueue), global::Crazy.Common.C2S_JoinMatchQueue.Parser, new[]{ "RpcId", "LaunchPlayerId", "MatchTeamId", "BarrierId" }, null, null, null),
@@ -1419,6 +1428,559 @@ namespace Crazy.Common {
 
   }
 
+  public sealed partial class C2S_GetMatchTeamInfo : pb::IMessage<C2S_GetMatchTeamInfo> {
+    private static readonly pb::MessageParser<C2S_GetMatchTeamInfo> _parser = new pb::MessageParser<C2S_GetMatchTeamInfo>(() => new C2S_GetMatchTeamInfo());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<C2S_GetMatchTeamInfo> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Crazy.Common.MessageReflection.Descriptor.MessageTypes[7]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C2S_GetMatchTeamInfo() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C2S_GetMatchTeamInfo(C2S_GetMatchTeamInfo other) : this() {
+      rpcId_ = other.rpcId_;
+      launchPlayerId_ = other.launchPlayerId_;
+      matchTeamId_ = other.matchTeamId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C2S_GetMatchTeamInfo Clone() {
+      return new C2S_GetMatchTeamInfo(this);
+    }
+
+    /// <summary>Field number for the "RpcId" field.</summary>
+    public const int RpcIdFieldNumber = 90;
+    private int rpcId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "LaunchPlayerId" field.</summary>
+    public const int LaunchPlayerIdFieldNumber = 1;
+    private string launchPlayerId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string LaunchPlayerId {
+      get { return launchPlayerId_; }
+      set {
+        launchPlayerId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "MatchTeamId" field.</summary>
+    public const int MatchTeamIdFieldNumber = 2;
+    private ulong matchTeamId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong MatchTeamId {
+      get { return matchTeamId_; }
+      set {
+        matchTeamId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as C2S_GetMatchTeamInfo);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(C2S_GetMatchTeamInfo other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (RpcId != other.RpcId) return false;
+      if (LaunchPlayerId != other.LaunchPlayerId) return false;
+      if (MatchTeamId != other.MatchTeamId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (RpcId != 0) hash ^= RpcId.GetHashCode();
+      if (LaunchPlayerId.Length != 0) hash ^= LaunchPlayerId.GetHashCode();
+      if (MatchTeamId != 0UL) hash ^= MatchTeamId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (LaunchPlayerId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(LaunchPlayerId);
+      }
+      if (MatchTeamId != 0UL) {
+        output.WriteRawTag(16);
+        output.WriteUInt64(MatchTeamId);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (LaunchPlayerId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(LaunchPlayerId);
+      }
+      if (MatchTeamId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(MatchTeamId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(C2S_GetMatchTeamInfo other) {
+      if (other == null) {
+        return;
+      }
+      if (other.RpcId != 0) {
+        RpcId = other.RpcId;
+      }
+      if (other.LaunchPlayerId.Length != 0) {
+        LaunchPlayerId = other.LaunchPlayerId;
+      }
+      if (other.MatchTeamId != 0UL) {
+        MatchTeamId = other.MatchTeamId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            LaunchPlayerId = input.ReadString();
+            break;
+          }
+          case 16: {
+            MatchTeamId = input.ReadUInt64();
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class S2C_UpdateMatchTeamInfo : pb::IMessage<S2C_UpdateMatchTeamInfo> {
+    private static readonly pb::MessageParser<S2C_UpdateMatchTeamInfo> _parser = new pb::MessageParser<S2C_UpdateMatchTeamInfo>(() => new S2C_UpdateMatchTeamInfo());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<S2C_UpdateMatchTeamInfo> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Crazy.Common.MessageReflection.Descriptor.MessageTypes[8]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S2C_UpdateMatchTeamInfo() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S2C_UpdateMatchTeamInfo(S2C_UpdateMatchTeamInfo other) : this() {
+      rpcId_ = other.rpcId_;
+      launchPlayerId_ = other.launchPlayerId_;
+      matchTeamId_ = other.matchTeamId_;
+      teamInfo_ = other.teamInfo_ != null ? other.teamInfo_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S2C_UpdateMatchTeamInfo Clone() {
+      return new S2C_UpdateMatchTeamInfo(this);
+    }
+
+    /// <summary>Field number for the "RpcId" field.</summary>
+    public const int RpcIdFieldNumber = 90;
+    private int rpcId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "LaunchPlayerId" field.</summary>
+    public const int LaunchPlayerIdFieldNumber = 1;
+    private string launchPlayerId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string LaunchPlayerId {
+      get { return launchPlayerId_; }
+      set {
+        launchPlayerId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "MatchTeamId" field.</summary>
+    public const int MatchTeamIdFieldNumber = 2;
+    private ulong matchTeamId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong MatchTeamId {
+      get { return matchTeamId_; }
+      set {
+        matchTeamId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "TeamInfo" field.</summary>
+    public const int TeamInfoFieldNumber = 3;
+    private global::Crazy.Common.MatchTeamInfo teamInfo_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Crazy.Common.MatchTeamInfo TeamInfo {
+      get { return teamInfo_; }
+      set {
+        teamInfo_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as S2C_UpdateMatchTeamInfo);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(S2C_UpdateMatchTeamInfo other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (RpcId != other.RpcId) return false;
+      if (LaunchPlayerId != other.LaunchPlayerId) return false;
+      if (MatchTeamId != other.MatchTeamId) return false;
+      if (!object.Equals(TeamInfo, other.TeamInfo)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (RpcId != 0) hash ^= RpcId.GetHashCode();
+      if (LaunchPlayerId.Length != 0) hash ^= LaunchPlayerId.GetHashCode();
+      if (MatchTeamId != 0UL) hash ^= MatchTeamId.GetHashCode();
+      if (teamInfo_ != null) hash ^= TeamInfo.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (LaunchPlayerId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(LaunchPlayerId);
+      }
+      if (MatchTeamId != 0UL) {
+        output.WriteRawTag(16);
+        output.WriteUInt64(MatchTeamId);
+      }
+      if (teamInfo_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(TeamInfo);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (LaunchPlayerId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(LaunchPlayerId);
+      }
+      if (MatchTeamId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(MatchTeamId);
+      }
+      if (teamInfo_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(TeamInfo);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(S2C_UpdateMatchTeamInfo other) {
+      if (other == null) {
+        return;
+      }
+      if (other.RpcId != 0) {
+        RpcId = other.RpcId;
+      }
+      if (other.LaunchPlayerId.Length != 0) {
+        LaunchPlayerId = other.LaunchPlayerId;
+      }
+      if (other.MatchTeamId != 0UL) {
+        MatchTeamId = other.MatchTeamId;
+      }
+      if (other.teamInfo_ != null) {
+        if (teamInfo_ == null) {
+          teamInfo_ = new global::Crazy.Common.MatchTeamInfo();
+        }
+        TeamInfo.MergeFrom(other.TeamInfo);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            LaunchPlayerId = input.ReadString();
+            break;
+          }
+          case 16: {
+            MatchTeamId = input.ReadUInt64();
+            break;
+          }
+          case 26: {
+            if (teamInfo_ == null) {
+              teamInfo_ = new global::Crazy.Common.MatchTeamInfo();
+            }
+            input.ReadMessage(teamInfo_);
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class MatchTeamInfo : pb::IMessage<MatchTeamInfo> {
+    private static readonly pb::MessageParser<MatchTeamInfo> _parser = new pb::MessageParser<MatchTeamInfo>(() => new MatchTeamInfo());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<MatchTeamInfo> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Crazy.Common.MessageReflection.Descriptor.MessageTypes[9]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MatchTeamInfo() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MatchTeamInfo(MatchTeamInfo other) : this() {
+      matchTeamId_ = other.matchTeamId_;
+      playerIds_ = other.playerIds_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MatchTeamInfo Clone() {
+      return new MatchTeamInfo(this);
+    }
+
+    /// <summary>Field number for the "MatchTeamId" field.</summary>
+    public const int MatchTeamIdFieldNumber = 1;
+    private ulong matchTeamId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong MatchTeamId {
+      get { return matchTeamId_; }
+      set {
+        matchTeamId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "PlayerIds" field.</summary>
+    public const int PlayerIdsFieldNumber = 2;
+    private static readonly pb::FieldCodec<string> _repeated_playerIds_codec
+        = pb::FieldCodec.ForString(18);
+    private readonly pbc::RepeatedField<string> playerIds_ = new pbc::RepeatedField<string>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<string> PlayerIds {
+      get { return playerIds_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as MatchTeamInfo);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(MatchTeamInfo other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (MatchTeamId != other.MatchTeamId) return false;
+      if(!playerIds_.Equals(other.playerIds_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (MatchTeamId != 0UL) hash ^= MatchTeamId.GetHashCode();
+      hash ^= playerIds_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (MatchTeamId != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(MatchTeamId);
+      }
+      playerIds_.WriteTo(output, _repeated_playerIds_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (MatchTeamId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(MatchTeamId);
+      }
+      size += playerIds_.CalculateSize(_repeated_playerIds_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(MatchTeamInfo other) {
+      if (other == null) {
+        return;
+      }
+      if (other.MatchTeamId != 0UL) {
+        MatchTeamId = other.MatchTeamId;
+      }
+      playerIds_.Add(other.playerIds_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            MatchTeamId = input.ReadUInt64();
+            break;
+          }
+          case 18: {
+            playerIds_.AddEntriesFrom(input, _repeated_playerIds_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class C2S_ExitMatchTeam : pb::IMessage<C2S_ExitMatchTeam> {
     private static readonly pb::MessageParser<C2S_ExitMatchTeam> _parser = new pb::MessageParser<C2S_ExitMatchTeam>(() => new C2S_ExitMatchTeam());
     private pb::UnknownFieldSet _unknownFields;
@@ -1427,7 +1989,7 @@ namespace Crazy.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Crazy.Common.MessageReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Crazy.Common.MessageReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1612,7 +2174,7 @@ namespace Crazy.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Crazy.Common.MessageReflection.Descriptor.MessageTypes[8]; }
+      get { return global::Crazy.Common.MessageReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1837,7 +2399,7 @@ namespace Crazy.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Crazy.Common.MessageReflection.Descriptor.MessageTypes[9]; }
+      get { return global::Crazy.Common.MessageReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2050,7 +2612,7 @@ namespace Crazy.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Crazy.Common.MessageReflection.Descriptor.MessageTypes[10]; }
+      get { return global::Crazy.Common.MessageReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2275,7 +2837,7 @@ namespace Crazy.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Crazy.Common.MessageReflection.Descriptor.MessageTypes[11]; }
+      get { return global::Crazy.Common.MessageReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2460,7 +3022,7 @@ namespace Crazy.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Crazy.Common.MessageReflection.Descriptor.MessageTypes[12]; }
+      get { return global::Crazy.Common.MessageReflection.Descriptor.MessageTypes[15]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2685,7 +3247,7 @@ namespace Crazy.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Crazy.Common.MessageReflection.Descriptor.MessageTypes[13]; }
+      get { return global::Crazy.Common.MessageReflection.Descriptor.MessageTypes[16]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2913,7 +3475,7 @@ namespace Crazy.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Crazy.Common.MessageReflection.Descriptor.MessageTypes[14]; }
+      get { return global::Crazy.Common.MessageReflection.Descriptor.MessageTypes[17]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3263,7 +3825,7 @@ namespace Crazy.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Crazy.Common.MessageReflection.Descriptor.MessageTypes[15]; }
+      get { return global::Crazy.Common.MessageReflection.Descriptor.MessageTypes[18]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

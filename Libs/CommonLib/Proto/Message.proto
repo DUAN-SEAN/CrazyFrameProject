@@ -55,6 +55,24 @@ message S2CM_JoinMatchTeamComplete // IMessage
 		HaveTeam = 2;
 	}
 }
+message C2S_GetMatchTeamInfo // IMessage
+{
+	int32 RpcId = 90;
+	string LaunchPlayerId = 1;
+	uint64 MatchTeamId = 2;
+}
+message S2C_UpdateMatchTeamInfo // IMessage
+{
+	int32 RpcId = 90;
+	string LaunchPlayerId = 1;
+	uint64 MatchTeamId = 2;
+	MatchTeamInfo TeamInfo = 3;
+}
+message MatchTeamInfo
+{
+	uint64 MatchTeamId = 1;
+	repeated string PlayerIds = 2;
+}
 message C2S_ExitMatchTeam  // IMessage
 {
 	int32 RpcId = 90;

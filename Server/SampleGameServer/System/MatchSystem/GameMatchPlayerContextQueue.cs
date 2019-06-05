@@ -34,7 +34,7 @@ namespace GameServer
         public void MatchUpdate()
         {
             //TODO:首先要检测是否能够进行匹配
-
+            if (m_matchingQue.Count < 1) return;
 
 
             //这里执行匹配算法

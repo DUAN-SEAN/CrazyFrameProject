@@ -28,9 +28,17 @@ namespace GameServer.System.NetHandlerSystem
         protected override void Run(ISession playerContext, C2S_JoinMatchTeam message)
         {
             Log.Info(message.ToJson());
+            GameServerPlayerContext context = playerContext as GameServerPlayerContext;
+            if(context.ContextStringName != message.LaunchPlayerId)
+            {
+                Log.Debug("发起人和退出玩家不一致，不能执行逻辑");
+                return;
+            }
             var lm = new JoinMatchTeamMessage();
+
             lm.playerId = message.LaunchPlayerId;
             lm.teamId = message.MatchTeamId;
+            
             GameServer.Instance.PostMessageToSystem<GameMatchSystem>(lm);
         }
     }
@@ -46,6 +54,20 @@ namespace GameServer.System.NetHandlerSystem
             GameServer.Instance.PostMessageToSystem<GameMatchSystem>(lm);
         }
     }
+    [MessageHandler]
+    public class C2S_GetMatchTeamInfoMessageHandler : AMHandler<C2S_GetMatchTeamInfo>
+    {
+        /// <summary>
+        /// 获取一次队伍信息
+        /// </summary>
+        /// <param name="playerContext"></param>
+        /// <param name="message"></param>
+        protected override void Run(ISession playerContext, C2S_GetMatchTeamInfo message)
+        {
+            //TODO:向匹配系统发送获取队伍信息 并发送给发起人
+        }
+    }
+
     [MessageHandler]
     public class C2S_JoinMatchQueueMessageHandler : AMHandler<C2S_JoinMatchQueue>
     {
