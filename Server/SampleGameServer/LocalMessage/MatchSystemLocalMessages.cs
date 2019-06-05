@@ -70,7 +70,11 @@ namespace GameServer
         public List<UInt64> teamIds = new List<UInt64>();
         public int barrierId;
     }
-
+    public class MatchTeamUpdateInfoMessage : ILocalMessage
+    {
+        public int MessageId => GameServerConstDefine.MatchSysteamMatchTeamUpdateInfo;
+        public UInt64 teamId;//队伍Id
+    }
 
 
 

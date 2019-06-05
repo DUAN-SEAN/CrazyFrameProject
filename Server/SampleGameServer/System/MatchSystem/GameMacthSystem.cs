@@ -418,6 +418,16 @@ namespace GameServer
             createBattleBarrierMessage.BarrierId = barrierId;
             GameServer.Instance.PostMessageToSystem<BattleSystem>(createBattleBarrierMessage);
         }
+       
+        /// <summary>
+        /// 刷新队伍信息并且广播给队伍内玩家
+        /// </summary>
+        private void OnUpdateMatchTeam()
+        {
+
+
+        }
+
         /// <summary>
         /// 在查找玩家所在队伍
         /// </summary>

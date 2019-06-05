@@ -45,6 +45,10 @@ namespace GameServer
         /// 匹配队列完成一项
         /// </summary>
         public const Int32 MatchQueueCompleteSingle = 1056;
+        /// <summary>
+        /// 更新匹配队伍的信息
+        /// </summary>
+        public const Int32 MatchSysteamMatchTeamUpdateInfo = 1057;
         #endregion
         #region BattleSystem 1101-1200
         /// <summary>
