@@ -437,9 +437,9 @@ namespace GameServer
                 var team = m_teamDic[id];
                 createBattleBarrierMessage.Players.AddRange(team.GetMembers());
                 //修改队伍状态 并通知GameServer 向战斗系统发送创建战斗模块的消息
-                
+                team.State = MatchTeam.MatchTeamState.INBATTLE;
             }
-            team.State = MatchTeam.MatchTeamState.INBATTLE;
+           
             createBattleBarrierMessage.BarrierId = barrierId;
             GameServer.Instance.PostMessageToSystem<BattleSystem>(createBattleBarrierMessage);
         }
