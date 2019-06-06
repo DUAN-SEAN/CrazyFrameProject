@@ -87,6 +87,10 @@ namespace GameServer
                     MatchQueueCompleteSingleMessage matchQueueCompleteSingleMessage = msg as MatchQueueCompleteSingleMessage;
                     OnCompleteMatching(matchQueueCompleteSingleMessage.teamIds, matchQueueCompleteSingleMessage.barrierId);
                     break;
+                case GameServerConstDefine.MatchSysteamMatchTeamUpdateInfo:
+                    MatchTeamUpdateInfoMessage matchTeamUpdateInfoMessage = msg as MatchTeamUpdateInfoMessage;
+                    OnUpdateMatchTeam(matchTeamUpdateInfoMessage.teamId);
+                    break;
                 default:
                     break;
             }
@@ -320,30 +324,49 @@ namespace GameServer
         /// </summary>
         public void OnJoinMatchQueue(ulong teamId, string playerId, int barrierId)
         {
+            S2CM_JoinMatchQueueComplete message = new S2CM_JoinMatchQueueComplete();
+            message.State = S2CM_JoinMatchQueueComplete.Types.State.Fail;
             //1 验证 队伍是否存在
             MatchTeam matchTeam = null;
+            GameMatchPlayerContextQueue gameMatchPlayerContextQueue = null;
             if (!m_teamDic.TryGetValue(teamId, out matchTeam))
             {
-                return;
+                goto Result;
             }
             //2 验证队长是否合法
             if (matchTeam.GetCaptainId() != playerId)
             {
-                return;
+                goto Result;
             }
             //3 验证team状态是否满足
             if (matchTeam.State != MatchTeam.MatchTeamState.OPEN)
             {
-                return;
+                goto Result;
             }
             //4 验证是否有对应的关卡匹配队列
-            GameMatchPlayerContextQueue gameMatchPlayerContextQueue;
+            
             if (!m_gameMatchPlayerCtxQueDic.TryGetValue(barrierId, out gameMatchPlayerContextQueue))
             {
-                return;
+                goto Result;
             }
             //5 向匹配队列加入该队伍  方法内修改matchTeam的状态
             gameMatchPlayerContextQueue.OnJoinMatchQueue(matchTeam);
+            message.State = S2CM_JoinMatchQueueComplete.Types.State.Ok;
+            message.BarrierId = barrierId;
+            message.MatchTeamId = teamId;
+            Result:
+            if(message.State == S2CM_JoinMatchQueueComplete.Types.State.Ok)
+            {
+                PostLocalMessageToCtx(new SystemSendNetMessage { Message = message }, matchTeam.GetMembers());
+            }
+            else
+            {
+                PostLocalMessageToCtx(new SystemSendNetMessage { Message = message }, playerId);
+            }
+            
+
+
+
 
 
         }
@@ -406,6 +429,7 @@ namespace GameServer
                 return;
 
             }
+            Log.Info("战斗匹配系统 匹配一个战斗成功 BarrierId = "+barrierId);
             //TODO:向战斗系统发生生成消息 战斗系统内部会向队伍所有玩家发生 战斗生成消息
             CreateBattleBarrierMessage createBattleBarrierMessage = new CreateBattleBarrierMessage();
             foreach(var id in teamIds)
@@ -413,8 +437,9 @@ namespace GameServer
                 var team = m_teamDic[id];
                 createBattleBarrierMessage.Players.AddRange(team.GetMembers());
                 //修改队伍状态 并通知GameServer 向战斗系统发送创建战斗模块的消息
-                team.State = MatchTeam.MatchTeamState.INBATTLE;
+                
             }
+            team.State = MatchTeam.MatchTeamState.INBATTLE;
             createBattleBarrierMessage.BarrierId = barrierId;
             GameServer.Instance.PostMessageToSystem<BattleSystem>(createBattleBarrierMessage);
         }
@@ -422,9 +447,35 @@ namespace GameServer
         /// <summary>
         /// 刷新队伍信息并且广播给队伍内玩家
         /// </summary>
-        private void OnUpdateMatchTeam()
+        private void OnUpdateMatchTeam(ulong teamId)
         {
+            S2C_UpdateMatchTeamInfo message = null;
+            MatchTeam matchTeam = null;
+            if (!m_teamDic.TryGetValue(teamId, out matchTeam))
+            {
 
+                return;
+            }
+            //队伍状态检测
+            if (matchTeam.State != MatchTeam.MatchTeamState.OPEN)
+            {
+                
+                goto Result;
+            }
+            message = new S2C_UpdateMatchTeamInfo();
+            message.TeamInfo = new MatchTeamInfo();
+            message.TeamInfo.MatchTeamId = teamId;
+            message.MatchTeamId = teamId;
+            foreach (var item in matchTeam.GetMembers())
+            {
+                message.TeamInfo.PlayerIds.Add(item);
+            }
+
+            Result:
+            if (matchTeam != null && message != null)
+            {
+                PostLocalMessageToCtx(new SystemSendNetMessage { Message = message }, matchTeam?.GetMembers());
+            }
 
         }
 

@@ -64,7 +64,10 @@ namespace GameServer.System.NetHandlerSystem
         /// <param name="message"></param>
         protected override void Run(ISession playerContext, C2S_GetMatchTeamInfo message)
         {
-            //TODO:向匹配系统发送获取队伍信息 并发送给发起人
+            //向匹配系统发送获取队伍信息 并发送给发起人
+            var lm = new MatchTeamUpdateInfoMessage();
+            lm.teamId = message.MatchTeamId;
+            GameServer.Instance.PostMessageToSystem<GameMatchSystem>(lm);
         }
     }
 
@@ -73,7 +76,12 @@ namespace GameServer.System.NetHandlerSystem
     {
         protected override void Run(ISession playerContext, C2S_JoinMatchQueue message)
         {
-            
+            //TODO:队伍的队长发起匹配交给匹配系统执行逻辑
+            var lm = new JoinMatchQueueMessage();
+            lm.barrierId = message.BarrierId;
+            lm.playerId = message.LaunchPlayerId;
+            lm.teamId = message.MatchTeamId;
+            GameServer.Instance.PostMessageToSystem<GameMatchSystem>(lm);
         }
     }
 }

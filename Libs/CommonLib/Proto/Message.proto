@@ -94,7 +94,7 @@ message C2S_JoinMatchQueue  // IMessage
 {
 	int32 RpcId = 90;
 	string LaunchPlayerId = 1;
-	string MatchTeamId = 2;
+	uint64 MatchTeamId = 2;
 	int32 BarrierId = 3;
 }
 message S2CM_JoinMatchQueueComplete  // IMessage

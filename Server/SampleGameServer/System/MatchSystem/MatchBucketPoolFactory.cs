@@ -37,7 +37,6 @@ namespace GameServer
         }
         public void Recycle(MatchBucket matchBucket)
         {
-            matchBucket.Dispose();
             m_queue.Enqueue(matchBucket);
         }
         /// <summary>
@@ -47,7 +46,7 @@ namespace GameServer
 
         private static MatchBucketPool m_instance;
 
-        public static MatchBucketPool Instance;
+        public static MatchBucketPool Instance { get => m_instance; }
     }
     /// <summary>
     /// 匹配桶 桶的容量等于关卡容量
@@ -63,6 +62,7 @@ namespace GameServer
         public void Dispose()
         {
             matchTeams.Clear();
+            matchTeams = null;
             MatchBucketPool.Instance.Recycle(this);//放入池子
 
         }

@@ -55,7 +55,7 @@ namespace Crazy.Common {
             "BXN0YXRlGAMgASgOMi4uQ3JhenkuQ29tbW9uLlMyQ01fRXhpdE1hdGNoVGVh",
             "bUNvbXBsZXRlLlN0YXRlIhkKBVN0YXRlEgYKAk9LEAASCAoERmFpbBABImMK",
             "EkMyU19Kb2luTWF0Y2hRdWV1ZRINCgVScGNJZBhaIAEoBRIWCg5MYXVuY2hQ",
-            "bGF5ZXJJZBgBIAEoCRITCgtNYXRjaFRlYW1JZBgCIAEoCRIRCglCYXJyaWVy",
+            "bGF5ZXJJZBgBIAEoCRITCgtNYXRjaFRlYW1JZBgCIAEoBBIRCglCYXJyaWVy",
             "SWQYAyABKAUirwEKG1MyQ01fSm9pbk1hdGNoUXVldWVDb21wbGV0ZRINCgVS",
             "cGNJZBhaIAEoBRITCgtNYXRjaFRlYW1JZBgBIAEoBBIRCglCYXJyaWVySWQY",
             "AiABKAUSPgoFc3RhdGUYAyABKA4yLy5DcmF6eS5Db21tb24uUzJDTV9Kb2lu",
@@ -2452,12 +2452,12 @@ namespace Crazy.Common {
 
     /// <summary>Field number for the "MatchTeamId" field.</summary>
     public const int MatchTeamIdFieldNumber = 2;
-    private string matchTeamId_ = "";
+    private ulong matchTeamId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string MatchTeamId {
+    public ulong MatchTeamId {
       get { return matchTeamId_; }
       set {
-        matchTeamId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        matchTeamId_ = value;
       }
     }
 
@@ -2497,7 +2497,7 @@ namespace Crazy.Common {
       int hash = 1;
       if (RpcId != 0) hash ^= RpcId.GetHashCode();
       if (LaunchPlayerId.Length != 0) hash ^= LaunchPlayerId.GetHashCode();
-      if (MatchTeamId.Length != 0) hash ^= MatchTeamId.GetHashCode();
+      if (MatchTeamId != 0UL) hash ^= MatchTeamId.GetHashCode();
       if (BarrierId != 0) hash ^= BarrierId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -2516,9 +2516,9 @@ namespace Crazy.Common {
         output.WriteRawTag(10);
         output.WriteString(LaunchPlayerId);
       }
-      if (MatchTeamId.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(MatchTeamId);
+      if (MatchTeamId != 0UL) {
+        output.WriteRawTag(16);
+        output.WriteUInt64(MatchTeamId);
       }
       if (BarrierId != 0) {
         output.WriteRawTag(24);
@@ -2542,8 +2542,8 @@ namespace Crazy.Common {
       if (LaunchPlayerId.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(LaunchPlayerId);
       }
-      if (MatchTeamId.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(MatchTeamId);
+      if (MatchTeamId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(MatchTeamId);
       }
       if (BarrierId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(BarrierId);
@@ -2565,7 +2565,7 @@ namespace Crazy.Common {
       if (other.LaunchPlayerId.Length != 0) {
         LaunchPlayerId = other.LaunchPlayerId;
       }
-      if (other.MatchTeamId.Length != 0) {
+      if (other.MatchTeamId != 0UL) {
         MatchTeamId = other.MatchTeamId;
       }
       if (other.BarrierId != 0) {
@@ -2586,8 +2586,8 @@ namespace Crazy.Common {
             LaunchPlayerId = input.ReadString();
             break;
           }
-          case 18: {
-            MatchTeamId = input.ReadString();
+          case 16: {
+            MatchTeamId = input.ReadUInt64();
             break;
           }
           case 24: {
