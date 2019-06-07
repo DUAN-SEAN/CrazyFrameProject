@@ -16,7 +16,6 @@ namespace GameServer
     /// </summary>
     public class BattleSystem:BaseSystem
     {
-        
 
         public override void Update(int data1 = 0, long data2 = 0, object data3 = null)
         {
