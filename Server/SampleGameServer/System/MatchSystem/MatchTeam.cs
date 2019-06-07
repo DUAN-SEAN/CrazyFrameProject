@@ -22,9 +22,6 @@ namespace GameServer
             m_maxCount = maxCount;
         }
 
-
-
-
         public void Add(string playerId)
         {
             lock (Member)
@@ -55,17 +52,56 @@ namespace GameServer
                 return false;
             return true;
         }
-
+        /// <summary>
+        /// 判断玩家是否在队伍中
+        /// </summary>
+        /// <param name="playerId"></param>
+        /// <returns></returns>
         public bool IsContain(string playerId)
         {
-            return Member.Contains(playerId);
+            lock (Member)
+            {
+                return Member.Contains(playerId);
+            }
+           
         }
-
+        public string FindPlayer(string playerId)
+        {
+            lock (Member)
+            {
+               return  Member.Contains(playerId) ?playerId: null;
+            }
+           
+        }
+        /// <summary>
+        /// 获取队长的id
+        /// </summary>
+        /// <returns></returns>
         public string GetCaptainId()
         {
-            return Member.First();
-        }
+            lock (Member)
+            {
+                return Member.First();
+            }
 
+           
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>获取队伍</returns>
+        public List<string> GetMembers()
+        {
+            lock (Member)
+            {
+                return Member.ToList();
+            }
+            
+        }
+        public void Clear()
+        {
+            Member.Clear();
+        }
         public UInt64 Id { get; protected set; }//表示队伍的唯一Id表示，不可被更改
 
         public int CurrentCount { get => Member.Count; }//当前队伍人数

@@ -52,6 +52,9 @@ namespace GameServer
                             case EventOnAuthLoginFail:
                                 returnState = State;
                                 break;
+                            case EventOnAuthLoginReq:
+                                returnState = State;
+                                break;
                             case EventOnSessionLoginReq:
                                 returnState = State;
                                 break;
@@ -168,6 +171,7 @@ namespace GameServer
             {
                 return -1;
             }
+            State = returnState;
             return returnState;
         }
         #region 状态定义

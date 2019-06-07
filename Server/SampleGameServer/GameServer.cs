@@ -25,6 +25,7 @@ namespace GameServer
 
         public override bool Initialize<GlobalConfigureType, PlayerContextBase>(string globalPath, Type plyaerContextType, IMessagePacker messagePraser, string serverName)
         {
+            //初始化程序集
             TypeManager.Instance.Add(DLLType.Common,Assembly.GetAssembly(typeof(TypeManager)));
             TypeManager.Instance.Add(DLLType.ServerBase, Assembly.GetAssembly(typeof(ServerBase)));
             TypeManager.Instance.Add(DLLType.GameServer, Assembly.GetAssembly(typeof(GameServer)));
@@ -42,18 +43,23 @@ namespace GameServer
             var dbConfig = m_gameServerGlobalConfig.DBConfigInfos[0];
             Log.Info($"ip:{dbConfig.ConnectHost} port:{dbConfig.Port} serviceName:{dbConfig.DataBase} username:{dbConfig.UserName} password:{dbConfig.Password}");
 
+
             //MongoDBHelper.CreateDBClient(); //测试
-            
             //mongodb测试
             MongoDBHelper.Test();
 
-          
 
+            //初始化功能服务的各个模块系统
+            if (!InitializeSystem())
+            {
+                Log.Info("初始化模块系统失败");
+                return false;
+            }
 
 
 
             //下面可以写启动逻辑线程 将上述游戏逻辑丢到逻辑线程中处理
-             
+
 
             return true;
         }
@@ -82,7 +88,7 @@ namespace GameServer
             //启动各个系统的Tick功能
             foreach (var item in m_systemDic.Values)
             {
-                item.Start();//首先Start
+                item.Start();//首先System.Start
                 TimerManager.SetLoopTimer(100, new TimerManager.OnTimerCallBack(item.Update)); 
             }
             return true;

@@ -11,5 +11,8 @@ namespace GameServer.System.BattleSystem
     /// </summary>
     public class BattleEntity
     {
+
+
+
     }
 }

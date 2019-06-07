@@ -19,8 +19,6 @@ namespace GameServer
         /// 服务器本地消息:关闭当前玩家现场
         /// </summary>
         public const Int32 LocalMsgShutdownContext = 1002;
-
-
         #endregion
         #region MatchSystem 1051-1100  
         /// <summary>
@@ -47,12 +45,16 @@ namespace GameServer
         /// 匹配队列完成一项
         /// </summary>
         public const Int32 MatchQueueCompleteSingle = 1056;
+        /// <summary>
+        /// 更新匹配队伍的信息
+        /// </summary>
+        public const Int32 MatchSysteamMatchTeamUpdateInfo = 1057;
         #endregion
         #region BattleSystem 1101-1200
         /// <summary>
         /// 创建战斗关卡
         /// </summary>
-        public const Int32 BattleSystemCreateBattleBarrier = 1101;
+        public const Int32 BattleSystemCreateBattleBarrier = 110;
         #endregion
 
 

@@ -289,9 +289,13 @@ namespace Crazy.ServerBase
         /// <param name="playerId"></param>
         public void SendSingleLocalMessage(ILocalMessage msg,string playerId)
         {
+            if (playerId == null || playerId == default) return;
             var playerCtx = FindPlayerContextByString(playerId);
             if (playerCtx != null)
+            {
                 playerCtx.PostLocalMessage(msg);
+            }
+                
         }
         /// <summary>
         /// 向多个玩家发送本地消息
@@ -300,6 +304,7 @@ namespace Crazy.ServerBase
         /// <param name="playerId"></param>
         public void BroadcastLocalMessagebyPlayerId(ILocalMessage msg, List<string> playerIds)
         {
+            if (playerIds == null) return;
             foreach(var id in playerIds)
             {
                 var playerCtx = FindPlayerContextByString(id);

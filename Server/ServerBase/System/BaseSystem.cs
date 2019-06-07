@@ -76,7 +76,7 @@ namespace Crazy.ServerBase
             return true;
         }
         /// <summary>
-        /// 向一个玩家发送
+        /// 向一个玩家发送本地消息
         /// </summary>
         /// <param name="msg"></param>
         /// <param name="playerId"></param>
@@ -85,7 +85,7 @@ namespace Crazy.ServerBase
             ServerBase.Instance.PlayerCtxManager.SendSingleLocalMessage(msg, playerId);
         }
         /// <summary>
-        /// 向多个玩家发送
+        /// 向多个玩家发送本地消息
         /// </summary>
         /// <param name="msg"></param>
         /// <param name="playerIds"></param>

@@ -247,9 +247,17 @@ namespace Crazy.ServerBase
                         return;
                     }
                 case ServerBaseLocalMesssageIDDef.SystemSendNetMessage:
+                    
                     var snm = (SystemSendNetMessage)msg;
-                    if(snm.PlayerId==m_gameUserId)//如果验证通过才允许向客户端发送
-                        Send(snm.Message);
+                    if(snm.Message == null)
+                    {
+                        Log.Debug("要发送的网络消息为空");
+                        return;
+                    }
+                    Log.Info("系统向玩家发送消息 " + snm.PlayerId + "  " + snm.Message.GetType());
+                    Send(snm.Message);
+                   
+                        
                     break;
                 default:break;
             }
