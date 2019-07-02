@@ -37,6 +37,11 @@ namespace GameServer
         }
         public void Recycle(MatchBucket matchBucket)
         {
+            //如果池子中的桶数量过多就释放一部分
+            while (m_queue.Count > 10)
+            {
+                m_queue.Dequeue();
+            }
             m_queue.Enqueue(matchBucket);
         }
         /// <summary>

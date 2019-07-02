@@ -89,7 +89,8 @@ namespace GameServer
             foreach (var item in m_systemDic.Values)
             {
                 item.Start();//首先System.Start
-                TimerManager.SetLoopTimer(100, new TimerManager.OnTimerCallBack(item.Update)); 
+                var timeId = TimerManager.SetLoopTimer(100, new TimerManager.OnTimerCallBack(item.Update));
+                //timeId保留了一个取消token 后期需要使用用来关闭系统循环
             }
             return true;
         }
