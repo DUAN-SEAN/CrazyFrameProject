@@ -485,7 +485,7 @@ namespace GameServer
                 Release();//CtxManager Free Context
             }
 
-
+            GameServer.Instance.PostMessageToSystem<GameMatchSystem>(new ToMatchPlayerShutdownMessage { playerId = m_gameUserId});
             return Task.CompletedTask;
 
         }
@@ -500,7 +500,7 @@ namespace GameServer
             // 由于基类调用了 ServerBase.Instance.PlayerCtxManager.FreePlayerContext(this); 
             // 所以这里要实现延时删除必须覆盖基类实现,在Shutdown中 最终释放现场
 
-
+            Log.Info("现场感知到玩家断线，进入断线状态 playerId = "+m_gameUserId);
             // 设置状态，等待timer来进行删除
             if (m_csm.SetStateCheck(PlayerContextStateMachine.EventOnDisconnected) == -1)
             {

@@ -289,7 +289,6 @@ namespace Crazy.ServerBase
         /// 协议字典
         /// </summary>
         private OpcodeTypeDictionary OpcodeTypeDic;
-
         /// <summary>
         /// 获取当前服务器的玩家上下文管理对象。
         /// </summary>

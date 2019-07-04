@@ -10,6 +10,18 @@ using System.Threading.Tasks;
 namespace GameServer
 {
     /// <summary>
+    /// 玩家现场被关闭时发送给匹配系统
+    /// </summary>
+    public class ToMatchPlayerShutdownMessage : ILocalMessage
+    {
+        public int MessageId => GameServerConstDefine.MatchSystemPlayerShutdown;
+
+        public string playerId;//玩家Id
+
+    }
+
+
+    /// <summary>
     /// 创建队伍
     /// </summary>
     public class CreateMatchTeamMessage : ILocalMessage

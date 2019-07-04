@@ -91,12 +91,54 @@ namespace GameServer
                     MatchTeamUpdateInfoMessage matchTeamUpdateInfoMessage = msg as MatchTeamUpdateInfoMessage;
                     OnUpdateMatchTeam(matchTeamUpdateInfoMessage.teamId);
                     break;
+                case GameServerConstDefine.MatchSystemPlayerShutdown:
+                    ToMatchPlayerShutdownMessage toMatchPlayerShutdownMessage = msg as ToMatchPlayerShutdownMessage;
+                    OnShutdownPlayer(toMatchPlayerShutdownMessage);
+                    break;
                 default:
                     break;
             }
 
 
             return base.OnMessage(msg);
+        }
+        /// <summary>
+        /// TODO:关闭一个玩家现场在匹配系统的存在
+        /// 安全操作，尽管退出
+        /// </summary>
+        /// <param name="toMatchPlayerShutdownMessage"></param>
+        private void OnShutdownPlayer(ToMatchPlayerShutdownMessage message)
+        {
+            Log.Info("收到了玩家现场发来的关闭消息");
+            var playerId = message.playerId;
+            var teamId = FindMatchTeamById(playerId);
+            MatchTeam matchTeam = null;
+            if (teamId == default)
+            {
+                return;
+            }
+            if(!m_teamDic.TryGetValue(teamId,out matchTeam))
+            {
+                return;
+            }
+            //匹配队伍在战斗中需要向战斗系统发送消息
+            if (matchTeam.State == MatchTeam.MatchTeamState.INBATTLE)
+            {
+
+                return;
+            }
+            //匹配队列正在匹配，需要将队伍从匹配队列中删除
+            if(matchTeam.State == MatchTeam.MatchTeamState.Matching)
+            {
+
+                return;
+            }
+            //最简单的退出 直接交给退出队伍执行
+            if(matchTeam.State == MatchTeam.MatchTeamState.OPEN)
+            {
+                OnExitMatchTeam(teamId, playerId);
+                return;
+            }
         }
 
         public override bool PostLocalMessage(ILocalMessage msg)
@@ -219,9 +261,11 @@ namespace GameServer
                 }
             }
             
-            if (matchTeam.State != MatchTeam.MatchTeamState.OPEN)//队伍不开放暂时不能退出，脏的也不让退
+            if (matchTeam.State == MatchTeam.MatchTeamState.CLOSE )//队伍不开放暂时不能退出，脏的也不让退
             {
+                
                 message.State = S2CM_ExitMatchTeamComplete.Types.State.Fail;
+                Log.Info("由于队伍已经处于关闭所以退出失败 = "+playerId);
                 goto Result;
             }
 

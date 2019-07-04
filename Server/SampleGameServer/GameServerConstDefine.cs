@@ -49,6 +49,10 @@ namespace GameServer
         /// 更新匹配队伍的信息
         /// </summary>
         public const Int32 MatchSysteamMatchTeamUpdateInfo = 1057;
+        /// <summary>
+        /// 玩家现场被关闭时需要向匹配系统发送一个消息
+        /// </summary>
+        public const Int32 MatchSystemPlayerShutdown = 1058;
         #endregion
         #region BattleSystem 1101-1200
         /// <summary>
