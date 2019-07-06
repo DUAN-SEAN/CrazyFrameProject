@@ -47,7 +47,20 @@ namespace GameServer
 
             //switch(msg.)
             //TODO:配置一些需要Tick的逻辑，使用TimeManager，目前暂时不需要
-               
+
+            // 记录连接时间
+            m_connectedTime = DateTime.Now;
+
+            // 设置一个定时扫描timer
+            m_playerCtxTimerId = GameServer.Instance.TimerManager.SetPlayerContextTimerOneShoot(ContextId,
+                ServerBaseLocalMesssageIDDef.GameServerPlayerCtxTimerPeriod, PLAYERTIMER_INT32CODE_TICK, 0, null);
+
+            // 如果启动心跳的话，设置一个心跳的定时扫描timer
+            //if (GameServer.Instance.m_gameServerGlobalConfig.ServerContext.HeartBeatTimerPeriod > 0)
+            //{
+            //    m_heartBeatTimerId = GameServer.Instance.TimerManager.SetPlayerContextTimerOneShoot(m_sessionId,
+            //       GameServer.Instance.m_gameServerGlobalConfig.ServerContext.HeartBeatTimerPeriod, HEARBEATTIMER_INT32CODE_TICK, 0, null);
+            //}
         }
         /// <summary>
         /// 重写 但要保留基现场的逻辑
@@ -64,6 +77,7 @@ namespace GameServer
 
                 case GameServerConstDefine.LocalMsgShutdownContext:
                     return OnLMsgShutdownContext((LocalMessageShutdownContext)msg);
+                
                 default:
                     return base.OnMessage(msg);
                    
@@ -387,6 +401,46 @@ namespace GameServer
             return Task.CompletedTask;
         }
         /// <summary>
+        /// 玩家现场timer回调
+        /// </summary>
+        /// <param name="lmsg"></param>
+        /// <returns></returns>
+        protected override async Task OnPlayerContextTimer(PlayerTimerMessage msg)
+        {
+            if (msg == null)
+            {
+                Log.Info("GameServerPlayerContext::OnPlayerContextTimer, but lmsg is null");
+                return;
+            }
+
+            //this.LogDebugFormat("OnPlayerContextTimer, lmsg.MessageId:{1}",
+            //    _sessionId.ToString(), lmsg.MessageId.ToString());
+
+            switch (msg.m_int32Data)
+            {
+                case PLAYERTIMER_INT32CODE_TICK:
+                    {
+                        // 驱动tick
+                        await OnTimerTick();
+                        // 驱动下一次
+                        m_playerCtxTimerId = GameServerBase.Instance.TimerManager.SetPlayerContextTimerOneShoot(
+                            m_sessionId, ServerFrameworkConstDefine.GameServerPlayerCtxTimerPeriod, PLAYERTIMER_INT32CODE_TICK, 0, null);
+                        return;
+                    }
+                case HEARBEATTIMER_INT32CODE_TICK:
+                    {
+                        // 驱动下一次
+                        OnHeartBeat();
+                        m_heartBeatTimerId = GameServerBase.Instance.TimerManager.SetPlayerContextTimerOneShoot(m_sessionId,
+                            GameServerBase.Instance.ServerConfig.ServerContext.HeartBeatTimerPeriod, HEARBEATTIMER_INT32CODE_TICK, 0, null);
+                        return;
+                    }
+                default:
+                    // base.OnPlayerContextTimer(lmsg); 什么也没有做，所以直接返回
+                    return;
+            }
+        }
+        /// <summary>
         /// 当从断线重联恢复
         /// </summary>
         private void OnResumeFromWaitForReconnectStart()
@@ -428,7 +482,7 @@ namespace GameServer
             
             return ShutdownContext(msg.m_shutdownRightNow);
         }
-
+       
         /// <summary>
         /// 关闭现场
         /// 内部将切断与客户端的连接Client
@@ -610,6 +664,10 @@ namespace GameServer
         /// 是否正在断线重联的恢复中
         /// </summary>
         protected bool m_resumingFromWaitForReconnect;
+        /// <summary>
+        /// 玩家连接时间
+        /// </summary>
+        protected DateTime m_connectedTime = DateTime.MaxValue;
 
         /// <summary>
         /// 用来tick玩家现场的timerid
