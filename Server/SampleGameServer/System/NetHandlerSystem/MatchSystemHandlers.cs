@@ -84,4 +84,16 @@ namespace GameServer.System.NetHandlerSystem
             GameServer.Instance.PostMessageToSystem<GameMatchSystem>(lm);
         }
     }
+    [MessageHandler]
+    public class C2S_ExitMatchQueueMessageHandler : AMHandler<C2S_ExitMatchQueue>
+    {
+        protected override void Run(ISession playerContext, C2S_ExitMatchQueue message)
+        {
+            GameServerPlayerContext context = playerContext as GameServerPlayerContext;
+            if (!context.IsAvaliable()) return; 
+            ExitMatchQueueMessage lm = new ExitMatchQueueMessage { playerId = message.LaunchPlayerId, teamId = message.MatchTeamId};
+            GameServer.Instance.PostMessageToSystem<GameMatchSystem>(lm);
+
+        }
+    }
 }

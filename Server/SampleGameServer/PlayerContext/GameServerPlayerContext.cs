@@ -158,6 +158,7 @@ namespace GameServer
         /// <returns></returns>
         private async Task OnLoginOk()
         {
+            Log.Info("当前玩家的状态为:" + m_csm.State);
             await Task.CompletedTask;
         }
 
@@ -482,6 +483,7 @@ namespace GameServer
             // 释放玩家现场
             if (needRelease)
             {
+                Log.Info("neeRelease:" + ContextStringName);
                 Release();//CtxManager Free Context
             }
 
@@ -516,6 +518,7 @@ namespace GameServer
             // 如果不处于断线等待状态也要关闭现场 也就是已经在断线状态了 也要关闭
             if (m_csm.State == PlayerContextStateMachine.StateDisconnected)
             {
+                
                 ShutdownContext();
                 return Task.CompletedTask;
             }

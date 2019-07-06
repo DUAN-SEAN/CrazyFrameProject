@@ -94,7 +94,7 @@ namespace GameServer
                             case EventOnDisconnected:
                                 returnState = StateDisconnectedWaitForReconnect;     // 进入断线等待状态
                                 break;
-                            case EventDisconnect:
+                            case EventDisconnect://服务器主动断掉
                                 returnState = StateDisconnecting;
                                 break;
                             case EventOnGameLogicOPTAfterLogin:                      // 只有这个状态之下可以进行游戏逻辑操作

@@ -163,7 +163,12 @@ namespace GameServer
 
             LeaveLock();
         }
-     
+        public bool IsContain(MatchTeam matchTeam)
+        {
+            if (m_matchingQue.Contains(matchTeam))
+                return true;
+            return false;
+        }
         private void OnEnterLock()
         {
             m_queueLock.Wait();

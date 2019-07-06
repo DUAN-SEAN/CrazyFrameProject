@@ -53,6 +53,10 @@ namespace GameServer
         /// 玩家现场被关闭时需要向匹配系统发送一个消息
         /// </summary>
         public const Int32 MatchSystemPlayerShutdown = 1058;
+        /// <summary>
+        /// 更新在线玩家集合，消息为来自客户端rpc请求
+        /// </summary>
+        public const Int32 UpdateOnlinePlayerList = 1059;
         #endregion
         #region BattleSystem 1101-1200
         /// <summary>

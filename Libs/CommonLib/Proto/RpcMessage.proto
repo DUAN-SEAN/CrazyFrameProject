@@ -43,3 +43,21 @@ message S2C_RegisterMessage // IResponse
 	}	
 }
 
+//´óÌü
+message C2S_UpdateOnlinePlayerList // IRequest
+{
+	int32 RpcId = 90;
+	string LaunchPlayerId = 1;
+}
+message S2C_UpdateOnlinePlayerList // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated OnlinePlayerInfo OnlinePlayers = 1;
+	message OnlinePlayerInfo
+	{
+		string PlayerId = 1;
+		int32 State = 2;
+	}
+}

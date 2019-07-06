@@ -1,6 +1,7 @@
 ﻿using Crazy.Common;
 using Crazy.NetSharp;
 using Crazy.ServerBase;
+using MongoDB.Bson;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -94,6 +95,10 @@ namespace GameServer
                 case GameServerConstDefine.MatchSystemPlayerShutdown:
                     ToMatchPlayerShutdownMessage toMatchPlayerShutdownMessage = msg as ToMatchPlayerShutdownMessage;
                     OnShutdownPlayer(toMatchPlayerShutdownMessage);
+                    break;
+                case GameServerConstDefine.UpdateOnlinePlayerList://更新客户端在线玩家状态
+                    UpdateOnlinePlayerMessage updateOnlinePlayerMessage = msg as UpdateOnlinePlayerMessage;
+                    OnUpdateOnlinePlayerRpc(updateOnlinePlayerMessage);
                     break;
                 default:
                     break;
@@ -222,7 +227,7 @@ namespace GameServer
             Result:
             //向玩家发送 创建并且加入到队伍的消息
             PostLocalMessageToCtx(new SystemSendNetMessage { Message = new S2C_CreateMatchTeamComplete { State = state,MatchTeamId = teamId }, PlayerId = playerId }, playerId);
-            Log.Info("创建房间 执行完毕 state = "+state.ToString());
+            Log.Info($"创建房间Id = {teamId} 执行完毕 state = "+state.ToString());
 
         }
         /// <summary>
@@ -437,9 +442,15 @@ namespace GameServer
                 return;
             }
             //4 获取匹配队列
+            var matchQueue = FindMatchTeamQueue(matchTeam);
+            if (matchQueue == null) return;
             //5 从匹配队列中删除
-            //6 
-
+            matchQueue.OnExitMatchQueue(matchTeam);
+            //6 向队伍内人广播退出匹配队列
+            if(matchTeam.State == MatchTeam.MatchTeamState.OPEN)
+            {
+                PostLocalMessageToCtx(new SystemSendNetMessage { Message = new S2CM_ExitMatchQueue { LaunchPlayerId = playerId, MatchTeamId = teamId, State = S2CM_ExitMatchQueue.Types.State.Client } }, matchTeam?.GetMembers());
+            }
 
         }
 
@@ -522,6 +533,40 @@ namespace GameServer
             }
 
         }
+        /// <summary>
+        /// 接收到用户的RPC请求 获取一次在线玩家列表，并显示在线玩家的状态
+        /// </summary>
+        /// <param name="message"></param>
+        public void OnUpdateOnlinePlayerRpc(UpdateOnlinePlayerMessage message)
+        {
+            S2C_UpdateOnlinePlayerList response = new S2C_UpdateOnlinePlayerList();
+            foreach (var item in message.players)
+            {
+                S2C_UpdateOnlinePlayerList.Types.OnlinePlayerInfo info = new S2C_UpdateOnlinePlayerList.Types.OnlinePlayerInfo();
+                info.PlayerId = item;
+                //检查玩家所在地
+                info.State = GetPlayerState(item);
+                response.OnlinePlayers.Add(info);
+            }
+            Log.Info(response.ToJson());
+            message.reply(response);
+
+
+            
+        }
+        /// <summary>
+        /// 查找队伍的匹配队列
+        /// </summary>
+        /// <param name="matchTeam"></param>
+        /// <returns></returns>
+        private GameMatchPlayerContextQueue FindMatchTeamQueue(MatchTeam matchTeam)
+        {
+            foreach (var item in m_gameMatchPlayerCtxQueDic.Values)
+            {
+                if(item.IsContain(matchTeam)) return item;
+            }
+            return null;
+        }
 
         /// <summary>
         /// 在查找玩家所在队伍
@@ -536,7 +581,34 @@ namespace GameServer
             }
             return default;
         }
-
+        /// <summary>
+        /// 获取玩家的状态
+        /// </summary>
+        /// <param name="playerId"></param>
+        /// <returns>在队伍里0,1,2,3。不在队伍里4</returns>
+        private int GetPlayerState(string playerId)
+        {
+            foreach(var team in m_teamDic.Values)
+            {
+                if (team.IsContain(playerId))
+                {
+                    switch (team.State)
+                    {
+                        case MatchTeam.MatchTeamState.OPEN:
+                            return 0;
+                        case MatchTeam.MatchTeamState.CLOSE:
+                            return 1;
+                        case MatchTeam.MatchTeamState.INBATTLE:
+                            return 2;
+                        case MatchTeam.MatchTeamState.Matching:
+                            return 3;
+                        default:
+                            break;
+                    }
+                }
+            }
+            return 4;//没有在队伍中 可以进行邀请
+        }
 
         /// <summary>
         /// 用来生成唯一的房间Id 

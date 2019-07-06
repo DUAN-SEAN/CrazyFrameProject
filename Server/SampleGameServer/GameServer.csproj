@@ -95,9 +95,10 @@
     <Compile Include="LocalMessage\MatchSystemLocalMessages.cs" />
     <Compile Include="System\MatchSystem\MatchBucketPoolFactory.cs" />
     <Compile Include="System\MatchSystem\MatchTeam.cs" />
+    <Compile Include="System\NetHandlerSystem\LobbyMessageHandlers.cs" />
     <Compile Include="System\NetHandlerSystem\MatchSystemHandlers.cs" />
     <Compile Include="System\NetHandlerSystem\RPC\RealmHandlers.cs" />
-    <Compile Include="System\MatchSystem\GameMacthSystem.cs" />
+    <Compile Include="System\MatchSystem\GameMatchSystem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

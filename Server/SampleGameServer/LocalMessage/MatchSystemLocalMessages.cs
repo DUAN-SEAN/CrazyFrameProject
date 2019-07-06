@@ -1,4 +1,5 @@
-﻿using Crazy.NetSharp;
+﻿using Crazy.Common;
+using Crazy.NetSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,7 +68,7 @@ namespace GameServer
     /// </summary>
     public class ExitMatchQueueMessage : ILocalMessage
     {
-        public int MessageId => GameServerConstDefine.MatchSystemJoinMatchQueue;
+        public int MessageId => GameServerConstDefine.MatchSystemExitMatchQueue;
         public UInt64 teamId;//队伍Id
         public string playerId;//玩家Id 队伍中的玩家都能退出匹配队列
         public Int32 barrierId;//关卡Id 每一个关卡都有对应的Id 
@@ -87,7 +88,16 @@ namespace GameServer
         public int MessageId => GameServerConstDefine.MatchSysteamMatchTeamUpdateInfo;
         public UInt64 teamId;//队伍Id
     }
-
-
-
+    /// <summary>
+    /// 向玩家发送更新在线玩家状态信息
+    /// ps:由于匹配系统保留着玩家在队伍和战斗中的信息，所以向匹配系统发送一个在线玩家集合
+    /// 然后根据这个集合检查是否由匹配系统管理
+    /// </summary>
+    public class UpdateOnlinePlayerMessage : ILocalMessage
+    {
+        public int MessageId => GameServerConstDefine.UpdateOnlinePlayerList;
+        public string playerId;//发起更新请求的玩家Id
+        public List<string> players;//所有在线玩家集合 
+        public Action<S2C_UpdateOnlinePlayerList> reply;//回调
+    }
 }
