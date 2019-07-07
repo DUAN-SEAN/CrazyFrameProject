@@ -62,8 +62,13 @@ namespace GameServer
         /// <summary>
         /// 创建战斗关卡
         /// </summary>
-        public const Int32 BattleSystemCreateBattleBarrier = 110;
+        public const Int32 BattleSystemCreateBattleBarrier = 1101;
         #endregion
+
+        /// <summary>
+        /// 玩家现场上的timer扫描时间间隔，单位毫秒
+        /// </summary>
+        public const Int32 GameServerPlayerCtxTimerPeriod = 5000;
 
 
     }

@@ -53,7 +53,7 @@ namespace GameServer
 
             // 设置一个定时扫描timer
             m_playerCtxTimerId = GameServer.Instance.TimerManager.SetPlayerContextTimerOneShoot(ContextId,
-                ServerBaseLocalMesssageIDDef.GameServerPlayerCtxTimerPeriod, PLAYERTIMER_INT32CODE_TICK, 0, null);
+                GameServerConstDefine.GameServerPlayerCtxTimerPeriod, PLAYERTIMER_INT32CODE_TICK, 0, null);
 
             // 如果启动心跳的话，设置一个心跳的定时扫描timer
             //if (GameServer.Instance.m_gameServerGlobalConfig.ServerContext.HeartBeatTimerPeriod > 0)
@@ -356,10 +356,100 @@ namespace GameServer
         /// </summary>
         /// <param name="msg"></param>
         /// <returns></returns>
-        protected override Task OnPlayerContextTimer(PlayerTimerMessage msg)
+        protected override async Task OnPlayerContextTimer(PlayerTimerMessage msg)
         {
+            if (msg == null)
+            {
+                Log.Info("GameServerPlayerContext::OnPlayerContextTimer, but lmsg is null");
+                return;
+            }
 
-            return Task.CompletedTask;
+            //this.LogDebugFormat("OnPlayerContextTimer, lmsg.MessageId:{1}",
+            //    _sessionId.ToString(), lmsg.MessageId.ToString());
+
+            switch (msg.m_int32Data)
+            {
+                case PLAYERTIMER_INT32CODE_TICK:
+                    {
+                        // 驱动tick
+                        await OnTimerTick();
+                        // 驱动下一次
+                        m_playerCtxTimerId = GameServer.Instance.TimerManager.SetPlayerContextTimerOneShoot(
+                            ContextId, GameServerConstDefine.GameServerPlayerCtxTimerPeriod, PLAYERTIMER_INT32CODE_TICK, 0, null);
+                        return;
+                    }
+                case HEARBEATTIMER_INT32CODE_TICK:
+                    {
+                        //// 驱动下一次
+                        //OnHeartBeat();
+                        //m_heartBeatTimerId = GameServer.Instance.TimerManager.SetPlayerContextTimerOneShoot(ContextId,
+                        //    GameServer.Instance.ServerConfig.ServerContext.HeartBeatTimerPeriod, HEARBEATTIMER_INT32CODE_TICK, 0, null);
+                        return;
+                    }
+                default:
+                    // base.OnPlayerContextTimer(lmsg); 什么也没有做，所以直接返回
+                    return;
+            }
+            return ;
+        }
+        /// <summary>
+        /// 5秒一次的扫描
+        /// </summary>
+        protected async Task OnTimerTick()
+        {
+            //this.LogDebugFormat("OnTimerTick",
+            //    _sessionId.ToString());
+
+            if (!IsAvaliable())
+            {
+                return;
+            }
+
+            // 对于shutdown超时的处理
+            if (m_shutdownTime != DateTime.MaxValue)
+            {
+                
+                if (m_shutdownTime.AddMilliseconds(GameServer.Instance.m_gameServerGlobalConfig.GameServerPlayerContext.ShutdownTimeOut) <= DateTime.Now)
+                {
+                    // 这个函数只应该进入一次，多次进入肯定是有问题了
+                    await OnShutDownTimeOut();
+                    return;
+                }
+            }
+
+            switch (m_csm.State)
+            {
+                case PlayerContextStateMachine.StateIdle:
+                case PlayerContextStateMachine.StateConnected:
+                    {
+                        // 如果发生连接超时
+                        if (m_connectedTime.AddMilliseconds(GameServer.Instance.m_gameServerGlobalConfig.GameServerPlayerContext.ConnectTimeOut) <= DateTime.Now)
+                        {
+                            await OnConnectedTimeOut();
+                        }
+                    }
+                    break;
+                case PlayerContextStateMachine.StateAuthLoginOK:
+                    break;
+                case PlayerContextStateMachine.StateSessionLoginOK:
+                    break;
+                case PlayerContextStateMachine.StateDisconnecting:
+                    break;
+                case PlayerContextStateMachine.StateDisconnected:
+                    break;
+                case PlayerContextStateMachine.StateDisconnectedWaitForReconnect:
+                    {
+                        // 在断线等待重连状态，如果超时
+                        if (m_disconnetedWaitTimeOutTime <= DateTime.Now)
+                        {
+                            await OnDisconnectedWaitTimeOut();
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return;
         }
         /// <summary>
         /// 当断线重连恢复完成
@@ -400,46 +490,7 @@ namespace GameServer
 
             return Task.CompletedTask;
         }
-        /// <summary>
-        /// 玩家现场timer回调
-        /// </summary>
-        /// <param name="lmsg"></param>
-        /// <returns></returns>
-        protected override async Task OnPlayerContextTimer(PlayerTimerMessage msg)
-        {
-            if (msg == null)
-            {
-                Log.Info("GameServerPlayerContext::OnPlayerContextTimer, but lmsg is null");
-                return;
-            }
-
-            //this.LogDebugFormat("OnPlayerContextTimer, lmsg.MessageId:{1}",
-            //    _sessionId.ToString(), lmsg.MessageId.ToString());
-
-            switch (msg.m_int32Data)
-            {
-                case PLAYERTIMER_INT32CODE_TICK:
-                    {
-                        // 驱动tick
-                        await OnTimerTick();
-                        // 驱动下一次
-                        m_playerCtxTimerId = GameServerBase.Instance.TimerManager.SetPlayerContextTimerOneShoot(
-                            m_sessionId, ServerFrameworkConstDefine.GameServerPlayerCtxTimerPeriod, PLAYERTIMER_INT32CODE_TICK, 0, null);
-                        return;
-                    }
-                case HEARBEATTIMER_INT32CODE_TICK:
-                    {
-                        // 驱动下一次
-                        OnHeartBeat();
-                        m_heartBeatTimerId = GameServerBase.Instance.TimerManager.SetPlayerContextTimerOneShoot(m_sessionId,
-                            GameServerBase.Instance.ServerConfig.ServerContext.HeartBeatTimerPeriod, HEARBEATTIMER_INT32CODE_TICK, 0, null);
-                        return;
-                    }
-                default:
-                    // base.OnPlayerContextTimer(lmsg); 什么也没有做，所以直接返回
-                    return;
-            }
-        }
+      
         /// <summary>
         /// 当从断线重联恢复
         /// </summary>
@@ -546,6 +597,36 @@ namespace GameServer
 
         }
         /// <summary>
+        /// 当断线延时也超时了
+        /// </summary>
+        /// <returns></returns>
+        protected  Task OnDisconnectedWaitTimeOut()
+        {
+            Log.Error("GameServerBasePlayerContext::OnDisconnectedWaitTimeOut");
+            ShutdownContext();
+            return Task.CompletedTask;
+        }
+        /// <summary>
+        /// 当shutdown现场超时
+        /// </summary>
+        /// <returns></returns>
+        protected Task OnShutDownTimeOut()
+        {
+            Log.Error("GameServerBasePlayerContext::OnShutDownTimeOut");
+            ShutdownContext(true);
+            return Task.CompletedTask;
+        }
+        /// <summary>
+        /// 当发生了连接状态下的超时
+        /// </summary>
+        /// <returns></returns>
+        protected Task OnConnectedTimeOut()
+        {
+            Log.Error("GameServerBasePlayerContext::OnConnectedTimeOut");
+            ShutdownContext(true);
+            return Task.CompletedTask;
+        }
+        /// <summary>
         /// 由通信层Client调用 用于通知玩家现场 我要和客户端断开连接
         /// 简单的说由Client感知客户端掉线情况
         /// 后期会加上心跳包去激发Client的检测功能
@@ -563,6 +644,11 @@ namespace GameServer
                 Log.Info("GameServerBasePlayerContext::OnDisconnected SetStateCheck EVENT_ONDISCONNECTED failed");
                 return Task.CompletedTask;
             }
+            // 记录连接断开的时间
+            m_disconnectedTime = DateTime.Now;
+            m_disconnetedWaitTimeOutTime = m_disconnectedTime.AddMilliseconds(GameServer.Instance.m_gameServerGlobalConfig.GameServerPlayerContext.DisconnectTimeOut);
+            Log.Debug("GameServerBasePlayerContext::OnDisconnected disconnectedTime"+m_disconnectedTime);
+
             // 如果已经在shutdown过程中 
             if (m_shutdownTime != DateTime.MaxValue)
             {
