@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace GameServer.System.NetHandlerSystem
 {
+    /// <summary>
+    /// 玩家更新在线玩家信息
+    /// </summary>
     [MessageHandler]
     public class C2S_UpdateOnlinePlayerMessageHandler : AMRpcHandler<C2S_UpdateOnlinePlayerList, S2C_UpdateOnlinePlayerList>
     {
@@ -15,7 +18,7 @@ namespace GameServer.System.NetHandlerSystem
         {
             GameServerPlayerContext gameServerPlayerContext = playerContext as GameServerPlayerContext;
             if (gameServerPlayerContext == null) return;
-
+            
             //1 根据PlayerManager获取在线玩家集合 
             var playerContexts =  GameServer.Instance.PlayerCtxManager.GetRegisteredByStringPlayerList();
             List<string> players = new List<string>();

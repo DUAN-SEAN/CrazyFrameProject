@@ -42,6 +42,9 @@ namespace GameServer.System.NetHandlerSystem
             GameServer.Instance.PostMessageToSystem<GameMatchSystem>(lm);
         }
     }
+    /// <summary>
+    /// 退出匹配队伍
+    /// </summary>
     [MessageHandler]
     public class C2S_ExitMatchTeamMessageHandler : AMHandler<C2S_ExitMatchTeam>
     {
@@ -84,6 +87,7 @@ namespace GameServer.System.NetHandlerSystem
             GameServer.Instance.PostMessageToSystem<GameMatchSystem>(lm);
         }
     }
+    
     [MessageHandler]
     public class C2S_ExitMatchQueueMessageHandler : AMHandler<C2S_ExitMatchQueue>
     {

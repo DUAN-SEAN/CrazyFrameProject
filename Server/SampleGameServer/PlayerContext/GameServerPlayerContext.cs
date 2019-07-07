@@ -160,10 +160,16 @@ namespace GameServer
             }
             //向客户端发送登陆验证成功
             RETURN:
-            response = new S2C_LoginMessage { PlayerGameId = this.m_gameUserId, State = result };
+            if(result == S2C_LoginMessage.Types.State.Ok)
+            {
+                response = new S2C_LoginMessage { PlayerGameId = this.m_gameUserId, State = result };
+                await OnLoginOk();//TODO:通知应用层登录流程完成
+            }
+            else
+                response = new S2C_LoginMessage { PlayerGameId = message.Account, State = result };
             reply(response);
-            //TODO:通知应用层登录流程完成
-            await OnLoginOk();
+            
+            
             return ;
         }
         /// <summary>
