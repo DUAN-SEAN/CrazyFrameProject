@@ -13,10 +13,7 @@ namespace GameServer.Battle
     {
 
 
-        public override void Dispose()
-        {
-            base.Dispose();
-        }
+       
 
         public override void Start(ulong id)
         {
@@ -30,16 +27,32 @@ namespace GameServer.Battle
         {
             base.Update();
 
+
+
+
+
+
         }
         public void SetTimer(long timerId)
         {
             m_timerId = timerId;
         }
+        /// <summary>
+        /// 返回TimerId
+        /// </summary>
+        /// <returns></returns>
         public long GetTimerId()
         {
             return m_timerId;
         }
 
+
+
+
+        public override void Dispose()
+        {
+            base.Dispose();
+        }
 
         /// <summary>
         /// 战斗开始时间
