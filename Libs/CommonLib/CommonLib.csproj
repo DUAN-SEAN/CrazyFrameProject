@@ -71,6 +71,7 @@
     <Compile Include="Message\MessageOpcode.cs" />
     <Compile Include="Message\RpcMessage.cs" />
     <Compile Include="Message\RpcMessageOpcode.cs" />
+    <Compile Include="ObjectPool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocol\AHandler.cs" />
     <Compile Include="Protocol\IMHandler.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Protocol\OpcodeTypeComponent.cs" />
     <Compile Include="Tools\AssemblyHelper.cs" />
     <Compile Include="Base\Assembly\UnOrderMultiMap.cs" />
+    <Compile Include="Tools\Factory\MessageFactory.cs" />
     <Compile Include="Tools\MessagePraser.cs" />
   </ItemGroup>
   <ItemGroup>

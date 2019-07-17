@@ -356,10 +356,12 @@ namespace Crazy.ServerBase
             if (m_client == null || m_client.Disconnected)
                 return -1;
 
-            Task t = SendAsync(ServerBase.Instance.PackProtobufObject(message));
+            Task t = Send(ServerBase.Instance.PackProtobufObject(message));
+            
+            
             return 0;
         }
-        public async Task SendAsync(ClientOutputBuffer buff)
+        public async Task Send(ClientOutputBuffer buff)
         {
             //这里可以写一个发包统计
             if (buff != null)

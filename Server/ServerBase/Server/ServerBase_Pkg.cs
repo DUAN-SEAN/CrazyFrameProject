@@ -105,7 +105,7 @@ namespace Crazy.ServerBase
                     buffer.m_dataLen = dataOffset;
                 }
             }
-
+            MessageFactory.Recycle(packageObj as IMessage);
             return true;
         }
 
@@ -157,7 +157,9 @@ namespace Crazy.ServerBase
                 //该调用失败时抛出异常，因此不需判断结果
                 msgType = OpcodeTypeDic.GetTypeById(msgId);
                 // 反序列化消息，如果数据是压缩的，就必须先解压缩，再反序列化
-                deserializeObject = Activator.CreateInstance(msgType);
+                //2019.7.16 修改为池子获取消息
+                deserializeObject =  MessageFactory.CreateMessage(msgType);
+                //deserializeObject = Activator.CreateInstance(msgType);
             }
             catch (Exception)
             {

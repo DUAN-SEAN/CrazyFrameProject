@@ -107,5 +107,7 @@ namespace GameServer
         /// 服务器用于顺序化AsyncAction的队列池，根据每个Context的UserId来分配该Context对应的AsyncAction所属的队列
         /// </summary>
         public SampleGameServerAsyncActionSequenceQueuePool AsyncActionQueuePool { get; private set; }
+
+      
     }
 }

@@ -86,6 +86,8 @@
     <Compile Include="LocalMessage\PlayerContextLocalMessages.cs" />
     <Compile Include="PlayerContext\PlayerContextStateMachine.cs" />
     <Compile Include="System\BattleSystem\BattleEntity.cs" />
+    <Compile Include="System\BattleSystem\BattleTimerManager.cs" />
+    <Compile Include="System\BattleSystem\BEntity.cs" />
     <Compile Include="System\BattleSystem\BattleSystem.cs" />
     <Compile Include="System\DBSystem\MongoDBHelper.cs" />
     <Compile Include="GameServerConstDefine.cs" />

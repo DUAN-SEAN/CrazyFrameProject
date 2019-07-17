@@ -1,4 +1,5 @@
-﻿using Crazy.NetSharp;
+﻿using Crazy.Common;
+using Crazy.NetSharp;
 using Crazy.ServerBase;
 using GameServer.Configure;
 using System;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameServer
+namespace GameServer.Battle
 {
     /// <summary>
     /// 1 游戏战斗系统，由于服务器处理单服，所以战斗系统将作为模块嵌入服务器中
@@ -47,6 +48,7 @@ namespace GameServer
             m_gameBarrierConfigs = GameServer.Instance.m_gameServerGlobalConfig.BarrierConfigs;
             if (m_gameBarrierConfigs == null) return false;
 
+            
 
             return true;
         }
@@ -61,7 +63,8 @@ namespace GameServer
         private void OnCreateBattleBarrier(CreateBattleBarrierMessage msg)
         {
             //TODO:战斗场景在此生成
-
+            //每场关卡运行在独立的线程中
+            
 
 
 
@@ -87,6 +90,11 @@ namespace GameServer
 
         }
         private GameBarrierConfig[] m_gameBarrierConfigs;
+
+        /// <summary>
+        /// 战斗系统的Timer管理
+        /// </summary>
+        public BattleTimerManager TimerManager { get; protected set; }
 
     }
 }

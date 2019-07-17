@@ -595,8 +595,6 @@ namespace GameServer
                     switch (team.State)
                     {
                         case MatchTeam.MatchTeamState.OPEN:
-                            return 0;
-                        case MatchTeam.MatchTeamState.CLOSE:
                             return 1;
                         case MatchTeam.MatchTeamState.INBATTLE:
                             return 2;
@@ -607,7 +605,7 @@ namespace GameServer
                     }
                 }
             }
-            return 4;//没有在队伍中 可以进行邀请
+            return 0;//没有在队伍中 可以进行邀请
         }
 
         /// <summary>

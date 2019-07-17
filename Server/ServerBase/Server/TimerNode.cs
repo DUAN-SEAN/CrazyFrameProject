@@ -8,7 +8,7 @@ namespace Crazy.ServerBase
     /// <summary>
     /// Timer节点
     /// </summary>
-    class TimerNode:IEqualityComparer<TimerNode>
+    public class TimerNode:IEqualityComparer<TimerNode>
     {
         /// <summary>
         /// IEqualityComparer 的Equals重载

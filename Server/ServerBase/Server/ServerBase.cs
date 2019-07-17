@@ -64,6 +64,13 @@ namespace Crazy.ServerBase
                 Log.Error("ServerBase::Initialization started timer manager failed");
                 return false;
             }
+
+            if (!InitlizeObjectFactory())
+            {
+                Log.Error("对象池初始化失败");
+                return false;
+            }
+
             //初始化网络
             if (!InitializeNetWork())
             {
@@ -208,6 +215,18 @@ namespace Crazy.ServerBase
             Log.Info("初始化日志成功");
             return true;
         }
+        protected virtual bool InitlizeObjectFactory()
+        {
+            m_objectPool = new ObjectPool();
+            if (m_objectPool == null) return false;
+            if (!MessageFactory.Adapting(m_objectPool)) return false;
+
+            var message = MessageFactory.CreateMessage<S2C_LoginMessage>();
+            message.State = S2C_LoginMessage.Types.State.Ok;
+            Log.Info(message.ToString());
+            return true;
+
+        }
         /// <summary>
         /// 用来初始化两个组件
         /// </summary>
@@ -302,6 +321,11 @@ namespace Crazy.ServerBase
         /// 继承类可以覆盖来获得更具体的类型。
         /// </summary>
         protected static ServerBase m_instance;
+        /// <summary>
+        /// 对象池
+        /// </summary>
+        protected ObjectPool m_objectPool;
+
         public static ServerBase Instance
         {
             get { return m_instance; }
