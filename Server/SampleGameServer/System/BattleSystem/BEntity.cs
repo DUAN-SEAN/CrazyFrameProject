@@ -29,6 +29,8 @@ namespace GameServer.Battle
         public virtual void Dispose()
         {
             m_Id = 0;
+            BEntityFactory.Recycle(this);
+
         }
 
         /// <summary>

@@ -50,9 +50,6 @@ namespace Crazy.ServerBase
             m_nextCallTime = 0;
             m_period = period;
             m_timerCallBack = timerCallBack;
-            m_objData = objData;
-            m_int32Data = int32Data;
-            m_int64Data = int64Data;
             m_cts = cts;
         }
 

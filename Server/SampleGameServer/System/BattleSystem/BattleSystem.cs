@@ -48,7 +48,8 @@ namespace GameServer.Battle
             m_gameBarrierConfigs = GameServer.Instance.m_gameServerGlobalConfig.BarrierConfigs;
             if (m_gameBarrierConfigs == null) return false;
 
-            
+            TimerManager = new BattleTimerManager();
+            TimerManager.Start();
 
             return true;
         }

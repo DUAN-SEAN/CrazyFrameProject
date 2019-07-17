@@ -1,6 +1,7 @@
 ﻿using Crazy.Common;
 using Crazy.NetSharp;
 using Crazy.ServerBase;
+using GameServer.Battle;
 using MongoDB.Bson;
 using System;
 using System.Collections.Concurrent;
