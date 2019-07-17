@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public delegate void Handler();
 public delegate void Handler<T1>(T1 param1);
@@ -54,7 +55,6 @@ public class TimerManager : IAnimatable
                 {
                     while (t >= handler.exeTime)
                     {
-                        
                         handler.exeTime += handler.delay;
                         method.DynamicInvoke(args);
                     }
@@ -67,6 +67,7 @@ public class TimerManager : IAnimatable
             }
         }
     }
+
 
     private object create(bool useFrame, bool repeat, int delay, Delegate method, params object[] args)
     {
@@ -249,30 +250,40 @@ public class TimerManager : IAnimatable
     /// </summary>
     public long currentTime
     {
-        get { return 0; }
+        get { return (long)(Time.time * 1000); }
+    }
+
+
+    public void Tick()
+    {
+        //朱颍的时间器 驱动物理引擎
+        foreach (IAnimatable animatable in timerList)
+        {
+            animatable.AdvanceTime();
+        }
     }
 
     /**定时处理器*/
 
     private class TimerHandler
     {
-        /**执行间隔*/
+        /*执行间隔*/
         public int delay;
-        /**是否重复执行*/
+        /*是否重复执行*/
         public bool repeat;
-        /**是否用帧率*/
+        /*是否用帧率*/
         public bool userFrame;
 
-        /**执行时间*/
+        /*执行时间*/
         public long exeTime;
 
-        /**处理方法*/
+        /*处理方法*/
         public Delegate method;
 
-        /**参数*/
+        /*参数*/
         public object[] args;
 
-        /**清理*/
+        /*清理*/
 
         public void clear()
         {

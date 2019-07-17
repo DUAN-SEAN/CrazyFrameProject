@@ -15,36 +15,44 @@ public struct Rectangle : IBaseStruct
     /// 矩形的宽
     /// </summary>
     /// <value>The length.</value>
-    public float Width
-    {
-        get
-        {
-            return Max.x - Min.x;
-        }
-    }
+    public float Width { set; get; }
     /// <summary>
     /// 矩形的高
     /// </summary>
     /// <value>The width.</value>
-    public float Height
-    {
-        get
-        {
-            return Max.y - Min.y;
-        }
-    }
+    public float Height { set; get; }
 
+    /// <summary>
+    /// 构造方法
+    /// </summary>
+    /// <param name="min"></param>
+    /// <param name="max"></param>
     public Rectangle(Vector2 min, Vector2 max)
     {
-        if (max.x > min.x)
-        {
-            Min = min;
-            Max = max;
-        }else
-        {
-            Min = max;
-            Max = min;
-        }
+        Min = new Vector2(Math.Min(min.x, max.x), Math.Min(min.y, max.y));
+        Max = new Vector2(Math.Max(min.x, max.x), Math.Max(min.y, max.y));
+
+        Width = Max.x - Min.x;
+        Height = Max.y - Min.y;
+    }
+
+    /// <summary>
+    /// 构造方法
+    /// </summary>
+    /// <param name="minX"></param>
+    /// <param name="minY"></param>
+    /// <param name="maxX"></param>
+    /// <param name="maxY"></param>
+    public Rectangle(float minX, float minY, float maxX, float maxY)
+    {
+        Vector2 min = new Vector2(minX, minY);
+        Vector2 max = new Vector2(maxX, maxY);
+
+        Min = new Vector2(Math.Min(min.x, max.x), Math.Min(min.y, max.y));
+        Max = new Vector2(Math.Max(min.x, max.x), Math.Max(min.y, max.y));
+
+        Width = Max.x - Min.x;
+        Height = Max.y - Min.y;
     }
 
     public Vector2 Center

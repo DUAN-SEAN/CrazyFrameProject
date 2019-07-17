@@ -1,23 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
+[Serializable]
 public class Body : ObjectBase
 {
 
-    private bool _static = false;
-    private Vector2 _position = new Vector2();
-    private Vector2 _velocity = new Vector2();
-    private float _mass = 1f;
-    private Vector2 _forword = new Vector2(1,0);
-    private ColliderType _collierType = ColliderType.Point;
-    private IBaseStruct _collier = new Point(new Vector2(0,0));
-    private List<Vector2> _forceList = new List<Vector2>();
+    protected bool _static = false;
+    protected Vector2 _position = new Vector2();
+    protected Vector2 _velocity = new Vector2();
+    protected float _mass = 1f;
+    protected Vector2 _forward = new Vector2(1,0);
+    protected Collider _collider = new Collider();
+    protected float _maxVelocity = 100;
+    protected List<Vector2> _forceList = new List<Vector2>();
+    protected Body m_ownerbody;
 
     //每当body创建时候加入world的bodies
     //public Body()
     //{
     //    World.Instanse.Bodies.Add(this);
     //}
+
+    public Body Owner
+    {
+        get { return m_ownerbody; }
+        set { m_ownerbody = value; }
+    }
 
     /// <summary>
     /// 位置
@@ -43,7 +52,7 @@ public class Body : ObjectBase
             _velocity = value;
         }
     }
-
+  
     /// <summary>
     /// 是否属于静态
     /// </summary>
@@ -88,10 +97,10 @@ public class Body : ObjectBase
     /// <value>The angle.</value>
     public Vector2 Forward
     {
-        get { return _forword; }
+        get { return _forward; }
         set
         {
-            _forword = value;
+            _forward = value;
         }
     }
 
@@ -112,15 +121,15 @@ public class Body : ObjectBase
         }
     }
 
-    /// <summary>
-    /// 碰撞机类型
-    /// </summary>
-    /// <value>The type of the collider.</value>
-    public ColliderType ColliderType
+    public float MaxVelocity
     {
+        set
+        {
+            _maxVelocity = value;
+        }
         get
         {
-            return _collierType;
+            return _maxVelocity;
         }
     }
 
@@ -128,27 +137,17 @@ public class Body : ObjectBase
     /// 碰撞机
     /// </summary>
     /// <value>The collider.</value>
-    public IBaseStruct Collider
+    public Collider Collider
     {
         get
         {
-            //_collier.Center = _position;
-            return _collier;
+            _collider.collider.Center = _position;  //collider始终附在物体上
+            _collider.body = this;
+            return _collider;
         }
         set
         {
-            if(value is Point)
-            {
-                _collierType = ColliderType.Point;
-            }else if(value is Circle)
-            {
-                _collierType = ColliderType.Circle;
-            }else if(value is Rectangle)
-            {
-                _collierType = ColliderType.Rectangle;
-            }
-
-            _collier = value;
+            _collider = value;
         }
     }
 
@@ -174,4 +173,37 @@ public class Body : ObjectBase
         _forceList.Clear();
     }
 
+    public bool StayIn;
+
+
+    /// <summary>
+    /// 碰撞后一直调用
+    /// </summary>
+    /// <param name="collider">Collider.</param>
+    public virtual void OnCollisionStay(Collider collider)
+    {
+       
+    }
+
+    /// <summary>
+    /// 碰撞第一次被调用一次
+    /// </summary>
+    /// <param name="collider"></param>
+    public virtual void OnCollisionStayIn(Collider collider)
+    {
+
+    }
+
+    /// <summary>
+    /// 碰撞结束被调用一次
+    /// </summary>
+    /// <param name="collider"></param>
+    public virtual void OnCollisionStayOut(Collider collider)
+    {
+
+    }
+    public virtual void Dispose()
+    {
+        World.Instanse.Bodies.Remove(this);
+    }
 }

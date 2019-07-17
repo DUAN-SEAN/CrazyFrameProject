@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0ED02981-B64C-49FA-A7DC-3F0FB6800D39}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SpaceShooterLogical</RootNamespace>
+    <AssemblyName>SpaceShooterLogical</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="XMLDataLib">
+      <HintPath>..\packages\XMLDataLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AI\AIEnemyManager\AIEnemyLogic.cs" />
+    <Compile Include="AI\AIEntity\aiBody\AICarrierShipInBody.cs" />
+    <Compile Include="AI\AIEntity\aiBody\AIShipBase.cs" />
+    <Compile Include="AI\AIEntity\aiBody\AISmallShipInBody.cs" />
+    <Compile Include="AI\AIEntity\Interface\IFollow.cs" />
+    <Compile Include="AI\AIEntity\State\AlertState.cs" />
+    <Compile Include="AI\AIEntity\State\AttackState.cs" />
+    <Compile Include="AI\AIEntity\State\BossAttackState.cs" />
+    <Compile Include="AI\AIEntity\State\FollowState.cs" />
+    <Compile Include="AI\AIEntity\State\TeamState.cs" />
+    <Compile Include="AI\FSMBase\FSMState.cs" />
+    <Compile Include="AI\FSMBase\FSMSystem.cs" />
+    <Compile Include="Factory\AssetBundleName.cs" />
+    <Compile Include="Factory\BodyFactory\BodyFactory.cs" />
+    <Compile Include="Factory\EnvironmentFactory\EnviromentBase\EnviromentInBody.cs" />
+    <Compile Include="Factory\EnvironmentFactory\EnviromentBase\MeteoriteInBody.cs" />
+    <Compile Include="Factory\EnvironmentFactory\Enviroment\EnviromentInWorld.cs" />
+    <Compile Include="Factory\EnvironmentFactory\EnvironmentFactory.cs" />
+    <Compile Include="Factory\LevelDataFactory\LevelDataFactory.cs" />
+    <Compile Include="Factory\ResourcesFactory\AssetsBundleLoaderAsync.cs" />
+    <Compile Include="Factory\ResourcesFactory\AssetsLoaderAsync.cs" />
+    <Compile Include="Factory\ResourcesFactory\ResourcesComponent.cs" />
+    <Compile Include="Factory\ShipFactroy\ShipBody\PlayerInBody.cs" />
+    <Compile Include="Factory\ShipFactroy\ShipBody\ShipBase.cs" />
+    <Compile Include="Factory\ShipFactroy\ShipFactory.cs" />
+    <Compile Include="Factory\ShipFactroy\ShipGameObject\CarrierShipInWorld.cs" />
+    <Compile Include="Factory\ShipFactroy\ShipGameObject\PlayerShipInWorld.cs" />
+    <Compile Include="Factory\ShipFactroy\ShipGameObject\ShipInWorld.cs" />
+    <Compile Include="Factory\ShipFactroy\ShipGameObject\SmallShipInWorld.cs" />
+    <Compile Include="Factory\WeaponFactory\IAliveable.cs" />
+    <Compile Include="Factory\WeaponFactory\IWeanpon.cs" />
+    <Compile Include="Factory\WeaponFactory\WeaponFactory.cs" />
+    <Compile Include="Factory\WeaponFactory\WeaponGameLogic.cs" />
+    <Compile Include="Factory\WeaponFactory\WeaponScripts\BoltInWorld.cs" />
+    <Compile Include="Factory\WeaponFactory\WeaponScripts\LightInWorld.cs" />
+    <Compile Include="Factory\WeaponFactory\WeaponScripts\MineInWorld.cs" />
+    <Compile Include="Factory\WeaponFactory\WeaponScripts\MissileInWorld.cs" />
+    <Compile Include="ITickable.cs" />
+    <Compile Include="LevelDataSystem.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AI\AIEnemyManager\AIEnemyLogic.cs.meta" />
+    <None Include="Factory\ShipFactroy\ShipBody.meta" />
+    <None Include="Factory\ShipFactroy\ShipBody\PlayerInBody.cs.meta" />
+    <None Include="Factory\ShipFactroy\ShipBody\ShipBase.cs.meta" />
+    <None Include="Factory\ShipFactroy\ShipFactory.cs.meta" />
+    <None Include="Factory\ShipFactroy\ShipGameObject.meta" />
+    <None Include="Factory\ShipFactroy\ShipGameObject\CarrierShipInWorld.cs.meta" />
+    <None Include="Factory\ShipFactroy\ShipGameObject\PlayerShipInWorld.cs.meta" />
+    <None Include="Factory\ShipFactroy\ShipGameObject\ShipInWorld.cs.meta" />
+    <None Include="Factory\ShipFactroy\ShipGameObject\SmallShipInWorld.cs.meta" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CrazyEngine\CrazyEngine.csproj">
+      <Project>{74c6ef13-2869-4869-932f-698aa795df34}</Project>
+      <Name>CrazyEngine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

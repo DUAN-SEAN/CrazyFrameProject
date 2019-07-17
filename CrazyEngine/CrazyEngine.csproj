@@ -45,16 +45,21 @@
     <Compile Include="Base\ObjectBase.cs" />
     <Compile Include="Base\Vector2.cs" />
     <Compile Include="Common\BaseStruct\Circle.cs" />
+    <Compile Include="Common\BaseStruct\Line.cs" />
     <Compile Include="Common\BaseStruct\Point.cs" />
     <Compile Include="Common\BaseStruct\Rectangle.cs" />
+    <Compile Include="Common\Collider.cs" />
     <Compile Include="Common\Collision.cs" />
     <Compile Include="Common\Id.cs" />
     <Compile Include="Common\World.cs" />
     <Compile Include="Core\Engine.cs" />
     <Compile Include="Core\TimerManager.cs" />
     <Compile Include="Interface\IBaseStruct.cs" />
-    <Compile Include="Interface\ITickable.cs" />
-    <Compile Include="Manager\GameManager.cs" />
+    <Compile Include="Manager\TestGameManager.cs" />
+    <Compile Include="Model\CircleEntity.cs" />
+    <Compile Include="Model\LineEntity.cs" />
+    <Compile Include="Model\PointEntity.cs" />
+    <Compile Include="Model\RectangleEntity.cs" />
     <Compile Include="Model\Spaceship.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="System\CollisionSystem.cs" />
@@ -62,7 +67,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controller\" />
-    <Folder Include="Test\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

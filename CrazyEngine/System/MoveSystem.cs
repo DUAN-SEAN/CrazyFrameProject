@@ -1,5 +1,5 @@
 ﻿using System;
-
+using UnityEngine;
 
 public class MoveSystem :  ITickable
 {
@@ -7,11 +7,21 @@ public class MoveSystem :  ITickable
     {
         foreach (Body body in World.Instanse.Bodies)
         {
-            if (body.Static) continue;
+            if (body.Enable)
+            {
+                body.Position += body.Velocity / 100;
 
-            body.Position += body.Velocity;
+                if (!body.Static && body.MaxVelocity - body.Velocity.magnitude > float.Epsilon)
+                {
+                    body.Velocity += body.Acceleration;
+                }
 
-            body.Velocity += body.Acceleration;
+                if(body.MaxVelocity - body.Velocity.magnitude < float.Epsilon)
+                {
+                    Vector2 newVelocity = new Vector2(body.MaxVelocity * body.Forward.CosNoSqrt, body.MaxVelocity * body.Forward.SinNoSqrt);
+                    body.Velocity = Vector2.Lerp(body.Velocity, newVelocity,1f);
+                }
+            }
 
             body.ClearForce();
         }

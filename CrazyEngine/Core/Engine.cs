@@ -1,23 +1,30 @@
 ﻿using System;
 using System.Timers;
 
-public class Engine
+public class Engine: ITickable
 {
+    
     public int UpdateInterval = 20;
+    public bool isStop;
+    private readonly MoveSystem _moveSystem = new MoveSystem();
+    private readonly CollisionSystem _collisionSystem = new CollisionSystem();
 
-    private MoveSystem _moveSystem = new MoveSystem();
-    private CollisionSystem _collisionSystem = new CollisionSystem();
-
+    
     public Engine()
     {
-        TimerManager.Instanse.doLoop(UpdateInterval, Update);
+        TimerManager.Instanse.doLoop(UpdateInterval, Tick);
     }
 
-    private void Update()
+    public void Tick()
     {
+
+        //if (World.Instanse.isWorldStop) return;
+
         _moveSystem.Tick();
 
         _collisionSystem.Tick();
     }
 
+
+   
 }

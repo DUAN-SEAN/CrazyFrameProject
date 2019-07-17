@@ -4,7 +4,10 @@ public class Id
     private static int _id;
 
     public int Value { get; private set; }
-
+    public Id()
+    {
+        Value = _id++;
+    }
     private Id(int id)
     {
         Value = id;

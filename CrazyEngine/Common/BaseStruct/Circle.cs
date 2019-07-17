@@ -22,9 +22,14 @@ public struct Circle : IBaseStruct
 
     public Circle(Vector2 center, float radius)
     {
-        if (radius < 0) radius = 0;
         _center = center;
-        Radius = radius;
+        Radius = radius < 0 ? 0 : radius;
+    }
+
+    public Circle(float centerX, float centerY, float radius)
+    {
+        _center = new Vector2(centerX, centerY);
+        Radius = radius < 0 ? 0 : radius;
     }
 
 }

@@ -4,91 +4,144 @@ public class CollisionSystem : ITickable
 
     private void CollissionCheck()
     {
-        for(int i=0; i<World.Instanse.Bodies.Count; i++)
+        //碰撞检测
+        for (int i = 0; i < World.Instanse.Bodies.Count; i++)
         {
-            for(int j=i+1; j<World.Instanse.Bodies.Count; j++)
+            for (int j = i + 1; j < World.Instanse.Bodies.Count; j++)
             {
                 bool flag = false;
+                Collider collider1 = World.Instanse.Bodies[i].Collider;
+                Collider collider2 = World.Instanse.Bodies[j].Collider;
 
-                ColliderType ct1 = World.Instanse.Bodies[i].ColliderType;
-                ColliderType ct2 = World.Instanse.Bodies[j].ColliderType;
-                switch (ct1)
+                if (!collider1.body.Enable || !collider2.body.Enable) continue;
+
+                switch (collider1.ColliderType)
                 {
                     case ColliderType.Point:
                         {
-                            switch (ct2)
+                            switch (collider2.ColliderType)
                             {
                                 case ColliderType.Point:
                                     {
-                                        flag = Collision.isCollision((Point)World.Instanse.Bodies[i].Collider, (Point)World.Instanse.Bodies[j].Collider);
+                                        flag = Collision.isCollision((Point)collider1.collider, (Point)collider2.collider);
                                         break;
                                     }
                                 case ColliderType.Circle:
                                     {
-                                        flag = Collision.isCollision((Point)World.Instanse.Bodies[i].Collider, (Circle)World.Instanse.Bodies[j].Collider);
+                                        flag = Collision.isCollision((Point)collider1.collider, (Circle)collider2.collider);
                                         break;
                                     }
                                 case ColliderType.Rectangle:
                                     {
-                                        flag = Collision.isCollision((Point)World.Instanse.Bodies[i].Collider, (Rectangle)World.Instanse.Bodies[j].Collider);
+                                        flag = Collision.isCollision((Point)collider1.collider, (Rectangle)collider2.collider);
+                                        break;
+                                    }
+                                case ColliderType.Line:
+                                    {
+                                        flag = Collision.isCollision((Point)collider1.collider, (Line)collider2.collider);
                                         break;
                                     }
                             }
                             break;
                         }
+
                     case ColliderType.Circle:
                         {
-                            switch (ct2)
+                            switch (collider2.ColliderType)
                             {
                                 case ColliderType.Point:
                                     {
-                                        flag = Collision.isCollision((Circle)World.Instanse.Bodies[i].Collider, (Point)World.Instanse.Bodies[j].Collider);
+                                        flag = Collision.isCollision((Circle)collider1.collider, (Point)collider2.collider);
                                         break;
                                     }
                                 case ColliderType.Circle:
                                     {
-                                        flag = Collision.isCollision((Circle)World.Instanse.Bodies[i].Collider, (Circle)World.Instanse.Bodies[j].Collider);
+                                        flag = Collision.isCollision((Circle)collider1.collider, (Circle)collider2.collider);
                                         break;
                                     }
                                 case ColliderType.Rectangle:
                                     {
-                                        flag = Collision.isCollision((Circle)World.Instanse.Bodies[i].Collider, (Rectangle)World.Instanse.Bodies[j].Collider);
+                                        flag = Collision.isCollision((Circle)collider1.collider, (Rectangle)collider2.collider);
                                         break;
                                     }
+                                case ColliderType.Line:
+                                    {
+                                        flag = Collision.isCollision((Circle)collider1.collider, (Line)collider2.collider);
+                                        break;
+                                    }
+
                             }
                             break;
                         }
                     case ColliderType.Rectangle:
                         {
-                            switch (ct2)
+                            switch (collider2.ColliderType)
                             {
                                 case ColliderType.Point:
                                     {
-                                        flag = Collision.isCollision((Rectangle)World.Instanse.Bodies[i].Collider, (Point)World.Instanse.Bodies[j].Collider);
+                                        flag = Collision.isCollision((Rectangle)collider1.collider, (Point)collider2.collider);
                                         break;
                                     }
                                 case ColliderType.Circle:
                                     {
-                                        flag = Collision.isCollision((Rectangle)World.Instanse.Bodies[i].Collider, (Circle)World.Instanse.Bodies[j].Collider);
+                                        flag = Collision.isCollision((Rectangle)collider1.collider, (Circle)collider2.collider);
                                         break;
                                     }
                                 case ColliderType.Rectangle:
                                     {
-                                        flag = Collision.isCollision((Rectangle)World.Instanse.Bodies[i].Collider, (Rectangle)World.Instanse.Bodies[j].Collider);
+                                        flag = Collision.isCollision((Rectangle)collider1.collider, (Rectangle)collider2.collider);
+                                        break;
+                                    }
+                                case ColliderType.Line:
+                                    {
+                                        flag = Collision.isCollision((Rectangle)collider1.collider, (Line)collider2.collider);
                                         break;
                                     }
                             }
                             break;
                         }
 
+                    case ColliderType.Line:
+                        {
+                            switch (collider2.ColliderType)
+                            {
+                                case ColliderType.Point:
+                                    {
+                                        flag = Collision.isCollision((Line)collider1.collider, (Point)collider2.collider);
+                                        break;
+                                    }
+                                case ColliderType.Circle:
+                                    {
+                                        flag = Collision.isCollision((Line)collider1.collider, (Circle)collider2.collider);
+                                        break;
+                                    }
+                                case ColliderType.Rectangle:
+                                    {
+                                        flag = Collision.isCollision((Line)collider1.collider, (Rectangle)collider2.collider);
+                                        break;
+                                    }
+                                case ColliderType.Line:
+                                    {
+                                        flag = Collision.isCollision((Line)collider1.collider, (Line)collider2.collider);
+                                        break;
+                                    }
+                            }
+                            break;
+                        }
                 }
 
                 if (flag)
                 {
-                    GameManager.printS(ct1.ToString() + " "+ ct2.ToString());
+                  
+
+                    collider1.OnCollisionStay(collider2);
+                    collider2.OnCollisionStay(collider1);
                 }
             }
         }
+
+
+
     }
 
     public void Tick()
