@@ -1,30 +1,34 @@
 ﻿using System;
 using System.Timers;
 
-public class Engine: ITickable
+
+namespace CrazyEngine
 {
-    
-    public int UpdateInterval = 20;
-    public bool isStop;
-    private readonly MoveSystem _moveSystem = new MoveSystem();
-    private readonly CollisionSystem _collisionSystem = new CollisionSystem();
-
-    
-    public Engine()
-    {
-        TimerManager.Instanse.doLoop(UpdateInterval, Tick);
-    }
-
-    public void Tick()
+    public class Engine : ITickable
     {
 
-        //if (World.Instanse.isWorldStop) return;
+        public int UpdateInterval = 20;
+        public bool isStop;
+        private readonly MoveSystem _moveSystem = new MoveSystem();
+        private readonly CollisionSystem _collisionSystem = new CollisionSystem();
 
-        _moveSystem.Tick();
 
-        _collisionSystem.Tick();
+        public Engine()
+        {
+            TimerManager.Instanse.doLoop(UpdateInterval, Tick);
+        }
+
+        public void Tick()
+        {
+
+            //if (World.Instanse.isWorldStop) return;
+
+            _moveSystem.Tick();
+
+            _collisionSystem.Tick();
+        }
+
+
+
     }
-
-
-   
 }

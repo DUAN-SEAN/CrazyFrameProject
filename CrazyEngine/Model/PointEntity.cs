@@ -1,26 +1,30 @@
 ﻿using System;
-public class PointEntity : Body,IGameEvent
+
+namespace CrazyEngine
 {
-    public PointEntity()
+    public class PointEntity : Body, IGameEvent
     {
-        Collider = new Collider(Vector2.Zero);
-        Position = Vector2.Zero;
-    }
-    public PointEntity(Vector2 vector)
-    {
-        Collider = new Collider(vector);
-        Position = vector;
-    }
+        public PointEntity()
+        {
+            Collider = new Collider(Vector2.Zero);
+            Position = Vector2.Zero;
+        }
+        public PointEntity(Vector2 vector)
+        {
+            Collider = new Collider(vector);
+            Position = vector;
+        }
 
-    public bool DoSomething()
-    {
-        return true;
-    }
+        public bool DoSomething()
+        {
+            return true;
+        }
 
-    public bool GetEventTrigger()
-    {
-        return GameState.playing == GameSceneLogic.Instance.GameState;
-    }
+        public bool GetEventTrigger()
+        {
+            return GameState.playing == GameSceneLogic.Instance.GameState;
+        }
 
-   
+
+    }
 }

@@ -56,46 +56,11 @@
     <Compile Include="AI\AIEntity\State\TeamState.cs" />
     <Compile Include="AI\FSMBase\FSMState.cs" />
     <Compile Include="AI\FSMBase\FSMSystem.cs" />
-    <Compile Include="Factory\AssetBundleName.cs" />
     <Compile Include="Factory\BodyFactory\BodyFactory.cs" />
-    <Compile Include="Factory\EnvironmentFactory\EnviromentBase\EnviromentInBody.cs" />
-    <Compile Include="Factory\EnvironmentFactory\EnviromentBase\MeteoriteInBody.cs" />
-    <Compile Include="Factory\EnvironmentFactory\Enviroment\EnviromentInWorld.cs" />
-    <Compile Include="Factory\EnvironmentFactory\EnvironmentFactory.cs" />
     <Compile Include="Factory\LevelDataFactory\LevelDataFactory.cs" />
-    <Compile Include="Factory\ResourcesFactory\AssetsBundleLoaderAsync.cs" />
-    <Compile Include="Factory\ResourcesFactory\AssetsLoaderAsync.cs" />
-    <Compile Include="Factory\ResourcesFactory\ResourcesComponent.cs" />
-    <Compile Include="Factory\ShipFactroy\ShipBody\PlayerInBody.cs" />
-    <Compile Include="Factory\ShipFactroy\ShipBody\ShipBase.cs" />
-    <Compile Include="Factory\ShipFactroy\ShipFactory.cs" />
-    <Compile Include="Factory\ShipFactroy\ShipGameObject\CarrierShipInWorld.cs" />
-    <Compile Include="Factory\ShipFactroy\ShipGameObject\PlayerShipInWorld.cs" />
-    <Compile Include="Factory\ShipFactroy\ShipGameObject\ShipInWorld.cs" />
-    <Compile Include="Factory\ShipFactroy\ShipGameObject\SmallShipInWorld.cs" />
-    <Compile Include="Factory\WeaponFactory\IAliveable.cs" />
-    <Compile Include="Factory\WeaponFactory\IWeanpon.cs" />
-    <Compile Include="Factory\WeaponFactory\WeaponFactory.cs" />
-    <Compile Include="Factory\WeaponFactory\WeaponGameLogic.cs" />
-    <Compile Include="Factory\WeaponFactory\WeaponScripts\BoltInWorld.cs" />
-    <Compile Include="Factory\WeaponFactory\WeaponScripts\LightInWorld.cs" />
-    <Compile Include="Factory\WeaponFactory\WeaponScripts\MineInWorld.cs" />
-    <Compile Include="Factory\WeaponFactory\WeaponScripts\MissileInWorld.cs" />
     <Compile Include="ITickable.cs" />
     <Compile Include="LevelDataSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="AI\AIEnemyManager\AIEnemyLogic.cs.meta" />
-    <None Include="Factory\ShipFactroy\ShipBody.meta" />
-    <None Include="Factory\ShipFactroy\ShipBody\PlayerInBody.cs.meta" />
-    <None Include="Factory\ShipFactroy\ShipBody\ShipBase.cs.meta" />
-    <None Include="Factory\ShipFactroy\ShipFactory.cs.meta" />
-    <None Include="Factory\ShipFactroy\ShipGameObject.meta" />
-    <None Include="Factory\ShipFactroy\ShipGameObject\CarrierShipInWorld.cs.meta" />
-    <None Include="Factory\ShipFactroy\ShipGameObject\PlayerShipInWorld.cs.meta" />
-    <None Include="Factory\ShipFactroy\ShipGameObject\ShipInWorld.cs.meta" />
-    <None Include="Factory\ShipFactroy\ShipGameObject\SmallShipInWorld.cs.meta" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CrazyEngine\CrazyEngine.csproj">

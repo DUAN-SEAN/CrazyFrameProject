@@ -1,7 +1,11 @@
 ﻿using System;
-public interface IBaseStruct
+
+namespace CrazyEngine
 {
-    Vector2 Center { set; get; }
+    public interface IBaseStruct
+    {
+        Vector2 Center { set; get; }
 
 
+    }
 }

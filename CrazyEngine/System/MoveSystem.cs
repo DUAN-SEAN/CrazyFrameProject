@@ -1,34 +1,37 @@
 ﻿using System;
 using UnityEngine;
 
-public class MoveSystem :  ITickable
+namespace CrazyEngine
 {
-    private void Move()
+    public class MoveSystem : ITickable
     {
-        foreach (Body body in World.Instanse.Bodies)
+        private void Move()
         {
-            if (body.Enable)
+            foreach (Body body in World.Instanse.Bodies)
             {
-                body.Position += body.Velocity / 100;
-
-                if (!body.Static && body.MaxVelocity - body.Velocity.magnitude > float.Epsilon)
+                if (body.Enable)
                 {
-                    body.Velocity += body.Acceleration;
+                    body.Position += body.Velocity / 100;
+
+                    if (!body.Static && body.MaxVelocity - body.Velocity.magnitude > float.Epsilon)
+                    {
+                        body.Velocity += body.Acceleration;
+                    }
+
+                    if (body.MaxVelocity - body.Velocity.magnitude < float.Epsilon)
+                    {
+                        Vector2 newVelocity = new Vector2(body.MaxVelocity * body.Forward.CosNoSqrt, body.MaxVelocity * body.Forward.SinNoSqrt);
+                        body.Velocity = Vector2.Lerp(body.Velocity, newVelocity, 1f);
+                    }
                 }
 
-                if(body.MaxVelocity - body.Velocity.magnitude < float.Epsilon)
-                {
-                    Vector2 newVelocity = new Vector2(body.MaxVelocity * body.Forward.CosNoSqrt, body.MaxVelocity * body.Forward.SinNoSqrt);
-                    body.Velocity = Vector2.Lerp(body.Velocity, newVelocity,1f);
-                }
+                body.ClearForce();
             }
-
-            body.ClearForce();
         }
-    }
 
-    public void Tick()
-    {
-        Move();
+        public void Tick()
+        {
+            Move();
+        }
     }
 }

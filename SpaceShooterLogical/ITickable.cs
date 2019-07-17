@@ -1,6 +1,11 @@
 ﻿using System;
-public interface ITickable
+namespace SpaceShip.Base
 {
-    void Tick();
 
+
+    public interface ITickable
+    {
+        void Tick();
+
+    }
 }

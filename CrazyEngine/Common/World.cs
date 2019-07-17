@@ -1,119 +1,123 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class World
+
+namespace CrazyEngine
 {
-    /// <summary>
-    /// 世界里所有的物体 
-    /// </summary>
-    public List<Body> Bodies;
-
-    /// <summary>
-    /// 世界的长
-    /// </summary>
-    public float WorldX = 1000f;
-    /// <summary>
-    /// 世界的宽
-    /// </summary>
-    public float WorldY = 1000f;
-
-    /// <summary>
-    /// 世界引擎停止
-    /// </summary>
-    public bool isWorldStop
+    public class World
     {
-        set
-        {
-            isworldstop = value;
+        /// <summary>
+        /// 世界里所有的物体 
+        /// </summary>
+        public List<Body> Bodies;
 
-            foreach(var body in Bodies)
+        /// <summary>
+        /// 世界的长
+        /// </summary>
+        public float WorldX = 1000f;
+        /// <summary>
+        /// 世界的宽
+        /// </summary>
+        public float WorldY = 1000f;
+
+        /// <summary>
+        /// 世界引擎停止
+        /// </summary>
+        public bool isWorldStop
+        {
+            set
             {
-                body.Enable = value;
+                isworldstop = value;
+
+                foreach (var body in Bodies)
+                {
+                    body.Enable = value;
+                }
+            }
+
+            get
+            {
+                return isworldstop;
+            }
+        }
+        private bool isworldstop;
+
+
+        private static World _world;
+
+
+        public static World Instanse
+        {
+            get
+            {
+                if (_world == null)
+                    _world = new World();
+                return _world;
             }
         }
 
-        get
+        private World()
         {
-            return isworldstop;
+            Bodies = new List<Body>();
         }
-    }
-    private bool isworldstop;
-
-
-    private static World _world;
-
-
-    public static World Instanse
-    {
-        get
+        public T InitInWorld<T>(Vector2 vector) where T : PointEntity, new()
         {
-            if (_world == null)
-                _world = new World();
-            return _world;
+            T t = new T()
+            {
+                Collider = new Collider(vector),
+                Position = vector,
+                Enable = isworldstop
+
+            };
+
+            Bodies.Add(t);
+
+
+
+            return t;
         }
-    }
 
-    private World()
-    {
-        Bodies = new List<Body>();
-    }
-    public T InitInWorld<T>(Vector2 vector) where T : PointEntity, new()
-    {
-        T t = new T()
+        public T InitInWorld<T>(Vector2 min, Vector2 max) where T : RectangleEntity, new()
         {
-            Collider = new Collider(vector),
-            Position = vector,
-            Enable = isworldstop
+            T t = new T()
+            {
+                Position = new Vector2((max.x + min.x) / 2, (max.y + min.y) / 2),
+                Collider = new Collider(min, max),
+                Enable = isworldstop
 
-        };
+            };
+            Bodies.Add(t);
+            return t;
+        }
 
-        Bodies.Add(t);
-
-
-
-        return t;
-    }
-
-    public T InitInWorld<T>(Vector2 min, Vector2 max) where T : RectangleEntity, new()
-    {
-        T t = new T()
+        public T InitInWorld<T>(Line line) where T : LineEntity, new()
         {
-            Position = new Vector2((max.x + min.x) / 2, (max.y + min.y) / 2),
-            Collider = new Collider(min, max),
-            Enable = isworldstop
+            T t = new T()
+            {
+                Collider = new Collider(line),
+                Position = (line.Start + line.End) / 2,
+                Length = line.Length,
+                StartPoint = line.Start,
+                Enable = isworldstop
 
-        };
-        Bodies.Add(t);
-        return t;
-    }
+            };
+            Bodies.Add(t);
+            return t;
+        }
 
-    public T InitInWorld<T>(Line line) where T : LineEntity, new()
-    {
-        T t = new T()
+        public T InitInWorld<T>(Vector2 vector, float radius) where T : CircleEntity, new()
         {
-            Collider = new Collider(line),
-            Position = (line.Start + line.End) / 2,
-            Length = line.Length,
-            StartPoint = line.Start,
-            Enable = isworldstop
-            
-        };
-        Bodies.Add(t);
-        return t;
+            T t = new T()
+            {
+                Collider = new Collider(vector, radius),
+                Position = vector,
+                Enable = isworldstop
+
+            };
+            Bodies.Add(t);
+            return t;
+        }
+
+
     }
-
-    public T InitInWorld<T>(Vector2 vector,float radius) where T : CircleEntity , new ()
-    {
-        T t = new T()
-        {
-            Collider = new Collider(vector, radius),
-            Position = vector,
-            Enable = isworldstop
-
-        };
-        Bodies.Add(t);
-        return t;
-    }
-
-
 }

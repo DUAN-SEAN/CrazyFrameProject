@@ -4,6 +4,10 @@ using FSMTransition = FSMSystemSpace.Transition;
 using FSMStateID = FSMSystemSpace.StateID;
 using System.Collections.Generic;
 
+namespace SpaceShip.AI
+{
+
+
 /// <summary>
 /// 自动飞机
 /// </summary>
@@ -206,7 +210,7 @@ public enum AIShipTransition
     BOSSATTACK = 5
 
 }
-
+}
 
 
 
