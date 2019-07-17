@@ -18,7 +18,7 @@ namespace GameServer.Battle
         {
             BEntity bEntity;
             bEntity =  m_objectPool.Fetch<T>();
-            bEntity.Init(GenerateId++);
+            bEntity.Start(GenerateId++);
             return bEntity as T;
         }
         public static void Recycle(BEntity bEntity)

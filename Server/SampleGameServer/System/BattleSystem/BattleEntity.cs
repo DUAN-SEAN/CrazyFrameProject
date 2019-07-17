@@ -18,9 +18,10 @@ namespace GameServer.Battle
             base.Dispose();
         }
 
-        public override void Init(ulong id)
+        public override void Start(ulong id)
         {
-            base.Init(id);
+            base.Start(id);
+            m_startTime = DateTime.Now;
         }
         /// <summary>
         /// 由时间管理器进行驱动
@@ -30,10 +31,24 @@ namespace GameServer.Battle
             base.Update();
 
         }
+        public void SetTimer(long timerId)
+        {
+            m_timerId = timerId;
+        }
+        public long GetTimerId()
+        {
+            return m_timerId;
+        }
+
+
         /// <summary>
         /// 战斗开始时间
         /// </summary>
         private DateTime m_startTime;
+        /// <summary>
+        /// timeId
+        /// </summary>
+        private long m_timerId;
         
     }
 }

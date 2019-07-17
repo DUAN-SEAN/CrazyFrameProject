@@ -50,7 +50,6 @@ namespace GameServer.Battle
 
             TimerManager = new BattleTimerManager();
             TimerManager.Start();
-
             return true;
         }
         /// <summary>
@@ -65,10 +64,12 @@ namespace GameServer.Battle
         {
             //TODO:战斗场景在此生成
             //每场关卡运行在独立的线程中
-            
 
+            BattleEntity battleEntity = BEntityFactory.CreateEntity<BattleEntity>();
 
+            var timerId =  TimerManager.SetLoopTimer(50, battleEntity.Update);//设置Tick步长
 
+            battleEntity.SetTimer(timerId);
             //向玩家现场客户端发送战斗创建成功的消息，Ps 所有战斗消息目前都这样写
             foreach (var item in msg.Players)
             {
@@ -86,10 +87,45 @@ namespace GameServer.Battle
         /// 解除战斗系统关于关卡战斗实体的注册
         /// PS 该方法可以由各层调用：实体自身、战斗系统、GameSever
         /// </summary>
-        private void OnReleaseBattle()
+        private void OnReleaseBattle(ulong battleId)
         {
+            BattleEntity battleEntity = null;
+            if(!m_battleDic.TryGetValue(battleId,out battleEntity))
+            {
+                Log.Error("OnReleaseBattle Find Null");
+            }
+            TimerManager.UnsetLoopTimer(battleEntity.GetTimerId());//解除绑定
+
+            battleEntity.Dispose();//最终Dispose战斗实体 释放资源
+            
+        }
+        /// <summary>
+        /// 释放关卡战斗资源：
+        /// 修改关卡战斗实体状态为正在关闭
+        /// 暂停所有物理层逻辑
+        /// 释放所有物理单位
+        /// 释放应用层玩家
+        /// 发送匹配队伍系统玩家更新状态
+        /// 修改关卡战斗实体状态为已关闭
+        /// 解除战斗系统关于关卡战斗实体的注册
+        /// PS 该方法可以由各层调用：实体自身、战斗系统、GameSever
+        /// </summary>
+        private void OnReleaseBattle(BattleEntity battleEntity)
+        {
+            
+            TimerManager.UnsetLoopTimer(battleEntity.GetTimerId());//解除绑定
+
+            battleEntity.Dispose();//最终Dispose战斗实体 释放资源
 
         }
+        /// <summary>
+        /// 战斗实体字典
+        /// </summary>
+        private readonly Dictionary<ulong, BattleEntity> m_battleDic = new Dictionary<ulong, BattleEntity>();
+
+        /// <summary>
+        /// 战斗关卡的匹配文件
+        /// </summary>
         private GameBarrierConfig[] m_gameBarrierConfigs;
 
         /// <summary>

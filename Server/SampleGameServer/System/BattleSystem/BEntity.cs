@@ -17,18 +17,19 @@ namespace GameServer.Battle
         /// 初始化实体
         /// </summary>
         /// <param name="id"></param>
-        public virtual void Init(ulong id)
+        public virtual void Start(ulong id)
         {
             m_Id = id;
+            IsDispose = false;
         }
-
-
         /// <summary>
         /// 销毁
         /// </summary>
         public virtual void Dispose()
         {
+            if (IsDispose) return;
             m_Id = 0;
+            IsDispose = true;
             BEntityFactory.Recycle(this);
 
         }
@@ -51,8 +52,10 @@ namespace GameServer.Battle
         /// 实体的唯一表示
         /// </summary>
         private ulong m_Id;
-
-
+        /// <summary>
+        /// 是否被dispose
+        /// </summary>
+        private bool IsDispose;
         
             
     }
