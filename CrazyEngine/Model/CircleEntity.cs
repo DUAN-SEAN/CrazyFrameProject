@@ -1,8 +1,9 @@
-﻿using System;
+﻿using CrazyEngine;
+using System;
 
 namespace CrazyEngine
 {
-    public class CircleEntity : Body, IGameEvent
+    public class CircleEntity : Body
     {
         public float radius;
         public CircleEntity()
@@ -22,9 +23,5 @@ namespace CrazyEngine
             return true;
         }
 
-        public bool GetEventTrigger()
-        {
-            return GameState.playing == GameSceneLogic.Instance.GameState;
-        }
     }
 }

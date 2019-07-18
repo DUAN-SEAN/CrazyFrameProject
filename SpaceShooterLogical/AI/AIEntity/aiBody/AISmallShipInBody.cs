@@ -1,5 +1,8 @@
 ﻿
 using System.Collections;
+using CrazyEngine;
+
+
 namespace SpaceShip.AI
 {
     public class AISmallShipInBody : AIShipBase

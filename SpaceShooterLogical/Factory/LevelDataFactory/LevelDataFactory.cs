@@ -1,9 +1,8 @@
 ﻿
 
 using SpaceShip.AI;
-using SpaceShip.Level;
-using System;
-
+using SpaceShip.Base;
+using SpaceShip.System;
 namespace SpaceShip.Factory
 {
 
@@ -40,33 +39,37 @@ namespace SpaceShip.Factory
         /// 将资源加载到World世界中
         /// AI会由AIManager管理
         /// </summary>
-        /// <param name="id"></param>
-        public void LoadingLeveldataByID(int id)
+        public void LoadingLeveldataByID(int id,SeanD seanD)
         {
             LoadingResources();
 
             LevelData levelData = LevelDataSystem.Instance.GetLevelDataByID(id);
             foreach (var body in levelData.things)
             {
-                LogUI.Log("leveldata count" + levelData.things.Count);
+                //LogUI.Log("leveldata count" + levelData.things.Count);
                 if (body is AICarrierShipInBody)
                 {
-                    LogUI.Log("Boss done");
+                    //LogUI.Log("Boss done");
                     AICarrierShipInBody aIShipBase = body as AICarrierShipInBody;
+                    BodyFactory.Instance.LoadShipBodyByType<AICarrierShipInBody>(seanD, aIShipBase.Label, aIShipBase.Min_posi, aIShipBase.Max_posi, aIShipBase.Forward);
                     //GamePlayerLogic.Instance.boss_ship = ShipFactory.Instance.LoadShipFromAssetBundle<AICarrierShipInBody>(ShipName.CarrierShip, aIShipBase.Label, aIShipBase.Min_posi, aIShipBase.Max_posi, aIShipBase.Forward) as ShipBase;
 
                     continue;
                 }
                 if (body is AISmallShipInBody)
                 {
-                    LogUI.Log("AI done");
+                    //LogUI.Log("AI done");
                     AISmallShipInBody aIShipBase = body as AISmallShipInBody;
+                    BodyFactory.Instance.LoadShipBodyByType<AISmallShipInBody>(seanD, aIShipBase.Label, aIShipBase.Min_posi, aIShipBase.Max_posi, aIShipBase.Forward);
+
                     //ShipFactory.Instance.LoadShipFromAssetBundle<AISmallShipInBody>(ShipName.SmallShip1, aIShipBase.Label, aIShipBase.Min_posi, aIShipBase.Max_posi, aIShipBase.Forward);
                     continue;
                 }
                 if (body is PlayerInBody)
                 {
                     PlayerInBody body1 = body as PlayerInBody;
+                    BodyFactory.Instance.LoadShipBodyByType<PlayerInBody>(seanD, body1.Label, body1.Min_posi, body1.Max_posi, body1.Forward);
+
                     //ShipFactory.Instance.LoadShipFromAssetBundle<PlayerInBody>(ShipName.MainShip, body1.Label, body1.Min_posi, body1.Max_posi, body1.Forward);
                     continue;
                 }
@@ -74,6 +77,8 @@ namespace SpaceShip.Factory
                 if (body is EnviromentInBody)
                 {
                     EnviromentInBody meteorite = body as EnviromentInBody;
+                    BodyFactory.Instance.LoadEnvironmentBodyByType<EnviromentInBody>(seanD, meteorite.Position, meteorite.radius, meteorite.Forward);
+
                     //EnvironmentFactory.Instance.LoadEnvironmentFromAssetBundle<EnviromentInBody>(EnvironmentName.Meteorite, meteorite.Position, meteorite.radius, meteorite.Forward);
                 }
 
@@ -81,11 +86,9 @@ namespace SpaceShip.Factory
 
         }
 
-        public void UnLoadLeveldataByID(int id)
+        public void UnLoadLeveldataByID(int id,SeanD seanD)
         {
-            //EnvironmentFactory.Instance.Dispose();
-            //ShipFactory.Instance.Dispose();
-            //WeaponFactory.Instance.Dispose();
+            seanD.Dispose();
         }
 
 

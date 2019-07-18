@@ -1,8 +1,9 @@
 ﻿using System;
+using CrazyEngine;
 
 namespace CrazyEngine
 {
-    public class RectangleEntity : Body, IGameEvent
+    public class RectangleEntity : Body
     {
         public RectangleEntity()
         {
@@ -22,10 +23,7 @@ namespace CrazyEngine
             return true;
         }
 
-        public bool GetEventTrigger()
-        {
-            return GameState.playing == GameSceneLogic.Instance.GameState;
-        }
+        
 
 
         public Vector2 Max_posi;

@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AI\AIEnemyManager\AIEnemyLogic.cs" />
+    <Compile Include="AI\AIEnemyManager\IAILog.cs" />
     <Compile Include="AI\AIEntity\aiBody\AICarrierShipInBody.cs" />
     <Compile Include="AI\AIEntity\aiBody\AIShipBase.cs" />
     <Compile Include="AI\AIEntity\aiBody\AISmallShipInBody.cs" />
@@ -57,10 +59,19 @@
     <Compile Include="AI\FSMBase\FSMState.cs" />
     <Compile Include="AI\FSMBase\FSMSystem.cs" />
     <Compile Include="Factory\BodyFactory\BodyFactory.cs" />
+    <Compile Include="Factory\BodyFactory\Bodys\EnviromentInBody.cs" />
+    <Compile Include="Factory\BodyFactory\Bodys\MeteoriteInBody.cs" />
+    <Compile Include="Factory\BodyFactory\Bodys\PlayerInBody.cs" />
+    <Compile Include="Factory\BodyFactory\Bodys\ShipBase.cs" />
+    <Compile Include="Factory\BodyFactory\Bodys\Weanpon.cs" />
+    <Compile Include="ISBSeanDuan.cs" />
+    <Compile Include="Base\LevelData.cs" />
+    <Compile Include="Base\WeaponGameLogic.cs" />
     <Compile Include="Factory\LevelDataFactory\LevelDataFactory.cs" />
-    <Compile Include="ITickable.cs" />
-    <Compile Include="LevelDataSystem.cs" />
+    <Compile Include="Base\ITickable.cs" />
+    <Compile Include="Base\LevelDataSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeanD.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CrazyEngine\CrazyEngine.csproj">

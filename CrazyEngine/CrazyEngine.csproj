@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -54,8 +55,9 @@
     <Compile Include="Common\World.cs" />
     <Compile Include="Core\Engine.cs" />
     <Compile Include="Core\TimerManager.cs" />
+    <Compile Include="IGetWorld.cs" />
     <Compile Include="Interface\IBaseStruct.cs" />
-    <Compile Include="Manager\TestGameManager.cs" />
+    <Compile Include="ITickable.cs" />
     <Compile Include="Model\CircleEntity.cs" />
     <Compile Include="Model\LineEntity.cs" />
     <Compile Include="Model\PointEntity.cs" />

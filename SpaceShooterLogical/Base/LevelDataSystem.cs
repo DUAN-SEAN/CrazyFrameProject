@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using XMLDataLib;
-using UnityEngine;
-using System.Xml.Serialization;
 using System.IO;
-
-namespace SpaceShip.Level
+using SpaceShip.Base;
+using CrazyEngine;
+using SpaceShip.Factory;
+using SpaceShip.AI;
+namespace SpaceShip.System
 {
 
 
@@ -38,7 +39,11 @@ namespace SpaceShip.Level
         private void LoadingLevelData()
         {
             ///GameConfig.conf
-            string path = Application.dataPath + "/Resources/Data/StreamingAssets/LevelConfigure/GameConfig.config";
+            string path = "";
+#if UNITY
+             path = Application.dataPath + "/Resources/Data/StreamingAssets/LevelConfigure/GameConfig.config";
+                
+#endif
 #if UNITY_EDITOR
         path = Application.dataPath + "/StreamingAssets/LevelConfigure/GameConfig.config";
 #endif
@@ -49,12 +54,10 @@ namespace SpaceShip.Level
                 //LogUI.Log(datasInfo.dataInfos);
                 foreach (DataInfo data in datasInfo.dataInfos)
                 {
-                    LogUI.Log(data.Id + " " + data);
                 }
 
                 foreach (LevelDatasInfo leveldatas in datasInfo.LevelDatasInfo)
                 {
-                    LogUI.Log("levelData Begin");
                     LevelData levelData = new LevelData
                     {
                         id = leveldatas.Id,
@@ -85,7 +88,7 @@ namespace SpaceShip.Level
                             }
 
                         }
-                        LogUI.Log("Point Done" + points.Length);
+                        //LogUI.Log("Point Done" + points.Length);
 
                     }
 
@@ -116,7 +119,7 @@ namespace SpaceShip.Level
 
                         }
 
-                        LogUI.Log("Circle Done" + circles.Length);
+                        //LogUI.Log("Circle Done" + circles.Length);
                     }
 
                     if (rectangles != null)
@@ -144,7 +147,7 @@ namespace SpaceShip.Level
                                     levelData.AddEntity(body_ship);
                                     break;
                                 case 2:
-                                    LogUI.Log("aiship");
+                                    //LogUI.Log("aiship");
                                     AISmallShipInBody body_ship2 = new AISmallShipInBody(
                                         new Vector2(rectangle.Min_x, rectangle.Min_y),
                                         new Vector2(rectangle.Max_x, rectangle.Max_y))
@@ -154,10 +157,10 @@ namespace SpaceShip.Level
                                     };
 
                                     levelData.AddEntity(body_ship2);
-                                    LogUI.Log("aiship done");
+                                    //LogUI.Log("aiship done");
                                     break;
                                 case 3:
-                                    LogUI.Log("Boss ship");
+                                    //LogUI.Log("Boss ship");
                                     AICarrierShipInBody carrierShipInBody = new AICarrierShipInBody(
                                         new Vector2(rectangle.Min_x, rectangle.Min_y),
                                         new Vector2(rectangle.Max_x, rectangle.Max_y))
@@ -166,14 +169,14 @@ namespace SpaceShip.Level
                                         Label = (Label)rectangle.Label
                                     };
                                     levelData.AddEntity(carrierShipInBody);
-                                    LogUI.Log("Boss done");
+                                    //LogUI.Log("Boss done");
                                     break;
 
                                 default:
                                     break;
                             }
                         }
-                        LogUI.Log("Rectangle Done" + rectangles.Length);
+                        //LogUI.Log("Rectangle Done" + rectangles.Length);
                     }
 
                     levelDatasDict.Add(levelData.id, levelData);
@@ -182,9 +185,9 @@ namespace SpaceShip.Level
             }
             catch (Exception e)
             {
-                LogUI.LogError(e);
-                LogUI.Log(path);
-                LogUI.Log(File.OpenText(path).ReadToEnd());
+                //LogUI.LogError(e);
+                //LogUI.Log(path);
+                //LogUI.Log(File.OpenText(path).ReadToEnd());
 
             }
         }

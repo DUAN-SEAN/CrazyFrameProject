@@ -4,7 +4,8 @@ using FSMTransition = FSMSystemSpace.Transition;
 using FSMStateID = FSMSystemSpace.StateID;
 using System.Collections.Generic;
 using SpaceShip.Base;
-
+using CrazyEngine;
+using SpaceShip.Factory;
 namespace SpaceShip.AI
 {
 
@@ -14,7 +15,6 @@ namespace SpaceShip.AI
         {
             //LogUI.Log("carrier ctor");
             IsLeader = true;
-            AIEnemyLogic.Instance.LogoutAIShip(this);
             m_fsmsystem = new FSMSystem();
             FollowState followState = new FollowState(this);
             followState.AddTransition((FSMTransition)AIShipTransition.ATTACK,
@@ -59,7 +59,6 @@ namespace SpaceShip.AI
             oldtime = DateTime.Now.Ticks;
             //isAttack = true;
             teamershiplist = new List<AIShipBase>();
-            AIEnemyLogic.Instance.RegisterAIShip(this);
         }
 
         public AICarrierShipInBody(Vector2 min, Vector2 max) : base(min, max)
@@ -68,36 +67,51 @@ namespace SpaceShip.AI
 
         }
 
+        
+
+
+
         #region 确定大飞机特殊位置 武器位置等
         public Vector2 GetShotPositionOne()
         {
-            var body = shipinworld as CarrierShipInWorld;
-            return new Vector2(body.shotSpawnOne.position.x, body.shotSpawnOne.position.z);
+            //var body = shipinworld as CarrierShipInWorld;
+            //return new Vector2(body.shotSpawnOne.position.x, body.shotSpawnOne.position.z);
+            return Position;
         }
         public Vector2 GetShotPositionTwo()
         {
-            var body = shipinworld as CarrierShipInWorld;
-            return new Vector2(body.shotSpawnTwo.position.x, body.shotSpawnTwo.position.z);
+            //var body = shipinworld as CarrierShipInWorld;
+            //return new Vector2(body.shotSpawnTwo.position.x, body.shotSpawnTwo.position.z);
+            return Position;
+
         }
         public Vector2 GetMisslePositionOne()
         {
-            var body = shipinworld as CarrierShipInWorld;
-            return new Vector2(body.missleSpawnOne.position.x, body.missleSpawnOne.position.z);
+            //var body = shipinworld as CarrierShipInWorld;
+            //return new Vector2(body.missleSpawnOne.position.x, body.missleSpawnOne.position.z);
+            return Position;
+
         }
         public Vector2 GetMisslePositionTwo()
         {
-            var body = shipinworld as CarrierShipInWorld;
-            return new Vector2(body.missleSpawnTwo.position.x, body.missleSpawnTwo.position.z);
+            //var body = shipinworld as CarrierShipInWorld;
+            //return new Vector2(body.missleSpawnTwo.position.x, body.missleSpawnTwo.position.z);
+            return Position;
+
         }
         public Vector2 GetShipOutPositionOne()
         {
-            var body = shipinworld as CarrierShipInWorld;
-            return new Vector2(body.aircraftSpawnOne.position.x, body.aircraftSpawnOne.position.z);
+            //var body = shipinworld as CarrierShipInWorld;
+            //return new Vector2(body.aircraftSpawnOne.position.x, body.aircraftSpawnOne.position.z);
+            return Position;
+
         }
         public Vector2 GetShipOutPositionTwo()
         {
-            var body = shipinworld as CarrierShipInWorld;
-            return new Vector2(body.aircraftSpawnTwo.position.x, body.aircraftSpawnTwo.position.z);
+            //var body = shipinworld as CarrierShipInWorld;
+            //return new Vector2(body.aircraftSpawnTwo.position.x, body.aircraftSpawnTwo.position.z);
+            return Position;
+
         }
         #endregion
 
@@ -156,13 +170,14 @@ namespace SpaceShip.AI
 
                 if (initableShip > 0 && initShips < maxSmallShip)
                 {
-                    ShipFactory.Instance.LoadShipFromAssetBundle<AISmallShipInBody>(ShipName.SmallShip1, Label, GetShipOutPositionOne(), GetShipOutPositionOne() + new Vector2(1, 1), Forward);
+                    BodyFactory.Instance.LoadShipBodyByType<AISmallShipInBody>(Label, GetShipOutPositionOne(), GetShipOutPositionOne() + new Vector2(1, 1), Forward);
                     initShips++;
                     initableShip--;
                 }
                 if (initableShip > 0 && initShips < maxSmallShip)
                 {
-                    ShipFactory.Instance.LoadShipFromAssetBundle<AISmallShipInBody>(ShipName.SmallShip1, Label, GetShipOutPositionTwo(), GetShipOutPositionTwo() + new Vector2(1, 1), Forward);
+                    BodyFactory.Instance.LoadShipBodyByType<AISmallShipInBody>(Label, GetShipOutPositionTwo(), GetShipOutPositionTwo() + new Vector2(1, 1), Forward);
+
                     initShips++;
                     initableShip--;
                 }

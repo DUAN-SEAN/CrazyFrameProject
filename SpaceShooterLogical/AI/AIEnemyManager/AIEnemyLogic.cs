@@ -1,31 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using SpaceShip.Base;
+using SpaceShip.Factory;
+using CrazyEngine;
 namespace SpaceShip.AI
 {
 
 
-    public class AIEnemyLogic : ITickable
+    public class AIEnemyLogic : ITickable,IAILog
     {
-        #region SystemMethod
-        public static AIEnemyLogic Instance
-        {
-            get
-            {
-                if (m_aienemyManager == null) m_aienemyManager = new AIEnemyLogic();
-                return m_aienemyManager;
-            }
-
-        }
-        private AIEnemyLogic()
+       
+        public AIEnemyLogic()
         {
             m_aishipList = new List<AIShipBase>();
             m_enviromentList = new List<EnviromentInBody>();
+            m_LeaderShipList = new List<AIShipBase>();
         }
 
 
 
 
-        #endregion
+       
 
         public void Tick()
         {
@@ -78,6 +73,18 @@ namespace SpaceShip.AI
 
 
         #region 物体全体dispose
+        public void Dispose()
+        {
+            AIShipDone();
+
+            EnviromentDone();
+
+            m_aishipList = null;
+            m_enviromentList = null;
+            m_LeaderShipList = null;
+        }
+
+
         public void AIShipDone()
         {
             for (int i = 0; i < m_aishipList.Count; i++)
@@ -88,11 +95,12 @@ namespace SpaceShip.AI
             //{
             //    aIShipBase.Destroy();
             //}
-
+            m_LeaderShipList.Clear();
             m_aishipList.Clear();
         }
         public void EnviromentDone()
         {
+
             for (int i = 0; i < m_enviromentList.Count; i++)
             {
                 m_enviromentList[i].Dispose();
@@ -100,29 +108,24 @@ namespace SpaceShip.AI
 
 
             m_enviromentList.Clear();
+
+        }
+
+        public List<AIShipBase> getLeaderShips()
+        {
+            return m_LeaderShipList;
         }
         #endregion
 
-        public List<AIShipBase> LeaderShips
-        {
-            get
-            {
-                if (m_LeaderShipList == null) m_LeaderShipList = new List<AIShipBase>();
 
-                
-                return m_LeaderShipList;
-
-            }
-        }
 
         public bool isAiStop;
 
         public List<AIShipBase> m_LeaderShipList;
 
-        public readonly List<EnviromentInBody> m_enviromentList;
-        public readonly List<AIShipBase> m_aishipList;
-        private static AIEnemyLogic m_aienemyManager;
-
+        public List<EnviromentInBody> m_enviromentList;
+        public List<AIShipBase> m_aishipList;
+       
 
     }
     

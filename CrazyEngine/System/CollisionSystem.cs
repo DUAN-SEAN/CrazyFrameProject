@@ -3,17 +3,22 @@ namespace CrazyEngine
 {
     public class CollisionSystem : ITickable
     {
+        protected World world;
 
+        public CollisionSystem(World world)
+        {
+            this.world = world;
+        }
         private void CollissionCheck()
         {
             //碰撞检测
-            for (int i = 0; i < World.Instanse.Bodies.Count; i++)
+            for (int i = 0; i < world.Bodies.Count; i++)
             {
-                for (int j = i + 1; j < World.Instanse.Bodies.Count; j++)
+                for (int j = i + 1; j < world.Bodies.Count; j++)
                 {
                     bool flag = false;
-                    Collider collider1 = World.Instanse.Bodies[i].Collider;
-                    Collider collider2 = World.Instanse.Bodies[j].Collider;
+                    Collider collider1 = world.Bodies[i].Collider;
+                    Collider collider2 = world.Bodies[j].Collider;
 
                     if (!collider1.body.Enable || !collider2.body.Enable) continue;
 
@@ -151,5 +156,9 @@ namespace CrazyEngine
             CollissionCheck();
         }
 
+        public void Dispose()
+        {
+            world = null;
+        }
     }
 }

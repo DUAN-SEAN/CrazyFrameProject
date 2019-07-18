@@ -1,8 +1,9 @@
 ﻿using System;
+using CrazyEngine;
 
 namespace CrazyEngine
 {
-    public class LineEntity : Body, IGameEvent
+    public class LineEntity : Body
     {
         public float Length;
         public Vector2 StartPoint;
@@ -22,10 +23,7 @@ namespace CrazyEngine
             return true;
         }
 
-        public bool GetEventTrigger()
-        {
-            return GameState.playing == GameSceneLogic.Instance.GameState;
-        }
+        
 
     }
 }
