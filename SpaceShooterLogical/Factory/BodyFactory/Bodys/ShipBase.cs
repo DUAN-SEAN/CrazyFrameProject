@@ -34,7 +34,7 @@ namespace SpaceShip.Factory
             IntervalTime = 5;
 
         }
-        public virtual void Init(Level seanD)
+        public virtual void Init(SeanD seanD)
         {
             base.InitWorld(seanD);
             iSBSean = seanD;
