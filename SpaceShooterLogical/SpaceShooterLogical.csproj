@@ -71,7 +71,7 @@
     <Compile Include="Base\ITickable.cs" />
     <Compile Include="Base\LevelDataSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SeanD.cs" />
+    <Compile Include="Level.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CrazyEngine\CrazyEngine.csproj">
