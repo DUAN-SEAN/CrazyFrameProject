@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpaceShip.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,17 @@ namespace GameServer.Battle
         {
             base.Start(id);
             m_startTime = DateTime.Now;
+
+            m_level = new Level();
+
+
         }
+
+        public void Init()
+        {
+            m_level.Init();
+        }
+
         /// <summary>
         /// 由时间管理器进行驱动
         /// </summary>
@@ -41,8 +52,11 @@ namespace GameServer.Battle
 
 
             //4 驱动物理引擎
-
-
+            if (m_level == null)
+            {
+                return;
+            }
+            m_level.Tick();
 
 
         }
@@ -63,9 +77,9 @@ namespace GameServer.Battle
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        private BodyEntity GetBodyEntity(ulong id)
+        private ABodyEntity GetBodyEntity(ulong id)
         {
-            BodyEntity bodyEntity = null;
+            ABodyEntity bodyEntity = null;
             if(!m_bodyEntityDic.TryGetValue(id,out bodyEntity))
             {
                 return null;
@@ -85,7 +99,7 @@ namespace GameServer.Battle
         /// <summary>
         /// BodyEntity字典
         /// </summary>
-        private Dictionary<ulong, BodyEntity> m_bodyEntityDic = new Dictionary<ulong, BodyEntity>();
+        private Dictionary<ulong, ABodyEntity> m_bodyEntityDic = new Dictionary<ulong, ABodyEntity>();
         
         /// <summary>
         /// 战斗开始时间
@@ -95,6 +109,8 @@ namespace GameServer.Battle
         /// timeId
         /// </summary>
         private long m_timerId;
+
+        private Level m_level;
         
     }
 }
