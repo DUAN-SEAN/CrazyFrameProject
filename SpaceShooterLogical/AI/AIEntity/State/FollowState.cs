@@ -2,6 +2,9 @@
 using FSMSystemSpace;
 using FSMTransition = FSMSystemSpace.Transition;
 using FSMStateID = FSMSystemSpace.StateID;
+using CrazyEngine;
+using SpaceShip.Base;
+using SpaceShip.Factory;
 
 namespace SpaceShip.AI
 {
@@ -29,23 +32,23 @@ namespace SpaceShip.AI
         {
             if (follow_body == null)
             {
-                LogUI.Log("follow fail");
+                //LogUI.Log("follow fail");
 
                 m_body.m_fsmsystem.PerformTransition((FSMTransition)AIShipTransition.ALERT);
             }
-            LogUI.Log(m_body.Id + "enter follow");
+            //LogUI.Log(m_body.Id + "enter follow");
 
         }
         public override void DoBeforeEntering<T>(T t)
         {
             if (!(t is ShipBase body))
             {
-                LogUI.Log("follow fail" + t);
+                //LogUI.Log("follow fail" + t);
 
                 m_body.m_fsmsystem.PerformTransition((FSMTransition)AIShipTransition.ALERT);
                 return;
             }
-            LogUI.Log(m_body.Id + "enter follow1");
+            //LogUI.Log(m_body.Id + "enter follow1");
 
             follow_body = body;
         }
@@ -53,11 +56,11 @@ namespace SpaceShip.AI
         {
             if (!(t1 is ShipBase body))
             {
-                LogUI.Log("follow fail" + t1);
+                //LogUI.Log("follow fail" + t1);
                 m_body.m_fsmsystem.PerformTransition((FSMTransition)AIShipTransition.ALERT);
                 return;
             }
-            LogUI.Log(m_body.Id + "enter follow1");
+            //LogUI.Log(m_body.Id + "enter follow1");
 
             offset_vector = t2;
 
@@ -65,7 +68,7 @@ namespace SpaceShip.AI
         }
         public override void DoBeforeLeaving()
         {
-            LogUI.Log(m_body.Id + "leaving follow");
+            //LogUI.Log(m_body.Id + "leaving follow");
         }
 
         public override void DoingSomthing()

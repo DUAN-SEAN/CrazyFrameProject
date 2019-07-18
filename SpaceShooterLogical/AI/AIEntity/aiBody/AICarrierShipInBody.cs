@@ -170,13 +170,15 @@ namespace SpaceShip.AI
 
                 if (initableShip > 0 && initShips < maxSmallShip)
                 {
-                    BodyFactory.Instance.LoadShipBodyByType<AISmallShipInBody>(Label, GetShipOutPositionOne(), GetShipOutPositionOne() + new Vector2(1, 1), Forward);
+                    var body = BodyFactory.Instance.LoadShipBodyByType<AISmallShipInBody>((SeanD)iSBSean,Label, GetShipOutPositionOne(), GetShipOutPositionOne() + new Vector2(1, 1), Forward);
+                    iSBSean.GetBodyMessages().Add(new BodyMessage(BodyMessageID.SmallShip1, body));
                     initShips++;
                     initableShip--;
                 }
                 if (initableShip > 0 && initShips < maxSmallShip)
                 {
-                    BodyFactory.Instance.LoadShipBodyByType<AISmallShipInBody>(Label, GetShipOutPositionTwo(), GetShipOutPositionTwo() + new Vector2(1, 1), Forward);
+                    var body = BodyFactory.Instance.LoadShipBodyByType<AISmallShipInBody>((SeanD)iSBSean,Label, GetShipOutPositionTwo(), GetShipOutPositionTwo() + new Vector2(1, 1), Forward);
+                    iSBSean.GetBodyMessages().Add(new BodyMessage(BodyMessageID.SmallShip1, body));
 
                     initShips++;
                     initableShip--;

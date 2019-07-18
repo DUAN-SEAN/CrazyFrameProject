@@ -2,6 +2,10 @@
 using FSMSystemSpace;
 using FSMTransition = FSMSystemSpace.Transition;
 using FSMStateID = FSMSystemSpace.StateID;
+using SpaceShip.Factory;
+using CrazyEngine;
+using SpaceShip.Base;
+
 namespace SpaceShip.AI
 {
 
@@ -19,7 +23,7 @@ namespace SpaceShip.AI
 
         public override void DoBeforeEntering()
         {
-            LogUI.Log(m_body.Id + "enter attack");
+            //LogUI.Log(m_body.Id + "enter attack");
 
         }
 
@@ -43,18 +47,19 @@ namespace SpaceShip.AI
                 m_body.m_fsmsystem.PerformTransition((FSMTransition)AIShipTransition.ALERT);
                 return;
             }
-            if (attack_body.shipinworld == null)
-            {
-                m_body.m_fsmsystem.PerformTransition((FSMTransition)AIShipTransition.ALERT);
-                return;
-            }
+            //if (attack_body.shipinworld == null)
+            //{
+            //    m_body.m_fsmsystem.PerformTransition((FSMTransition)AIShipTransition.ALERT);
+            //    return;
+            //}
             Vector2 vector2 = attack_body.Position - m_body.Position;
             m_body.Forward = Vector2.Lerp(m_body.Forward, vector2, m_body.rotatespeed);
 
             // LogUI.Log(vector2.normalized.magnitudeNoSqrt);
             if (!m_body.isAttack && vector2.normalized.magnitudeNoSqrt < 1.001)
             {
-                WeaponFactory.Instance.LoadWeaponFromAssetBundle(WeaponsName.Bolt, m_body);
+                var weanpon = BodyFactory.Instance.LoadBoltWeaponByType<BoltInBody>((SeanD)m_body.iSBSean, m_body);
+                m_body.iSBSean.GetBodyMessages().Add(new BodyMessage(BodyMessageID.Bolt, weanpon));
                 m_body.IsAttack = true;
             }
 
@@ -72,7 +77,7 @@ namespace SpaceShip.AI
         public override void DoBeforeLeaving()
         {
 
-            LogUI.Log(m_body.Id + "leaving attack");
+            //LogUI.Log(m_body.Id + "leaving attack");
 
         }
 

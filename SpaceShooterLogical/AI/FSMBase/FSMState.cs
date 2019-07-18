@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using CrazyEngine;
 
 
 namespace FSMSystemSpace
@@ -84,13 +84,13 @@ namespace FSMSystemSpace
             // Check if anyone of the args is invalid
             if (trans == Transition.NullTransition)
             {
-               LogUI.Log("FSMState ERROR: NullTransition is not allowed for a real transition");
+               //LogUI.Log("FSMState ERROR: NullTransition is not allowed for a real transition");
                 return;
             }
 
             if (id == StateID.NullStateID)
             {
-               LogUI.Log("FSMState ERROR: NullStateID is not allowed for a real ID");
+               //LogUI.Log("FSMState ERROR: NullStateID is not allowed for a real ID");
                 return;
             }
 
@@ -98,8 +98,8 @@ namespace FSMSystemSpace
             //   check if the current transition was already inside the map
             if (map.ContainsKey(trans))
             {
-               LogUI.Log("FSMState ERROR: State " + stateID.ToString() + " already has transition " + trans.ToString() +
-                               "Impossible to assign to another state");
+               //LogUI.Log("FSMState ERROR: State " + stateID.ToString() + " already has transition " + trans.ToString() +
+               //                "Impossible to assign to another state");
                 return;
             }
 
@@ -111,13 +111,13 @@ namespace FSMSystemSpace
             // Check if anyone of the args is invalid
             if (pop == Popup.NullPopup)
             {
-               LogUI.Log("FSMState ERROR: NullPopup is not allowed for a real Popup");
+               //LogUI.Log("FSMState ERROR: NullPopup is not allowed for a real Popup");
                 return;
             }
 
             if (id == StateID.NullStateID)
             {
-               LogUI.Log("FSMState ERROR: NullStateID is not allowed for a real ID");
+               //LogUI.Log("FSMState ERROR: NullStateID is not allowed for a real ID");
                 return;
             }
 
@@ -125,8 +125,8 @@ namespace FSMSystemSpace
             //   check if the current transition was already inside the map
             if (map_pop.ContainsKey(pop))
             {
-               LogUI.Log("FSMState ERROR: State " + stateID.ToString() + " already has popup " + pop.ToString() +
-                           "Impossible to assign to another state");
+               //LogUI.Log("FSMState ERROR: State " + stateID.ToString() + " already has popup " + pop.ToString() +
+               //            "Impossible to assign to another state");
                 return;
             }
 
@@ -142,7 +142,7 @@ namespace FSMSystemSpace
             // Check for NullTransition
             if (trans == Transition.NullTransition)
             {
-               LogUI.Log("FSMState ERROR: NullTransition is not allowed");
+               //LogUI.Log("FSMState ERROR: NullTransition is not allowed");
                 return;
             }
 
@@ -152,8 +152,8 @@ namespace FSMSystemSpace
                 map.Remove(trans);
                 return;
             }
-           LogUI.Log("FSMState ERROR: Transition " + trans.ToString() + " passed to " + stateID.ToString() +
-                           " was not on the state's transition list");
+           //LogUI.Log("FSMState ERROR: Transition " + trans.ToString() + " passed to " + stateID.ToString() +
+           //                " was not on the state's transition list");
         }
 
         /// <summary>

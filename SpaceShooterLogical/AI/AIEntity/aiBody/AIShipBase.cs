@@ -88,7 +88,7 @@ abstract public class AIShipBase : ShipBase, ITickable
 
     }
 
-    public override void Init(Level seanD)
+    public override void Init(SeanD seanD)
         {
             base.InitWorld(seanD);
             seanD.GetAILog().RegisterAIShip(this);

@@ -22,27 +22,27 @@ namespace SpaceShip.Base
             things.Add(thing);
             //gameEvents.Add(thing);
         }
-        /// <summary>
-        /// 在游戏开始之前将地图数据添加进世界
-        /// </summary>
-        public void LoadingEntityToWorldBeforeBegin()
-        {
-            foreach (Body body in things)
-            {
-                World.Instanse.Bodies.Add(body);
-            }
-        }
+        ///// <summary>
+        ///// 在游戏开始之前将地图数据添加进世界
+        ///// </summary>
+        //public void LoadingEntityToWorldBeforeBegin()
+        //{
+        //    foreach (Body body in things)
+        //    {
+        //        World.Instanse.Bodies.Add(body);
+        //    }
+        //}
 
-        /// <summary>
-        /// 在游戏结束之后将世界中的地图数据去除
-        /// </summary>
-        public void UnLoadingEntityFromWorldAfterEnd()
-        {
-            foreach (Body body in things)
-            {
-                World.Instanse.Bodies.Remove(body);
-            }
-        }
+        ///// <summary>
+        ///// 在游戏结束之后将世界中的地图数据去除
+        ///// </summary>
+        //public void UnLoadingEntityFromWorldAfterEnd()
+        //{
+        //    foreach (Body body in things)
+        //    {
+        //        World.Instanse.Bodies.Remove(body);
+        //    }
+        //}
         public int id;
         public int level;
         public string Name;

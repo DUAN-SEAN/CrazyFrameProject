@@ -26,6 +26,7 @@ namespace SpaceShip.Base
         IAILog GetAILog();
         #endregion
 
+        List<BodyMessage> GetBodyMessages();
         
 
         

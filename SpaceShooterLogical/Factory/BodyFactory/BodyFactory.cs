@@ -21,7 +21,7 @@ namespace SpaceShip.Factory
         /// <summary>
         /// 船体生成 供船工厂使用
         /// </summary>
-        public T LoadShipBodyByType<T>(Level seanD,Label label, Vector2 min, Vector2 max, Vector2 forward) where T : ShipBase, new()
+        public T LoadShipBodyByType<T>(SeanD seanD,Label label, Vector2 min, Vector2 max, Vector2 forward) where T : ShipBase, new()
         {
 
 
@@ -33,6 +33,7 @@ namespace SpaceShip.Factory
             body_ship.Label = label;
             body_ship.MaxVelocity = 100;
 
+            body_ship.Init(seanD);
 
             return body_ship;
         }
@@ -44,49 +45,58 @@ namespace SpaceShip.Factory
         /// <summary>
         /// 小激光武器生成 供武器工厂使用
         /// </summary>
-        public T LoadBoltWeaponByType<T>(Level seanD,Body body, Vector2 position = default, Vector2 forward = default) where T : BoltInBody, new()
+        public T LoadBoltWeaponByType<T>(SeanD seanD,Body body, Vector2 position = default, Vector2 forward = default) where T : BoltInBody, new()
         {
+            if (forward == Vector2.Zero) forward = body.Forward;
+            if (position == Vector2.Zero) position = body.Position;
+
             T body_weanpon;
             body_weanpon = seanD.GetCurrentWorld().InitInWorld<T>(position);
             body_weanpon.Forward = forward;
             body_weanpon.Owner = body;
+
+
+            body_weanpon.Init(seanD);
             return body_weanpon;
         }
 
         /// <summary>
         /// 地雷武器生成 供武器工厂使用
         /// </summary>
-        public T LoadMineWeaponByType<T>(Level seanD,Body body, Vector2 position = default, Vector2 forward = default) where T : MineInBody, new()
+        public T LoadMineWeaponByType<T>(SeanD seanD,Body body, Vector2 position = default, Vector2 forward = default) where T : MineInBody, new()
         {
             T body_weanpon;
             body_weanpon = seanD.GetCurrentWorld().InitInWorld<T>(position, 0.5f);
             body_weanpon.Forward = forward;
             body_weanpon.Owner = body;
+            body_weanpon.Init(seanD);
             return body_weanpon;
         }
 
         /// <summary>
         /// 导弹武器生成 供武器工厂使用
         /// </summary>
-        public T LoadMissileWeaponByType<T>(Level seanD,Body body, Vector2 position = default, Vector2 forward = default) where T : MissileInBody, new()
+        public T LoadMissileWeaponByType<T>(SeanD seanD,Body body, Vector2 position = default, Vector2 forward = default) where T : MissileInBody, new()
         {
             T body_weanpon;
             body_weanpon = seanD.GetCurrentWorld().InitInWorld<T>(position);
             body_weanpon.Forward = forward;
             body_weanpon.Owner = body;
+            body_weanpon.Init(seanD);
 
             return body_weanpon;
         }
         /// <summary>
         /// 激光武器生成 供武器工厂使用
         /// </summary>
-        public T LoadLightWeaponByType<T>(Level seanD,Body body, Vector2 position = default, Vector2 forward = default) where T : LightInBody, new()
+        public T LoadLightWeaponByType<T>(SeanD seanD,Body body, Vector2 position = default, Vector2 forward = default) where T : LightInBody, new()
         {
             T body_weanpon;
             body_weanpon = seanD.GetCurrentWorld().InitInWorld<T>(new Line(position, new Vector2(position + forward.normalized * 20)));
             //LogUI.Log("飞船"+ new Vector2(body.Position + body.Forward.normalized * 10));
             body_weanpon.Forward = forward;
             body_weanpon.Owner = body;
+            body_weanpon.Init(seanD);
             return body_weanpon;
         }
 
@@ -94,13 +104,14 @@ namespace SpaceShip.Factory
 
         #region LoadingEnviromentBody 加载环境资源
 
-        public T LoadEnvironmentBodyByType<T>(Level seanD,Vector2 position, float radius, Vector2 forward) where T : EnviromentInBody, new()
+        public T LoadEnvironmentBodyByType<T>(SeanD seanD,Vector2 position, float radius, Vector2 forward) where T : EnviromentInBody, new()
         {
 
             T body_environ = seanD.GetCurrentWorld().InitInWorld<T>(position, radius);
             body_environ.Label = Label.Environment;
             body_environ.Forward = forward;
 
+            body_environ.Init(seanD);
             return body_environ;
         }
 
@@ -116,5 +127,49 @@ namespace SpaceShip.Factory
         }
 
         private static BodyFactory bodyFactory;
+    }
+    interface IBodyMessage {
+        string GetMessageID();
+        Body GetBody();
+    }
+    public class BodyMessage : IBodyMessage
+    {
+        string messageID;
+        Body m_body;
+
+        public BodyMessage(string bodyMessageID,Body body)
+        {
+            messageID = bodyMessageID;
+            m_body = body;
+        }
+
+        public Body GetBody()
+        {
+            return m_body;
+        }
+
+        public string GetMessageID()
+        {
+            return messageID;
+        }
+    }
+
+
+    public class BodyMessageID
+    {
+        public const string Missile = "Missile";
+        public const string Mine = "Mine";
+        public const string Light = "Light";
+        public const string Bolt = "Bolt";
+
+        public const string MainShip = "Players Variant";
+        public const string MainShip2 = "SF_Battleship-G6_FBX";
+        public const string BossBigShip1 = "Carrier";
+        public const string SmallShip1 = "SF_Bomber-X4";
+        public const string CarrierShip = "Carrier";
+
+        public const string Enviroment = "Enviroment";
+        public const string Meteorite = "Asteroid";
+
     }
 }

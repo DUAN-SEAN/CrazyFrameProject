@@ -252,7 +252,7 @@ namespace CrazyEngine
         /// </summary>
         public long currentTime
         {
-            get { return (long)(Time.time * 1000); }
+            get { return /*(long)(Time.time * 1000);*/ 0; }
         }
 
 

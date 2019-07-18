@@ -18,7 +18,7 @@ namespace SpaceShip.Factory
         public bool isLeft;
         public bool isRight;
 
-        protected ISBSeanDuan iSBSean;
+        public ISBSeanDuan iSBSean;
         public ShipBase()
         {
             HP = 10;
@@ -34,7 +34,7 @@ namespace SpaceShip.Factory
             IntervalTime = 5;
 
         }
-        public virtual void Init(Level seanD)
+        public virtual void Init(SeanD seanD)
         {
             base.InitWorld(seanD);
             iSBSean = seanD;

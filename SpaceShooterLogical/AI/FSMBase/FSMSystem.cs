@@ -1,7 +1,8 @@
-﻿using System;
+﻿using CrazyEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+
 
 namespace FSMSystemSpace
 {
@@ -45,7 +46,7 @@ namespace FSMSystemSpace
             // Check for Null reference before deleting
             if (s == null)
             {
-               LogUI.Log("FSM ERROR: Null reference is not allowed");
+               //LogUI.Log("FSM ERROR: Null reference is not allowed");
                 return;
             }
 
@@ -65,8 +66,8 @@ namespace FSMSystemSpace
             {
                 if (state.ID == s.ID)
                 {
-                   LogUI.Log("FSM ERROR: Impossible to add state " + s.ID.ToString() +
-                                   " because state has already been added");
+                   //LogUI.Log("FSM ERROR: Impossible to add state " + s.ID.ToString() +
+                   //                " because state has already been added");
                     return;
                 }
             }
@@ -77,7 +78,7 @@ namespace FSMSystemSpace
         {
             if (currentState != null)
             {
-               LogUI.Log("当前已有状态");
+               //LogUI.Log("当前已有状态");
                 return;
             }
             // Update the currentStateID and currentState		
@@ -100,7 +101,7 @@ namespace FSMSystemSpace
             // Check for NullState before deleting
             if (id == StateID.NullStateID)
             {
-               LogUI.Log("FSM ERROR: NullStateID is not allowed for a real state");
+               //LogUI.Log("FSM ERROR: NullStateID is not allowed for a real state");
                 return;
             }
 
@@ -113,8 +114,8 @@ namespace FSMSystemSpace
                     return;
                 }
             }
-           LogUI.Log("FSM ERROR: Impossible to delete state " + id.ToString() +
-                           ". It was not on the list of states");
+           //LogUI.Log("FSM ERROR: Impossible to delete state " + id.ToString() +
+           //                ". It was not on the list of states");
         }
 
         /// <summary>
@@ -128,7 +129,7 @@ namespace FSMSystemSpace
             // Check for NullTransition before changing the current state
             if (trans == Transition.NullTransition)
             {
-               LogUI.Log("FSM ERROR: NullTransition is not allowed for a real transition");
+               //LogUI.Log("FSM ERROR: NullTransition is not allowed for a real transition");
                 return;
             }
 
@@ -136,8 +137,8 @@ namespace FSMSystemSpace
             StateID id = currentState.GetOutputState(trans);
             if (id == StateID.NullStateID)
             {
-               LogUI.Log("FSM ERROR: State " + currentStateID.ToString() + " does not have a target state " +
-                               " for transition " + trans.ToString());
+               //LogUI.Log("FSM ERROR: State " + currentStateID.ToString() + " does not have a target state " +
+               //                " for transition " + trans.ToString());
                 return;
             }
 
@@ -180,7 +181,7 @@ namespace FSMSystemSpace
             // Check for NullTransition before changing the current state
             if (trans == Transition.NullTransition)
             {
-               LogUI.Log("FSM ERROR: NullTransition is not allowed for a real transition");
+               //LogUI.Log("FSM ERROR: NullTransition is not allowed for a real transition");
                 return;
             }
 
@@ -188,8 +189,8 @@ namespace FSMSystemSpace
             StateID id = currentState.GetOutputState(trans);
             if (id == StateID.NullStateID)
             {
-               LogUI.Log("FSM ERROR: State " + currentStateID.ToString() + " does not have a target state " +
-                               " for transition " + trans.ToString());
+               //LogUI.Log("FSM ERROR: State " + currentStateID.ToString() + " does not have a target state " +
+               //                " for transition " + trans.ToString());
                 return;
             }
 
@@ -230,7 +231,7 @@ namespace FSMSystemSpace
             // Check for NullTransition before changing the current state
             if (trans == Transition.NullTransition)
             {
-                LogUI.Log("FSM ERROR: NullTransition is not allowed for a real transition");
+                //LogUI.Log("FSM ERROR: NullTransition is not allowed for a real transition");
                 return;
             }
 
@@ -238,8 +239,8 @@ namespace FSMSystemSpace
             StateID id = currentState.GetOutputState(trans);
             if (id == StateID.NullStateID)
             {
-                LogUI.Log("FSM ERROR: State " + currentStateID.ToString() + " does not have a target state " +
-                                " for transition " + trans.ToString());
+                //LogUI.Log("FSM ERROR: State " + currentStateID.ToString() + " does not have a target state " +
+                //                " for transition " + trans.ToString());
                 return;
             }
 
@@ -274,7 +275,7 @@ namespace FSMSystemSpace
             // Check for NullTransition before changing the current state
             if (pop == Popup.NullPopup)
             {
-               LogUI.Log("FSM ERROR: NullPopup is not allowed for a real popup");
+               //LogUI.Log("FSM ERROR: NullPopup is not allowed for a real popup");
                 return;
             }
 
@@ -282,8 +283,8 @@ namespace FSMSystemSpace
             StateID id = currentState.GetOutputState(pop);
             if (id == StateID.NullStateID)
             {
-               LogUI.Log("FSM ERROR: State " + currentStateID.ToString() + " does not have a target state " +
-                           " for popup " + pop.ToString());
+               //LogUI.Log("FSM ERROR: State " + currentStateID.ToString() + " does not have a target state " +
+               //            " for popup " + pop.ToString());
                 return;
             }
 
@@ -304,7 +305,7 @@ namespace FSMSystemSpace
             // Check for NullTransition before changing the current state
             if (pop == Popup.NullPopup)
             {
-               LogUI.Log("FSM ERROR: NullPopup is not allowed for a real popup");
+               //LogUI.Log("FSM ERROR: NullPopup is not allowed for a real popup");
                 return;
             }
 
@@ -312,8 +313,8 @@ namespace FSMSystemSpace
             StateID id = currentState.GetOutputState(pop);
             if (id == StateID.NullStateID)
             {
-               LogUI.Log("FSM ERROR: State " + currentStateID.ToString() + " does not have a target state " +
-                           " for popup " + pop.ToString());
+               //LogUI.Log("FSM ERROR: State " + currentStateID.ToString() + " does not have a target state " +
+               //            " for popup " + pop.ToString());
                 return;
             }
 
@@ -334,7 +335,7 @@ namespace FSMSystemSpace
         {
             if (PopStack.Count == 0)
             {
-               LogUI.Log("FSM ERROR: PopStack is no elements");
+               //LogUI.Log("FSM ERROR: PopStack is no elements");
             }
             var popState = PopStack.Pop();
             popState.DoBeforeLeaving();

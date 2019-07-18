@@ -10,7 +10,7 @@ using SpaceShip.System;
 
 namespace SpaceShip.Base
 {
-    public sealed class Level : ISBSeanDuan,ITickable,IGetWorld
+    public sealed class SeanD : ISBSeanDuan,ITickable,IGetWorld
     {
         /// <summary>
         /// 物理引擎世界集合
@@ -33,7 +33,13 @@ namespace SpaceShip.Base
         /// </summary>
         private AIEnemyLogic enemyLogic;
 
-        public Level()
+        /// <summary>
+        /// body生成信息
+        /// </summary>
+        private List<BodyMessage> messages;
+
+
+        public SeanD()
         {
            
         }
@@ -84,5 +90,13 @@ namespace SpaceShip.Base
             weaponGameLogic.Dispose();
             engine.Dispose();
         }
+
+        public List<BodyMessage> GetBodyMessages()
+        {
+            return messages;
+        }
     }
+
+
+
 }

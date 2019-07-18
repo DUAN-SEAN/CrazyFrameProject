@@ -11,17 +11,23 @@ namespace SpaceShip.Factory
     /// </summary>
     public class MissileInBody : PointEntity, ITickable, IAliveable
     {
+        public ISBSeanDuan iSBSean;
+        public virtual void Init(SeanD seanD)
+        {
+            base.InitWorld(seanD);
+            iSBSean = seanD;
+            iSBSean.GetWeanponList().Add(this);
+
+        }
         public MissileInBody()
         {
             //LogUI.Log("isWeapon");
-            WeaponGameLogic.Instance.moveWeaponsList.Add(this);
             birthtime = DateTime.Now.Ticks;
             lifetime = 50000000;
             isAlive = true;
         }
         public MissileInBody(Vector2 vector) : base(vector)
         {
-            WeaponGameLogic.Instance.moveWeaponsList.Add(this);
             birthtime = DateTime.Now.Ticks;
             lifetime = 50000000;
             isAlive = true;
@@ -56,7 +62,7 @@ namespace SpaceShip.Factory
         public override void Dispose()
         {
             base.Dispose();
-            WeaponGameLogic.Instance.moveWeaponsList.Remove(this);
+            iSBSean.GetWeanponList().Remove(this);
             isAlive = false;
         }
 
@@ -81,17 +87,25 @@ namespace SpaceShip.Factory
     /// </summary>
     public class BoltInBody : PointEntity, ITickable, IAliveable
     {
+        public ISBSeanDuan iSBSean;
+        public virtual void Init(SeanD seanD)
+        {
+            base.InitWorld(seanD);
+            iSBSean = seanD;
+            iSBSean.GetWeanponList().Add(this);
+
+        }
         public BoltInBody()
         {
             //LogUI.Log("isWeapon");
-            WeaponGameLogic.Instance.moveWeaponsList.Add(this);
+           
             birthtime = DateTime.Now.Ticks;
             lifetime = 50000000;
             isAlive = true;
         }
         public BoltInBody(Vector2 vector) : base(vector)
         {
-            WeaponGameLogic.Instance.moveWeaponsList.Add(this);
+           
             birthtime = DateTime.Now.Ticks;
             lifetime = 50000000;
             isAlive = true;
@@ -126,7 +140,7 @@ namespace SpaceShip.Factory
         public override void Dispose()
         {
             base.Dispose();
-            WeaponGameLogic.Instance.moveWeaponsList.Remove(this);
+           iSBSean.GetWeanponList().Remove(this);
             isAlive = false;
         }
 
@@ -152,17 +166,23 @@ namespace SpaceShip.Factory
     /// </summary>
     public class MineInBody : CircleEntity, ITickable, IAliveable
     {
+        public ISBSeanDuan iSBSean;
+        public virtual void Init(SeanD seanD)
+        {
+            base.InitWorld(seanD);
+            iSBSean = seanD;
+            iSBSean.GetWeanponList().Add(this);
+
+        }
         public MineInBody()
         {
             //LogUI.Log("isWeapon");
-            WeaponGameLogic.Instance.moveWeaponsList.Add(this);
             birthtime = DateTime.Now.Ticks;
             //lifetime = 50000000;
             isAlive = true;
         }
         public MineInBody(Vector2 vector, float r) : base(vector, r)
         {
-            WeaponGameLogic.Instance.moveWeaponsList.Add(this);
             birthtime = DateTime.Now.Ticks;
             //lifetime = 50000000;
             isAlive = true;
@@ -195,7 +215,7 @@ namespace SpaceShip.Factory
         public override void Dispose()
         {
             base.Dispose();
-            WeaponGameLogic.Instance.moveWeaponsList.Remove(this);
+            iSBSean.GetWeanponList().Remove(this);
             isAlive = false;
         }
 
@@ -224,11 +244,18 @@ namespace SpaceShip.Factory
     public class LightInBody : LineEntity, ITickable, IAliveable, IWeanpon
     {
 
+        public ISBSeanDuan iSBSean;
+        public virtual void Init(SeanD seanD)
+        {
+            base.InitWorld(seanD);
+            iSBSean = seanD;
+            iSBSean.GetWeanponList().Add(this);
 
+        }
         public LightInBody()
         {
             //LogUI.Log("isWeapon");
-            WeaponGameLogic.Instance.moveWeaponsList.Add(this);
+            
             birthtime = DateTime.Now.Ticks;
             lifetime = 50000000;
             isAlive = true;
@@ -237,7 +264,6 @@ namespace SpaceShip.Factory
         {
             StartPoint = start;
             Length = (float)Math.Sqrt((end.x - start.x) * (end.x - start.x) + (end.y - start.y) * (end.y - start.y));
-            WeaponGameLogic.Instance.moveWeaponsList.Add(this);
             birthtime = DateTime.Now.Ticks;
             lifetime = 50000000;
             isAlive = true;
@@ -278,7 +304,7 @@ namespace SpaceShip.Factory
         public override void Dispose()
         {
             base.Dispose();
-            WeaponGameLogic.Instance.moveWeaponsList.Remove(this);
+            iSBSean.GetWeanponList().Remove(this);
             isAlive = false;
         }
 
