@@ -10,7 +10,7 @@ using SpaceShip.System;
 
 namespace SpaceShip.Base
 {
-    public sealed class SeanD : ISBSeanDuan,ITickable,IGetWorld
+    public sealed class Level : ISBSeanDuan,ITickable,IGetWorld
     {
         /// <summary>
         /// 物理引擎世界集合
@@ -33,7 +33,7 @@ namespace SpaceShip.Base
         /// </summary>
         private AIEnemyLogic enemyLogic;
 
-        public SeanD()
+        public Level()
         {
            
         }

@@ -39,7 +39,7 @@ namespace SpaceShip.Factory
         /// 将资源加载到World世界中
         /// AI会由AIManager管理
         /// </summary>
-        public void LoadingLeveldataByID(int id,SeanD seanD)
+        public void LoadingLeveldataByID(int id,Level seanD)
         {
             LoadingResources();
 
@@ -86,7 +86,7 @@ namespace SpaceShip.Factory
 
         }
 
-        public void UnLoadLeveldataByID(int id,SeanD seanD)
+        public void UnLoadLeveldataByID(int id,Level seanD)
         {
             seanD.Dispose();
         }
