@@ -25,6 +25,7 @@ namespace GameServer.Battle
         {
             m_objectPool.Recycle(bEntity);
         }
+
         private static UInt64 GenerateId = 0;
         private static ObjectPool m_objectPool = new ObjectPool();
     }

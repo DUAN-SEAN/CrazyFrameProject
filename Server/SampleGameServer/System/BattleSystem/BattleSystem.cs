@@ -68,8 +68,12 @@ namespace GameServer.Battle
             BattleEntity battleEntity = BEntityFactory.CreateEntity<BattleEntity>();
 
             var timerId =  TimerManager.SetLoopTimer(50, battleEntity.Update);//设置Tick步长
-
+            
             battleEntity.SetTimer(timerId);
+
+            //字典添加
+            m_battleDic.Add(battleEntity.Id, battleEntity);
+
             //向玩家现场客户端发送战斗创建成功的消息，Ps 所有战斗消息目前都这样写
             foreach (var item in msg.Players)
             {
