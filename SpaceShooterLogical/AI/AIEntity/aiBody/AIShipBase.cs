@@ -3,6 +3,10 @@ using FSMSystemSpace;
 using FSMTransition = FSMSystemSpace.Transition;
 using FSMStateID = FSMSystemSpace.StateID;
 using System.Collections.Generic;
+using CrazyEngine;
+using SpaceShip.Base;
+using SpaceShip.Factory;
+
 
 namespace SpaceShip.AI
 {
@@ -55,7 +59,6 @@ abstract public class AIShipBase : ShipBase, ITickable
         m_fsmsystem.AddState(attackState);
 
         teamershiplist = new List<AIShipBase>();
-        AIEnemyLogic.Instance.RegisterAIShip(this);
 
         movespeed = 0.1f;
         rotatespeed = 0.1f;
@@ -85,8 +88,14 @@ abstract public class AIShipBase : ShipBase, ITickable
 
     }
 
+    public override void Init(SeanD seanD)
+        {
+            base.InitWorld(seanD);
+            seanD.GetAILog().RegisterAIShip(this);
 
-    public FSMSystem m_fsmsystem;
+        }
+
+        public FSMSystem m_fsmsystem;
 
     public void Tick()
     {
@@ -122,7 +131,6 @@ abstract public class AIShipBase : ShipBase, ITickable
                     if (aIShipBase.m_fsmsystem.CurrentStateID != (FSMStateID)AIShipStateID.ATTACKSTATE)
                     {
                         aIShipBase.m_fsmsystem.PerformTransition((FSMTransition)AIShipTransition.FOLLOW, ((AttackState)m_fsmsystem.CurrentState).attack_body);
-                        LogUI.Log("team attack" + aIShipBase.Id);
 
                     }
 
@@ -149,11 +157,10 @@ abstract public class AIShipBase : ShipBase, ITickable
     public override void Dispose()
     {
         base.Dispose();
-        if (AIEnemyLogic.Instance.m_aishipList.Contains(this))
-        {
-            AIEnemyLogic.Instance.LogoutAIShip(this);
-            //LogUI.Log("logout ai");
-        }
+       
+            iSBSean.GetAILog().LogoutAIShip(this);
+           //LogUI.Log("logout ai");
+        
 
     }
 

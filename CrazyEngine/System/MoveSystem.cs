@@ -1,13 +1,21 @@
 ﻿using System;
-using UnityEngine;
+
 
 namespace CrazyEngine
 {
     public class MoveSystem : ITickable
     {
+        public World world;
+
+        public MoveSystem(World world)
+        {
+            this.world = world;
+        }
+
+
         private void Move()
         {
-            foreach (Body body in World.Instanse.Bodies)
+            foreach (Body body in world.Bodies)
             {
                 if (body.Enable)
                 {
@@ -32,6 +40,12 @@ namespace CrazyEngine
         public void Tick()
         {
             Move();
+        }
+
+
+        public void Dispose()
+        {
+            world = null;
         }
     }
 }

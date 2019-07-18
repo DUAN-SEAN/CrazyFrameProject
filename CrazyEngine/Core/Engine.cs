@@ -9,13 +9,15 @@ namespace CrazyEngine
 
         public int UpdateInterval = 20;
         public bool isStop;
-        private readonly MoveSystem _moveSystem = new MoveSystem();
-        private readonly CollisionSystem _collisionSystem = new CollisionSystem();
+        private MoveSystem _moveSystem;
+        private CollisionSystem _collisionSystem;
 
 
-        public Engine()
+        public Engine(World world)
         {
-            TimerManager.Instanse.doLoop(UpdateInterval, Tick);
+            //TimerManager.Instanse.doLoop(UpdateInterval, Tick);
+            _moveSystem = new MoveSystem(world);
+            _collisionSystem = new CollisionSystem(world);
         }
 
         public void Tick()
@@ -28,7 +30,15 @@ namespace CrazyEngine
             _collisionSystem.Tick();
         }
 
+        public void Dispose()
+        {
+            _moveSystem.Dispose();
+            _collisionSystem.Dispose();
 
+            _moveSystem = null;
+            _collisionSystem = null;
+            
+        }
 
     }
 }

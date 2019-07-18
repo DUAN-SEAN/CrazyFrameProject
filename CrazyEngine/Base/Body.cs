@@ -18,11 +18,19 @@ namespace CrazyEngine
         protected List<Vector2> _forceList = new List<Vector2>();
         protected Body m_ownerbody;
 
+        protected IGetWorld currentWorld;
+
         //每当body创建时候加入world的bodies
-        //public Body()
-        //{
-        //    World.Instanse.Bodies.Add(this);
-        //}
+        public Body()
+        {
+        }
+        public virtual void InitWorld(IGetWorld getWorld)
+        {
+            currentWorld = getWorld;
+            getWorld.GetCurrentWorld().Bodies.Add(this);
+
+        }
+
 
         public Body Owner
         {
@@ -206,7 +214,7 @@ namespace CrazyEngine
         }
         public virtual void Dispose()
         {
-            World.Instanse.Bodies.Remove(this);
+           currentWorld.GetCurrentWorld().Bodies.Remove(this);
         }
     }
 

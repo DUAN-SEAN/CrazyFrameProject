@@ -1,8 +1,8 @@
 ﻿using System;
-
+using CrazyEngine;
 namespace CrazyEngine
 {
-    public class PointEntity : Body, IGameEvent
+    public class PointEntity : Body
     {
         public PointEntity()
         {
@@ -20,10 +20,6 @@ namespace CrazyEngine
             return true;
         }
 
-        public bool GetEventTrigger()
-        {
-            return GameState.playing == GameSceneLogic.Instance.GameState;
-        }
 
 
     }

@@ -43,20 +43,11 @@ namespace CrazyEngine
         private bool isworldstop;
 
 
-        private static World _world;
 
 
-        public static World Instanse
-        {
-            get
-            {
-                if (_world == null)
-                    _world = new World();
-                return _world;
-            }
-        }
+      
 
-        private World()
+        public World()
         {
             Bodies = new List<Body>();
         }
@@ -118,6 +109,16 @@ namespace CrazyEngine
             return t;
         }
 
+        public void Dispose()
+        {
+            isWorldStop = true;
+            for(int i = 0; i < Bodies.Count; i++)
+            {
+                Bodies[i].Dispose();
+            }
+
+            Bodies = null;
+        }
 
     }
 }
