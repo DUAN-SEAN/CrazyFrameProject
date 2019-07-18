@@ -12,23 +12,6 @@ namespace SpaceShip.Base
 {
     public sealed class SeanD : ISBSeanDuan,ITickable,IGetWorld
     {
-
-        /// <summary>
-        /// 公开ID 标识该对象 
-        /// 每个ID建议唯一
-        /// </summary>
-        public long ID
-        {
-            get
-            {
-                return _id;
-            }
-
-            
-        }
-
-        private readonly long _id;
-
         /// <summary>
         /// 物理引擎世界集合
         /// </summary>
@@ -50,9 +33,9 @@ namespace SpaceShip.Base
         /// </summary>
         private AIEnemyLogic enemyLogic;
 
-        public SeanD(long id)
+        public SeanD()
         {
-            _id = id;
+           
         }
 
         public void Init()
