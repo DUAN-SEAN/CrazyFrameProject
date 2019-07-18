@@ -11,9 +11,16 @@ namespace SpaceShip.Factory
     using System;
     public class EnviromentInBody : CircleEntity, ITickable
     {
+        public ISBSeanDuan iSBSean;
+        public virtual void Init(SeanD seanD)
+        {
+            base.InitWorld(seanD);
+            iSBSean = seanD;
+            iSBSean.GetAILog().RegisterEnviroment(this);
+
+        }
         public EnviromentInBody()
         {
-            AIEnemyLogic.Instance.RegisterEnviroment(this);
         }
 
         public EnviromentInBody(Vector2 vector, float radius) : base(vector, radius)
@@ -37,8 +44,8 @@ namespace SpaceShip.Factory
             //    enviromentinworld.Destroy();
 
             base.Dispose();
-            if (AIEnemyLogic.Instance.m_enviromentList.Contains(this))
-                AIEnemyLogic.Instance.LogoutEnviroment(this);
+           
+            iSBSean.GetAILog().LogoutEnviroment(this);
         }
     }
 

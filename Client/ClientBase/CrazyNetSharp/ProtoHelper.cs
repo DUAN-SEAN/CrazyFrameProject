@@ -124,7 +124,7 @@ namespace BlackJack.LibClient
             // Message ID, placehold only now
             bnWriter.Write((ushort)0);
             // write message body data to stream
-            RuntimeTypeModel.Default.Serialize(wrStream, vMsg);
+            //RuntimeTypeModel.Default.Serialize(wrStream, vMsg);
 
             // if the length of message body data is longer than a specific value, then we need compress the message body data
             bool needCompress = wrStream.Position - headLength >= ProtoConst.ZIP_BUFFER_MIN_LENGTH;
@@ -144,9 +144,11 @@ namespace BlackJack.LibClient
 
                 using (MemoryStream zipMs = new MemoryStream(wrStream.ToArray(), headLength, (int)wrStream.Position - headLength))
                 {
-                    var compressedByte = QuickLZSharp.QuickLZ.compress(zipMs.ToArray(), 3);
-                    wrStream.Seek(headLength, SeekOrigin.Begin);
-                    wrStream.Write(compressedByte, 0, compressedByte.Length);
+                    //var compressedByte = QuickLZSharp.QuickLZ.compress(zipMs.ToArray(), 3);
+                    //var compressedByte;
+
+                    //wrStream.Seek(headLength, SeekOrigin.Begin);
+                    //wrStream.Write(compressedByte, 0, compressedByte.Length);
                 }
 
                 // Rewrite the message length

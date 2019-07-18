@@ -1,6 +1,8 @@
 ﻿using FSMSystemSpace;
 using FSMTransition = FSMSystemSpace.Transition;
 using FSMStateID = FSMSystemSpace.StateID;
+using CrazyEngine;
+
 namespace SpaceShip.AI
 {
 
@@ -16,7 +18,7 @@ namespace SpaceShip.AI
 
         public override void DoBeforeEntering()
         {
-            LogUI.Log(m_body.Id + "enter alert");
+            //LogUI.Log(m_body.Id + "enter alert");
             //if (m_body.teamershiplist.Count != 0)
             //{
             //    LogUI.Log("follow leader " + m_body.teamershiplist.Count);
@@ -34,7 +36,7 @@ namespace SpaceShip.AI
             //TODO 警戒周围的事情 
 
 
-            foreach (Body body in World.Instanse.Bodies)
+            foreach (Body body in m_body.iSBSean.GetWorld().GetCurrentWorld().Bodies)
             {
                 if (body.Label.HasFlag(m_body.Label) || body.Label.HasFlag(Label.WEAPON)) continue;
                 if (body.Label.HasFlag(Label.Environment)) continue;
@@ -63,7 +65,7 @@ namespace SpaceShip.AI
 
         public override void DoBeforeLeaving()
         {
-            LogUI.Log(m_body.Id + "leavting alert");
+            //LogUI.Log(m_body.Id + "leavting alert");
 
         }
     }

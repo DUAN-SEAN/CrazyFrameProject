@@ -33,6 +33,12 @@ namespace SpaceShip.Base
         /// </summary>
         private AIEnemyLogic enemyLogic;
 
+        /// <summary>
+        /// body生成信息
+        /// </summary>
+        private List<BodyMessage> messages;
+
+
         public SeanD()
         {
            
@@ -84,5 +90,13 @@ namespace SpaceShip.Base
             weaponGameLogic.Dispose();
             engine.Dispose();
         }
+
+        public List<BodyMessage> GetBodyMessages()
+        {
+            return messages;
+        }
     }
+
+
+
 }

@@ -30,7 +30,7 @@ namespace CrazyEngine
             getWorld.GetCurrentWorld().Bodies.Add(this);
 
         }
-
+       
 
         public Body Owner
         {

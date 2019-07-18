@@ -25,33 +25,33 @@ namespace SpaceShip.AI
 
         public override void DoBeforeEntering()
         {
-            LogUI.Log(m_body.Id + "enter Teamstate");
+            //LogUI.Log(m_body.Id + "enter Teamstate");
             if (m_body.IsLeader)
             {
-                if (!AIEnemyLogic.Instance.LeaderShips.Contains(m_body))
-                    AIEnemyLogic.Instance.LeaderShips.Add(m_body);
+                if (!m_body.iSBSean.GetAILog().getLeaderShips().Contains(m_body))
+                    m_body.iSBSean.GetAILog().getLeaderShips().Add(m_body);
 
                 return;
             }
             if (m_body.Leadership != null)
             {
-                LogUI.Log("leadership not null");
+                //LogUI.Log("leadership not null");
                 //if(m_body.Leadership.teamershiplist)
                 //m_body.Leadership.teamershiplist.Add(m_body);
                 return;
             }
-            if (AIEnemyLogic.Instance.LeaderShips.Count == 0)
+            if (m_body.iSBSean.GetAILog().getLeaderShips().Count == 0)
             {
-                LogUI.Log("leaderships count 0");
+                //LogUI.Log("leaderships count 0");
 
-                AIEnemyLogic.Instance.LeaderShips.Add(m_body);
+                m_body.iSBSean.GetAILog().getLeaderShips().Add(m_body);
                 m_body.IsLeader = true;
                 return;
             }
-            foreach (AIShipBase aIShipBase in AIEnemyLogic.Instance.LeaderShips)
+            foreach (AIShipBase aIShipBase in m_body.iSBSean.GetAILog().getLeaderShips())
             {
                 if (aIShipBase.teamershiplist.Count == 4) continue;
-                LogUI.Log("aiteamers:" + aIShipBase.teamershiplist.Count);
+                //LogUI.Log("aiteamers:" + aIShipBase.teamershiplist.Count);
                 aIShipBase.teamershiplist.Add(m_body);
                 m_body.Leadership = aIShipBase;
 
@@ -59,9 +59,9 @@ namespace SpaceShip.AI
             }
             if (m_body.Leadership == null)
             {
-                LogUI.Log("Leadership set self");
+                //LogUI.Log("Leadership set self");
 
-                AIEnemyLogic.Instance.LeaderShips.Add(m_body);
+                m_body.iSBSean.GetAILog().getLeaderShips().Add(m_body);
                 m_body.IsLeader = true;
                 return;
             }
@@ -69,7 +69,7 @@ namespace SpaceShip.AI
 
         public override void DoBeforeLeaving()
         {
-            LogUI.Log(m_body.Id + "leaving Teamstate");
+            //LogUI.Log(m_body.Id + "leaving Teamstate");
             //if (m_body.Leadership != null) m_body.Leadership.teamershiplist.Remove(m_body);
             //m_body.IsLeader = false;
             //m_body.Leadership = null;
@@ -85,7 +85,7 @@ namespace SpaceShip.AI
                 m_body.m_fsmsystem.PerformTransition((FSMTransition)AIShipTransition.FOLLOW, m_body.Leadership, m_body.Leadership.GetTeamerPosition(m_body));
                 return;
             }
-            LogUI.Log(m_body.Id + "leader go alert");
+            //LogUI.Log(m_body.Id + "leader go alert");
 
             //队长转到警戒状态
             m_body.m_fsmsystem.PerformTransition((FSMTransition)AIShipTransition.ALERT);

@@ -33,6 +33,7 @@ namespace SpaceShip.Factory
             body_ship.Label = label;
             body_ship.MaxVelocity = 100;
 
+            body_ship.Init(seanD);
 
             return body_ship;
         }
@@ -46,10 +47,16 @@ namespace SpaceShip.Factory
         /// </summary>
         public T LoadBoltWeaponByType<T>(SeanD seanD,Body body, Vector2 position = default, Vector2 forward = default) where T : BoltInBody, new()
         {
+            if (forward == Vector2.Zero) forward = body.Forward;
+            if (position == Vector2.Zero) position = body.Position;
+
             T body_weanpon;
             body_weanpon = seanD.GetCurrentWorld().InitInWorld<T>(position);
             body_weanpon.Forward = forward;
             body_weanpon.Owner = body;
+
+
+            body_weanpon.Init(seanD);
             return body_weanpon;
         }
 
@@ -62,6 +69,7 @@ namespace SpaceShip.Factory
             body_weanpon = seanD.GetCurrentWorld().InitInWorld<T>(position, 0.5f);
             body_weanpon.Forward = forward;
             body_weanpon.Owner = body;
+            body_weanpon.Init(seanD);
             return body_weanpon;
         }
 
@@ -74,6 +82,7 @@ namespace SpaceShip.Factory
             body_weanpon = seanD.GetCurrentWorld().InitInWorld<T>(position);
             body_weanpon.Forward = forward;
             body_weanpon.Owner = body;
+            body_weanpon.Init(seanD);
 
             return body_weanpon;
         }
@@ -87,6 +96,7 @@ namespace SpaceShip.Factory
             //LogUI.Log("飞船"+ new Vector2(body.Position + body.Forward.normalized * 10));
             body_weanpon.Forward = forward;
             body_weanpon.Owner = body;
+            body_weanpon.Init(seanD);
             return body_weanpon;
         }
 
@@ -101,6 +111,7 @@ namespace SpaceShip.Factory
             body_environ.Label = Label.Environment;
             body_environ.Forward = forward;
 
+            body_environ.Init(seanD);
             return body_environ;
         }
 
@@ -116,5 +127,49 @@ namespace SpaceShip.Factory
         }
 
         private static BodyFactory bodyFactory;
+    }
+    interface IBodyMessage {
+        string GetMessageID();
+        Body GetBody();
+    }
+    public class BodyMessage : IBodyMessage
+    {
+        string messageID;
+        Body m_body;
+
+        public BodyMessage(string bodyMessageID,Body body)
+        {
+            messageID = bodyMessageID;
+            m_body = body;
+        }
+
+        public Body GetBody()
+        {
+            return m_body;
+        }
+
+        public string GetMessageID()
+        {
+            return messageID;
+        }
+    }
+
+
+    public class BodyMessageID
+    {
+        public const string Missile = "Missile";
+        public const string Mine = "Mine";
+        public const string Light = "Light";
+        public const string Bolt = "Bolt";
+
+        public const string MainShip = "Players Variant";
+        public const string MainShip2 = "SF_Battleship-G6_FBX";
+        public const string BossBigShip1 = "Carrier";
+        public const string SmallShip1 = "SF_Bomber-X4";
+        public const string CarrierShip = "Carrier";
+
+        public const string Enviroment = "Enviroment";
+        public const string Meteorite = "Asteroid";
+
     }
 }

@@ -2,6 +2,9 @@
 using FSMSystemSpace;
 using FSMTransition = FSMSystemSpace.Transition;
 using FSMStateID = FSMSystemSpace.StateID;
+using CrazyEngine;
+using SpaceShip.Base;
+using SpaceShip.Factory;
 
 namespace SpaceShip.AI
 {
@@ -21,7 +24,7 @@ namespace SpaceShip.AI
 
         public override void DoBeforeEntering()
         {
-            LogUI.Log(m_body.Id + "enter attack");
+            //LogUI.Log(m_body.Id + "enter attack");
 
         }
 
@@ -45,11 +48,11 @@ namespace SpaceShip.AI
                 m_body.m_fsmsystem.PerformTransition((FSMTransition)AIShipTransition.ALERT);
                 return;
             }
-            if (attack_body.shipinworld == null)
-            {
-                m_body.m_fsmsystem.PerformTransition((FSMTransition)AIShipTransition.ALERT);
-                return;
-            }
+            //if (attack_body.shipinworld == null)
+            //{
+            //    m_body.m_fsmsystem.PerformTransition((FSMTransition)AIShipTransition.ALERT);
+            //    return;
+            //}
             Vector2 boltposition1 = m_body.GetShotPositionOne();
             Vector2 boltposition2 = m_body.GetShotPositionTwo();
             Vector2 missleposition1 = m_body.GetMisslePositionOne();
@@ -69,10 +72,14 @@ namespace SpaceShip.AI
                 //LogUI.Log("missleposition2:" + missleposition2);
                 //LogUI.Log("attack position: "+attack_body.Position);
 
-                WeaponFactory.Instance.LoadWeaponFromAssetBundle(WeaponsName.Bolt, m_body, boltposition1, attack_body.Position - boltposition1);
-                WeaponFactory.Instance.LoadWeaponFromAssetBundle(WeaponsName.Bolt, m_body, boltposition2, attack_body.Position - boltposition2);
-                WeaponFactory.Instance.LoadWeaponFromAssetBundle(WeaponsName.Missile, m_body, missleposition1, attack_body.Position - missleposition1);
-                WeaponFactory.Instance.LoadWeaponFromAssetBundle(WeaponsName.Missile, m_body, missleposition2, attack_body.Position - missleposition2);
+                var weanpon1 = BodyFactory.Instance.LoadBoltWeaponByType<BoltInBody>((SeanD)m_body.iSBSean, m_body, boltposition1, attack_body.Position - boltposition1);
+                m_body.iSBSean.GetBodyMessages().Add(new BodyMessage(BodyMessageID.Bolt, weanpon1));
+                weanpon1 = BodyFactory.Instance.LoadBoltWeaponByType<BoltInBody>((SeanD)m_body.iSBSean, m_body, boltposition2, attack_body.Position - boltposition2);
+                m_body.iSBSean.GetBodyMessages().Add(new BodyMessage(BodyMessageID.Bolt, weanpon1));
+                var weanpon2 = BodyFactory.Instance.LoadMissileWeaponByType<MissileInBody>((SeanD)m_body.iSBSean, m_body, missleposition1, attack_body.Position - missleposition1);
+                m_body.iSBSean.GetBodyMessages().Add(new BodyMessage(BodyMessageID.Missile, weanpon2));
+                weanpon2 = BodyFactory.Instance.LoadMissileWeaponByType<MissileInBody>((SeanD)m_body.iSBSean, m_body, missleposition2, attack_body.Position - missleposition2);
+                m_body.iSBSean.GetBodyMessages().Add(new BodyMessage(BodyMessageID.Missile, weanpon2));
 
 
                 m_body.IsAttack = true;
@@ -92,7 +99,7 @@ namespace SpaceShip.AI
         public override void DoBeforeLeaving()
         {
 
-            LogUI.Log(m_body.Id + "leaving attack");
+            //LogUI.Log(m_body.Id + "leaving attack");
 
         }
     }
