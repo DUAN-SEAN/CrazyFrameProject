@@ -58,6 +58,7 @@
     <Compile Include="AI\AIEntity\State\TeamState.cs" />
     <Compile Include="AI\FSMBase\FSMState.cs" />
     <Compile Include="AI\FSMBase\FSMSystem.cs" />
+    <Compile Include="Command.cs" />
     <Compile Include="Message\BodyAttackedMessage.cs" />
     <Compile Include="Message\BodyAttackMessage.cs" />
     <Compile Include="Message\BodyDestoriedMessage.cs" />

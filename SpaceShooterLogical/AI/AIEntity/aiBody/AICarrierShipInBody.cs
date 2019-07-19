@@ -162,9 +162,8 @@ namespace SpaceShip.AI
                     isAttack = false;
                     oldtime = DateTime.Now.Ticks;
                 }
-
-
             }
+
             if (currenttime - oldtimeinit > 10000000)
             {
                 //LogUI.Log("ships init");

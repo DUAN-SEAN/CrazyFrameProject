@@ -71,6 +71,9 @@ namespace SpaceShip.Base
         }
         #endregion
 
+
+
+
         public List<ITickable> GetWeanponList()
         {
             return weaponGameLogic.moveWeaponsList;
@@ -80,6 +83,29 @@ namespace SpaceShip.Base
         {
             return this;
         }
+
+        public void SendCommand(Command command)
+        {
+            foreach (var body in world.Bodies)
+            {
+                if (body.Id.Value == command.ID)
+                {
+                    body.AddForce(command.Force);
+                    body.Forward = command.Forward;
+                    var player = body as PlayerInBody;
+                    if(player != null)
+                    {
+                        if(command.attackCommand.attackState)
+                            player.AttackByType(command.attackCommand.type);
+                        if (command.unattackCommand.unattackState)
+                            player.UnAttackByType(command.unattackCommand.type);
+                    }
+                    break;
+
+                }
+            }
+        }
+
 
         public void ForceByShipID(int id , Vector2 vector2)
         {
@@ -97,7 +123,7 @@ namespace SpaceShip.Base
 
                 if(body.Id.Value == id)      
                     body.Forward = forward;
-               
+                
             }
         }
 
@@ -139,6 +165,9 @@ namespace SpaceShip.Base
 
       
     }
+
+
+
 
 
 
