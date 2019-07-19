@@ -21,6 +21,7 @@ namespace SpaceShip.Factory
         }
         public EnviromentInBody()
         {
+
         }
 
         public EnviromentInBody(Vector2 vector, float radius) : base(vector, radius)
