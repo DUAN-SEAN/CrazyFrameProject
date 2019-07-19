@@ -33,8 +33,7 @@ namespace GameServer.Battle
             base.Update();
 
             //1 接收网络指令
-
-
+            
 
 
             //2 接收逻辑事件(生成、销毁)
@@ -72,8 +71,35 @@ namespace GameServer.Battle
         /// </summary>
         private void OnEventMessage()
         {
+            IBodyMessage bodyMessage = GetLogicalMsg();
 
+            switch (bodyMessage.GetMessageType())
+            {
+                case MessageType.BodyAttack:
+
+
+
+                    break;
+                case MessageType.BodyAttacked:
+                    break;
+                case MessageType.BodyDestoried:
+                    break;
+                case MessageType.BodyInit:
+                    BodyInitMessage bodyInitMessage = bodyMessage as BodyInitMessage;
+                    int bodyId = bodyInitMessage.GetBodyID();
+                    break;
+                default:
+                    break;
+            }
         }
+
+        private IBodyMessage GetLogicalMsg()
+        {
+            IBodyMessage bodyMessage = null;
+            return bodyMessage;
+            
+        }
+
         /// <summary>
         /// 接受到销毁事件
         /// </summary>
@@ -134,6 +160,6 @@ namespace GameServer.Battle
         private long m_timerId;
 
         private Level m_level;
-        
+
     }
 }
