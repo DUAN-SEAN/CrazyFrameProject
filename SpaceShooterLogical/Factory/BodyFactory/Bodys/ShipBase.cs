@@ -56,7 +56,7 @@ namespace SpaceShip.Factory
         {
 
             HP = 0;
-            iSBSean.GetBodyMessages().Add(new BodyDestoriedMessage(this));
+            iSBSean.GetBodyMessages().Enqueue(new BodyDestoriedMessage(this));
 
             base.Dispose();
         }

@@ -42,7 +42,7 @@ namespace SpaceShip.Factory
             //}
             //else
             //    enviromentinworld.Destroy();
-            iSBSean.GetBodyMessages().Add(new BodyDestoriedMessage(this));
+            iSBSean.GetBodyMessages().Enqueue(new BodyDestoriedMessage(this));
 
             base.Dispose();
            

@@ -53,7 +53,7 @@ namespace SpaceShip.Factory
                     AICarrierShipInBody aIShipBase = body as AICarrierShipInBody;
                     var ship = BodyFactory.Instance.LoadShipBodyByType<AICarrierShipInBody>(seanD, aIShipBase.Label, aIShipBase.Min_posi, aIShipBase.Max_posi, aIShipBase.Forward);
                     //GamePlayerLogic.Instance.boss_ship = ShipFactory.Instance.LoadShipFromAssetBundle<AICarrierShipInBody>(ShipName.CarrierShip, aIShipBase.Label, aIShipBase.Min_posi, aIShipBase.Max_posi, aIShipBase.Forward) as ShipBase;
-                    seanD.GetBodyMessages().Add(new BodyInitMessage( ship));
+                    seanD.GetBodyMessages().Enqueue(new BodyInitMessage( ship));
 
 
 
@@ -64,7 +64,7 @@ namespace SpaceShip.Factory
                     //LogUI.Log("AI done");
                     AISmallShipInBody aIShipBase = body as AISmallShipInBody;
                     var ship = BodyFactory.Instance.LoadShipBodyByType<AISmallShipInBody>(seanD, aIShipBase.Label, aIShipBase.Min_posi, aIShipBase.Max_posi, aIShipBase.Forward);
-                    seanD.GetBodyMessages().Add(new BodyInitMessage( ship));
+                    seanD.GetBodyMessages().Enqueue(new BodyInitMessage( ship));
 
                     //ShipFactory.Instance.LoadShipFromAssetBundle<AISmallShipInBody>(ShipName.SmallShip1, aIShipBase.Label, aIShipBase.Min_posi, aIShipBase.Max_posi, aIShipBase.Forward);
                     continue;
@@ -73,7 +73,7 @@ namespace SpaceShip.Factory
                 {
                     PlayerInBody body1 = body as PlayerInBody;
                     var ship = BodyFactory.Instance.LoadShipBodyByType<PlayerInBody>(seanD, body1.Label, body1.Min_posi, body1.Max_posi, body1.Forward);
-                    seanD.GetBodyMessages().Add(new BodyInitMessage( ship));
+                    seanD.GetBodyMessages().Enqueue(new BodyInitMessage( ship));
 
                     //ShipFactory.Instance.LoadShipFromAssetBundle<PlayerInBody>(ShipName.MainShip, body1.Label, body1.Min_posi, body1.Max_posi, body1.Forward);
                     continue;
@@ -83,7 +83,7 @@ namespace SpaceShip.Factory
                 {
                     EnviromentInBody meteorite = body as EnviromentInBody;
                     var envir = BodyFactory.Instance.LoadEnvironmentBodyByType<EnviromentInBody>(seanD, meteorite.Position, meteorite.radius, meteorite.Forward);
-                    seanD.GetBodyMessages().Add(new BodyInitMessage( envir));
+                    seanD.GetBodyMessages().Enqueue(new BodyInitMessage( envir));
 
                     //EnvironmentFactory.Instance.LoadEnvironmentFromAssetBundle<EnviromentInBody>(EnvironmentName.Meteorite, meteorite.Position, meteorite.radius, meteorite.Forward);
                 }
