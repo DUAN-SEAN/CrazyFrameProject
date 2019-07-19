@@ -43,8 +43,11 @@ namespace SpaceShip.Base
         {
            
         }
-
-        public void Init()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="players">玩家编号</param>
+        public void Init(List<string> players)
         {
             world = new World();
             weaponGameLogic = new WeaponGameLogic();

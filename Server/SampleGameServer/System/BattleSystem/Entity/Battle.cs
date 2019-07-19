@@ -22,7 +22,8 @@ namespace GameServer.Battle
 
         public void Init()
         {
-            m_level.Init();
+            List<string> players = null;
+            m_level.Init(players);
         }
          
         /// <summary>
@@ -57,7 +58,11 @@ namespace GameServer.Battle
 
 
         }
-        private void CreateBodyEntity()
+        /// <summary>
+        /// 创建玩家和body的匹配
+        /// </summary>
+        /// <param name="bodyId"></param>
+        private void CreateBodyEntity(int bodyId)
         {
 
         }
@@ -86,7 +91,9 @@ namespace GameServer.Battle
                     break;
                 case MessageType.BodyInit:
                     BodyInitMessage bodyInitMessage = bodyMessage as BodyInitMessage;
+                    
                     int bodyId = bodyInitMessage.GetBodyID();
+                    CreateBodyEntity(bodyId);
                     break;
                 default:
                     break;
