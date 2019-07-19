@@ -65,7 +65,7 @@ namespace GameServer.Battle
             //TODO:战斗场景在此生成
             //每场关卡运行在独立的线程中
 
-            BattleEntity battleEntity = BEntityFactory.CreateEntity<BattleEntity>();
+            Battle battleEntity = BEntityFactory.CreateEntity<Battle>();
 
             var timerId =  TimerManager.SetLoopTimer(50, battleEntity.Update);//设置Tick步长
             
@@ -93,7 +93,7 @@ namespace GameServer.Battle
         /// </summary>
         private void OnReleaseBattle(ulong battleId)
         {
-            BattleEntity battleEntity = null;
+            Battle battleEntity = null;
             if(!m_battleDic.TryGetValue(battleId,out battleEntity))
             {
                 Log.Error("OnReleaseBattle Find Null");
@@ -114,7 +114,7 @@ namespace GameServer.Battle
         /// 解除战斗系统关于关卡战斗实体的注册
         /// PS 该方法可以由各层调用：实体自身、战斗系统、GameSever
         /// </summary>
-        private void OnReleaseBattle(BattleEntity battleEntity)
+        private void OnReleaseBattle(Battle battleEntity)
         {
             
             TimerManager.UnsetLoopTimer(battleEntity.GetTimerId());//解除绑定
@@ -125,7 +125,7 @@ namespace GameServer.Battle
         /// <summary>
         /// 战斗实体字典
         /// </summary>
-        private readonly Dictionary<ulong, BattleEntity> m_battleDic = new Dictionary<ulong, BattleEntity>();
+        private readonly Dictionary<ulong, Battle> m_battleDic = new Dictionary<ulong, Battle>();
 
         /// <summary>
         /// 战斗关卡的匹配文件

@@ -12,7 +12,7 @@ namespace SpaceShip.Factory
     public class EnviromentInBody : CircleEntity, ITickable
     {
         public ISBSeanDuan iSBSean;
-        public virtual void Init(SeanD seanD)
+        public virtual void Init(Level seanD)
         {
             base.InitWorld(seanD);
             iSBSean = seanD;

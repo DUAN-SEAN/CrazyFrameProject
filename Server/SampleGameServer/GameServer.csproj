@@ -83,7 +83,7 @@
     <Compile Include="LocalMessage\BattleSystemLocalMessages.cs" />
     <Compile Include="LocalMessage\PlayerContextLocalMessages.cs" />
     <Compile Include="PlayerContext\PlayerContextStateMachine.cs" />
-    <Compile Include="System\BattleSystem\Entity\BattleEntity.cs" />
+    <Compile Include="System\BattleSystem\Entity\Battle.cs" />
     <Compile Include="System\BattleSystem\BattleTimerManager.cs" />
     <Compile Include="System\BattleSystem\Entity\BEntity.cs" />
     <Compile Include="System\BattleSystem\BattleSystem.cs" />

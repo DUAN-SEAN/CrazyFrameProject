@@ -72,13 +72,13 @@ namespace SpaceShip.AI
                 //LogUI.Log("missleposition2:" + missleposition2);
                 //LogUI.Log("attack position: "+attack_body.Position);
 
-                var weanpon1 = BodyFactory.Instance.LoadBoltWeaponByType<BoltInBody>((SeanD)m_body.iSBSean, m_body, boltposition1, attack_body.Position - boltposition1);
+                var weanpon1 = BodyFactory.Instance.LoadBoltWeaponByType<BoltInBody>((Level)m_body.iSBSean, m_body, boltposition1, attack_body.Position - boltposition1);
                 m_body.iSBSean.GetBodyMessages().Add(new BodyMessage(BodyMessageID.Bolt, weanpon1));
-                weanpon1 = BodyFactory.Instance.LoadBoltWeaponByType<BoltInBody>((SeanD)m_body.iSBSean, m_body, boltposition2, attack_body.Position - boltposition2);
+                weanpon1 = BodyFactory.Instance.LoadBoltWeaponByType<BoltInBody>((Level)m_body.iSBSean, m_body, boltposition2, attack_body.Position - boltposition2);
                 m_body.iSBSean.GetBodyMessages().Add(new BodyMessage(BodyMessageID.Bolt, weanpon1));
-                var weanpon2 = BodyFactory.Instance.LoadMissileWeaponByType<MissileInBody>((SeanD)m_body.iSBSean, m_body, missleposition1, attack_body.Position - missleposition1);
+                var weanpon2 = BodyFactory.Instance.LoadMissileWeaponByType<MissileInBody>((Level)m_body.iSBSean, m_body, missleposition1, attack_body.Position - missleposition1);
                 m_body.iSBSean.GetBodyMessages().Add(new BodyMessage(BodyMessageID.Missile, weanpon2));
-                weanpon2 = BodyFactory.Instance.LoadMissileWeaponByType<MissileInBody>((SeanD)m_body.iSBSean, m_body, missleposition2, attack_body.Position - missleposition2);
+                weanpon2 = BodyFactory.Instance.LoadMissileWeaponByType<MissileInBody>((Level)m_body.iSBSean, m_body, missleposition2, attack_body.Position - missleposition2);
                 m_body.iSBSean.GetBodyMessages().Add(new BodyMessage(BodyMessageID.Missile, weanpon2));
 
 

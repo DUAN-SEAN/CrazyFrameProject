@@ -10,7 +10,7 @@ namespace GameServer.Battle
     /// <summary>
     /// 表示一场战斗的实体
     /// </summary>
-    public class BattleEntity : BEntity
+    public class Battle : BEntity
     {
         public override void Start(ulong id)
         {
@@ -26,7 +26,7 @@ namespace GameServer.Battle
         {
             m_level.Init();
         }
-
+         
         /// <summary>
         /// 由时间管理器进行驱动
         /// </summary>
@@ -39,7 +39,7 @@ namespace GameServer.Battle
 
 
 
-            //2 接收世界指令(生成、销毁)
+            //2 接收逻辑事件(生成、销毁)
 
 
 
@@ -60,6 +60,31 @@ namespace GameServer.Battle
 
 
         }
+        private void CreateBodyEntity()
+        {
+
+        }
+        /// <summary>
+        /// 处理事件队列，广播游戏事件
+        /// 1 玩家生成飞机绑定
+        /// 2 攻击事件（击中）
+        /// 3 AI事件（武器、道具）
+        /// 
+        /// n 玩家飞机解除绑定
+        /// </summary>
+        private void OnEventMessage()
+        {
+
+        }
+        /// <summary>
+        /// 接受到销毁事件
+        /// </summary>
+        private void OnDestoryBodyEntity()
+        {
+
+        }
+        
+
         public void SetTimer(long timerId)
         {
             m_timerId = timerId;

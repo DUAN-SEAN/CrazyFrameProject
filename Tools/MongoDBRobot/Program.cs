@@ -9,12 +9,24 @@ using System.Threading.Tasks;
 
 namespace MongoDBRobot
 {
+    class A
+    {
+
+    }
+    class BB : A
+    {
+
+    }
+
     class Program
     {
         static void Main(string[] args)
         {
-            Test1();
 
+            //Test1();
+            BB b = new BB();
+            A a = b;
+            Console.WriteLine(a.GetType());
             //ObjectId
 
             Console.ReadKey();
