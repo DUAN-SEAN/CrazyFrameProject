@@ -70,6 +70,9 @@ namespace GameServer
         public override bool InitializeSystem()
         {
             // 匹配系统初始化
+
+            
+
             var gameMatchSystem = new GameMatchSystem();
             if (!gameMatchSystem.Initialize(m_serverId))
             {
@@ -90,7 +93,7 @@ namespace GameServer
             foreach (var item in m_systemDic.Values)
             {
                 item.Start();//首先System.Start
-                var timeId = TimerManager.SetLoopTimer(100, new TimerManager.OnTimerCallBack(item.Update));
+                var timeId = TimerManager.SetLoopTimer(100, item.Update);
                 //timeId保留了一个取消token 后期需要使用用来关闭系统循环
             }
             return true;
