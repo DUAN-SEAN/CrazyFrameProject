@@ -63,7 +63,7 @@ namespace SpaceShip.Factory
 
         public override void Dispose()
         {
-            iSBSean.GetBodyMessages().Add(new BodyDestoriedMessage(this));
+            iSBSean.GetBodyMessages().Enqueue(new BodyDestoriedMessage(this));
 
             base.Dispose();
             iSBSean.GetWeanponList().Remove(this);
@@ -143,7 +143,7 @@ namespace SpaceShip.Factory
 
         public override void Dispose()
         {
-            iSBSean.GetBodyMessages().Add(new BodyDestoriedMessage(this));
+            iSBSean.GetBodyMessages().Enqueue(new BodyDestoriedMessage(this));
 
             base.Dispose();
            iSBSean.GetWeanponList().Remove(this);
@@ -220,7 +220,7 @@ namespace SpaceShip.Factory
         }
         public override void Dispose()
         {
-            iSBSean.GetBodyMessages().Add(new BodyDestoriedMessage(this));
+            iSBSean.GetBodyMessages().Enqueue(new BodyDestoriedMessage(this));
 
             base.Dispose();
             iSBSean.GetWeanponList().Remove(this);
@@ -311,7 +311,7 @@ namespace SpaceShip.Factory
 
         public override void Dispose()
         {
-            iSBSean.GetBodyMessages().Add(new BodyDestoriedMessage(this));
+            iSBSean.GetBodyMessages().Enqueue(new BodyDestoriedMessage(this));
 
             base.Dispose();
             iSBSean.GetWeanponList().Remove(this);

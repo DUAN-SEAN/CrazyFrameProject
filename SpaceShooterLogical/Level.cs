@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using CrazyEngine;
 using SpaceShip.AI;
 using SpaceShip.Factory;
@@ -36,7 +34,7 @@ namespace SpaceShip.Base
         /// <summary>
         /// body生成信息
         /// </summary>
-        private List<IBodyMessage> messages;
+        private Queue<IBodyMessage> messages;
 
 
         public Level()
@@ -52,7 +50,7 @@ namespace SpaceShip.Base
             world = new World();
             weaponGameLogic = new WeaponGameLogic();
             enemyLogic = new AIEnemyLogic();
-            messages = new List<IBodyMessage>();
+            messages = new Queue<IBodyMessage>();
         }
         public void Tick()
         {
@@ -161,7 +159,7 @@ namespace SpaceShip.Base
             engine.Dispose();
         }
 
-        public List<IBodyMessage> GetBodyMessages()
+        public Queue<IBodyMessage> GetBodyMessages()
         {
             return messages;
         }
