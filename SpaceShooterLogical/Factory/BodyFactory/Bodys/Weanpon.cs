@@ -53,14 +53,18 @@ namespace SpaceShip.Factory
         {
 
             if (collider.body.Label.HasFlag(Label) || Label.HasFlag(collider.body.Label)) return;
+
             //LogUI.Log(collider.body.Label + " " + Label);
             //LogUI.Log(Position + " " + collider.body.Position);
             isAlive = false;
+
             Dispose();
         }
 
         public override void Dispose()
         {
+            iSBSean.GetBodyMessages().Add(new BodyDestoriedMessage(this));
+
             base.Dispose();
             iSBSean.GetWeanponList().Remove(this);
             isAlive = false;
@@ -139,6 +143,8 @@ namespace SpaceShip.Factory
 
         public override void Dispose()
         {
+            iSBSean.GetBodyMessages().Add(new BodyDestoriedMessage(this));
+
             base.Dispose();
            iSBSean.GetWeanponList().Remove(this);
             isAlive = false;
@@ -214,6 +220,8 @@ namespace SpaceShip.Factory
         }
         public override void Dispose()
         {
+            iSBSean.GetBodyMessages().Add(new BodyDestoriedMessage(this));
+
             base.Dispose();
             iSBSean.GetWeanponList().Remove(this);
             isAlive = false;
@@ -303,6 +311,8 @@ namespace SpaceShip.Factory
 
         public override void Dispose()
         {
+            iSBSean.GetBodyMessages().Add(new BodyDestoriedMessage(this));
+
             base.Dispose();
             iSBSean.GetWeanponList().Remove(this);
             isAlive = false;

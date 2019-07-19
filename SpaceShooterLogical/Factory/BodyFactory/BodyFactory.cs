@@ -128,48 +128,5 @@ namespace SpaceShip.Factory
 
         private static BodyFactory bodyFactory;
     }
-    interface IBodyMessage {
-        string GetMessageID();
-        Body GetBody();
-    }
-    public class BodyMessage : IBodyMessage
-    {
-        string messageID;
-        Body m_body;
-
-        public BodyMessage(string bodyMessageID,Body body)
-        {
-            messageID = bodyMessageID;
-            m_body = body;
-        }
-
-        public Body GetBody()
-        {
-            return m_body;
-        }
-
-        public string GetMessageID()
-        {
-            return messageID;
-        }
-    }
-
-
-    public class BodyMessageID
-    {
-        public const string Missile = "Missile";
-        public const string Mine = "Mine";
-        public const string Light = "Light";
-        public const string Bolt = "Bolt";
-
-        public const string MainShip = "Players Variant";
-        public const string MainShip2 = "SF_Battleship-G6_FBX";
-        public const string BossBigShip1 = "Carrier";
-        public const string SmallShip1 = "SF_Bomber-X4";
-        public const string CarrierShip = "Carrier";
-
-        public const string Enviroment = "Enviroment";
-        public const string Meteorite = "Asteroid";
-
-    }
+   
 }

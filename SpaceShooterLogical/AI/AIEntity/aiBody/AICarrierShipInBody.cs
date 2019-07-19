@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using SpaceShip.Base;
 using CrazyEngine;
 using SpaceShip.Factory;
+
 namespace SpaceShip.AI
 {
 
@@ -171,14 +172,14 @@ namespace SpaceShip.AI
                 if (initableShip > 0 && initShips < maxSmallShip)
                 {
                     var body = BodyFactory.Instance.LoadShipBodyByType<AISmallShipInBody>((SeanD)iSBSean,Label, GetShipOutPositionOne(), GetShipOutPositionOne() + new Vector2(1, 1), Forward);
-                    iSBSean.GetBodyMessages().Add(new BodyMessage(BodyMessageID.SmallShip1, body));
+                    iSBSean.GetBodyMessages().Add(new BodyInitMessage(body));
                     initShips++;
                     initableShip--;
                 }
                 if (initableShip > 0 && initShips < maxSmallShip)
                 {
                     var body = BodyFactory.Instance.LoadShipBodyByType<AISmallShipInBody>((SeanD)iSBSean,Label, GetShipOutPositionTwo(), GetShipOutPositionTwo() + new Vector2(1, 1), Forward);
-                    iSBSean.GetBodyMessages().Add(new BodyMessage(BodyMessageID.SmallShip1, body));
+                    iSBSean.GetBodyMessages().Add(new BodyInitMessage(body));
 
                     initShips++;
                     initableShip--;

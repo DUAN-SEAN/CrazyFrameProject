@@ -44,6 +44,7 @@ namespace SpaceShip.Factory
         {
             if (collider.body.Label.HasFlag(Label) || Label.HasFlag(collider.body.Label)) return;
             //LogUI.Log(Position + " " + collider.body.Position);
+
             if (Armor > 0) Armor--;
             else if (Armor == 0) HP--;
 
@@ -53,7 +54,10 @@ namespace SpaceShip.Factory
 
         public override void Dispose()
         {
+
             HP = 0;
+            iSBSean.GetBodyMessages().Add(new BodyDestoriedMessage(this));
+
             base.Dispose();
         }
     }

@@ -36,7 +36,7 @@ namespace SpaceShip.Base
         /// <summary>
         /// body生成信息
         /// </summary>
-        private List<BodyMessage> messages;
+        private List<IBodyMessage> messages;
 
 
         public SeanD()
@@ -49,6 +49,7 @@ namespace SpaceShip.Base
             world = new World();
             weaponGameLogic = new WeaponGameLogic();
             enemyLogic = new AIEnemyLogic();
+            messages = new List<IBodyMessage>();
         }
         public void Tick()
         {
@@ -91,10 +92,12 @@ namespace SpaceShip.Base
             engine.Dispose();
         }
 
-        public List<BodyMessage> GetBodyMessages()
+        public List<IBodyMessage> GetBodyMessages()
         {
             return messages;
         }
+
+      
     }
 
 
