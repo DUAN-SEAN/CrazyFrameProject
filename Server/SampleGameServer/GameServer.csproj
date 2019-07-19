@@ -116,10 +116,6 @@
       <Project>{0f3ecc0f-e8f4-434e-aaf9-95a912f2f565}</Project>
       <Name>CommonLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\SpaceShooterLogical\SpaceShooterLogical.csproj">
-      <Project>{0ed02981-b64c-49fa-a7dc-3f0fb6800d39}</Project>
-      <Name>SpaceShooterLogical</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ServerBase\ServerBase.csproj">
       <Project>{c62bc39f-6932-45f2-a626-4faf7f836e6f}</Project>
       <Name>ServerBase</Name>

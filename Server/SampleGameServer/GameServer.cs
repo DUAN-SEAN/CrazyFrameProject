@@ -70,8 +70,10 @@ namespace GameServer
         public override bool InitializeSystem()
         {
             // 匹配系统初始化
-
-            
+            //Activator.CreateInstance();
+            //Type type = Type.GetType("BattleSystem");
+            //TypeManager.Instance.
+            //Log.Info(type.ToString());
 
             var gameMatchSystem = new GameMatchSystem();
             if (!gameMatchSystem.Initialize(m_serverId))
