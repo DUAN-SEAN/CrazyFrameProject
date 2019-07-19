@@ -16,10 +16,7 @@ namespace GameServer.Battle
         {
             base.Start(id);
             m_startTime = DateTime.Now;
-
             m_level = new Level();
-
-
         }
 
         public void Init()
