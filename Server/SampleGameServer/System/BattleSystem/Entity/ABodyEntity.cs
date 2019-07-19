@@ -9,7 +9,7 @@ namespace GameServer.Battle
     /// <summary>
     /// 表示一个世界中的引擎控制的实体
     /// </summary>
-    public abstract class BodyEntity:BEntity
+    public abstract class ABodyEntity:BEntity
     {
 
         /// <summary>

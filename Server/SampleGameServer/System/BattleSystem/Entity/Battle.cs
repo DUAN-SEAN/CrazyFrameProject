@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpaceShip.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,13 +10,23 @@ namespace GameServer.Battle
     /// <summary>
     /// 表示一场战斗的实体
     /// </summary>
-    public class BattleEntity : BEntity
+    public class Battle : BEntity
     {
         public override void Start(ulong id)
         {
             base.Start(id);
             m_startTime = DateTime.Now;
+
+            m_level = new Level();
+
+
         }
+
+        public void Init()
+        {
+            m_level.Init();
+        }
+         
         /// <summary>
         /// 由时间管理器进行驱动
         /// </summary>
@@ -28,8 +39,8 @@ namespace GameServer.Battle
 
 
 
-            //2 接收世界指令(生成、销毁)
-
+            //2 接收逻辑事件(生成、销毁)
+            OnEventMessage();
 
 
 
@@ -41,11 +52,39 @@ namespace GameServer.Battle
 
 
             //4 驱动物理引擎
-
-
+            if (m_level == null)
+            {
+                return;
+            }
+            m_level.Tick();
 
 
         }
+        private void CreateBodyEntity()
+        {
+
+        }
+        /// <summary>
+        /// 处理事件队列，广播游戏事件
+        /// 1 玩家生成飞机绑定
+        /// 2 攻击事件（击中）
+        /// 3 AI事件（武器、道具）
+        /// 
+        /// n 玩家飞机解除绑定
+        /// </summary>
+        private void OnEventMessage()
+        {
+
+        }
+        /// <summary>
+        /// 接受到销毁事件
+        /// </summary>
+        private void OnDestoryBodyEntity()
+        {
+
+        }
+        
+
         public void SetTimer(long timerId)
         {
             m_timerId = timerId;
@@ -63,9 +102,9 @@ namespace GameServer.Battle
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        private BodyEntity GetBodyEntity(ulong id)
+        private ABodyEntity GetBodyEntity(ulong id)
         {
-            BodyEntity bodyEntity = null;
+            ABodyEntity bodyEntity = null;
             if(!m_bodyEntityDic.TryGetValue(id,out bodyEntity))
             {
                 return null;
@@ -85,7 +124,7 @@ namespace GameServer.Battle
         /// <summary>
         /// BodyEntity字典
         /// </summary>
-        private Dictionary<ulong, BodyEntity> m_bodyEntityDic = new Dictionary<ulong, BodyEntity>();
+        private Dictionary<ulong, ABodyEntity> m_bodyEntityDic = new Dictionary<ulong, ABodyEntity>();
         
         /// <summary>
         /// 战斗开始时间
@@ -95,6 +134,8 @@ namespace GameServer.Battle
         /// timeId
         /// </summary>
         private long m_timerId;
+
+        private Level m_level;
         
     }
 }

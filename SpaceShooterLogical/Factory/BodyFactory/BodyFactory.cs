@@ -21,7 +21,7 @@ namespace SpaceShip.Factory
         /// <summary>
         /// 船体生成 供船工厂使用
         /// </summary>
-        public T LoadShipBodyByType<T>(SeanD seanD,Label label, Vector2 min, Vector2 max, Vector2 forward) where T : ShipBase, new()
+        public T LoadShipBodyByType<T>(Level seanD,Label label, Vector2 min, Vector2 max, Vector2 forward) where T : ShipBase, new()
         {
 
 
@@ -45,7 +45,7 @@ namespace SpaceShip.Factory
         /// <summary>
         /// 小激光武器生成 供武器工厂使用
         /// </summary>
-        public T LoadBoltWeaponByType<T>(SeanD seanD,Body body, Vector2 position = default, Vector2 forward = default) where T : BoltInBody, new()
+        public T LoadBoltWeaponByType<T>(Level seanD,Body body, Vector2 position = default, Vector2 forward = default) where T : BoltInBody, new()
         {
             if (forward == Vector2.Zero) forward = body.Forward;
             if (position == Vector2.Zero) position = body.Position;
@@ -63,7 +63,7 @@ namespace SpaceShip.Factory
         /// <summary>
         /// 地雷武器生成 供武器工厂使用
         /// </summary>
-        public T LoadMineWeaponByType<T>(SeanD seanD,Body body, Vector2 position = default, Vector2 forward = default) where T : MineInBody, new()
+        public T LoadMineWeaponByType<T>(Level seanD,Body body, Vector2 position = default, Vector2 forward = default) where T : MineInBody, new()
         {
             T body_weanpon;
             body_weanpon = seanD.GetCurrentWorld().InitInWorld<T>(position, 0.5f);
@@ -76,7 +76,7 @@ namespace SpaceShip.Factory
         /// <summary>
         /// 导弹武器生成 供武器工厂使用
         /// </summary>
-        public T LoadMissileWeaponByType<T>(SeanD seanD,Body body, Vector2 position = default, Vector2 forward = default) where T : MissileInBody, new()
+        public T LoadMissileWeaponByType<T>(Level seanD,Body body, Vector2 position = default, Vector2 forward = default) where T : MissileInBody, new()
         {
             T body_weanpon;
             body_weanpon = seanD.GetCurrentWorld().InitInWorld<T>(position);
@@ -89,7 +89,7 @@ namespace SpaceShip.Factory
         /// <summary>
         /// 激光武器生成 供武器工厂使用
         /// </summary>
-        public T LoadLightWeaponByType<T>(SeanD seanD,Body body, Vector2 position = default, Vector2 forward = default) where T : LightInBody, new()
+        public T LoadLightWeaponByType<T>(Level seanD,Body body, Vector2 position = default, Vector2 forward = default) where T : LightInBody, new()
         {
             T body_weanpon;
             body_weanpon = seanD.GetCurrentWorld().InitInWorld<T>(new Line(position, new Vector2(position + forward.normalized * 20)));
@@ -104,7 +104,7 @@ namespace SpaceShip.Factory
 
         #region LoadingEnviromentBody 加载环境资源
 
-        public T LoadEnvironmentBodyByType<T>(SeanD seanD,Vector2 position, float radius, Vector2 forward) where T : EnviromentInBody, new()
+        public T LoadEnvironmentBodyByType<T>(Level seanD,Vector2 position, float radius, Vector2 forward) where T : EnviromentInBody, new()
         {
 
             T body_environ = seanD.GetCurrentWorld().InitInWorld<T>(position, radius);
