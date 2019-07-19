@@ -81,9 +81,49 @@ namespace SpaceShip.Base
             return this;
         }
 
+        public void ForceByShipID(int id , Vector2 vector2)
+        {
+            foreach(var body in world.Bodies)
+            {
+                if (body.Id.Value == id)
+                    body.AddForce(vector2);
+            }
+        }
 
+        public void ForwardByShipID(int id,Vector2 forward)
+        {
+            foreach(var body in world.Bodies)
+            {
 
+                if(body.Id.Value == id)      
+                    body.Forward = forward;
+               
+            }
+        }
 
+        public void AttackByShipID(int id,int attacktype)
+        {
+            foreach(var body in world.Bodies)
+            {
+                var player = body as PlayerInBody;
+                if (player == null) return;
+                player.AttackByType(attacktype);
+
+            }
+
+        }
+
+        public void UnAttackByShipID(int id, int attacktype)
+        {
+            foreach (var body in world.Bodies)
+            {
+                var player = body as PlayerInBody;
+                if (player == null) return;
+                player.UnAttackByType(attacktype);
+
+            }
+
+        }
         public void Dispose()
         {
             enemyLogic.Dispose();

@@ -58,8 +58,8 @@ namespace SpaceShip.AI
             // LogUI.Log(vector2.normalized.magnitudeNoSqrt);
             if (!m_body.isAttack && vector2.normalized.magnitudeNoSqrt < 1.001)
             {
-                var weanpon = BodyFactory.Instance.LoadBoltWeaponByType<BoltInBody>((SeanD)m_body.iSBSean, m_body);
-                m_body.iSBSean.GetBodyMessages().Add(new BodyInitMessage(BodyMessageID.Bolt, weanpon));
+                var weanpon = BodyFactory.Instance.LoadBoltWeaponByType<BoltInBody>((Level)m_body.iSBSean, m_body);
+                m_body.iSBSean.GetBodyMessages().Add(new BodyInitMessage(weanpon));
                 m_body.IsAttack = true;
             }
 
