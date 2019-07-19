@@ -127,7 +127,7 @@ namespace GameServer
             {
                 return;
             }
-            //匹配队伍在战斗中需要向战斗系统发送消息
+            //TODO:匹配队伍在战斗中需要向战斗系统发送消息
             if (matchTeam.State == MatchTeam.MatchTeamState.INBATTLE)
             {
 

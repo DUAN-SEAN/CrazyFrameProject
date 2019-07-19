@@ -40,7 +40,7 @@ namespace GameServer.Battle
 
 
             //2 接收逻辑事件(生成、销毁)
-
+            OnEventMessage();
 
 
 
