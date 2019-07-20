@@ -16,6 +16,9 @@ namespace GameServer
         public override int SetStateCheck(int commingEvent, int newState = -1)
         {
             Int32 returnState = -1;
+            
+
+
             switch (State)
             {
                 case StateIdle:
