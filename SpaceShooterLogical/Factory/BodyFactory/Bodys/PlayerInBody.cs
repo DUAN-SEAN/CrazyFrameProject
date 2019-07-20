@@ -11,7 +11,6 @@ namespace SpaceShip.Factory
     public class PlayerInBody : ShipBase
     {
         LightInBody light;
-        public string userid;
 
         public PlayerInBody()
         {

@@ -30,7 +30,7 @@ namespace GameServer.Battle
 
 
 
-            Command
+            //Command
             
         }
 
