@@ -39,7 +39,7 @@ namespace SpaceShip.System
         private void LoadingLevelData()
         {
             ///GameConfig.conf
-            string path = "";
+            string path = "GameConfig.config";
 #if UNITY
              path = Application.dataPath + "/Resources/Data/StreamingAssets/LevelConfigure/GameConfig.config";
                 
