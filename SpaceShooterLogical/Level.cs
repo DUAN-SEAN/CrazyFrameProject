@@ -45,13 +45,19 @@ namespace SpaceShip.Base
         /// 
         /// </summary>
         /// <param name="players">玩家编号</param>
-        public void Init(List<string> players)
+        public void Init(int levelID,List<string> players)
         {
             world = new World();
             weaponGameLogic = new WeaponGameLogic();
             enemyLogic = new AIEnemyLogic();
+            engine = new Engine(world);
             messages = new Queue<IBodyMessage>();
+
+            //BodyFactory.Instance.LoadShipBodyByType<PlayerInBody>(this,Label.BLUE)
+
+            LevelDataFactory.Instance.LoadingLeveldataByID(levelID, this);
         }
+
         public void Tick()
         {
             enemyLogic.Tick();
@@ -149,8 +155,8 @@ namespace SpaceShip.Base
                 player.UnAttackByType(attacktype);
 
             }
-
         }
+
         public void Dispose()
         {
             enemyLogic.Dispose();
