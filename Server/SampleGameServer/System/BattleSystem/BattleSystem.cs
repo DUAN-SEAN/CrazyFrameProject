@@ -65,20 +65,22 @@ namespace GameServer.Battle
             //TODO:战斗场景在此生成
             //每场关卡运行在独立的线程中
 
+
+            //向玩家现场客户端发送战斗创建成功的消息，Ps 所有战斗消息目前都这样写
+            foreach (var item in msg.Players)
+            {
+                PostLocalMessageToCtx(new SystemSendNetMessage { Message = null, PlayerId = item }, item);
+            }
+
             Battle battleEntity = BEntityFactory.CreateEntity<Battle>();
 
             var timerId =  TimerManager.SetLoopTimer(50, battleEntity.Update);//设置Tick步长
             
             battleEntity.SetTimer(timerId);
-            battleEntity.Init(msg.Players,msg.BarrierId,this);
+            battleEntity.Init(msg.Players, msg.BarrierId, this);
             //字典添加
             m_battleDic.Add(battleEntity.Id, battleEntity);
 
-            //向玩家现场客户端发送战斗创建成功的消息，Ps 所有战斗消息目前都这样写
-            foreach (var item in msg.Players)
-            {
-                PostLocalMessageToCtx(new SystemSendNetMessage { Message = null, PlayerId = item },item);
-            }
         }
         /// <summary>
         /// 释放关卡战斗资源：

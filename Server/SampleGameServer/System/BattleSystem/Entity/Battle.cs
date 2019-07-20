@@ -204,9 +204,20 @@ namespace GameServer.Battle
         }
         public override void Dispose()
         {
-            base.Dispose();
+            Log.Info("Dispose Battle Id = " + Id);
+
+            m_players.Clear();
             m_playerToBody.Clear();
             m_bodyEntityDic.Clear();
+            m_level.Dispose();
+
+            m_players = null;
+            m_playerToBody = null;
+            m_bodyEntityDic = null;
+            m_level = null;
+            m_netHandler = null;
+
+            base.Dispose();
         }
 
         #region IBroadcastHandler
