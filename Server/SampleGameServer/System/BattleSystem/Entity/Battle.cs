@@ -1,4 +1,5 @@
 ﻿using SpaceShip.Base;
+using SpaceShip.Factory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace GameServer.Battle
         public void Init(List<string> players,int barrierId)
         {
             
-            m_level.Init(players);
+            m_level.Init(barrierId,players);
         }
          
         /// <summary>
@@ -95,17 +96,10 @@ namespace GameServer.Battle
                      case MessageType.BodyDestoried:break;
                      case MessageType.BodyInit:
 
-                        BodyInitMessage bodyInitMessage = bodyMessage as BodyInitMessage;
-                        
-                        int bodyId = bodyInitMessage.GetBodyID();
+                        OnInitBodyEvent(bodyMessage);
 
-                        switch (bodyInitMessage.GetBody().GetType())
-                        {
-                            
-                        }
-                        
                         break;
-                     default:
+                    default:
                         break;
                 }
             }
@@ -113,8 +107,30 @@ namespace GameServer.Battle
 
             
         }
-      
-     
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="bodyMessage"></param>
+        private static void OnInitBodyEvent(IBodyMessage bodyMessage)
+        {
+            BodyInitMessage bodyInitMessage = bodyMessage as BodyInitMessage;
+
+            int bodyId = bodyInitMessage.GetBodyID();
+
+            switch (bodyInitMessage.GetBody().GetType().ToString())
+            {
+                case SpaceBodyType.PlayerInBody:
+                    var playerBody = bodyInitMessage.GetBody() as PlayerInBody;
+                    
+                    break;
+                
+
+
+                default: break;
+            }
+        }
+
+
         /// <summary>
         /// 接受到销毁事件
         /// </summary>
