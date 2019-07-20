@@ -20,7 +20,7 @@ namespace GameServer.Battle
         public void Init(List<string> players,int barrierId)
         {
             
-            m_level.Init(players);
+            //m_level.Init(players);
         }
          
         /// <summary>

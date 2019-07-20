@@ -16,6 +16,7 @@ namespace CrazyEngine
         protected float _maxVelocity = 100;
         protected List<Vector2> _forceList = new List<Vector2>();
         protected Body m_ownerbody;
+        protected string userid;
 
         protected IGetWorld currentWorld;
 
@@ -30,6 +31,11 @@ namespace CrazyEngine
 
         }
        
+        public string UserID
+        {
+            get { return userid; }
+            set { userid = value; }
+        }
 
         public Body Owner
         {
