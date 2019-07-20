@@ -15,7 +15,7 @@ namespace GameServer.Battle
     /// 2 所有逻辑通过消息和玩家现场进行通信
     /// 3 游戏战斗系统的消息由GameServer负责生成驱动
     /// </summary>
-    public class BattleSystem:BaseSystem
+    public class BattleSystem:BaseSystem, INetCumnication
     {
 
         public override void Update(int data1 = 0, long data2 = 0, object data3 = null)
@@ -70,7 +70,7 @@ namespace GameServer.Battle
             var timerId =  TimerManager.SetLoopTimer(50, battleEntity.Update);//设置Tick步长
             
             battleEntity.SetTimer(timerId);
-            battleEntity.Init(msg.Players,msg.BarrierId);
+            battleEntity.Init(msg.Players,msg.BarrierId,this);
             //字典添加
             m_battleDic.Add(battleEntity.Id, battleEntity);
 
@@ -122,6 +122,19 @@ namespace GameServer.Battle
             battleEntity.Dispose();//最终Dispose战斗实体 释放资源
 
         }
+
+        public void SendMessageToClient(IBattleMessage message,string playerId)
+        {
+            PostLocalMessageToCtx(new SystemSendNetMessage { Message = message, PlayerId = playerId }, playerId);
+            
+
+        }
+        public void SendMessageToClient(IBattleMessage message, List<string> players)
+        {
+            PostLocalMessageToCtx(new SystemSendNetMessage { Message = message }, players);
+
+        }
+
         /// <summary>
         /// 战斗实体字典
         /// </summary>
@@ -136,6 +149,13 @@ namespace GameServer.Battle
         /// 战斗系统的Timer管理
         /// </summary>
         public BattleTimerManager TimerManager { get; protected set; }
+
+    }
+
+    public interface INetCumnication
+    {
+        void SendMessageToClient(IBattleMessage message, string playerId);
+        void SendMessageToClient(IBattleMessage message, List<string> players);
 
     }
 }

@@ -56,6 +56,7 @@
     <Compile Include="Base\MessageBase\BaseAttribute.cs" />
     <Compile Include="Base\MessageBase\DoubleMap.cs" />
     <Compile Include="Base\MessageBase\ErrorCode.cs" />
+    <Compile Include="Base\MessageBase\IBattleMessage.cs" />
     <Compile Include="Base\MessageBase\IFrameMessage.cs" />
     <Compile Include="Base\MessageBase\IMessage.cs" />
     <Compile Include="Base\MessageBase\IMessageDispatcher.cs" />
@@ -68,6 +69,8 @@
     <Compile Include="Configure\ConfigLoader.cs" />
     <Compile Include="Configure\ServerBaseGlobalConfigure.cs" />
     <Compile Include="Configure\Util.cs" />
+    <Compile Include="Message\BattleMessage.cs" />
+    <Compile Include="Message\BattleMessageOpcode.cs" />
     <Compile Include="Message\Message.cs" />
     <Compile Include="Message\MessageOpcode.cs" />
     <Compile Include="Message\RpcMessage.cs" />
@@ -96,6 +99,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Proto\BattleMessage.proto" />
     <None Include="Proto\RpcMessage.proto" />
     <None Include="Proto\Message.proto" />
   </ItemGroup>

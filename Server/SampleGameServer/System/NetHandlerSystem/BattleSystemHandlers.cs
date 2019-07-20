@@ -26,4 +26,7 @@ namespace GameServer.System.NetHandlerSystem
             GameServer.Instance.PostMessageToSystem<BattleSystem>(null);
         }
     }
+
+
+
 }

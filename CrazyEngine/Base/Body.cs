@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace CrazyEngine
 {
     
-[Serializable]
+    
     public class Body : ObjectBase
     {
         protected bool _static = false;

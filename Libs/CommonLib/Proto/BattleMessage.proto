@@ -1,0 +1,19 @@
+syntax = "proto3";
+package Crazy.Common;
+
+// 战斗指令
+message C2S_BattleCommandMessage // IBattleMessage 
+{
+	int32 RpcId = 90;
+	uint64 BattleId = 1;
+	string Message = 2;
+}
+//物体生成消息
+message S2C_BodyInitBattleMessage // IBattleMessage
+{
+	int32 RpcId = 90;
+	uint64 BattleId = 1;
+	string PlayerId = 2;
+	string BodyType = 3;
+	bytes Body = 4;
+}

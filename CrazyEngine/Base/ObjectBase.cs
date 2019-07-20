@@ -2,7 +2,7 @@
 
 namespace CrazyEngine
 {
-
+    [Serializable]
     public class ObjectBase
     {
         /// <summary>

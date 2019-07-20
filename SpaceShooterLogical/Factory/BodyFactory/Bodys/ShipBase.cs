@@ -7,7 +7,7 @@ using CrazyEngine;
 using SpaceShip.Base;
 namespace SpaceShip.Factory
 {
-    using System;
+    
     abstract public class ShipBase : RectangleEntity
     {
         public int HP;

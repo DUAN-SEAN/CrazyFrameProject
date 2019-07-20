@@ -1,4 +1,5 @@
-﻿using SpaceShip.Base;
+﻿using Crazy.Common;
+using SpaceShip.Base;
 using SpaceShip.Factory;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ namespace GameServer.Battle
     /// <summary>
     /// 表示一场战斗的实体
     /// </summary>
-    public class Battle : BEntity
+    public class Battle : BEntity,IBroadcastHandler
     {
         public override void Start(ulong id)
         {
@@ -17,11 +18,18 @@ namespace GameServer.Battle
             m_level = new Level();
 
         }
-
-        public void Init(List<string> players,int barrierId)
+        /// <summary>
+        /// 初始化战斗副本实体
+        /// </summary>
+        /// <param name="players">玩家集合</param>
+        /// <param name="barrierId">关卡Id</param>
+        /// <param name="handler">通讯句柄</param>
+        public void Init(List<string> players,int barrierId,INetCumnication handler)
         {
             
             m_level.Init(barrierId,players);
+
+            m_netHandler = handler;
         }
          
         /// <summary>
@@ -31,7 +39,7 @@ namespace GameServer.Battle
         {
             base.Update();
 
-            //1 接收网络指令
+            //1 接收网络指令，将收集的指令下发给系统
             
 
 
@@ -43,36 +51,18 @@ namespace GameServer.Battle
             //3 同步状态（各个战斗实体根据自身特性同步状态）
             foreach (var item in m_bodyEntityDic.Values)
             {
-                item.SyncState();
+                item.SyncState();//驱动每一个实体进行状态同步
             }
 
 
             //4 驱动物理引擎
             if (m_level == null)
-            {
                 return;
-            }
             m_level.Tick();
 
 
         }
-        /// <summary>
-        /// 创建一个body通信实体
-        /// </summary>
-        /// <param name="bodyId"></param>
-        private void CreateBodyEntity()
-        {
-            
-        }
-        /// <summary>
-        /// 绑定body通信实体
-        /// </summary>
-        private void BindBodyEntity()
-        {
-
-        }
-
-
+        
         /// <summary>
         /// 处理事件队列，广播游戏事件
         /// 1 玩家生成飞机绑定
@@ -107,25 +97,71 @@ namespace GameServer.Battle
 
             
         }
+
+        #region OnEvent
         /// <summary>
-        ///
+        /// 接收到战斗逻辑层发来的生成物体事件
         /// </summary>
         /// <param name="bodyMessage"></param>
-        private static void OnInitBodyEvent(IBodyMessage bodyMessage)
+        private void OnInitBodyEvent(IBodyMessage bodyMessage)
         {
             BodyInitMessage bodyInitMessage = bodyMessage as BodyInitMessage;
 
             int bodyId = bodyInitMessage.GetBodyID();
 
+            ShipBase shipBody = null;
+            ShipBodyEntity shipBodyEntity = null;
+
             switch (bodyInitMessage.GetBody().GetType().ToString())
             {
-                case SpaceBodyType.PlayerInBody:
+                case SpaceBodyType.PlayerInBody://最特殊的
+
                     var playerBody = bodyInitMessage.GetBody() as PlayerInBody;
-                    
+                    var playerBodyEntity = BEntityFactory.CreateEntity<PlayerBodyEntity>();
+                    playerBodyEntity.Init(playerBody,this);
+
+                    //添加到字典中
+                    m_playerToBody.Add(playerBody.UserID, playerBodyEntity);
+                    m_bodyEntityDic.Add(playerBodyEntity.Id, playerBodyEntity);
+
                     break;
-                
+                case SpaceBodyType.AICarrierShipInBody://BOSS飞船
+                    shipBody = bodyInitMessage.GetBody() as ShipBase;
+                    shipBodyEntity = BEntityFactory.CreateEntity<ShipBodyEntity>();
+                    shipBodyEntity.Init(shipBody, this);
+
+                    //添加到字典中
+                    m_bodyEntityDic.Add(shipBodyEntity.Id, shipBodyEntity);
+                    break;
+                case SpaceBodyType.AISmallShipInBody://小AI
+                    shipBody = bodyInitMessage.GetBody() as ShipBase;
+                    shipBodyEntity = BEntityFactory.CreateEntity<ShipBodyEntity>();
+                    shipBodyEntity.Init(shipBody, this);
 
 
+                    //添加到字典中
+                    m_bodyEntityDic.Add(shipBodyEntity.Id, shipBodyEntity);
+                    break;
+                case SpaceBodyType.LightInBody://激光 直线
+
+
+                    break;
+                case SpaceBodyType.MeteoriteInBody://陨石
+
+
+                    break;
+                case SpaceBodyType.MissileInBody://导弹 喷火
+
+
+                    break;
+                case SpaceBodyType.MineInBody://地雷
+
+
+                    break;
+                case SpaceBodyType.BoltInBody:
+
+
+                    break;
                 default: break;
             }
         }
@@ -138,8 +174,8 @@ namespace GameServer.Battle
         {
 
         }
-        
 
+        #endregion
         public void SetTimer(long timerId)
         {
             m_timerId = timerId;
@@ -172,10 +208,36 @@ namespace GameServer.Battle
             m_playerToBody.Clear();
             m_bodyEntityDic.Clear();
         }
+
+        #region IBroadcastHandler
+        /// <summary>
+        /// 广播战斗消息
+        /// </summary>
+        /// <param name="message"></param>
+        public void BroadcastMessage(IBattleMessage message)
+        {
+            if(message.BattleId == default)
+            {
+                Log.Error("BroadcastMessage::BattleId is default ");
+                return;
+            }
+            m_netHandler.SendMessageToClient(message, m_players);
+        }
+        /// <summary>
+        /// 获取战斗实体Id
+        /// </summary>
+        /// <returns></returns>
+        public ulong GetBattleId()
+        {
+            return Id;
+        }
+        #endregion
+
+
         /// <summary>
         /// 玩家与Body的映射关系
         /// </summary>
-        private Dictionary<string, ulong> m_playerToBody = new Dictionary<string, ulong>();
+        private Dictionary<string, PlayerBodyEntity> m_playerToBody = new Dictionary<string, PlayerBodyEntity>();
         /// <summary>
         /// BodyEntity字典
         /// </summary>
@@ -190,7 +252,26 @@ namespace GameServer.Battle
         /// </summary>
         private long m_timerId;
 
+        /// <summary>
+        /// 逻辑数据层实体
+        /// </summary>
         private Level m_level;
 
+        /// <summary>
+        /// 玩家集合
+        /// </summary>
+        private List<string> m_players;
+
+        /// <summary>
+        /// 网路通信句柄
+        /// </summary>
+        private INetCumnication m_netHandler;
+
+    }
+
+    public interface IBroadcastHandler
+    {
+        void BroadcastMessage(IBattleMessage message);
+        ulong GetBattleId();
     }
 }
