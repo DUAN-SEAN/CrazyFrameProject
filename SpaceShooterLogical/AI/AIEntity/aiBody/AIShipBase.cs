@@ -20,56 +20,7 @@ abstract public class AIShipBase : ShipBase, ITickable
     protected AIShipBase()
     {
         //LogUI.Log("Aiship ctor");
-        m_fsmsystem = new FSMSystem();
-        FollowState followState = new FollowState(this);
-        followState.AddTransition((FSMTransition)AIShipTransition.ATTACK,
-            (FSMStateID)AIShipStateID.ATTACKSTATE);
-        followState.AddTransition((FSMTransition)AIShipTransition.ALERT,
-            (FSMStateID)AIShipStateID.ALERTSTATE);
-        followState.AddTransition((FSMTransition)AIShipTransition.FOLLOW,
-            (FSMStateID)AIShipStateID.FOLLOWSTATE);
-        followState.AddTransition((FSMTransition)AIShipTransition.TEAM,
-            (FSMStateID)AIShipStateID.TEAMSTATE);
-
-        AttackState attackState = new AttackState(this);
-        attackState.AddTransition((FSMTransition)AIShipTransition.ALERT,
-            (FSMStateID)AIShipStateID.ALERTSTATE);
-        attackState.AddTransition((FSMTransition)AIShipTransition.FOLLOW,
-            (FSMStateID)AIShipStateID.FOLLOWSTATE);
-        attackState.AddTransition((FSMTransition)AIShipTransition.TEAM,
-            (FSMStateID)AIShipStateID.TEAMSTATE);
-
-        AlertState alertState = new AlertState(this);
-        alertState.AddTransition((FSMTransition)AIShipTransition.FOLLOW,
-            (FSMStateID)AIShipStateID.FOLLOWSTATE);
-        alertState.AddTransition((FSMTransition)AIShipTransition.TEAM,
-         (FSMStateID)AIShipStateID.TEAMSTATE);
-
-        TeamState teamState = new TeamState(this);
-        teamState.AddTransition((FSMTransition)AIShipTransition.ALERT,
-            (FSMStateID)AIShipStateID.ALERTSTATE);
-        teamState.AddTransition((FSMTransition)AIShipTransition.ATTACK,
-            (FSMStateID)AIShipStateID.ATTACKSTATE);
-        teamState.AddTransition((FSMTransition)AIShipTransition.FOLLOW,
-            (FSMStateID)AIShipStateID.FOLLOWSTATE);
-
-        m_fsmsystem.AddState(teamState);
-        m_fsmsystem.AddState(alertState);
-        m_fsmsystem.AddState(followState);
-        m_fsmsystem.AddState(attackState);
-
-        teamershiplist = new List<AIShipBase>();
-
-        movespeed = 0.1f;
-        rotatespeed = 0.1f;
-        alertrange = 1000;
-        followrange = 400;
-
-        HP = 1;
-        Armor = 0;
-        maxArmor = 0;
-        IntervalTime = 5;
-        //isAttack = true;
+        
 
     }
 
@@ -93,6 +44,56 @@ abstract public class AIShipBase : ShipBase, ITickable
             base.InitWorld(seanD);
             seanD.GetAILog().RegisterAIShip(this);
 
+            m_fsmsystem = new FSMSystem();
+            FollowState followState = new FollowState(this);
+            followState.AddTransition((FSMTransition)AIShipTransition.ATTACK,
+                (FSMStateID)AIShipStateID.ATTACKSTATE);
+            followState.AddTransition((FSMTransition)AIShipTransition.ALERT,
+                (FSMStateID)AIShipStateID.ALERTSTATE);
+            followState.AddTransition((FSMTransition)AIShipTransition.FOLLOW,
+                (FSMStateID)AIShipStateID.FOLLOWSTATE);
+            followState.AddTransition((FSMTransition)AIShipTransition.TEAM,
+                (FSMStateID)AIShipStateID.TEAMSTATE);
+
+            AttackState attackState = new AttackState(this);
+            attackState.AddTransition((FSMTransition)AIShipTransition.ALERT,
+                (FSMStateID)AIShipStateID.ALERTSTATE);
+            attackState.AddTransition((FSMTransition)AIShipTransition.FOLLOW,
+                (FSMStateID)AIShipStateID.FOLLOWSTATE);
+            attackState.AddTransition((FSMTransition)AIShipTransition.TEAM,
+                (FSMStateID)AIShipStateID.TEAMSTATE);
+
+            AlertState alertState = new AlertState(this);
+            alertState.AddTransition((FSMTransition)AIShipTransition.FOLLOW,
+                (FSMStateID)AIShipStateID.FOLLOWSTATE);
+            alertState.AddTransition((FSMTransition)AIShipTransition.TEAM,
+             (FSMStateID)AIShipStateID.TEAMSTATE);
+
+            TeamState teamState = new TeamState(this);
+            teamState.AddTransition((FSMTransition)AIShipTransition.ALERT,
+                (FSMStateID)AIShipStateID.ALERTSTATE);
+            teamState.AddTransition((FSMTransition)AIShipTransition.ATTACK,
+                (FSMStateID)AIShipStateID.ATTACKSTATE);
+            teamState.AddTransition((FSMTransition)AIShipTransition.FOLLOW,
+                (FSMStateID)AIShipStateID.FOLLOWSTATE);
+
+            m_fsmsystem.AddState(teamState);
+            m_fsmsystem.AddState(alertState);
+            m_fsmsystem.AddState(followState);
+            m_fsmsystem.AddState(attackState);
+
+            teamershiplist = new List<AIShipBase>();
+
+            movespeed = 0.1f;
+            rotatespeed = 0.1f;
+            alertrange = 1000;
+            followrange = 400;
+
+            HP = 1;
+            Armor = 0;
+            maxArmor = 0;
+            IntervalTime = 5;
+            //isAttack = true;
         }
 
         public FSMSystem m_fsmsystem;
