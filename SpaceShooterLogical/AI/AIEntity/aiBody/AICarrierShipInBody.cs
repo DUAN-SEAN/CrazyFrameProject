@@ -15,6 +15,18 @@ namespace SpaceShip.AI
         public AICarrierShipInBody()
         {
             //LogUI.Log("carrier ctor");
+            
+        }
+
+        public AICarrierShipInBody(Vector2 min, Vector2 max) : base(min, max)
+        {
+
+
+        }
+
+        public override void Init(Level seanD)
+        {
+            base.Init(seanD);
             IsLeader = true;
             m_fsmsystem = new FSMSystem();
             FollowState followState = new FollowState(this);
@@ -61,14 +73,6 @@ namespace SpaceShip.AI
             //isAttack = true;
             teamershiplist = new List<AIShipBase>();
         }
-
-        public AICarrierShipInBody(Vector2 min, Vector2 max) : base(min, max)
-        {
-
-
-        }
-
-        
 
 
 
