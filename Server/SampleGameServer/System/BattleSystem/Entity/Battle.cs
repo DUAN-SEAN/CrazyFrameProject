@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace GameServer.Battle
 {
     /// <summary>
@@ -20,9 +17,9 @@ namespace GameServer.Battle
 
         }
 
-        public void Init()
+        public void Init(List<string> players,int barrierId)
         {
-            List<string> players = null;
+            
             m_level.Init(players);
         }
          
@@ -59,13 +56,22 @@ namespace GameServer.Battle
 
         }
         /// <summary>
-        /// 创建玩家和body的匹配
+        /// 创建一个body通信实体
         /// </summary>
         /// <param name="bodyId"></param>
-        private void CreateBodyEntity(int bodyId)
+        private void CreateBodyEntity()
+        {
+            
+        }
+        /// <summary>
+        /// 绑定body通信实体
+        /// </summary>
+        private void BindBodyEntity()
         {
 
         }
+
+
         /// <summary>
         /// 处理事件队列，广播游戏事件
         /// 1 玩家生成飞机绑定
@@ -76,37 +82,39 @@ namespace GameServer.Battle
         /// </summary>
         private void OnEventMessage()
         {
-            IBodyMessage bodyMessage = GetLogicalMsg();
-
-            switch (bodyMessage.GetMessageType())
+            var queue = m_level.GetBodyMessages();
+            while (true)
             {
-                case MessageType.BodyAttack:
+                var bodyMessage = queue.Dequeue();
+                if (bodyMessage == null) break;
+               
+                switch (bodyMessage.GetMessageType())
+                {
+                     case MessageType.BodyAttack:break;
+                     case MessageType.BodyAttacked:break;
+                     case MessageType.BodyDestoried:break;
+                     case MessageType.BodyInit:
 
+                        BodyInitMessage bodyInitMessage = bodyMessage as BodyInitMessage;
+                        
+                        int bodyId = bodyInitMessage.GetBodyID();
 
-
-                    break;
-                case MessageType.BodyAttacked:
-                    break;
-                case MessageType.BodyDestoried:
-                    break;
-                case MessageType.BodyInit:
-                    BodyInitMessage bodyInitMessage = bodyMessage as BodyInitMessage;
-                    
-                    int bodyId = bodyInitMessage.GetBodyID();
-                    CreateBodyEntity(bodyId);
-                    break;
-                default:
-                    break;
+                        switch (bodyInitMessage.GetBody().GetType())
+                        {
+                            
+                        }
+                        
+                        break;
+                     default:
+                        break;
+                }
             }
-        }
+           
 
-        private IBodyMessage GetLogicalMsg()
-        {
-            IBodyMessage bodyMessage = null;
-            return bodyMessage;
             
         }
-
+      
+     
         /// <summary>
         /// 接受到销毁事件
         /// </summary>

@@ -70,7 +70,7 @@ namespace GameServer.Battle
             var timerId =  TimerManager.SetLoopTimer(50, battleEntity.Update);//设置Tick步长
             
             battleEntity.SetTimer(timerId);
-
+            battleEntity.Init(msg.Players,msg.BarrierId);
             //字典添加
             m_battleDic.Add(battleEntity.Id, battleEntity);
 
