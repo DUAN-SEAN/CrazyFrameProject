@@ -44,6 +44,27 @@ abstract public class AIShipBase : ShipBase, ITickable
             base.InitWorld(seanD);
             seanD.GetAILog().RegisterAIShip(this);
 
+
+           
+            teamershiplist = new List<AIShipBase>();
+
+            movespeed = 0.1f;
+            rotatespeed = 0.1f;
+            alertrange = 1000;
+            followrange = 400;
+
+            HP = 1;
+            Armor = 0;
+            maxArmor = 0;
+            IntervalTime = 5;
+
+            InitFsm();
+
+            //isAttack = true;
+        }
+
+        protected virtual void InitFsm()
+        {
             m_fsmsystem = new FSMSystem();
             FollowState followState = new FollowState(this);
             followState.AddTransition((FSMTransition)AIShipTransition.ATTACK,
@@ -82,18 +103,6 @@ abstract public class AIShipBase : ShipBase, ITickable
             m_fsmsystem.AddState(followState);
             m_fsmsystem.AddState(attackState);
 
-            teamershiplist = new List<AIShipBase>();
-
-            movespeed = 0.1f;
-            rotatespeed = 0.1f;
-            alertrange = 1000;
-            followrange = 400;
-
-            HP = 1;
-            Armor = 0;
-            maxArmor = 0;
-            IntervalTime = 5;
-            //isAttack = true;
         }
 
         public FSMSystem m_fsmsystem;

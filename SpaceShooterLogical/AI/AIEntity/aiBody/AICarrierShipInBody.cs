@@ -28,6 +28,25 @@ namespace SpaceShip.AI
         {
             base.Init(seanD);
             IsLeader = true;
+           
+
+            movespeed = 0.001f;
+            rotatespeed = 0.001f;
+            alertrange = 6000;
+            followrange = 4000;
+            maxSmallShip = 20;
+
+            HP = 10;
+            Armor = 10;
+            maxArmor = 10;
+            IntervalTime = 5;
+            oldtime = DateTime.Now.Ticks;
+            //isAttack = true;
+            teamershiplist = new List<AIShipBase>();
+        }
+
+        protected override void InitFsm()
+        {
             m_fsmsystem = new FSMSystem();
             FollowState followState = new FollowState(this);
             followState.AddTransition((FSMTransition)AIShipTransition.ATTACK,
@@ -58,22 +77,7 @@ namespace SpaceShip.AI
             m_fsmsystem.AddState(alertState);
             m_fsmsystem.AddState(followState);
             m_fsmsystem.AddState(attackState);
-
-            movespeed = 0.001f;
-            rotatespeed = 0.001f;
-            alertrange = 6000;
-            followrange = 4000;
-            maxSmallShip = 20;
-
-            HP = 10;
-            Armor = 10;
-            maxArmor = 10;
-            IntervalTime = 5;
-            oldtime = DateTime.Now.Ticks;
-            //isAttack = true;
-            teamershiplist = new List<AIShipBase>();
         }
-
 
 
         #region 确定大飞机特殊位置 武器位置等
