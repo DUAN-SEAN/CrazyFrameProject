@@ -44,7 +44,6 @@ namespace SpaceShip.Base
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="players">玩家编号</param>
         public void Init(int levelID,List<string> players)
         {
             world = new World();
@@ -52,8 +51,10 @@ namespace SpaceShip.Base
             enemyLogic = new AIEnemyLogic();
             engine = new Engine(world);
             messages = new Queue<IBodyMessage>();
-
-            //BodyFactory.Instance.LoadShipBodyByType<PlayerInBody>(this,Label.BLUE)
+            //var body = BodyFactory.Instance.LoadShipBodyByType<PlayerInBody>(this,Label.BLUE)
+            //messages.Enqueue(new BodyInitMessage(body));
+            
+            
 
             LevelDataFactory.Instance.LoadingLeveldataByID(levelID, this);
         }
