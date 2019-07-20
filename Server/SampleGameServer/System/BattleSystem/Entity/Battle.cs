@@ -73,12 +73,24 @@ namespace GameServer.Battle
         /// </summary>
         private void OnEventMessage()
         {
+            
             var queue = m_level.GetBodyMessages();
+            
+            if(queue == null)
+            {
+                Log.Error("queue null");
+                return;
+            }
+
             while (true)
             {
+                if (queue.Count <= 0)
+                {
+                    return;
+                }
                 var bodyMessage = queue.Dequeue();
-                if (bodyMessage == null) break;
-               
+                Log.Info("OnEventMessage::" + bodyMessage.GetType().ToString());
+
                 switch (bodyMessage.GetMessageType())
                 {
                      case MessageType.BodyAttack:break;

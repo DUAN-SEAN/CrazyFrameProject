@@ -31,7 +31,7 @@ namespace GameServer.Battle
         /// <returns>该循环Timer唯一ID Int64.MinValue表示失败</returns>
         public Int64 SetLoopTimer(Int32 period, OnBattleTimerCallBack callBack, Int32 int32Data = 0, Int64 int64Data = 0, Object objData = null)
         {
-            if (period < 100 || m_state != 1)
+            if (period < 10 || m_state != 1)
                 return Int64.MinValue;
 
             // 获取该循环Timer唯一ID
@@ -204,7 +204,7 @@ namespace GameServer.Battle
         /// <summary>
         /// 无限循环的Timer容器
         /// </summary>
-        private ConcurrentDictionary<Int64, BattleTimerNode> m_loopTimers;
+        private ConcurrentDictionary<Int64, BattleTimerNode> m_loopTimers = new ConcurrentDictionary<long, BattleTimerNode>();
 
         /// <summary>
         /// Task引用的CancellationToken
