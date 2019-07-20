@@ -7,7 +7,6 @@ namespace CrazyEngine
 [Serializable]
     public class Body : ObjectBase
     {
-
         protected bool _static = false;
         protected Vector2 _position = new Vector2();
         protected Vector2 _velocity = new Vector2();

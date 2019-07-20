@@ -30,7 +30,7 @@ namespace Crazy.ServerBase
         public virtual void Update()
         {
             ILocalMessage localMessage;
-            if (p_localMessages.TryDequeue(out localMessage))
+            while(p_localMessages.TryDequeue(out localMessage))
             {
                 var nothing = OnMessage(localMessage);
             }

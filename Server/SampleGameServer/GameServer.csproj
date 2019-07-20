@@ -112,6 +112,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CrazyEngine\CrazyEngine.csproj">
+      <Project>{74C6EF13-2869-4869-932F-698AA795DF34}</Project>
+      <Name>CrazyEngine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Libs\CommonLib\CommonLib.csproj">
       <Project>{0f3ecc0f-e8f4-434e-aaf9-95a912f2f565}</Project>
       <Name>CommonLib</Name>
