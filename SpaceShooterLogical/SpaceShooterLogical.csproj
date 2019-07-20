@@ -87,5 +87,8 @@
       <Name>CrazyEngine</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="GameConfig.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
