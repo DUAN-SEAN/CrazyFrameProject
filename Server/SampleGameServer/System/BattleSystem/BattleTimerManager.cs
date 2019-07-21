@@ -161,7 +161,7 @@ namespace GameServer.Battle
                         }
                         catch (Exception ex)
                         {
-                            Log.Error("TimerManager::TimerWorkerProc catch Exception0: " + ex.ToString());
+                            Log.Error("BattleTimerManager::TimerWorkerProc catch Exception: " + ex.ToString());
                         }
                         timerNode.m_nextCallTime = currentTimeTick + timerNode.m_period * 10000;
                     }

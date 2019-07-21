@@ -19,6 +19,7 @@ namespace SpaceShip.Factory
         public bool isRight;
         [NonSerialized]
         public ISBZhuying iSBSean;
+
         public ShipBase()
         {
             HP = 10;
@@ -45,7 +46,7 @@ namespace SpaceShip.Factory
         {
             if (collider.body.Label.HasFlag(Label) || Label.HasFlag(collider.body.Label)) return;
             //LogUI.Log(Position + " " + collider.body.Position);
-
+            string id = collider.body.Id.Value.ToString();
             if (Armor > 0) Armor--;
             else if (Armor == 0) HP--;
 

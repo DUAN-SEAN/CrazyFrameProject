@@ -8,10 +8,11 @@ using SpaceShip.Base;
 
 namespace SpaceShip.Factory
 {
-    using System;
+    
     [Serializable]
     public class EnviromentInBody : CircleEntity, ITickable
     {
+        [NonSerialized]
         public ISBZhuying iSBSean;
         public virtual void Init(Level seanD)
         {

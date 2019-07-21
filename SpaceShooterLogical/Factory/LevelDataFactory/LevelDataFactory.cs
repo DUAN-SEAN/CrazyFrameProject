@@ -79,11 +79,22 @@ namespace SpaceShip.Factory
                     continue;
                 }
 
+                if (body is MeteoriteInBody)
+                {
+                    MeteoriteInBody meteorite = body as MeteoriteInBody;
+                    var envir = BodyFactory.Instance.LoadEnvironmentBodyByType<MeteoriteInBody>(seanD, meteorite.Position, meteorite.radius, meteorite.Forward);
+                    seanD.GetBodyMessages().Enqueue(new BodyInitMessage(envir));
+
+                    //EnvironmentFactory.Instance.LoadEnvironmentFromAssetBundle<EnviromentInBody>(EnvironmentName.Meteorite, meteorite.Position, meteorite.radius, meteorite.Forward);
+                    continue;
+                }
+
                 if (body is EnviromentInBody)
                 {
                     EnviromentInBody meteorite = body as EnviromentInBody;
                     var envir = BodyFactory.Instance.LoadEnvironmentBodyByType<EnviromentInBody>(seanD, meteorite.Position, meteorite.radius, meteorite.Forward);
                     seanD.GetBodyMessages().Enqueue(new BodyInitMessage( envir));
+                    continue;
 
                     //EnvironmentFactory.Instance.LoadEnvironmentFromAssetBundle<EnviromentInBody>(EnvironmentName.Meteorite, meteorite.Position, meteorite.radius, meteorite.Forward);
                 }

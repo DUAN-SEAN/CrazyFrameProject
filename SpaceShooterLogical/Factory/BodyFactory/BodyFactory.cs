@@ -54,6 +54,7 @@ namespace SpaceShip.Factory
             body_weanpon = seanD.GetCurrentWorld().InitInWorld<T>(position);
             body_weanpon.Forward = forward;
             body_weanpon.Owner = body;
+            body_weanpon.Label = body.Label;
             body_weanpon.UserID = userID;
 
 
@@ -71,6 +72,8 @@ namespace SpaceShip.Factory
             body_weanpon.Forward = forward;
             body_weanpon.Owner = body;
             body_weanpon.UserID = userID;
+            body_weanpon.Label = body.Label;
+
             body_weanpon.Init(seanD);
             return body_weanpon;
         }
@@ -85,6 +88,7 @@ namespace SpaceShip.Factory
             body_weanpon.Forward = forward;
             body_weanpon.Owner = body;
             body_weanpon.UserID = userID;
+            body_weanpon.Label = body.Label;
 
 
             body_weanpon.Init(seanD);
@@ -102,6 +106,7 @@ namespace SpaceShip.Factory
             body_weanpon.Forward = forward;
             body_weanpon.Owner = body;
             body_weanpon.UserID = userID;
+            body_weanpon.Label = body.Label;
 
             body_weanpon.Init(seanD);
             return body_weanpon;

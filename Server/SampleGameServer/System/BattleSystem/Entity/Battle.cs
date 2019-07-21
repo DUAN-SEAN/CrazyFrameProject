@@ -96,7 +96,10 @@ namespace GameServer.Battle
                 {
                      case MessageType.BodyAttack:break;
                      case MessageType.BodyAttacked:break;
-                     case MessageType.BodyDestoried:break;
+                     case MessageType.BodyDestoried:
+                        OnDestoryBodyEntity(bodyMessage);
+
+                        break;
                      case MessageType.BodyInit:
 
                         OnInitBodyEvent(bodyMessage);
@@ -124,58 +127,67 @@ namespace GameServer.Battle
 
             ShipBase shipBody = null;
             ShipBodyEntity shipBodyEntity = null;
-
+            WeaponBodyEntity weaponBodyEntity = null;
             var type = bodyInitMessage.GetBody().GetType().ToString();
             Log.Info("OnInitBodyEvent::Type = " + type);
             switch (type)
             {
                 case SpaceBodyType.PlayerInBody://最特殊的
-
                     var playerBody = bodyInitMessage.GetBody() as PlayerInBody;
                     var playerBodyEntity = BEntityFactory.CreateEntity<PlayerBodyEntity>();
                     playerBodyEntity.Init(playerBody,this);
-
                     //添加到字典中
                     m_playerToBody.Add(playerBody.UserID, playerBodyEntity);
-                    m_bodyEntityDic.Add(playerBodyEntity.Id, playerBodyEntity);
-
+                    m_bodyEntityDic.Add(playerBody.Id.Value, playerBodyEntity);
                     break;
                 case SpaceBodyType.AICarrierShipInBody://BOSS飞船
                     shipBody = bodyInitMessage.GetBody() as ShipBase;
                     shipBodyEntity = BEntityFactory.CreateEntity<ShipBodyEntity>();
                     shipBodyEntity.Init(shipBody, this);
-
                     //添加到字典中
-                    m_bodyEntityDic.Add(shipBodyEntity.Id, shipBodyEntity);
+                    m_bodyEntityDic.Add(shipBody.Id.Value, shipBodyEntity);
                     break;
                 case SpaceBodyType.AISmallShipInBody://小AI
                     shipBody = bodyInitMessage.GetBody() as ShipBase;
                     shipBodyEntity = BEntityFactory.CreateEntity<ShipBodyEntity>();
                     shipBodyEntity.Init(shipBody, this);
-
-
                     //添加到字典中
-                    m_bodyEntityDic.Add(shipBodyEntity.Id, shipBodyEntity);
+                    m_bodyEntityDic.Add(shipBody.Id.Value, shipBodyEntity);
+                    break;          
+                case SpaceBodyType.MeteoriteInBody://陨石
+                    shipBody = bodyInitMessage.GetBody() as ShipBase;
+                    shipBodyEntity = BEntityFactory.CreateEntity<ShipBodyEntity>();
+                    shipBodyEntity.Init(shipBody, this);
+                    //添加到字典中
+                    m_bodyEntityDic.Add(shipBody.Id.Value, shipBodyEntity);
                     break;
                 case SpaceBodyType.LightInBody://激光 直线
-
-
-                    break;
-                case SpaceBodyType.MeteoriteInBody://陨石
-
-
+                    shipBody = bodyInitMessage.GetBody() as ShipBase;
+                    weaponBodyEntity = BEntityFactory.CreateEntity<WeaponBodyEntity>();
+                    weaponBodyEntity.Init(shipBody, this);
+                    //添加到字典中
+                    m_bodyEntityDic.Add(shipBody.Id.Value, weaponBodyEntity);
                     break;
                 case SpaceBodyType.MissileInBody://导弹 喷火
-
-
+                    shipBody = bodyInitMessage.GetBody() as ShipBase;
+                    weaponBodyEntity = BEntityFactory.CreateEntity<WeaponBodyEntity>();
+                    weaponBodyEntity.Init(shipBody, this);
+                    //添加到字典中
+                    m_bodyEntityDic.Add(shipBody.Id.Value, weaponBodyEntity);
                     break;
                 case SpaceBodyType.MineInBody://地雷
-
-
+                    shipBody = bodyInitMessage.GetBody() as ShipBase;
+                    weaponBodyEntity = BEntityFactory.CreateEntity<WeaponBodyEntity>();
+                    weaponBodyEntity.Init(shipBody, this);
+                    //添加到字典中
+                    m_bodyEntityDic.Add(shipBody.Id.Value, weaponBodyEntity);
                     break;
                 case SpaceBodyType.BoltInBody:
-                
-
+                    shipBody = bodyInitMessage.GetBody() as ShipBase;
+                    weaponBodyEntity = BEntityFactory.CreateEntity<WeaponBodyEntity>();
+                    weaponBodyEntity.Init(shipBody, this);
+                    //添加到字典中
+                    m_bodyEntityDic.Add(shipBody.Id.Value, weaponBodyEntity);
                     break;
                 default: break;
             }
@@ -185,9 +197,25 @@ namespace GameServer.Battle
         /// <summary>
         /// 接受到销毁事件
         /// </summary>
-        private void OnDestoryBodyEntity()
+        private void OnDestoryBodyEntity(IBodyMessage bodyMessage)
         {
+            BodyDestoriedMessage message = bodyMessage as BodyDestoriedMessage;
+            ABodyEntity bodyEntity = null;
+            if (!m_bodyEntityDic.TryGetValue(message.GetBodyID(),out bodyEntity))
+            {
+                Log.Debug("OnDestoryBodyEntity::没有销毁的body ID = "+ message.GetBodyID());
+                return;
+            }
 
+
+            bodyEntity.Dispose();
+            //从body字典中移除
+            m_bodyEntityDic.Remove(message.GetBodyID());
+            //从玩家body映射字典中删除
+            if (message.GetBody().UserID != null)
+            {
+                m_playerToBody.Remove(message.GetBody().UserID);
+            }
         }
 
         #endregion
@@ -208,7 +236,7 @@ namespace GameServer.Battle
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        private ABodyEntity GetBodyEntity(ulong id)
+        private ABodyEntity GetBodyEntity(int id)
         {
             ABodyEntity bodyEntity = null;
             if(!m_bodyEntityDic.TryGetValue(id,out bodyEntity))
@@ -271,7 +299,7 @@ namespace GameServer.Battle
         /// <summary>
         /// BodyEntity字典
         /// </summary>
-        private Dictionary<ulong, ABodyEntity> m_bodyEntityDic = new Dictionary<ulong, ABodyEntity>();
+        private Dictionary<int, ABodyEntity> m_bodyEntityDic = new Dictionary<int, ABodyEntity>();
         
         /// <summary>
         /// 战斗开始时间

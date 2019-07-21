@@ -61,7 +61,7 @@ namespace CrazyEngine
 
             };
 
-            Bodies.Add(t);
+            //Bodies.Add(t);
 
 
 
@@ -77,7 +77,7 @@ namespace CrazyEngine
                 Enable = isworldstop
 
             };
-            Bodies.Add(t);
+            //Bodies.Add(t);
             return t;
         }
 
@@ -92,7 +92,7 @@ namespace CrazyEngine
                 Enable = isworldstop
 
             };
-            Bodies.Add(t);
+            //Bodies.Add(t);
             return t;
         }
 
@@ -105,7 +105,7 @@ namespace CrazyEngine
                 Enable = isworldstop
 
             };
-            Bodies.Add(t);
+            //Bodies.Add(t);
             return t;
         }
 
