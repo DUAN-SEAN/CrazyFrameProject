@@ -69,12 +69,10 @@ namespace GameServer.Battle
             
             
             battleEntity.Init(msg.Players, msg.BarrierId, this);
-
             var timerId = TimerManager.SetLoopTimer(50, battleEntity.Update);//设置Tick步长
             battleEntity.SetTimer(timerId);
             //字典添加
             m_battleDic.Add(battleEntity.Id, battleEntity);
-
             //向玩家现场客户端发送战斗创建成功的消息，Ps 所有战斗消息目前都这样写
             var info = new S2CM_CreateBattleBarrier.Types.CreateBattleBarrierInfo();
             info.PlayerIds.Add(msg.Players);

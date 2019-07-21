@@ -12,6 +12,7 @@ namespace SpaceShip.Factory
     [Serializable]
     public class MissileInBody : PointEntity, ITickable, IAliveable
     {
+        [NonSerialized]
         public ISBZhuying iSBSean;
         public virtual void Init(Level seanD)
         {
@@ -93,6 +94,7 @@ namespace SpaceShip.Factory
     [Serializable]
     public class BoltInBody : PointEntity, ITickable, IAliveable
     {
+        [NonSerialized]
         public ISBZhuying iSBSean;
         public virtual void Init(Level seanD)
         {
@@ -175,6 +177,7 @@ namespace SpaceShip.Factory
     [Serializable]
     public class MineInBody : CircleEntity, ITickable, IAliveable
     {
+        [NonSerialized]
         public ISBZhuying iSBSean;
         public virtual void Init(Level seanD)
         {
@@ -255,7 +258,7 @@ namespace SpaceShip.Factory
     [Serializable]
     public class LightInBody : LineEntity, ITickable, IAliveable, IWeanpon
     {
-
+        [NonSerialized]
         public ISBZhuying iSBSean;
         public virtual void Init(Level seanD)
         {

@@ -29,7 +29,7 @@ namespace GameServer.Battle
         {
             
             m_level.Init(barrierId,players);
-
+            m_players = players;
             m_netHandler = handler;
         }
          
@@ -128,6 +128,7 @@ namespace GameServer.Battle
             ShipBase shipBody = null;
             ShipBodyEntity shipBodyEntity = null;
             WeaponBodyEntity weaponBodyEntity = null;
+            EnvirmentEntity envirmentEntity = null;
             var type = bodyInitMessage.GetBody().GetType().ToString();
             Log.Info("OnInitBodyEvent::Type = " + type);
             switch (type)
@@ -155,39 +156,39 @@ namespace GameServer.Battle
                     m_bodyEntityDic.Add(shipBody.Id.Value, shipBodyEntity);
                     break;          
                 case SpaceBodyType.MeteoriteInBody://陨石
-                    shipBody = bodyInitMessage.GetBody() as ShipBase;
-                    shipBodyEntity = BEntityFactory.CreateEntity<ShipBodyEntity>();
-                    shipBodyEntity.Init(shipBody, this);
+                    var Body = bodyInitMessage.GetBody() as MeteoriteInBody;
+                    envirmentEntity = BEntityFactory.CreateEntity<EnvirmentEntity>();
+                    envirmentEntity.Init(Body, this);
                     //添加到字典中
-                    m_bodyEntityDic.Add(shipBody.Id.Value, shipBodyEntity);
+                    m_bodyEntityDic.Add(Body.Id.Value, envirmentEntity);
                     break;
                 case SpaceBodyType.LightInBody://激光 直线
-                    shipBody = bodyInitMessage.GetBody() as ShipBase;
+                    var weanpon1 = bodyInitMessage.GetBody() as LightInBody;
                     weaponBodyEntity = BEntityFactory.CreateEntity<WeaponBodyEntity>();
-                    weaponBodyEntity.Init(shipBody, this);
+                    weaponBodyEntity.Init(weanpon1, this);
                     //添加到字典中
-                    m_bodyEntityDic.Add(shipBody.Id.Value, weaponBodyEntity);
+                    m_bodyEntityDic.Add(weanpon1.Id.Value, weaponBodyEntity);
                     break;
                 case SpaceBodyType.MissileInBody://导弹 喷火
-                    shipBody = bodyInitMessage.GetBody() as ShipBase;
+                    var weanpon2 = bodyInitMessage.GetBody() as MissileInBody;
                     weaponBodyEntity = BEntityFactory.CreateEntity<WeaponBodyEntity>();
-                    weaponBodyEntity.Init(shipBody, this);
+                    weaponBodyEntity.Init(weanpon2, this);
                     //添加到字典中
-                    m_bodyEntityDic.Add(shipBody.Id.Value, weaponBodyEntity);
+                    m_bodyEntityDic.Add(weanpon2.Id.Value, weaponBodyEntity);
                     break;
                 case SpaceBodyType.MineInBody://地雷
-                    shipBody = bodyInitMessage.GetBody() as ShipBase;
+                    var weanpon3 = bodyInitMessage.GetBody() as MineInBody;
                     weaponBodyEntity = BEntityFactory.CreateEntity<WeaponBodyEntity>();
-                    weaponBodyEntity.Init(shipBody, this);
+                    weaponBodyEntity.Init(weanpon3, this);
                     //添加到字典中
-                    m_bodyEntityDic.Add(shipBody.Id.Value, weaponBodyEntity);
+                    m_bodyEntityDic.Add(weanpon3.Id.Value, weaponBodyEntity);
                     break;
                 case SpaceBodyType.BoltInBody:
-                    shipBody = bodyInitMessage.GetBody() as ShipBase;
+                    var weanpon4 = bodyInitMessage.GetBody() as BoltInBody;
                     weaponBodyEntity = BEntityFactory.CreateEntity<WeaponBodyEntity>();
-                    weaponBodyEntity.Init(shipBody, this);
+                    weaponBodyEntity.Init(weanpon4, this);
                     //添加到字典中
-                    m_bodyEntityDic.Add(shipBody.Id.Value, weaponBodyEntity);
+                    m_bodyEntityDic.Add(weanpon4.Id.Value, weaponBodyEntity);
                     break;
                 default: break;
             }
@@ -259,9 +260,12 @@ namespace GameServer.Battle
                 Log.Error("BroadcastMessage::BattleId is default ");
                 return;
             }
-
-            Log.Info(message.ToJson());
-            Log.Info("message size = "+(message as Google.Protobuf.IMessage).CalculateSize());
+            if(m_players == null)
+            {
+                Log.Debug("BroadcastMessage::m_players is NULL");
+            }
+            //Log.Info(message.ToJson());
+            //Log.Info("message size = "+(message as Google.Protobuf.IMessage).CalculateSize());
             m_netHandler.SendMessageToClient(message, m_players);
         }
         /// <summary>

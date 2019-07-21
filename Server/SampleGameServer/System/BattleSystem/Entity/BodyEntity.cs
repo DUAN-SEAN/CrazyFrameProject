@@ -49,6 +49,7 @@ namespace GameServer.Battle
         /// <param name="body"></param>
         public virtual void Init(Body body,IBroadcastHandler handler)
         {
+            
             //如果有问题的 需要删除Body
             if (body == null)
             {
@@ -61,7 +62,7 @@ namespace GameServer.Battle
             {
                 
                 formatter.Serialize(memory, body);
-                ByteString bs = ByteString.FromStream(memory);
+                ByteString bs = ByteString.CopyFrom(memory.ToArray());
                 S2C_BodyInitBattleMessage msg = new S2C_BodyInitBattleMessage { BattleId = handler.GetBattleId(),
                     BodyType = body.GetType().ToString(),
                     PlayerId = body.UserID == null? "null": body.UserID,
@@ -80,10 +81,10 @@ namespace GameServer.Battle
         /// </summary>
         public override void Dispose()
         {
-            m_body.Dispose();
+            //m_body.Dispose();
             m_body = null;
             broadcastHandler = null;
-            formatter = null;
+            
 
 
 
@@ -104,7 +105,7 @@ namespace GameServer.Battle
         protected IBroadcastHandler broadcastHandler;
 
 
-        protected BinaryFormatter formatter = new BinaryFormatter();
+        private static BinaryFormatter formatter = new BinaryFormatter();
 
     }
 
@@ -135,6 +136,34 @@ namespace GameServer.Battle
 
 
     }
+
+    public class EnvirmentEntity : ABodyEntity
+    {
+
+
+        public override void Init(Body body, IBroadcastHandler handler)
+        {
+            base.Init(body, handler);
+            m_shipBase = body as EnviromentInBody;
+            //向客户端发送
+
+        }
+
+        public override void SyncState()
+        {
+            base.SyncState();
+        }
+        public override void Dispose()
+        {
+            m_shipBase = null;
+            base.Dispose();
+        }
+        private EnviromentInBody m_shipBase;
+
+
+
+    }
+
     public class WeaponBodyEntity : ABodyEntity
     {
 
@@ -142,7 +171,7 @@ namespace GameServer.Battle
         public override void Init(Body body, IBroadcastHandler handler)
         {
             base.Init(body, handler);
-            m_weapon = body as ShipBase;
+            m_weapon = body;
             //向客户端发送
 
         }
@@ -156,7 +185,7 @@ namespace GameServer.Battle
             m_weapon = null;
             base.Dispose();
         }
-        private ShipBase m_weapon;
+        private Body m_weapon;
 
 
 

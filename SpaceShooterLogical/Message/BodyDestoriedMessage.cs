@@ -10,7 +10,7 @@ namespace SpaceShip.Base
     {
         public BodyDestoriedMessage(Body body) : base(body)
         {
-
+            string id = body.Id.Value.ToString();
         }
 
         public override int GetMessageType()
