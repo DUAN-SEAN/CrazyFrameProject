@@ -3,6 +3,8 @@ using CrazyEngine;
 
 namespace CrazyEngine
 {
+    [Serializable]
+
     public class LineEntity : Body
     {
         public float Length;

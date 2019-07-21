@@ -2,6 +2,8 @@
 using CrazyEngine;
 namespace CrazyEngine
 {
+    [Serializable]
+
     public class PointEntity : Body
     {
         public PointEntity()

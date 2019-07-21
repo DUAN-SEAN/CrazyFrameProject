@@ -9,6 +9,7 @@ using SpaceShip.Factory;
 
 namespace SpaceShip.AI
 {
+    [Serializable]
 
     public class AICarrierShipInBody : AIShipBase, ITickable
     {

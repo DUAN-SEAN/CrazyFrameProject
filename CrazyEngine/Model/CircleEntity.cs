@@ -3,6 +3,8 @@ using System;
 
 namespace CrazyEngine
 {
+    [Serializable]
+
     public class CircleEntity : Body
     {
         public float radius;

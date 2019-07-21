@@ -5,6 +5,8 @@ using CrazyEngine;
 
 namespace SpaceShip.AI
 {
+    [Serializable]
+
     public class AISmallShipInBody : AIShipBase
     {
         public AISmallShipInBody()

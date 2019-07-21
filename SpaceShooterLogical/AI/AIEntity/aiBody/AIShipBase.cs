@@ -15,6 +15,7 @@ namespace SpaceShip.AI
 /// <summary>
 /// 自动飞机
 /// </summary>
+    [Serializable]
 abstract public class AIShipBase : ShipBase, ITickable
 {
     protected AIShipBase()
