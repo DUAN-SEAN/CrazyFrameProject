@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 
 namespace SpaceShip.Model
 {
@@ -16,7 +16,20 @@ namespace SpaceShip.Model
         public const int DroneAttach = 9;
         public const int DroneRepair = 10;
     }
+    public class AirCraftInfo
+    {
+        private float Hp;
+        private float Mp;
+        private string Name;
+        private List<Weapon> Weapon;
+        private int AircraftType;
+        private float speed;
+        private float acceleratedSpeed;
+        private float Maxspeed;
+        private float MaxacceleratedSpeed;
 
+
+    }
 
 }
 
