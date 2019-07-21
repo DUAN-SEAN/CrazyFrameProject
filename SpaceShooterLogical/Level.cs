@@ -51,10 +51,15 @@ namespace SpaceShip.Base
             enemyLogic = new AIEnemyLogic();
             engine = new Engine(world);
             messages = new Queue<IBodyMessage>();
-            //var body = BodyFactory.Instance.LoadShipBodyByType<PlayerInBody>(this,Label.BLUE)
-            //messages.Enqueue(new BodyInitMessage(body));
-            
-            
+
+            foreach(string s in players)
+            {
+                var body = BodyFactory.Instance.LoadShipBodyByType<PlayerInBody>(this, Label.BLUE, new Vector2(20, 20), new Vector2(21, 21), Vector2.Up, s);
+                messages.Enqueue(new BodyInitMessage(body));
+
+            }
+
+
 
             LevelDataFactory.Instance.LoadingLeveldataByID(levelID, this);
         }
