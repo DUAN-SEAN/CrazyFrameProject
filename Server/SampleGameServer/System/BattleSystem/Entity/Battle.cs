@@ -199,7 +199,23 @@ namespace GameServer.Battle
         /// </summary>
         private void OnDestoryBodyEntity(IBodyMessage bodyMessage)
         {
+            BodyDestoriedMessage message = bodyMessage as BodyDestoriedMessage;
+            ABodyEntity bodyEntity = null;
+            if (!m_bodyEntityDic.TryGetValue(message.GetBodyID(),out bodyEntity))
+            {
+                Log.Debug("OnDestoryBodyEntity::没有销毁的body ID = "+ message.GetBodyID());
+                return;
+            }
 
+
+            bodyEntity.Dispose();
+            //从body字典中移除
+            m_bodyEntityDic.Remove(message.GetBodyID());
+            //从玩家body映射字典中删除
+            if (message.GetBody().UserID != null)
+            {
+                m_playerToBody.Remove(message.GetBody().UserID);
+            }
         }
 
         #endregion

@@ -49,10 +49,17 @@ namespace GameServer.Battle
         /// <param name="body"></param>
         public virtual void Init(Body body,IBroadcastHandler handler)
         {
+            //如果有问题的 需要删除Body
+            if (body == null)
+            {
+                Log.Debug("InitBodyEntity::Body is NULL");
+                return;
+            }
             m_body = body;
             broadcastHandler = handler;
             using(MemoryStream memory = new MemoryStream())
             {
+                
                 formatter.Serialize(memory, body);
                 ByteString bs = ByteString.FromStream(memory);
                 S2C_BodyInitBattleMessage msg = new S2C_BodyInitBattleMessage { BattleId = handler.GetBattleId(),
@@ -188,7 +195,7 @@ namespace GameServer.Battle
 
         public override void Dispose()
         {
-            
+            Log.Debug("PlayerBodyEntity is Disposing");
             m_playerInBody = null;
             base.Dispose();
         }
