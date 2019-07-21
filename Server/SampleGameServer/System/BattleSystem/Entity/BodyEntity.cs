@@ -55,7 +55,10 @@ namespace GameServer.Battle
             {
                 formatter.Serialize(memory, body);
                 ByteString bs = ByteString.FromStream(memory);
-                S2C_BodyInitBattleMessage msg = new S2C_BodyInitBattleMessage { BattleId = handler.GetBattleId(), BodyType = body.GetType().ToString(), PlayerId = body.UserID, Body = bs };
+                S2C_BodyInitBattleMessage msg = new S2C_BodyInitBattleMessage { BattleId = handler.GetBattleId(),
+                    BodyType = body.GetType().ToString(),
+                    PlayerId = body.UserID == null? "null": body.UserID,
+                    Body = bs };
                 handler.BroadcastMessage(msg);
 
 
