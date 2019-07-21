@@ -62,6 +62,8 @@ namespace SpaceShip.Base
 
 
             LevelDataFactory.Instance.LoadingLeveldataByID(levelID, this);
+
+            world.isWorldStop = true;
         }
 
         public void Tick()
