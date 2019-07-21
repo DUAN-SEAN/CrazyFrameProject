@@ -5,6 +5,7 @@ namespace SpaceShip.Model
 {
     public class AirCraftType
     {
+
         public const int Bomber = 1;
         public const int Colossal = 2;
         public const int Cruiser = 3;
@@ -15,9 +16,11 @@ namespace SpaceShip.Model
         public const int Stealth = 8;
         public const int DroneAttach = 9;
         public const int DroneRepair = 10;
+
     }
     public class AirCraftInfo
     {
+
         private float Hp;
         private float Mp;
         private string Name;
@@ -27,7 +30,6 @@ namespace SpaceShip.Model
         private float acceleratedSpeed;
         private float Maxspeed;
         private float MaxacceleratedSpeed;
-
 
     }
 
