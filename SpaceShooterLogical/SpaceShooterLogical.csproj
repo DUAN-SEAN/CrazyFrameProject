@@ -69,7 +69,7 @@
     <Compile Include="Factory\BodyFactory\Bodys\PlayerInBody.cs" />
     <Compile Include="Factory\BodyFactory\Bodys\ShipBase.cs" />
     <Compile Include="Factory\BodyFactory\Bodys\Weanpon.cs" />
-    <Compile Include="ISBSeanDuan.cs" />
+    <Compile Include="ISBZhuying.cs" />
     <Compile Include="Base\LevelData.cs" />
     <Compile Include="Base\WeaponGameLogic.cs" />
     <Compile Include="Factory\LevelDataFactory\LevelDataFactory.cs" />
