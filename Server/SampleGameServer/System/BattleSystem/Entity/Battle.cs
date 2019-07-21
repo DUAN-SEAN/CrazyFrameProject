@@ -174,7 +174,7 @@ namespace GameServer.Battle
 
                     break;
                 case SpaceBodyType.BoltInBody:
-
+                
 
                     break;
                 default: break;

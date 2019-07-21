@@ -12,7 +12,7 @@ namespace SpaceShip.Base
 
         public const string MeteoriteInBody = "SpaceShip.Factory.MeteoriteInBody";
 
-        public const string AICarrierShipInBody = "SpaceShip.AI.SpaceBodyType";
+        public const string AICarrierShipInBody = "SpaceShip.AI.AICarrierShipInBody";
         public const string AISmallShipInBody = "SpaceShip.AI.AISmallShipInBody";
 
         public const string MissileInBody = "SpaceShip.Factory.MissileInBody";
