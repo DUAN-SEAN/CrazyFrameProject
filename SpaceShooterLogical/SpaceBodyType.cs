@@ -19,5 +19,7 @@ namespace SpaceShip.Base
         public const string BoltInBody = "SpaceShip.Factory.BoltInBody";
         public const string MineInBody = "SpaceShip.Factory.MineInBody";
         public const string LightInBody = "SpaceShip.Factory.LightInBody";
+
+
     }
 }

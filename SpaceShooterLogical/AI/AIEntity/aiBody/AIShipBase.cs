@@ -105,7 +105,7 @@ abstract public class AIShipBase : ShipBase, ITickable
             m_fsmsystem.AddState(attackState);
 
         }
-
+        [NonSerialized]
         public FSMSystem m_fsmsystem;
 
     public void Tick()
