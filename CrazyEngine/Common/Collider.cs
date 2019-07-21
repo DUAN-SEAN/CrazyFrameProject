@@ -2,6 +2,7 @@
 
 namespace CrazyEngine
 {
+    [Serializable]
     public class Collider
     {
         /// <summary>

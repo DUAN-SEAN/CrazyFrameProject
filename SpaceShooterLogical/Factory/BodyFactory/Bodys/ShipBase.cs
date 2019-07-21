@@ -17,8 +17,8 @@ namespace SpaceShip.Factory
 
         public bool isLeft;
         public bool isRight;
-
-        public ISBSeanDuan iSBSean;
+        [NonSerialized]
+        public ISBZhuying iSBSean;
         public ShipBase()
         {
             HP = 10;

@@ -2,6 +2,7 @@
 
 namespace CrazyEngine
 {
+    [Serializable]
     public struct Point : IBaseStruct
     {
         private Vector2 _postion;

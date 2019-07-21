@@ -15,7 +15,7 @@ namespace SpaceShip.AI
 /// <summary>
 /// 自动飞机
 /// </summary>
-    [Serializable]
+[Serializable]
 abstract public class AIShipBase : ShipBase, ITickable
 {
     protected AIShipBase()
@@ -41,7 +41,7 @@ abstract public class AIShipBase : ShipBase, ITickable
     }
 
     public override void Init(Level seanD)
-        {
+    {
             base.InitWorld(seanD);
             seanD.GetAILog().RegisterAIShip(this);
 
