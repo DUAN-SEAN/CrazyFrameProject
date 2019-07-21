@@ -18,6 +18,7 @@ namespace CrazyEngine
         protected Body m_ownerbody;
         protected string userid;
 
+        [NonSerialized]
         protected IGetWorld currentWorld;
 
         //每当body创建时候加入world的bodies

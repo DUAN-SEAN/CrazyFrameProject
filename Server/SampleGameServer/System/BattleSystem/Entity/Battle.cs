@@ -125,7 +125,9 @@ namespace GameServer.Battle
             ShipBase shipBody = null;
             ShipBodyEntity shipBodyEntity = null;
 
-            switch (bodyInitMessage.GetBody().GetType().ToString())
+            var type = bodyInitMessage.GetBody().GetType().ToString();
+            Log.Info("OnInitBodyEvent::Type = " + type);
+            switch (type)
             {
                 case SpaceBodyType.PlayerInBody://最特殊的
 
@@ -172,7 +174,7 @@ namespace GameServer.Battle
 
                     break;
                 case SpaceBodyType.BoltInBody:
-
+                
 
                     break;
                 default: break;
@@ -231,6 +233,7 @@ namespace GameServer.Battle
             }
 
             Log.Info(message.ToJson());
+            Log.Info("message size = "+(message as Google.Protobuf.IMessage).CalculateSize());
             m_netHandler.SendMessageToClient(message, m_players);
         }
         /// <summary>

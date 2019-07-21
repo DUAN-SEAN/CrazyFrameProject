@@ -66,10 +66,12 @@ namespace GameServer.Battle
             //每场关卡运行在独立的线程中
             Battle battleEntity = BEntityFactory.CreateEntity<Battle>();
 
-            var timerId =  TimerManager.SetLoopTimer(50, battleEntity.Update);//设置Tick步长
             
-            battleEntity.SetTimer(timerId);
+            
             battleEntity.Init(msg.Players, msg.BarrierId, this);
+
+            var timerId = TimerManager.SetLoopTimer(50, battleEntity.Update);//设置Tick步长
+            battleEntity.SetTimer(timerId);
             //字典添加
             m_battleDic.Add(battleEntity.Id, battleEntity);
 

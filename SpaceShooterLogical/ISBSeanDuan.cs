@@ -8,7 +8,7 @@ namespace SpaceShip.Base
     /// <summary>
     /// 将系统对象化 用于生成和结束世界系统对象等
     /// </summary>
-    public interface ISBSeanDuan
+    public interface ISBZhuying
     {
        
         

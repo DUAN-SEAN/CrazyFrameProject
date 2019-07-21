@@ -2,6 +2,7 @@
 
 namespace CrazyEngine
 {
+    [Serializable]
     public struct Circle : IBaseStruct
     {
 

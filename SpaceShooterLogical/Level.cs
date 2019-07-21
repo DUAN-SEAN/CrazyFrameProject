@@ -8,7 +8,7 @@ using SpaceShip.System;
 
 namespace SpaceShip.Base
 {
-    public sealed class Level : ISBSeanDuan,ITickable,IGetWorld
+    public sealed class Level : ISBZhuying,ITickable,IGetWorld
     {
         /// <summary>
         /// 物理引擎世界集合

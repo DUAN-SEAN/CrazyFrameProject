@@ -47,7 +47,7 @@ namespace GameServer.Battle
         /// <summary>
         /// 外部只能获取不能修改该字段
         /// </summary>
-        public ulong Id { get; }
+        public ulong Id { get => m_Id; }
         /// <summary>
         /// 实体的唯一表示
         /// </summary>
