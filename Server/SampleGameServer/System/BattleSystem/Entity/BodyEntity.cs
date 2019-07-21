@@ -128,7 +128,32 @@ namespace GameServer.Battle
 
 
     }
+    public class WeaponBodyEntity : ABodyEntity
+    {
 
+
+        public override void Init(Body body, IBroadcastHandler handler)
+        {
+            base.Init(body, handler);
+            m_weapon = body as ShipBase;
+            //向客户端发送
+
+        }
+
+        public override void SyncState()
+        {
+            base.SyncState();
+        }
+        public override void Dispose()
+        {
+            m_weapon = null;
+            base.Dispose();
+        }
+        private ShipBase m_weapon;
+
+
+
+    }
 
     /// <summary>
     /// 玩家通信实体，继承自ABodyEntity

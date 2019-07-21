@@ -43,6 +43,7 @@ abstract public class AIShipBase : ShipBase, ITickable
     public override void Init(Level seanD)
     {
             base.InitWorld(seanD);
+            iSBSean = seanD;
             seanD.GetAILog().RegisterAIShip(this);
 
 
