@@ -1,4 +1,5 @@
 ﻿using Crazy.Common;
+using MongoDB.Bson;
 using SpaceShip.Base;
 using SpaceShip.Factory;
 using System;
@@ -214,23 +215,7 @@ namespace GameServer.Battle
             }
             return bodyEntity;
         }
-        public override void Dispose()
-        {
-            Log.Info("Dispose Battle Id = " + Id);
-
-            m_players.Clear();
-            m_playerToBody.Clear();
-            m_bodyEntityDic.Clear();
-            m_level.Dispose();
-
-            m_players = null;
-            m_playerToBody = null;
-            m_bodyEntityDic = null;
-            m_level = null;
-            m_netHandler = null;
-
-            base.Dispose();
-        }
+       
 
         #region IBroadcastHandler
         /// <summary>
@@ -244,6 +229,8 @@ namespace GameServer.Battle
                 Log.Error("BroadcastMessage::BattleId is default ");
                 return;
             }
+
+            Log.Info(message.ToJson());
             m_netHandler.SendMessageToClient(message, m_players);
         }
         /// <summary>
@@ -256,7 +243,24 @@ namespace GameServer.Battle
         }
         #endregion
 
+        public override void Dispose()
+        {
+            Log.Info("Dispose Battle Id = " + Id);
 
+            m_players.Clear();
+            m_playerToBody.Clear();
+            m_bodyEntityDic.Clear();
+
+            m_level.Dispose();
+
+            m_players = null;
+            m_playerToBody = null;
+            m_bodyEntityDic = null;
+            m_level = null;
+            m_netHandler = null;
+
+            base.Dispose();
+        }
         /// <summary>
         /// 玩家与Body的映射关系
         /// </summary>

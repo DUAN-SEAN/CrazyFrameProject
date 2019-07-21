@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CrazyEngine;
 namespace SpaceShip.Factory
 {
+    [Serializable]
     public class MeteoriteInBody : EnviromentInBody
     {
         public MeteoriteInBody()

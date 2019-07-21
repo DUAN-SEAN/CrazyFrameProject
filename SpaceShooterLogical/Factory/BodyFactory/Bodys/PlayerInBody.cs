@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CrazyEngine;
+using SpaceShip.Base;
 namespace SpaceShip.Factory
 {
-    using SpaceShip.Base;
-    using System;
+    [Serializable]
     public class PlayerInBody : ShipBase
     {
         LightInBody light;
