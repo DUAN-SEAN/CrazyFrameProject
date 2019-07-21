@@ -9,6 +9,7 @@ namespace SpaceShip.Factory
     /// <summary>
     /// 导弹在物理世界的描述
     /// </summary>
+    [Serializable]
     public class MissileInBody : PointEntity, ITickable, IAliveable
     {
         public ISBSeanDuan iSBSean;
@@ -89,6 +90,7 @@ namespace SpaceShip.Factory
     /// <summary>
     /// 激光导弹在物理世界的描述
     /// </summary>
+    [Serializable]
     public class BoltInBody : PointEntity, ITickable, IAliveable
     {
         public ISBSeanDuan iSBSean;
@@ -170,6 +172,7 @@ namespace SpaceShip.Factory
     /// <summary>
     /// 地雷在物理世界的描述
     /// </summary>
+    [Serializable]
     public class MineInBody : CircleEntity, ITickable, IAliveable
     {
         public ISBSeanDuan iSBSean;
@@ -249,6 +252,7 @@ namespace SpaceShip.Factory
     /// 射线激光在物理世界的描述
     /// TODO射线激光在物理世界的描述未完成
     /// </summary>
+    [Serializable]
     public class LightInBody : LineEntity, ITickable, IAliveable, IWeanpon
     {
 

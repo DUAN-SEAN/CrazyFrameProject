@@ -3,6 +3,7 @@ using CrazyEngine;
 
 namespace CrazyEngine
 {
+    [Serializable]
     public class RectangleEntity : Body
     {
         public RectangleEntity()
