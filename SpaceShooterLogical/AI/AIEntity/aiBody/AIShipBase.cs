@@ -168,9 +168,8 @@ abstract public class AIShipBase : ShipBase, ITickable
     public override void Dispose()
     {
         base.Dispose();
-       
-            iSBSean.GetAILog().LogoutAIShip(this);
-           //LogUI.Log("logout ai");
+        iSBSean.GetAILog().LogoutAIShip(this);
+        //LogUI.Log("logout ai");
         
 
     }

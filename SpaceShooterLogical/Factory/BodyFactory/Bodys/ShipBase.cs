@@ -40,6 +40,7 @@ namespace SpaceShip.Factory
             iSBSean = seanD;
 
         }
+
         public override void OnCollisionStay(Collider collider)
         {
             if (collider.body.Label.HasFlag(Label) || Label.HasFlag(collider.body.Label)) return;
@@ -54,7 +55,7 @@ namespace SpaceShip.Factory
 
         public override void Dispose()
         {
-
+            
             HP = 0;
             iSBSean.GetBodyMessages().Enqueue(new BodyDestoriedMessage(this));
 
