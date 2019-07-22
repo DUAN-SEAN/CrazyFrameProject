@@ -231,12 +231,12 @@ namespace SpaceShip.AI
             base.Dispose();
 
         }
-
+        [NonSerialized]
         private long _oldTime;
         public int initableShip;
         public int initShips;
+        
         public int maxSmallShip;
-
         private long oldtime;
 
         private long oldtimenew;

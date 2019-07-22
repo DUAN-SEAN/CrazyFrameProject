@@ -7,6 +7,7 @@ namespace CrazyEngine
     [Serializable]
     public class Body : ObjectBase
     {
+        public bool StayIn;
         protected bool _static = false;
         protected Vector2 _position = new Vector2();
         protected Vector2 _velocity = new Vector2();
@@ -14,6 +15,7 @@ namespace CrazyEngine
         protected Vector2 _forward = new Vector2(1,0);
         protected Collider _collider = new Collider();
         protected float _maxVelocity = 100;
+        [NonSerialized]
         protected List<Vector2> _forceList = new List<Vector2>();
         protected Body m_ownerbody;
         protected string userid;
@@ -189,7 +191,7 @@ namespace CrazyEngine
             _forceList.Clear();
         }
 
-        public bool StayIn;
+        
 
 
         /// <summary>
