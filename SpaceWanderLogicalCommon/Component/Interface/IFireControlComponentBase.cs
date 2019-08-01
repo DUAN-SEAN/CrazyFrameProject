@@ -13,4 +13,10 @@ namespace SpaceWanderLogicalCommon
 
 
     }
+    public interface IInternalFireControlComponentBase: IFireControlComponentBase
+    {
+
+
+
+    }
 }

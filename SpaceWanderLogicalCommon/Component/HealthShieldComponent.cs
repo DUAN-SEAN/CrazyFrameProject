@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpaceWanderLogicalCommon
 {
-    public  class HealthShieldComponent:IHealthShieldComponent
+    public  class HealthShieldComponent:IInternalHealthShieldComponent
     {
         public void GetHP()
         {

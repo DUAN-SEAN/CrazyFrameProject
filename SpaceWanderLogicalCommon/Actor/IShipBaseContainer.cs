@@ -3,18 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SpaceWanderLogicalCommon.Component.Interface;
 
 namespace SpaceWanderLogicalCommon
 {
-    public interface IShipBaseContainer:
-        IColliderComponent,
-        IHealthShieldComponent,
-        IEventComponent,
-        IMoveComponent,
-        IPhycisXComponent
+    public interface IShipBaseContainer
     {
+        IinternalColliderComponent GetColliderComponent();
+        IHealthShieldComponent GetHealthShieldComponent();
+        IInternalEventComponent GetEventComponent();
+        IInternalMoveComponent GetMoveComponent();
+        IInternalPhycisXComponent GetPhycisXComponent();
 
+        IInternalFireControlComponentBase GetInternalFireControlComponentBase();
 
     }
+    public interface IShipBase:
+        IColliderComponent,
+        IEventComponent,
+        IHealthShieldComponent,
+        IMoveComponent,
+        IPhycisXComponent,
+        IFireControlComponentBase
+    {
+    
+
+    }
+
+
 }

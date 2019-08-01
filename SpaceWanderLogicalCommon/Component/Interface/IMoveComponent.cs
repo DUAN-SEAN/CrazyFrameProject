@@ -13,5 +13,8 @@ namespace SpaceWanderLogicalCommon
         /// </summary>
         void Move();
     }
-
+    public interface IInternalMoveComponent:IMoveComponent
+    {
+       
+    }
 }

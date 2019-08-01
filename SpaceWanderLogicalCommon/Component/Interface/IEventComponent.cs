@@ -4,9 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpaceWanderLogicalCommon.Component.Interface
+namespace SpaceWanderLogicalCommon
 {
     public interface IEventComponent
     {
+
+    }
+    public interface IInternalEventComponent: IEventComponent
+    {
+
     }
 }

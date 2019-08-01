@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpaceWanderLogicalCommon
 {
-    public interface IPhycisXComponent
-    {
-    }
-
-    public interface IInternalPhycisXComponent:IPhycisXComponent
+    public class ColliderComponent:IinternalColliderComponent
     {
     }
 }

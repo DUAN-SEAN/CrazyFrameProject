@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpaceWanderLogicalCommon
 {
-    public class MoveComponent:IMoveComponent
+    public class MoveComponent:IInternalMoveComponent
     {
         public void Move()
         {

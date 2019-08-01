@@ -10,4 +10,8 @@ namespace SpaceWanderLogicalCommon
     {
         void GetHP();
     }
+    public interface IInternalHealthShieldComponent:IHealthShieldComponent
+    {
+        
+    }
 }
