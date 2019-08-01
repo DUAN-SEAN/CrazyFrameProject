@@ -8,9 +8,11 @@ namespace SpaceWanderLogicalCommon
 {
     public interface IPhycisXComponent
     {
+
     }
 
     public interface IInternalPhycisXComponent:IPhycisXComponent
     {
+
     }
 }

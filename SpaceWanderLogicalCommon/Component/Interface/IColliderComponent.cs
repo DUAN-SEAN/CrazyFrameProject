@@ -11,6 +11,7 @@ namespace SpaceWanderLogicalCommon
     /// </summary>
     public interface IColliderComponent
     {
+
     }
 
     public interface IinternalColliderComponent:IColliderComponent

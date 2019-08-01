@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace SpaceWanderLogicalCommon
 {
+
+
     public class ShipBaseActor:IShipBaseContainer,IShipBase
     {
+
+
 
         public void Move()
         {
