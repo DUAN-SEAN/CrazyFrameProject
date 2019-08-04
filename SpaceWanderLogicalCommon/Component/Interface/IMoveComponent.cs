@@ -12,6 +12,8 @@ namespace SpaceWanderLogicalCommon
         /// 移动
         /// </summary>
         void Move();
+
+        void Reset();
     }
     public interface IInternalMoveComponent:IMoveComponent
     {

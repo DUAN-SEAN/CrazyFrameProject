@@ -1,4 +1,4 @@
-using System;
+锘縰sing System;
 using System.IO;
 using BlackJack.LibClient.Protocol;
 using System.Diagnostics;
@@ -45,11 +45,11 @@ namespace BlackJack.LibClient
             //Debug.WriteLine(String.Format("DecodeMessage Before rCache.Length={0} pakBodyLength={1} ", rCache.Length, pakBodyLength));
 
             // Not enough data for body
-            // 注意这里需要考虑后面一个包头的长度
+            // 注锟斤拷锟斤拷锟斤拷锟斤拷要锟斤拷锟角猴拷锟斤拷一锟斤拷锟斤拷头锟侥筹拷锟斤拷
             if (rCache.Length < pakBodyLength + sizeof(ushort))
             {
                 // Move read ptr to back
-                // 此处只处理了UInt16长度的数据，所以回滚需要一致，不能使用headLength
+                // 锟剿达拷只锟斤拷锟斤拷锟斤拷UInt16锟斤拷锟饺碉拷锟斤拷锟捷ｏ拷锟斤拷锟皆回癸拷锟斤拷要一锟铰ｏ拷锟斤拷锟斤拷使锟斤拷headLength
                 rCache.ReadPtr(-(sizeof(ushort)));
                 //Debug.WriteLine(String.Format("DecodeMessage Not enough data for body rCache.Length={0} < pakBodyLength={1}", rCache.Length, pakBodyLength));
                 return null;
@@ -72,7 +72,7 @@ namespace BlackJack.LibClient
             {
                 using (MemoryStream readStream = rCache.GetStream(pakBodyLength))
                 {
-                    //将消息序列化，根据所提供的序列化器进行序列化和反序列化
+                    //锟斤拷锟斤拷息锟斤拷锟叫伙拷锟斤拷锟斤拷锟斤拷锟斤拷锟结供锟斤拷锟斤拷锟叫伙拷锟斤拷锟斤拷锟斤拷锟斤拷锟叫伙拷锟酵凤拷锟斤拷锟叫伙拷
                     //Debug.WriteLine(String.Format("DecodeMessage readStream={0}", printByteArray(readStream.ToArray())));
                     //RuntimeTypeModel.Default.Deserialize(readStream, ccMsg, pakType);
                 }
@@ -89,7 +89,7 @@ namespace BlackJack.LibClient
         }
 
         ///// <summary>
-        ///// 打印byte数组
+        ///// 锟斤拷印byte锟斤拷锟斤拷
         ///// </summary>
         ///// <param name="array"></param>
         ///// <returns></returns>

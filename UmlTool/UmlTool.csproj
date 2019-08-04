@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C7CAF6CC-DFEB-489D-BE25-770D046B5AD9}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SpaceWanderLogicalCommon</RootNamespace>
-    <AssemblyName>SpaceWanderLogicalCommon</AssemblyName>
+    <ProjectGuid>{E191B31B-E51B-494F-9D99-D2DBD764BEED}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>UmlTool</RootNamespace>
+    <AssemblyName>UmlTool</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -41,24 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actor\IShipBaseContainer.cs" />
-    <Compile Include="Actor\ShipBaseActor.cs" />
-    <Compile Include="Component\ColliderComponent.cs" />
-    <Compile Include="Component\EventComponent.cs" />
-    <Compile Include="Component\FireControlComponent.cs" />
-    <Compile Include="Component\HealthShieldComponent.cs" />
-    <Compile Include="Component\Interface\IColliderComponent.cs" />
-    <Compile Include="Component\Interface\IEventComponent.cs" />
-    <Compile Include="Component\Interface\IFireControlComponentBase.cs" />
-    <Compile Include="Component\Interface\IHealthShieldComponent.cs" />
-    <Compile Include="Component\Interface\IMoveComponent.cs" />
-    <Compile Include="Component\Interface\IPhycisXComponent.cs" />
-    <Compile Include="Component\Interface\IViewComponent.cs" />
-    <Compile Include="Component\MoveComponent.cs" />
-    <Compile Include="Component\PhycisXComponent.cs" />
-    <Compile Include="Component\ViewComponent.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

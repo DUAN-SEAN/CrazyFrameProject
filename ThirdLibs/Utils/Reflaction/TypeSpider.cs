@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
@@ -14,7 +14,7 @@ namespace BlackJack.Utils
 		/// <param name="predicater">Predicater.</param>
 		public static IEnumerable<Type> FindTypesInSolution(Func<Type, bool> predicater, String nameInclude="")
 		{
-			// ÏÖÔÚ»³ÒÉAssembly::GetExportedTypes»á·µ»ØÁ½¸öÏàÍ¬µÄType£¬»ùÓÚÕâÒ»µã¿¼ÂÇ£¬Ê¹ÓÃSet¹ýÂË·µ»ØType. -- ÖÜÁˆ
+			// ï¿½ï¿½ï¿½Ú»ï¿½ï¿½ï¿½Assembly::GetExportedTypesï¿½á·µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½Typeï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ã¿¼ï¿½Ç£ï¿½Ê¹ï¿½ï¿½Setï¿½ï¿½ï¿½Ë·ï¿½ï¿½ï¿½Type. -- ï¿½ï¿½ï¿½ï¿½
 			ISet<string> typesReturned = new HashSet<string>();
 
 			ISet<string> assembliesVisited = new HashSet<string>();
@@ -34,7 +34,7 @@ namespace BlackJack.Utils
 				// Enqueue referenced assemblies.
 				foreach (AssemblyName an in assemblyVisiting.GetReferencedAssemblies())
 				{
-                    //ÅÅ³ýµôÃû×Ö²»·ûºÏÒªÇóµÄAssemblyName
+                    //ï¿½Å³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö²ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½AssemblyName
                     if (!String.IsNullOrEmpty(nameInclude) && nameInclude.IndexOf(an.Name, 0) == -1) continue;
 					
 					//Debug.WriteLine("Visiting={0}", a.FullName);
