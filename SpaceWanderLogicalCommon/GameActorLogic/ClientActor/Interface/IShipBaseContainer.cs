@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace GameActorLogic
 {
@@ -11,7 +7,8 @@ namespace GameActorLogic
     /// </summary>
     public interface IShipBaseContainer : IBaseContainer,
         IFireControlBase,
-        IHealthShieldBase
+        IHealthShieldBase,
+        IShipEventBase
     {
 
     }
@@ -24,8 +21,24 @@ namespace GameActorLogic
         IBaseComponentContainer
         ,IShipBaseContainer
     {
+        /// <summary>
+        /// 返回火控组件
+        /// </summary>
         IFireControlinternalBase GetFireControlinternalBase(); 
 
+        /// <summary>
+        /// 获取血量护盾组件
+        /// </summary>
+        /// <returns></returns>
         IHealthShieldinternalBase GetHealthShieldinternalBase();
+
+        /// <summary>
+        /// 获取船事件组件
+        /// </summary>
+        /// <returns></returns>
+        IShipEventinternalBase GetShipEventinternalBase();
+
+
+
     }
 }

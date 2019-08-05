@@ -17,7 +17,10 @@ namespace GameActorLogic
         /// </summary>
         long GetLevelID();
 
-        
+        /// <summary>
+        /// 获得战斗ID
+        /// </summary>
+        ulong GetBattleID();
 
         /// <summary>
         /// 开启关卡
@@ -40,5 +43,8 @@ namespace GameActorLogic
         /// 获取事件组件
         /// </summary>
         IEventComponentBase GetEventComponentBase();
+
+
+        
     }
 }

@@ -50,7 +50,7 @@
     <Compile Include="GameActorLogic\ClientActor\Interface\ShipContainer\IPlayerShipBaseContainer.cs" />
     <Compile Include="GameActorLogic\Component\Interface\IAIComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\IColliderComponentBase.cs" />
-    <Compile Include="GameActorLogic\Component\Interface\IFireControlComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\Interface\Ship\IFireControlComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\IHealthShieldComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\IInvariantAttributeComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\IMoveComponentBase.cs" />
@@ -58,6 +58,9 @@
     <Compile Include="GameActorLogic\Component\Interface\IViewComponentBase.cs" />
     <Compile Include="Event\IEventMessage.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Server\IEventComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\Interface\Ship\IShipEventComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\Interface\Weanpon\IWeaponAttributeComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\Interface\Weanpon\IWeaponEventComponentBase.cs" />
     <Compile Include="GameActorLogic\LevelActor\ILevelActorBaseContainer.cs" />
     <Compile Include="Interface\IViewComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,6 +69,7 @@
     <Folder Include="Component\Interface\" />
     <Folder Include="GameActorLogic\ClientActor\Interface\WeaponContainer\" />
     <Folder Include="GameActorLogic\ClientActor\ShipActor\" />
+    <Folder Include="GameActorLogic\Component\AIComponent\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,5 +1,7 @@
 ﻿
 
+
+
 namespace GameActorLogic
 {
     /// <summary>
@@ -7,7 +9,9 @@ namespace GameActorLogic
     /// </summary>
     public interface IWeaponBaseContainer : 
         IBaseContainer,
-        IAIBase
+        IAIBase,
+        IWeaponEventBase,
+        IWeaponAttributeBase
     {
 
     }
@@ -24,6 +28,16 @@ namespace GameActorLogic
         /// 获得ai组件对内接口
         /// </summary>
         IAIinternalBase GetAIinternalBase();
+
+        /// <summary>
+        /// 获取销毁组件
+        /// </summary>
+        IWeaponEventinternalBase GetWeaponEventinternalBase();
+
+        /// <summary>
+        /// 获取武器属性
+        /// </summary>
+        IWeanponAttributeinternalBase GetWeanponAttributeinternalBase();
     }
 
 
