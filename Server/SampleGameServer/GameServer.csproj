@@ -124,6 +124,10 @@
       <Project>{0ed02981-b64c-49fa-a7dc-3f0fb6800d39}</Project>
       <Name>SpaceShooterLogical</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\SpaceWanderLogicalCommon\SpaceWanderLogicalCommon.csproj">
+      <Project>{c7caf6cc-dfeb-489d-be25-770d046b5ad9}</Project>
+      <Name>SpaceWanderLogicalCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServerBase\ServerBase.csproj">
       <Project>{c62bc39f-6932-45f2-a626-4faf7f836e6f}</Project>
       <Name>ServerBase</Name>
