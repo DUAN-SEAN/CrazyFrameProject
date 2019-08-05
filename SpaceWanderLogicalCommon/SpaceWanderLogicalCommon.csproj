@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="Event\BattleEventMessage.cs" />
     <Compile Include="Event\EventMessageConstDefine.cs" />
-    <Compile Include="GameActorLogic\ClientActor\Interface\IBaseContainer.cs" />
+    <Compile Include="GameActorLogic\ClientActor\Interface\IClientBaseContainer.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\IShipBaseContainer.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\IWeaponBaseContainer.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\ShipContainer\IAIShipBaseContainer.cs" />
@@ -58,6 +58,7 @@
     <Compile Include="GameActorLogic\Component\Interface\IViewComponentBase.cs" />
     <Compile Include="Event\IEventMessage.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Server\IEventComponentBase.cs" />
+    <Compile Include="GameActorLogic\LevelActor\ILevelActorBaseContainer.cs" />
     <Compile Include="Interface\IViewComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
