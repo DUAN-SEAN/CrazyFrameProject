@@ -75,15 +75,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="C:\Users\dr186\Desktop\GameServerDBOperationDefine.cs">
-      <Link>AsyncActions\DBContextAsyncAction\GameServerDBOperationDefine.cs</Link>
-    </Compile>
+    <Compile Include="AsyncActions\DBContextAsyncAction\GameServerContextAsyncAction.cs" />
+    <Compile Include="AsyncActions\DBContextAsyncAction\GameServerDBOperationDefine.cs" />
     <Compile Include="AsyncActions\DBDataDefine\GameServerDBarrierRecord.cs" />
     <Compile Include="AsyncActions\DBDataDefine\GameServerDBPlayer.cs" />
     <Compile Include="Configure\GameServerConfig.cs" />
-    <Compile Include="C:\Users\dr186\Desktop\GameServerContextAsyncAction.cs">
-      <Link>AsyncActions\DBContextAsyncAction\GameServerContextAsyncAction.cs</Link>
-    </Compile>
     <Compile Include="LocalMessage\BattleSystemLocalMessages.cs" />
     <Compile Include="LocalMessage\PlayerContextLocalMessages.cs" />
     <Compile Include="PlayerContext\PlayerContextStateMachine.cs" />
