@@ -42,9 +42,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EventMessageConstDefine.cs" />
+    <Compile Include="GameActorLogic\ClientActor\Interface\IBaseContainer.cs" />
+    <Compile Include="GameActorLogic\ClientActor\Interface\IShipBaseContainer.cs" />
+    <Compile Include="GameActorLogic\ClientActor\Interface\IWeaponBaseContainer.cs" />
+    <Compile Include="GameActorLogic\ClientActor\Interface\ShipContainer\IAIShipBaseContainer.cs" />
+    <Compile Include="GameActorLogic\ClientActor\Interface\ShipContainer\IPlayerShipBaseContainer.cs" />
+    <Compile Include="GameActorLogic\Component\Interface\IAIComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\Interface\IColliderComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\Interface\IFireControlComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\Interface\IHealthShieldComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\Interface\IInvariantAttributeComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\Interface\IMoveComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\Interface\IPhysicalComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\Interface\IViewComponentBase.cs" />
     <Compile Include="IEventMessage.cs" />
+    <Compile Include="Interface\IViewComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Component\Interface\" />
+    <Folder Include="GameActorLogic\ClientActor\ShipActor\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
