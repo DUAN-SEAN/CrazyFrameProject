@@ -18,6 +18,17 @@ namespace GameActorLogic
     /// </summary>
     public interface IColliderinternal: IColliderBase
     {
+        /// <summary>
+        /// 碰撞机被进入调用一次
+        /// </summary>
+        event Action OnColliderEnter;
+        /// <summary>
+        /// 碰撞机中有碰撞持续调用
+        /// </summary>
         event Action OnColliderStay;
+        /// <summary>
+        /// 碰撞机退出后调用一次
+        /// </summary>
+        event Action OnColliderExit;
     }
 }

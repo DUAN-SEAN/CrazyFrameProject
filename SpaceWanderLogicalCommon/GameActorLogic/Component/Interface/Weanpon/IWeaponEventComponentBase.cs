@@ -11,10 +11,19 @@ namespace GameActorLogic
     /// </summary>
     public interface IWeaponEventBase
     {
+        /// <summary>
+        /// 当武器被实例化后 被组件外部开启
+        /// </summary>
         void Start();
 
+        /// <summary>
+        /// 武器被组件外部关闭或结束
+        /// </summary>
         void End();
 
+        /// <summary>
+        /// 武器被组件外部销毁
+        /// </summary>
         void Destroy();
     }
 
@@ -24,17 +33,17 @@ namespace GameActorLogic
     public interface IWeaponEventinternalBase : IWeaponEventBase
     {
         /// <summary>
-        /// 当武器被实例化后 被外部开启
+        /// 当武器被实例化后 被组件外部开启
         /// </summary>
         event Action OnStart;
 
         /// <summary>
-        /// 武器被外部关闭或结束
+        /// 武器被组件外部关闭或结束
         /// </summary>
         event Action OnEnd;
 
         /// <summary>
-        /// 武器被外部销毁
+        /// 武器被组件外部销毁
         /// </summary>
         event Action OnDestroy;
     }
