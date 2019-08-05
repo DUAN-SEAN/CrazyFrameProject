@@ -20,7 +20,7 @@ namespace GameActorLogic
     /// 对内接口
     /// 目前没有需求
     /// </summary>
-    public interface IFireControlinternalBase : IFireControlBase
+    public interface IFireControlInternalBase : IFireControlBase
     {
 
 

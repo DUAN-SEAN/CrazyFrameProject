@@ -54,7 +54,6 @@
     <Compile Include="GameActorLogic\Component\Interface\IAIComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\IColliderComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\ICommandComponentBase.cs" />
-    <Compile Include="GameActorLogic\Component\Interface\IFireControlComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Ship\IFireControlComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\IHealthShieldComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\IInvariantAttributeComponentBase.cs" />
@@ -71,7 +70,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Component\Interface\" />
     <Folder Include="GameActorLogic\ClientActor\Interface\WeaponContainer\" />
     <Folder Include="GameActorLogic\ClientActor\ShipActor\" />
     <Folder Include="GameActorLogic\Component\AIComponent\" />

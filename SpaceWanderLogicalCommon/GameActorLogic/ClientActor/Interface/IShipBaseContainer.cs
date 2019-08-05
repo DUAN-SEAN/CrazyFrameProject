@@ -24,7 +24,7 @@ namespace GameActorLogic
         /// <summary>
         /// 返回火控组件
         /// </summary>
-        IFireControlinternalBase GetFireControlinternalBase(); 
+        IFireControlInternalBase GetFireControlinternalBase(); 
 
         /// <summary>
         /// 获取血量护盾组件
