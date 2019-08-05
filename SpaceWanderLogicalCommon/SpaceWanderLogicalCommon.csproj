@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BattleEventMessage.cs" />
     <Compile Include="EventMessageConstDefine.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\IBaseContainer.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\IShipBaseContainer.cs" />

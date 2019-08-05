@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace SpaceWanderLogicalCommon
 {
-    class EventMessageConstDefine
+    public class EventMessageConstDefine
     {
+        public const Int32 BattleEventNone = 1001;
     }
 }
