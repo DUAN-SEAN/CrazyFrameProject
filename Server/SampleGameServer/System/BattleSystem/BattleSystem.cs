@@ -31,6 +31,10 @@ namespace GameServer.Battle
                 case GameServerConstDefine.BattleSystemCreateBattleBarrier:
                     OnCreateBattleBarrier((CreateBattleBarrierMessage)msg);
                     break;
+                case GameServerConstDefine.BattleSystemCommandUpLoad:
+
+                    break;
+                    
 
                 default: return base.OnMessage(msg);
             }

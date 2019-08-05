@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using Crazy.Common;
+using GameActorLogic.Command;
 using GameServer.Battle;
 
 namespace GameServer.System.NetHandlerSystem
@@ -27,6 +30,28 @@ namespace GameServer.System.NetHandlerSystem
         }
     }
 
+    /// <summary>
+    /// 接受指令消息handler
+    /// </summary>
+    [MessageHandler]
+    public class C2S_CommandBattleMessageHandler:AMHandler<C2S_CommandBattleMessage>
+    {
+        private static BinaryFormatter bf = new BinaryFormatter();
+        protected override void Run(ISession playerContext, C2S_CommandBattleMessage message)
+        {
+            GameServerPlayerContext ctx = playerContext as GameServerPlayerContext;
+
+            CommandBattleLocalMessage localMessage = new CommandBattleLocalMessage();
 
 
+            using (MemoryStream ms = new MemoryStream(message.Command.ToByteArray()))
+            {
+                localMessage.ICommand = bf.Deserialize(ms) as ICommand;//将其反序列化
+
+
+                GameServer.Instance.PostMessageToSystem<BattleSystem>(localMessage);
+
+            }
+        }
+    }
 }
