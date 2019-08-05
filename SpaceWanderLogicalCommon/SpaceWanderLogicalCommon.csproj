@@ -54,8 +54,10 @@
     <Compile Include="Component\Interface\IHealthShieldComponent.cs" />
     <Compile Include="Component\Interface\IMoveComponent.cs" />
     <Compile Include="Component\Interface\IPhycisXComponent.cs" />
+    <Compile Include="Component\Interface\IViewComponent.cs" />
     <Compile Include="Component\MoveComponent.cs" />
     <Compile Include="Component\PhycisXComponent.cs" />
+    <Compile Include="Component\ViewComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
