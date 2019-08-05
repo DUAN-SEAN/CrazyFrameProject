@@ -9,7 +9,5 @@ namespace SpaceWanderLogicalCommon
     public interface IEventMessage
     {
         Int32 MessageId { get; }
-
-
     }
 }
