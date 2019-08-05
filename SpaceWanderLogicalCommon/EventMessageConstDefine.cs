@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpaceWanderLogicalCommon
 {
-    public class EventComponent:IInternalEventComponent
+    class EventMessageConstDefine
     {
     }
 }

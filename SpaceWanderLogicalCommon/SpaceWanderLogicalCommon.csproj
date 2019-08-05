@@ -41,22 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actor\IShipBaseContainer.cs" />
-    <Compile Include="Actor\ShipBaseActor.cs" />
-    <Compile Include="Component\ColliderComponent.cs" />
-    <Compile Include="Component\EventComponent.cs" />
-    <Compile Include="Component\FireControlComponent.cs" />
-    <Compile Include="Component\HealthShieldComponent.cs" />
-    <Compile Include="Component\Interface\IColliderComponent.cs" />
-    <Compile Include="Component\Interface\IEventComponent.cs" />
-    <Compile Include="Component\Interface\IFireControlComponentBase.cs" />
-    <Compile Include="Component\Interface\IHealthShieldComponent.cs" />
-    <Compile Include="Component\Interface\IMoveComponent.cs" />
-    <Compile Include="Component\Interface\IPhycisXComponent.cs" />
-    <Compile Include="Component\Interface\IViewComponent.cs" />
-    <Compile Include="Component\MoveComponent.cs" />
-    <Compile Include="Component\PhycisXComponent.cs" />
-    <Compile Include="Component\ViewComponent.cs" />
+    <Compile Include="EventMessageConstDefine.cs" />
+    <Compile Include="IEventMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

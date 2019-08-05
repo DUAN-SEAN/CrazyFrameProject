@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace SpaceWanderLogicalCommon
 {
-    public class PhycisXComponent:IInternalPhycisXComponent
+    public interface IEventMessage
     {
+
     }
 }
