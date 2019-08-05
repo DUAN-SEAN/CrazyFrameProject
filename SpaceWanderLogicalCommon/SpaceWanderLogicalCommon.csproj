@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Component\Interface\" />
+    <Folder Include="GameActorLogic\ClientActor\Interface\WeaponContainer\" />
     <Folder Include="GameActorLogic\ClientActor\ShipActor\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
