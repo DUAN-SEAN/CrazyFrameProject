@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpaceWanderLogicalCommon
+namespace GameActorLogic.Command
 {
-    public interface IEventMessage
+    public interface ICommand
     {
-        Int32 MessageId { get; }
+        Int32 CommandType { get; }
+
     }
 }

@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command\Commands.cs" />
+    <Compile Include="Command\CommandTypeConstDefine.cs" />
+    <Compile Include="Command\ICommand.cs" />
     <Compile Include="Event\BattleEventMessage.cs" />
     <Compile Include="Event\EventMessageConstDefine.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\IClientBaseContainer.cs" />
@@ -50,6 +53,8 @@
     <Compile Include="GameActorLogic\ClientActor\Interface\ShipContainer\IPlayerShipBaseContainer.cs" />
     <Compile Include="GameActorLogic\Component\Interface\IAIComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\IColliderComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\Interface\ICommandComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\Interface\IFireControlComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Ship\IFireControlComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\IHealthShieldComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\IInvariantAttributeComponentBase.cs" />
