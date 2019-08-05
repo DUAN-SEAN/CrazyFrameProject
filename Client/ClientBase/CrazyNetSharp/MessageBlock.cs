@@ -1,4 +1,4 @@
-using System;
+锘縰sing System;
 using System.IO;
 using System.Diagnostics;
 
@@ -55,7 +55,7 @@ namespace BlackJack.LibClient
                 return 0;
 
             /// Copy to cache
-            /// 将datablock写入当前流中
+            /// 锟斤拷datablock写锟诫当前锟斤拷锟斤拷
             Array.Copy(dataBlock, 0, _cache, _wrPtr, dataLen);
             
             _wrPtr += dataLen;

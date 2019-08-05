@@ -6,17 +6,8 @@ using System.Threading.Tasks;
 
 namespace SpaceWanderLogicalCommon
 {
-
-    public interface IFireControlComponentBase
+    public interface IEventMessage
     {
-
-
-
-    }
-    public interface IInternalFireControlComponentBase: IFireControlComponentBase
-    {
-
-
 
     }
 }

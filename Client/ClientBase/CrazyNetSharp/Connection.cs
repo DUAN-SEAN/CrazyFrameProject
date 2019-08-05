@@ -1,4 +1,4 @@
-using BlackJack.LibClient.Protocol;
+ï»¿using BlackJack.LibClient.Protocol;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,19 +24,19 @@ namespace BlackJack.LibClient
         /// </summary>
         None = 0,
         /// <summary>
-        /// Á¬½ÓÖÐ
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         Connecting = 1,
         /// <summary>
-        /// ÒÑÁ¬½Ó
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         Established = 2,
         /// <summary>
-        /// ¶Ï¿ªÖÐ
+        /// ï¿½Ï¿ï¿½ï¿½ï¿½
         /// </summary>
         Disconnecting = 3,
         /// <summary>
-        /// ÒÑ¹Ø±Õ
+        /// ï¿½Ñ¹Ø±ï¿½
         /// </summary>
         Closed = 4,
     }
@@ -75,7 +75,7 @@ namespace BlackJack.LibClient
         private static extern string getIPv6(string mHost, string mPort);
 #endif
         /// <summary>
-        /// »ñÈ¡·þÎñÆ÷ip¶ÔÓ¦µÄipv6µÄµØÖ·±íÊ¾×Ö·û´®£¬Ä¬ÈÏÎª"192.168.1.1&&ipv4"
+        /// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ipï¿½ï¿½Ó¦ï¿½ï¿½ipv6ï¿½Äµï¿½Ö·ï¿½ï¿½Ê¾ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Îª"192.168.1.1&&ipv4"
         /// </summary>
         /// <param name="mHost"></param>
         /// <param name="mPort"></param>
@@ -90,7 +90,7 @@ namespace BlackJack.LibClient
         }
 
         /// <summary>
-        /// ½«·þÎñÆ÷ip×ª»»Îªipv6ÍøÂçÖÐµÄÐÂµØÖ·
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ip×ªï¿½ï¿½Îªipv6ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½Âµï¿½Ö·
         /// </summary>
         /// <param name="serverIp"></param>
         /// <param name="serverPorts"></param>
@@ -140,7 +140,7 @@ namespace BlackJack.LibClient
         /// <param name="remotePort">The port of remote server to connect.</param>
         public Boolean Initialize(String remoteAddress, Int32 remotePort)
         {
-            // ¿Í»§¶Ë´¦ÀíIPV6µÄÊ±ºòÂß¼­£¬ÐèÒªÓÃµ½
+            // ï¿½Í»ï¿½ï¿½Ë´ï¿½ï¿½ï¿½IPV6ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½Ãµï¿½
 #if UNITY_5_3_OR_NEWER
             if (Application.platform == RuntimePlatform.IPhonePlayer)
             {
@@ -219,7 +219,7 @@ namespace BlackJack.LibClient
         //}
 
         /// <summary>
-        /// ¶Ï¿ªsoket
+        /// ï¿½Ï¿ï¿½soket
         /// </summary>
         private void SocketDisconnect()
         {
@@ -229,7 +229,7 @@ namespace BlackJack.LibClient
                 {
                     lock (_lockSocket)
                     {
-                        // Æô¶¯¶Ï¿ªÁ¬½ÓµÄtimer
+                        // ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Óµï¿½timer
                         if (m_disconnectTimer == null)
                         {
                             m_disconnectTimer = new Timer((c) =>
@@ -237,24 +237,24 @@ namespace BlackJack.LibClient
                                 if (ConnSocket.Connected) return;
                                 if (State != ConnectionState.Disconnecting) return;
 
-                                // ¼ÇÂ¼ÈÕÖ¾
+                                // ï¿½ï¿½Â¼ï¿½ï¿½Ö¾
                                 Debug.WriteLine(string.Format("SocketDisconnect disconnected timer start..."));
                                 FireEventOnLogPrint("Disconnect.Timer" + "state=" + State);
 
-                                // ÉèÖÃ×´Ì¬
+                                // ï¿½ï¿½ï¿½ï¿½×´Ì¬
                                 State = ConnectionState.Closed;
 
-                                // ·¢ËÍÁ¬½Ó¶Ï¿ªµÄÏûÏ¢
+                                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¶Ï¿ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
                                 var vMsg = new CCMSGConnectionBreak();
                                 RecvQueue.Enqueue(new KeyValuePair<int, object>(vMsg.MessageId, vMsg));
 
-                                // ÇåÀítimer
+                                // ï¿½ï¿½ï¿½ï¿½timer
                                 if (m_disconnectTimer != null)
                                 {
                                     m_disconnectTimer.Dispose();
                                     m_disconnectTimer = null;
                                 }
-                            }, null, 500, 1000); // 500ºÁÃëºóÆô¶¯£¬ 1000ºÁÃë¼ì²éÒ»´Î
+                            }, null, 500, 1000); // 500ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1000ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
                         }
 
                         ConnSocket.Shutdown(SocketShutdown.Both);
@@ -271,7 +271,7 @@ namespace BlackJack.LibClient
         }
 
         /// <summary>
-        /// ÇåÀí¹Ø±Õsoket
+        /// ï¿½ï¿½ï¿½ï¿½Ø±ï¿½soket
         /// Close all work and release all resource.
         /// </summary>
         private void SocketClose()
@@ -286,7 +286,7 @@ namespace BlackJack.LibClient
                     }
                 }
 
-                // É¾³ýÁ½¸öIDisposeÊý¾Ý£¬±ÜÃâconnectÊÍ·Å²»ÁËµÄÎÊÌâ
+                // É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½IDisposeï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½connectï¿½Í·Å²ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½
                 if (m_connEventArg != null)
                 {
                     m_connEventArg.Dispose();
@@ -299,7 +299,7 @@ namespace BlackJack.LibClient
                     m_receiveEventArg = null;
                 }
 
-                // ÇåÀítimer
+                // ï¿½ï¿½ï¿½ï¿½timer
                 if (m_disconnectTimer != null)
                 {
                     m_disconnectTimer.Dispose();
@@ -315,7 +315,7 @@ namespace BlackJack.LibClient
         }
 
         /// <summary>
-        /// Ö÷¶¯¶Ï¿ªÁ¬½Ó
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         public void Disconnect()
         {
@@ -325,7 +325,7 @@ namespace BlackJack.LibClient
         }
 
         /// <summary>
-        /// ¹Ø±ÕÁ¬½Ó£¬³õÊ¼»¯×´Ì¬
+        /// ï¿½Ø±ï¿½ï¿½ï¿½ï¿½Ó£ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½×´Ì¬
         /// </summary>
         public void Close()
         {
@@ -571,7 +571,7 @@ namespace BlackJack.LibClient
             lock (RecvQueue)
             {
                 if (State == ConnectionState.Established || 
-                    State == ConnectionState.Disconnecting)  // Õâ¸ö×´Ì¬ÊÇÎªÁËÈÃ¿Í»§¶ËÖ÷¶¯¶Ï¿ª·þÎñÆ÷µÄÊ±ºò
+                    State == ConnectionState.Disconnecting)  // ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½Îªï¿½ï¿½ï¿½Ã¿Í»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
                 {
                     State = ConnectionState.Closed;
                     var vMsg = new CCMSGConnectionBreak();
@@ -595,7 +595,7 @@ namespace BlackJack.LibClient
         }
 
         /// <summary>
-        /// »ñÈ¡¶Ë¿Ú
+        /// ï¿½ï¿½È¡ï¿½Ë¿ï¿½
         /// </summary>
         public int GetEndpoint()
         {
@@ -671,12 +671,12 @@ namespace BlackJack.LibClient
         /// </summary>
         private SocketAsyncEventArgs m_receiveEventArg;
         /// <summary>
-        /// sokect¶Ï¿ªºóµÄtimer£¬ÓÃÀ´´¦Àí¿ÉÄÜÊÕ²»µ½ºóÐøFin°üµÄÇé¿ö
+        /// sokectï¿½Ï¿ï¿½ï¿½ï¿½ï¿½timerï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Finï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         private Timer m_disconnectTimer;
 
         /// <summary>
-        /// ¶ÔÐ­Òé¶þ½øÖÆÊý¾Ý½øÐÐ·´ÐòÁÐ»¯µÄ·½·¨£¬¿Í»§¶Ë»áÊ¹ÓÃ²»Í¬ÓÚ·þÎñÆ÷µÄ·½·¨
+        /// ï¿½ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý½ï¿½ï¿½Ð·ï¿½ï¿½ï¿½ï¿½Ð»ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½Ë»ï¿½Ê¹ï¿½Ã²ï¿½Í¬ï¿½Ú·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½
         /// </summary>
         private Func<Stream, Type, int, object> m_messageDeserializeAction;
 

@@ -1,4 +1,4 @@
-using Crazy.Common;
+﻿using Crazy.Common;
 namespace Crazy.Common
 {
 	[Message(MessageOpcode.ChatOneMessage)]
