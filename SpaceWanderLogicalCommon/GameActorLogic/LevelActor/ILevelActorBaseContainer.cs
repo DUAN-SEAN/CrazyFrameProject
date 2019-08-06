@@ -27,6 +27,10 @@ namespace GameActorLogic
         /// </summary>
         void Start();
 
+        /// <summary>
+        /// 由BattleSystem驱动
+        /// </summary>
+        void Update();
         
         /// <summary>
         /// 清理关卡现场

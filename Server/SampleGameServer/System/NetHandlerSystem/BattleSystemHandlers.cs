@@ -6,7 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using Crazy.Common;
-using GameActorLogic.Command;
+using GameActorLogic;
 
 
 namespace GameServer.System.NetHandlerSystem
