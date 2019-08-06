@@ -48,7 +48,7 @@
     <Compile Include="Event\EventMessageConstDefine.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\IClientBaseContainer.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\IShipBaseContainer.cs" />
-    <Compile Include="GameActorLogic\ClientActor\Interface\IWeaponBaseContainer.cs" />
+    <Compile Include="GameActorLogic\ClientActor\ShipActor\IWeaponBaseContainer.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\ShipContainer\IAIShipBaseContainer.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\ShipContainer\IPlayerShipBaseContainer.cs" />
     <Compile Include="GameActorLogic\Component\Interface\IAIComponentBase.cs" />
@@ -66,13 +66,12 @@
     <Compile Include="GameActorLogic\Component\Interface\Weanpon\IWeaponAttributeComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Weanpon\IWeaponEventComponentBase.cs" />
     <Compile Include="GameActorLogic\LevelActor\ILevelActorBaseContainer.cs" />
-    <Compile Include="Interface\IViewComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GameActorLogic\ClientActor\Interface\WeaponContainer\" />
-    <Folder Include="GameActorLogic\ClientActor\ShipActor\" />
     <Folder Include="GameActorLogic\Component\AIComponent\" />
+    <Folder Include="Interface\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

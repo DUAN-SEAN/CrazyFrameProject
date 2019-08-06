@@ -21,20 +21,21 @@ namespace GameActorLogic
         /// </summary>
         int GetShieldBase();
 
-        /// <summary>
-        /// 失去血量
-        /// </summary>
-        void LossBlood(int loss);
-
-        /// <summary>
-        /// 得到血量
-        /// </summary>
-        void GetBlood(int get);
+       
     }
 
 
     public interface IHealthShieldinternalBase : IHealthShieldBase
     {
+        /// <summary>
+        /// 失去血量
+        /// 会先失去护盾
+        /// </summary>
+        void LossBlood(int loss);
 
+        /// <summary>
+        /// 加血 只加到血量
+        /// </summary>
+        void AddBlood(int get);
     }
 }
