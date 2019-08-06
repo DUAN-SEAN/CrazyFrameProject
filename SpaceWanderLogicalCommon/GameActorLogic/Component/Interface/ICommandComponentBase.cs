@@ -25,7 +25,7 @@ namespace GameActorLogic
 
     }
 
-    public interface ICommandInternalComponentBase:ICommand
+    public interface ICommandInternalComponentBase:ICommandComponentBase
     {
         /// <summary>
         /// 执行指令

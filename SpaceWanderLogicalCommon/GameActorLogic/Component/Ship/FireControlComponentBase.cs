@@ -12,7 +12,7 @@ namespace GameActorLogic
     /// </summary>
     public abstract class FireControlComponentBase:
         IFireControlBase,
-        IFireControlinternalBase
+        IFireControlInternalBase
     {
         protected List<IWeaponBaseContainer> weapons;
 
