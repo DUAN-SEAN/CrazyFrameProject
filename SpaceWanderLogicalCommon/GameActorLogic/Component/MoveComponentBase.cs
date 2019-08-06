@@ -7,7 +7,10 @@ using GameActorLogic;
 
 namespace GameActorLogic
 {
-    public class MoveComponentBase : 
+    /// <summary>
+    /// 基础移动组件
+    /// </summary>
+    public abstract class MoveComponentBase : 
         IMoveBase,
         IMoveinternalBase
     {

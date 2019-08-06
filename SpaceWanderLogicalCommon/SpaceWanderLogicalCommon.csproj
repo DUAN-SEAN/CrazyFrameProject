@@ -74,13 +74,14 @@
     <Compile Include="GameActorLogic\Component\Server\EventComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Ship\FireControlComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Ship\ShipEventComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\Weanpon\WeanponAttributeComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\Weanpon\WeanponEventComponentBase.cs" />
     <Compile Include="GameActorLogic\LevelActor\ILevelActorBaseContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GameActorLogic\ClientActor\Interface\WeaponContainer\" />
     <Folder Include="GameActorLogic\Component\AIComponent\" />
-    <Folder Include="GameActorLogic\Component\Weanpon\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
