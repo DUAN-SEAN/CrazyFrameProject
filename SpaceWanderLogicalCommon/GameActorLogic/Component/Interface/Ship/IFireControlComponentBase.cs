@@ -16,19 +16,19 @@ namespace GameActorLogic
         /// <summary>
         /// 发射武器
         /// </summary>
-        /// <param name="i">武器槽</param>
+        /// <param name="i">全局武器类型</param>
         void Fire(int i);
 
         /// <summary>
         /// 关闭制定武器功能
         /// </summary>
-        /// <param name="i">武器槽</param>
+        /// <param name="i">全局武器类型</param>
         void End(int i);
 
         /// <summary>
         /// 销毁武器
         /// </summary>
-        /// <param name="i"></param>
+        /// <param name="i">全局武器类型</param>
         void Destroy(int i);
 
 
@@ -41,11 +41,11 @@ namespace GameActorLogic
     /// </summary>
     public interface IFireControlinternalBase : IFireControlBase
     {
-        event Action<int> OnFire;
+        event Action<IWeaponBaseContainer> OnFire;
 
-        event Action<int> OnEnd;
+        event Action<IWeaponBaseContainer> OnEnd;
 
-        event Action<int> OnDestroy;
+        event Action<IWeaponBaseContainer> OnDestroy;
     }
 
 

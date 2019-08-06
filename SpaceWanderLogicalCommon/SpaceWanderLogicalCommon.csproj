@@ -51,6 +51,9 @@
     <Compile Include="GameActorLogic\ClientActor\ShipActor\IWeaponBaseContainer.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\ShipContainer\IAIShipBaseContainer.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\ShipContainer\IPlayerShipBaseContainer.cs" />
+    <Compile Include="GameActorLogic\Component\ColliderComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\CommandComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\HealthShieldComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\IAIComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\IColliderComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\ICommandComponentBase.cs" />
@@ -65,14 +68,19 @@
     <Compile Include="GameActorLogic\Component\Interface\Ship\IShipEventComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Weanpon\IWeaponAttributeComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Weanpon\IWeaponEventComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\InvariantAttributeinternalBase.cs" />
+    <Compile Include="GameActorLogic\Component\MoveComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\PhysicalBase.cs" />
+    <Compile Include="GameActorLogic\Component\Server\EventComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\Ship\FireControlComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\Ship\ShipEventComponentBase.cs" />
     <Compile Include="GameActorLogic\LevelActor\ILevelActorBaseContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Component\Interface\" />
     <Folder Include="GameActorLogic\ClientActor\Interface\WeaponContainer\" />
     <Folder Include="GameActorLogic\Component\AIComponent\" />
-    <Folder Include="Interface\" />
+    <Folder Include="GameActorLogic\Component\Weanpon\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

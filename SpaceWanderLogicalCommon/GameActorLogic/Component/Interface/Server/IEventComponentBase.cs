@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SpaceWanderLogicalCommon;
+
 
 namespace GameActorLogic
 {
@@ -12,23 +12,9 @@ namespace GameActorLogic
     /// </summary>
     public interface IEventComponentBase
     {
-        /// <summary>
-        /// 待Actor处理的事件集合
-        /// </summary>
-        List<IEventMessage> HandleEventMessages
-        {
-            get;
-            set;
-        }
-        /// <summary>
-        /// 待Actor向外转发的事件集合
-        /// </summary>
-        List<IEventMessage> ForWardEventMessages
-        {
-            get;
-            set;
-        }
-     
+
+
+
         /// <summary>
         /// 添加要处理的集合
         /// </summary>
@@ -38,10 +24,7 @@ namespace GameActorLogic
         /// 在服务器上由服务器转发到客户端对应的相同组件上，在客户端上由相关组件获取。
         /// </summary>
         List<IEventMessage> GetForWardEventMessages();
-        /// <summary>
-        /// 向转发事件集合中添加要转发的消息
-        /// </summary>
-        void AddForWardEventMessages(IEventMessage msg);
+
 
     }
     /// <summary>
@@ -49,9 +32,23 @@ namespace GameActorLogic
     /// </summary>
     public interface IEventInternalComponentBase : IEventComponentBase
     {
+        // <summary>
+        // 执行需要处理的事件消息
+        // </summary>
+        //void TickHandleEvent();
+
         /// <summary>
-        /// 执行需要处理的事件消息
+        /// 向转发事件集合中添加要转发的消息
         /// </summary>
-        void TickHandleEvent();
+        void AddForWardEventMessages(IEventMessage msg);
+
+        /// <summary>
+        /// 获取从上层发来的事件待处理集合
+        /// </summary>
+        /// <returns></returns>
+        List<IEventMessage> GetHandleEventMessages();
+
+
+
     }
 }

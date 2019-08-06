@@ -15,6 +15,12 @@ namespace GameActorLogic
         /// 获取武器弹药数量
         /// </summary>
         int GetBulletNum();
+
+        /// <summary>
+        /// 获取武器类型
+        /// </summary>
+        /// <returns></returns>
+        int GetWeanponType();
     }
 
     /// <summary>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpaceWanderLogicalCommon
+namespace GameActorLogic
 {
     [Serializable]
     public abstract class BattleEventMessageBase:IEventMessage
