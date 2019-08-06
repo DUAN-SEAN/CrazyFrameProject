@@ -15,13 +15,10 @@ namespace GameActorLogic
     {
         /// <summary>
         /// 获得最大速度
+        /// 与物理组件中的速度对应
         /// </summary>
-        int GetMaxVel();
+        double GetMaxSpeed();
 
-        /// <summary>
-        /// 获得当前转向速度
-        /// </summary>
-        int GetCurrentRotaVel();
 
 
     }

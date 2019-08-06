@@ -19,9 +19,25 @@ namespace GameActorLogic
         /// <summary>
         /// 获得当前护盾值
         /// </summary>
-        int GetShieldBase();
+        int GetShieldNum();
 
-       
+        /// <summary>
+        /// 减少护盾恢复间隔
+        /// </summary>
+        void ReduceRecoveryInterval(int shieldrecovery);
+
+        /// <summary>
+        /// 增加护盾恢复值
+        /// </summary>
+        /// <param name="recoveryval"></param>
+        void AddRecoveryVal(int recoveryval);
+
+        /// <summary>
+        /// 增加护盾上限
+        /// </summary>
+        void AddShieldMax(int shieldrecovery);
+
+
     }
 
 

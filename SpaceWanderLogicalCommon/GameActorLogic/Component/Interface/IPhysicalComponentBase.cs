@@ -20,6 +20,11 @@ namespace GameActorLogic {
         /// 获取朝向
         /// </summary>
         void GetForward();
+
+        /// <summary>
+        /// 得到当前速度
+        /// </summary>
+        double GetSpeed();
     }
 
 

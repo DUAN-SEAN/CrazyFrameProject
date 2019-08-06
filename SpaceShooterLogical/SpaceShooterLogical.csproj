@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrazyEngine">
+      <HintPath>..\packages\CrazyEngine.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,47 +48,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AI\AIEnemyManager\AIEnemyLogic.cs" />
-    <Compile Include="AI\AIEnemyManager\IAILog.cs" />
-    <Compile Include="AI\AIEntity\aiBody\AICarrierShipInBody.cs" />
-    <Compile Include="AI\AIEntity\aiBody\AIShipBase.cs" />
-    <Compile Include="AI\AIEntity\aiBody\AISmallShipInBody.cs" />
-    <Compile Include="AI\AIEntity\Interface\IFollow.cs" />
-    <Compile Include="AI\AIEntity\State\AlertState.cs" />
-    <Compile Include="AI\AIEntity\State\AttackState.cs" />
-    <Compile Include="AI\AIEntity\State\BossAttackState.cs" />
-    <Compile Include="AI\AIEntity\State\FollowState.cs" />
-    <Compile Include="AI\AIEntity\State\TeamState.cs" />
-    <Compile Include="AI\FSMBase\FSMState.cs" />
-    <Compile Include="AI\FSMBase\FSMSystem.cs" />
-    <Compile Include="Command.cs" />
-    <Compile Include="Message\BodyAttackedMessage.cs" />
-    <Compile Include="Message\BodyAttackMessage.cs" />
-    <Compile Include="Message\BodyDestoriedMessage.cs" />
-    <Compile Include="Message\BodyMessage.cs" />
-    <Compile Include="Factory\BodyFactory\BodyFactory.cs" />
-    <Compile Include="Factory\BodyFactory\Bodys\EnviromentInBody.cs" />
-    <Compile Include="Factory\BodyFactory\Bodys\MeteoriteInBody.cs" />
-    <Compile Include="Factory\BodyFactory\Bodys\PlayerInBody.cs" />
-    <Compile Include="Factory\BodyFactory\Bodys\ShipBase.cs" />
-    <Compile Include="Factory\BodyFactory\Bodys\Weanpon.cs" />
-    <Compile Include="ISBZhuying.cs" />
     <Compile Include="Base\LevelData.cs" />
     <Compile Include="Base\WeaponGameLogic.cs" />
-    <Compile Include="Factory\LevelDataFactory\LevelDataFactory.cs" />
     <Compile Include="Base\ITickable.cs" />
     <Compile Include="Base\LevelDataSystem.cs" />
     <Compile Include="model\AirCraftType.cs" />
     <Compile Include="model\WeaponInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Level.cs" />
     <Compile Include="SpaceBodyType.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CrazyEngine\CrazyEngine.csproj">
-      <Project>{74c6ef13-2869-4869-932f-698aa795df34}</Project>
-      <Name>CrazyEngine</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameConfig.config" />

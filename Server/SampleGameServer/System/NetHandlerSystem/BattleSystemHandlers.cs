@@ -6,8 +6,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using Crazy.Common;
-using GameActorLogic.Command;
-using GameServer.Battle;
+using GameActorLogic;
+
 
 namespace GameServer.System.NetHandlerSystem
 {
@@ -26,7 +26,7 @@ namespace GameServer.System.NetHandlerSystem
         protected override void Run(ISession playerContext, C2S_BattleCommandMessage message)
         {
             
-            GameServer.Instance.PostMessageToSystem<BattleSystem>(null);
+            //GameServer.Instance.PostMessageToSystem<BattleSystem>(null);
         }
     }
 
@@ -49,7 +49,7 @@ namespace GameServer.System.NetHandlerSystem
                 localMessage.ICommand = bf.Deserialize(ms) as ICommand;//将其反序列化
 
 
-                GameServer.Instance.PostMessageToSystem<BattleSystem>(localMessage);
+                //GameServer.Instance.PostMessageToSystem<BattleSystem>(localMessage);
 
             }
         }

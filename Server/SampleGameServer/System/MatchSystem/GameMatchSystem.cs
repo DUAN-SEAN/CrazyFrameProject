@@ -1,7 +1,6 @@
 ﻿using Crazy.Common;
 using Crazy.NetSharp;
 using Crazy.ServerBase;
-using GameServer.Battle;
 using MongoDB.Bson;
 using System;
 using System.Collections.Concurrent;
@@ -497,7 +496,7 @@ namespace GameServer
             }
            
             createBattleBarrierMessage.BarrierId = barrierId;
-            GameServer.Instance.PostMessageToSystem<BattleSystem>(createBattleBarrierMessage);
+            //GameServer.Instance.PostMessageToSystem<BattleSystem>(createBattleBarrierMessage);
         }
        
         /// <summary>

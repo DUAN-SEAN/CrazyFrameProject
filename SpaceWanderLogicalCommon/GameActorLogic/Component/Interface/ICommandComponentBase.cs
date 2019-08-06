@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GameActorLogic.Command;
+
 
 namespace GameActorLogic
 {
@@ -25,7 +25,8 @@ namespace GameActorLogic
 
     }
 
-    public interface ICommandInternalComponentBase:ICommand
+    public interface ICommandInternalComponentBase : ICommandComponentBase
+
     {
         /// <summary>
         /// 执行指令

@@ -15,6 +15,12 @@ namespace GameActorLogic
         /// 获取武器弹药数量
         /// </summary>
         int GetBulletNum();
+
+        /// <summary>
+        /// 获取武器类型
+        /// </summary>
+        /// <returns></returns>
+        int GetWeanponType();
     }
 
     /// <summary>
@@ -26,7 +32,8 @@ namespace GameActorLogic
         /// <summary>
         /// 添加或减少弹药
         /// </summary>
-        int BulletNum { set; get; }
+        void AddBulletNum(int add);
+        void ReduceBulletNum(int rdu);
 
         /// <summary>
         /// 武器在过了存活时间后自动销毁
