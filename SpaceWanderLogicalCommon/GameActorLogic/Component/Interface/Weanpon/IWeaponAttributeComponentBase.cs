@@ -20,7 +20,7 @@ namespace GameActorLogic
         /// 获取武器类型
         /// </summary>
         /// <returns></returns>
-        int GetWeanponType();
+        int GetWeaponType();
     }
 
     /// <summary>

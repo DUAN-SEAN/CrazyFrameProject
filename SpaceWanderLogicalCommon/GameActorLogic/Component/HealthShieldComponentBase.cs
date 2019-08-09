@@ -8,7 +8,8 @@ namespace GameActorLogic
     /// 目前不会有特化功能
     /// 应该会去掉抽象标签
     /// </summary>
-    public abstract class HealthShieldComponentBase : 
+    /// 已去掉抽象标签
+    public class HealthShieldComponentBase : 
         IHealthShieldBase,
         IHealthShieldinternalBase
     {
@@ -55,7 +56,7 @@ namespace GameActorLogic
         #endregion
 
 
-        protected HealthShieldComponentBase()
+        public HealthShieldComponentBase()
         {
             _hp = 3;
             _shieldval = 0;
@@ -65,7 +66,7 @@ namespace GameActorLogic
             reducerecoveryinterval = 0;
             lastTime = DateTime.Now.Ticks;
         }
-        protected HealthShieldComponentBase(int hp,int shieldval,int maxshield,int shieldrecoverVal)
+        public  HealthShieldComponentBase(int hp,int shieldval,int maxshield,int shieldrecoverVal)
         {
             _hp = hp;
             _shieldval = shieldval;

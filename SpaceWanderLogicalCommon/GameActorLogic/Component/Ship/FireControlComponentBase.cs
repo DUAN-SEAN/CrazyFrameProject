@@ -10,18 +10,18 @@ namespace GameActorLogic
     /// 基础火控组件
     /// 每个飞船的火控组件中的武器应该不同
     /// </summary>
-    public abstract class FireControlComponentBase:
+    public class FireControlComponentBase:
         IFireControlBase,
-        IFireControlinternalBase
+        IFireControlInternalBase
     {
         protected List<IWeaponBaseContainer> weapons;
 
-        protected FireControlComponentBase()
+        public FireControlComponentBase()
         {
             weapons = new List<IWeaponBaseContainer>();
         }
 
-        protected FireControlComponentBase(List<IWeaponBaseContainer> weapons)
+        public FireControlComponentBase(List<IWeaponBaseContainer> weapons)
         {
             this.weapons = weapons;
         }

@@ -46,14 +46,20 @@
     <Compile Include="Command\ICommand.cs" />
     <Compile Include="Event\BattleEventMessage.cs" />
     <Compile Include="Event\EventMessageConstDefine.cs" />
+    <Compile Include="GameActorLogic\ClientActor\ActorBase.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\IClientBaseContainer.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\IShipBaseContainer.cs" />
-    <Compile Include="GameActorLogic\ClientActor\ShipActor\IWeaponBaseContainer.cs" />
+    <Compile Include="GameActorLogic\ClientActor\Interface\IWeaponBaseContainer.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\ShipContainer\IAIShipBaseContainer.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\ShipContainer\IPlayerShipBaseContainer.cs" />
+    <Compile Include="GameActorLogic\ClientActor\ShipActor\ShipActorBase.cs" />
+    <Compile Include="GameActorLogic\ClientActor\WeaponActor\WeaponActorBase.cs" />
+    <Compile Include="GameActorLogic\Component\AIComponent\AIComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\ColliderComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\CommandComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\EnvirinfoComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\HealthShieldComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\Interface\IEnvirinfoComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\IAIComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\IColliderComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\ICommandComponentBase.cs" />
@@ -68,20 +74,25 @@
     <Compile Include="GameActorLogic\Component\Interface\Ship\IShipEventComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Weanpon\IWeaponAttributeComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Weanpon\IWeaponEventComponentBase.cs" />
-    <Compile Include="GameActorLogic\Component\InvariantAttributeinternalBase.cs" />
+    <Compile Include="GameActorLogic\Component\InvariantAttributeComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\MoveComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\PhysicalBase.cs" />
     <Compile Include="GameActorLogic\Component\Server\EventComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Ship\FireControlComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Ship\ShipEventComponentBase.cs" />
-    <Compile Include="GameActorLogic\Component\Weanpon\WeanponAttributeComponentBase.cs" />
-    <Compile Include="GameActorLogic\Component\Weanpon\WeanponEventComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\Weanpon\WeaponAttributeComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\Weanpon\WeaponEventComponentBase.cs" />
     <Compile Include="GameActorLogic\LevelActor\ILevelActorBaseContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GameActorLogic\ClientActor\Interface\WeaponContainer\" />
-    <Folder Include="GameActorLogic\Component\AIComponent\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CrazyEngine\CrazyEngine\CrazyEngine.csproj">
+      <Project>{c3c26458-0def-489b-961d-46294380f757}</Project>
+      <Name>CrazyEngine</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

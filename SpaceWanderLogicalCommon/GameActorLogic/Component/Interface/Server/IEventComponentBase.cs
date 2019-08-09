@@ -12,9 +12,6 @@ namespace GameActorLogic
     /// </summary>
     public interface IEventComponentBase
     {
-
-
-
         /// <summary>
         /// 添加要处理的集合
         /// </summary>

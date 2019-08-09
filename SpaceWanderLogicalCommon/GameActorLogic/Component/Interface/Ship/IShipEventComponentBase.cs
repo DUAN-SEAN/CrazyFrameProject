@@ -12,12 +12,12 @@ namespace GameActorLogic
     public interface IShipEventBase
     {
         /// <summary>
-        /// 动态初始化生成调用
+        /// 飞船动态初始化生成调用
         /// </summary>
         void Init();
 
         /// <summary>
-        /// 动态销毁调用
+        /// 飞船动态销毁调用
         /// </summary>
         void Destroy();
 

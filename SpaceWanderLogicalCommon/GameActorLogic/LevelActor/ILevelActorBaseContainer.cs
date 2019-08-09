@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace GameActorLogic
 {
     /// <summary>
     /// 关卡Actor 对外接口
     /// </summary>
     public interface ILevelActorBaseContainer:
-        IEventComponentBase
+        IEventComponentBase,
+        IEnvirinfoBase
     {
         /// <summary>
         /// 获得ID
@@ -36,6 +32,7 @@ namespace GameActorLogic
         /// 清理关卡现场
         /// </summary>
         void Dispose();
+
     }
 
     /// <summary>
@@ -48,7 +45,12 @@ namespace GameActorLogic
         /// </summary>
         IEventComponentBase GetEventComponentBase();
 
+        /// <summary>
+        /// 世界环境信息
+        /// </summary>
+        IEnvirinfointernalBase GetEnvirinfointernalBase();
 
         
+
     }
 }

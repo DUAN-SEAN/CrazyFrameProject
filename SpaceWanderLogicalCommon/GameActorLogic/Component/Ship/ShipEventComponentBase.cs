@@ -10,7 +10,7 @@ namespace GameActorLogic
     /// <summary>
     /// 基础飞船事件组件
     /// </summary>
-    public abstract class ShipEventComponentBase:
+    public class ShipEventComponentBase:
         IShipEventBase,
         IShipEventinternalBase
     {

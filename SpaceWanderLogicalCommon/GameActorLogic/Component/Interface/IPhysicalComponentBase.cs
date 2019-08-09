@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CrazyEngine.Common;
 
 namespace GameActorLogic { 
     /// <summary>
@@ -14,12 +15,12 @@ namespace GameActorLogic {
         /// <summary>
         /// 获得位置坐标
         /// </summary>
-        void GetPosition();
+        Point GetPosition();
 
         /// <summary>
         /// 获取朝向
         /// </summary>
-        void GetForward();
+        Point GetForward();
 
         /// <summary>
         /// 得到当前速度
@@ -34,13 +35,15 @@ namespace GameActorLogic {
     public interface IPhysicalinternalBase : IPhysicalBase
     {
         /// <summary>
-        /// 未定
+        /// 给飞船一个与朝向相同的推力
         /// </summary>
-        void AddForce();
+        void AddThrust(float pro);
 
         /// <summary>
-        /// 未定
+        /// 给一个弧度表示转向弧度
+        /// 正负表示方向
+        /// 默认0.001
         /// </summary>
-        void AddForward();
+        void AddForward(double ang);
     }
 }

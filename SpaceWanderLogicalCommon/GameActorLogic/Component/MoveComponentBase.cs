@@ -10,7 +10,7 @@ namespace GameActorLogic
     /// <summary>
     /// 基础移动组件
     /// </summary>
-    public abstract class MoveComponentBase : 
+    public class MoveComponentBase : 
         IMoveBase,
         IMoveinternalBase
     {
