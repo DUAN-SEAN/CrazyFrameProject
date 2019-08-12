@@ -32,17 +32,17 @@ namespace GameActorLogic
         #region AI组件
         public bool StartAILogic()
         {
-            return _aIinternalBase.StartAILogic();
+            return _aiComponent.StartAILogic();
         }
 
         public bool PauseAILogic()
         {
-            return _aIinternalBase.PauseAILogic();
+            return _aiComponent.PauseAILogic();
         }
 
         public IAIinternalBase GetAIinternalBase()
         {
-            return _aIinternalBase;
+            return _aiComponent;
         }
         #endregion
 
