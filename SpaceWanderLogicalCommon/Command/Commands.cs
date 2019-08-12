@@ -9,9 +9,11 @@ namespace GameActorLogic
     [Serializable]
     public class MoveCommand:ICommand
     {
+        protected int _commandtype = CommandConstDefine.MoveCommand;
+       
         public int CommandType
         {
-            get => CommandConstDefine.MoveCommand;
+            get => _commandtype;
         }
 
 

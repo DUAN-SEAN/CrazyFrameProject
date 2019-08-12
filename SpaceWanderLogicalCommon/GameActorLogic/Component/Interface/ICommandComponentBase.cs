@@ -12,7 +12,7 @@ namespace GameActorLogic
         /// <summary>
         /// 指令集合
         /// </summary>
-        List<ICommand> Commands { get; }
+        List<ICommand> GetCommands();
 
         /// <summary>
         /// 向组件添加新的指令

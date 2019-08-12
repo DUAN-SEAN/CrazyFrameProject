@@ -46,9 +46,9 @@
     <Compile Include="Command\ICommand.cs" />
     <Compile Include="Event\BattleEventMessage.cs" />
     <Compile Include="Event\EventMessageConstDefine.cs" />
-    <Compile Include="Event\MoveEvent\LeftEventMessage.cs" />
-    <Compile Include="Event\MoveEvent\RightEventMessage.cs" />
-    <Compile Include="Event\MoveEvent\ThrustEventMessage.cs" />
+    <Compile Include="Command\MoveCommand\LeftCommand.cs" />
+    <Compile Include="Command\MoveCommand\RightCommand.cs" />
+    <Compile Include="Command\MoveCommand\ThrustCommand.cs" />
     <Compile Include="GameActorLogic\ClientActor\ActorBase.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\IClientBaseContainer.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\IShipBaseContainer.cs" />

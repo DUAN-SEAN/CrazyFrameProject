@@ -13,7 +13,7 @@ namespace GameActorLogic
     {
         protected EventComponentBase _eventComponent;
         protected EnvirinfoComponentBase _envirinfoComponent;
-
+        protected CommandComponentBase _commandComponent;
         protected long levelid;
         protected ulong battleid;
 
@@ -82,10 +82,27 @@ namespace GameActorLogic
 
         #endregion
 
+        #region 指令集合组件
+
+        public List<ICommand> GetCommands()
+        {
+            return _commandComponent.GetCommands();
+        }
+        public void PostCommand(ICommand command)
+        {
+            _commandComponent.PostCommand(command);
+        }
+
 
         #endregion
-        
-        IEventComponentBase ILevelActorComponentBaseContainer.GetEventComponentBase()
+
+        #endregion
+
+        ICommandInternalComponentBase ILevelActorComponentBaseContainer.GetComponentBase()
+        {
+            return _commandComponent;
+        }
+        IEventInternalComponentBase ILevelActorComponentBaseContainer.GetEventComponentBase()
         {
             return _eventComponent;
         }
@@ -94,5 +111,7 @@ namespace GameActorLogic
         {
             return _envirinfoComponent;
         }
+
+       
     }
 }

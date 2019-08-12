@@ -6,6 +6,7 @@ namespace GameActorLogic
     /// </summary>
     public interface ILevelActorBaseContainer:
         IEventComponentBase,
+        ICommandComponentBase,
         IEnvirinfoBase
     {
         /// <summary>
@@ -43,7 +44,12 @@ namespace GameActorLogic
         /// <summary>
         /// 获取事件组件
         /// </summary>
-        IEventComponentBase GetEventComponentBase();
+        IEventInternalComponentBase GetEventComponentBase();
+
+        /// <summary>
+        /// 获取指令组件
+        /// </summary>
+        ICommandInternalComponentBase GetComponentBase();
 
         /// <summary>
         /// 世界环境信息

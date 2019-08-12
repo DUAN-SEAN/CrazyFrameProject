@@ -18,7 +18,13 @@ namespace GameActorLogic
         }
 
         #region ICommandComponentBase
-        public List<ICommand> Commands => _commands;
+
+        public List<ICommand> GetCommands()
+        {
+            var list = new List<ICommand>(_commands);
+            _commands.Clear();
+            return list;
+        }
 
         public void PostCommand(ICommand command)
         {
