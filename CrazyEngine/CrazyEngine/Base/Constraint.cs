@@ -1,5 +1,6 @@
 ﻿using System;
 using CrazyEngine.Common;
+using UnityEngine;
 
 namespace CrazyEngine.Base
 {
@@ -18,6 +19,12 @@ namespace CrazyEngine.Base
         public double Stiffness { get; set; } = 1d;
         public double AngularStiffness { get; set; } = 0d;
 
+        public Constraint()
+        {
+            Type = ObjType.Constraint;
+            Init();
+        }
+
         public void Init()
         {
             if (BodyA != null && PointA == null)
@@ -25,12 +32,14 @@ namespace CrazyEngine.Base
             if (BodyB != null && PointB == null)
                 PointB = new Point();
 
-            var initialPointA = BodyA != null
+            MonoBehaviour.print(PointA + " " + PointB);
+            Point initialPointA = BodyA != null
                 ? (BodyA.Position + PointA)
                 : PointA;
-            var initialPointB = BodyB != null
+            Point initialPointB = BodyB != null
                 ? (BodyB.Position + PointB)
                 : PointB;
+
             Length = (initialPointA - initialPointB).Magnitude();
             AngleA = BodyA?.Angle ?? AngleA;
             AngleB = BodyB?.Angle ?? AngleB;

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C3C26458-0DEF-489B-961D-46294380F757}</ProjectGuid>
+    <ProjectGuid>{F0522629-274C-4631-B2F3-7301AA933B4D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CrazyEngine</RootNamespace>
@@ -41,26 +41,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\Body.cs" />
-    <Compile Include="Base\Composite.cs" />
-    <Compile Include="Base\Constraint.cs" />
-    <Compile Include="Base\Factory.cs" />
-    <Compile Include="Base\ObjBase.cs" />
-    <Compile Include="Base\World.cs" />
-    <Compile Include="Common\Axes.cs" />
-    <Compile Include="Common\Bound.cs" />
-    <Compile Include="Common\Collision.cs" />
-    <Compile Include="Common\Contact.cs" />
-    <Compile Include="Common\EnumHelper.cs" />
-    <Compile Include="Common\Id.cs" />
-    <Compile Include="Common\ObjType.cs" />
-    <Compile Include="Common\Pair.cs" />
-    <Compile Include="Common\Pairs.cs" />
-    <Compile Include="Common\Point.cs" />
-    <Compile Include="Common\Vertices.cs" />
-    <Compile Include="Core\Engine.cs" />
-    <Compile Include="Core\Helper.cs" />
-    <Compile Include="Core\Runner.cs" />
+    <Compile Include="CrazyEngine\Base\Body.cs" />
+    <Compile Include="CrazyEngine\Base\Composite.cs" />
+    <Compile Include="CrazyEngine\Base\Constraint.cs" />
+    <Compile Include="CrazyEngine\Base\Factory.cs" />
+    <Compile Include="CrazyEngine\Base\ObjBase.cs" />
+    <Compile Include="CrazyEngine\Base\World.cs" />
+    <Compile Include="CrazyEngine\Common\Axes.cs" />
+    <Compile Include="CrazyEngine\Common\Bound.cs" />
+    <Compile Include="CrazyEngine\Common\Collision.cs" />
+    <Compile Include="CrazyEngine\Common\Contact.cs" />
+    <Compile Include="CrazyEngine\Common\EnumHelper.cs" />
+    <Compile Include="CrazyEngine\Common\Id.cs" />
+    <Compile Include="CrazyEngine\Common\ObjType.cs" />
+    <Compile Include="CrazyEngine\Common\Pair.cs" />
+    <Compile Include="CrazyEngine\Common\Pairs.cs" />
+    <Compile Include="CrazyEngine\Common\Point.cs" />
+    <Compile Include="CrazyEngine\Common\Vertices.cs" />
+    <Compile Include="CrazyEngine\Core\Engine.cs" />
+    <Compile Include="CrazyEngine\Core\Helper.cs" />
+    <Compile Include="CrazyEngine\Core\Runner.cs" />
+    <Compile Include="CrazyEngine\External\Collider.cs" />
+    <Compile Include="CrazyEngine\External\CollisionEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

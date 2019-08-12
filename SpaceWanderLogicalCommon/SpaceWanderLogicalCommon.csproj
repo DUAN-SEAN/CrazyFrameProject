@@ -95,8 +95,8 @@
     <Folder Include="GameActorLogic\ClientActor\Interface\WeaponContainer\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CrazyEngine\CrazyEngine\CrazyEngine.csproj">
-      <Project>{c3c26458-0def-489b-961d-46294380f757}</Project>
+    <ProjectReference Include="..\CrazyEngine\CrazyEngine.csproj">
+      <Project>{f0522629-274c-4631-b2f3-7301aa933b4d}</Project>
       <Name>CrazyEngine</Name>
     </ProjectReference>
   </ItemGroup>

@@ -17,7 +17,7 @@ namespace CrazyEngine.Base
         /// <summary>
         /// 类型
         /// </summary>
-        public ObjType Type { get; private set; }
+        public ObjType Type { get; set; }
 
         /// <summary>
         /// 标签

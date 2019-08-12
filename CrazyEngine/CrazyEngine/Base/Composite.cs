@@ -36,6 +36,19 @@ namespace CrazyEngine.Base
             }
         }
 
+        public Composite()
+        {
+            Type = ObjType.Composite;
+        }
+
+        public Composite( List<ObjBase> Objs)
+        {
+            foreach (var obj in Objs)
+            {
+                Add(obj);
+            }
+        }
+
         public IEnumerable<Body> AllBodies =>
             Bodies.Union(Composites.SelectMany(composite => composite.AllBodies));
 

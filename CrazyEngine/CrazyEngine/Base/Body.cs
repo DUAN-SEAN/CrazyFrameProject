@@ -119,6 +119,24 @@ namespace CrazyEngine.Base
             }
         }
 
+        public void InitAngle(double angle)
+        {
+            var delta = angle - _angle;
+
+            for (var i = 0; i < _parts.Count; i++)
+            {
+                var part = _parts[i];
+                part._angle += delta;
+                part.Vertices.Rotate(delta, _position);
+                part.Axes.Rotate(delta);
+                part.Bounds.Update(part.Vertices, Velocity);
+                if (i > 0)
+                {
+                    part.Position.RotateAbout(delta, Position);
+                }
+            }
+        }
+
         public double AnglePrev
         {
             get { return _anglePrev; }
@@ -140,6 +158,9 @@ namespace CrazyEngine.Base
             }
         }
 
+        /// <summary>
+        /// 是物体角速度和速度的组合，始终是正的，用于判断物体是否为正
+        /// </summary>
         public double Motion { get; set; }
 
         /// <summary>
