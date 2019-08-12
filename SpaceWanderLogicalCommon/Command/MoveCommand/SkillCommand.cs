@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameActorLogic
 {
+    [Serializable]
     public class SkillCommand : Command
     {
         /// <summary>
@@ -17,9 +18,9 @@ namespace GameActorLogic
         /// <summary>
         /// 执行技能的ActorID
         /// </summary>
-        public long actorid;
+        public ulong actorid;
 
-        public SkillCommand(long actorid,int skillcontrol)
+        public SkillCommand(ulong actorid,int skillcontrol)
         {
             _commandtype = CommandConstDefine.SkillCommand;
             this.skillcontrol = skillcontrol;

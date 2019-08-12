@@ -9,15 +9,15 @@ namespace GameActorLogic
     public class ThrustCommand : Command
     {
         public float Thrustproc = 0.0001f;
-        public long actorid;
+        public ulong actorid;
 
-        public ThrustCommand(long actorid)
+        public ThrustCommand(ulong actorid)
         {
             _commandtype = CommandConstDefine.ThrustCommand;
             this.actorid = actorid;
         }
 
-        public ThrustCommand(long actorid, float thrustproc)
+        public ThrustCommand(ulong actorid, float thrustproc)
         {
             _commandtype = CommandConstDefine.ThrustCommand;
             Thrustproc = thrustproc;

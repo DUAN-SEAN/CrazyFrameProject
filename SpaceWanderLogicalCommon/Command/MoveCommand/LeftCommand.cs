@@ -7,17 +7,18 @@ using GameActorLogic;
 
 namespace GameActorLogic
 {
+    [Serializable]
     public class LeftCommand: Command
     {
         public double Leftang = 0.0000001;
-        public long actorid;
-        public LeftCommand(long actorid)
+        public ulong actorid;
+        public LeftCommand(ulong actorid)
         {
             _commandtype = CommandConstDefine.ForwardCommand;
             this.actorid = actorid;
         }
 
-        public LeftCommand(long actorid,double leftang = 0.0000001)
+        public LeftCommand(ulong actorid,double leftang = 0.0000001)
         {
             _commandtype = CommandConstDefine.ForwardCommand;
             Leftang = leftang;
