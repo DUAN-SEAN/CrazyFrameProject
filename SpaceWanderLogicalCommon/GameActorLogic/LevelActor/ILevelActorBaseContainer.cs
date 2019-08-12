@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace GameActorLogic
 {
     /// <summary>
@@ -22,7 +24,7 @@ namespace GameActorLogic
         /// <summary>
         /// 开启关卡
         /// </summary>
-        void Start();
+        void Start(List<string> players,int barrierId);
 
         /// <summary>
         /// 由BattleSystem驱动
