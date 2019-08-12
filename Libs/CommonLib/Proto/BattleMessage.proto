@@ -17,11 +17,17 @@ message S2C_BodyInitBattleMessage // IBattleMessage
 	string BodyType = 3;
 	bytes Body = 4;
 }
-
-//物体生成消息
+//以下是正常的逻辑
+//指令生成消息
 message C2S_CommandBattleMessage // IBattleMessage
 {
 	int32 RpcId = 90;
 	uint64 BattleId = 1;
     bytes Command = 2;
+}
+message S2C_EventBattleMessage // IBattleMessage 
+{
+	int32 RpcId = 90;
+	uint64 BattleId = 1;
+	bytes Event = 2;
 }

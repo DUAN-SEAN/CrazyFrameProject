@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Crazy.Common;
 using GameActorLogic;
+using GameServer.Battle;
 
 
 namespace GameServer.System.NetHandlerSystem
@@ -42,14 +43,14 @@ namespace GameServer.System.NetHandlerSystem
             GameServerPlayerContext ctx = playerContext as GameServerPlayerContext;
 
             CommandBattleLocalMessage localMessage = new CommandBattleLocalMessage();
-
+            localMessage.battleId = message.BattleId;
 
             using (MemoryStream ms = new MemoryStream(message.Command.ToByteArray()))
             {
                 localMessage.ICommand = bf.Deserialize(ms) as ICommand;//将其反序列化
 
 
-                //GameServer.Instance.PostMessageToSystem<BattleSystem>(localMessage);
+                GameServer.Instance.PostMessageToSystem<BattleSystem>(localMessage);
 
             }
         }

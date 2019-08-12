@@ -32,7 +32,8 @@ namespace GameServer.Battle
                     OnCreateBattleBarrier((CreateBattleBarrierMessage)msg);
                     break;
                 case GameServerConstDefine.BattleSystemCommandUpLoad:
-
+                    CommandBattleLocalMessage commandBattleLocalMessage = msg as CommandBattleLocalMessage;
+                    OnBattleCommand(commandBattleLocalMessage);
                     break;
                     
 
@@ -41,6 +42,9 @@ namespace GameServer.Battle
             return Task.CompletedTask;
 
         }
+
+       
+
         /// <summary>
         /// GameServer初始化战斗系统
         /// 1 获取关卡配置文件
@@ -85,6 +89,17 @@ namespace GameServer.Battle
             //{
             //    PostLocalMessageToCtx(new SystemSendNetMessage { Message = new S2CM_CreateBattleBarrier { BattleId = battleEntity.Id, BattleInfo = info }, PlayerId = item }, item);
             //}
+
+        }
+        /// <summary>
+        /// 玩家发来的战斗指令
+        /// 根据battleId进行转发 
+        /// </summary>
+        /// <param name="commandBattleLocalMessage"></param>
+        private void OnBattleCommand(CommandBattleLocalMessage msg)
+        {
+            var battleId = msg.battleId;
+            var commandMsg = msg.ICommand;
 
         }
         /// <summary>
