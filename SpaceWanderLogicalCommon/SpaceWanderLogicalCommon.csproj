@@ -44,6 +44,7 @@
     <Compile Include="Command\Commands.cs" />
     <Compile Include="Command\CommandTypeConstDefine.cs" />
     <Compile Include="Command\ICommand.cs" />
+    <Compile Include="Command\MoveCommand\ForwardCommand.cs" />
     <Compile Include="Event\BattleEventMessage.cs" />
     <Compile Include="Event\EventMessageConstDefine.cs" />
     <Compile Include="Command\MoveCommand\LeftCommand.cs" />

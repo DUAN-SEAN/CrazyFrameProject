@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace GameActorLogic
 {
     [Serializable]
-    public class MoveCommand:ICommand
+    public class Command:ICommand
     {
-        protected int _commandtype = CommandConstDefine.MoveCommand;
+        protected int _commandtype = CommandConstDefine.CommandDefine;
        
         public int CommandType
         {
