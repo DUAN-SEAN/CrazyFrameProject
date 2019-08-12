@@ -72,23 +72,23 @@ namespace GameServer.Battle
         {
             ////TODO:战斗场景在此生成
             ////每场关卡运行在独立的线程中
-            //Battle battleEntity = BEntityFactory.CreateEntity<Battle>();
+            Battle battleEntity = BEntityFactory.CreateEntity<Battle>();
 
-            
-            
-            //battleEntity.Init(msg.Players, msg.BarrierId, this);
-            //var timerId = TimerManager.SetLoopTimer(50, battleEntity.Update);//设置Tick步长
-            //battleEntity.SetTimer(timerId);
-            ////字典添加
-            //m_battleDic.Add(battleEntity.Id, battleEntity);
-            ////向玩家现场客户端发送战斗创建成功的消息，Ps 所有战斗消息目前都这样写
-            //var info = new S2CM_CreateBattleBarrier.Types.CreateBattleBarrierInfo();
-            //info.PlayerIds.Add(msg.Players);
-            //info.BattleId = battleEntity.Id;
-            //foreach (var item in msg.Players)
-            //{
-            //    PostLocalMessageToCtx(new SystemSendNetMessage { Message = new S2CM_CreateBattleBarrier { BattleId = battleEntity.Id, BattleInfo = info }, PlayerId = item }, item);
-            //}
+
+
+            battleEntity.Init(msg.Players, msg.BarrierId, this);
+            var timerId = TimerManager.SetLoopTimer(50, battleEntity.Update);//设置Tick步长
+            battleEntity.SetTimer(timerId);
+            //字典添加
+            m_battleDic.Add(battleEntity.Id, battleEntity);
+            //向玩家现场客户端发送战斗创建成功的消息，Ps 所有战斗消息目前都这样写
+            var info = new S2CM_CreateBattleBarrier.Types.CreateBattleBarrierInfo();
+            info.PlayerIds.Add(msg.Players);
+            info.BattleId = battleEntity.Id;
+            foreach (var item in msg.Players)
+            {
+                PostLocalMessageToCtx(new SystemSendNetMessage { Message = new S2CM_CreateBattleBarrier { BattleId = battleEntity.Id, BattleInfo = info }, PlayerId = item }, item);
+            }
 
         }
         /// <summary>
@@ -100,6 +100,10 @@ namespace GameServer.Battle
         {
             var battleId = msg.battleId;
             var commandMsg = msg.ICommand;
+            if (m_battleDic.TryGetValue(battleId,out Battle battle))
+            {
+                battle.SendCommandToLevel(commandMsg);
+            }
 
         }
         /// <summary>
@@ -160,7 +164,7 @@ namespace GameServer.Battle
         /// <summary>
         /// 战斗实体字典
         /// </summary>
-      //  private readonly Dictionary<ulong, Battle> m_battleDic = new Dictionary<ulong, Battle>();
+        private readonly Dictionary<ulong, Battle> m_battleDic = new Dictionary<ulong, Battle>();
 
         /// <summary>
         /// 战斗关卡的匹配文件
