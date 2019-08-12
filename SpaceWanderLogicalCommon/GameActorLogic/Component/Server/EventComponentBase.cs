@@ -37,7 +37,9 @@ namespace GameActorLogic
 
         public List<IEventMessage> GetForWardEventMessages()
         {
-            return _forwardeventmessages;
+            var list = new List<IEventMessage>(_forwardeventmessages);
+            _forwardeventmessages.Clear();
+            return list;
         }
         #endregion
 
@@ -50,6 +52,8 @@ namespace GameActorLogic
 
         public List<IEventMessage> GetHandleEventMessages()
         {
+            var list = new List<IEventMessage>(_handleeventmessages);
+            _handleeventmessages.Clear();
             return _handleeventmessages;
         }
         #endregion
