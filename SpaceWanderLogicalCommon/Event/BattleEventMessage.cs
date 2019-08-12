@@ -9,9 +9,10 @@ namespace GameActorLogic
     [Serializable]
     public abstract class BattleEventMessageBase:IEventMessage
     {
+        protected int _eventMessageId = EventMessageConstDefine.BattleEventNone;
         public int MessageId
         {
-            get => EventMessageConstDefine.BattleEventNone;
+            get => _eventMessageId;
         }
     }
 

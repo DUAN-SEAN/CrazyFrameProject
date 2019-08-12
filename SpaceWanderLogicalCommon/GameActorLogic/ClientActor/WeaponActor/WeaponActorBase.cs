@@ -14,6 +14,11 @@ namespace GameActorLogic
         protected WeaponEventComponentBase _weaponEventComponent;
         protected WeaponAttributeComponentBase _weaponAttributeComponent;
 
+        protected WeaponActorBase(long id) : base(id)
+        {
+
+        }
+
         protected override void CreateComponent()
         {
             base.CreateComponent();

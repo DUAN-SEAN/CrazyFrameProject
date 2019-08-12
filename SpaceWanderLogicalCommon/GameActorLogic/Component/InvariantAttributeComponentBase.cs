@@ -18,6 +18,8 @@ namespace GameActorLogic
         /// 移动的最大速度
         /// </summary>
         protected double maxSpeed;
+        
+
 
         public InvariantAttributeComponentBase(double maxSpeed  = 2)
         {

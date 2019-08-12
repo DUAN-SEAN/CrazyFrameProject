@@ -13,6 +13,10 @@ namespace GameActorLogic
         protected HealthShieldComponentBase _healthShieldComponent;
         protected ShipEventComponentBase _shipEventComponent;
 
+        public ShipActorBase(long id) : base(id)
+        {
+
+        }
 
         protected override void CreateComponent()
         {

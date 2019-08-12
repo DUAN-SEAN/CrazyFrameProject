@@ -14,7 +14,12 @@ namespace GameActorLogic
         protected InvariantAttributeComponentBase _invariantAttributeComponent;
         protected ColliderComponentBase _colliderComponent;
 
-        
+        protected long ActorID;
+
+        protected ActorBase(long id)
+        {
+            ActorID = id;
+        }
 
         protected virtual void  CreateComponent()
         {
@@ -32,6 +37,11 @@ namespace GameActorLogic
 
 
         #region IBaseContainer
+        public long GetActorID()
+        {
+            return ActorID;
+        }
+
 
         #region PhysicalBase
 
