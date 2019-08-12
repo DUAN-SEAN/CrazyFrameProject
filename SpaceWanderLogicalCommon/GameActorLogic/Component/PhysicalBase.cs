@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CrazyEngine.Base;
 using CrazyEngine.Common;
 using CrazyEngine.Core;
+using CrazyEngine.External;
 using GameActorLogic;
 
 namespace GameActorLogic
@@ -15,33 +16,69 @@ namespace GameActorLogic
     /// 物理信息组件
     /// 可能会与碰撞组件合并成一个类 然后继承两种接口
     /// </summary>
-    public abstract class PhysicalBase:
+    public class PhysicalBase:
         IPhysicalBase,
         IPhysicalinternalBase,
         IColliderBase,
         IColliderinternal
     {
         protected Body m_body;
+        protected Collider m_collider;
         protected IEnvirinfoBase envirinfo;
-        protected PhysicalBase()
-        {
-            m_body = Factory.CreateCircleBody(1, 1, 1);
-        }
+
+        /// <summary>
+        /// 碰撞方法被
+        /// </summary>
+        protected bool isColliderStay;
+        /// <summary>
+        /// 判断这一帧碰撞方法是否被调用
+        /// </summary>
+        protected bool isColliderMethodEnter;
+
+        //protected PhysicalBase()
+        //{
+        //    m_body = Factory.CreateCircleBody(1, 1, 1);
+        //    m_collider
+        //}
 
         /// <summary>
         /// body应该在传入之前就添加进engine中
         /// 该传入的engine用于将新的对象进行创建
         /// 应该会放入其他接口
         /// </summary>
-        protected PhysicalBase(Body body, IEnvirinfoBase envirinfo)
+        public PhysicalBase(Body body,Collider collider, IEnvirinfointernalBase envirinfo)
         {
             this.envirinfo = envirinfo;
             m_body = body;
-            
+            m_collider = collider;
+            envirinfo.GetCollisionEvent().colliders.Add(body, collider);
+            m_collider.OnCollisionStay += OnCollision;
         }
 
-       
+        /// <summary>
+        /// 碰撞逻辑检测
+        /// 调用相应的碰撞方法
+        /// </summary>
+        protected void OnCollision(Collision collision)
+        {
+            isColliderMethodEnter = true;
+            if(isColliderStay == false)
+            {
+                OnColliderEnter?.Invoke();
+                isColliderStay = true;
+            }
+            if (isColliderStay)
+                OnColliderStay?.Invoke();
+        }
 
+        public void Update()
+        {
+            if (isColliderStay == true && isColliderMethodEnter == false)
+            {
+                isColliderStay = false;
+                OnColliderExit?.Invoke();
+            }
+        }
 
         #region IPhysicalBase
         public Point GetPosition()

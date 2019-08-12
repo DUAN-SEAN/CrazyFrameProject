@@ -47,10 +47,12 @@
     <Compile Include="Command\MoveCommand\ForwardCommand.cs" />
     <Compile Include="Command\MoveCommand\SkillCommand.cs" />
     <Compile Include="Event\BattleEventMessage.cs" />
+    <Compile Include="Event\DestroyEventMessage.cs" />
     <Compile Include="Event\EventMessageConstDefine.cs" />
     <Compile Include="Command\MoveCommand\LeftCommand.cs" />
     <Compile Include="Command\MoveCommand\RightCommand.cs" />
     <Compile Include="Command\MoveCommand\ThrustCommand.cs" />
+    <Compile Include="Event\InitEventMessage.cs" />
     <Compile Include="GameActorLogic\ClientActor\ActorBase.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\IClientBaseContainer.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\IShipBaseContainer.cs" />

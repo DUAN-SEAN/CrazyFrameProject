@@ -9,7 +9,9 @@ namespace GameActorLogic
     public class EventMessageConstDefine
     {
         public const Int32 BattleEventNone = 1001;
-
+        public const Int32 InitEvent = 1002;
+        public const Int32 DestroyEvent = 1003;
+        public const Int32 UpdateEvent = 1004;
 
 
     }

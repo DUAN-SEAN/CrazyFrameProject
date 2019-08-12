@@ -14,7 +14,7 @@ namespace GameActorLogic
         protected WeaponEventComponentBase _weaponEventComponent;
         protected WeaponAttributeComponentBase _weaponAttributeComponent;
 
-        protected WeaponActorBase(long id) : base(id)
+        protected WeaponActorBase(ulong id,IEnvirinfointernalBase envir) : base(id,envir)
         {
 
         }

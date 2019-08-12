@@ -39,7 +39,7 @@ namespace GameActorLogic
         IInvariantAttributeBase,
         IColliderBase
     {
-        long GetActorID();
+        ulong GetActorID();
     }
 
     /// <summary>

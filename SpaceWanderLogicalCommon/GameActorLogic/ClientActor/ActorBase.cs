@@ -1,6 +1,8 @@
 ﻿
 
+using CrazyEngine.Base;
 using CrazyEngine.Common;
+using CrazyEngine.External;
 
 namespace GameActorLogic
 {
@@ -12,21 +14,25 @@ namespace GameActorLogic
         protected PhysicalBase _physicalBase;
         protected MoveComponentBase _moveComponent;
         protected InvariantAttributeComponentBase _invariantAttributeComponent;
-        protected ColliderComponentBase _colliderComponent;
 
-        protected long ActorID;
+        /// <summary>
+        /// levelActor的环境内部接口
+        /// 有物理引擎和物理碰撞机
+        /// </summary>
+        protected IEnvirinfointernalBase envir;
+        protected ulong ActorID;
 
-        protected ActorBase(long id)
+        protected ActorBase(ulong id, IEnvirinfointernalBase envir)
         {
             ActorID = id;
+            this.envir = envir;
         }
 
         protected virtual void  CreateComponent()
         {
-            //显示组件 只做demo
+            
 
-            //TODO 物理引擎与碰撞的关系还未完善不能初始化
-
+            _physicalBase = CreatePhysicalBase();
             //目前只引发移动事件
             _moveComponent = new MoveComponentBase(_physicalBase);
 
@@ -35,9 +41,24 @@ namespace GameActorLogic
 
         }
 
+        #region 创建组件
+
+        /// <summary>
+        /// 创建不同的物理对象
+        /// </summary>
+        protected virtual PhysicalBase CreatePhysicalBase()
+        {
+            var body = new Body();
+            var collider = new Collider();
+
+            return new PhysicalBase(body,collider,envir);
+        }
+
+        #endregion
+
 
         #region IBaseContainer
-        public long GetActorID()
+        public ulong GetActorID()
         {
             return ActorID;
         }
@@ -148,7 +169,7 @@ namespace GameActorLogic
         /// </summary>
         IColliderinternal IBaseComponentContainer.GetColliderinternal()
         {
-            return _colliderComponent;
+            return _physicalBase;
         }
         #endregion
 
