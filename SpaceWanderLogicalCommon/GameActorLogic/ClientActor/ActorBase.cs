@@ -23,7 +23,7 @@ namespace GameActorLogic
             //TODO 物理引擎与碰撞的关系还未完善不能初始化
 
             //目前只引发移动事件
-            _moveComponent = new MoveComponentBase();
+            _moveComponent = new MoveComponentBase(_physicalBase);
 
             //目前只有最大速度
             _invariantAttributeComponent = new InvariantAttributeComponentBase();
@@ -66,28 +66,36 @@ namespace GameActorLogic
         /// <summary>
         /// 向左转向接口
         /// </summary>
-        public void Left()
+        public void Left(double proc)
         {
-            _moveComponent.Left();
+            _moveComponent.Left(proc);
         }
 
         /// <summary>
         /// 向右转向接口
         /// </summary>
-        public void Right()
+        public void Right(double proc)
         {
-            _moveComponent.Right();
+            _moveComponent.Right(proc);
         }
 
         /// <summary>
         /// 向前加速接口
         /// </summary>
-        public void Forward()
+        public void AddThrust(float ang)
         {
-            _moveComponent.Forward();
+            _moveComponent.AddThrust(ang);
         }
         #endregion
 
+        #region InvariantAttributeComponentBase
+        public double GetMaxSpeed()
+        {
+            return _invariantAttributeComponent.GetMaxSpeed();
+        }
+
+
+        #endregion
         #endregion
 
 
@@ -95,7 +103,7 @@ namespace GameActorLogic
         /// <summary>
         /// 获得对内显示组件接口
         /// </summary>
-        public IViewinternalBase GetViewinternalBase()
+        IViewinternalBase IBaseComponentContainer.GetViewinternalBase()
         {
             return _viewinternal;
         }
@@ -103,7 +111,7 @@ namespace GameActorLogic
         /// <summary>
         /// 获得对内物理组件接口
         /// </summary>
-        public IPhysicalinternalBase GetPhysicalinternalBase()
+        IPhysicalinternalBase IBaseComponentContainer.GetPhysicalinternalBase()
         {
             return _physicalBase;
         }
@@ -111,7 +119,7 @@ namespace GameActorLogic
         /// <summary>
         /// 获得对内移动组件接口
         /// </summary>
-        public IMoveinternalBase GeMoveinternalBase()
+        IMoveinternalBase IBaseComponentContainer.GeMoveinternalBase()
         {
             return _moveComponent;
         }
@@ -119,7 +127,7 @@ namespace GameActorLogic
         /// <summary>
         /// 获得对内静态属性接口
         /// </summary>
-        public IInvariantAttributeinternalBase GeInvariantAttributeinternalBase()
+        IInvariantAttributeinternalBase IBaseComponentContainer.GeInvariantAttributeinternalBase()
         {
             return _invariantAttributeComponent;
         }
@@ -128,12 +136,13 @@ namespace GameActorLogic
         /// 获取碰撞机
         /// 有很多碰撞事件
         /// </summary>
-        public IColliderinternal GetColliderinternal()
+        IColliderinternal IBaseComponentContainer.GetColliderinternal()
         {
             return _colliderComponent;
         }
         #endregion
 
 
+       
     }
 }

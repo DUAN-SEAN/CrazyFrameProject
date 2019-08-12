@@ -42,7 +42,9 @@ namespace GameActorLogic {
         /// <summary>
         /// 给一个弧度表示转向弧度
         /// 正负表示方向
-        /// 默认0.001
+        /// 正数向左
+        /// 负数向右
+        /// 默认0.0000001
         /// </summary>
         void AddForward(double ang);
     }

@@ -8,16 +8,16 @@ namespace GameActorLogic
 {
     public interface IInvariantAttributeBase
     {
-
-    }
-
-    public interface IInvariantAttributeinternalBase : IInvariantAttributeBase
-    {
         /// <summary>
         /// 获得最大速度
         /// 与物理组件中的速度对应
         /// </summary>
         double GetMaxSpeed();
+    }
+
+    public interface IInvariantAttributeinternalBase : IInvariantAttributeBase
+    {
+        
 
 
 

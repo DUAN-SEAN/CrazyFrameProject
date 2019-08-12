@@ -11,13 +11,12 @@ namespace GameActorLogic
     /// <summary>
     /// actor环境组件
     /// 包括物理引擎相关操作
+    /// 添加了Actor对象集合
     /// 对外接口
     /// </summary>
     public interface IEnvirinfoBase
     {
-        void AddToEngine(ObjBase obj);
-
-        void RemoveFromEngine(ObjBase obj);
+        
 
 
     }
@@ -33,7 +32,9 @@ namespace GameActorLogic
         /// <returns></returns>
         Engine GetEngine();
 
+        void AddToEngine(ObjBase obj);
 
+        void RemoveFromEngine(ObjBase obj);
     }
 
 

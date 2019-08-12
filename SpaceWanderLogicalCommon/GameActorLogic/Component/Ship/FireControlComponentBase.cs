@@ -32,7 +32,7 @@ namespace GameActorLogic
         {
             for (var j = 0; j < weapons.Count; j++)
             {
-                if (weapons[j].GetWeanponType() == i)
+                if (weapons[j].GetWeaponType() == i)
                     OnFire?.Invoke(weapons[j]);
             }
 
@@ -44,7 +44,7 @@ namespace GameActorLogic
 
             for (var j = 0; j < weapons.Count; j++)
             {
-                if (weapons[j].GetWeanponType() == i)
+                if (weapons[j].GetWeaponType() == i)
                     OnEnd?.Invoke(weapons[j]);
             }
         }
@@ -54,7 +54,7 @@ namespace GameActorLogic
 
             for (var j = 0; j < weapons.Count; j++)
             {
-                if (weapons[j].GetWeanponType() == i)
+                if (weapons[j].GetWeaponType() == i)
                     OnDestroy?.Invoke(weapons[j]);
             }
         }

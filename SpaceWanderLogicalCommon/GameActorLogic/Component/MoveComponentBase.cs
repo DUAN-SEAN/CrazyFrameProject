@@ -14,30 +14,41 @@ namespace GameActorLogic
         IMoveBase,
         IMoveinternalBase
     {
+        protected IPhysicalinternalBase physical;
+
+        public MoveComponentBase(IPhysicalinternalBase physical)
+        {
+            this.physical = physical;
+        }
+
+
 
         #region IMoveBase
-        public void Left()
+        public void Left(double proc)
         {
-            OnLeft?.Invoke();
+            physical?.AddForward(proc);
+            OnLeft?.Invoke(proc);
         }
 
-        public void Right()
+        public void Right(double proc)
         {
-            OnRight?.Invoke();
+            physical?.AddForward(proc);
+            OnRight?.Invoke(proc);
         }
 
-        public void Forward()
+        public void AddThrust(float ang = 0.0001f)
         {
-            OnForward?.Invoke();
+            physical?.AddThrust(ang);
+            OnThrust?.Invoke(ang);
         }
 
 
         #endregion
 
         #region IMoveinternalBase
-        public event Action OnLeft;
-        public event Action OnRight;
-        public event Action OnForward;
+        public event Action<double> OnLeft;
+        public event Action<double> OnRight;
+        public event Action<float> OnThrust;
         #endregion
 
 

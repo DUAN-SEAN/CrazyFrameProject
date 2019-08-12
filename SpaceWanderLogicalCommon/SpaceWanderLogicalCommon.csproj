@@ -83,6 +83,7 @@
     <Compile Include="GameActorLogic\Component\Weanpon\WeaponAttributeComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Weanpon\WeaponEventComponentBase.cs" />
     <Compile Include="GameActorLogic\LevelActor\ILevelActorBaseContainer.cs" />
+    <Compile Include="GameActorLogic\LevelActor\LevelActorBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
