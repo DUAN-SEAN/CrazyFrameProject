@@ -1,5 +1,6 @@
 ﻿
 
+using System;
 using CrazyEngine.Base;
 using CrazyEngine.Common;
 using CrazyEngine.External;
@@ -21,11 +22,12 @@ namespace GameActorLogic
         /// </summary>
         protected IEnvirinfoInternalBase envir;
         protected ulong ActorID;
-
+        protected Int32 ActorType;
         protected ActorBase(ulong id)
         {
             ActorID = id;
             //this.envir = envir;
+            ActorType = ActorTypeBaseDefine.ActorNone;
         }
 
         protected virtual void  CreateComponent()
@@ -68,6 +70,11 @@ namespace GameActorLogic
         public ulong GetActorID()
         {
             return ActorID;
+        }
+
+        public int GetActorType()
+        {
+            return ActorType;
         }
 
 

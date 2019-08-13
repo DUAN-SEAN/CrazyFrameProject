@@ -46,6 +46,7 @@
     <Compile Include="Command\ICommand.cs" />
     <Compile Include="Command\MoveCommand\ForwardCommand.cs" />
     <Compile Include="Command\MoveCommand\SkillCommand.cs" />
+    <Compile Include="GameActorLogic\Component\Server\HandlerComponentBase.cs" />
     <Compile Include="Helper\ActorBaseHelper.cs" />
     <Compile Include="Helper\CrazyEngineHelper\Vector2D.cs" />
     <Compile Include="Event\BattleEventMessage.cs" />

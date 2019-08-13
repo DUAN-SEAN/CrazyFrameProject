@@ -14,6 +14,7 @@ namespace GameActorLogic
         protected EventComponentBase _eventComponent;
         protected EnvirinfoComponentBase _envirinfoComponent;
         protected CommandComponentBase _commandComponent;
+        protected 
         protected long levelid;
         protected ulong battleid;
 
