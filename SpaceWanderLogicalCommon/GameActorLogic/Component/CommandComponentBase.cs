@@ -7,12 +7,12 @@ namespace GameActorLogic
     /// <summary>
     /// 基础命令组件
     /// </summary>
-    public abstract class CommandComponentBase : 
+    public class CommandComponentBase : 
         ICommandComponentBase,
         ICommandInternalComponentBase
     {
         protected List<ICommand> _commands;
-        protected CommandComponentBase()
+        public CommandComponentBase()
         {
             _commands = new List<ICommand>();
         }

@@ -82,6 +82,7 @@ namespace GameActorLogic
 
         #region IPhysicalBase
 
+        #region 物理同步
         public Point GetVelocity()
         {
             return m_body.Velocity;
@@ -111,6 +112,24 @@ namespace GameActorLogic
         {
             return m_body.Torque;
         }
+
+        public void SetPhysicalValue(ulong actorId, double angleVelocity, double forceX, double forceY,
+            double forwardAngle, double positionX, double positionY, double velocityX, double velocityY, double torque)
+
+        {
+            m_body.Position.Set(positionX,positionY);
+            m_body.Velocity.Set(velocityX,velocityY);
+            m_body.Force.Set(forceX,forceY);
+            m_body.InitAngle(forwardAngle);
+            m_body.Angle = forwardAngle;
+            m_body.AngularVelocity = angleVelocity;
+            m_body.Torque = torque;
+        }
+
+        #endregion
+
+
+
 
 
         public double GetSpeed()

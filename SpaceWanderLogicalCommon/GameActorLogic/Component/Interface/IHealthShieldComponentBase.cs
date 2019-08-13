@@ -22,6 +22,16 @@ namespace GameActorLogic
         int GetShieldNum();
 
         /// <summary>
+        /// 设置HP
+        /// </summary>
+        void SetHP(int hp);
+
+        /// <summary>
+        /// 设置护盾值
+        /// </summary>
+        void SetShieldNum(int shield);
+
+        /// <summary>
         /// 减少护盾恢复间隔
         /// </summary>
         void ReduceRecoveryInterval(int shieldrecovery);

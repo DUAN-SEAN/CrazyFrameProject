@@ -115,6 +115,16 @@ namespace GameActorLogic
             return _shieldval;
         }
 
+        public void SetHP(int hp)
+        {
+            
+        }
+
+        public void SetShieldNum(int shield)
+        {
+            
+        }
+
         public void ReduceRecoveryInterval(int shieldrecoveryinterval)
         {
             reducerecoveryinterval = shieldrecoveryinterval;

@@ -14,11 +14,31 @@ namespace GameActorLogic
         protected EventComponentBase _eventComponent;
         protected EnvirinfoComponentBase _envirinfoComponent;
         protected CommandComponentBase _commandComponent;
-        protected 
+        protected HandlerComponentBase _handlerComponent;
         protected long levelid;
         protected ulong battleid;
 
         protected bool isStart = false;
+
+        public LevelActorBase()
+        {
+            CreateComponent();
+        }
+
+
+        #region 创建组件
+
+        protected void CreateComponent()
+        {
+            _eventComponent = new EventComponentBase();
+            _commandComponent = new CommandComponentBase();
+            _envirinfoComponent = new EnvirinfoComponentBase();
+            _handlerComponent = new HandlerComponentBase();
+
+        }
+
+        #endregion
+
 
         #region ILevelActorBaseContainer
 
@@ -49,7 +69,7 @@ namespace GameActorLogic
         {
             if(isStart == false) return;
 
-            //TODO 添加一个处理事件集合组件
+           _handlerComponent.Update();
 
             
 
@@ -59,6 +79,7 @@ namespace GameActorLogic
         {
             isStart = false;
             //TODO 对子对象进行动态Dispose
+
 
         }
 

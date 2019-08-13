@@ -10,7 +10,7 @@ using CrazyEngine.External;
 namespace GameActorLogic
 {
 
-    public abstract class EnvirinfoComponentBase:
+    public class EnvirinfoComponentBase:
         IEnvirinfoBase,
         IEnvirinfoInternalBase
     {
@@ -26,7 +26,7 @@ namespace GameActorLogic
         protected CollisionEvent m_collision;
         protected List<ActorBase> _actorList;
 
-        protected EnvirinfoComponentBase()
+        public EnvirinfoComponentBase()
         {
             m_engine = new Engine();
             m_runner = new Runner(m_engine);

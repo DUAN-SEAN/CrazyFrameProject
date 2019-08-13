@@ -10,7 +10,7 @@ namespace GameActorLogic
     /// <summary>
     /// 基础事件组件
     /// </summary>
-    public abstract class EventComponentBase : IEventComponentBase,
+    public class EventComponentBase : IEventComponentBase,
         IEventInternalComponentBase
     {
         /// <summary>
@@ -23,7 +23,7 @@ namespace GameActorLogic
         /// </summary>
         protected List<IEventMessage> _forwardeventmessages;
 
-        protected EventComponentBase()
+        public EventComponentBase()
         {
             _handleeventmessages = new List<IEventMessage>();
             _forwardeventmessages = new List<IEventMessage>();

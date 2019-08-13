@@ -45,7 +45,6 @@ namespace GameActorLogic
         /// <summary>
         /// 返回具体类型的相对应常量
         /// </summary>
-        /// <returns></returns>
         Int32 GetActorType();
     }
 

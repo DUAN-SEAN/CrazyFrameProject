@@ -93,17 +93,26 @@ namespace CrazyEngine.Common
 			return Math.Sqrt(X * X + Y * Y);
 		}
 
-		public void Normalize()
-		{
-			var magnitude = Math.Sqrt(X * X + Y * Y);
-			if (Math.Sign(magnitude) == 0)
-			{
-				X = Y = 0;
-				return;
-			}
-			X /= magnitude;
-			Y /= magnitude;
-		}
+        public void Set(double x, double y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        public Point Normalized
+        {
+            get
+            {
+                var magnitude = Math.Sqrt(X * X + Y * Y);
+                if (Math.Sign(magnitude) == 0)
+                {
+                    X = Y = 0;
+                    return Point.Zero();
+                }
+                return new Point(X / magnitude, Y / magnitude);
+            }
+        }
+
 
         public static Point Zero()
         {
