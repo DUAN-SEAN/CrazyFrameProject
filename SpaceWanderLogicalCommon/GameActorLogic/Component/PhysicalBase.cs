@@ -81,15 +81,37 @@ namespace GameActorLogic
         }
 
         #region IPhysicalBase
+
+        public Point GetVelocity()
+        {
+            return m_body.Velocity;
+        }
+
         public Point GetPosition()
         {
             return m_body.Position;
         }
 
-        public Point GetForward()
+        public double GetForwardAngle()
         {
-            return m_body.Forward;
+            return m_body.Angle;
         }
+
+        public double GetAngleVelocity()
+        {
+            return m_body.AngularVelocity;
+        }
+
+        public Point GetForce()
+        {
+            return m_body.Force;
+        }
+
+        public double GetTorque()
+        {
+            return m_body.Torque;
+        }
+
 
         public double GetSpeed()
         {

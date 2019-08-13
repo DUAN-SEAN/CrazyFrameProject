@@ -10,10 +10,12 @@ using CrazyEngine.External;
 namespace GameActorLogic { 
     /// <summary>
     /// 针对物理引擎对象的操作 对外接口
-    /// //TODO 物理引擎会根据最新的物理引擎更新接口
+    /// 
     /// </summary>
     public interface IPhysicalBase
     {
+        #region 物理同步
+
         /// <summary>
         /// 获得位置坐标
         /// </summary>
@@ -22,12 +24,39 @@ namespace GameActorLogic {
         /// <summary>
         /// 获取朝向
         /// </summary>
-        Point GetForward();
+        double GetForwardAngle();
+
+        /// <summary>
+        /// 得到当前速度矢量
+        /// </summary>
+        Point GetVelocity();
+
+        /// <summary>
+        /// 得到当前角速度
+        /// </summary>
+        double GetAngleVelocity();
+        /// <summary>
+        /// 得到当前力
+        /// </summary>
+        Point GetForce();
+        /// <summary>
+        /// 得到当前转矩
+        /// （角加速度）
+        /// </summary>
+        double GetTorque();
+
+        #endregion
+
+
+
 
         /// <summary>
         /// 得到当前速度
         /// </summary>
         double GetSpeed();
+
+
+
     }
 
 

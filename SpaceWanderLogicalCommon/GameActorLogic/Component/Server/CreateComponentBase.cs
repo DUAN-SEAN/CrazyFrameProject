@@ -40,11 +40,7 @@ namespace GameActorLogic
                 #region 飞船Actor
                 case ActorTypeBaseDefine.ShipActorNone:
                     actor = new ShipActorBase(Id);
-                    var container = actor as IBaseComponentContainer;
-                    var body = container.GetPhysicalinternalBase().GetBody();
-                    body.Position = new Point(point_x,point_y);
-                    body.InitAngle(angle);
-                    body.Angle = angle;
+                    actor.PrepareActor(point_x,point_y,angle);
                     break;
 
                 #endregion
@@ -53,17 +49,8 @@ namespace GameActorLogic
             return actor;
         }
 
-        #region Helper
-
-        protected void PrepareActor(double point_x, double point_y, double angle)
-        {
-
-        }
-
-        #endregion
-
-
-
     }
+
+  
 
 }

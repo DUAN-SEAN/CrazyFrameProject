@@ -61,6 +61,16 @@ namespace GameActorLogic
 
         }
 
+        #region 关卡环境
+
+        public List<ActorBase> GetAllActors()
+        {
+            return _envirinfoComponent.GetAllActors();
+        }
+
+        #endregion
+
+
         #region 关卡事件组件
         public void AddHandleEventMessage(IEventMessage msg)
         {
@@ -104,6 +114,7 @@ namespace GameActorLogic
         {
             return _envirinfoComponent;
         }
+
 
        
     }
