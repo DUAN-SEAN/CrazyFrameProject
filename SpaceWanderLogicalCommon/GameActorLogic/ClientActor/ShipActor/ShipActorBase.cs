@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace GameActorLogic
 {
-    public class ShipActorBase :ActorBase ,IShipBaseContainer,
+    public class ShipActorBase :ActorBase ,
+        IShipBaseContainer,
         IShipComponentBaseContainer
     {
         protected FireControlComponentBase _fireControlComponent;
         protected HealthShieldComponentBase _healthShieldComponent;
         protected ShipEventComponentBase _shipEventComponent;
 
-        public ShipActorBase(long id) : base(id)
+        public ShipActorBase(ulong id) : base(id)
         {
 
         }
@@ -30,7 +31,12 @@ namespace GameActorLogic
             _healthShieldComponent = new HealthShieldComponentBase();
             _shipEventComponent = new ShipEventComponentBase();
         }
-        
+
+        public override void Update()
+        {
+            //护盾恢复逻辑需要被Tick
+            _healthShieldComponent.Tick();
+        }
 
         #region IShipBaseContainer
 
@@ -139,7 +145,7 @@ namespace GameActorLogic
             return _fireControlComponent;
         }
 
-        public IHealthShieldinternalBase GetHealthShieldinternalBase()
+        public IHealthShieldInternalBase GetHealthShieldinternalBase()
         {
             return _healthShieldComponent;
         }

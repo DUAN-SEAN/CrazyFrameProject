@@ -21,7 +21,7 @@ namespace GameActorLogic
 
     }
 
-    public interface IInvariantAttributeinternalBase : IInvariantAttributeBase
+    public interface IInvariantAttributeInternalBase : IInvariantAttributeBase
     {
         
 

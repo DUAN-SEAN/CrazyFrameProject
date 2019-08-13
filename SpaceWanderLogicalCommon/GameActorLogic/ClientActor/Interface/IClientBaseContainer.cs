@@ -33,7 +33,7 @@ namespace GameActorLogic
     /// 实现各种组件对外接口
     /// </summary>
     public interface IBaseContainer:
-        IViewBase,
+        //IViewBase,
         IPhysicalBase,
         IMoveBase,
         IInvariantAttributeBase,
@@ -47,31 +47,31 @@ namespace GameActorLogic
     /// </summary>
     public interface IBaseComponentContainer : IBaseContainer
     {
-        /// <summary>
-        /// 获得对内显示组件接口
-        /// </summary>
-        IViewinternalBase GetViewinternalBase();
+        ///// <summary>
+        ///// 获得对内显示组件接口
+        ///// </summary>
+        //IViewInternalBase GetViewinternalBase();
 
         /// <summary>
         /// 获得对内物理组件接口
         /// </summary>
-        IPhysicalinternalBase GetPhysicalinternalBase();
+        IPhysicalInternalBase GetPhysicalinternalBase();
 
         /// <summary>
         /// 获得对内移动组件接口
         /// </summary>
-        IMoveinternalBase GeMoveinternalBase();
+        IMoveInternalBase GeMoveinternalBase();
 
         /// <summary>
         /// 获得对内静态属性接口
         /// </summary>
-        IInvariantAttributeinternalBase GeInvariantAttributeinternalBase();
+        IInvariantAttributeInternalBase GeInvariantAttributeinternalBase();
 
         /// <summary>
         /// 获取碰撞机
         /// 有很多碰撞事件
         /// </summary>
-        IColliderinternal GetColliderinternal();
+        IColliderInternal GetColliderinternal();
 
 
         

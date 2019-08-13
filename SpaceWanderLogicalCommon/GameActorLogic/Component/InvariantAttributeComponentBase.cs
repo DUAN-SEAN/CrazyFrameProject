@@ -12,7 +12,7 @@ namespace GameActorLogic
     /// </summary>
     public class InvariantAttributeComponentBase : 
         IInvariantAttributeBase,
-        IInvariantAttributeinternalBase
+        IInvariantAttributeInternalBase
     {
         /// <summary>
         /// 移动的最大速度
@@ -31,7 +31,7 @@ namespace GameActorLogic
             this.maxForceProc = maxForceProc;
         }
 
-        #region IInvariantAttributeinternalBase
+        #region IInvariantAttributeInternalBase
 
         public double GetMaxSpeed()
         {

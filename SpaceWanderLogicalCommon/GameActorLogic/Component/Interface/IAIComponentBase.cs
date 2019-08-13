@@ -30,7 +30,7 @@ namespace GameActorLogic
     /// AI组件对内接口
     /// 
     /// </summary>
-    public interface IAIinternalBase : IAIBase
+    public interface IAIInternalBase : IAIBase
     {
         /// <summary>
         /// 获得AI状态

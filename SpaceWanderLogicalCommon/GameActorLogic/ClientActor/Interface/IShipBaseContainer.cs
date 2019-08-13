@@ -30,7 +30,7 @@ namespace GameActorLogic
         /// 获取血量护盾组件
         /// </summary>
         /// <returns></returns>
-        IHealthShieldinternalBase GetHealthShieldinternalBase();
+        IHealthShieldInternalBase GetHealthShieldinternalBase();
 
         /// <summary>
         /// 获取船事件组件

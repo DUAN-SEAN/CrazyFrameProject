@@ -31,7 +31,7 @@ namespace GameActorLogic
     /// <summary>
     /// 移动物体组件 对内接口
     /// </summary>
-    public interface IMoveinternalBase : IMoveBase
+    public interface IMoveInternalBase : IMoveBase
     {
         /// <summary>
         /// 当向左转向时调用

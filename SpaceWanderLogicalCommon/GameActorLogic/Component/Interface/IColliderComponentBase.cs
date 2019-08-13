@@ -16,7 +16,7 @@ namespace GameActorLogic
     /// <summary>
     /// 对内碰撞机事件
     /// </summary>
-    public interface IColliderinternal: IColliderBase
+    public interface IColliderInternal: IColliderBase
     {
         /// <summary>
         /// 碰撞机被进入调用一次

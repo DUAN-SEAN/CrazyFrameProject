@@ -46,6 +46,7 @@
     <Compile Include="Command\ICommand.cs" />
     <Compile Include="Command\MoveCommand\ForwardCommand.cs" />
     <Compile Include="Command\MoveCommand\SkillCommand.cs" />
+    <Compile Include="CrazyEngineHelper\Vector2D.cs" />
     <Compile Include="Event\BattleEventMessage.cs" />
     <Compile Include="Event\DestroyEventMessage.cs" />
     <Compile Include="Event\EventMessageConstDefine.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Command\MoveCommand\ThrustCommand.cs" />
     <Compile Include="Event\InitEventMessage.cs" />
     <Compile Include="GameActorLogic\ClientActor\ActorBase.cs" />
+    <Compile Include="GameActorLogic\ClientActor\ActorTypeBaseDefine.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\IClientBaseContainer.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\IShipBaseContainer.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\IWeaponBaseContainer.cs" />
@@ -62,7 +64,6 @@
     <Compile Include="GameActorLogic\ClientActor\ShipActor\ShipActorBase.cs" />
     <Compile Include="GameActorLogic\ClientActor\WeaponActor\WeaponActorBase.cs" />
     <Compile Include="GameActorLogic\Component\AIComponent\AIComponentBase.cs" />
-    <Compile Include="GameActorLogic\Component\ColliderComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\CommandComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\EnvirinfoComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\HealthShieldComponentBase.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="GameActorLogic\Component\Interface\IAIComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\IColliderComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\ICommandComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\Interface\Server\ICreateComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Ship\IFireControlComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\IHealthShieldComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\IInvariantAttributeComponentBase.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="GameActorLogic\Component\InvariantAttributeComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\MoveComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\PhysicalBase.cs" />
+    <Compile Include="GameActorLogic\Component\Server\CreateComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Server\EventComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Ship\FireControlComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Ship\ShipEventComponentBase.cs" />

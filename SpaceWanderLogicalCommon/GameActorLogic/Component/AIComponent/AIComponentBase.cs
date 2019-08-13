@@ -8,19 +8,24 @@ namespace GameActorLogic
 {
     public abstract class AIComponentBase : 
         IAIBase,
-        IAIinternalBase
+        IAIInternalBase
     {
-
+        /// <summary>
+        /// 是否暂停
+        /// </summary>
+        protected bool isPause = false;
 
 
         public bool StartAILogic()
         {
-            return true;
+            isPause = false;
+            return isPause;
         }
 
         public bool PauseAILogic()
         {
-            return true;
+            isPause = true;
+            return isPause;
         }
 
         /// <summary>
@@ -31,7 +36,24 @@ namespace GameActorLogic
             return -1;
         }
 
+        /// <summary>
+        /// 运行AI逻辑
+        /// </summary>
+        public void Update()
+        {
+            if(isPause == true) return;
+            TickLogical();
 
-        //public 
+        }
+
+        /// <summary>
+        /// 被底层所重写
+        /// 用来执行特定逻辑
+        /// </summary>
+        public virtual void TickLogical()
+        {
+
+        }
+
     }
 }

@@ -18,9 +18,9 @@ namespace GameActorLogic
     /// </summary>
     public class PhysicalBase:
         IPhysicalBase,
-        IPhysicalinternalBase,
+        IPhysicalInternalBase,
         IColliderBase,
-        IColliderinternal
+        IColliderInternal
     {
         protected Body m_body;
         protected Collider m_collider;
@@ -37,7 +37,7 @@ namespace GameActorLogic
 
         //protected PhysicalBase()
         //{
-        //    m_body = Factory.CreateCircleBody(1, 1, 1);
+        m_body = Factory.CreateCircleBody(1, 1, 1);
         //    m_collider
         //}
 
@@ -46,12 +46,12 @@ namespace GameActorLogic
         /// 该传入的engine用于将新的对象进行创建
         /// 应该会放入其他接口
         /// </summary>
-        public PhysicalBase(Body body,Collider collider, IEnvirinfointernalBase envirinfo)
+        public PhysicalBase(Body body,Collider collider, IEnvirinfoInternalBase envirinfo)
         {
             this.envirinfo = envirinfo;
             m_body = body;
             m_collider = collider;
-            envirinfo.GetCollisionEvent().colliders.Add(body, collider);
+            //envirinfo.GetCollisionEvent().colliders.Add(body, collider);
             m_collider.OnCollisionStay += OnCollision;
         }
 
@@ -97,7 +97,7 @@ namespace GameActorLogic
         }
         #endregion
 
-        #region IPhysicalinternalBase
+        #region IPhysicalInternalBase
 
         /// <summary>
         /// 给飞船一个与朝向相同的推力
@@ -116,6 +116,17 @@ namespace GameActorLogic
         {
             m_body.AngularVelocity += angular;
         }
+
+        public Body GetBody()
+        {
+            return m_body;
+        }
+
+        public Collider GetCollider()
+        {
+            return m_collider;
+        }
+
         #endregion
 
 

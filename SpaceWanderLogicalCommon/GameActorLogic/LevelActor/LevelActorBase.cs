@@ -73,18 +73,7 @@ namespace GameActorLogic
         }
         #endregion
 
-        #region 关卡世界环境组件
-        public void AddToEngine(ObjBase obj)
-        {
-            _envirinfoComponent.AddToEngine(obj);
-        }
-
-        public void RemoveFromEngine(ObjBase obj)
-        {
-            _envirinfoComponent.RemoveFromEngine(obj);
-        }
-
-        #endregion
+    
 
         #region 指令集合组件
 
@@ -111,7 +100,7 @@ namespace GameActorLogic
             return _eventComponent;
         }
 
-        IEnvirinfointernalBase ILevelActorComponentBaseContainer.GetEnvirinfointernalBase()
+        IEnvirinfoInternalBase ILevelActorComponentBaseContainer.GetEnvirinfointernalBase()
         {
             return _envirinfoComponent;
         }

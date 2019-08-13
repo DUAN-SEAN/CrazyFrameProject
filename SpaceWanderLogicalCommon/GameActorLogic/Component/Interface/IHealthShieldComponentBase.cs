@@ -41,7 +41,7 @@ namespace GameActorLogic
     }
 
 
-    public interface IHealthShieldinternalBase : IHealthShieldBase
+    public interface IHealthShieldInternalBase : IHealthShieldBase
     {
         /// <summary>
         /// 失去血量

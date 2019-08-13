@@ -14,7 +14,7 @@ namespace GameActorLogic
         protected WeaponEventComponentBase _weaponEventComponent;
         protected WeaponAttributeComponentBase _weaponAttributeComponent;
 
-        protected WeaponActorBase(ulong id,IEnvirinfointernalBase envir) : base(id,envir)
+        protected WeaponActorBase(ulong id) : base(id)
         {
 
         }
@@ -31,7 +31,13 @@ namespace GameActorLogic
 
         public abstract AIComponentBase CreateAiComponent();
 
-        
+        public override void Update()
+        {
+            _aiComponent.Update();
+        }
+
+
+
         #region IWeaponBaseContainer
 
         #region AI组件
@@ -45,7 +51,7 @@ namespace GameActorLogic
             return _aiComponent.PauseAILogic();
         }
 
-        public IAIinternalBase GetAIinternalBase()
+        public IAIInternalBase GetAIinternalBase()
         {
             return _aiComponent;
         }

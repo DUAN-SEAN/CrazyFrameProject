@@ -56,7 +56,7 @@ namespace GameActorLogic
         /// <summary>
         /// 世界环境信息
         /// </summary>
-        IEnvirinfointernalBase GetEnvirinfointernalBase();
+        IEnvirinfoInternalBase GetEnvirinfointernalBase();
 
         
 

@@ -12,7 +12,7 @@ namespace GameActorLogic
 
     public abstract class EnvirinfoComponentBase:
         IEnvirinfoBase,
-        IEnvirinfointernalBase
+        IEnvirinfoInternalBase
     {
         /// <summary>
         /// 物理引擎
@@ -45,10 +45,20 @@ namespace GameActorLogic
 
         }
 
+        /// <summary>
+        /// 对物理引擎和Actor对象的逻辑进行Tick
+        /// </summary>
         public void Tick()
         {
             m_runner.Update(DateTime.Now.Ticks);
             m_collision.Update();
+
+            for (int i = 0; i < _actorList.Count; i++)
+            {
+                _actorList[i].Update();
+            }
+
+
         }
 
 
@@ -56,18 +66,31 @@ namespace GameActorLogic
 
        
 
-        public void AddToEngine(ObjBase obj)
+     
+
+        public void AddActor(ActorBase actor)
         {
-            m_engine.World.Add(obj);
+
+            IBaseComponentContainer container = actor as IBaseComponentContainer;
+            var body = container.GetPhysicalinternalBase().GetBody();
+            var collider = container.GetPhysicalinternalBase().GetCollider();
+            m_collision.colliders.Add(body, collider);
+            m_engine.World.Add(body);
+            _actorList.Add(actor);
         }
 
-        public void RemoveFromEngine(ObjBase obj)
+        public void RemoveActor(ActorBase actor)
         {
-            m_engine.World.Remove(obj);
+            IBaseComponentContainer container = actor as IBaseComponentContainer;
+            var body = container.GetPhysicalinternalBase().GetBody();
+            m_collision.colliders.Remove(body);
+            m_engine.World.Remove(body);
+            _actorList.Remove(actor);
         }
+
         #endregion
 
-        #region IEnvirinfointernalBase
+        #region IEnvirinfoInternalBase
         public Engine GetEngine()
         {
             return m_engine;

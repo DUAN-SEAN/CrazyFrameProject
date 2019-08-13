@@ -17,7 +17,7 @@ namespace GameActorLogic
     /// <summary>
     /// 用于显示层显示 对内接口
     /// </summary>
-    public interface IViewinternalBase : IViewBase
+    public interface IViewInternalBase : IViewBase
     {
 
     }

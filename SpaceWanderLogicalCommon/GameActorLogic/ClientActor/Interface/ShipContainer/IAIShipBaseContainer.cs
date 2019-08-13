@@ -26,7 +26,7 @@ namespace GameActorLogic
         /// <summary>
         /// 获取AI对内接口
         /// </summary>
-        IAIinternalBase GetAIinternalBase();
+        IAIInternalBase GetAIinternalBase();
 
 
 

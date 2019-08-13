@@ -29,12 +29,18 @@ namespace GameActorLogic
             _forwardeventmessages = new List<IEventMessage>();
         }
 
+       
+
+
         #region 对外接口
         public void AddHandleEventMessage(IEventMessage msg)
         {
             _handleeventmessages.Add(msg);
         }
 
+        /// <summary>
+        /// 获取一次清空一次集合
+        /// </summary>
         public List<IEventMessage> GetForWardEventMessages()
         {
             var list = new List<IEventMessage>(_forwardeventmessages);

@@ -11,7 +11,7 @@ namespace GameActorLogic
     /// 已去掉抽象标签
     public class HealthShieldComponentBase : 
         IHealthShieldBase,
-        IHealthShieldinternalBase
+        IHealthShieldInternalBase
     {
         protected int _hp;
         protected int _shieldval;
@@ -125,7 +125,7 @@ namespace GameActorLogic
 
         #endregion
 
-        #region IHealthShieldinternalBase
+        #region IHealthShieldInternalBase
         public void LossBlood(int loss)
         {
             if (_shieldval > 0)

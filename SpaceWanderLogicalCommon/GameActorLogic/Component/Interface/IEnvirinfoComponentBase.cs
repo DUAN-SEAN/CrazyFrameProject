@@ -25,7 +25,7 @@ namespace GameActorLogic
     /// <summary>
     /// 对内接口
     /// </summary>
-    public interface IEnvirinfointernalBase : IEnvirinfoBase
+    public interface IEnvirinfoInternalBase : IEnvirinfoBase
     {
         /// <summary>
         /// 获取物理引擎
@@ -37,9 +37,11 @@ namespace GameActorLogic
         /// </summary>
         CollisionEvent GetCollisionEvent();
 
-        void AddToEngine(ObjBase obj);
 
-        void RemoveFromEngine(ObjBase obj);
+        void AddActor(ActorBase actor);
+
+        void RemoveActor(ActorBase actor);
+
     }
 
 

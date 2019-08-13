@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CrazyEngine.Base;
 using CrazyEngine.Common;
+using CrazyEngine.External;
 
 namespace GameActorLogic { 
     /// <summary>
@@ -32,7 +34,7 @@ namespace GameActorLogic {
     /// <summary>
     /// 针对物理引擎对象的操作 对内接口
     /// </summary>
-    public interface IPhysicalinternalBase : IPhysicalBase
+    public interface IPhysicalInternalBase : IPhysicalBase
     {
         /// <summary>
         /// 给飞船一个与朝向相同的推力
@@ -47,5 +49,15 @@ namespace GameActorLogic {
         /// 默认0.0000001
         /// </summary>
         void AddForward(double ang);
+
+        /// <summary>
+        /// 返回自己的Body实体 用于添加到物理引擎中
+        /// </summary>
+        Body GetBody();
+
+        /// <summary>
+        /// 返回自己的碰撞机实体 用于添加到碰撞器中
+        /// </summary>
+        Collider GetCollider();
     }
 }

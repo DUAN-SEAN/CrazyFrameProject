@@ -12,11 +12,11 @@ namespace GameActorLogic
     /// </summary>
     public class MoveComponentBase : 
         IMoveBase,
-        IMoveinternalBase
+        IMoveInternalBase
     {
-        protected IPhysicalinternalBase physical;
+        protected IPhysicalInternalBase physical;
 
-        public MoveComponentBase(IPhysicalinternalBase physical)
+        public MoveComponentBase(IPhysicalInternalBase physical)
         {
             this.physical = physical;
         }
@@ -45,7 +45,7 @@ namespace GameActorLogic
 
         #endregion
 
-        #region IMoveinternalBase
+        #region IMoveInternalBase
         public event Action<double> OnLeft;
         public event Action<double> OnRight;
         public event Action<float> OnThrust;
