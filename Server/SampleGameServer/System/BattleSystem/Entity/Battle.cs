@@ -61,7 +61,40 @@ namespace GameServer.Battle
         private void OnSyncState()
         {
             //获取所有关卡内的actor
+            var actors = m_level.GetAllActors();
+            foreach (var actor in actors)
+            {
+                switch (actor.GetActorType())
+                {
+                    case ActorTypeBaseDefine.ShipActorNone:
+                        ShipActorBase shipActorBase = actor as ShipActorBase;
+                        S2C_SyncHpShieldStateBattleMessage syncHpShield = new S2C_SyncHpShieldStateBattleMessage();
+                        syncHpShield.BattleId = Id;
+                        syncHpShield.ActorId = shipActorBase.GetActorID();
+                        syncHpShield.ActorType = shipActorBase.GetActorType();
+                        syncHpShield.Hp = shipActorBase.GetHP();
+                        syncHpShield.Shield = shipActorBase.GetShieldNum();
+                        S2C_SyncPhysicsStateBattleMessage syncPhysics = new S2C_SyncPhysicsStateBattleMessage();
+                        syncPhysics.BattleId = Id;
+                        syncPhysics.ActorId = shipActorBase.GetActorID();
+                        syncPhysics.ActorType = shipActorBase.GetActorType();
+                        syncPhysics.AngleVelocity = shipActorBase.GetAngleVelocity();
+                        syncPhysics.ForceX = shipActorBase.GetForce().X;
+                        syncPhysics.ForceY = shipActorBase.GetForce().Y;
+                        syncPhysics.ForwardAngle = shipActorBase.GetForwardAngle();
+                        syncPhysics.PositionX = shipActorBase.GetPosition().X;
+                        syncPhysics.PositionY = shipActorBase.GetPosition().Y;
+                        syncPhysics.VelocityX = shipActorBase.GetVelocity().X;
+                        syncPhysics.VelocityY = shipActorBase.GetVelocity().Y;
+                        syncPhysics.Torque = shipActorBase.GetTorque();
 
+                        BroadcastMessage(syncPhysics);
+                        BroadcastMessage(syncHpShield);
+
+                        break;
+                    default:break;
+                }
+            }
             //分组件封装所有的值
 
         }

@@ -32,14 +32,25 @@ namespace Crazy.Common {
             "IkwKGEMyU19Db21tYW5kQmF0dGxlTWVzc2FnZRINCgVScGNJZBhaIAEoBRIQ",
             "CghCYXR0bGVJZBgBIAEoBBIPCgdDb21tYW5kGAIgASgMIkgKFlMyQ19FdmVu",
             "dEJhdHRsZU1lc3NhZ2USDQoFUnBjSWQYWiABKAUSEAoIQmF0dGxlSWQYASAB",
-            "KAQSDQoFRXZlbnQYAiABKAxiBnByb3RvMw=="));
+            "KAQSDQoFRXZlbnQYAiABKAwihQEKIlMyQ19TeW5jSHBTaGllbGRTdGF0ZUJh",
+            "dHRsZU1lc3NhZ2USDQoFUnBjSWQYWiABKAUSEAoIQmF0dGxlSWQYASABKAQS",
+            "DwoHQWN0b3JJZBgCIAEoBBIRCglBY3RvclR5cGUYAyABKAUSCgoCSHAYBCAB",
+            "KAUSDgoGU2hpZWxkGAUgASgFIpcCCiFTMkNfU3luY1BoeXNpY3NTdGF0ZUJh",
+            "dHRsZU1lc3NhZ2USDQoFUnBjSWQYWiABKAUSEAoIQmF0dGxlSWQYASABKAQS",
+            "DwoHQWN0b3JJZBgCIAEoBBIRCglBY3RvclR5cGUYAyABKAUSEgoKUG9zaXRp",
+            "b25fWBgEIAEoARISCgpQb3NpdGlvbl9ZGAUgASgBEhQKDEZvcndhcmRBbmds",
+            "ZRgGIAEoARISCgpWZWxvY2l0eV9YGAcgASgBEhIKClZlbG9jaXR5X1kYCCAB",
+            "KAESFQoNQW5nbGVWZWxvY2l0eRgJIAEoARIPCgdGb3JjZV9YGAogASgBEg8K",
+            "B0ZvcmNlX1kYCyABKAESDgoGVG9ycXVlGAwgASgBYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.C2S_BattleCommandMessage), global::Crazy.Common.C2S_BattleCommandMessage.Parser, new[]{ "RpcId", "BattleId", "Message" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_BodyInitBattleMessage), global::Crazy.Common.S2C_BodyInitBattleMessage.Parser, new[]{ "RpcId", "BattleId", "PlayerId", "BodyType", "Body" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.C2S_CommandBattleMessage), global::Crazy.Common.C2S_CommandBattleMessage.Parser, new[]{ "RpcId", "BattleId", "Command" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_EventBattleMessage), global::Crazy.Common.S2C_EventBattleMessage.Parser, new[]{ "RpcId", "BattleId", "Event" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_EventBattleMessage), global::Crazy.Common.S2C_EventBattleMessage.Parser, new[]{ "RpcId", "BattleId", "Event" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncHpShieldStateBattleMessage), global::Crazy.Common.S2C_SyncHpShieldStateBattleMessage.Parser, new[]{ "RpcId", "BattleId", "ActorId", "ActorType", "Hp", "Shield" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncPhysicsStateBattleMessage), global::Crazy.Common.S2C_SyncPhysicsStateBattleMessage.Parser, new[]{ "RpcId", "BattleId", "ActorId", "ActorType", "PositionX", "PositionY", "ForwardAngle", "VelocityX", "VelocityY", "AngleVelocity", "ForceX", "ForceY", "Torque" }, null, null, null)
           }));
     }
     #endregion
@@ -840,6 +851,740 @@ namespace Crazy.Common {
           }
           case 18: {
             Event = input.ReadBytes();
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class S2C_SyncHpShieldStateBattleMessage : pb::IMessage<S2C_SyncHpShieldStateBattleMessage> {
+    private static readonly pb::MessageParser<S2C_SyncHpShieldStateBattleMessage> _parser = new pb::MessageParser<S2C_SyncHpShieldStateBattleMessage>(() => new S2C_SyncHpShieldStateBattleMessage());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<S2C_SyncHpShieldStateBattleMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Crazy.Common.BattleMessageReflection.Descriptor.MessageTypes[4]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S2C_SyncHpShieldStateBattleMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S2C_SyncHpShieldStateBattleMessage(S2C_SyncHpShieldStateBattleMessage other) : this() {
+      rpcId_ = other.rpcId_;
+      battleId_ = other.battleId_;
+      actorId_ = other.actorId_;
+      actorType_ = other.actorType_;
+      hp_ = other.hp_;
+      shield_ = other.shield_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S2C_SyncHpShieldStateBattleMessage Clone() {
+      return new S2C_SyncHpShieldStateBattleMessage(this);
+    }
+
+    /// <summary>Field number for the "RpcId" field.</summary>
+    public const int RpcIdFieldNumber = 90;
+    private int rpcId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "BattleId" field.</summary>
+    public const int BattleIdFieldNumber = 1;
+    private ulong battleId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong BattleId {
+      get { return battleId_; }
+      set {
+        battleId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "ActorId" field.</summary>
+    public const int ActorIdFieldNumber = 2;
+    private ulong actorId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong ActorId {
+      get { return actorId_; }
+      set {
+        actorId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "ActorType" field.</summary>
+    public const int ActorTypeFieldNumber = 3;
+    private int actorType_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int ActorType {
+      get { return actorType_; }
+      set {
+        actorType_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Hp" field.</summary>
+    public const int HpFieldNumber = 4;
+    private int hp_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Hp {
+      get { return hp_; }
+      set {
+        hp_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Shield" field.</summary>
+    public const int ShieldFieldNumber = 5;
+    private int shield_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Shield {
+      get { return shield_; }
+      set {
+        shield_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as S2C_SyncHpShieldStateBattleMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(S2C_SyncHpShieldStateBattleMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (RpcId != other.RpcId) return false;
+      if (BattleId != other.BattleId) return false;
+      if (ActorId != other.ActorId) return false;
+      if (ActorType != other.ActorType) return false;
+      if (Hp != other.Hp) return false;
+      if (Shield != other.Shield) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (RpcId != 0) hash ^= RpcId.GetHashCode();
+      if (BattleId != 0UL) hash ^= BattleId.GetHashCode();
+      if (ActorId != 0UL) hash ^= ActorId.GetHashCode();
+      if (ActorType != 0) hash ^= ActorType.GetHashCode();
+      if (Hp != 0) hash ^= Hp.GetHashCode();
+      if (Shield != 0) hash ^= Shield.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (BattleId != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(BattleId);
+      }
+      if (ActorId != 0UL) {
+        output.WriteRawTag(16);
+        output.WriteUInt64(ActorId);
+      }
+      if (ActorType != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(ActorType);
+      }
+      if (Hp != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(Hp);
+      }
+      if (Shield != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(Shield);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (BattleId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(BattleId);
+      }
+      if (ActorId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(ActorId);
+      }
+      if (ActorType != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ActorType);
+      }
+      if (Hp != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Hp);
+      }
+      if (Shield != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Shield);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(S2C_SyncHpShieldStateBattleMessage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.RpcId != 0) {
+        RpcId = other.RpcId;
+      }
+      if (other.BattleId != 0UL) {
+        BattleId = other.BattleId;
+      }
+      if (other.ActorId != 0UL) {
+        ActorId = other.ActorId;
+      }
+      if (other.ActorType != 0) {
+        ActorType = other.ActorType;
+      }
+      if (other.Hp != 0) {
+        Hp = other.Hp;
+      }
+      if (other.Shield != 0) {
+        Shield = other.Shield;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            BattleId = input.ReadUInt64();
+            break;
+          }
+          case 16: {
+            ActorId = input.ReadUInt64();
+            break;
+          }
+          case 24: {
+            ActorType = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            Hp = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            Shield = input.ReadInt32();
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class S2C_SyncPhysicsStateBattleMessage : pb::IMessage<S2C_SyncPhysicsStateBattleMessage> {
+    private static readonly pb::MessageParser<S2C_SyncPhysicsStateBattleMessage> _parser = new pb::MessageParser<S2C_SyncPhysicsStateBattleMessage>(() => new S2C_SyncPhysicsStateBattleMessage());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<S2C_SyncPhysicsStateBattleMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Crazy.Common.BattleMessageReflection.Descriptor.MessageTypes[5]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S2C_SyncPhysicsStateBattleMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S2C_SyncPhysicsStateBattleMessage(S2C_SyncPhysicsStateBattleMessage other) : this() {
+      rpcId_ = other.rpcId_;
+      battleId_ = other.battleId_;
+      actorId_ = other.actorId_;
+      actorType_ = other.actorType_;
+      positionX_ = other.positionX_;
+      positionY_ = other.positionY_;
+      forwardAngle_ = other.forwardAngle_;
+      velocityX_ = other.velocityX_;
+      velocityY_ = other.velocityY_;
+      angleVelocity_ = other.angleVelocity_;
+      forceX_ = other.forceX_;
+      forceY_ = other.forceY_;
+      torque_ = other.torque_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S2C_SyncPhysicsStateBattleMessage Clone() {
+      return new S2C_SyncPhysicsStateBattleMessage(this);
+    }
+
+    /// <summary>Field number for the "RpcId" field.</summary>
+    public const int RpcIdFieldNumber = 90;
+    private int rpcId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "BattleId" field.</summary>
+    public const int BattleIdFieldNumber = 1;
+    private ulong battleId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong BattleId {
+      get { return battleId_; }
+      set {
+        battleId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "ActorId" field.</summary>
+    public const int ActorIdFieldNumber = 2;
+    private ulong actorId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong ActorId {
+      get { return actorId_; }
+      set {
+        actorId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "ActorType" field.</summary>
+    public const int ActorTypeFieldNumber = 3;
+    private int actorType_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int ActorType {
+      get { return actorType_; }
+      set {
+        actorType_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Position_X" field.</summary>
+    public const int PositionXFieldNumber = 4;
+    private double positionX_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public double PositionX {
+      get { return positionX_; }
+      set {
+        positionX_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Position_Y" field.</summary>
+    public const int PositionYFieldNumber = 5;
+    private double positionY_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public double PositionY {
+      get { return positionY_; }
+      set {
+        positionY_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "ForwardAngle" field.</summary>
+    public const int ForwardAngleFieldNumber = 6;
+    private double forwardAngle_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public double ForwardAngle {
+      get { return forwardAngle_; }
+      set {
+        forwardAngle_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Velocity_X" field.</summary>
+    public const int VelocityXFieldNumber = 7;
+    private double velocityX_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public double VelocityX {
+      get { return velocityX_; }
+      set {
+        velocityX_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Velocity_Y" field.</summary>
+    public const int VelocityYFieldNumber = 8;
+    private double velocityY_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public double VelocityY {
+      get { return velocityY_; }
+      set {
+        velocityY_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "AngleVelocity" field.</summary>
+    public const int AngleVelocityFieldNumber = 9;
+    private double angleVelocity_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public double AngleVelocity {
+      get { return angleVelocity_; }
+      set {
+        angleVelocity_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Force_X" field.</summary>
+    public const int ForceXFieldNumber = 10;
+    private double forceX_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public double ForceX {
+      get { return forceX_; }
+      set {
+        forceX_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Force_Y" field.</summary>
+    public const int ForceYFieldNumber = 11;
+    private double forceY_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public double ForceY {
+      get { return forceY_; }
+      set {
+        forceY_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Torque" field.</summary>
+    public const int TorqueFieldNumber = 12;
+    private double torque_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public double Torque {
+      get { return torque_; }
+      set {
+        torque_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as S2C_SyncPhysicsStateBattleMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(S2C_SyncPhysicsStateBattleMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (RpcId != other.RpcId) return false;
+      if (BattleId != other.BattleId) return false;
+      if (ActorId != other.ActorId) return false;
+      if (ActorType != other.ActorType) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(PositionX, other.PositionX)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(PositionY, other.PositionY)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(ForwardAngle, other.ForwardAngle)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(VelocityX, other.VelocityX)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(VelocityY, other.VelocityY)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(AngleVelocity, other.AngleVelocity)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(ForceX, other.ForceX)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(ForceY, other.ForceY)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(Torque, other.Torque)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (RpcId != 0) hash ^= RpcId.GetHashCode();
+      if (BattleId != 0UL) hash ^= BattleId.GetHashCode();
+      if (ActorId != 0UL) hash ^= ActorId.GetHashCode();
+      if (ActorType != 0) hash ^= ActorType.GetHashCode();
+      if (PositionX != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(PositionX);
+      if (PositionY != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(PositionY);
+      if (ForwardAngle != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(ForwardAngle);
+      if (VelocityX != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(VelocityX);
+      if (VelocityY != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(VelocityY);
+      if (AngleVelocity != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(AngleVelocity);
+      if (ForceX != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(ForceX);
+      if (ForceY != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(ForceY);
+      if (Torque != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Torque);
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (BattleId != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(BattleId);
+      }
+      if (ActorId != 0UL) {
+        output.WriteRawTag(16);
+        output.WriteUInt64(ActorId);
+      }
+      if (ActorType != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(ActorType);
+      }
+      if (PositionX != 0D) {
+        output.WriteRawTag(33);
+        output.WriteDouble(PositionX);
+      }
+      if (PositionY != 0D) {
+        output.WriteRawTag(41);
+        output.WriteDouble(PositionY);
+      }
+      if (ForwardAngle != 0D) {
+        output.WriteRawTag(49);
+        output.WriteDouble(ForwardAngle);
+      }
+      if (VelocityX != 0D) {
+        output.WriteRawTag(57);
+        output.WriteDouble(VelocityX);
+      }
+      if (VelocityY != 0D) {
+        output.WriteRawTag(65);
+        output.WriteDouble(VelocityY);
+      }
+      if (AngleVelocity != 0D) {
+        output.WriteRawTag(73);
+        output.WriteDouble(AngleVelocity);
+      }
+      if (ForceX != 0D) {
+        output.WriteRawTag(81);
+        output.WriteDouble(ForceX);
+      }
+      if (ForceY != 0D) {
+        output.WriteRawTag(89);
+        output.WriteDouble(ForceY);
+      }
+      if (Torque != 0D) {
+        output.WriteRawTag(97);
+        output.WriteDouble(Torque);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (BattleId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(BattleId);
+      }
+      if (ActorId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(ActorId);
+      }
+      if (ActorType != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ActorType);
+      }
+      if (PositionX != 0D) {
+        size += 1 + 8;
+      }
+      if (PositionY != 0D) {
+        size += 1 + 8;
+      }
+      if (ForwardAngle != 0D) {
+        size += 1 + 8;
+      }
+      if (VelocityX != 0D) {
+        size += 1 + 8;
+      }
+      if (VelocityY != 0D) {
+        size += 1 + 8;
+      }
+      if (AngleVelocity != 0D) {
+        size += 1 + 8;
+      }
+      if (ForceX != 0D) {
+        size += 1 + 8;
+      }
+      if (ForceY != 0D) {
+        size += 1 + 8;
+      }
+      if (Torque != 0D) {
+        size += 1 + 8;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(S2C_SyncPhysicsStateBattleMessage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.RpcId != 0) {
+        RpcId = other.RpcId;
+      }
+      if (other.BattleId != 0UL) {
+        BattleId = other.BattleId;
+      }
+      if (other.ActorId != 0UL) {
+        ActorId = other.ActorId;
+      }
+      if (other.ActorType != 0) {
+        ActorType = other.ActorType;
+      }
+      if (other.PositionX != 0D) {
+        PositionX = other.PositionX;
+      }
+      if (other.PositionY != 0D) {
+        PositionY = other.PositionY;
+      }
+      if (other.ForwardAngle != 0D) {
+        ForwardAngle = other.ForwardAngle;
+      }
+      if (other.VelocityX != 0D) {
+        VelocityX = other.VelocityX;
+      }
+      if (other.VelocityY != 0D) {
+        VelocityY = other.VelocityY;
+      }
+      if (other.AngleVelocity != 0D) {
+        AngleVelocity = other.AngleVelocity;
+      }
+      if (other.ForceX != 0D) {
+        ForceX = other.ForceX;
+      }
+      if (other.ForceY != 0D) {
+        ForceY = other.ForceY;
+      }
+      if (other.Torque != 0D) {
+        Torque = other.Torque;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            BattleId = input.ReadUInt64();
+            break;
+          }
+          case 16: {
+            ActorId = input.ReadUInt64();
+            break;
+          }
+          case 24: {
+            ActorType = input.ReadInt32();
+            break;
+          }
+          case 33: {
+            PositionX = input.ReadDouble();
+            break;
+          }
+          case 41: {
+            PositionY = input.ReadDouble();
+            break;
+          }
+          case 49: {
+            ForwardAngle = input.ReadDouble();
+            break;
+          }
+          case 57: {
+            VelocityX = input.ReadDouble();
+            break;
+          }
+          case 65: {
+            VelocityY = input.ReadDouble();
+            break;
+          }
+          case 73: {
+            AngleVelocity = input.ReadDouble();
+            break;
+          }
+          case 81: {
+            ForceX = input.ReadDouble();
+            break;
+          }
+          case 89: {
+            ForceY = input.ReadDouble();
+            break;
+          }
+          case 97: {
+            Torque = input.ReadDouble();
             break;
           }
           case 720: {

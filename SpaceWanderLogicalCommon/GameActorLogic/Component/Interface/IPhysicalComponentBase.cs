@@ -47,9 +47,6 @@ namespace GameActorLogic {
 
         #endregion
 
-
-
-
         /// <summary>
         /// 得到当前速度
         /// </summary>

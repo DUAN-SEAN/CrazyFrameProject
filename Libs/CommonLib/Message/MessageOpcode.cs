@@ -69,25 +69,25 @@ namespace Crazy.Common
 {
 	public static partial class MessageOpcode
 	{
-		 public const ushort ChatOneMessage = 1006;
-		 public const ushort C2S_CreateMatchTeam = 1007;
-		 public const ushort S2C_CreateMatchTeamComplete = 1008;
-		 public const ushort C2S_InvitePlayerMatchTeam = 1009;
-		 public const ushort S2C_InvitePlayerMatchTeam = 1010;
-		 public const ushort C2S_JoinMatchTeam = 1011;
-		 public const ushort S2CM_JoinMatchTeamComplete = 1012;
-		 public const ushort C2S_GetMatchTeamInfo = 1013;
-		 public const ushort S2C_UpdateMatchTeamInfo = 1014;
-		 public const ushort MatchTeamInfo = 1015;
-		 public const ushort C2S_ExitMatchTeam = 1016;
-		 public const ushort S2CM_ExitMatchTeamComplete = 1017;
-		 public const ushort C2S_JoinMatchQueue = 1018;
-		 public const ushort S2CM_JoinMatchQueueComplete = 1019;
-		 public const ushort C2S_ExitMatchQueue = 1020;
-		 public const ushort S2CM_ExitMatchQueue = 1021;
-		 public const ushort S2CM_MatchingFinish = 1022;
-		 public const ushort S2CM_CreateBattleBarrier = 1023;
-		 public const ushort CreateBattleBarrierInfo = 1024;
-		 public const ushort C2S_ReConnectByLogin = 1025;
+		 public const ushort ChatOneMessage = 1008;
+		 public const ushort C2S_CreateMatchTeam = 1009;
+		 public const ushort S2C_CreateMatchTeamComplete = 1010;
+		 public const ushort C2S_InvitePlayerMatchTeam = 1011;
+		 public const ushort S2C_InvitePlayerMatchTeam = 1012;
+		 public const ushort C2S_JoinMatchTeam = 1013;
+		 public const ushort S2CM_JoinMatchTeamComplete = 1014;
+		 public const ushort C2S_GetMatchTeamInfo = 1015;
+		 public const ushort S2C_UpdateMatchTeamInfo = 1016;
+		 public const ushort MatchTeamInfo = 1017;
+		 public const ushort C2S_ExitMatchTeam = 1018;
+		 public const ushort S2CM_ExitMatchTeamComplete = 1019;
+		 public const ushort C2S_JoinMatchQueue = 1020;
+		 public const ushort S2CM_JoinMatchQueueComplete = 1021;
+		 public const ushort C2S_ExitMatchQueue = 1022;
+		 public const ushort S2CM_ExitMatchQueue = 1023;
+		 public const ushort S2CM_MatchingFinish = 1024;
+		 public const ushort S2CM_CreateBattleBarrier = 1025;
+		 public const ushort CreateBattleBarrierInfo = 1026;
+		 public const ushort C2S_ReConnectByLogin = 1027;
 	}
 }
