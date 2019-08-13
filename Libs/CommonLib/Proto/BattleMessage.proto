@@ -31,3 +31,18 @@ message S2C_EventBattleMessage // IBattleMessage
 	uint64 BattleId = 1;
 	bytes Event = 2;
 }
+message S2C_SyncHpShieldStateBattleMessage // IBattleMessage
+{
+	int32 RpcId = 90;
+	uint64 ActorId = 1;
+	int32 Hp = 2;
+	int32 Shield = 3;
+
+}
+message S2C_SyncPhysicsStateBattleMessage // IBattleMessage
+{
+	int32 RpcId = 90;
+	uint64 ActorId = 1;
+
+
+}
