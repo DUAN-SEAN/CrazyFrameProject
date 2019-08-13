@@ -13,6 +13,5 @@ namespace GameActorLogic
         public const Int32 DestroyEvent = 1003;
         public const Int32 UpdateEvent = 1004;
 
-
     }
 }

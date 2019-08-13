@@ -1,6 +1,5 @@
 ﻿using System;
 using CrazyEngine.Common;
-using UnityEngine;
 
 namespace CrazyEngine.Base
 {
@@ -32,7 +31,7 @@ namespace CrazyEngine.Base
             if (BodyB != null && PointB == null)
                 PointB = new Point();
 
-            MonoBehaviour.print(PointA + " " + PointB);
+            //MonoBehaviour.print(PointA + " " + PointB);
             Point initialPointA = BodyA != null
                 ? (BodyA.Position + PointA)
                 : PointA;

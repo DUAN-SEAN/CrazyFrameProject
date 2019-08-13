@@ -44,20 +44,11 @@ namespace GameServer.Battle
         {
             base.Update();
 
-            //1 接收网络指令，将收集的指令下发给系统
 
-
-
-            //2 接收逻辑事件(生成、销毁)
+            //1 接收逻辑事件(生成、销毁、状态)
             OnEventMessage();
-
-
-
-            //3 同步状态（各个战斗实体根据自身特性同步状态）
             
-
-
-            //4 驱动物理引擎
+            //2 驱动物理引擎
             if (m_level == null)
                 return;
             m_level.Update();
@@ -159,7 +150,7 @@ namespace GameServer.Battle
         #region BattleSystem
         public void SendCommandToLevel(ICommand commandMsg)
         {
-            
+            m_level.PostCommand(commandMsg);
         }
 
 
