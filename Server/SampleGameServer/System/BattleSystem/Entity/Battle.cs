@@ -44,6 +44,8 @@ namespace GameServer.Battle
         {
             base.Update();
 
+            //0 获取同步状态
+            OnSyncState();
 
             //1 接收逻辑事件(生成、销毁、状态)
             OnEventMessage();
@@ -53,6 +55,14 @@ namespace GameServer.Battle
                 return;
             m_level.Update();
 
+
+        }
+
+        private void OnSyncState()
+        {
+            //获取所有关卡内的actor
+
+            //分组件封装所有的值
 
         }
 

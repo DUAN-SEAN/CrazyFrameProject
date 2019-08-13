@@ -9,7 +9,7 @@ namespace GameActorLogic
     /// 应该会去掉抽象标签
     /// </summary>
     /// 已去掉抽象标签
-    public class HealthShieldComponentBase : 
+    public class HealthShieldComponentBase: 
         IHealthShieldBase,
         IHealthShieldInternalBase
     {
@@ -98,11 +98,18 @@ namespace GameActorLogic
 
 
         #region IHealthShieldBase
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public int GetHP()
         {
             return _hp;
         }
-
+        /// <summary>
+        /// 获取护盾
+        /// </summary>
+        /// <returns></returns>
         public int GetShieldNum()
         {
             return _shieldval;
