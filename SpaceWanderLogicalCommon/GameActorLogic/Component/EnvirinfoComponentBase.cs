@@ -42,6 +42,7 @@ namespace GameActorLogic
             m_engine = engine;
             m_runner = runner;
             m_collision = new CollisionEvent(m_engine);
+            _actorList = new List<ActorBase>();
 
         }
 
@@ -64,6 +65,10 @@ namespace GameActorLogic
 
         #region IEnvirinfoBase
 
+        public List<ActorBase> GetAllActors()
+        {
+            return _actorList;
+        }
        
 
      

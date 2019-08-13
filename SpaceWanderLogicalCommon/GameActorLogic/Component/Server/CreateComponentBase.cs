@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CrazyEngine.Common;
 
 namespace GameActorLogic
 {
-    public class CreateComponentBase:
+    public class CreateComponentBase :
         ICreateComponentBase,
         ICreateInternalComponentBase
     {
@@ -22,7 +23,12 @@ namespace GameActorLogic
             return IDs++;
         }
 
-        public ActorBase CreateActor(int actortype, double point_x, double point_y,double angle)
+        public ActorBase CreateActor(int actortype, double point_x, double point_y, double angle)
+        {
+            return CreateActor(actortype, point_x, point_y, angle, GetCreateID());
+        }
+
+        protected ActorBase CreateActor(int actortype, double point_x, double point_y, double angle,ulong Id)
         {
             ActorBase actor = null;
             switch (actortype)
@@ -30,13 +36,21 @@ namespace GameActorLogic
                 case ActorTypeBaseDefine.ActorNone:
                     //actor = new ActorBase();
                     break;
+
+                #region 飞船Actor
                 case ActorTypeBaseDefine.ShipActorNone:
-                    actor = new ShipActorBase(GetCreateID());
+                    actor = new ShipActorBase(Id);
+                    actor.PrepareActor(point_x,point_y,angle);
                     break;
-                    
+
+                #endregion
             }
 
             return actor;
         }
+
     }
+
+  
+
 }

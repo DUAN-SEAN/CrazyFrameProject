@@ -55,7 +55,7 @@ namespace GameActorLogic
         /// </summary>
         protected virtual PhysicalBase CreatePhysicalBase()
         {
-            var body = new Body();
+            var body = Factory.CreateTriggleBody(0,0,4,6);
             var collider = new Collider();
 
             return new PhysicalBase(body,collider,envir);
