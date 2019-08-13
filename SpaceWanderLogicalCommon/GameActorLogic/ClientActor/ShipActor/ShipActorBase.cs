@@ -70,9 +70,6 @@ namespace GameActorLogic
 
         #endregion
 
-
-
-
         #region HealthShieldComponent
         /// <summary>
         /// 获得当前血量
@@ -115,7 +112,6 @@ namespace GameActorLogic
         }
         #endregion
 
-
         #region ShipEventComponent
         /// <summary>
         /// 飞船动态初始化生成调用
@@ -136,8 +132,6 @@ namespace GameActorLogic
         #endregion
 
         #endregion
-
-
 
         #region IShipComponentBaseContainer
         public IFireControlInternalBase GetFireControlinternalBase()

@@ -31,18 +31,31 @@ message S2C_EventBattleMessage // IBattleMessage
 	uint64 BattleId = 1;
 	bytes Event = 2;
 }
-message S2C_SyncHpShieldStateBattleMessage // IBattleMessage
+message S2C_SyncHpShieldStateBattleMessage // IBattleMessage 
 {
 	int32 RpcId = 90;
-	uint64 ActorId = 1;
-	int32 Hp = 2;
-	int32 Shield = 3;
+	uint64 BattleId = 1;
+	uint64 ActorId = 2;
+	int32 ActorType = 3;
+	int32 Hp = 4;
+	int32 Shield = 5;
+	
 
 }
-message S2C_SyncPhysicsStateBattleMessage // IBattleMessage
+message S2C_SyncPhysicsStateBattleMessage // IBattleMessage 
 {
 	int32 RpcId = 90;
-	uint64 ActorId = 1;
-
+	uint64 BattleId = 1;
+	uint64 ActorId = 2;
+	int32 ActorType = 3;
+	double Position_X = 4;
+	double Position_Y = 5;
+	double ForwardAngle = 6;
+	double Velocity_X = 7;
+	double Velocity_Y = 8;
+	double AngleVelocity = 9;
+	double Force_X = 10;
+	double Force_Y = 11;
+	double Torque = 12;
 
 }

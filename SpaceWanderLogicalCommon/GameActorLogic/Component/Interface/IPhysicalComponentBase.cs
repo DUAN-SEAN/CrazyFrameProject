@@ -52,9 +52,6 @@ namespace GameActorLogic {
             double forwardAngle, double positionX, double positionY, double velocityX, double velocityY, double torque);
         #endregion
 
-
-
-
         /// <summary>
         /// 得到当前速度
         /// </summary>

@@ -29,12 +29,12 @@ namespace Crazy.Common
 {
 	public static partial class RpcMessageOpcode
 	{
-		 public const ushort C2S_LoginMessage = 1026;
-		 public const ushort S2C_LoginMessage = 1027;
-		 public const ushort C2S_RegisterMessage = 1028;
-		 public const ushort S2C_RegisterMessage = 1029;
-		 public const ushort C2S_UpdateOnlinePlayerList = 1030;
-		 public const ushort S2C_UpdateOnlinePlayerList = 1031;
-		 public const ushort OnlinePlayerInfo = 1032;
+		 public const ushort C2S_LoginMessage = 1028;
+		 public const ushort S2C_LoginMessage = 1029;
+		 public const ushort C2S_RegisterMessage = 1030;
+		 public const ushort S2C_RegisterMessage = 1031;
+		 public const ushort C2S_UpdateOnlinePlayerList = 1032;
+		 public const ushort S2C_UpdateOnlinePlayerList = 1033;
+		 public const ushort OnlinePlayerInfo = 1034;
 	}
 }

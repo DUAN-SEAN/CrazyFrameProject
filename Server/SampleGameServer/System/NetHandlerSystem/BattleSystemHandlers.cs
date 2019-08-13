@@ -12,9 +12,18 @@ using GameServer.Battle;
 
 namespace GameServer.System.NetHandlerSystem
 {
+  
+
+    /// <summary>
+    /// 接受指令消息handler
+    /// </summary>
     [MessageHandler]
-    public class C2S_BattleCommandHandler : AMHandler<C2S_BattleCommandMessage>
+    public class C2S_CommandBattleMessageHandler:AMHandler<C2S_CommandBattleMessage>
     {
+        /// <summary>
+        /// 序列化器
+        /// </summary>
+        private static BinaryFormatter bf = new BinaryFormatter();
         /// <summary>
         /// 由客户端同步过来的个人指令
         /// 服务器做如下处理
@@ -24,20 +33,6 @@ namespace GameServer.System.NetHandlerSystem
         /// </summary>
         /// <param name="playerContext"></param>
         /// <param name="message">网络消息</param>
-        protected override void Run(ISession playerContext, C2S_BattleCommandMessage message)
-        {
-            
-            //GameServer.Instance.PostMessageToSystem<BattleSystem>(null);
-        }
-    }
-
-    /// <summary>
-    /// 接受指令消息handler
-    /// </summary>
-    [MessageHandler]
-    public class C2S_CommandBattleMessageHandler:AMHandler<C2S_CommandBattleMessage>
-    {
-        private static BinaryFormatter bf = new BinaryFormatter();
         protected override void Run(ISession playerContext, C2S_CommandBattleMessage message)
         {
             GameServerPlayerContext ctx = playerContext as GameServerPlayerContext;
