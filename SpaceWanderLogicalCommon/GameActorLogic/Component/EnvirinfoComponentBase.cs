@@ -73,6 +73,20 @@ namespace GameActorLogic
 
      
 
+       
+
+        #endregion
+
+        #region IEnvirinfoInternalBase
+        public Engine GetEngine()
+        {
+            return m_engine;
+        }
+        public CollisionEvent GetCollisionEvent()
+        {
+            return m_collision;
+        }
+
         public void AddActor(ActorBase actor)
         {
 
@@ -91,18 +105,6 @@ namespace GameActorLogic
             m_collision.colliders.Remove(body);
             m_engine.World.Remove(body);
             _actorList.Remove(actor);
-        }
-
-        #endregion
-
-        #region IEnvirinfoInternalBase
-        public Engine GetEngine()
-        {
-            return m_engine;
-        }
-        public CollisionEvent GetCollisionEvent()
-        {
-            return m_collision;
         }
         #endregion
 

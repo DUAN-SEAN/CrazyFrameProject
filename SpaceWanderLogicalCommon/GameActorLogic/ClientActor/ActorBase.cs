@@ -81,13 +81,32 @@ namespace GameActorLogic
             return _physicalBase.GetPosition();
         }
 
-        /// <summary>
-        /// 获取朝向
-        /// </summary>
-        public Point GetForward()
+        public double GetForwardAngle()
         {
-            return _physicalBase.GetForward();
+            return _physicalBase.GetForwardAngle();
         }
+
+        public Point GetVelocity()
+        {
+            return _physicalBase.GetVelocity();
+        }
+
+        public double GetAngleVelocity()
+        {
+            return _physicalBase.GetAngleVelocity();
+        }
+
+        public Point GetForce()
+        {
+            return _physicalBase.GetForce();
+        }
+
+        public double GetTorque()
+        {
+            return _physicalBase.GetTorque();
+        }
+
+      
 
         /// <summary>
         /// 得到当前速度
