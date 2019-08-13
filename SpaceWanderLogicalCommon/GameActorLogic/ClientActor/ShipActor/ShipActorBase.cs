@@ -87,6 +87,16 @@ namespace GameActorLogic
             return _healthShieldComponent.GetShieldNum();
         }
 
+        public void SetHP(int hp)
+        {
+            _healthShieldComponent.SetHP(hp);
+        }
+
+        public void SetShieldNum(int shield)
+        {
+            _healthShieldComponent.SetShieldNum(shield);
+        }
+
         /// <summary>
         /// 减少护盾恢复间隔
         /// </summary>

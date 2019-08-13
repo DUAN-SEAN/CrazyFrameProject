@@ -23,7 +23,7 @@ namespace GameActorLogic
             var commandlist = levelContainer.GetComponentBase().GetCommands();
             foreach (var command in commandlist)
             {
-                
+                HandlerCommand(command);
             }
 
 
@@ -53,8 +53,10 @@ namespace GameActorLogic
                     HandlerThrustCommand(command);
                     break;
                 case CommandConstDefine.ForwardCommand:
+                    HandlerForwardCommand(command);
                     break;
                 case CommandConstDefine.SkillCommand:
+                    HandlerSkillCommand(command);
                     break;
             }
         }
@@ -74,7 +76,26 @@ namespace GameActorLogic
         {
             if (!(command is ForwardCommand commanditme)) return;
             var actor = GetActor(commanditme.actorid);
-            actor?.;
+            if (commanditme.ang > 0)
+                actor?.Left(commanditme.ang);
+            else
+                actor?.Right(commanditme.ang);
+        }
+
+        protected void HandlerSkillCommand(ICommand command)
+        {
+            if (!(command is SkillCommand commanditme)) return;
+            if(!(GetActor(commanditme.actorid) is ShipActorBase ship)) return;
+            switch (commanditme.skillcontrol)
+            {
+                case 0:
+                    ship.Fire(commanditme.skilltype);
+                    break;
+                case 1:
+                    ship.End(commanditme.skilltype);
+                    break;
+            }
+
         }
     }
 }

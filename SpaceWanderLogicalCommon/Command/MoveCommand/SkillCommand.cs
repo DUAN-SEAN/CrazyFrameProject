@@ -20,11 +20,17 @@ namespace GameActorLogic
         /// </summary>
         public ulong actorid;
 
-        public SkillCommand(ulong actorid,int skillcontrol)
+        /// <summary>
+        /// 技能类型参数
+        /// </summary>
+        public int skilltype;
+
+        public SkillCommand(ulong actorid,int skilltype,int skillcontrol)
         {
             _commandtype = CommandConstDefine.SkillCommand;
             this.skillcontrol = skillcontrol;
             this.actorid = actorid;
+            this.skilltype = skilltype;
         }
     }
 }

@@ -113,7 +113,12 @@ namespace GameActorLogic
             return _physicalBase.GetTorque();
         }
 
-      
+        public void SetPhysicalValue(ulong actorId, double angleVelocity, double forceX, double forceY, double forwardAngle,
+            double positionX, double positionY, double velocityX, double velocityY, double torque)
+        {
+            _physicalBase.SetPhysicalValue(actorId, angleVelocity, forceX, forceY, forwardAngle, positionX, positionY, velocityX, velocityY, torque);
+        }
+
 
         /// <summary>
         /// 得到当前速度

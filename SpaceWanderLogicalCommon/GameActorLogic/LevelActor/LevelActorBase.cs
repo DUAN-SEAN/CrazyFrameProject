@@ -33,7 +33,7 @@ namespace GameActorLogic
             _eventComponent = new EventComponentBase();
             _commandComponent = new CommandComponentBase();
             _envirinfoComponent = new EnvirinfoComponentBase();
-            _handlerComponent = new HandlerComponentBase();
+            _handlerComponent = new HandlerComponentBase(this);
 
         }
 
