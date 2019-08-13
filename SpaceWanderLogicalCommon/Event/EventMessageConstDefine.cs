@@ -11,6 +11,5 @@ namespace GameActorLogic
         public const Int32 BattleEventNone = 1001;
 
 
-
     }
 }

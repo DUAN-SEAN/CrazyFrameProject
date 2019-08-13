@@ -88,7 +88,6 @@
     <Compile Include="System\BattleSystem\Entity\Battle.cs" />
     <Compile Include="System\BattleSystem\Entity\BEntity.cs" />
     <Compile Include="System\BattleSystem\Entity\BEntityFactory.cs" />
-    <Compile Include="System\BattleSystem\Entity\BodyEntity.cs" />
     <Compile Include="System\DBSystem\MongoDBHelper.cs" />
     <Compile Include="GameServerConstDefine.cs" />
     <Compile Include="GameServer.cs" />
