@@ -59,5 +59,8 @@ namespace GameActorLogic {
         /// 返回自己的碰撞机实体 用于添加到碰撞器中
         /// </summary>
         Collider GetCollider();
+
+
+
     }
 }

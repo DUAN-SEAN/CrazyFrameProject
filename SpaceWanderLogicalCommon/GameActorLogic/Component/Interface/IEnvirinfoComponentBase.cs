@@ -17,8 +17,8 @@ namespace GameActorLogic
     /// </summary>
     public interface IEnvirinfoBase
     {
-        
 
+        List<ActorBase> GetAllActors();
 
     }
 

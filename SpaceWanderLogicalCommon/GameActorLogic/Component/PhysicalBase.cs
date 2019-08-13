@@ -37,7 +37,7 @@ namespace GameActorLogic
 
         //protected PhysicalBase()
         //{
-        m_body = Factory.CreateCircleBody(1, 1, 1);
+        //m_body = Factory.CreateCircleBody(1, 1, 1);
         //    m_collider
         //}
 
