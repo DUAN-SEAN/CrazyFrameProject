@@ -13,6 +13,12 @@ namespace GameActorLogic
         /// 与物理组件中的速度对应
         /// </summary>
         double GetMaxSpeed();
+
+        /// <summary>
+        /// 最大力比率
+        /// </summary>
+        float GetMaxForceProc();
+
     }
 
     public interface IInvariantAttributeinternalBase : IInvariantAttributeBase

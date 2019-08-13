@@ -7,10 +7,9 @@ using CrazyEngine.Core;
 
 namespace CrazyEngine.External
 {
-    public abstract class Collider
+    public class Collider
     {
-
-        public abstract void OnCollisionStay(Collision collision);
+        public  Action<Collision> OnCollisionStay;
 
     }
 }

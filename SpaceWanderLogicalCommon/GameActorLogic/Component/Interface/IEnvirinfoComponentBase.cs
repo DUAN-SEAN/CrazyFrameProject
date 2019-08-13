@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CrazyEngine.Base;
 using CrazyEngine.Core;
+using CrazyEngine.External;
 
 namespace GameActorLogic
 {
@@ -29,8 +30,12 @@ namespace GameActorLogic
         /// <summary>
         /// 获取物理引擎
         /// </summary>
-        /// <returns></returns>
         Engine GetEngine();
+
+        /// <summary>
+        /// 获取碰撞信息收集器
+        /// </summary>
+        CollisionEvent GetCollisionEvent();
 
         void AddToEngine(ObjBase obj);
 

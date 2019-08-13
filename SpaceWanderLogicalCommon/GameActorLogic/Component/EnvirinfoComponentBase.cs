@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CrazyEngine.Base;
 using CrazyEngine.Core;
+using CrazyEngine.External;
 
 namespace GameActorLogic
 {
@@ -22,12 +23,14 @@ namespace GameActorLogic
         /// </summary>
         protected Runner m_runner;
 
+        protected CollisionEvent m_collision;
         protected List<ActorBase> _actorList;
 
         protected EnvirinfoComponentBase()
         {
             m_engine = new Engine();
             m_runner = new Runner(m_engine);
+            m_collision = new CollisionEvent(m_engine);
             _actorList = new List<ActorBase>();
         }
 
@@ -38,16 +41,21 @@ namespace GameActorLogic
         {
             m_engine = engine;
             m_runner = runner;
-            
+            m_collision = new CollisionEvent(m_engine);
+
         }
 
         public void Tick()
         {
             m_runner.Update(DateTime.Now.Ticks);
+            m_collision.Update();
         }
 
 
         #region IEnvirinfoBase
+
+       
+
         public void AddToEngine(ObjBase obj)
         {
             m_engine.World.Add(obj);
@@ -63,6 +71,10 @@ namespace GameActorLogic
         public Engine GetEngine()
         {
             return m_engine;
+        }
+        public CollisionEvent GetCollisionEvent()
+        {
+            return m_collision;
         }
         #endregion
 

@@ -26,6 +26,7 @@ namespace GameActorLogic
         {
             OnDestroy?.Invoke();
         }
+
         #endregion
 
         #region IShipEventinternalBase
