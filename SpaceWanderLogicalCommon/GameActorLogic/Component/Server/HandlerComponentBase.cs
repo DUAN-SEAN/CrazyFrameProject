@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SpaceWanderLogicalCommon.Event;
 
 namespace GameActorLogic
 {
@@ -20,13 +21,17 @@ namespace GameActorLogic
 
         public void Update()
         {
-            var commandlist = levelContainer.GetComponentBase().GetCommands();
+            var commandlist = levelContainer.GetCommandComponentBase().GetCommands();
             foreach (var command in commandlist)
             {
                 HandlerCommand(command);
             }
 
-
+            var eventlist = levelContainer.GetEventComponentBase().GetHandleEventMessages();
+            foreach (var eventMessage in eventlist)
+            {
+                HandlerEvent(eventMessage);
+            }
 
         }
 
@@ -42,7 +47,69 @@ namespace GameActorLogic
             return null;
         }
 
+        #region 处理事件
 
+        protected void HandlerEvent(IEventMessage eventMessage)
+        {
+            switch (eventMessage.MessageId)
+            {
+                case EventMessageConstDefine.BattleEventNone:
+                    break;
+                case EventMessageConstDefine.InitEvent:
+                    HandlerInitEvent(eventMessage as InitEventMessage);
+                    break;
+                case EventMessageConstDefine.UpdateEvent:
+                    break;
+                case EventMessageConstDefine.DestroyEvent:
+                    HandlerDestroyEvent(eventMessage as DestroyEventMessage);
+                    break;
+
+            }
+        }
+
+        /// <summary>
+        /// 处理生成事件
+        /// </summary>
+        protected void HandlerInitEvent(InitEventMessage initEvent)
+        {
+            if (initEvent == null) return;
+            ActorBase actor = null;
+            if (initEvent.haveId)
+            {
+                actor = levelContainer.GetCreateInternalComponentBase().CreateActor(initEvent.actortype,
+                    initEvent.point_x,
+                    initEvent.point_y, initEvent.angle, initEvent.actorid);
+            }
+            else
+            {
+                actor = levelContainer.GetCreateInternalComponentBase().CreateActor(initEvent.actortype,
+                    initEvent.point_x,
+                    initEvent.point_y, initEvent.angle);
+            }
+
+            if (actor != null)
+            {
+                levelContainer.GetEnvirinfointernalBase().AddActor(actor);
+            }
+        }
+
+        /// <summary>
+        /// 处理销毁事件
+        /// </summary>
+        protected void HandlerDestroyEvent(DestroyEventMessage destroyEvent)
+        {
+            if(destroyEvent == null) return;
+            ActorBase actor = null;
+            foreach (var actorBase in levelContainer.GetEnvirinfointernalBase().GetAllActors())
+            {
+                if (actorBase.GetActorID() == destroyEvent.actorid)
+                    actor = actorBase;
+            }
+            levelContainer.GetEnvirinfointernalBase().RemoveActor(actor);
+        }
+        #endregion
+
+        #region 处理指令
         protected void HandlerCommand(ICommand command)
         {
             switch (command.CommandType)
@@ -66,7 +133,7 @@ namespace GameActorLogic
         /// </summary>
         protected void HandlerThrustCommand(ICommand command)
         {
-            if(!(command is ThrustCommand commanditme)) return;
+            if (!(command is ThrustCommand commanditme)) return;
             var actor = GetActor(commanditme.actorid);
             actor?.AddThrust(commanditme.Thrustproc);
         }
@@ -85,7 +152,7 @@ namespace GameActorLogic
         protected void HandlerSkillCommand(ICommand command)
         {
             if (!(command is SkillCommand commanditme)) return;
-            if(!(GetActor(commanditme.actorid) is ShipActorBase ship)) return;
+            if (!(GetActor(commanditme.actorid) is ShipActorBase ship)) return;
             switch (commanditme.skillcontrol)
             {
                 case 0:
@@ -97,5 +164,10 @@ namespace GameActorLogic
             }
 
         }
+
+
+        #endregion
+
+
     }
 }

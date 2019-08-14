@@ -15,6 +15,7 @@ namespace GameActorLogic
         protected EnvirinfoComponentBase _envirinfoComponent;
         protected CommandComponentBase _commandComponent;
         protected HandlerComponentBase _handlerComponent;
+        protected CreateComponentBase _createComponent;
         protected long levelid;
         protected ulong battleid;
 
@@ -34,6 +35,7 @@ namespace GameActorLogic
             _commandComponent = new CommandComponentBase();
             _envirinfoComponent = new EnvirinfoComponentBase();
             _handlerComponent = new HandlerComponentBase(this);
+            _createComponent = new CreateComponentBase();
 
         }
 
@@ -99,6 +101,11 @@ namespace GameActorLogic
             _eventComponent.AddHandleEventMessage(msg);
         }
 
+        public void AddEventMessagesToHandlerForward(IEventMessage msg)
+        {
+            _eventComponent.AddEventMessagesToHandlerForward(msg);
+        }
+
         public List<IEventMessage> GetForWardEventMessages()
         {
             return _eventComponent.GetForWardEventMessages();
@@ -123,7 +130,7 @@ namespace GameActorLogic
 
         #endregion
 
-        ICommandInternalComponentBase ILevelActorComponentBaseContainer.GetComponentBase()
+        ICommandInternalComponentBase ILevelActorComponentBaseContainer.GetCommandComponentBase()
         {
             return _commandComponent;
         }
@@ -137,7 +144,9 @@ namespace GameActorLogic
             return _envirinfoComponent;
         }
 
-
-       
+        public ICreateInternalComponentBase GetCreateInternalComponentBase()
+        {
+            return _createComponent;
+        }
     }
 }

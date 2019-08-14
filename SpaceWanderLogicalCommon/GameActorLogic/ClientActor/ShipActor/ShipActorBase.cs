@@ -144,17 +144,17 @@ namespace GameActorLogic
         #endregion
 
         #region IShipComponentBaseContainer
-        public IFireControlInternalBase GetFireControlinternalBase()
+        IFireControlInternalBase IShipComponentBaseContainer.GetFireControlinternalBase()
         {
             return _fireControlComponent;
         }
 
-        public IHealthShieldInternalBase GetHealthShieldinternalBase()
+        IHealthShieldInternalBase IShipComponentBaseContainer.GetHealthShieldinternalBase()
         {
             return _healthShieldComponent;
         }
 
-        public IShipEventinternalBase GetShipEventinternalBase()
+        IShipEventinternalBase IShipComponentBaseContainer.GetShipEventinternalBase()
         {
             return _shipEventComponent;
         }

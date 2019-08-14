@@ -10,7 +10,7 @@ namespace SpaceWanderLogicalCommon.Event
     [Serializable]
     public class DestroyEventMessage : BattleEventMessageBase
     {
-        protected ulong actorid;
+        public ulong actorid;
         public DestroyEventMessage(ulong actorid)
         {
             _eventMessageId = EventMessageConstDefine.DestroyEvent;

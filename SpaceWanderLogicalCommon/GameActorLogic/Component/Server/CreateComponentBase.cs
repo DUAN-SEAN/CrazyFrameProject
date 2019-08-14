@@ -28,7 +28,7 @@ namespace GameActorLogic
             return CreateActor(actortype, point_x, point_y, angle, GetCreateID());
         }
 
-        protected ActorBase CreateActor(int actortype, double point_x, double point_y, double angle,ulong Id)
+        public ActorBase CreateActor(int actortype, double point_x, double point_y, double angle,ulong Id)
         {
             ActorBase actor = null;
             switch (actortype)
