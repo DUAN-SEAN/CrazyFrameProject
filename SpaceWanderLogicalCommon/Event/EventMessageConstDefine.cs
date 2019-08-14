@@ -12,6 +12,7 @@ namespace GameActorLogic
         public const Int32 InitEvent = 1002;
         public const Int32 DestroyEvent = 1003;
         public const Int32 UpdateEvent = 1004;
+        public const Int32 TaskUpdateEvent = 1005;
 
     }
 }

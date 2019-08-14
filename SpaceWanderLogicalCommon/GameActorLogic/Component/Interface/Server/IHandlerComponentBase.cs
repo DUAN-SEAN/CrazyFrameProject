@@ -20,6 +20,11 @@ namespace GameActorLogic
         /// </summary>
         event Action<ulong> OnDestroyMessageHandler;
 
+        /// <summary>
+        /// 当HandMessageList处理任务更新事件时回调
+        /// </summary>
+        event Action<ulong> OnTaskUpdateMessageHandler;
+
         #endregion
     }
 

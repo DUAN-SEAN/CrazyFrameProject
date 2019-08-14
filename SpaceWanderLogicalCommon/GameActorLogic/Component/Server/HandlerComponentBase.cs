@@ -64,6 +64,10 @@ namespace GameActorLogic
                 case EventMessageConstDefine.DestroyEvent:
                     HandlerDestroyEvent(eventMessage as DestroyEventMessage);
                     break;
+                case EventMessageConstDefine.TaskUpdateEvent:
+                    HandlerTaskUpdateEvent(eventMessage as TaskUpdateEventMessage);
+                    break;
+                    
 
             }
         }
@@ -115,6 +119,43 @@ namespace GameActorLogic
 
 
         }
+
+        /// <summary>
+        /// 处理任务更新事件/
+        /// </summary>
+        protected void HandlerTaskUpdateEvent(TaskUpdateEventMessage taskUpdateEvent)
+        {
+            List<ITaskEvent> events = levelContainer.GeTaskEventComponentInternalBase().GetAllTaskEvents();
+
+            ITaskEvent eventitme = null;
+            foreach (var taskEvent in events)
+            {
+                if (taskEvent.GetTaskId() == taskUpdateEvent.eventid)
+                {
+                    eventitme = taskEvent;
+                }
+            }
+            if(eventitme == null) return;
+
+            if (taskUpdateEvent.IsObejct)
+            {
+                eventitme.SetValue(taskUpdateEvent.key,taskUpdateEvent.value);
+            }
+
+            if (taskUpdateEvent.isBool)
+            {
+                eventitme.SetValue(taskUpdateEvent.key,taskUpdateEvent.value_bool);
+            }
+
+            if (taskUpdateEvent.isInt)
+            {
+                eventitme.SetValue(taskUpdateEvent.key, taskUpdateEvent.value_int);
+            }
+
+            OnTaskUpdateMessageHandler?.Invoke(taskUpdateEvent.eventid);
+
+        }
+
         #endregion
 
         #region 处理指令
@@ -179,6 +220,8 @@ namespace GameActorLogic
         #region 回调事件
         public event Action<ulong> OnInitMessageHandler;
         public event Action<ulong> OnDestroyMessageHandler;
+        public event Action<ulong> OnTaskUpdateMessageHandler;
+
         #endregion
 
     }

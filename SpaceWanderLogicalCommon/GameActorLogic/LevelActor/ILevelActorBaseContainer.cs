@@ -70,5 +70,10 @@ namespace GameActorLogic
         /// </summary>
         IHandlerComponentInternalBase GetHandlerComponentInternalBase();
 
+        /// <summary>
+        /// 获取任务处理组件
+        /// </summary>
+        ITaskEventComponentInternalBase GeTaskEventComponentInternalBase();
+
     }
 }

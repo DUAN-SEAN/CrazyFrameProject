@@ -149,7 +149,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Configure\XML\GameServerConfig.config" />
-    <None Include="GameServer_TemporaryKey.pfx" />
     <None Include="NLog.config" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
