@@ -10,7 +10,8 @@ namespace GameActorLogic
     /// <summary>
     /// 处理事件和指令组件
     /// </summary>
-    public class HandlerComponentBase
+    public class HandlerComponentBase : IHandlerComponentBase,
+        IHandlerComponentInternalBase
     {
         protected ILevelActorComponentBaseContainer levelContainer;
 
@@ -91,6 +92,9 @@ namespace GameActorLogic
             {
                 levelContainer.GetEnvirinfointernalBase().AddActor(actor);
             }
+            //执行回调生成事件
+            OnInitMessageHandler?.Invoke(initEvent.actorid);
+
         }
 
         /// <summary>
@@ -99,6 +103,8 @@ namespace GameActorLogic
         protected void HandlerDestroyEvent(DestroyEventMessage destroyEvent)
         {
             if(destroyEvent == null) return;
+            //先执行回调销毁事件
+            OnDestroyMessageHandler?.Invoke(destroyEvent.actorid);
             ActorBase actor = null;
             foreach (var actorBase in levelContainer.GetEnvirinfointernalBase().GetAllActors())
             {
@@ -106,6 +112,8 @@ namespace GameActorLogic
                     actor = actorBase;
             }
             levelContainer.GetEnvirinfointernalBase().RemoveActor(actor);
+
+
         }
         #endregion
 
@@ -168,6 +176,10 @@ namespace GameActorLogic
 
         #endregion
 
+        #region 回调事件
+        public event Action<ulong> OnInitMessageHandler;
+        public event Action<ulong> OnDestroyMessageHandler;
+        #endregion
 
     }
 }

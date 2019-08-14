@@ -19,6 +19,7 @@ namespace GameActorLogic
         /// </summary>
         float GetMaxForceProc();
 
+        int GetCamp();
     }
 
     public interface IInvariantAttributeInternalBase : IInvariantAttributeBase

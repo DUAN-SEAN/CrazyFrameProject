@@ -144,9 +144,26 @@ namespace GameActorLogic
             return _envirinfoComponent;
         }
 
-        public ICreateInternalComponentBase GetCreateInternalComponentBase()
+        ICreateInternalComponentBase ILevelActorComponentBaseContainer.GetCreateInternalComponentBase()
         {
             return _createComponent;
+        }
+
+        IHandlerComponentInternalBase ILevelActorComponentBaseContainer.GetHandlerComponentInternalBase()
+        {
+            return _handlerComponent;
+        }
+
+        public event Action<ulong> OnInitMessageHandler
+        {
+            add => _handlerComponent.OnInitMessageHandler += value;
+            remove => _handlerComponent.OnInitMessageHandler -= value;
+        }
+
+        public event Action<ulong> OnDestroyMessageHandler
+        {
+            add => _handlerComponent.OnDestroyMessageHandler += value;
+            remove => _handlerComponent.OnDestroyMessageHandler -= value;
         }
     }
 }

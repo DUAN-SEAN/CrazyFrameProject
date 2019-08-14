@@ -167,6 +167,11 @@ namespace GameActorLogic
             return _invariantAttributeComponent.GetMaxForceProc();
         }
 
+        public int GetCamp()
+        {
+            return _invariantAttributeComponent.GetCamp();
+        }
+
         #endregion
         #endregion
 

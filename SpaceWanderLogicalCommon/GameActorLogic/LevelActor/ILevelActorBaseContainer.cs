@@ -10,7 +10,8 @@ namespace GameActorLogic
         IEventComponentBase,
         ICommandComponentBase,
         IEnvirinfoBase,
-        ICreateComponentBase
+        ICreateComponentBase,
+        IHandlerComponentBase
     {
         /// <summary>
         /// 获得ID
@@ -64,6 +65,10 @@ namespace GameActorLogic
         /// </summary>
         ICreateInternalComponentBase GetCreateInternalComponentBase();
 
+        /// <summary>
+        /// 获取事件处理组件
+        /// </summary>
+        IHandlerComponentInternalBase GetHandlerComponentInternalBase();
 
     }
 }

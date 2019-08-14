@@ -24,11 +24,13 @@ namespace GameActorLogic
         /// </summary>
         protected float maxForceProc;
 
+        protected int camp;
 
-        public InvariantAttributeComponentBase(double maxSpeed  = 2,float maxForceProc = 0.0002f)
+        public InvariantAttributeComponentBase(int camp,double maxSpeed  = 2,float maxForceProc = 0.0002f)
         {
             this.maxSpeed = maxSpeed;
             this.maxForceProc = maxForceProc;
+            this.camp = camp;
         }
 
         #region IInvariantAttributeInternalBase
@@ -41,6 +43,11 @@ namespace GameActorLogic
         public float GetMaxForceProc()
         {
             return maxForceProc;
+        }
+
+        public int GetCamp()
+        {
+            return camp;
         }
 
         #endregion
