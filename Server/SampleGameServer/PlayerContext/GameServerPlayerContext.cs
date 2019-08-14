@@ -158,6 +158,7 @@ namespace GameServer
                 result = S2C_LoginMessage.Types.State.Fail;
                 goto RETURN;
             }
+            
             //向客户端发送登陆验证成功
             RETURN:
             if(result == S2C_LoginMessage.Types.State.Ok)

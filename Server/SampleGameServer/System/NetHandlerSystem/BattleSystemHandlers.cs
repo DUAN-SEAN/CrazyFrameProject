@@ -12,8 +12,6 @@ using GameServer.Battle;
 
 namespace GameServer.System.NetHandlerSystem
 {
-  
-
     /// <summary>
     /// 接受指令消息handler
     /// </summary>
