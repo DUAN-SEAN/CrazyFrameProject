@@ -48,4 +48,19 @@ namespace GameServer.System.NetHandlerSystem
             }
         }
     }
+    [MessageHandler]
+    public class C2S_ExitBattleMessageHandler:AMHandler<C2S_ExitBattleMessage>
+    {
+        protected override void Run(ISession playerContext, C2S_ExitBattleMessage message)
+        {
+            GameServerPlayerContext ctx = playerContext as GameServerPlayerContext;
+            
+            ExitBattleLocalMessage localMessage = new ExitBattleLocalMessage();
+
+            localMessage.BattleId = message.BattleId;
+            localMessage.PlayerId = message.PlayerId;
+
+            GameServer.Instance.PostMessageToSystem<BattleSystem>(localMessage);
+        }
+    }
 }

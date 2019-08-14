@@ -57,5 +57,21 @@ message S2C_SyncPhysicsStateBattleMessage // IBattleMessage
 	double Force_X = 10;
 	double Force_Y = 11;
 	double Torque = 12;
-
+}
+message C2S_ExitBattleMessage // IBattleMessage 
+{
+	int32 RpcId = 90;
+	uint64 BattleId = 1;
+	string PlayerId = 2;
+}
+message S2C_ExitBattleMessage // IBattleMessage 
+{
+	int32 RpcId = 90;
+	uint64 BattleId = 1;
+	string PlayerId = 2;
+	State state = 3;
+	enum State {
+		Fail = 0;
+		OK = 1;
+	}	
 }

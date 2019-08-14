@@ -196,8 +196,30 @@ namespace GameServer.Battle
             m_level.PostCommand(commandMsg);
         }
 
+        public void OnExitBattle(string playerId,S2C_ExitBattleMessage response)
+        {
+            //1 检查
+            if (!m_players.Contains(playerId))
+                return;
+            //2 todo:通知关卡实体移除对应的飞船实体
+
+            //3 广播
+            response.State = S2C_ExitBattleMessage.Types.State.Ok;
+            response.BattleId = Id;
+            BroadcastMessage(response);
+            //4 从集合删除
+            m_players.Remove(playerId);
+        }
 
         #endregion
+
+        #region 属性
+
+        public List<string> Players;
+
+        #endregion
+
+        #region 字段
 
         /// <summary>
         /// 战斗开始时间
@@ -225,7 +247,10 @@ namespace GameServer.Battle
 
         private BinaryFormatter m_binaryFormatter;
 
-       
+
+        #endregion
+
+
     }
 
     public interface IBroadcastHandler

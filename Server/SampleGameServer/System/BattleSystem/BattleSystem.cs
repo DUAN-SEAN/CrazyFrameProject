@@ -35,7 +35,10 @@ namespace GameServer.Battle
                     CommandBattleLocalMessage commandBattleLocalMessage = msg as CommandBattleLocalMessage;
                     OnBattleCommand(commandBattleLocalMessage);
                     break;
-                    
+                case GameServerConstDefine.BattleSystemExitBattleBarrier:
+                    ExitBattleLocalMessage exitBattleLocal = msg as ExitBattleLocalMessage;
+                    OnExitBattle(exitBattleLocal);
+                    break;
 
                 default: return base.OnMessage(msg);
             }
@@ -43,7 +46,7 @@ namespace GameServer.Battle
 
         }
 
-       
+  
 
         /// <summary>
         /// GameServer初始化战斗系统
@@ -92,6 +95,26 @@ namespace GameServer.Battle
 
         }
         /// <summary>
+        /// 收到从服务器或客户端发来的玩家退出战斗的请求
+        /// </summary>
+        /// <param name="exitBattleLocal"></param>
+        private void OnExitBattle(ExitBattleLocalMessage msg)
+        {
+            m_battleDic.TryGetValue(msg.BattleId, out Battle battle);
+            S2C_ExitBattleMessage response = new S2C_ExitBattleMessage();
+            response.PlayerId = msg.PlayerId;
+            response.BattleId = msg.BattleId;
+            if (battle == null)
+            {
+                PostLocalMessageToCtx(new SystemSendNetMessage{Message = response,PlayerId = msg.PlayerId}, msg.PlayerId);
+                return;
+            }
+            battle.OnExitBattle(msg.PlayerId,response);
+
+        }
+
+
+        /// <summary>
         /// 玩家发来的战斗指令
         /// 根据battleId进行转发 
         /// </summary>
@@ -129,26 +152,6 @@ namespace GameServer.Battle
             //battleEntity.Dispose();//最终Dispose战斗实体 释放资源
             
         }
-        /// <summary>
-        /// 释放关卡战斗资源：
-        /// 修改关卡战斗实体状态为正在关闭
-        /// 暂停所有物理层逻辑
-        /// 释放所有物理单位
-        /// 释放应用层玩家
-        /// 发送匹配队伍系统玩家更新状态
-        /// 修改关卡战斗实体状态为已关闭
-        /// 解除战斗系统关于关卡战斗实体的注册
-        /// PS 该方法可以由各层调用：实体自身、战斗系统、GameSever
-        /// </summary>
-        private void OnReleaseBattle()
-        {
-            
-            //TimerManager.UnsetLoopTimer(battleEntity.GetTimerId());//解除绑定
-
-            //battleEntity.Dispose();//最终Dispose战斗实体 释放资源
-
-        }
-
         public void SendMessageToClient(IBattleMessage message,string playerId)
         {
             PostLocalMessageToCtx(new SystemSendNetMessage { Message = message, PlayerId = playerId }, playerId);

@@ -64,8 +64,9 @@ namespace GameServer
         /// </summary>
         public const Int32 BattleSystemCreateBattleBarrier = 1101;
 
+        public const Int32 BattleSystemExitBattleBarrier = 1102;
 
-        public const Int32 BattleSystemCommandUpLoad = 1102;
+        public const Int32 BattleSystemCommandUpLoad = 1103;
         #endregion
 
         /// <summary>

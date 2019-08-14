@@ -21,7 +21,9 @@ namespace GameServer
     }
 
 
-
+    /// <summary>
+    /// 战斗指令服务器转发内部消息
+    /// </summary>
     public class CommandBattleLocalMessage:ILocalMessage
     {
         public int MessageId => GameServerConstDefine.BattleSystemCommandUpLoad;
@@ -30,6 +32,16 @@ namespace GameServer
 
         public ICommand ICommand;//战斗指令
 
+    }
 
+    public class ExitBattleLocalMessage:ILocalMessage
+    {
+        public int MessageId { get=>GameServerConstDefine.BattleSystemExitBattleBarrier}
+
+        public ulong BattleId;
+
+        public string PlayerId;
+
+      
     }
 }

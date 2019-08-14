@@ -22,6 +22,12 @@ namespace Crazy.Common
 	[Message(BattleMessageOpcode.S2C_SyncPhysicsStateBattleMessage)]
 	public partial class S2C_SyncPhysicsStateBattleMessage : IBattleMessage {}
 
+	[Message(BattleMessageOpcode.C2S_ExitBattleMessage)]
+	public partial class C2S_ExitBattleMessage : IBattleMessage {}
+
+	[Message(BattleMessageOpcode.S2C_ExitBattleMessage)]
+	public partial class S2C_ExitBattleMessage : IBattleMessage {}
+
 }
 namespace Crazy.Common
 {
@@ -33,5 +39,7 @@ namespace Crazy.Common
 		 public const ushort S2C_EventBattleMessage = 1005;
 		 public const ushort S2C_SyncHpShieldStateBattleMessage = 1006;
 		 public const ushort S2C_SyncPhysicsStateBattleMessage = 1007;
+		 public const ushort C2S_ExitBattleMessage = 1008;
+		 public const ushort S2C_ExitBattleMessage = 1009;
 	}
 }
