@@ -16,6 +16,7 @@ namespace GameActorLogic
         protected CommandComponentBase _commandComponent;
         protected HandlerComponentBase _handlerComponent;
         protected CreateComponentBase _createComponent;
+        protected TaskEventComponentBase _taskEventComponent;
         protected long levelid;
         protected ulong battleid;
 
@@ -36,6 +37,7 @@ namespace GameActorLogic
             _envirinfoComponent = new EnvirinfoComponentBase();
             _handlerComponent = new HandlerComponentBase(this);
             _createComponent = new CreateComponentBase();
+            _taskEventComponent = new TaskEventComponentBase(this);
 
         }
 
@@ -67,13 +69,13 @@ namespace GameActorLogic
 
         }
 
-        public void Update()
+        public virtual void Update()
         {
             if(isStart == false) return;
 
            _handlerComponent.Update();
 
-            
+           _envirinfoComponent.Tick();
 
         }
 
@@ -154,6 +156,11 @@ namespace GameActorLogic
             return _handlerComponent;
         }
 
+        ITaskEventComponentInternalBase ILevelActorComponentBaseContainer.GeTaskEventComponentInternalBase()
+        {
+            return _taskEventComponent;
+        }
+
         public event Action<ulong> OnInitMessageHandler
         {
             add => _handlerComponent.OnInitMessageHandler += value;
@@ -164,6 +171,12 @@ namespace GameActorLogic
         {
             add => _handlerComponent.OnDestroyMessageHandler += value;
             remove => _handlerComponent.OnDestroyMessageHandler -= value;
+        }
+
+        public event Action<ulong> OnTaskUpdateMessageHandler
+        {
+            add => _handlerComponent.OnTaskUpdateMessageHandler += value;
+            remove => _handlerComponent.OnTaskUpdateMessageHandler -= value;
         }
     }
 }

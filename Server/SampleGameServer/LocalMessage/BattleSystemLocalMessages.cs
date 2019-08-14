@@ -36,7 +36,10 @@ namespace GameServer
 
     public class ExitBattleLocalMessage:ILocalMessage
     {
-        public int MessageId { get=>GameServerConstDefine.BattleSystemExitBattleBarrier}
+        public int MessageId
+        {
+            get => GameServerConstDefine.BattleSystemExitBattleBarrier;
+        }
 
         public ulong BattleId;
 
