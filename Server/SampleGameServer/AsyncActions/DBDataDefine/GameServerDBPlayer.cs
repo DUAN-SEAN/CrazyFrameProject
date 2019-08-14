@@ -19,6 +19,8 @@ namespace GameServer
 
         public List<GameServerDBPlayerBarrierRatings> barrierRatings = new List<GameServerDBPlayerBarrierRatings>();
 
+        public GameServerDBPlayerShip playerShip = new GameServerDBPlayerShip();
+
         public DateTime createTime;
 
         internal string DisPlayer()
@@ -27,6 +29,34 @@ namespace GameServer
         }
 
 
+    }
+
+    public class GameServerDBPlayerShip
+    {
+        /// <summary>
+        /// 飞船Id
+        /// </summary>
+        public Int32 shipId;
+        /// <summary>
+        /// 飞船类型
+        /// </summary>
+        public Int32 shipType;
+        /// <summary>
+        /// 飞船名称
+        /// </summary>
+        public string shipName;
+        /// <summary>
+        /// 配置武器a
+        /// </summary>
+        public Int32 weapon_a;
+        /// <summary>
+        /// 配置武器b
+        /// </summary>
+        public Int32 weapon_b;
+        /// <summary>
+        /// 最后修改的时间
+        /// </summary>
+        public DateTime modifyTime;
     }
     public class GameServerDBPlayerBarrierRatings
     {

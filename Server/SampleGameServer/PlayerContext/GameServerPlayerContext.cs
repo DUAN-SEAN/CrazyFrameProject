@@ -13,7 +13,7 @@ namespace GameServer
     /// <summary>
     /// 玩家现场
     /// </summary>
-    public sealed class GameServerPlayerContext:PlayerContextBase
+    public sealed partial class GameServerPlayerContext:PlayerContextBase
     {
         public GameServerPlayerContext()
         {

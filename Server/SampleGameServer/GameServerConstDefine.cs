@@ -120,5 +120,10 @@ namespace GameServer
         /// 玩家创建时间
         /// </summary>
         public const String PLAYER_CREATETIME = "createTime";
+
+        /// <summary>
+        /// 玩家飞船配置
+        /// </summary>
+        public const String PLAYER_SHIPINFO = "playerShip";
     }
 }
