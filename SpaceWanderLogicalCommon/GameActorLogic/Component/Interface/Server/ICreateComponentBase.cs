@@ -15,5 +15,6 @@ namespace GameActorLogic
     public interface ICreateInternalComponentBase : ICreateComponentBase
     {
         ActorBase CreateActor(int actortype, double point_x, double point_y,double angle);
+        ActorBase CreateActor(int actortype, double point_x, double point_y, double angle,ulong actorid);
     }
 }

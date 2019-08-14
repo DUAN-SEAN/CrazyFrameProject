@@ -56,6 +56,12 @@ namespace GameActorLogic
             _forwardeventmessages.Add(msg);
         }
 
+        public void AddEventMessagesToHandlerForward(IEventMessage msg)
+        {
+            _handleeventmessages.Add(msg);
+            _forwardeventmessages.Add(msg);
+        }
+
         public List<IEventMessage> GetHandleEventMessages()
         {
             var list = new List<IEventMessage>(_handleeventmessages);
