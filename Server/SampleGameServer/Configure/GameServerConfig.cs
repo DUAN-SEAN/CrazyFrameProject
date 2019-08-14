@@ -40,7 +40,169 @@ namespace GameServer.Configure
         [XmlElement("GameServerPlayerContext")]
         public GameServerPlayerContext GameServerPlayerContext { get; set; }
 
+        /// <summary>
+        /// 关卡配置
+        /// </summary>
+        [XmlArray("ShipConfig"), XmlArrayItem("Ship")]
+        public GameShipConfig[] GameShipConfig { get; set; }
+
+        [XmlElement("GameSkillConfig")]
+        public GameSkillConfig GameSkillConfig { get; set; }
+
+
+
+
     }
+    [Serializable]
+    public class GameSkillConfig
+    {
+        [XmlArray("DamageSkillConfig"), XmlArrayItem("Damage")]
+        public DamageSkillConfig[] DamageSkillConfig { get; set; }
+
+        [XmlArray("SummonSkillConfig"), XmlArrayItem("Summon")]
+        public SummonSkillConfig[] SummonSkillConfig { get; set; }
+
+        [XmlArray("RecoverySkillConfig"), XmlArrayItem("Recovery")]
+        public RecoverySkillConfig[] RecoverySkillConfig { get; set; }
+
+        [XmlArray("GainSkillConfig"), XmlArrayItem("Gain")]
+        public GainSkillConfig[] GainSkillConfig { get; set; }
+
+
+    }
+    [Serializable]
+    public class GainSkillConfig
+    {
+        [XmlAttribute("SkillType")]
+        public Int32 SkillType { get; set; }
+
+        [XmlAttribute("SkillName")]
+        public Int32 SkillName { get; set; }
+
+        [XmlAttribute("CD")]
+        public Int32 CD { get; set; }
+
+        [XmlAttribute("GainType")]
+        public Int32 RecoveryType { get; set; }
+
+        [XmlAttribute("GainValue")]
+        public Int32 RecoveryValue { get; set; }
+
+
+    }
+    [Serializable]
+    public class RecoverySkillConfig
+    {
+        [XmlAttribute("SkillType")]
+        public Int32 SkillType { get; set; }
+
+        [XmlAttribute("SkillName")]
+        public Int32 SkillName { get; set; }
+
+        [XmlAttribute("CD")]
+        public Int32 CD { get; set; }
+
+        [XmlAttribute("RecoveryType")]
+        public Int32 RecoveryType { get; set; }
+
+        [XmlAttribute("RecoveryValue")]
+        public Int32 RecoveryValue { get; set; }
+
+
+
+    }
+    [Serializable]
+    public class SummonSkillConfig
+    {
+        [XmlAttribute("SkillType")]
+        public Int32 SkillType { get; set; }
+
+        [XmlAttribute("SkillName")]
+        public Int32 SkillName { get; set; }
+
+        [XmlAttribute("CD")]
+        public Int32 CD { get; set; }
+
+        [XmlAttribute("MaxSummonCount")]
+        public Int32 MaxSummonCount { get; set; }
+
+        [XmlAttribute("SummonShipType")]
+        public Int32 SummonShipType { get; set; }
+
+        [XmlAttribute("SummonSurvivalTime")]
+        public Int32 SummonSurvivalTime { get; set; }
+
+    }
+    [Serializable]
+    public class DamageSkillConfig
+    {
+        [XmlAttribute("SkillType")]
+        public Int32 SkillType { get; set; }
+
+        [XmlAttribute("SkillName")]
+        public Int32 SkillName { get; set; }
+
+        [XmlAttribute("CD")]
+        public Int32 CD { get; set; }
+
+        [XmlAttribute("MaxCount")]
+        public Int32 MaxCount { get; set; }
+
+        [XmlAttribute("MaxDamageValue")]
+        public Int32 DamageValue { get; set; }
+
+        [XmlAttribute("DamageDistance")]
+        public Int32 DamageDistance { get; set; }
+
+        [XmlAttribute("DamageRange")]
+        public Int32 DamageRange { get; set; }
+
+        [XmlAttribute("AttackInterval")]
+        public Int32 AttackInterval { get; set; }
+
+        [XmlAttribute("PhsicsValue")]
+        public Int32 PhsicsValue { get; set; }
+
+    }
+
+
+    [Serializable]
+    public class GameShipConfig
+    {
+        [XmlAttribute("ShipType")]
+        public Int32 ShipType { get; set; }
+
+        [XmlAttribute("ShipName")]
+        public String ShipName { get; set; }
+
+        [XmlAttribute("Mass")]
+        public Int32 Mass { get; set; }
+
+        [XmlAttribute("MaxHp")]
+        public Int32 MaxHp { get; set; }
+
+        [XmlAttribute("MaxShield")]
+        public Int32 MaxShield { set; get; }
+
+        [XmlAttribute("ShieldRecoverySpeed")]
+        public Int32 ShieldRecoverySpeed { set; get; }
+
+        [XmlAttribute("AccelerationSpeed")]
+        public Int32 AccelerationSpeed { set; get; }
+
+        [XmlAttribute("MaxAccelerationSpeed")]
+        public Int32 MaxAccelerationSpeed { set; get; }
+
+        [XmlAttribute("MaxSpeed")]
+        public Int32 MaxSpeed { set; get; }
+
+        [XmlAttribute("MaxTurnSpeed")]
+        public Int32 MaxTurnSpeed { set; get; }
+
+        
+
+    }
+
     [Serializable]
     public class DBConfigInfo
     {
