@@ -172,6 +172,11 @@ namespace GameActorLogic
             return _invariantAttributeComponent.GetCamp();
         }
 
+        public void SetCamp(int camp)
+        {
+            _invariantAttributeComponent.SetCamp(camp);
+        }
+
         #endregion
         #endregion
 

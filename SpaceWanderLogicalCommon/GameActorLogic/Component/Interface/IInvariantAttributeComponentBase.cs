@@ -19,7 +19,16 @@ namespace GameActorLogic
         /// </summary>
         float GetMaxForceProc();
 
+        /// <summary>
+        /// 获得阵营
+        /// </summary>
+        /// <returns></returns>
         int GetCamp();
+
+        /// <summary>
+        /// 设置阵营
+        /// </summary>
+        void SetCamp(int camp);
     }
 
     public interface IInvariantAttributeInternalBase : IInvariantAttributeBase

@@ -26,7 +26,7 @@ namespace GameActorLogic
 
         protected int camp;
 
-        public InvariantAttributeComponentBase(int camp,double maxSpeed  = 2,float maxForceProc = 0.0002f)
+        public InvariantAttributeComponentBase(int camp = 0,double maxSpeed  = 2,float maxForceProc = 0.0002f)
         {
             this.maxSpeed = maxSpeed;
             this.maxForceProc = maxForceProc;
@@ -48,6 +48,11 @@ namespace GameActorLogic
         public int GetCamp()
         {
             return camp;
+        }
+
+        public void SetCamp(int camp)
+        {
+            this.camp = camp;
         }
 
         #endregion
