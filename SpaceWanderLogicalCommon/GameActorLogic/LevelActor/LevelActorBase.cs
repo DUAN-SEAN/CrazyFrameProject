@@ -11,6 +11,8 @@ namespace GameActorLogic
         ILevelActorBaseContainer,
         ILevelActorComponentBaseContainer
     {
+        public static int PlayerCamp = 1;
+
         protected EventComponentBase _eventComponent;
         protected EnvirinfoComponentBase _envirinfoComponent;
         protected CommandComponentBase _commandComponent;
@@ -19,7 +21,7 @@ namespace GameActorLogic
         protected TaskEventComponentBase _taskEventComponent;
         protected long levelid;
         protected ulong battleid;
-
+        
         protected bool isStart = false;
 
         public LevelActorBase()
@@ -109,6 +111,21 @@ namespace GameActorLogic
             return _envirinfoComponent.GetAllActors();
         }
 
+        public List<ActorBase> GetShipActors()
+        {
+            return _envirinfoComponent.GetShipActors();
+        }
+
+        public List<ActorBase> GetWeaponActors()
+        {
+            return _envirinfoComponent.GetWeaponActors();
+        }
+
+        public ActorBase GetActor(ulong id)
+        {
+            return ((IEnvirinfoBase) _envirinfoComponent).GetActor(id);
+        }
+
         #endregion
 
 
@@ -129,7 +146,30 @@ namespace GameActorLogic
         }
         #endregion
 
-    
+
+        #region 任务事件组件
+
+        public void AddTaskEvent(ITaskEvent task)
+        {
+            _taskEventComponent.AddTaskEvent(task);
+        }
+
+        public List<ITaskEvent> GetAllTaskEvents()
+        {
+            return _taskEventComponent.GetAllTaskEvents();
+        }
+
+        public List<ITaskEvent> GetUnFinishTaskEvents()
+        {
+            return _taskEventComponent.GetUnFinishTaskEvents();
+        }
+
+        public ITaskEvent GetTaskEvent(ulong id)
+        {
+            return _taskEventComponent.GetTaskEvent(id);
+        }
+
+        #endregion
 
         #region 指令集合组件
 
@@ -193,5 +233,7 @@ namespace GameActorLogic
             add => _handlerComponent.OnTaskUpdateMessageHandler += value;
             remove => _handlerComponent.OnTaskUpdateMessageHandler -= value;
         }
+
+
     }
 }

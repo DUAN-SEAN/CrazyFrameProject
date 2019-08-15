@@ -30,12 +30,12 @@ namespace GameActorLogic
             return IDs++;
         }
 
-        public ActorBase CreateActor(int actortype, double point_x, double point_y, double angle)
+        public ActorBase CreateActor(int actortype,int camp, double point_x, double point_y, double angle)
         {
-            return CreateActor(actortype, point_x, point_y, angle, GetCreateID());
+            return CreateActor(actortype,camp, point_x, point_y, angle, GetCreateID());
         }
 
-        public ActorBase CreateActor(int actortype, double point_x, double point_y, double angle, ulong Id)
+        public ActorBase CreateActor(int actortype, int camp,double point_x, double point_y, double angle, ulong Id)
         {
             ActorBase actor = null;
             switch (actortype)
@@ -48,6 +48,7 @@ namespace GameActorLogic
                 case ActorTypeBaseDefine.ShipActorNone:
                     actor = new ShipActorBase(Id);
                     actor.PrepareActor(point_x, point_y, angle);
+                    actor.SetCamp(camp);
                     break;
 
                 #endregion

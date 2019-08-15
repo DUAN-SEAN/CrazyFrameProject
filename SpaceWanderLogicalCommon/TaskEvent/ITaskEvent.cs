@@ -25,6 +25,14 @@ namespace GameActorLogic
         /// 返回任务状态
         /// </summary>
         TaskEventState GetTaskState();
+
+        /// <summary>
+        /// 激活任务
+        /// 从闲置激活到未完成状态
+        /// 完成状态不能激活
+        /// </summary>
+        bool ActivateTask();
+
         /// <summary>
         /// 执行任务逻辑
         /// </summary>

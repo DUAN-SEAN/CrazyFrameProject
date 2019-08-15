@@ -11,7 +11,8 @@ namespace GameActorLogic
         ICommandComponentBase,
         IEnvirinfoBase,
         ICreateComponentBase,
-        IHandlerComponentBase
+        IHandlerComponentBase,
+        ITaskEventComponentBase
     {
         /// <summary>
         /// 获得ID
