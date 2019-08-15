@@ -17,13 +17,26 @@ namespace GameActorLogic
     /// </summary>
     public interface IEnvirinfoBase
     {
-
+        /// <summary>
+        /// 获取所有Actor
+        /// </summary>
         List<ActorBase> GetAllActors();
 
+        /// <summary>
+        /// 获取所有船Actor
+        /// </summary>
+        List<ActorBase> GetShipActors();
+
+        /// <summary>
+        /// 获取所有武器Actor
+        /// </summary>
+        List<ActorBase> GetWeaponActors();
         /// <summary>
         /// 获取一个Actor
         /// </summary>
         ActorBase GetActor(ulong id);
+
+
     }
 
     /// <summary>

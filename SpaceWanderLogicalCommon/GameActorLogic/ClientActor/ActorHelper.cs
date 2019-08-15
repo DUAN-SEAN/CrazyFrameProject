@@ -25,5 +25,22 @@ namespace GameActorLogic
                 default: return false;
             }
         }
+
+        public static bool IsWeapon(this ActorBase actor)
+        {
+            switch (actor.GetActorType())
+            {
+                case ActorTypeBaseDefine.AntiAircraftGunActor:
+                case ActorTypeBaseDefine.ContinuousLaserActor:
+                case ActorTypeBaseDefine.MachineGunActor:
+                case ActorTypeBaseDefine.PowerLaserActor:
+                case ActorTypeBaseDefine.TimeBombActor:
+                case ActorTypeBaseDefine.TorpedoActor:
+                case ActorTypeBaseDefine.TrackingMissileActor:
+                case ActorTypeBaseDefine.TriggerBombActor:
+                    return true;
+                default: return false;
+            }
+        }
     }
 }

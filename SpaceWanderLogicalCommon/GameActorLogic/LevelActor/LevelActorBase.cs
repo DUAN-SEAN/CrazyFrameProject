@@ -111,6 +111,16 @@ namespace GameActorLogic
             return _envirinfoComponent.GetAllActors();
         }
 
+        public List<ActorBase> GetShipActors()
+        {
+            return _envirinfoComponent.GetShipActors();
+        }
+
+        public List<ActorBase> GetWeaponActors()
+        {
+            return _envirinfoComponent.GetWeaponActors();
+        }
+
         public ActorBase GetActor(ulong id)
         {
             return ((IEnvirinfoBase) _envirinfoComponent).GetActor(id);
