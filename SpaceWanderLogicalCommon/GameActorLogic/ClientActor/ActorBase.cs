@@ -15,18 +15,15 @@ namespace GameActorLogic
         protected PhysicalBase _physicalBase;
         protected MoveComponentBase _moveComponent;
         protected InvariantAttributeComponentBase _invariantAttributeComponent;
+        protected ILevelActorComponentBaseContainer level;
 
-        /// <summary>
-        /// levelActor的环境内部接口
-        /// 有物理引擎和物理碰撞机
-        /// </summary>
-        protected IEnvirinfoInternalBase envir;
         protected ulong ActorID;
         protected Int32 ActorType;
-        protected ActorBase(ulong id)
+        protected ActorBase(ulong id,ILevelActorComponentBaseContainer level)
         {
             ActorID = id;
             //this.envir = envir;
+            this.level = level;
             ActorType = ActorTypeBaseDefine.ActorNone;
         }
 
@@ -48,6 +45,18 @@ namespace GameActorLogic
 
         }
 
+        #region 相关方法
+
+        public ActorBase Clone()
+        {
+            return this.MemberwiseClone() as ActorBase;
+        }
+
+        public void SetActorId(ulong id)
+        {
+            ActorID = id;
+        }
+        #endregion
 
 
         #region 创建组件
@@ -60,7 +69,7 @@ namespace GameActorLogic
             var body = Factory.CreateTriggleBody(0,0,4,6);
             var collider = new Collider();
 
-            return new PhysicalBase(body,collider,envir);
+            return new PhysicalBase(body,collider,level.GetEnvirinfointernalBase());
         }
 
         #endregion
@@ -79,6 +88,11 @@ namespace GameActorLogic
 
 
         #region PhysicalBase
+
+        public void InitializePhysicalBase()
+        {
+            _physicalBase.InitializePhysicalBase();
+        }
 
         /// <summary>
         /// 获得位置坐标
@@ -158,6 +172,12 @@ namespace GameActorLogic
         #endregion
 
         #region InvariantAttributeComponentBase
+
+        public void InitializeInvariantAttributeBase(int camp, double maxSpeed, float maxForceProc)
+        {
+            _invariantAttributeComponent.InitializeInvariantAttributeBase(camp, maxSpeed, maxForceProc);
+        }
+
         public double GetMaxSpeed()
         {
             return _invariantAttributeComponent.GetMaxSpeed();

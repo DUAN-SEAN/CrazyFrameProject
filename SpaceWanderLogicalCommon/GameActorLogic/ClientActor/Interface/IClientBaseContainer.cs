@@ -46,6 +46,11 @@ namespace GameActorLogic
         /// 返回具体类型的相对应常量
         /// </summary>
         Int32 GetActorType();
+
+        /// <summary>
+        /// 获得该对象的浅拷贝
+        /// </summary>
+        ActorBase Clone();
     }
 
     /// <summary>

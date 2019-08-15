@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 
 namespace GameActorLogic
@@ -12,7 +13,8 @@ namespace GameActorLogic
         IEnvirinfoBase,
         ICreateComponentBase,
         IHandlerComponentBase,
-        ITaskEventComponentBase
+        ITaskEventComponentBase,
+        IConfigComponentBase
     {
         /// <summary>
         /// 获得ID
@@ -38,6 +40,11 @@ namespace GameActorLogic
         /// 清理关卡现场
         /// </summary>
         void Dispose();
+
+        /// <summary>
+        /// 当关卡初始化完成 等待消息输入之前被调用
+        /// </summary>
+        event Action OnLoadingDone;
 
     }
 
@@ -75,6 +82,11 @@ namespace GameActorLogic
         /// 获取任务处理组件
         /// </summary>
         ITaskEventComponentInternalBase GeTaskEventComponentInternalBase();
+
+        /// <summary>
+        /// 配置文件组件
+        /// </summary>
+        IConfigComponentInternalBase GetConfigComponentInternalBase();
 
     }
 }

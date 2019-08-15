@@ -14,7 +14,7 @@ namespace GameActorLogic
         protected WeaponEventComponentBase _weaponEventComponent;
         protected WeaponAttributeComponentBase _weaponAttributeComponent;
 
-        protected WeaponActorBase(ulong id) : base(id)
+        protected WeaponActorBase(ulong id,ILevelActorComponentBaseContainer level) : base(id,level)
         {
 
         }
@@ -22,7 +22,7 @@ namespace GameActorLogic
         protected override void CreateComponent()
         {
             base.CreateComponent();
-            _weaponEventComponent = new WeaponEventComponentBase();
+            _weaponEventComponent = new WeaponEventComponentBase(this);
             _weaponAttributeComponent = new WeaponAttributeComponentBase();
             _aiComponent = CreateAiComponent();
 
@@ -72,6 +72,25 @@ namespace GameActorLogic
         {
             _weaponEventComponent.Destroy();
         }
+
+        public event Action<IWeaponBaseContainer> OnStartWeapon
+        {
+            add => ((IWeaponEventBase) _weaponEventComponent).OnStartWeapon += value;
+            remove => ((IWeaponEventBase) _weaponEventComponent).OnStartWeapon -= value;
+        }
+
+        public event Action<IWeaponBaseContainer> OnEndWeapon
+        {
+            add => ((IWeaponEventBase) _weaponEventComponent).OnEndWeapon += value;
+            remove => ((IWeaponEventBase) _weaponEventComponent).OnEndWeapon -= value;
+        }
+
+        public event Action<IWeaponBaseContainer> OnDestroyWeapon
+        {
+            add => ((IWeaponEventBase) _weaponEventComponent).OnDestroyWeapon += value;
+            remove => ((IWeaponEventBase) _weaponEventComponent).OnDestroyWeapon -= value;
+        }
+
         #endregion
 
         #region 武器属性组件
@@ -97,7 +116,7 @@ namespace GameActorLogic
             return _weaponEventComponent;
         }
 
-        public IWeanponAttributeinternalBase GetWeaponAttributeinternalBase()
+        public IWeaponAttributeInternalBase GetWeaponAttributeinternalBase()
         {
             return _weaponAttributeComponent;
         }

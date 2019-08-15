@@ -88,6 +88,11 @@ namespace GameActorLogic
             return m_body.Velocity;
         }
 
+        public void InitializePhysicalBase()
+        {
+            
+        }
+
         public Point GetPosition()
         {
             return m_body.Position;

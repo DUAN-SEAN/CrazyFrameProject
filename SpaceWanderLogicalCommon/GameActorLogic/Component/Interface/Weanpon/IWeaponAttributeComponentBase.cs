@@ -26,7 +26,7 @@ namespace GameActorLogic
     /// <summary>
     /// 武器属性对内接口
     /// </summary>
-    public interface IWeanponAttributeinternalBase : 
+    public interface IWeaponAttributeInternalBase : 
         IWeaponAttributeBase
     {
         /// <summary>

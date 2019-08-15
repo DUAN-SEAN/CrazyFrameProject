@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CrazyEngine.Base;
+using GameServer.Configure;
 
 namespace GameActorLogic
 {
@@ -12,13 +13,15 @@ namespace GameActorLogic
         ILevelActorComponentBaseContainer
     {
         public static int PlayerCamp = 1;
-
+        public static int EnemyCamp = 2;
         protected EventComponentBase _eventComponent;
         protected EnvirinfoComponentBase _envirinfoComponent;
         protected CommandComponentBase _commandComponent;
         protected HandlerComponentBase _handlerComponent;
         protected CreateComponentBase _createComponent;
         protected TaskEventComponentBase _taskEventComponent;
+        protected ConfigComponentBase _configComponent;
+
         protected long levelid;
         protected ulong battleid;
         
@@ -82,8 +85,8 @@ namespace GameActorLogic
             isStart = true;
             //TODO 可能进行动态初始化
 
-
-
+            //先放这里
+            OnLoadingDone?.Invoke();
         }
 
         public virtual void Update()
@@ -103,6 +106,8 @@ namespace GameActorLogic
 
 
         }
+
+        public event Action OnLoadingDone;
 
         #region 关卡环境
 
@@ -185,6 +190,16 @@ namespace GameActorLogic
 
         #endregion
 
+
+        #region 配置文件组件
+
+        public void InitializeConfig(GameShipConfig[] ships, GameSkillConfig skill, GameBarrierConfig[] barrier)
+        {
+            _configComponent.InitializeConfig(ships, skill, barrier);
+        }
+
+        #endregion
+
         #endregion
 
         ICommandInternalComponentBase ILevelActorComponentBaseContainer.GetCommandComponentBase()
@@ -216,6 +231,13 @@ namespace GameActorLogic
             return _taskEventComponent;
         }
 
+        public IConfigComponentInternalBase GetConfigComponentInternalBase()
+        {
+            return _configComponent;
+        }
+
+        #region Handler组件
+
         public event Action<ulong> OnInitMessageHandler
         {
             add => _handlerComponent.OnInitMessageHandler += value;
@@ -233,6 +255,11 @@ namespace GameActorLogic
             add => _handlerComponent.OnTaskUpdateMessageHandler += value;
             remove => _handlerComponent.OnTaskUpdateMessageHandler -= value;
         }
+
+
+        #endregion
+
+
 
 
     }

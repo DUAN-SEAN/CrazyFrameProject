@@ -14,6 +14,9 @@ namespace GameActorLogic {
     /// </summary>
     public interface IPhysicalBase
     {
+        void InitializePhysicalBase();
+
+
         #region 物理同步
 
         /// <summary>

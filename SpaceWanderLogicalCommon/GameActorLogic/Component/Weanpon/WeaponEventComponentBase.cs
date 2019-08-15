@@ -14,25 +14,36 @@ namespace GameActorLogic
         IWeaponEventBase,
         IWeaponEventinternalBase
     {
+        protected IWeaponBaseComponentContainer weapon;
 
-
-
+        public WeaponEventComponentBase(IWeaponBaseComponentContainer weapon)
+        {
+            this.weapon = weapon;
+        }
 
         #region IWeaponEventBaes
         public void Start()
         {
+            OnStartWeapon?.Invoke(weapon);
             OnStart?.Invoke();
         }
 
         public void End()
         {
+            OnEndWeapon?.Invoke(weapon);
             OnEnd?.Invoke();
         }
 
         public void Destroy()
         {
+            OnDestroyWeapon?.Invoke(weapon);
             OnDestroy?.Invoke();
         }
+
+        public event Action<IWeaponBaseContainer> OnStartWeapon;
+        public event Action<IWeaponBaseContainer> OnEndWeapon;
+        public event Action<IWeaponBaseContainer> OnDestroyWeapon;
+
         #endregion
 
         #region IWeaponEventinternalBase

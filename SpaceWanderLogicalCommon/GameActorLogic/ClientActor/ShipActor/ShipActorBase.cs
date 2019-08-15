@@ -14,7 +14,7 @@ namespace GameActorLogic
         protected HealthShieldComponentBase _healthShieldComponent;
         protected ShipEventComponentBase _shipEventComponent;
 
-        public ShipActorBase(ulong id) : base(id)
+        public ShipActorBase(ulong id,ILevelActorComponentBaseContainer level) : base(id,level)
         {
 
         }
@@ -23,11 +23,7 @@ namespace GameActorLogic
         {
             base.CreateComponent();
             //应该在构造器参数中添加武器集合信息
-            _fireControlComponent = new FireControlComponentBase(new List<IWeaponBaseContainer>
-            {
-                //在这之中添加武器actor实体
-                //new WeaponActorBase()
-            });
+            _fireControlComponent = new FireControlComponentBase(this, level);
             _healthShieldComponent = new HealthShieldComponentBase();
             _shipEventComponent = new ShipEventComponentBase();
         }
@@ -41,6 +37,20 @@ namespace GameActorLogic
         #region IShipBaseContainer
 
         #region FireControlComponent
+
+        public void InitializeFireControl(List<IWeaponBaseContainer> containers)
+        {
+            _fireControlComponent.InitializeFireControl(new List<int>
+            {
+
+            });
+        }
+
+        public void InitializeFireControl(List<int> containers)
+        {
+            _fireControlComponent.InitializeFireControl(containers);
+        }
+
         /// <summary>
         /// 发射武器
         /// </summary>
@@ -71,6 +81,12 @@ namespace GameActorLogic
         #endregion
 
         #region HealthShieldComponent
+
+        public void InitializeHealthShieldBase(int hp, int shieldval, int maxshield, int shieldrecoverVal)
+        {
+             _healthShieldComponent.InitializeHealthShieldBase(hp, shieldval, maxshield, shieldrecoverVal);
+        }
+
         /// <summary>
         /// 获得当前血量
         /// </summary>

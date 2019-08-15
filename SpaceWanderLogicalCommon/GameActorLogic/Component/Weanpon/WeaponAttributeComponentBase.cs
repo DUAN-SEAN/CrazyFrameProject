@@ -12,7 +12,7 @@ namespace GameActorLogic
     /// </summary>
     public class WeaponAttributeComponentBase:
         IWeaponAttributeBase,
-        IWeanponAttributeinternalBase
+        IWeaponAttributeInternalBase
     {
         protected int bulletnum;
 
@@ -52,7 +52,7 @@ namespace GameActorLogic
 
         #endregion
 
-        #region IWeaponAttributeinternalBase
+        #region IWeaponAttributeInternalBase
 
         public void AddBulletNum(int add)
         {
