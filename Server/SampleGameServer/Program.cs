@@ -20,7 +20,7 @@ namespace GameServer
 
 
             GameServer gameServer = new GameServer();
-            if(!gameServer.Initialize<GameServerGlobalConfig,GameServerPlayerContext>
+            if(!gameServer.Initialize<GameServerGlobalConfig, GameServerPlayerContext>
                 (@"GameServerConfig.config", typeof(GameServerPlayerContext),new ProtobufPacker(), "GameServer"))
             {
                 Log.Error("初始化服务器错误");

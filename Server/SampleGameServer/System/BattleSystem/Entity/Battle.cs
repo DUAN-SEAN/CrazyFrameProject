@@ -32,6 +32,15 @@ namespace GameServer.Battle
         public void Init(List<string> players, int barrierId, INetCumnication handler)
         {
 
+            foreach (var plyaerId in players)
+            {
+                var plx = GameServer.Instance.PlayerCtxManager.FindPlayerContextByString(plyaerId) as GameServerPlayerContext;
+
+                var shipInfo =  plx.m_gameServerDBPlayer.playerShip;
+
+
+
+            }
             m_level.Start(players,barrierId);
             m_players = players;
             m_netHandler = handler;

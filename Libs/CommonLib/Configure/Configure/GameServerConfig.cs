@@ -13,8 +13,6 @@ namespace GameServer.Configure
     public class GameServerGlobalConfig : ServerBaseGlobalConfigure
     {
 
-
-
         /// <summary>
         /// 服务器配置
         /// </summary>
@@ -254,14 +252,57 @@ namespace GameServer.Configure
         [XmlAttribute("Level")]
         public int Level { get; set; }
 
-
         [XmlAttribute("Name")]
         public string Name { get; set; }
 
         [XmlAttribute("MemberCount")]
         public int MemberCount { get; set; }
 
+        [XmlArray("TaskConfigs"), XmlArrayItem("TaskItem")]
+        public TaskConfigs[] TaskConfigs { get; set; }
+
     }
+
+
+    [Serializable]
+    public class TaskConfigs
+    {
+        [XmlAttribute("Id")]
+        public int Id { get; set; }
+
+        [XmlAttribute("StartCondition")]
+        public int StartCondition { get; set; }
+
+        [XmlAttribute("Description")]
+        public string Description { get; set; }
+
+        [XmlAttribute("TaskAward")]
+        public string TaskAward { get; set; }
+
+
+        [XmlArray("TaskConditionItemConfig"), XmlArrayItem("Condition")]
+        public TaskConditionItemConfig[] TaskConditionItemConfig { get; set; }
+
+
+    }
+
+
+    [Serializable]
+    public class TaskConditionItemConfig
+    {
+        [XmlAttribute("ConditionType")]
+        public int ConditionType { get; set; }
+
+        [XmlAttribute("ConditionTarget")]
+        public int ConditionTarget { get; set; }
+
+        [XmlAttribute("Description")]
+        public string Description { get; set; }
+
+        [XmlAttribute("ConditionValue")]
+        public int ConditionValue { get; set; }
+    }
+
     [Serializable]
     public class GameMatchTeamConfig
     {

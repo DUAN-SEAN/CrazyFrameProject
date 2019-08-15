@@ -57,7 +57,11 @@ namespace GameServer.Battle
         {
             //获取关卡配置文件,获取所有的游戏匹配信息
             m_gameBarrierConfigs = GameServer.Instance.m_gameServerGlobalConfig.BarrierConfigs;
+            m_gameShipInfoConfigs =  GameServer.Instance.m_gameServerGlobalConfig.GameShipConfig;
+            m_gameSkillConfig = GameServer.Instance.m_gameServerGlobalConfig.GameSkillConfig;
             if (m_gameBarrierConfigs == null) return false;
+            if (m_gameShipInfoConfigs == null) return false;
+            if (m_gameSkillConfig == null) return false;
 
             TimerManager = new BattleTimerManager();
             TimerManager.Start();
@@ -173,6 +177,14 @@ namespace GameServer.Battle
         /// 战斗关卡的匹配文件
         /// </summary>
         private GameBarrierConfig[] m_gameBarrierConfigs;
+        /// <summary>
+        /// 飞船配置信息
+        /// </summary>
+        private GameShipConfig[] m_gameShipInfoConfigs;
+        /// <summary>
+        /// 飞船配置信息
+        /// </summary>
+        private GameSkillConfig m_gameSkillConfig;
 
         /// <summary>
         /// 战斗系统的Timer管理
