@@ -20,6 +20,10 @@ namespace GameActorLogic
 
         List<ActorBase> GetAllActors();
 
+        /// <summary>
+        /// 获取一个Actor
+        /// </summary>
+        ActorBase GetActor(ulong id);
     }
 
     /// <summary>

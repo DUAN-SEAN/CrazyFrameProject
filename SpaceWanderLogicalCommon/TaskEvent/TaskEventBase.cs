@@ -82,7 +82,7 @@ namespace GameActorLogic
                     taskcondition = new TimeTaskCondition(this,0);
                     break;
                 case TaskConditionTypeConstDefine.KillTaskEvent:
-                    taskcondition = new KillTaskCondition(this, 0);
+                    taskcondition = new KillTaskCondition(this, 0,levelActor);
                     break;
             }
             return taskcondition;
@@ -119,6 +119,15 @@ namespace GameActorLogic
         public TaskEventState GetTaskState()
         {
             return m_taskEventState;
+        }
+
+        public bool ActivateTask()
+        {
+            if (m_taskEventState == TaskEventState.Finished) return false;
+            if (m_taskEventState != TaskEventState.Idle) return false;
+            m_taskEventState = TaskEventState.UnFinished;
+            return true;
+
         }
 
         public void TickTask()

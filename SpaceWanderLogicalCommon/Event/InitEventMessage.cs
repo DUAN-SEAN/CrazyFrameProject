@@ -12,11 +12,12 @@ namespace GameActorLogic
     {
         public ulong actorid;
         public Int32 actortype;
+        public int camp;
         public double point_x;
         public double point_y;
         public double angle;
         public readonly bool haveId;
-        public InitEventMessage(ulong actorid, Int32 actortype, double point_x, double point_y, double angle)
+        public InitEventMessage(ulong actorid,int camp, Int32 actortype, double point_x, double point_y, double angle)
         {
             _eventMessageId = EventMessageConstDefine.InitEvent;
             this.actorid = actorid;
@@ -26,7 +27,7 @@ namespace GameActorLogic
             this.angle = angle;
             haveId = true;
         }
-        public InitEventMessage(Int32 actortype, double point_x, double point_y, double angle)
+        public InitEventMessage(Int32 actortype,int camp, double point_x, double point_y, double angle)
         {
             _eventMessageId = EventMessageConstDefine.InitEvent;
 

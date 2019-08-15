@@ -81,13 +81,13 @@ namespace GameActorLogic
             ActorBase actor = null;
             if (initEvent.haveId)
             {
-                actor = levelContainer.GetCreateInternalComponentBase().CreateActor(initEvent.actortype,
+                actor = levelContainer.GetCreateInternalComponentBase().CreateActor(initEvent.actortype,initEvent.camp,
                     initEvent.point_x,
                     initEvent.point_y, initEvent.angle, initEvent.actorid);
             }
             else
             {
-                actor = levelContainer.GetCreateInternalComponentBase().CreateActor(initEvent.actortype,
+                actor = levelContainer.GetCreateInternalComponentBase().CreateActor(initEvent.actortype, initEvent.camp,
                     initEvent.point_x,
                     initEvent.point_y, initEvent.angle);
             }

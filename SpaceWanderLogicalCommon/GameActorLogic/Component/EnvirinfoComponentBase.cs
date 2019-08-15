@@ -69,11 +69,11 @@ namespace GameActorLogic
         {
             return _actorList;
         }
-       
 
-     
-
-       
+        public ActorBase GetActor(ulong id)
+        {
+            return _actorList.Find(actor => actor.GetActorID() == id);
+        }
 
         #endregion
 

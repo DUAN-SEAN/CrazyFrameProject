@@ -48,6 +48,7 @@
     <Compile Include="Command\MoveCommand\SkillCommand.cs" />
     <Compile Include="Event\TaskUpdateEventMessage.cs" />
     <Compile Include="Event\VictoryEventMessage.cs" />
+    <Compile Include="GameActorLogic\ClientActor\ActorHelper.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Server\IHandlerComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Server\ITaskEventComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Server\HandlerComponentBase.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="TaskEvent\TaskEventState.cs" />
     <Compile Include="TaskEvent\TaskConditionTypeConstDefine.cs" />
     <Compile Include="TaskEvent\TaskResultTypeConstDefine.cs" />
+    <Compile Include="TaskEvent\TaskResult\ActivateTaskResult.cs" />
     <Compile Include="TaskEvent\TaskResult\VictoryTaskResult.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -29,10 +29,18 @@ namespace GameActorLogic
         /// </summary>
         List<ITaskEvent> GetUnFinishTaskEvents();
 
+        /// <summary>
+        /// 返回一个指定的TaskEvent
+        /// </summary>
+        ITaskEvent GetTaskEvent(ulong id);
+
     }
 
     public interface ITaskEventComponentInternalBase : ITaskEventComponentBase
     {
-
+        /// <summary>
+        /// 用任务id激活一个任务
+        /// </summary>
+        void ActivateTask(ulong id);
     } 
 }
