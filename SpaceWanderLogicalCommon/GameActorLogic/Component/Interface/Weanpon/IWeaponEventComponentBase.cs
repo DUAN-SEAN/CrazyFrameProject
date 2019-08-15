@@ -25,6 +25,21 @@ namespace GameActorLogic
         /// 武器被组件外部销毁
         /// </summary>
         void Destroy();
+
+        /// <summary>
+        /// 当武器被实例化后 被组件外部开启
+        /// </summary>
+        event Action<IWeaponBaseContainer> OnStartWeapon;
+
+        /// <summary>
+        /// 武器被组件外部关闭或结束
+        /// </summary>
+        event Action<IWeaponBaseContainer> OnEndWeapon;
+
+        /// <summary>
+        /// 武器被组件外部销毁
+        /// </summary>
+        event Action<IWeaponBaseContainer> OnDestroyWeapon;
     }
 
     /// <summary>

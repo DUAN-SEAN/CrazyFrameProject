@@ -14,49 +14,101 @@ namespace GameActorLogic
         IFireControlBase,
         IFireControlInternalBase
     {
+        /// <summary>
+        /// 准备好生成的武器
+        /// </summary>
         protected List<IWeaponBaseContainer> weapons;
 
-        public FireControlComponentBase()
+        protected List<IWeaponBaseContainer> weaponInitList;
+
+        protected ILevelActorComponentBaseContainer level;
+
+        protected IShipComponentBaseContainer container;
+        public FireControlComponentBase(IShipComponentBaseContainer container, ILevelActorComponentBaseContainer create)
         {
             weapons = new List<IWeaponBaseContainer>();
+            this.container = container;
+            this.level = create;
         }
 
-        public FireControlComponentBase(List<IWeaponBaseContainer> weapons)
+        public FireControlComponentBase(IShipComponentBaseContainer container, ILevelActorComponentBaseContainer create,List<Int32> weapons)
         {
-            this.weapons = weapons;
+            this.container = container;
+            this.weapons = new List<IWeaponBaseContainer>();
+            foreach (var weapon in weapons)
+            {
+               level.GetConfigComponentInternalBase().GetActorClone(weapon, out var actor);
+               if (actor is IWeaponBaseContainer weaponBase)
+                   this.weapons.Add(weaponBase);
+            }
+            
         }
 
+        protected void WaitWeaponDestroy(IWeaponBaseContainer weapon)
+        {
+            weaponInitList.Remove(weapon);
+        }
 
         #region IFireControlBase
+
+        public void InitializeFireControl(List<Int32> containers)
+        {
+            weapons = new List<IWeaponBaseContainer>();
+            foreach (var weapon in containers)
+            {
+                level.GetConfigComponentInternalBase().GetActorClone(weapon, out var actor);
+                if (actor is IWeaponBaseContainer weaponBase)
+                    this.weapons.Add(weaponBase);
+            }
+        }
+
         public void Fire(int i)
         {
             for (var j = 0; j < weapons.Count; j++)
             {
-                if (weapons[j].GetWeaponType() == i)
-                    OnFire?.Invoke(weapons[j]);
+                if (weapons[j].GetWeaponType() == i && weapons[j] is IWeaponBaseContainer actor)
+                {
+                    var weapon = actor.Clone() as IWeaponBaseContainer;
+                    weaponInitList.Add(weapon);
+                    weapon.OnDestroyWeapon += WaitWeaponDestroy;
+                    level.GetEnvirinfointernalBase().AddActor(weapon as ActorBase);
+                    weapon.Start();
+                    OnFire?.Invoke(weapon);
+                }
             }
-
-            
         }
 
         public void End(int i)
         {
 
-            for (var j = 0; j < weapons.Count; j++)
+            for (var j = 0; j < weaponInitList.Count; j++)
             {
-                if (weapons[j].GetWeaponType() == i)
-                    OnEnd?.Invoke(weapons[j]);
+                if (weaponInitList[j].GetWeaponType() == i)
+                {
+                    weaponInitList[j].End();
+                    OnEnd?.Invoke(weaponInitList[j]);
+                }
             }
         }
 
         public void Destroy(int i)
         {
-
-            for (var j = 0; j < weapons.Count; j++)
+            List<IWeaponBaseContainer> weaponList = new List<IWeaponBaseContainer>();
+            for (var j = 0; j < weaponInitList.Count; j++)
             {
-                if (weapons[j].GetWeaponType() == i)
-                    OnDestroy?.Invoke(weapons[j]);
+                if (weaponInitList[j].GetWeaponType() == i)
+                {
+                    weaponList.Add(weaponInitList[j]);
+                }
             }
+            //从集合中删除
+            foreach (var weaponBaseContainer in weaponInitList)
+            {
+                weaponList.Remove(weaponBaseContainer);
+                OnDestroy?.Invoke(weaponBaseContainer);
+                weaponBaseContainer.Destroy();
+            }
+
         }
         #endregion
 

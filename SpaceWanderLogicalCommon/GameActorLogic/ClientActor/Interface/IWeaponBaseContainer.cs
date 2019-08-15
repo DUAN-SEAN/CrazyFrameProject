@@ -13,7 +13,7 @@ namespace GameActorLogic
         IWeaponEventBase,
         IWeaponAttributeBase
     {
-
+        
     }
 
 
@@ -37,7 +37,7 @@ namespace GameActorLogic
         /// <summary>
         /// 获取武器属性
         /// </summary>
-        IWeanponAttributeinternalBase GetWeaponAttributeinternalBase();
+        IWeaponAttributeInternalBase GetWeaponAttributeinternalBase();
     }
 
 

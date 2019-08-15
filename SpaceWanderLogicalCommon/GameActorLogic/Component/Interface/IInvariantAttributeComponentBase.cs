@@ -8,6 +8,9 @@ namespace GameActorLogic
 {
     public interface IInvariantAttributeBase
     {
+
+        void InitializeInvariantAttributeBase(int camp, double maxSpeed, float maxForceProc);
+
         /// <summary>
         /// 获得最大速度
         /// 与物理组件中的速度对应

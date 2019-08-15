@@ -10,7 +10,7 @@ namespace GameActorLogic
         IHealthShieldBase,
         IShipEventBase
     {
-
+        
     }
 
 

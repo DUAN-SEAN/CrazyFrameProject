@@ -12,6 +12,11 @@ namespace GameActorLogic
     /// </summary>
     public interface IFireControlBase
     {
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        void InitializeFireControl(List<Int32> containers);
+
        
         /// <summary>
         /// 发射武器

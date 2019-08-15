@@ -35,6 +35,13 @@ namespace GameActorLogic
 
         #region IInvariantAttributeInternalBase
 
+        public void InitializeInvariantAttributeBase(int camp, double maxSpeed, float maxForceProc)
+        {
+            this.maxSpeed = maxSpeed;
+            this.maxForceProc = maxForceProc;
+            this.camp = camp;
+        }
+
         public double GetMaxSpeed()
         {
             return maxSpeed;

@@ -98,6 +98,29 @@ namespace GameActorLogic
 
 
         #region IHealthShieldBase
+
+        public void Initialize(int hp, int shieldval, int maxshield, int shieldrecoverVal)
+        {
+            _hp = hp;
+            _shieldval = shieldval;
+            _maxshieldVal = maxshield;
+            _shieldrecoverVal = shieldrecoverVal;
+            _addshieldrecoverVal = 0;
+            reducerecoveryinterval = 0;
+            lastTime = DateTime.Now.Ticks;
+        }
+
+        public void InitializeHealthShieldBase(int hp, int shieldval, int maxshield, int shieldrecoverVal)
+        {
+            _hp = hp;
+            _shieldval = shieldval;
+            _maxshieldVal = maxshield;
+            _shieldrecoverVal = shieldrecoverVal;
+            _addshieldrecoverVal = 0;
+            reducerecoveryinterval = 0;
+            lastTime = DateTime.Now.Ticks;
+        }
+
         /// <summary>
         /// 
         /// </summary>

@@ -12,6 +12,12 @@ namespace GameActorLogic
     public interface IHealthShieldBase
     {
         /// <summary>
+        /// 初始化组件
+        /// </summary>
+        void InitializeHealthShieldBase(int hp, int shieldval, int maxshield, int shieldrecoverVal);
+
+
+        /// <summary>
         /// 获得当前血量
         /// </summary>
         int GetHP();

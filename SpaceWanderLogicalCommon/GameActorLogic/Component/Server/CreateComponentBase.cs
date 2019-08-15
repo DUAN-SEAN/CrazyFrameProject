@@ -38,6 +38,9 @@ namespace GameActorLogic
         public ActorBase CreateActor(int actortype, int camp,double point_x, double point_y, double angle, ulong Id)
         {
             ActorBase actor = null;
+            //从配置文件中获取Actor
+            level.GetConfigComponentInternalBase().GetActorClone(actortype, out actor);
+
             switch (actortype)
             {
                 case ActorTypeBaseDefine.ActorNone:
@@ -46,13 +49,45 @@ namespace GameActorLogic
 
                 #region 飞船Actor
                 case ActorTypeBaseDefine.ShipActorNone:
-                    actor = new ShipActorBase(Id);
+                    if (actor == null) 
+                        actor = new ShipActorBase(Id, level);
+                    actor.SetActorId(Id);
                     actor.PrepareActor(point_x, point_y, angle);
                     actor.SetCamp(camp);
+                    break;
+                case ActorTypeBaseDefine.EliteShipActorA:
+                    break;
+                case ActorTypeBaseDefine.EliteShipActorB:
+                    break;
+                case ActorTypeBaseDefine.FighterShipActorA:
+                    break;
+                case ActorTypeBaseDefine.FighterShipActorB:
+                    break;
+                case ActorTypeBaseDefine.WaspShipActorA:
+                    break;
+                case ActorTypeBaseDefine.AnnihilationShipActor:
+                    break;
+                case ActorTypeBaseDefine.DroneShipActor:
+                    break;
+                case ActorTypeBaseDefine.PlayerShipActor:
+                    break;
+
+                #endregion
+
+                #region 武器Acotr
+                case ActorTypeBaseDefine.AntiAircraftGunActor:
+                case ActorTypeBaseDefine.ContinuousLaserActor:
+                case ActorTypeBaseDefine.MachineGunActor:
+                case ActorTypeBaseDefine.PowerLaserActor:
+                case ActorTypeBaseDefine.TimeBombActor:
+                case ActorTypeBaseDefine.TorpedoActor:
+                case ActorTypeBaseDefine.TrackingMissileActor:
+                case ActorTypeBaseDefine.TriggerBombActor:
                     break;
 
                 #endregion
             }
+
             return actor;
         }
 
