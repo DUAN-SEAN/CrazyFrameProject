@@ -36,13 +36,28 @@ namespace GameActorLogic
             _commandComponent = new CommandComponentBase();
             _envirinfoComponent = new EnvirinfoComponentBase();
             _handlerComponent = new HandlerComponentBase(this);
-            _createComponent = new CreateComponentBase();
+            _createComponent = new CreateComponentBase(this);
             _taskEventComponent = new TaskEventComponentBase(this);
 
         }
 
         #endregion
 
+        #region 测试添加任务方法
+
+        protected void AddPrepareTask()
+        {
+            var container = this as ILevelActorComponentBaseContainer;
+            var task = container.GetCreateInternalComponentBase().CreateTaskEvent(
+                TaskConditionTypeConstDefine.KillTaskEvent,TaskResultTypeConstDefine.Victory, 1, new Dictionary<int, int>
+                {
+                    {0, 10}
+                });
+            container.GeTaskEventComponentInternalBase().AddTaskEvent(task);
+        }
+        
+
+        #endregion
 
         #region ILevelActorBaseContainer
 

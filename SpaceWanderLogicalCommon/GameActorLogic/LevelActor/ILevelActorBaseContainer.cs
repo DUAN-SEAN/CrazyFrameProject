@@ -43,7 +43,7 @@ namespace GameActorLogic
     /// <summary>
     /// 关卡Actor 对内接口
     /// </summary>
-    public interface ILevelActorComponentBaseContainer
+    public interface ILevelActorComponentBaseContainer : ILevelActorBaseContainer
     {
         /// <summary>
         /// 获取事件组件

@@ -10,9 +10,16 @@ namespace GameActorLogic
     public interface ITaskEvent
     {
         /// <summary>
-        /// 获得任务类型定义
+        /// 获得任务条件类型定义
+        /// 击杀数，时间
         /// </summary>
-        Int32 GetTaskTypeDefine();
+        Int32 GetTaskConditionTypeDefine();
+
+        /// <summary>
+        /// 获得任务结果类型
+        /// 胜利，失败等
+        /// </summary>
+        Int32 GetTaskResultTypeDefine();
 
         /// <summary>
         /// 返回任务状态
@@ -23,7 +30,21 @@ namespace GameActorLogic
         /// </summary>
         void TickTask();
 
+        /// <summary>
+        /// 获得任务ID
+        /// </summary>
+        /// <returns></returns>
         ulong GetTaskId();
+
+        /// <summary>
+        /// 向任务数据字典中添加值
+        /// </summary>
+        bool AddValue(int key,int value);
+
+        /// <summary>
+        /// 尝试从任务数据字典中获取值
+        /// </summary>
+        bool TryGetValue(int key, out int value);
 
         #region 同步逻辑
         /// <summary>

@@ -11,20 +11,109 @@ namespace GameActorLogic
     /// </summary>
     public class TaskEventBase : ITaskEvent
     {
-        protected Int32 m_tasktypedefine;
+        #region 任务字段
+        /// <summary>
+        /// 任务条件类型
+        /// </summary>
+        protected Int32 m_taskconditiontypedefine;
+
+        /// <summary>
+        /// 任务结果类型
+        /// </summary>
+        protected Int32 m_taskresulttypedefine;
+
+        /// <summary>
+        /// 任务当前状态
+        /// </summary>
         protected TaskEventState m_taskEventState;
+        /// <summary>
+        /// 任务ID
+        /// </summary>
         protected ulong taskid;
+
+        /// <summary>
+        /// 任务数据
+        /// </summary>
         protected Dictionary<int, int> taskcondition;
 
+        /// <summary>
+        /// 关卡对象引用
+        /// </summary>
         protected ILevelActorComponentBaseContainer levelActor;
-        public TaskEventBase(ILevelActorComponentBaseContainer levelActor)
+
+        #endregion
+
+        #region 任务策略对象
+        /// <summary>
+        /// 任务条件
+        /// </summary>
+        protected ITaskCondition taskCondition;
+        /// <summary>
+        /// 任务结果
+        /// </summary>
+        protected ITaskResult taskResult;
+        
+        #endregion
+
+
+
+
+        public TaskEventBase(ulong taskid,ILevelActorComponentBaseContainer levelActor,Int32 condition,Int32 result)
         {
+            this.taskid = taskid;
             taskcondition = new Dictionary<int, int>();
             this.levelActor = levelActor;
+            m_taskconditiontypedefine = condition;
+            m_taskresulttypedefine = result;
+            taskCondition = CreateTaskCondition(m_taskconditiontypedefine);
+            taskResult = CreateTaskResult(m_taskresulttypedefine);
         }
-        public int GetTaskTypeDefine()
+        /// <summary>
+        /// 返回对应类型的条件
+        /// </summary>
+        protected ITaskCondition CreateTaskCondition(Int32 condition)
         {
-            return m_tasktypedefine;
+            ITaskCondition taskcondition = null;
+            switch (condition)
+            {
+                case TaskConditionTypeConstDefine.TaskEventNone:
+                    break;
+                case TaskConditionTypeConstDefine.TimeTaskEvent:
+                    taskcondition = new TimeTaskCondition(this,0);
+                    break;
+                case TaskConditionTypeConstDefine.KillTaskEvent:
+                    taskcondition = new KillTaskCondition(this, 0);
+                    break;
+            }
+            return taskcondition;
+        }
+
+        protected ITaskResult CreateTaskResult(Int32 result)
+        {
+            ITaskResult taskresult = null;
+
+            switch (result)
+            {
+                case TaskResultTypeConstDefine.TaskEventNone:
+                    break;
+                case TaskResultTypeConstDefine.Victory:
+                    taskresult = new VictoryTaskResult(levelActor);
+                    break;
+                case TaskResultTypeConstDefine.ActivateTask:
+                    break;
+            }
+            return taskresult;
+        }
+
+        #region ITaskEvent
+        public int GetTaskConditionTypeDefine()
+        {
+            return m_taskconditiontypedefine;
+        }
+
+        public int GetTaskResultTypeDefine()
+        {
+            return m_taskresulttypedefine;
         }
 
         public TaskEventState GetTaskState()
@@ -34,12 +123,34 @@ namespace GameActorLogic
 
         public void TickTask()
         {
-            //TODO 进行任务逻辑判断
+ 
+            if(m_taskEventState == TaskEventState.Idle) return;
+            if(m_taskEventState == TaskEventState.Finished) return;
+            //任务已激活 但是未完成 判断条件是否达成
+            if(taskCondition == null) return;
+            if (!taskCondition.TickCondition()) return;
+            //任务条件已达成
+            //如果任务结果未执行 任务不显示已完成
+            if(taskResult == null) return;
+            taskResult.Execute();
+            m_taskEventState = TaskEventState.Finished;
         }
 
         public ulong GetTaskId()
         {
             return taskid;
+        }
+
+        public bool AddValue(int key, int value)
+        {
+            if (taskcondition.ContainsKey(key)) return false;
+            taskcondition.Add(key, value);
+            return true;
+        }
+
+        public bool TryGetValue(int key, out int value)
+        {
+            return taskcondition.TryGetValue(key, out value);
         }
 
         public void SetValue(int key, object value)
@@ -62,8 +173,12 @@ namespace GameActorLogic
                 levelActor.GetEventComponentBase()
                     .AddForWardEventMessages(new TaskUpdateEventMessage(taskid, m_taskEventState, key, value));
             }
-
         }
+
+
+        #endregion
+
+
     }
 
 

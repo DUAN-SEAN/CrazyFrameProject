@@ -11,12 +11,19 @@ namespace GameActorLogic
         ICreateComponentBase,
         ICreateInternalComponentBase
     {
+        /// <summary>
+        /// ActorID
+        /// </summary>
         protected ulong IDs;
 
-        public CreateComponentBase()
+        protected ILevelActorComponentBaseContainer level;
+        public CreateComponentBase(ILevelActorComponentBaseContainer level)
         {
             IDs = 0;
+            this.level = level;
         }
+
+        #region 创建Actor
 
         public ulong GetCreateID()
         {
@@ -28,7 +35,7 @@ namespace GameActorLogic
             return CreateActor(actortype, point_x, point_y, angle, GetCreateID());
         }
 
-        public ActorBase CreateActor(int actortype, double point_x, double point_y, double angle,ulong Id)
+        public ActorBase CreateActor(int actortype, double point_x, double point_y, double angle, ulong Id)
         {
             ActorBase actor = null;
             switch (actortype)
@@ -40,14 +47,27 @@ namespace GameActorLogic
                 #region 飞船Actor
                 case ActorTypeBaseDefine.ShipActorNone:
                     actor = new ShipActorBase(Id);
-                    actor.PrepareActor(point_x,point_y,angle);
+                    actor.PrepareActor(point_x, point_y, angle);
                     break;
 
                 #endregion
             }
-
             return actor;
         }
+
+        public ITaskEvent CreateTaskEvent(int taskcondition,int taskresult, ulong taskid, Dictionary<int, int> taskconditions)
+        {
+            ITaskEvent task = null;
+            task = new TaskEventBase(taskid, level, taskcondition, taskresult);
+            foreach (var i in taskconditions)
+            {
+                task?.AddValue(i.Key, i.Value);
+            }
+            return task;
+        }
+
+        #endregion
+
 
     }
 

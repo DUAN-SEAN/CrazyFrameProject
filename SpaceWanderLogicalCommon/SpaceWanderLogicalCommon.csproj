@@ -47,6 +47,7 @@
     <Compile Include="Command\MoveCommand\ForwardCommand.cs" />
     <Compile Include="Command\MoveCommand\SkillCommand.cs" />
     <Compile Include="Event\TaskUpdateEventMessage.cs" />
+    <Compile Include="Event\VictoryEventMessage.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Server\IHandlerComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Server\ITaskEventComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Server\HandlerComponentBase.cs" />
@@ -101,10 +102,16 @@
     <Compile Include="GameActorLogic\LevelActor\ILevelActorBaseContainer.cs" />
     <Compile Include="GameActorLogic\LevelActor\LevelActorBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TaskEvent\ITaskCondition.cs" />
     <Compile Include="TaskEvent\ITaskEvent.cs" />
+    <Compile Include="TaskEvent\ITaskResult.cs" />
+    <Compile Include="TaskEvent\TaskCondition\KillTaskCondition.cs" />
+    <Compile Include="TaskEvent\TaskCondition\TimeTaskCondition.cs" />
     <Compile Include="TaskEvent\TaskEventBase.cs" />
     <Compile Include="TaskEvent\TaskEventState.cs" />
-    <Compile Include="TaskEvent\TaskEventType.cs" />
+    <Compile Include="TaskEvent\TaskConditionTypeConstDefine.cs" />
+    <Compile Include="TaskEvent\TaskResultTypeConstDefine.cs" />
+    <Compile Include="TaskEvent\TaskResult\VictoryTaskResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GameActorLogic\ClientActor\Interface\WeaponContainer\" />
