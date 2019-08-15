@@ -29,12 +29,22 @@ namespace GameServer.Battle
         /// <param name="players">玩家集合</param>
         /// <param name="barrierId">关卡Id</param>
         /// <param name="handler">通讯句柄</param>
-        public void Init(List<string> players, int barrierId, INetCumnication handler)
+        public void Init(List<string> players, int barrierId, IBattleSystemHandler handler)
         {
 
-            m_level.Start(players,barrierId);
+            foreach (var plyaerId in players)
+            {
+                var plx = GameServer.Instance.PlayerCtxManager.FindPlayerContextByString(plyaerId) as GameServerPlayerContext;
+
+                var shipInfo =  plx.m_gameServerDBPlayer.playerShip;
+
+            }
+            
             m_players = players;
             m_netHandler = handler;
+
+
+            m_level.Start(players, barrierId);
         }
 
         /// <summary>
@@ -243,7 +253,7 @@ namespace GameServer.Battle
         /// <summary>
         /// 网路通信句柄
         /// </summary>
-        private INetCumnication m_netHandler;
+        private IBattleSystemHandler m_netHandler;
 
         private BinaryFormatter m_binaryFormatter;
 

@@ -15,7 +15,7 @@ namespace GameServer.Battle
     /// 2 所有逻辑通过消息和玩家现场进行通信
     /// 3 游戏战斗系统的消息由GameServer负责生成驱动
     /// </summary>
-    public class BattleSystem:BaseSystem, INetCumnication
+    public class BattleSystem:BaseSystem, IBattleSystemHandler
     {
 
         public override void Update(int data1 = 0, long data2 = 0, object data3 = null)
@@ -57,7 +57,11 @@ namespace GameServer.Battle
         {
             //获取关卡配置文件,获取所有的游戏匹配信息
             m_gameBarrierConfigs = GameServer.Instance.m_gameServerGlobalConfig.BarrierConfigs;
+            m_gameShipInfoConfigs =  GameServer.Instance.m_gameServerGlobalConfig.GameShipConfig;
+            m_gameSkillConfig = GameServer.Instance.m_gameServerGlobalConfig.GameSkillConfig;
             if (m_gameBarrierConfigs == null) return false;
+            if (m_gameShipInfoConfigs == null) return false;
+            if (m_gameSkillConfig == null) return false;
 
             TimerManager = new BattleTimerManager();
             TimerManager.Start();
@@ -164,6 +168,21 @@ namespace GameServer.Battle
 
         }
 
+        public List<GameBarrierConfig> GetGameBarrierConfigs()
+        {
+            return m_gameBarrierConfigs?.ToList();
+        }
+
+        public List<GameShipConfig> GetGameShipConfigs()
+        {
+            return m_gameShipInfoConfigs?.ToList();
+        }
+
+        public GameSkillConfig GetGameSkillConfig()
+        {
+            return m_gameSkillConfig;
+        }
+
         /// <summary>
         /// 战斗实体字典
         /// </summary>
@@ -173,6 +192,14 @@ namespace GameServer.Battle
         /// 战斗关卡的匹配文件
         /// </summary>
         private GameBarrierConfig[] m_gameBarrierConfigs;
+        /// <summary>
+        /// 飞船配置信息
+        /// </summary>
+        private GameShipConfig[] m_gameShipInfoConfigs;
+        /// <summary>
+        /// 飞船配置信息
+        /// </summary>
+        private GameSkillConfig m_gameSkillConfig;
 
         /// <summary>
         /// 战斗系统的Timer管理
@@ -181,10 +208,17 @@ namespace GameServer.Battle
 
     }
 
-    public interface INetCumnication
+    public interface IBattleSystemHandler
     {
         void SendMessageToClient(IBattleMessage message, string playerId);
         void SendMessageToClient(IBattleMessage message, List<string> players);
+
+        List<GameBarrierConfig> GetGameBarrierConfigs();
+
+        List<GameShipConfig> GetGameShipConfigs();
+
+        GameSkillConfig GetGameSkillConfig();
+
 
     }
 }

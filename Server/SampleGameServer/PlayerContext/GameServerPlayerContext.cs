@@ -736,7 +736,7 @@ namespace GameServer
         /// <summary>
         /// 数据库代表玩家的实体player
         /// </summary>
-        private GameServerDBPlayer m_gameServerDBPlayer;
+        public GameServerDBPlayer m_gameServerDBPlayer;
         /// <summary>
         /// 玩家现场状态机
         /// </summary>
