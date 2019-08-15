@@ -22,8 +22,7 @@ namespace GameServer
         /// <summary>
         /// 静态实例
         /// </summary>
-        public static new GameServer Instance
-        { get { return (GameServer)(ServerBase.Instance); } }
+        public new static GameServer Instance => (GameServer)(ServerBase.Instance);
 
         public override bool Initialize<GlobalConfigureType, PlayerContextBase>(string globalPath, Type plyaerContextType, IMessagePacker messagePraser, string serverName)
         {
@@ -43,12 +42,13 @@ namespace GameServer
 
             //数据库配置
             var dbConfig = m_gameServerGlobalConfig.DBConfigInfos[0];
-            Log.Info($"ip:{dbConfig.ConnectHost} port:{dbConfig.Port} serviceName:{dbConfig.DataBase} username:{dbConfig.UserName} password:{dbConfig.Password}");
+            //Log.Info($"ip:{dbConfig.ConnectHost} port:{dbConfig.Port} serviceName:{dbConfig.DataBase} username:{dbConfig.UserName} password:{dbConfig.Password}");
 
 
             //MongoDBHelper.CreateDBClient(); //测试
             //mongodb测试
-            MongoDBHelper.Test();
+
+            //MongoDBHelper.Test();
 
 
             //初始化功能服务的各个模块系统

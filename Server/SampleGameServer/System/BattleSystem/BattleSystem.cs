@@ -15,7 +15,7 @@ namespace GameServer.Battle
     /// 2 所有逻辑通过消息和玩家现场进行通信
     /// 3 游戏战斗系统的消息由GameServer负责生成驱动
     /// </summary>
-    public class BattleSystem:BaseSystem, INetCumnication
+    public class BattleSystem:BaseSystem, IBattleSystemHandler
     {
 
         public override void Update(int data1 = 0, long data2 = 0, object data3 = null)
@@ -168,6 +168,21 @@ namespace GameServer.Battle
 
         }
 
+        public List<GameBarrierConfig> GetGameBarrierConfigs()
+        {
+            return m_gameBarrierConfigs?.ToList();
+        }
+
+        public List<GameShipConfig> GetGameShipConfigs()
+        {
+            return m_gameShipInfoConfigs?.ToList();
+        }
+
+        public GameSkillConfig GetGameSkillConfig()
+        {
+            return m_gameSkillConfig;
+        }
+
         /// <summary>
         /// 战斗实体字典
         /// </summary>
@@ -193,10 +208,17 @@ namespace GameServer.Battle
 
     }
 
-    public interface INetCumnication
+    public interface IBattleSystemHandler
     {
         void SendMessageToClient(IBattleMessage message, string playerId);
         void SendMessageToClient(IBattleMessage message, List<string> players);
+
+        List<GameBarrierConfig> GetGameBarrierConfigs();
+
+        List<GameShipConfig> GetGameShipConfigs();
+
+        GameSkillConfig GetGameSkillConfig();
+
 
     }
 }

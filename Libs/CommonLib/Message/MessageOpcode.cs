@@ -60,6 +60,14 @@ namespace Crazy.Common
 	[Message(MessageOpcode.CreateBattleBarrierInfo)]
 	public partial class CreateBattleBarrierInfo {}
 
+// ��ս��ϵͳ��ص���Ϣд������
+	[Message(MessageOpcode.C2S_ReadyBattleBarrierReq)]
+	public partial class C2S_ReadyBattleBarrierReq : IMessage {}
+
+// ��ս��ϵͳ��ص���Ϣд������
+	[Message(MessageOpcode.S2CM_ReadyBattleBarrierAck)]
+	public partial class S2CM_ReadyBattleBarrierAck : IMessage {}
+
 //����Ϊ����ͨ����Ϣ
 	[Message(MessageOpcode.C2S_ReConnectByLogin)]
 	public partial class C2S_ReConnectByLogin : IMessage {}
@@ -88,6 +96,8 @@ namespace Crazy.Common
 		 public const ushort S2CM_MatchingFinish = 1026;
 		 public const ushort S2CM_CreateBattleBarrier = 1027;
 		 public const ushort CreateBattleBarrierInfo = 1028;
-		 public const ushort C2S_ReConnectByLogin = 1029;
+		 public const ushort C2S_ReadyBattleBarrierReq = 1029;
+		 public const ushort S2CM_ReadyBattleBarrierAck = 1030;
+		 public const ushort C2S_ReConnectByLogin = 1031;
 	}
 }
