@@ -41,18 +41,15 @@ namespace ProtobufComplier
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            
-            
+
             Init(args[1]);
 
-
             Start(args[1],args[3], args[2],int.Parse(args[5]));
-
-
 
             ProtoWork(args[0],args[2],args[1]);
 
             Console.WriteLine("按下结束！");
+
             Console.ReadKey();
         }
         

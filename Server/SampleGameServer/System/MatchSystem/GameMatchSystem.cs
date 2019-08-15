@@ -7,6 +7,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GameServer.Battle;
 
 namespace GameServer
 {
@@ -496,7 +497,7 @@ namespace GameServer
             }
            
             createBattleBarrierMessage.BarrierId = barrierId;
-            //GameServer.Instance.PostMessageToSystem<BattleSystem>(createBattleBarrierMessage);
+            GameServer.Instance.PostMessageToSystem<BattleSystem>(createBattleBarrierMessage);
         }
        
         /// <summary>

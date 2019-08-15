@@ -67,6 +67,7 @@
     <Compile Include="Base\MessageBase\MessageHandlerAttribute.cs" />
     <Compile Include="Base\MessageBase\RpcException.cs" />
     <Compile Include="Configure\ConfigLoader.cs" />
+    <Compile Include="Configure\Configure\GameServerConfig.cs" />
     <Compile Include="Configure\ServerBaseGlobalConfigure.cs" />
     <Compile Include="Configure\Util.cs" />
     <Compile Include="Message\BattleMessage.cs" />
@@ -99,6 +100,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Configure\Configure\XML\GameServerConfig.config" />
     <None Include="Proto\BattleMessage.proto" />
     <None Include="Proto\RpcMessage.proto" />
     <None Include="Proto\Message.proto" />

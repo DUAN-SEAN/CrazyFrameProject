@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Crazy.Common;
 using Crazy.NetSharp;
 using Crazy.ServerBase;
+using GameServer.Battle;
 
 
 namespace GameServer
@@ -82,14 +83,14 @@ namespace GameServer
                 return false;
             }
             m_systemDic.Add(gameMatchSystem.GetType(), gameMatchSystem);
-            // 战斗系统初始化
-            //var battleSystem = new BattleSystem();
-            //if (!battleSystem.Initialize())
-            //{
-            //    Log.Error("初始化战斗系统失败");
-            //    return false;
-            //}
-            //m_systemDic.Add(battleSystem.GetType(), battleSystem);
+            //战斗系统初始化
+            var battleSystem = new BattleSystem();
+            if (!battleSystem.Initialize())
+            {
+                Log.Error("初始化战斗系统失败");
+                return false;
+            }
+            m_systemDic.Add(battleSystem.GetType(), battleSystem);
 
             //启动各个系统的Tick功能
             foreach (var item in m_systemDic.Values)

@@ -120,7 +120,6 @@
     <Compile Include="AsyncActions\DBContextAsyncAction\GameServerDBOperationDefine.cs" />
     <Compile Include="AsyncActions\DBDataDefine\GameServerDBarrierRecord.cs" />
     <Compile Include="AsyncActions\DBDataDefine\GameServerDBPlayer.cs" />
-    <Compile Include="Configure\GameServerConfig.cs" />
     <Compile Include="LocalMessage\BattleSystemLocalMessages.cs" />
     <Compile Include="LocalMessage\PlayerContextLocalMessages.cs" />
     <Compile Include="PlayerContext\GameServerPlayerContext_ShipHouse.cs" />
@@ -148,7 +147,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Configure\XML\GameServerConfig.config" />
     <None Include="NLog.config" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />

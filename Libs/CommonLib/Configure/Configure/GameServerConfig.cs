@@ -10,20 +10,21 @@ namespace GameServer.Configure
 {
     [Serializable]
     [XmlRoot("Configure")]
-    public class GameServerGlobalConfig:ServerBaseGlobalConfigure
+    public class GameServerGlobalConfig : ServerBaseGlobalConfigure
     {
 
-        /// <summary>
-        /// 服务器数据库列表
-        /// </summary>
-        [XmlArray("DBConfig"), XmlArrayItem("Database")]
-        public DBConfigInfo[] DBConfigInfos { get; set; }
+
 
         /// <summary>
         /// 服务器配置
         /// </summary>
         [XmlElement("ServerContext")]
         public GameServerContext ServerContext { get; set; }
+        /// <summary>
+        /// 服务器数据库列表
+        /// </summary>
+        [XmlArray("DBConfig"), XmlArrayItem("Database")]
+        public DBConfigInfo[] DBConfigInfos { get; set; }
         /// <summary>
         /// 关卡配置
         /// </summary>
@@ -77,7 +78,7 @@ namespace GameServer.Configure
         public Int32 SkillType { get; set; }
 
         [XmlAttribute("SkillName")]
-        public Int32 SkillName { get; set; }
+        public String SkillName { get; set; }
 
         [XmlAttribute("CD")]
         public Int32 CD { get; set; }
@@ -97,7 +98,7 @@ namespace GameServer.Configure
         public Int32 SkillType { get; set; }
 
         [XmlAttribute("SkillName")]
-        public Int32 SkillName { get; set; }
+        public String SkillName { get; set; }
 
         [XmlAttribute("CD")]
         public Int32 CD { get; set; }
@@ -118,7 +119,7 @@ namespace GameServer.Configure
         public Int32 SkillType { get; set; }
 
         [XmlAttribute("SkillName")]
-        public Int32 SkillName { get; set; }
+        public String SkillName { get; set; }
 
         [XmlAttribute("CD")]
         public Int32 CD { get; set; }
@@ -140,7 +141,7 @@ namespace GameServer.Configure
         public Int32 SkillType { get; set; }
 
         [XmlAttribute("SkillName")]
-        public Int32 SkillName { get; set; }
+        public String SkillName { get; set; }
 
         [XmlAttribute("CD")]
         public Int32 CD { get; set; }
@@ -199,18 +200,19 @@ namespace GameServer.Configure
         [XmlAttribute("MaxTurnSpeed")]
         public Int32 MaxTurnSpeed { set; get; }
 
-        [XmlAttribute]
-        public Int32 Weapon_One { set; get; }
+        [XmlAttribute("WeaponOne")]
+        public Int32 WeaponOne { set; get; }
 
-        public Int32 Weapon_Two { set; get; }
+        [XmlAttribute("WeaponTwo")]
+        public Int32 WeaponTwo { set; get; }
 
     }
 
     [Serializable]
     public class DBConfigInfo
     {
-        
-       
+
+
         [XmlAttribute("ConnectHost")]
         public String ConnectHost { get; set; }
 
@@ -244,7 +246,7 @@ namespace GameServer.Configure
     /// 游戏匹配配置信息，实例代表一个匹配队列
     /// </summary>
     [Serializable]
-    public class GameBarrierConfig 
+    public class GameBarrierConfig
     {
         [XmlAttribute("Id")]
         public int Id { get; set; }

@@ -16,13 +16,13 @@ namespace Crazy.Common
         public void Handle(ISession sender, object msg)
         {
             Message message = msg as Message;
-            
+
             if (message == null)
             {
                 Log.Error($"消息类型转换错误: {msg.GetType().Name} to {typeof(Message).Name}");
                 return;
             }
-            if(sender.SessionId == 0)
+            if (sender.SessionId == 0)
             {
                 Log.Error("Session ID is 0");
                 return;
