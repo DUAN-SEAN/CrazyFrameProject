@@ -148,19 +148,7 @@ message S2CM_CreateBattleBarrier // IMessage
 		repeated string PlayerIds = 2;
 	}
 }
-// 与战斗系统相关的消息写在下面
-message C2S_ReadyBattleBarrierReq // IMessage
-{
-	int32 RpcId = 90;
-	uint64 BattleId = 1;
-	string PlayerId = 2;
-}
-// 与战斗系统相关的消息写在下面
-message S2CM_ReadyBattleBarrierAck // IMessage
-{
-	int32 RpcId = 90;
-	uint64 BattleId = 1;
-}
+
 //以下为其他通信消息
 message C2S_ReConnectByLogin  // IMessage
 {

@@ -33,6 +33,17 @@ namespace GameServer
         public ICommand ICommand;//战斗指令
 
     }
+    public class ClientReadyBattleLocalMessage:ILocalMessage
+    {
+        public int MessageId
+        {
+            get => GameServerConstDefine.BattleSystemClientReadyBattle;
+        }
+
+        public ulong battleId;//战斗Id
+
+        public string playerId;//玩家Id
+    }
 
     public class ExitBattleLocalMessage:ILocalMessage
     {

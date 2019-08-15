@@ -1,6 +1,18 @@
 syntax = "proto3";
 package Crazy.Common;
-
+// 与战斗系统相关的消息写在下面
+message C2S_ReadyBattleBarrierReq // IBattleMessage 
+{
+	int32 RpcId = 90;
+	uint64 BattleId = 1;
+	string PlayerId = 2;
+}
+// 与战斗系统相关的消息写在下面
+message S2CM_ReadyBattleBarrierAck // IBattleMessage 
+{
+	int32 RpcId = 90;
+	uint64 BattleId = 1;
+}
 // 战斗指令
 message C2S_BattleCommandMessage // IBattleMessage 
 {
