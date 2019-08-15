@@ -24,6 +24,22 @@ namespace Crazy.Common
 	[Message(RpcMessageOpcode.OnlinePlayerInfo)]
 	public partial class OnlinePlayerInfo {}
 
+//��ȡ�ɴ��б�
+	[Message(RpcMessageOpcode.C2S_ShipInfoReq)]
+	public partial class C2S_ShipInfoReq : IRequest {}
+
+//��ȡ�ɴ��б�
+	[Message(RpcMessageOpcode.S2C_ShipInfoAck)]
+	public partial class S2C_ShipInfoAck : IResponse {}
+
+//�ϴ��ɴ���������
+	[Message(RpcMessageOpcode.C2S_UpLoadShipInfoReq)]
+	public partial class C2S_UpLoadShipInfoReq : IRequest {}
+
+//�ϴ��ɴ�������Ӧ
+	[Message(RpcMessageOpcode.S2C_UpLoadShipInfoAck)]
+	public partial class S2C_UpLoadShipInfoAck : IResponse {}
+
 }
 namespace Crazy.Common
 {
@@ -36,5 +52,9 @@ namespace Crazy.Common
 		 public const ushort C2S_UpdateOnlinePlayerList = 1034;
 		 public const ushort S2C_UpdateOnlinePlayerList = 1035;
 		 public const ushort OnlinePlayerInfo = 1036;
+		 public const ushort C2S_ShipInfoReq = 1037;
+		 public const ushort S2C_ShipInfoAck = 1038;
+		 public const ushort C2S_UpLoadShipInfoReq = 1039;
+		 public const ushort S2C_UpLoadShipInfoAck = 1040;
 	}
 }

@@ -199,7 +199,10 @@ namespace GameServer.Configure
         [XmlAttribute("MaxTurnSpeed")]
         public Int32 MaxTurnSpeed { set; get; }
 
-        
+        [XmlAttribute]
+        public Int32 Weapon_One { set; get; }
+
+        public Int32 Weapon_Two { set; get; }
 
     }
 

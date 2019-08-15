@@ -123,6 +123,7 @@
     <Compile Include="Configure\GameServerConfig.cs" />
     <Compile Include="LocalMessage\BattleSystemLocalMessages.cs" />
     <Compile Include="LocalMessage\PlayerContextLocalMessages.cs" />
+    <Compile Include="PlayerContext\GameServerPlayerContext_ShipHouse.cs" />
     <Compile Include="PlayerContext\PlayerContextStateMachine.cs" />
     <Compile Include="System\BattleSystem\BattleSystem.cs" />
     <Compile Include="System\BattleSystem\BattleTimerManager.cs" />
