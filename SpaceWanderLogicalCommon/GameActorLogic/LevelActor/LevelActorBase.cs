@@ -30,6 +30,8 @@ namespace GameActorLogic
         public LevelActorBase()
         {
             CreateComponent();
+            OnLoadingDone?.Invoke();
+
         }
 
 
@@ -86,7 +88,7 @@ namespace GameActorLogic
             //TODO 可能进行动态初始化
 
             //先放这里
-            OnLoadingDone?.Invoke();
+            OnStartDone?.Invoke();
         }
 
         public virtual void Update()
@@ -108,6 +110,7 @@ namespace GameActorLogic
         }
 
         public event Action OnLoadingDone;
+        public event Action OnStartDone;
 
         #region 关卡环境
 

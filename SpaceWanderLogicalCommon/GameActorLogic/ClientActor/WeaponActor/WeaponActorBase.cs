@@ -139,9 +139,29 @@ namespace GameActorLogic
         #endregion
 
 
+        public int GetSkillCapacity()
+        {
+            return _weaponAttributeComponent.GetSkillCapacity();
+        }
 
+        public void SetSkillCapacity(int cap)
+        {
+            _weaponAttributeComponent.SetSkillCapacity(cap);
+        }
 
+        public int GetSkillCd()
+        {
+            return _weaponAttributeComponent.GetSkillCd();
+        }
 
+        public void SetSkillCd(int cd)
+        {
+            _weaponAttributeComponent.SetSkillCd(cd);
+        }
 
+        public ISkillAttributeInternalComponent GetSkillAttributeInternalComponent()
+        {
+            return _weaponAttributeComponent;
+        }
     }
 }

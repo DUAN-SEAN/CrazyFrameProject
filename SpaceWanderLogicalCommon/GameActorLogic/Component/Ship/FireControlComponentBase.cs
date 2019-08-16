@@ -152,9 +152,14 @@ namespace GameActorLogic
             return weapons.Find(t => t.GetActorID() == id).GetBulletNum();
         }
 
-        public List<IWeaponBaseContainer> GetWeaponSkills()
+        public List<ISkillContainer> GetSkills()
         {
-            return weapons;
+            List<ISkillContainer> skills = new List<ISkillContainer>();
+            foreach (var weaponBaseContainer in weapons)
+            {
+                skills.Add(weaponBaseContainer);
+            }
+            return skills;
         }
 
         public int GetWeaponCd(ulong id)

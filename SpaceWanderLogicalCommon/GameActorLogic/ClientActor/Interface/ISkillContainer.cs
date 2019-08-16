@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GameActorLogic
+{
+    /// <summary>
+    /// 技能容器
+    /// </summary>
+    public interface ISkillContainer:
+        ISkillAttributeComponent
+    {
+
+    }
+
+
+    public interface ISkillComponentContainer
+    {
+        ISkillAttributeInternalComponent GetSkillAttributeInternalComponent();
+    } 
+}

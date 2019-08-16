@@ -12,7 +12,9 @@ namespace GameActorLogic
     /// </summary>
     public class WeaponAttributeComponentBase:
         IWeaponAttributeBase,
-        IWeaponAttributeInternalBase
+        IWeaponAttributeInternalBase,
+        ISkillAttributeComponent,
+        ISkillAttributeInternalComponent
     {
         protected int bulletnum;
 
@@ -22,6 +24,7 @@ namespace GameActorLogic
 
         protected long lifetime;
 
+        protected int weaponcd;
         public WeaponAttributeComponentBase()
         {
             bulletnum = 0;
@@ -56,12 +59,12 @@ namespace GameActorLogic
 
         public int GetWeaponCd()
         {
-            throw new NotImplementedException();
+            return weaponcd;
         }
 
         public void SetWeaponCd(int cd)
         {
-            throw new NotImplementedException();
+            weaponcd = cd;
         }
 
         #endregion
@@ -89,6 +92,24 @@ namespace GameActorLogic
         #endregion
 
 
+        public int GetSkillCapacity()
+        {
+            return GetBulletNum();
+        }
 
+        public void SetSkillCapacity(int cap)
+        {
+           SetBulletNum(cap);
+        }
+
+        public int GetSkillCd()
+        {
+            return GetWeaponCd();
+        }
+
+        public void SetSkillCd(int cd)
+        {
+            SetWeaponCd(cd);
+        }
     }
 }

@@ -98,11 +98,12 @@ namespace GameActorLogic
             return _fireControlComponent.GetWeaponBulletNum(id);
         }
 
-        public List<IWeaponBaseContainer> GetWeaponSkills()
+        public List<ISkillContainer> GetSkills()
         {
-            return _fireControlComponent.GetWeaponSkills();
+            return _fireControlComponent.GetSkills();
         }
 
+ 
         public int GetWeaponCd(ulong id)
         {
             return _fireControlComponent.GetWeaponCd(id);

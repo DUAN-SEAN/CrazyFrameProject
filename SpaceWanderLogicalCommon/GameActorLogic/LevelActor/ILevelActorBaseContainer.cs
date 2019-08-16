@@ -42,9 +42,14 @@ namespace GameActorLogic
         void Dispose();
 
         /// <summary>
-        /// 当关卡初始化完成 等待消息输入之前被调用
+        /// 当关卡初始化完成
         /// </summary>
         event Action OnLoadingDone;
+
+        /// <summary>
+        /// 当开始方法完成
+        /// </summary>
+        event Action OnStartDone;
 
     }
 
