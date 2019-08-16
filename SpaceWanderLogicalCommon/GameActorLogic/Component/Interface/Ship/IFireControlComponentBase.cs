@@ -43,7 +43,7 @@ namespace GameActorLogic
         /// <summary>
         /// 获取武器弹药
         /// </summary>
-        int GetSkillCapNum(ulong id);
+        int GetSkillCapNum(int type);
 
         /// <summary>
         /// 获得当前的武器信息
@@ -53,11 +53,11 @@ namespace GameActorLogic
         /// <summary>
         /// 获取武器当前Cd
         /// </summary>
-        int GetSkillCd(ulong id);
+        int GetSkillCd(int type);
 
-        void SetSkillCapNum(ulong id,int num);
+        void SetSkillCapNum(int type,int num);
 
-        void SetSkillCd(ulong id, int cd);
+        void SetSkillCd(int type, int cd);
 
     }
 
