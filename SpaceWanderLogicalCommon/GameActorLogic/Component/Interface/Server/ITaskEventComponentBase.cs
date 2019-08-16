@@ -32,8 +32,17 @@ namespace GameActorLogic
         /// <summary>
         /// 返回一个指定的TaskEvent
         /// </summary>
-        ITaskEvent GetTaskEvent(ulong id);
+        ITaskEvent GetTaskEvent(int id);
 
+        /// <summary>
+        /// 设置任务条件和任务状态
+        /// Idle = 0,
+        /// UnFinished = 1,
+        /// Finished = 2,
+        /// </summary>
+        void SetTaskConditionAndState(int id,int state, Dictionary<int, int> values);
+
+       
     }
 
     public interface ITaskEventComponentInternalBase : ITaskEventComponentBase
@@ -41,6 +50,6 @@ namespace GameActorLogic
         /// <summary>
         /// 用任务id激活一个任务
         /// </summary>
-        void ActivateTask(ulong id);
+        void ActivateTask(int id);
     } 
 }

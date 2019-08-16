@@ -169,7 +169,13 @@ namespace GameActorLogic
             return _taskEventComponent.GetUnFinishTaskEvents();
         }
 
-        public ITaskEvent GetTaskEvent(ulong id)
+      
+        public void SetTaskConditionAndState(int id, int state, Dictionary<int, int> values)
+        {
+            _taskEventComponent.SetTaskConditionAndState(id, state, values);
+        }
+
+        public ITaskEvent GetTaskEvent(int id)
         {
             return _taskEventComponent.GetTaskEvent(id);
         }
@@ -250,7 +256,7 @@ namespace GameActorLogic
             remove => _handlerComponent.OnDestroyMessageHandler -= value;
         }
 
-        public event Action<ulong> OnTaskUpdateMessageHandler
+        public event Action<int> OnTaskUpdateMessageHandler
         {
             add => _handlerComponent.OnTaskUpdateMessageHandler += value;
             remove => _handlerComponent.OnTaskUpdateMessageHandler -= value;

@@ -29,7 +29,7 @@ namespace GameActorLogic
         /// <summary>
         /// 任务ID
         /// </summary>
-        protected ulong taskid;
+        protected int taskid;
 
         /// <summary>
         /// 任务数据
@@ -58,7 +58,7 @@ namespace GameActorLogic
 
 
 
-        public TaskEventBase(ulong taskid,ILevelActorComponentBaseContainer levelActor,Int32 condition,Int32 result)
+        public TaskEventBase(int taskid,ILevelActorComponentBaseContainer levelActor,Int32 condition,Int32 result)
         {
             this.taskid = taskid;
             taskcondition = new Dictionary<int, int>();
@@ -151,7 +151,7 @@ namespace GameActorLogic
             m_taskEventState = TaskEventState.Finished;
         }
 
-        public ulong GetTaskId()
+        public int GetTaskId()
         {
             return taskid;
         }
@@ -190,6 +190,10 @@ namespace GameActorLogic
             }
         }
 
+        public void SetTaskState(TaskEventState state)
+        {
+            m_taskEventState = state;
+        }
 
         #endregion
 

@@ -49,7 +49,7 @@ namespace GameActorLogic
         /// 获得任务ID
         /// </summary>
         /// <returns></returns>
-        ulong GetTaskId();
+        int GetTaskId();
 
         /// <summary>
         /// 向任务数据字典中添加值
@@ -71,6 +71,9 @@ namespace GameActorLogic
         void SetValue(int key, bool value);
 
         void SetValue(int key, Int32 value);
+
+
+        void SetTaskState(TaskEventState state);
 
         #endregion
 

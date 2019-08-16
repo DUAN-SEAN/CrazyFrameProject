@@ -91,7 +91,7 @@ namespace GameActorLogic
             return actor;
         }
 
-        public ITaskEvent CreateTaskEvent(int taskcondition,int taskresult, ulong taskid, Dictionary<int, int> taskconditions)
+        public ITaskEvent CreateTaskEvent(int taskcondition,int taskresult, int taskid, Dictionary<int, int> taskconditions)
         {
             ITaskEvent task = null;
             task = new TaskEventBase(taskid, level, taskcondition, taskresult);

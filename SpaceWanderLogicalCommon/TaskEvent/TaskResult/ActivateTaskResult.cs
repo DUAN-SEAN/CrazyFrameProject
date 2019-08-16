@@ -10,8 +10,8 @@ namespace GameActorLogic
     {
         protected ILevelActorComponentBaseContainer level;
         //将要激活的激活ID
-        protected ulong activateid;
-        public ActivateTaskResult(ILevelActorComponentBaseContainer level,ulong activateid)
+        protected int activateid;
+        public ActivateTaskResult(ILevelActorComponentBaseContainer level,int activateid)
         {
             this.level = level;
             this.activateid = activateid;
