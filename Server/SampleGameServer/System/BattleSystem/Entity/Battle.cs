@@ -169,19 +169,17 @@ namespace GameServer.Battle
                       
                     {
                         S2C_SyncSkillStateBattleMessage syncSkillMsg = new S2C_SyncSkillStateBattleMessage();
-                            foreach (var s in shipActorBase.GetSkills())
-                            {
-                                S2C_SyncSkillStateBattleMessage.Types.SkillState skill = new S2C_SyncSkillStateBattleMessage.Types.SkillState();
-                                skill.Id = s.GetId();
-                                skill.CD = s.GetSkillCd();
-                                skill.Count = s.GetSkillCapacity();
+                        syncSkillMsg.BattleId = Id;
+                        syncSkillMsg.ActorId = shipActorBase.GetActorID();
+                        foreach (var s in shipActorBase.GetSkills())
+                        {
+                            S2C_SyncSkillStateBattleMessage.Types.SkillState skill = new S2C_SyncSkillStateBattleMessage.Types.SkillState();
+                            skill.Id = s.GetActorType();//获取技能Id
+                            skill.CD = s.GetSkillCd();
+                            skill.Count = s.GetSkillCapacity();
 
-                            }
-                           
-
-                       
-                       
-                        
+                        }
+                        BroadcastMessage(syncSkillMsg);
                         //syncSkillMsg.Skills.Add();
 
                     }
@@ -199,6 +197,8 @@ namespace GameServer.Battle
         private void OnSyncTaskState()
         {
             S2C_SyncLevelTaskBattleMessage syncLevelTask = new S2C_SyncLevelTaskBattleMessage();
+            syncLevelTask.ActorId = 0;
+            syncLevelTask.BattleId = Id;
             syncLevelTask.Tasks.Clear();//如果从池子中取的话可能涉及到未清理干净的现象
             foreach (var task in m_level.GetAllTaskEvents())
             {

@@ -142,6 +142,7 @@ namespace GameServer
             //最简单的退出 直接交给退出队伍执行
             if(matchTeam.State == MatchTeam.MatchTeamState.OPEN)
             {
+                Log.Info("玩家掉线，重连超时，退出队伍  TeamId" +matchTeam.Id);
                 OnExitMatchTeam(teamId, playerId);
                 return;
             }

@@ -608,7 +608,7 @@ namespace GameServer
                 Log.Info("neeRelease:" + ContextStringName);
                 Release();//CtxManager Free Context
             }
-
+            //通知其他独立系统响应
             GameServer.Instance.PostMessageToSystem<GameMatchSystem>(new ToMatchPlayerShutdownMessage { playerId = m_gameUserId});
             return Task.CompletedTask;
 
