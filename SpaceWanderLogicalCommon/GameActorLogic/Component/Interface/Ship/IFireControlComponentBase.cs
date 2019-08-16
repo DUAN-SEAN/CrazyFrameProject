@@ -46,6 +46,11 @@ namespace GameActorLogic
         int GetWeaponBulletNum(ulong id);
 
         /// <summary>
+        /// 获得当前的武器信息
+        /// </summary>
+        List<IWeaponBaseContainer> GetWeaponSkills();
+
+        /// <summary>
         /// 获取武器当前Cd
         /// </summary>
         int GetWeaponCd(ulong id);
