@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GameActorLogic;
 
-namespace SpaceWanderLogicalCommon.Event
+namespace GameActorLogic
 {
     [Serializable]
     public class DestroyEventMessage : BattleEventMessageBase

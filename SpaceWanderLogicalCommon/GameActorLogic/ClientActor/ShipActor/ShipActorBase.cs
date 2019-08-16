@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CrazyEngine.Base;
 
+
 namespace GameActorLogic
 {
     public class ShipActorBase :ActorBase ,
@@ -14,8 +15,9 @@ namespace GameActorLogic
         protected FireControlComponentBase _fireControlComponent;
         protected HealthShieldComponentBase _healthShieldComponent;
         protected ShipEventComponentBase _shipEventComponent;
+        protected AIComponentBase _aiComponent;
 
-        public ShipActorBase(ulong id,ILevelActorComponentBaseContainer level) : base(id,level)
+        public ShipActorBase(ulong id,Int32 type,ILevelActorComponentBaseContainer level) : base(id, type,level)
         {
 
         }
@@ -174,12 +176,30 @@ namespace GameActorLogic
         }
         #endregion
 
+        #region Ai组件
+        public bool StartAILogic()
+        {
+            return _aiComponent.StartAILogic();
+        }
+
+        public bool PauseAILogic()
+        {
+            return _aiComponent.PauseAILogic();
+        }
+
+
+        #endregion
+
+
         #region ShipEventComponent
         /// <summary>
         /// 飞船动态初始化生成调用
         /// </summary>
         public void Init()
         {
+            var position = GetPosition();
+            level.AddEventMessagesToHandlerForward(new InitEventMessage(ActorID, GetCamp(), ActorType, position.X,
+                position.Y, GetForwardAngle()));
             _shipEventComponent.Init();
         }
 
@@ -188,6 +208,7 @@ namespace GameActorLogic
         /// </summary>
         public void Destroy()
         {
+            level.AddEventMessagesToHandlerForward(new DestroyEventMessage(ActorID));
             _shipEventComponent.Destroy();
         }
 
@@ -206,6 +227,11 @@ namespace GameActorLogic
             return _healthShieldComponent;
         }
 
+        IAIInternalBase IShipComponentBaseContainer.GetAIinternalBase()
+        {
+            return _aiComponent;
+        }
+
         IShipEventinternalBase IShipComponentBaseContainer.GetShipEventinternalBase()
         {
             return _shipEventComponent;
@@ -213,7 +239,6 @@ namespace GameActorLogic
 
 
         #endregion
-
 
 
     }

@@ -50,6 +50,8 @@
     <Compile Include="Event\VictoryEventMessage.cs" />
     <Compile Include="GameActorLogic\ClientActor\ActorHelper.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\ISkillContainer.cs" />
+    <Compile Include="GameActorLogic\Component\AIComponent\DeadAiComponent.cs" />
+    <Compile Include="GameActorLogic\Component\AIComponent\GogogoAiComponent.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Server\IConfigComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Server\IHandlerComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Server\ITaskEventComponentBase.cs" />

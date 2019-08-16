@@ -8,6 +8,7 @@ namespace GameActorLogic
     public interface IShipBaseContainer : IBaseContainer,
         IFireControlBase,
         IHealthShieldBase,
+        IAIBase,
         IShipEventBase
     {
         
@@ -31,6 +32,11 @@ namespace GameActorLogic
         /// </summary>
         /// <returns></returns>
         IHealthShieldInternalBase GetHealthShieldinternalBase();
+
+        /// <summary>
+        /// 获得ai组件对内接口
+        /// </summary>
+        IAIInternalBase GetAIinternalBase();
 
         /// <summary>
         /// 获取船事件组件

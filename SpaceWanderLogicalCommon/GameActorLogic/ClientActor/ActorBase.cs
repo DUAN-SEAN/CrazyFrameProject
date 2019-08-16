@@ -19,12 +19,12 @@ namespace GameActorLogic
 
         protected ulong ActorID;
         protected Int32 ActorType;
-        protected ActorBase(ulong id,ILevelActorComponentBaseContainer level)
+        protected ActorBase(ulong id,Int32 actortype,ILevelActorComponentBaseContainer level)
         {
             ActorID = id;
             //this.envir = envir;
             this.level = level;
-            ActorType = ActorTypeBaseDefine.ActorNone;
+            ActorType = actortype;
         }
 
         protected virtual void  CreateBaseComponent()
