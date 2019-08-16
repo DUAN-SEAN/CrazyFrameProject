@@ -121,6 +121,8 @@ namespace GameActorLogic
             return m_taskEventState;
         }
 
+        public Dictionary<int, int> ConditionCurrentValues => taskCondition.ConditionCurrentValues;
+
         public bool ActivateTask()
         {
             if (m_taskEventState == TaskEventState.Finished) return false;

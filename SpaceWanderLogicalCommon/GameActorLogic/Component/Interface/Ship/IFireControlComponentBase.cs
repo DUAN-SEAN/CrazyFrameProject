@@ -17,6 +17,10 @@ namespace GameActorLogic
         /// </summary>
         void InitializeFireControl(List<Int32> containers);
 
+        /// <summary>
+        /// 外部发送按下事件
+        /// </summary>
+        void SendButtonState(ulong actorid, int skilltype, int skillcontrol);
        
         /// <summary>
         /// 发射武器

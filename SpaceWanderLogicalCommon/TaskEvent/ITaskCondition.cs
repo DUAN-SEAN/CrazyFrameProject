@@ -16,5 +16,11 @@ namespace GameActorLogic
         /// 检查条件是否达成
         /// </summary>
         bool TickCondition();
+
+        /// <summary>
+        /// 获取当前条件值
+        /// </summary>
+        Dictionary<int, int> ConditionCurrentValues { get; }
+    
     }
 }

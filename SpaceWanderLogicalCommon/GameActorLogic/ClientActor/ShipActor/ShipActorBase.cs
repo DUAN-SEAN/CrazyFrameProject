@@ -51,6 +51,11 @@ namespace GameActorLogic
             _fireControlComponent.InitializeFireControl(containers);
         }
 
+        public void SendButtonState(int skillcontrol)
+        {
+            ((IFireControlBase) _fireControlComponent).SendButtonState(skillcontrol);
+        }
+
         /// <summary>
         /// 发射武器
         /// </summary>
