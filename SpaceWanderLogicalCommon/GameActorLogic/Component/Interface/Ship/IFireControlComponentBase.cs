@@ -57,7 +57,7 @@ namespace GameActorLogic
 
         void SetSkillCapNum(ulong id,int num);
 
-        void SetWeaponCd(ulong id, int cd);
+        void SetSkillCd(ulong id, int cd);
 
     }
 
