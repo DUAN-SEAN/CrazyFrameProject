@@ -52,17 +52,17 @@ namespace Crazy.Common {
             "dGF0ZRgCIAEoBRJaCgpDb25kaXRpb25zGAMgAygLMkYuQ3JhenkuQ29tbW9u",
             "LlMyQ19TeW5jTGV2ZWxUYXNrQmF0dGxlTWVzc2FnZS5UYXNrU3RhdGUuQ29u",
             "ZGl0aW9uc0VudHJ5GjEKD0NvbmRpdGlvbnNFbnRyeRILCgNrZXkYASABKAUS",
-            "DQoFdmFsdWUYAiABKAU6AjgBIsgBCh9TMkNfU3luY1NraWxsU3RhdGVCYXR0",
+            "DQoFdmFsdWUYAiABKAU6AjgBItIBCh9TMkNfU3luY1NraWxsU3RhdGVCYXR0",
             "bGVNZXNzYWdlEg0KBVJwY0lkGFogASgFEhAKCEJhdHRsZUlkGAEgASgEEg8K",
-            "B0FjdG9ySWQYAiABKAQSQwoGU2tpbGxzGAMgAygLMjMuQ3JhenkuQ29tbW9u",
-            "LlMyQ19TeW5jU2tpbGxTdGF0ZUJhdHRsZU1lc3NhZ2UuU2tpbGwaLgoFU2tp",
-            "bGwSCgoCSWQYASABKAUSDQoFQ291bnQYAiABKAUSCgoCQ0QYAyABKAUiSgoV",
-            "QzJTX0V4aXRCYXR0bGVNZXNzYWdlEg0KBVJwY0lkGFogASgFEhAKCEJhdHRs",
-            "ZUlkGAEgASgEEhAKCFBsYXllcklkGAIgASgJIp8BChVTMkNfRXhpdEJhdHRs",
-            "ZU1lc3NhZ2USDQoFUnBjSWQYWiABKAUSEAoIQmF0dGxlSWQYASABKAQSEAoI",
-            "UGxheWVySWQYAiABKAkSOAoFc3RhdGUYAyABKA4yKS5DcmF6eS5Db21tb24u",
-            "UzJDX0V4aXRCYXR0bGVNZXNzYWdlLlN0YXRlIhkKBVN0YXRlEggKBEZhaWwQ",
-            "ABIGCgJPSxABYgZwcm90bzM="));
+            "B0FjdG9ySWQYAiABKAQSSAoGU2tpbGxzGAMgAygLMjguQ3JhenkuQ29tbW9u",
+            "LlMyQ19TeW5jU2tpbGxTdGF0ZUJhdHRsZU1lc3NhZ2UuU2tpbGxTdGF0ZRoz",
+            "CgpTa2lsbFN0YXRlEgoKAklkGAEgASgFEg0KBUNvdW50GAIgASgFEgoKAkNE",
+            "GAMgASgFIkoKFUMyU19FeGl0QmF0dGxlTWVzc2FnZRINCgVScGNJZBhaIAEo",
+            "BRIQCghCYXR0bGVJZBgBIAEoBBIQCghQbGF5ZXJJZBgCIAEoCSKfAQoVUzJD",
+            "X0V4aXRCYXR0bGVNZXNzYWdlEg0KBVJwY0lkGFogASgFEhAKCEJhdHRsZUlk",
+            "GAEgASgEEhAKCFBsYXllcklkGAIgASgJEjgKBXN0YXRlGAMgASgOMikuQ3Jh",
+            "enkuQ29tbW9uLlMyQ19FeGl0QmF0dGxlTWVzc2FnZS5TdGF0ZSIZCgVTdGF0",
+            "ZRIICgRGYWlsEAASBgoCT0sQAWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -75,7 +75,7 @@ namespace Crazy.Common {
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncHpShieldStateBattleMessage), global::Crazy.Common.S2C_SyncHpShieldStateBattleMessage.Parser, new[]{ "RpcId", "BattleId", "ActorId", "ActorType", "Hp", "Shield" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncPhysicsStateBattleMessage), global::Crazy.Common.S2C_SyncPhysicsStateBattleMessage.Parser, new[]{ "RpcId", "BattleId", "ActorId", "ActorType", "PositionX", "PositionY", "ForwardAngle", "VelocityX", "VelocityY", "AngleVelocity", "ForceX", "ForceY", "Torque" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncLevelTaskBattleMessage), global::Crazy.Common.S2C_SyncLevelTaskBattleMessage.Parser, new[]{ "RpcId", "BattleId", "ActorId", "Tasks" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncLevelTaskBattleMessage.Types.TaskState), global::Crazy.Common.S2C_SyncLevelTaskBattleMessage.Types.TaskState.Parser, new[]{ "Id", "State", "Conditions" }, null, null, new pbr::GeneratedClrTypeInfo[] { null, })}),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncSkillStateBattleMessage), global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Parser, new[]{ "RpcId", "BattleId", "ActorId", "Skills" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Types.Skill), global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Types.Skill.Parser, new[]{ "Id", "Count", "CD" }, null, null, null)}),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncSkillStateBattleMessage), global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Parser, new[]{ "RpcId", "BattleId", "ActorId", "Skills" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Types.SkillState), global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Types.SkillState.Parser, new[]{ "Id", "Count", "CD" }, null, null, null)}),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.C2S_ExitBattleMessage), global::Crazy.Common.C2S_ExitBattleMessage.Parser, new[]{ "RpcId", "BattleId", "PlayerId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_ExitBattleMessage), global::Crazy.Common.S2C_ExitBattleMessage.Parser, new[]{ "RpcId", "BattleId", "PlayerId", "State" }, null, new[]{ typeof(global::Crazy.Common.S2C_ExitBattleMessage.Types.State) }, null)
           }));
@@ -2433,11 +2433,11 @@ namespace Crazy.Common {
 
     /// <summary>Field number for the "Skills" field.</summary>
     public const int SkillsFieldNumber = 3;
-    private static readonly pb::FieldCodec<global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Types.Skill> _repeated_skills_codec
-        = pb::FieldCodec.ForMessage(26, global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Types.Skill.Parser);
-    private readonly pbc::RepeatedField<global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Types.Skill> skills_ = new pbc::RepeatedField<global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Types.Skill>();
+    private static readonly pb::FieldCodec<global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Types.SkillState> _repeated_skills_codec
+        = pb::FieldCodec.ForMessage(26, global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Types.SkillState.Parser);
+    private readonly pbc::RepeatedField<global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Types.SkillState> skills_ = new pbc::RepeatedField<global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Types.SkillState>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Types.Skill> Skills {
+    public pbc::RepeatedField<global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Types.SkillState> Skills {
       get { return skills_; }
     }
 
@@ -2568,11 +2568,11 @@ namespace Crazy.Common {
     /// <summary>Container for nested types declared in the S2C_SyncSkillStateBattleMessage message type.</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static partial class Types {
-      public sealed partial class Skill : pb::IMessage<Skill> {
-        private static readonly pb::MessageParser<Skill> _parser = new pb::MessageParser<Skill>(() => new Skill());
+      public sealed partial class SkillState : pb::IMessage<SkillState> {
+        private static readonly pb::MessageParser<SkillState> _parser = new pb::MessageParser<SkillState>(() => new SkillState());
         private pb::UnknownFieldSet _unknownFields;
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public static pb::MessageParser<Skill> Parser { get { return _parser; } }
+        public static pb::MessageParser<SkillState> Parser { get { return _parser; } }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pbr::MessageDescriptor Descriptor {
@@ -2585,14 +2585,14 @@ namespace Crazy.Common {
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public Skill() {
+        public SkillState() {
           OnConstruction();
         }
 
         partial void OnConstruction();
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public Skill(Skill other) : this() {
+        public SkillState(SkillState other) : this() {
           id_ = other.id_;
           count_ = other.count_;
           cD_ = other.cD_;
@@ -2600,8 +2600,8 @@ namespace Crazy.Common {
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public Skill Clone() {
-          return new Skill(this);
+        public SkillState Clone() {
+          return new SkillState(this);
         }
 
         /// <summary>Field number for the "Id" field.</summary>
@@ -2639,11 +2639,11 @@ namespace Crazy.Common {
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override bool Equals(object other) {
-          return Equals(other as Skill);
+          return Equals(other as SkillState);
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public bool Equals(Skill other) {
+        public bool Equals(SkillState other) {
           if (ReferenceEquals(other, null)) {
             return false;
           }
@@ -2711,7 +2711,7 @@ namespace Crazy.Common {
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public void MergeFrom(Skill other) {
+        public void MergeFrom(SkillState other) {
           if (other == null) {
             return;
           }
