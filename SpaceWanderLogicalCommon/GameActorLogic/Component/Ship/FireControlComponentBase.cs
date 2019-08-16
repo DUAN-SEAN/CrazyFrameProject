@@ -173,7 +173,7 @@ namespace GameActorLogic
             skills.Find(s=>s.GetActorID() == id).SetSkillCapacity(num);
         }
 
-        public void SetWeaponCd(ulong id, int cd)
+        public void SetSkillCd(ulong id, int cd)
         {
             skills.Find(s => s.GetActorID() == id).SetSkillCd(cd);
         }
