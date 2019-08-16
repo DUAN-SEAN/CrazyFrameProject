@@ -39,14 +39,22 @@ namespace GameServer.Battle
                     ExitBattleLocalMessage exitBattleLocal = msg as ExitBattleLocalMessage;
                     OnExitBattle(exitBattleLocal);
                     break;
-
+                case GameServerConstDefine.BattleSystemClientReadyBattle:
+                    ClientReadyBattleLocalMessage clientReadyBattleLocalMessage = msg as ClientReadyBattleLocalMessage;
+                    OnReadyBattle(clientReadyBattleLocalMessage);
+                    break;
+                    
                 default: return base.OnMessage(msg);
             }
             return Task.CompletedTask;
 
         }
 
-  
+        private void OnReadyBattle(ClientReadyBattleLocalMessage clientReadyBattleLocalMessage)
+        {
+            
+        }
+
 
         /// <summary>
         /// GameServer初始化战斗系统

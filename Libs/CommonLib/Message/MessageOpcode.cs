@@ -60,14 +60,6 @@ namespace Crazy.Common
 	[Message(MessageOpcode.CreateBattleBarrierInfo)]
 	public partial class CreateBattleBarrierInfo {}
 
-// ��ս��ϵͳ��ص���Ϣд������
-	[Message(MessageOpcode.C2S_ReadyBattleBarrierReq)]
-	public partial class C2S_ReadyBattleBarrierReq : IMessage {}
-
-// ��ս��ϵͳ��ص���Ϣд������
-	[Message(MessageOpcode.S2CM_ReadyBattleBarrierAck)]
-	public partial class S2CM_ReadyBattleBarrierAck : IMessage {}
-
 //����Ϊ����ͨ����Ϣ
 	[Message(MessageOpcode.C2S_ReConnectByLogin)]
 	public partial class C2S_ReConnectByLogin : IMessage {}
@@ -77,27 +69,25 @@ namespace Crazy.Common
 {
 	public static partial class MessageOpcode
 	{
-		 public const ushort ChatOneMessage = 1010;
-		 public const ushort C2S_CreateMatchTeam = 1011;
-		 public const ushort S2C_CreateMatchTeamComplete = 1012;
-		 public const ushort C2S_InvitePlayerMatchTeam = 1013;
-		 public const ushort S2C_InvitePlayerMatchTeam = 1014;
-		 public const ushort C2S_JoinMatchTeam = 1015;
-		 public const ushort S2CM_JoinMatchTeamComplete = 1016;
-		 public const ushort C2S_GetMatchTeamInfo = 1017;
-		 public const ushort S2C_UpdateMatchTeamInfo = 1018;
-		 public const ushort MatchTeamInfo = 1019;
-		 public const ushort C2S_ExitMatchTeam = 1020;
-		 public const ushort S2CM_ExitMatchTeamComplete = 1021;
-		 public const ushort C2S_JoinMatchQueue = 1022;
-		 public const ushort S2CM_JoinMatchQueueComplete = 1023;
-		 public const ushort C2S_ExitMatchQueue = 1024;
-		 public const ushort S2CM_ExitMatchQueue = 1025;
-		 public const ushort S2CM_MatchingFinish = 1026;
-		 public const ushort S2CM_CreateBattleBarrier = 1027;
-		 public const ushort CreateBattleBarrierInfo = 1028;
-		 public const ushort C2S_ReadyBattleBarrierReq = 1029;
-		 public const ushort S2CM_ReadyBattleBarrierAck = 1030;
+		 public const ushort ChatOneMessage = 1012;
+		 public const ushort C2S_CreateMatchTeam = 1013;
+		 public const ushort S2C_CreateMatchTeamComplete = 1014;
+		 public const ushort C2S_InvitePlayerMatchTeam = 1015;
+		 public const ushort S2C_InvitePlayerMatchTeam = 1016;
+		 public const ushort C2S_JoinMatchTeam = 1017;
+		 public const ushort S2CM_JoinMatchTeamComplete = 1018;
+		 public const ushort C2S_GetMatchTeamInfo = 1019;
+		 public const ushort S2C_UpdateMatchTeamInfo = 1020;
+		 public const ushort MatchTeamInfo = 1021;
+		 public const ushort C2S_ExitMatchTeam = 1022;
+		 public const ushort S2CM_ExitMatchTeamComplete = 1023;
+		 public const ushort C2S_JoinMatchQueue = 1024;
+		 public const ushort S2CM_JoinMatchQueueComplete = 1025;
+		 public const ushort C2S_ExitMatchQueue = 1026;
+		 public const ushort S2CM_ExitMatchQueue = 1027;
+		 public const ushort S2CM_MatchingFinish = 1028;
+		 public const ushort S2CM_CreateBattleBarrier = 1029;
+		 public const ushort CreateBattleBarrierInfo = 1030;
 		 public const ushort C2S_ReConnectByLogin = 1031;
 	}
 }

@@ -63,10 +63,18 @@ namespace GameServer
         /// 创建战斗关卡
         /// </summary>
         public const Int32 BattleSystemCreateBattleBarrier = 1101;
-
+        /// <summary>
+        /// 退出战斗关卡
+        /// </summary>
         public const Int32 BattleSystemExitBattleBarrier = 1102;
-
+        /// <summary>
+        /// 上传战斗指令
+        /// </summary>
         public const Int32 BattleSystemCommandUpLoad = 1103;
+        /// <summary>
+        /// 客户端准备战斗
+        /// </summary>
+        public const Int32 BattleSystemClientReadyBattle = 1104;
         #endregion
 
         /// <summary>

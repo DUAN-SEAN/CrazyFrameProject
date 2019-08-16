@@ -21,7 +21,7 @@ namespace GameServer.Battle
             m_startTime = DateTime.Now;
             m_level = new LevelActorBase();
             m_binaryFormatter = new BinaryFormatter();
-
+            
         }
         /// <summary>
         /// 初始化战斗副本实体
@@ -31,9 +31,12 @@ namespace GameServer.Battle
         /// <param name="handler">通讯句柄</param>
         public void Init(List<string> players, int barrierId, IBattleSystemHandler handler)
         {
-
+            readState = new List<int>(players.Count);
+            int i = 0;
             foreach (var plyaerId in players)
             {
+                readState[i++] = 0;
+
                 var plx = GameServer.Instance.PlayerCtxManager.FindPlayerContextByString(plyaerId) as GameServerPlayerContext;
 
                 var shipInfo =  plx.m_gameServerDBPlayer.playerShip;
@@ -46,14 +49,15 @@ namespace GameServer.Battle
 
             m_level.Start(players, barrierId);
         }
-
+        
         /// <summary>
         /// 由时间管理器进行驱动
         /// </summary>
         public override void Update()
         {
             base.Update();
-
+            //获取是否可以开启战斗
+            CheckReadyState();
             //0 获取同步状态
             OnSyncState();
 
@@ -65,6 +69,27 @@ namespace GameServer.Battle
                 return;
             m_level.Update();
 
+
+        }
+        /// <summary>
+        /// 检查是否可以开始游戏
+        /// </summary>
+        private void CheckReadyState()
+        {
+            if (readState != null)
+            {
+                bool flag = true;
+                foreach (var i in readState)
+                {
+                    if (i == 0)
+                        flag = false;
+                }
+
+                if (flag)
+                {
+                    BroadcastMessage(new S2CM_ReadyBattleBarrierAck{BattleId = Id});
+                }
+            }
 
         }
 
@@ -139,7 +164,16 @@ namespace GameServer.Battle
 
 
         }
+        public void OnReadyBattle(string player)
+        {
+            if (readState == null) return;
 
+            var index = Players.IndexOf(player);
+
+            readState[index] = 1;
+
+            
+        }
        
         public void SetTimer(long timerId)
         {
@@ -257,10 +291,11 @@ namespace GameServer.Battle
 
         private BinaryFormatter m_binaryFormatter;
 
+        private List<int> readState;
 
         #endregion
 
-
+     
     }
 
     public interface IBroadcastHandler

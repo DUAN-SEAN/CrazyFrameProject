@@ -24,33 +24,38 @@ namespace Crazy.Common {
     static BattleMessageReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChNCYXR0bGVNZXNzYWdlLnByb3RvEgxDcmF6eS5Db21tb24iTAoYQzJTX0Jh",
-            "dHRsZUNvbW1hbmRNZXNzYWdlEg0KBVJwY0lkGFogASgFEhAKCEJhdHRsZUlk",
-            "GAEgASgEEg8KB01lc3NhZ2UYAiABKAkibgoZUzJDX0JvZHlJbml0QmF0dGxl",
-            "TWVzc2FnZRINCgVScGNJZBhaIAEoBRIQCghCYXR0bGVJZBgBIAEoBBIQCghQ",
-            "bGF5ZXJJZBgCIAEoCRIQCghCb2R5VHlwZRgDIAEoCRIMCgRCb2R5GAQgASgM",
-            "IkwKGEMyU19Db21tYW5kQmF0dGxlTWVzc2FnZRINCgVScGNJZBhaIAEoBRIQ",
-            "CghCYXR0bGVJZBgBIAEoBBIPCgdDb21tYW5kGAIgASgMIkgKFlMyQ19FdmVu",
-            "dEJhdHRsZU1lc3NhZ2USDQoFUnBjSWQYWiABKAUSEAoIQmF0dGxlSWQYASAB",
-            "KAQSDQoFRXZlbnQYAiABKAwihQEKIlMyQ19TeW5jSHBTaGllbGRTdGF0ZUJh",
-            "dHRsZU1lc3NhZ2USDQoFUnBjSWQYWiABKAUSEAoIQmF0dGxlSWQYASABKAQS",
-            "DwoHQWN0b3JJZBgCIAEoBBIRCglBY3RvclR5cGUYAyABKAUSCgoCSHAYBCAB",
-            "KAUSDgoGU2hpZWxkGAUgASgFIpcCCiFTMkNfU3luY1BoeXNpY3NTdGF0ZUJh",
-            "dHRsZU1lc3NhZ2USDQoFUnBjSWQYWiABKAUSEAoIQmF0dGxlSWQYASABKAQS",
-            "DwoHQWN0b3JJZBgCIAEoBBIRCglBY3RvclR5cGUYAyABKAUSEgoKUG9zaXRp",
-            "b25fWBgEIAEoARISCgpQb3NpdGlvbl9ZGAUgASgBEhQKDEZvcndhcmRBbmds",
-            "ZRgGIAEoARISCgpWZWxvY2l0eV9YGAcgASgBEhIKClZlbG9jaXR5X1kYCCAB",
-            "KAESFQoNQW5nbGVWZWxvY2l0eRgJIAEoARIPCgdGb3JjZV9YGAogASgBEg8K",
-            "B0ZvcmNlX1kYCyABKAESDgoGVG9ycXVlGAwgASgBIkoKFUMyU19FeGl0QmF0",
-            "dGxlTWVzc2FnZRINCgVScGNJZBhaIAEoBRIQCghCYXR0bGVJZBgBIAEoBBIQ",
-            "CghQbGF5ZXJJZBgCIAEoCSKfAQoVUzJDX0V4aXRCYXR0bGVNZXNzYWdlEg0K",
-            "BVJwY0lkGFogASgFEhAKCEJhdHRsZUlkGAEgASgEEhAKCFBsYXllcklkGAIg",
-            "ASgJEjgKBXN0YXRlGAMgASgOMikuQ3JhenkuQ29tbW9uLlMyQ19FeGl0QmF0",
-            "dGxlTWVzc2FnZS5TdGF0ZSIZCgVTdGF0ZRIICgRGYWlsEAASBgoCT0sQAWIG",
-            "cHJvdG8z"));
+            "ChNCYXR0bGVNZXNzYWdlLnByb3RvEgxDcmF6eS5Db21tb24iTgoZQzJTX1Jl",
+            "YWR5QmF0dGxlQmFycmllclJlcRINCgVScGNJZBhaIAEoBRIQCghCYXR0bGVJ",
+            "ZBgBIAEoBBIQCghQbGF5ZXJJZBgCIAEoCSI9ChpTMkNNX1JlYWR5QmF0dGxl",
+            "QmFycmllckFjaxINCgVScGNJZBhaIAEoBRIQCghCYXR0bGVJZBgBIAEoBCJM",
+            "ChhDMlNfQmF0dGxlQ29tbWFuZE1lc3NhZ2USDQoFUnBjSWQYWiABKAUSEAoI",
+            "QmF0dGxlSWQYASABKAQSDwoHTWVzc2FnZRgCIAEoCSJuChlTMkNfQm9keUlu",
+            "aXRCYXR0bGVNZXNzYWdlEg0KBVJwY0lkGFogASgFEhAKCEJhdHRsZUlkGAEg",
+            "ASgEEhAKCFBsYXllcklkGAIgASgJEhAKCEJvZHlUeXBlGAMgASgJEgwKBEJv",
+            "ZHkYBCABKAwiTAoYQzJTX0NvbW1hbmRCYXR0bGVNZXNzYWdlEg0KBVJwY0lk",
+            "GFogASgFEhAKCEJhdHRsZUlkGAEgASgEEg8KB0NvbW1hbmQYAiABKAwiSAoW",
+            "UzJDX0V2ZW50QmF0dGxlTWVzc2FnZRINCgVScGNJZBhaIAEoBRIQCghCYXR0",
+            "bGVJZBgBIAEoBBINCgVFdmVudBgCIAEoDCKFAQoiUzJDX1N5bmNIcFNoaWVs",
+            "ZFN0YXRlQmF0dGxlTWVzc2FnZRINCgVScGNJZBhaIAEoBRIQCghCYXR0bGVJ",
+            "ZBgBIAEoBBIPCgdBY3RvcklkGAIgASgEEhEKCUFjdG9yVHlwZRgDIAEoBRIK",
+            "CgJIcBgEIAEoBRIOCgZTaGllbGQYBSABKAUilwIKIVMyQ19TeW5jUGh5c2lj",
+            "c1N0YXRlQmF0dGxlTWVzc2FnZRINCgVScGNJZBhaIAEoBRIQCghCYXR0bGVJ",
+            "ZBgBIAEoBBIPCgdBY3RvcklkGAIgASgEEhEKCUFjdG9yVHlwZRgDIAEoBRIS",
+            "CgpQb3NpdGlvbl9YGAQgASgBEhIKClBvc2l0aW9uX1kYBSABKAESFAoMRm9y",
+            "d2FyZEFuZ2xlGAYgASgBEhIKClZlbG9jaXR5X1gYByABKAESEgoKVmVsb2Np",
+            "dHlfWRgIIAEoARIVCg1BbmdsZVZlbG9jaXR5GAkgASgBEg8KB0ZvcmNlX1gY",
+            "CiABKAESDwoHRm9yY2VfWRgLIAEoARIOCgZUb3JxdWUYDCABKAEiSgoVQzJT",
+            "X0V4aXRCYXR0bGVNZXNzYWdlEg0KBVJwY0lkGFogASgFEhAKCEJhdHRsZUlk",
+            "GAEgASgEEhAKCFBsYXllcklkGAIgASgJIp8BChVTMkNfRXhpdEJhdHRsZU1l",
+            "c3NhZ2USDQoFUnBjSWQYWiABKAUSEAoIQmF0dGxlSWQYASABKAQSEAoIUGxh",
+            "eWVySWQYAiABKAkSOAoFc3RhdGUYAyABKA4yKS5DcmF6eS5Db21tb24uUzJD",
+            "X0V4aXRCYXR0bGVNZXNzYWdlLlN0YXRlIhkKBVN0YXRlEggKBEZhaWwQABIG",
+            "CgJPSxABYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.C2S_ReadyBattleBarrierReq), global::Crazy.Common.C2S_ReadyBattleBarrierReq.Parser, new[]{ "RpcId", "BattleId", "PlayerId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2CM_ReadyBattleBarrierAck), global::Crazy.Common.S2CM_ReadyBattleBarrierAck.Parser, new[]{ "RpcId", "BattleId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.C2S_BattleCommandMessage), global::Crazy.Common.C2S_BattleCommandMessage.Parser, new[]{ "RpcId", "BattleId", "Message" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_BodyInitBattleMessage), global::Crazy.Common.S2C_BodyInitBattleMessage.Parser, new[]{ "RpcId", "BattleId", "PlayerId", "BodyType", "Body" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.C2S_CommandBattleMessage), global::Crazy.Common.C2S_CommandBattleMessage.Parser, new[]{ "RpcId", "BattleId", "Command" }, null, null, null),
@@ -66,6 +71,354 @@ namespace Crazy.Common {
   }
   #region Messages
   /// <summary>
+  /// 与战斗系统相关的消息写在下面
+  /// </summary>
+  public sealed partial class C2S_ReadyBattleBarrierReq : pb::IMessage<C2S_ReadyBattleBarrierReq> {
+    private static readonly pb::MessageParser<C2S_ReadyBattleBarrierReq> _parser = new pb::MessageParser<C2S_ReadyBattleBarrierReq>(() => new C2S_ReadyBattleBarrierReq());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<C2S_ReadyBattleBarrierReq> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Crazy.Common.BattleMessageReflection.Descriptor.MessageTypes[0]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C2S_ReadyBattleBarrierReq() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C2S_ReadyBattleBarrierReq(C2S_ReadyBattleBarrierReq other) : this() {
+      rpcId_ = other.rpcId_;
+      battleId_ = other.battleId_;
+      playerId_ = other.playerId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C2S_ReadyBattleBarrierReq Clone() {
+      return new C2S_ReadyBattleBarrierReq(this);
+    }
+
+    /// <summary>Field number for the "RpcId" field.</summary>
+    public const int RpcIdFieldNumber = 90;
+    private int rpcId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "BattleId" field.</summary>
+    public const int BattleIdFieldNumber = 1;
+    private ulong battleId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong BattleId {
+      get { return battleId_; }
+      set {
+        battleId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "PlayerId" field.</summary>
+    public const int PlayerIdFieldNumber = 2;
+    private string playerId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string PlayerId {
+      get { return playerId_; }
+      set {
+        playerId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as C2S_ReadyBattleBarrierReq);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(C2S_ReadyBattleBarrierReq other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (RpcId != other.RpcId) return false;
+      if (BattleId != other.BattleId) return false;
+      if (PlayerId != other.PlayerId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (RpcId != 0) hash ^= RpcId.GetHashCode();
+      if (BattleId != 0UL) hash ^= BattleId.GetHashCode();
+      if (PlayerId.Length != 0) hash ^= PlayerId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (BattleId != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(BattleId);
+      }
+      if (PlayerId.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(PlayerId);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (BattleId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(BattleId);
+      }
+      if (PlayerId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(PlayerId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(C2S_ReadyBattleBarrierReq other) {
+      if (other == null) {
+        return;
+      }
+      if (other.RpcId != 0) {
+        RpcId = other.RpcId;
+      }
+      if (other.BattleId != 0UL) {
+        BattleId = other.BattleId;
+      }
+      if (other.PlayerId.Length != 0) {
+        PlayerId = other.PlayerId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            BattleId = input.ReadUInt64();
+            break;
+          }
+          case 18: {
+            PlayerId = input.ReadString();
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  /// 与战斗系统相关的消息写在下面
+  /// </summary>
+  public sealed partial class S2CM_ReadyBattleBarrierAck : pb::IMessage<S2CM_ReadyBattleBarrierAck> {
+    private static readonly pb::MessageParser<S2CM_ReadyBattleBarrierAck> _parser = new pb::MessageParser<S2CM_ReadyBattleBarrierAck>(() => new S2CM_ReadyBattleBarrierAck());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<S2CM_ReadyBattleBarrierAck> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Crazy.Common.BattleMessageReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S2CM_ReadyBattleBarrierAck() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S2CM_ReadyBattleBarrierAck(S2CM_ReadyBattleBarrierAck other) : this() {
+      rpcId_ = other.rpcId_;
+      battleId_ = other.battleId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S2CM_ReadyBattleBarrierAck Clone() {
+      return new S2CM_ReadyBattleBarrierAck(this);
+    }
+
+    /// <summary>Field number for the "RpcId" field.</summary>
+    public const int RpcIdFieldNumber = 90;
+    private int rpcId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "BattleId" field.</summary>
+    public const int BattleIdFieldNumber = 1;
+    private ulong battleId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong BattleId {
+      get { return battleId_; }
+      set {
+        battleId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as S2CM_ReadyBattleBarrierAck);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(S2CM_ReadyBattleBarrierAck other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (RpcId != other.RpcId) return false;
+      if (BattleId != other.BattleId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (RpcId != 0) hash ^= RpcId.GetHashCode();
+      if (BattleId != 0UL) hash ^= BattleId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (BattleId != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(BattleId);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (BattleId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(BattleId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(S2CM_ReadyBattleBarrierAck other) {
+      if (other == null) {
+        return;
+      }
+      if (other.RpcId != 0) {
+        RpcId = other.RpcId;
+      }
+      if (other.BattleId != 0UL) {
+        BattleId = other.BattleId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            BattleId = input.ReadUInt64();
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
   /// 战斗指令
   /// </summary>
   public sealed partial class C2S_BattleCommandMessage : pb::IMessage<C2S_BattleCommandMessage> {
@@ -76,7 +429,7 @@ namespace Crazy.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Crazy.Common.BattleMessageReflection.Descriptor.MessageTypes[0]; }
+      get { return global::Crazy.Common.BattleMessageReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -264,7 +617,7 @@ namespace Crazy.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Crazy.Common.BattleMessageReflection.Descriptor.MessageTypes[1]; }
+      get { return global::Crazy.Common.BattleMessageReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -509,7 +862,7 @@ namespace Crazy.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Crazy.Common.BattleMessageReflection.Descriptor.MessageTypes[2]; }
+      get { return global::Crazy.Common.BattleMessageReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -694,7 +1047,7 @@ namespace Crazy.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Crazy.Common.BattleMessageReflection.Descriptor.MessageTypes[3]; }
+      get { return global::Crazy.Common.BattleMessageReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -879,7 +1232,7 @@ namespace Crazy.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Crazy.Common.BattleMessageReflection.Descriptor.MessageTypes[4]; }
+      get { return global::Crazy.Common.BattleMessageReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1148,7 +1501,7 @@ namespace Crazy.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Crazy.Common.BattleMessageReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Crazy.Common.BattleMessageReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1613,7 +1966,7 @@ namespace Crazy.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Crazy.Common.BattleMessageReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Crazy.Common.BattleMessageReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1798,7 +2151,7 @@ namespace Crazy.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Crazy.Common.BattleMessageReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Crazy.Common.BattleMessageReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

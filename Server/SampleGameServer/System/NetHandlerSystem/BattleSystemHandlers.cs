@@ -63,4 +63,18 @@ namespace GameServer.System.NetHandlerSystem
             GameServer.Instance.PostMessageToSystem<BattleSystem>(localMessage);
         }
     }
+
+    [MessageHandler]
+    public class C2S_ReadyBattleMessageHandler:AMHandler<C2S_ReadyBattleBarrierReq>
+    {
+        protected override void Run(ISession playerContext, C2S_ReadyBattleBarrierReq message)
+        {
+            GameServerPlayerContext ctx = playerContext as GameServerPlayerContext;
+
+            ClientReadyBattleLocalMessage crblm = new ClientReadyBattleLocalMessage();
+            crblm.battleId = message.BattleId;
+            crblm.playerId = message.PlayerId;
+            GameServer.Instance.PostMessageToSystem<BattleSystem>(crblm);
+        }
+    }
 }
