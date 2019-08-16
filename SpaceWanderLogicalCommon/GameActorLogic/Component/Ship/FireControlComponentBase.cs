@@ -69,34 +69,65 @@ namespace GameActorLogic
 
         public void SendButtonState(ulong actorid, int skilltype, int skillcontrol)
         {
-            //TODO 
-            switch (skillcontrol)
+            //TODO 技能控制 0 按下 1抬起
+            if (skillcontrol == 0)
             {
-                
+                switch (skilltype)
+                {
+                    //发射型武器
+                    case ActorTypeBaseDefine.AntiAircraftGunActor:
+                    case ActorTypeBaseDefine.MachineGunActor:
+                    case ActorTypeBaseDefine.PowerLaserActor:
+                    case ActorTypeBaseDefine.TorpedoActor:
+                    case ActorTypeBaseDefine.TrackingMissileActor:
+                    //持续激光
+                    case ActorTypeBaseDefine.ContinuousLaserActor:
+                    //炸弹
+                    case ActorTypeBaseDefine.TimeBombActor:
+                    case ActorTypeBaseDefine.TriggerBombActor:
+                        Fire(skilltype);
+                        break;
+
+
+                }
+            }
+            else if (skillcontrol == 1)
+            {
+                switch (skilltype)
+                {
+                    //发射型武器
+                    case ActorTypeBaseDefine.AntiAircraftGunActor:
+                    case ActorTypeBaseDefine.MachineGunActor:
+                    case ActorTypeBaseDefine.PowerLaserActor:
+                    case ActorTypeBaseDefine.TorpedoActor:
+                    case ActorTypeBaseDefine.TrackingMissileActor:
+                        break;
+                    //持续激光
+                    case ActorTypeBaseDefine.ContinuousLaserActor:
+                    case ActorTypeBaseDefine.TimeBombActor:
+                    case ActorTypeBaseDefine.TriggerBombActor:
+                        Destroy(skilltype);
+                        break;
+
+
+                }
             }
         }
 
-        //protected void TickFire()
-        //{
-        //    switch (skilltype)
-        //    {
-        //        //发射型武器
-        //        case ActorTypeBaseDefine.AntiAircraftGunActor:
-        //        case ActorTypeBaseDefine.MachineGunActor:
-        //        case ActorTypeBaseDefine.PowerLaserActor:
-        //        case ActorTypeBaseDefine.TorpedoActor:
-        //        case ActorTypeBaseDefine.TrackingMissileActor:
-        //            break;
-        //        case ActorTypeBaseDefine.ContinuousLaserActor:
-        //        case ActorTypeBaseDefine.TimeBombActor:
-        //        case ActorTypeBaseDefine.TriggerBombActor:
-        //            break;
+        public void TickFire()
+        {
+            //TODO 给所有的准备中武器赋值当前的Actor位置坐标和朝向
 
 
-        //    }
-        //}
-        
-        
+            var weaponlist = skills.Where(s => s.GetActorType() == ActorTypeBaseDefine.ContinuousLaserActor).ToList();
+            //TODO 给激光赋值
+            foreach (var skillContainer in weaponlist)
+            {
+               
+            }
+        }
+
+
 
         public void Fire(int i)
         {
@@ -104,9 +135,9 @@ namespace GameActorLogic
             {
                 if (skills[j].GetActorType() == i && skills[j] is ISkillContainer actor)
                 {
-                    var weapon = actor.Clone() as IWeaponBaseContainer;
+                    var weapon = actor.Clone() as ISkillContainer;
                     skillInitList.Add(weapon);
-                    weapon.OnDestroyWeapon += WaitSkillDestroy;
+                    weapon.OnDestroySkill += WaitSkillDestroy;
                     level.GetEnvirinfointernalBase().AddActor(weapon as ActorBase);
                     weapon.StartSkill();
                     OnFire?.Invoke(weapon);
