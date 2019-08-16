@@ -1,6 +1,7 @@
 ﻿
 
 using System;
+using System.Collections.Generic;
 
 namespace GameActorLogic
 {
@@ -25,6 +26,12 @@ namespace GameActorLogic
         /// 返回任务状态
         /// </summary>
         TaskEventState GetTaskState();
+
+
+        /// <summary>
+        /// 获取当前条件值
+        /// </summary>
+        Dictionary<int, int> ConditionCurrentValues { get; }
 
         /// <summary>
         /// 激活任务

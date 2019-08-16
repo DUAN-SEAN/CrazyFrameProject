@@ -24,6 +24,9 @@ namespace GameActorLogic
         protected ILevelActorComponentBaseContainer level;
 
         protected IShipComponentBaseContainer container;
+
+
+
         public FireControlComponentBase(IShipComponentBaseContainer container, ILevelActorComponentBaseContainer create)
         {
             weapons = new List<IWeaponBaseContainer>();
@@ -61,6 +64,14 @@ namespace GameActorLogic
                     this.weapons.Add(weaponBase);
             }
         }
+
+        public void SendButtonState(ulong actorid, int skilltype, int skillcontrol)
+        {
+            
+        }
+
+        
+        
 
         public void Fire(int i)
         {

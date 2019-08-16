@@ -202,15 +202,16 @@ namespace GameActorLogic
         {
             if (!(command is SkillCommand commanditme)) return;
             if (!(GetActor(commanditme.actorid) is ShipActorBase ship)) return;
-            switch (commanditme.skillcontrol)
-            {
-                case 0:
-                    ship.Fire(commanditme.skilltype);
-                    break;
-                case 1:
-                    ship.End(commanditme.skilltype);
-                    break;
-            }
+            ship.SendButtonState(commanditme.skillcontrol);
+            //switch (commanditme.skillcontrol)
+            //{
+            //    case 0:
+            //        ship.Fire(commanditme.skilltype);
+            //        break;
+            //    case 1:
+            //        ship.End(commanditme.skilltype);
+            //        break;
+            //}
 
         }
 
