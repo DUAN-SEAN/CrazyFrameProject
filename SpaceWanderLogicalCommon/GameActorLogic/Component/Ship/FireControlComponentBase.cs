@@ -147,9 +147,9 @@ namespace GameActorLogic
 
         }
 
-        public int GetSkillCapNum(ulong id)
+        public int GetSkillCapNum(int type)
         {
-            throw new NotImplementedException();
+            return skills.Find(s => s.GetActorType() == type).GetSkillCapacity();
         }
 
 
@@ -163,19 +163,19 @@ namespace GameActorLogic
             return skills;
         }
 
-        public int GetSkillCd(ulong id)
+        public int GetSkillCd(int type)
         {
-            return skills.Find(s => s.GetActorID() == id).GetSkillCd();
+            return skills.Find(s => s.GetActorType() == type).GetSkillCd();
         }
 
-        public void SetSkillCapNum(ulong id, int num)
+        public void SetSkillCapNum(int type, int num)
         {
-            skills.Find(s=>s.GetActorID() == id).SetSkillCapacity(num);
+            skills.Find(s => s.GetActorType() == type).SetSkillCapacity(num);
         }
 
-        public void SetSkillCd(ulong id, int cd)
+        public void SetSkillCd(int type, int cd)
         {
-            skills.Find(s => s.GetActorID() == id).SetSkillCd(cd);
+            skills.Find(s => s.GetActorType() == type).SetSkillCd(cd);
         }
 
         #endregion

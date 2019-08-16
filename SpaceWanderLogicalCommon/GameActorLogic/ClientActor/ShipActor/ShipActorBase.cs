@@ -79,9 +79,9 @@ namespace GameActorLogic
             _fireControlComponent.Destroy(i);
         }
 
-        public int GetSkillCapNum(ulong id)
+        public int GetSkillCapNum(int type)
         {
-            return _fireControlComponent.GetSkillCapNum(id);
+            return _fireControlComponent.GetSkillCapNum(type);
         }
 
  
@@ -91,22 +91,22 @@ namespace GameActorLogic
             return _fireControlComponent.GetSkills();
         }
 
-        public int GetSkillCd(ulong id)
+        public int GetSkillCd(int type)
         {
-            return _fireControlComponent.GetSkillCd(id);
+            return _fireControlComponent.GetSkillCd(type);
         }
 
-        public void SetSkillCapNum(ulong id, int num)
+        public void SetSkillCapNum(int type, int num)
         {
-            _fireControlComponent.SetSkillCapNum(id, num);
+            _fireControlComponent.SetSkillCapNum(type, num);
         }
 
 
 
 
-        public void SetWeaponCd(ulong id, int cd)
+        public void SetSkillCd(int type, int cd)
         {
-            _fireControlComponent.SetWeaponCd(id, cd);
+            _fireControlComponent.SetSkillCd(type, cd);
         }
 
         #endregion
