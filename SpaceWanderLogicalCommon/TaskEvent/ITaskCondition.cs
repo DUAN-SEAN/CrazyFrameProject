@@ -20,7 +20,7 @@ namespace GameActorLogic
         /// <summary>
         /// 获取当前条件值
         /// </summary>
-        Dictionary<int, int> ConditionCurrentValues { get; }
+        Dictionary<int, int> ConditionCurrentValues { get; set; }
     
     }
 }

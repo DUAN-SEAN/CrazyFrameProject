@@ -121,7 +121,11 @@ namespace GameActorLogic
             return m_taskEventState;
         }
 
-        public Dictionary<int, int> ConditionCurrentValues => taskCondition.ConditionCurrentValues;
+        public Dictionary<int, int> ConditionCurrentValues {
+            get => taskCondition.ConditionCurrentValues;
+            set => taskCondition.ConditionCurrentValues = value;
+
+        }
 
         public bool ActivateTask()
         {
