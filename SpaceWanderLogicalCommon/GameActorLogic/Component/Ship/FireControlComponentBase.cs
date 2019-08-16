@@ -17,9 +17,9 @@ namespace GameActorLogic
         /// <summary>
         /// 准备好生成的武器
         /// </summary>
-        protected List<IWeaponBaseContainer> weapons;
+        protected List<ISkillContainer> weapons;
 
-        protected List<IWeaponBaseContainer> weaponInitList;
+        protected List<ISkillContainer> weaponInitList;
 
         protected ILevelActorComponentBaseContainer level;
 
@@ -29,7 +29,7 @@ namespace GameActorLogic
 
         public FireControlComponentBase(IShipComponentBaseContainer container, ILevelActorComponentBaseContainer create)
         {
-            weapons = new List<IWeaponBaseContainer>();
+            weapons = new List<ISkillContainer>();
             this.container = container;
             this.level = create;
         }
@@ -37,17 +37,19 @@ namespace GameActorLogic
         public FireControlComponentBase(IShipComponentBaseContainer container, ILevelActorComponentBaseContainer create,List<Int32> weapons)
         {
             this.container = container;
-            this.weapons = new List<IWeaponBaseContainer>();
+            this.weapons = new List<ISkillContainer>();
+            this.level = create;
+
             foreach (var weapon in weapons)
             {
                level.GetConfigComponentInternalBase().GetActorClone(weapon, out var actor);
-               if (actor is IWeaponBaseContainer weaponBase)
+               if (actor is ISkillContainer weaponBase)
                    this.weapons.Add(weaponBase);
             }
             
         }
 
-        protected void WaitWeaponDestroy(IWeaponBaseContainer weapon)
+        protected void WaitWeaponDestroy(ISkillContainer weapon)
         {
             weaponInitList.Remove(weapon);
         }
@@ -56,7 +58,7 @@ namespace GameActorLogic
 
         public void InitializeFireControl(List<Int32> containers)
         {
-            weapons = new List<IWeaponBaseContainer>();
+            weapons = new List<ISkillContainer>();
             foreach (var weapon in containers)
             {
                 level.GetConfigComponentInternalBase().GetActorClone(weapon, out var actor);
@@ -69,9 +71,7 @@ namespace GameActorLogic
         {
             //TODO 
             switch (skillcontrol)
-#pragma warning disable CS1522 // 空的 switch 块
             {
-#pragma warning restore CS1522 // 空的 switch 块
                 
             }
         }
@@ -102,7 +102,7 @@ namespace GameActorLogic
         {
             for (var j = 0; j < weapons.Count; j++)
             {
-                if (weapons[j].GetWeaponType() == i && weapons[j] is IWeaponBaseContainer actor)
+                if (weapons[j].GetActorType() == i && weapons[j] is IWeaponBaseContainer actor)
                 {
                     var weapon = actor.Clone() as IWeaponBaseContainer;
                     weaponInitList.Add(weapon);
@@ -119,9 +119,9 @@ namespace GameActorLogic
 
             for (var j = 0; j < weaponInitList.Count; j++)
             {
-                if (weaponInitList[j].GetWeaponType() == i)
+                if (weaponInitList[j].GetActorType() == i)
                 {
-                    weaponInitList[j].End();
+                    //weaponInitList[j].End();
                     OnEnd?.Invoke(weaponInitList[j]);
                 }
             }
@@ -129,10 +129,10 @@ namespace GameActorLogic
 
         public void Destroy(int i)
         {
-            List<IWeaponBaseContainer> weaponList = new List<IWeaponBaseContainer>();
+            List<ISkillContainer> weaponList = new List<ISkillContainer>();
             for (var j = 0; j < weaponInitList.Count; j++)
             {
-                if (weaponInitList[j].GetWeaponType() == i)
+                if (weaponInitList[j].GetActorType() == i)
                 {
                     weaponList.Add(weaponInitList[j]);
                 }
@@ -142,15 +142,16 @@ namespace GameActorLogic
             {
                 weaponList.Remove(weaponBaseContainer);
                 OnDestroy?.Invoke(weaponBaseContainer);
-                weaponBaseContainer.Destroy();
+                //weaponBaseContainer.Destroy();
             }
 
         }
 
-        public int GetWeaponBulletNum(ulong id)
+        public int GetSkillCapNum(ulong id)
         {
-            return weapons.Find(t => t.GetActorID() == id).GetBulletNum();
+            throw new NotImplementedException();
         }
+
 
         public List<ISkillContainer> GetSkills()
         {
@@ -162,28 +163,28 @@ namespace GameActorLogic
             return skills;
         }
 
-        public int GetWeaponCd(ulong id)
+        public int GetSkillCd(ulong id)
         {
-            return weapons.Find(t => t.GetActorID() == id).GetWeaponCd();
+            throw new NotImplementedException();
         }
 
-        public void SetWeaponBulletNum(ulong id, int num)
+        public void SetSkillCapNum(ulong id, int num)
         {
-            weapons.Find(t => t.GetActorID() == id).SetBulletNum(num);
+            throw new NotImplementedException();
         }
 
         public void SetWeaponCd(ulong id, int cd)
         {
-            weapons.Find(t => t.GetActorID() == id).SetWeaponCd(cd);
+            throw new NotImplementedException();
         }
 
         #endregion
 
         #region IFireControlinternalBase
 
-        public event Action<IWeaponBaseContainer> OnFire;
-        public event Action<IWeaponBaseContainer> OnEnd;
-        public event Action<IWeaponBaseContainer> OnDestroy;
+        public event Action<ISkillContainer> OnFire;
+        public event Action<ISkillContainer> OnEnd;
+        public event Action<ISkillContainer> OnDestroy;
 
 
         #endregion

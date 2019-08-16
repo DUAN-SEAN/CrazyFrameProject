@@ -54,6 +54,7 @@
     <Compile Include="GameActorLogic\Component\Interface\Server\IHandlerComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Server\ITaskEventComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Skill\ISkillAttributeComponent.cs" />
+    <Compile Include="GameActorLogic\Component\Interface\Skill\ISkillEventComponent.cs" />
     <Compile Include="GameActorLogic\Component\Server\ConfigComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Server\HandlerComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Server\TaskEventComponentBase.cs" />

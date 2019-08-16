@@ -43,7 +43,7 @@ namespace GameActorLogic
         /// <summary>
         /// 获取武器弹药
         /// </summary>
-        int GetWeaponBulletNum(ulong id);
+        int GetSkillCapNum(ulong id);
 
         /// <summary>
         /// 获得当前的武器信息
@@ -53,9 +53,9 @@ namespace GameActorLogic
         /// <summary>
         /// 获取武器当前Cd
         /// </summary>
-        int GetWeaponCd(ulong id);
+        int GetSkillCd(ulong id);
 
-        void SetWeaponBulletNum(ulong id,int num);
+        void SetSkillCapNum(ulong id,int num);
 
         void SetWeaponCd(ulong id, int cd);
 
@@ -68,11 +68,11 @@ namespace GameActorLogic
     /// </summary>
     public interface IFireControlInternalBase : IFireControlBase
     {
-        event Action<IWeaponBaseContainer> OnFire;
+        event Action<ISkillContainer> OnFire;
 
-        event Action<IWeaponBaseContainer> OnEnd;
+        event Action<ISkillContainer> OnEnd;
 
-        event Action<IWeaponBaseContainer> OnDestroy;
+        event Action<ISkillContainer> OnDestroy;
     }
 
 

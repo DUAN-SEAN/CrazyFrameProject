@@ -7,15 +7,7 @@ using System.Threading.Tasks;
 namespace GameActorLogic
 {
     public class ShipActorBase :ActorBase ,
-#pragma warning disable CS0535 // '“ShipActorBase”不实现接口成员“IFireControlBase.SetWeaponCd(ulong, int)”
-#pragma warning disable CS0535 // '“ShipActorBase”不实现接口成员“IFireControlBase.SetWeaponBulletNum(ulong, int)”
-#pragma warning disable CS0535 // '“ShipActorBase”不实现接口成员“IFireControlBase.GetWeaponCd(ulong)”
-#pragma warning disable CS0535 // '“ShipActorBase”不实现接口成员“IFireControlBase.GetWeaponBulletNum(ulong)”
         IShipBaseContainer,
-#pragma warning restore CS0535 // '“ShipActorBase”不实现接口成员“IFireControlBase.GetWeaponBulletNum(ulong)”
-#pragma warning restore CS0535 // '“ShipActorBase”不实现接口成员“IFireControlBase.GetWeaponCd(ulong)”
-#pragma warning restore CS0535 // '“ShipActorBase”不实现接口成员“IFireControlBase.SetWeaponBulletNum(ulong, int)”
-#pragma warning restore CS0535 // '“ShipActorBase”不实现接口成员“IFireControlBase.SetWeaponCd(ulong, int)”
         IShipComponentBaseContainer
     {
         protected FireControlComponentBase _fireControlComponent;
@@ -46,13 +38,7 @@ namespace GameActorLogic
 
         #region FireControlComponent
 
-        public void InitializeFireControl(List<IWeaponBaseContainer> containers)
-        {
-            _fireControlComponent.InitializeFireControl(new List<int>
-            {
 
-            });
-        }
 
         public void InitializeFireControl(List<int> containers)
         {
@@ -93,26 +79,30 @@ namespace GameActorLogic
             _fireControlComponent.Destroy(i);
         }
 
-        public int GetWeaponBulletNum(ulong id)
+        public int GetSkillCapNum(ulong id)
         {
-            return _fireControlComponent.GetWeaponBulletNum(id);
+            return _fireControlComponent.GetSkillCapNum(id);
         }
+
+ 
 
         public List<ISkillContainer> GetSkills()
         {
             return _fireControlComponent.GetSkills();
         }
 
- 
-        public int GetWeaponCd(ulong id)
+        public int GetSkillCd(ulong id)
         {
-            return _fireControlComponent.GetWeaponCd(id);
+            return _fireControlComponent.GetSkillCd(id);
         }
 
-        public void SetWeaponBulletNum(ulong id, int num)
+        public void SetSkillCapNum(ulong id, int num)
         {
-            _fireControlComponent.SetWeaponBulletNum(id, num);
+            _fireControlComponent.SetSkillCapNum(id, num);
         }
+
+
+
 
         public void SetWeaponCd(ulong id, int cd)
         {

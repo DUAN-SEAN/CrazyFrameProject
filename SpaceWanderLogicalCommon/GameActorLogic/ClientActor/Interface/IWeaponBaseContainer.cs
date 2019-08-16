@@ -8,7 +8,7 @@ namespace GameActorLogic
     /// 武器Actor对外接口
     /// </summary>
     public interface IWeaponBaseContainer : 
-        IBaseContainer,
+       
         ISkillContainer,
         IAIBase,
         IWeaponEventBase,
@@ -22,7 +22,7 @@ namespace GameActorLogic
     /// 武器Actor对内接口
     /// </summary>
     public interface IWeaponBaseComponentContainer : 
-        IBaseComponentContainer,
+
         IWeaponBaseContainer,
         ISkillComponentContainer
     {

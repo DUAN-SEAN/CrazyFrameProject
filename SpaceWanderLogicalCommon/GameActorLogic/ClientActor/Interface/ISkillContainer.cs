@@ -10,13 +10,15 @@ namespace GameActorLogic
     /// 技能容器
     /// </summary>
     public interface ISkillContainer:
+        IBaseContainer,
         ISkillAttributeComponent
     {
 
     }
 
 
-    public interface ISkillComponentContainer
+    public interface ISkillComponentContainer:
+        IBaseComponentContainer
     {
         ISkillAttributeInternalComponent GetSkillAttributeInternalComponent();
     } 
