@@ -75,6 +75,7 @@ namespace Crazy.ServerBase
 
 
         #region IClientEventHandler
+#pragma warning disable CS1998 // 此异步方法缺少 "await" 运算符，将以同步方式运行。请考虑使用 "await" 运算符等待非阻止的 API 调用，或者使用 "await Task.Run(...)" 在后台线程上执行占用大量 CPU 的工作。
         /// <summary>
         /// 默认网络消息的处理是解析protobuf消息 
         /// </summary>
@@ -82,6 +83,7 @@ namespace Crazy.ServerBase
         /// <param name="dataAvailable"></param>
         /// <returns></returns>
         public virtual async Task<int> OnData(byte[] buffer, int dataAvailable)
+#pragma warning restore CS1998 // 此异步方法缺少 "await" 运算符，将以同步方式运行。请考虑使用 "await" 运算符等待非阻止的 API 调用，或者使用 "await Task.Run(...)" 在后台线程上执行占用大量 CPU 的工作。
         {
             if (buffer == null || dataAvailable < 1)
             {

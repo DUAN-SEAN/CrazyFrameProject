@@ -116,6 +116,11 @@ namespace GameActorLogic
             return _envirinfoComponent.GetAllActors();
         }
 
+        public List<ActorBase> GetPlayerActors()
+        {
+            return _envirinfoComponent.GetPlayerActors();
+        }
+
         public List<ActorBase> GetShipActors()
         {
             return _envirinfoComponent.GetShipActors();

@@ -42,5 +42,11 @@ namespace GameActorLogic
                 default: return false;
             }
         }
+
+
+        public static bool IsPlayer(this ActorBase actor)
+        {
+            return actor.GetCamp() == LevelActorBase.PlayerCamp;
+        }
     }
 }

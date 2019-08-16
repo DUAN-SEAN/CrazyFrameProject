@@ -25,7 +25,7 @@ namespace GameActorLogic
 
         protected IShipComponentBaseContainer container;
 
-
+        protected int buttonstate = 0;
 
         public FireControlComponentBase(IShipComponentBaseContainer container, ILevelActorComponentBaseContainer create)
         {
@@ -67,9 +67,34 @@ namespace GameActorLogic
 
         public void SendButtonState(ulong actorid, int skilltype, int skillcontrol)
         {
-            
+            //TODO 
+            switch (skillcontrol)
+#pragma warning disable CS1522 // 空的 switch 块
+            {
+#pragma warning restore CS1522 // 空的 switch 块
+                
+            }
         }
 
+        //protected void TickFire()
+        //{
+        //    switch (skilltype)
+        //    {
+        //        //发射型武器
+        //        case ActorTypeBaseDefine.AntiAircraftGunActor:
+        //        case ActorTypeBaseDefine.MachineGunActor:
+        //        case ActorTypeBaseDefine.PowerLaserActor:
+        //        case ActorTypeBaseDefine.TorpedoActor:
+        //        case ActorTypeBaseDefine.TrackingMissileActor:
+        //            break;
+        //        case ActorTypeBaseDefine.ContinuousLaserActor:
+        //        case ActorTypeBaseDefine.TimeBombActor:
+        //        case ActorTypeBaseDefine.TriggerBombActor:
+        //            break;
+
+
+        //    }
+        //}
         
         
 
@@ -121,6 +146,27 @@ namespace GameActorLogic
             }
 
         }
+
+        public int GetWeaponBulletNum(ulong id)
+        {
+            return weapons.Find(t => t.GetActorID() == id).GetBulletNum();
+        }
+
+        public int GetWeaponCd(ulong id)
+        {
+            return weapons.Find(t => t.GetActorID() == id).GetWeaponCd();
+        }
+
+        public void SetWeaponBulletNum(ulong id, int num)
+        {
+            weapons.Find(t => t.GetActorID() == id).SetBulletNum(num);
+        }
+
+        public void SetWeaponCd(ulong id, int cd)
+        {
+            weapons.Find(t => t.GetActorID() == id).SetWeaponCd(cd);
+        }
+
         #endregion
 
         #region IFireControlinternalBase

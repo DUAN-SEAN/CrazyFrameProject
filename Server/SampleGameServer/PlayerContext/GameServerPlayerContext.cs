@@ -84,7 +84,9 @@ namespace GameServer
             }
 
 
+#pragma warning disable CS0162 // 检测到无法访问的代码
             return Task.CompletedTask;
+#pragma warning restore CS0162 // 检测到无法访问的代码
         }
         #region GameServerPlayerContext基础设施
         /// <summary>
@@ -192,7 +194,9 @@ namespace GameServer
         {
             string account = message.Account;
             string password = message.Password;
+#pragma warning disable CS0219 // 变量“response”已被赋值，但从未使用过它的值
             S2C_LoginMessage response = null;
+#pragma warning restore CS0219 // 变量“response”已被赋值，但从未使用过它的值
 
             //设置现场状态
             if (m_csm.SetStateCheck(PlayerContextStateMachine.EventOnSessionLoginReq) == -1)
@@ -397,12 +401,16 @@ namespace GameServer
                     // base.OnPlayerContextTimer(lmsg); 什么也没有做，所以直接返回
                     return;
             }
+#pragma warning disable CS0162 // 检测到无法访问的代码
             return ;
+#pragma warning restore CS0162 // 检测到无法访问的代码
         }
+#pragma warning disable CS0628 // '“GameServerPlayerContext.OnTimerTick()”: 在密封类中声明了新的保护成员
         /// <summary>
         /// 5秒一次的扫描
         /// </summary>
         protected async Task OnTimerTick()
+#pragma warning restore CS0628 // '“GameServerPlayerContext.OnTimerTick()”: 在密封类中声明了新的保护成员
         {
             //this.LogDebugFormat("OnTimerTick",
             //    _sessionId.ToString());
@@ -465,7 +473,9 @@ namespace GameServer
         /// <returns></returns>
         private Task OnLMsgOnContextTransformOk(LocalMessageContextTransformOk msg)
         {
+#pragma warning disable CS0168 // 声明了变量“bRet”，但从未使用过
             Boolean bRet;
+#pragma warning restore CS0168 // 声明了变量“bRet”，但从未使用过
          
 
             if (msg == null)
@@ -603,31 +613,37 @@ namespace GameServer
             return Task.CompletedTask;
 
         }
+#pragma warning disable CS0628 // '“GameServerPlayerContext.OnDisconnectedWaitTimeOut()”: 在密封类中声明了新的保护成员
         /// <summary>
         /// 当断线延时也超时了
         /// </summary>
         /// <returns></returns>
         protected  Task OnDisconnectedWaitTimeOut()
+#pragma warning restore CS0628 // '“GameServerPlayerContext.OnDisconnectedWaitTimeOut()”: 在密封类中声明了新的保护成员
         {
             Log.Error("GameServerBasePlayerContext::OnDisconnectedWaitTimeOut");
             ShutdownContext();
             return Task.CompletedTask;
         }
+#pragma warning disable CS0628 // '“GameServerPlayerContext.OnShutDownTimeOut()”: 在密封类中声明了新的保护成员
         /// <summary>
         /// 当shutdown现场超时
         /// </summary>
         /// <returns></returns>
         protected Task OnShutDownTimeOut()
+#pragma warning restore CS0628 // '“GameServerPlayerContext.OnShutDownTimeOut()”: 在密封类中声明了新的保护成员
         {
             Log.Error("GameServerBasePlayerContext::OnShutDownTimeOut");
             ShutdownContext(true);
             return Task.CompletedTask;
         }
+#pragma warning disable CS0628 // '“GameServerPlayerContext.OnConnectedTimeOut()”: 在密封类中声明了新的保护成员
         /// <summary>
         /// 当发生了连接状态下的超时
         /// </summary>
         /// <returns></returns>
         protected Task OnConnectedTimeOut()
+#pragma warning restore CS0628 // '“GameServerPlayerContext.OnConnectedTimeOut()”: 在密封类中声明了新的保护成员
         {
             Log.Error("GameServerBasePlayerContext::OnConnectedTimeOut");
             ShutdownContext(true);
@@ -745,22 +761,30 @@ namespace GameServer
         /// 现场关闭用时
         /// </summary>
         private DateTime m_shutdownTime = DateTime.MaxValue;
+#pragma warning disable CS0628 // '“GameServerPlayerContext.m_disconnectedTime”: 在密封类中声明了新的保护成员
         /// <summary>
         /// 记录断线的时间
         /// </summary>
         protected DateTime m_disconnectedTime = DateTime.MaxValue;
+#pragma warning restore CS0628 // '“GameServerPlayerContext.m_disconnectedTime”: 在密封类中声明了新的保护成员
+#pragma warning disable CS0628 // '“GameServerPlayerContext.m_disconnetedWaitTimeOutTime”: 在密封类中声明了新的保护成员
         /// <summary>
         /// 记录的断线超时时间
         /// </summary>
         protected DateTime m_disconnetedWaitTimeOutTime = DateTime.MaxValue;
+#pragma warning restore CS0628 // '“GameServerPlayerContext.m_disconnetedWaitTimeOutTime”: 在密封类中声明了新的保护成员
+#pragma warning disable CS0628 // '“GameServerPlayerContext.m_resumingFromWaitForReconnect”: 在密封类中声明了新的保护成员
         /// <summary>
         /// 是否正在断线重联的恢复中
         /// </summary>
         protected bool m_resumingFromWaitForReconnect;
+#pragma warning restore CS0628 // '“GameServerPlayerContext.m_resumingFromWaitForReconnect”: 在密封类中声明了新的保护成员
+#pragma warning disable CS0628 // '“GameServerPlayerContext.m_connectedTime”: 在密封类中声明了新的保护成员
         /// <summary>
         /// 玩家连接时间
         /// </summary>
         protected DateTime m_connectedTime = DateTime.MaxValue;
+#pragma warning restore CS0628 // '“GameServerPlayerContext.m_connectedTime”: 在密封类中声明了新的保护成员
 
         /// <summary>
         /// 用来tick玩家现场的timerid

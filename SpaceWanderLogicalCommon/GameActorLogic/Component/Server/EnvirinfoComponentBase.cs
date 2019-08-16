@@ -70,6 +70,11 @@ namespace GameActorLogic
             return _actorList;
         }
 
+        public List<ActorBase> GetPlayerActors()
+        {
+            return _actorList.Where(t => t.IsPlayer()).ToList();
+        }
+
         public List<ActorBase> GetShipActors()
         {
             return _actorList.Where(t => t.IsShip()).ToList();

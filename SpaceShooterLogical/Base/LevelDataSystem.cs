@@ -183,7 +183,9 @@ namespace SpaceShip.System
                 //    levelnum += 1;
                 }
             }
+#pragma warning disable CS0168 // 声明了变量“e”，但从未使用过
             catch (Exception e)
+#pragma warning restore CS0168 // 声明了变量“e”，但从未使用过
             {
                 //LogUI.LogError(e);
                 //LogUI.Log(path);
@@ -223,7 +225,9 @@ namespace SpaceShip.System
 
         }
 
+#pragma warning disable CS0414 // 字段“LevelDataSystem.levelnum”已被赋值，但从未使用过它的值
         private int levelnum;
+#pragma warning restore CS0414 // 字段“LevelDataSystem.levelnum”已被赋值，但从未使用过它的值
         private readonly Dictionary<int, LevelData> levelDatasDict;
         private static LevelDataSystem m_leveldataSystem;
     }

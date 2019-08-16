@@ -99,7 +99,9 @@ namespace MongoDBRobot
                 collection.UpdateOneAsync(filter, update).ContinueWith(t => { Console.WriteLine("插入成功"); });
                 //Console.WriteLine(result.MatchedCount);
 
+#pragma warning disable CS0219 // 变量“a”已被赋值，但从未使用过它的值
                 Array a = null;
+#pragma warning restore CS0219 // 变量“a”已被赋值，但从未使用过它的值
 
       
 

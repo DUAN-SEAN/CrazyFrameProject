@@ -44,11 +44,25 @@ namespace GameActorLogic
             return bulletnum;
         }
 
+        public void SetBulletNum(int num)
+        {
+            bulletnum = num;
+        }
+
         public int GetWeaponType()
         {
             return weanpontype;
         }
 
+        public int GetWeaponCd()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetWeaponCd(int cd)
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion
 

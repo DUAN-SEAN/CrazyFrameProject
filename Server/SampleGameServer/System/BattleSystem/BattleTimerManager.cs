@@ -206,10 +206,12 @@ namespace GameServer.Battle
         /// </summary>
         private ConcurrentDictionary<Int64, BattleTimerNode> m_loopTimers = new ConcurrentDictionary<long, BattleTimerNode>();
 
+#pragma warning disable CS0169 // 从不使用字段“BattleTimerManager.m_playerCtxTimersCancelTokenSource”
         /// <summary>
         /// Task引用的CancellationToken
         /// </summary>
         private CancellationTokenSource m_playerCtxTimersCancelTokenSource;
+#pragma warning restore CS0169 // 从不使用字段“BattleTimerManager.m_playerCtxTimersCancelTokenSource”
 
         
 

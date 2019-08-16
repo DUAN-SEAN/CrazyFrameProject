@@ -95,12 +95,18 @@ namespace Crazy.ServerBase
         /// </summary>
         public Task m_task;
 
+#pragma warning disable CS0649 // 从未对字段“TimerNode.m_int32Data”赋值，字段将一直保持其默认值 0
         /// <summary>
         /// 回调参数
         /// </summary>
         private Int32 m_int32Data;
+#pragma warning restore CS0649 // 从未对字段“TimerNode.m_int32Data”赋值，字段将一直保持其默认值 0
+#pragma warning disable CS0649 // 从未对字段“TimerNode.m_int64Data”赋值，字段将一直保持其默认值 0
         private Int64 m_int64Data;
+#pragma warning restore CS0649 // 从未对字段“TimerNode.m_int64Data”赋值，字段将一直保持其默认值 0
+#pragma warning disable CS0649 // 从未对字段“TimerNode.m_objData”赋值，字段将一直保持其默认值 null
         private Object m_objData;
+#pragma warning restore CS0649 // 从未对字段“TimerNode.m_objData”赋值，字段将一直保持其默认值 null
 
         /// <summary>
         /// 回调函数

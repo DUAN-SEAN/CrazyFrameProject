@@ -47,10 +47,12 @@ namespace GameActorLogic
 
         #region 服务器特有代码
 
+#pragma warning disable CS0108 // '“IEventInternalComponentBase.AddEventMessagesToHandlerForward(IEventMessage)”隐藏继承的成员“IEventComponentBase.AddEventMessagesToHandlerForward(IEventMessage)”。如果是有意隐藏，请使用关键字 new。
         /// <summary>
         /// 用于服务器在添加自己要处理的事件的同时，将该事件添加进转发集合转发给客户端
         /// </summary>
         void AddEventMessagesToHandlerForward(IEventMessage msg);
+#pragma warning restore CS0108 // '“IEventInternalComponentBase.AddEventMessagesToHandlerForward(IEventMessage)”隐藏继承的成员“IEventComponentBase.AddEventMessagesToHandlerForward(IEventMessage)”。如果是有意隐藏，请使用关键字 new。
 
         #endregion
 

@@ -17,10 +17,25 @@ namespace GameActorLogic
         int GetBulletNum();
 
         /// <summary>
+        /// 设置武器弹药数量
+        /// </summary>
+        void SetBulletNum(int num);
+
+        /// <summary>
         /// 获取武器类型
         /// </summary>
         /// <returns></returns>
         int GetWeaponType();
+
+        /// <summary>
+        /// 获取武器CD
+        /// </summary>
+        int GetWeaponCd();
+
+        /// <summary>
+        /// 设置武器CD
+        /// </summary>
+        void SetWeaponCd(int cd);
     }
 
     /// <summary>

@@ -75,7 +75,7 @@
     <Compile Include="GameActorLogic\ClientActor\WeaponActor\WeaponActorBase.cs" />
     <Compile Include="GameActorLogic\Component\AIComponent\AIComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\CommandComponentBase.cs" />
-    <Compile Include="GameActorLogic\Component\EnvirinfoComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\Server\EnvirinfoComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\HealthShieldComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\IEnvirinfoComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\IAIComponentBase.cs" />

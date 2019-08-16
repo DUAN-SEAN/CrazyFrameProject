@@ -23,6 +23,11 @@ namespace GameActorLogic
         List<ActorBase> GetAllActors();
 
         /// <summary>
+        /// 获取所有玩家
+        /// </summary>
+        List<ActorBase> GetPlayerActors();
+
+        /// <summary>
         /// 获取所有船Actor
         /// </summary>
         List<ActorBase> GetShipActors();

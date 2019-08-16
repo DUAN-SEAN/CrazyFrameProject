@@ -292,10 +292,12 @@ namespace Crazy.ServerBase
         /// 服务器Id
         /// </summary>
         protected Int32 m_serverId;
+#pragma warning disable CS0169 // 从不使用字段“ServerBase.m_serverName”
         /// <summary>
         /// 服务器名称
         /// </summary>
         private string m_serverName;
+#pragma warning restore CS0169 // 从不使用字段“ServerBase.m_serverName”
         /// <summary>
         ///当前服务器的配置
         /// </summary>

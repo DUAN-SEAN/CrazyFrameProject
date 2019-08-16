@@ -100,9 +100,25 @@ namespace GameActorLogic
             return _weaponAttributeComponent.GetBulletNum();
         }
 
+        public void SetBulletNum(int num)
+        {
+            _weaponAttributeComponent.SetBulletNum(num);
+        }
+
+
         public int GetWeaponType()
         {
             return _weaponAttributeComponent.GetWeaponType();
+        }
+
+        public int GetWeaponCd()
+        {
+            return ((IWeaponAttributeBase) _weaponAttributeComponent).GetWeaponCd();
+        }
+
+        public void SetWeaponCd(int cd)
+        {
+            ((IWeaponAttributeBase) _weaponAttributeComponent).SetWeaponCd(cd);
         }
 
         #endregion

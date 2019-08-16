@@ -40,6 +40,19 @@ namespace GameActorLogic
         /// <param name="i">全局武器类型</param>
         void Destroy(int i);
 
+        /// <summary>
+        /// 获取武器弹药
+        /// </summary>
+        int GetWeaponBulletNum(ulong id);
+
+        /// <summary>
+        /// 获取武器当前Cd
+        /// </summary>
+        int GetWeaponCd(ulong id);
+
+        void SetWeaponBulletNum(ulong id,int num);
+
+        void SetWeaponCd(ulong id, int cd);
 
     }
 
