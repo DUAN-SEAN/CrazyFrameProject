@@ -163,5 +163,34 @@ namespace GameActorLogic
         {
             return _weaponAttributeComponent;
         }
+
+        public ISkillEventInternalComponent GetSkillEventInternalComponent()
+        {
+            return _weaponEventComponent;
+        }
+
+        #region ISkillEventComponent
+
+        public void StartSkill()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EndSkill()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DestroySkill()
+        {
+            throw new NotImplementedException();
+        }
+
+        public event Action<IWeaponBaseContainer> OnStartSkill;
+        public event Action<IWeaponBaseContainer> OnEndSkill;
+        public event Action<IWeaponBaseContainer> OnDestroySkill;
+
+        #endregion
+
     }
 }
