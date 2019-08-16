@@ -11,7 +11,8 @@ namespace GameActorLogic
     /// </summary>
     public interface ISkillContainer:
         IBaseContainer,
-        ISkillAttributeComponent
+        ISkillAttributeComponent,
+        ISkillEventComponent
     {
 
     }
@@ -21,5 +22,8 @@ namespace GameActorLogic
         IBaseComponentContainer
     {
         ISkillAttributeInternalComponent GetSkillAttributeInternalComponent();
+
+
+        ISkillEventInternalComponent GetSkillEventInternalComponent();
     } 
 }

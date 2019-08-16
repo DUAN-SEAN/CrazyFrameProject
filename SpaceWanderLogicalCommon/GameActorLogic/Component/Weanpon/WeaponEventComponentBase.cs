@@ -12,7 +12,9 @@ namespace GameActorLogic
     /// </summary>
     public class WeaponEventComponentBase : 
         IWeaponEventBase,
-        IWeaponEventinternalBase
+        IWeaponEventinternalBase,
+        ISkillEventComponent,
+        ISkillEventInternalComponent
     {
         protected IWeaponBaseComponentContainer weapon;
 
@@ -55,6 +57,54 @@ namespace GameActorLogic
         #endregion
 
 
+        public void StartSkill()
+        {
+            Start();
+        }
 
+        public void EndSkill()
+        {
+            End();
+        }
+
+        public void DestroySkill()
+        {
+            Destroy();
+        }
+
+        public event Action<IWeaponBaseContainer> OnStartSkill
+        {
+            add => OnStartWeapon += value;
+            remove => OnStartWeapon -= value;
+        }
+        public event Action<IWeaponBaseContainer> OnEndSkill
+        {
+            add => OnEndWeapon += value;
+            remove => OnEndWeapon -= value;
+        }
+        public event Action<IWeaponBaseContainer> OnDestroySkill
+        {
+            add => OnDestroyWeapon += value;
+            remove => OnDestroyWeapon -= value;
+        }
+
+
+
+
+        public event Action OnStartSkillInternal
+        {
+            add => OnStart += value;
+            remove => OnStart -= value;
+        }
+        public event Action OnEndSkillInternal
+        {
+            add => OnEnd += value;
+            remove => OnEnd -= value;
+        }
+        public event Action OnDestroySkillInternal
+        {
+            add => OnDestroy += value;
+            remove => OnDestroy -= value;
+        }
     }
 }

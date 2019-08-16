@@ -9,7 +9,7 @@ namespace GameActorLogic
     /// <summary>
     /// 武器事件 对外接口
     /// </summary>
-    public interface IWeaponEventBase
+    public interface IWeaponEventBase 
     {
         /// <summary>
         /// 当武器被实例化后 被组件外部开启
