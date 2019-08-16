@@ -51,10 +51,7 @@ namespace GameServer.Battle
 
         }
 
-        private void OnReadyBattle(ClientReadyBattleLocalMessage clientReadyBattleLocalMessage)
-        {
-            
-        }
+       
 
 
         /// <summary>
@@ -89,8 +86,6 @@ namespace GameServer.Battle
             ////TODO:战斗场景在此生成
             ////每场关卡运行在独立的线程中
             Battle battleEntity = BEntityFactory.CreateEntity<Battle>();
-
-
 
             battleEntity.Init(msg.Players, msg.BarrierId, this);
             var timerId = TimerManager.SetLoopTimer(50, battleEntity.Update);//设置Tick步长
@@ -141,6 +136,19 @@ namespace GameServer.Battle
                 battle.SendCommandToLevel(commandMsg);
             }
 
+        }
+        /// <summary>
+        /// 玩家确认战斗
+        /// </summary>
+        /// <param name="clientReadyBattleLocalMessage"></param>
+        private void OnReadyBattle(ClientReadyBattleLocalMessage clientReadyBattleLocalMessage)
+        {
+            var battleId = clientReadyBattleLocalMessage.battleId;
+            if (m_battleDic.TryGetValue(battleId, out Battle battle))
+            {
+                Log.Info("收到玩家发来的战斗准备完成请求 PlayerId = "+ clientReadyBattleLocalMessage.playerId);
+                battle.OnReadyBattle(clientReadyBattleLocalMessage.playerId);
+            }
         }
         /// <summary>
         /// 释放关卡战斗资源：

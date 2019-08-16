@@ -147,7 +147,14 @@ namespace GameServer
                 return;
             }
         }
+        /// <summary>
+        /// 玩家重连成功 取得战斗系统玩家实体控制权
+        /// </summary>
+        /// <param name="playerId"></param>
+        public void OnReConnect(ulong battleId,string playerId)
+        {
 
+        }
         public override bool PostLocalMessage(ILocalMessage msg)
         {
             return base.PostLocalMessage(msg);

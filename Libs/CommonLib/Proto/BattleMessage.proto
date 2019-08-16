@@ -92,9 +92,10 @@ message S2C_SyncSkillStateBattleMessage // IBattleMessage
 	repeated SkillState Skills = 3;
 	message SkillState
 	{
-		int32 Id = 1;
+		uint64 ActorId = 1;
 		int32 Count = 2;
 		int32 CD = 3;
+		int32 SkillType = 4;
 	}
 
 }

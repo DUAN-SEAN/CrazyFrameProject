@@ -13,7 +13,7 @@ namespace GameServer.Battle
 {
     /// <summary>
     /// 表示一场战斗的实体
-    /// </summary>
+    /// </summary> 
     public class Battle : BEntity, IBroadcastHandler
     {
         public override void Start(ulong id)
@@ -41,15 +41,17 @@ namespace GameServer.Battle
         /// <param name="handler">通讯句柄</param>
         public void Init(List<string> players, int barrierId, IBattleSystemHandler handler)
         {
+            List<Tuple<string,int,int,int,int>> playerShips = null;
             readState = new List<int>(players.Count);
             int i = 0;
             foreach (var plyaerId in players)
             {
-                readState[i++] = 0;
+                readState.Add(0);
 
                 var plx = GameServer.Instance.PlayerCtxManager.FindPlayerContextByString(plyaerId) as GameServerPlayerContext;
 
                 var shipInfo =  plx.m_gameServerDBPlayer.playerShip;
+                playerShips.Add(new Tuple<string, int, int, int, int>(plyaerId, shipInfo.shipId, shipInfo.shipType, shipInfo.weapon_a, shipInfo.weapon_b));
 
             }
             
@@ -58,7 +60,7 @@ namespace GameServer.Battle
 
             
 
-            m_level.Start(players, barrierId);
+            m_level.Start(playerShips, barrierId);
         }
         
         /// <summary>
@@ -174,7 +176,10 @@ namespace GameServer.Battle
                         foreach (var s in shipActorBase.GetSkills())
                         {
                             S2C_SyncSkillStateBattleMessage.Types.SkillState skill = new S2C_SyncSkillStateBattleMessage.Types.SkillState();
-                            skill.Id = s.GetActorType();//获取技能Id
+
+
+                            skill.ActorId = s.GetActorID();//获取技能Id
+                            skill.SkillType = s.GetActorType();//获取技能类型 
                             skill.CD = s.GetSkillCd();
                             skill.Count = s.GetSkillCapacity();
 
@@ -209,6 +214,7 @@ namespace GameServer.Battle
                 taskItem.State = (int)task.GetTaskState();
                 foreach (var taskConditionCurrentValue in task.ConditionCurrentValues)
                 {
+
                     taskItem.Conditions.Add(taskConditionCurrentValue.Key, taskConditionCurrentValue.Value);
                 }
 

@@ -52,17 +52,18 @@ namespace Crazy.Common {
             "dGF0ZRgCIAEoBRJaCgpDb25kaXRpb25zGAMgAygLMkYuQ3JhenkuQ29tbW9u",
             "LlMyQ19TeW5jTGV2ZWxUYXNrQmF0dGxlTWVzc2FnZS5UYXNrU3RhdGUuQ29u",
             "ZGl0aW9uc0VudHJ5GjEKD0NvbmRpdGlvbnNFbnRyeRILCgNrZXkYASABKAUS",
-            "DQoFdmFsdWUYAiABKAU6AjgBItIBCh9TMkNfU3luY1NraWxsU3RhdGVCYXR0",
+            "DQoFdmFsdWUYAiABKAU6AjgBIuoBCh9TMkNfU3luY1NraWxsU3RhdGVCYXR0",
             "bGVNZXNzYWdlEg0KBVJwY0lkGFogASgFEhAKCEJhdHRsZUlkGAEgASgEEg8K",
             "B0FjdG9ySWQYAiABKAQSSAoGU2tpbGxzGAMgAygLMjguQ3JhenkuQ29tbW9u",
-            "LlMyQ19TeW5jU2tpbGxTdGF0ZUJhdHRsZU1lc3NhZ2UuU2tpbGxTdGF0ZRoz",
-            "CgpTa2lsbFN0YXRlEgoKAklkGAEgASgFEg0KBUNvdW50GAIgASgFEgoKAkNE",
-            "GAMgASgFIkoKFUMyU19FeGl0QmF0dGxlTWVzc2FnZRINCgVScGNJZBhaIAEo",
-            "BRIQCghCYXR0bGVJZBgBIAEoBBIQCghQbGF5ZXJJZBgCIAEoCSKfAQoVUzJD",
-            "X0V4aXRCYXR0bGVNZXNzYWdlEg0KBVJwY0lkGFogASgFEhAKCEJhdHRsZUlk",
-            "GAEgASgEEhAKCFBsYXllcklkGAIgASgJEjgKBXN0YXRlGAMgASgOMikuQ3Jh",
-            "enkuQ29tbW9uLlMyQ19FeGl0QmF0dGxlTWVzc2FnZS5TdGF0ZSIZCgVTdGF0",
-            "ZRIICgRGYWlsEAASBgoCT0sQAWIGcHJvdG8z"));
+            "LlMyQ19TeW5jU2tpbGxTdGF0ZUJhdHRsZU1lc3NhZ2UuU2tpbGxTdGF0ZRpL",
+            "CgpTa2lsbFN0YXRlEg8KB0FjdG9ySWQYASABKAQSDQoFQ291bnQYAiABKAUS",
+            "CgoCQ0QYAyABKAUSEQoJU2tpbGxUeXBlGAQgASgFIkoKFUMyU19FeGl0QmF0",
+            "dGxlTWVzc2FnZRINCgVScGNJZBhaIAEoBRIQCghCYXR0bGVJZBgBIAEoBBIQ",
+            "CghQbGF5ZXJJZBgCIAEoCSKfAQoVUzJDX0V4aXRCYXR0bGVNZXNzYWdlEg0K",
+            "BVJwY0lkGFogASgFEhAKCEJhdHRsZUlkGAEgASgEEhAKCFBsYXllcklkGAIg",
+            "ASgJEjgKBXN0YXRlGAMgASgOMikuQ3JhenkuQ29tbW9uLlMyQ19FeGl0QmF0",
+            "dGxlTWVzc2FnZS5TdGF0ZSIZCgVTdGF0ZRIICgRGYWlsEAASBgoCT0sQAWIG",
+            "cHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -75,7 +76,7 @@ namespace Crazy.Common {
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncHpShieldStateBattleMessage), global::Crazy.Common.S2C_SyncHpShieldStateBattleMessage.Parser, new[]{ "RpcId", "BattleId", "ActorId", "ActorType", "Hp", "Shield" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncPhysicsStateBattleMessage), global::Crazy.Common.S2C_SyncPhysicsStateBattleMessage.Parser, new[]{ "RpcId", "BattleId", "ActorId", "ActorType", "PositionX", "PositionY", "ForwardAngle", "VelocityX", "VelocityY", "AngleVelocity", "ForceX", "ForceY", "Torque" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncLevelTaskBattleMessage), global::Crazy.Common.S2C_SyncLevelTaskBattleMessage.Parser, new[]{ "RpcId", "BattleId", "ActorId", "Tasks" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncLevelTaskBattleMessage.Types.TaskState), global::Crazy.Common.S2C_SyncLevelTaskBattleMessage.Types.TaskState.Parser, new[]{ "Id", "State", "Conditions" }, null, null, new pbr::GeneratedClrTypeInfo[] { null, })}),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncSkillStateBattleMessage), global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Parser, new[]{ "RpcId", "BattleId", "ActorId", "Skills" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Types.SkillState), global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Types.SkillState.Parser, new[]{ "Id", "Count", "CD" }, null, null, null)}),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncSkillStateBattleMessage), global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Parser, new[]{ "RpcId", "BattleId", "ActorId", "Skills" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Types.SkillState), global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Types.SkillState.Parser, new[]{ "ActorId", "Count", "CD", "SkillType" }, null, null, null)}),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.C2S_ExitBattleMessage), global::Crazy.Common.C2S_ExitBattleMessage.Parser, new[]{ "RpcId", "BattleId", "PlayerId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_ExitBattleMessage), global::Crazy.Common.S2C_ExitBattleMessage.Parser, new[]{ "RpcId", "BattleId", "PlayerId", "State" }, null, new[]{ typeof(global::Crazy.Common.S2C_ExitBattleMessage.Types.State) }, null)
           }));
@@ -2593,9 +2594,10 @@ namespace Crazy.Common {
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public SkillState(SkillState other) : this() {
-          id_ = other.id_;
+          actorId_ = other.actorId_;
           count_ = other.count_;
           cD_ = other.cD_;
+          skillType_ = other.skillType_;
           _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
         }
 
@@ -2604,14 +2606,14 @@ namespace Crazy.Common {
           return new SkillState(this);
         }
 
-        /// <summary>Field number for the "Id" field.</summary>
-        public const int IdFieldNumber = 1;
-        private int id_;
+        /// <summary>Field number for the "ActorId" field.</summary>
+        public const int ActorIdFieldNumber = 1;
+        private ulong actorId_;
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-        public int Id {
-          get { return id_; }
+        public ulong ActorId {
+          get { return actorId_; }
           set {
-            id_ = value;
+            actorId_ = value;
           }
         }
 
@@ -2637,6 +2639,17 @@ namespace Crazy.Common {
           }
         }
 
+        /// <summary>Field number for the "SkillType" field.</summary>
+        public const int SkillTypeFieldNumber = 4;
+        private int skillType_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int SkillType {
+          get { return skillType_; }
+          set {
+            skillType_ = value;
+          }
+        }
+
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override bool Equals(object other) {
           return Equals(other as SkillState);
@@ -2650,18 +2663,20 @@ namespace Crazy.Common {
           if (ReferenceEquals(other, this)) {
             return true;
           }
-          if (Id != other.Id) return false;
+          if (ActorId != other.ActorId) return false;
           if (Count != other.Count) return false;
           if (CD != other.CD) return false;
+          if (SkillType != other.SkillType) return false;
           return Equals(_unknownFields, other._unknownFields);
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override int GetHashCode() {
           int hash = 1;
-          if (Id != 0) hash ^= Id.GetHashCode();
+          if (ActorId != 0UL) hash ^= ActorId.GetHashCode();
           if (Count != 0) hash ^= Count.GetHashCode();
           if (CD != 0) hash ^= CD.GetHashCode();
+          if (SkillType != 0) hash ^= SkillType.GetHashCode();
           if (_unknownFields != null) {
             hash ^= _unknownFields.GetHashCode();
           }
@@ -2675,9 +2690,9 @@ namespace Crazy.Common {
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void WriteTo(pb::CodedOutputStream output) {
-          if (Id != 0) {
+          if (ActorId != 0UL) {
             output.WriteRawTag(8);
-            output.WriteInt32(Id);
+            output.WriteUInt64(ActorId);
           }
           if (Count != 0) {
             output.WriteRawTag(16);
@@ -2687,6 +2702,10 @@ namespace Crazy.Common {
             output.WriteRawTag(24);
             output.WriteInt32(CD);
           }
+          if (SkillType != 0) {
+            output.WriteRawTag(32);
+            output.WriteInt32(SkillType);
+          }
           if (_unknownFields != null) {
             _unknownFields.WriteTo(output);
           }
@@ -2695,14 +2714,17 @@ namespace Crazy.Common {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CalculateSize() {
           int size = 0;
-          if (Id != 0) {
-            size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
+          if (ActorId != 0UL) {
+            size += 1 + pb::CodedOutputStream.ComputeUInt64Size(ActorId);
           }
           if (Count != 0) {
             size += 1 + pb::CodedOutputStream.ComputeInt32Size(Count);
           }
           if (CD != 0) {
             size += 1 + pb::CodedOutputStream.ComputeInt32Size(CD);
+          }
+          if (SkillType != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeInt32Size(SkillType);
           }
           if (_unknownFields != null) {
             size += _unknownFields.CalculateSize();
@@ -2715,14 +2737,17 @@ namespace Crazy.Common {
           if (other == null) {
             return;
           }
-          if (other.Id != 0) {
-            Id = other.Id;
+          if (other.ActorId != 0UL) {
+            ActorId = other.ActorId;
           }
           if (other.Count != 0) {
             Count = other.Count;
           }
           if (other.CD != 0) {
             CD = other.CD;
+          }
+          if (other.SkillType != 0) {
+            SkillType = other.SkillType;
           }
           _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
         }
@@ -2736,7 +2761,7 @@ namespace Crazy.Common {
                 _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
                 break;
               case 8: {
-                Id = input.ReadInt32();
+                ActorId = input.ReadUInt64();
                 break;
               }
               case 16: {
@@ -2745,6 +2770,10 @@ namespace Crazy.Common {
               }
               case 24: {
                 CD = input.ReadInt32();
+                break;
+              }
+              case 32: {
+                SkillType = input.ReadInt32();
                 break;
               }
             }

@@ -84,7 +84,7 @@ namespace GameActorLogic
         /// </summary>
         /// <param name="players">玩家集合</param>
         /// <param name="barrierId">关卡类型id</param>
-        public void Start(List<string> players,int barrierId)
+        public void Start(List<Tuple<string, int, int, int, int>> players,int barrierId)
         {
             isStart = true;
             //TODO 可能进行动态初始化
