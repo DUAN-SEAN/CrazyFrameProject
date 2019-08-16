@@ -166,6 +166,7 @@ namespace GameServer.Battle
 
                             BroadcastMessage(syncPhysics);
                         }
+                        
                         break;
                     default: break;
                 }
