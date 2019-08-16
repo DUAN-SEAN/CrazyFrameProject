@@ -132,39 +132,40 @@ namespace GameServer.Battle
             foreach (var actor in actors)
             {
                 actor.IsShip();
-
+                actor.IsPlayer();
                 switch (actor.GetActorType())
                 {
                     case ActorTypeBaseDefine.ShipActorNone:
                         ShipActorBase shipActorBase = actor as ShipActorBase;
 
-                        S2C_SyncHpShieldStateBattleMessage syncHpShield = new S2C_SyncHpShieldStateBattleMessage();
-                        syncHpShield.BattleId = Id;
-                        syncHpShield.ActorId = shipActorBase.GetActorID();
-                        syncHpShield.ActorType = shipActorBase.GetActorType();
-                        syncHpShield.Hp = shipActorBase.GetHP();
-                        syncHpShield.Shield = shipActorBase.GetShieldNum();
+                        {
+                            S2C_SyncHpShieldStateBattleMessage syncHpShield = new S2C_SyncHpShieldStateBattleMessage();
+                            syncHpShield.BattleId = Id;
+                            syncHpShield.ActorId = shipActorBase.GetActorID();
+                            syncHpShield.ActorType = shipActorBase.GetActorType();
+                            syncHpShield.Hp = shipActorBase.GetHP();
+                            syncHpShield.Shield = shipActorBase.GetShieldNum();
 
-                        BroadcastMessage(syncHpShield);
+                            BroadcastMessage(syncHpShield);
+                        }
 
-                        S2C_SyncPhysicsStateBattleMessage syncPhysics = new S2C_SyncPhysicsStateBattleMessage();
-                        syncPhysics.BattleId = Id;
-                        syncPhysics.ActorId = shipActorBase.GetActorID();
-                        syncPhysics.ActorType = shipActorBase.GetActorType();
-                        syncPhysics.AngleVelocity = shipActorBase.GetAngleVelocity();
-                        syncPhysics.ForceX = shipActorBase.GetForce().X;
-                        syncPhysics.ForceY = shipActorBase.GetForce().Y;
-                        syncPhysics.ForwardAngle = shipActorBase.GetForwardAngle();
-                        syncPhysics.PositionX = shipActorBase.GetPosition().X;
-                        syncPhysics.PositionY = shipActorBase.GetPosition().Y;
-                        syncPhysics.VelocityX = shipActorBase.GetVelocity().X;
-                        syncPhysics.VelocityY = shipActorBase.GetVelocity().Y;
-                        syncPhysics.Torque = shipActorBase.GetTorque();
+                        {
+                            S2C_SyncPhysicsStateBattleMessage syncPhysics = new S2C_SyncPhysicsStateBattleMessage();
+                            syncPhysics.BattleId = Id;
+                            syncPhysics.ActorId = shipActorBase.GetActorID();
+                            syncPhysics.ActorType = shipActorBase.GetActorType();
+                            syncPhysics.AngleVelocity = shipActorBase.GetAngleVelocity();
+                            syncPhysics.ForceX = shipActorBase.GetForce().X;
+                            syncPhysics.ForceY = shipActorBase.GetForce().Y;
+                            syncPhysics.ForwardAngle = shipActorBase.GetForwardAngle();
+                            syncPhysics.PositionX = shipActorBase.GetPosition().X;
+                            syncPhysics.PositionY = shipActorBase.GetPosition().Y;
+                            syncPhysics.VelocityX = shipActorBase.GetVelocity().X;
+                            syncPhysics.VelocityY = shipActorBase.GetVelocity().Y;
+                            syncPhysics.Torque = shipActorBase.GetTorque();
 
-                        BroadcastMessage(syncPhysics);
-
-
-
+                            BroadcastMessage(syncPhysics);
+                        }
                         break;
                     default: break;
                 }
