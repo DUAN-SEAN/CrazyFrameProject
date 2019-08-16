@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using GameActorLogic;
 using Google.Protobuf;
+using Google.Protobuf.Collections;
 
 namespace GameServer.Battle
 {
@@ -55,6 +56,7 @@ namespace GameServer.Battle
             m_players = players;
             m_netHandler = handler;
 
+            
 
             m_level.Start(players, barrierId);
         }
@@ -112,14 +114,33 @@ namespace GameServer.Battle
 
         private void OnSyncState()
         {
+            S2C_SyncLevelTaskBattleMessage syncLevelTask = new S2C_SyncLevelTaskBattleMessage();
+            syncLevelTask.Tasks.Clear();//如果从池子中取的话可能涉及到未清理干净的现象
+            foreach (var task in m_level.GetAllTaskEvents())
+            {
+                S2C_SyncLevelTaskBattleMessage.Types.Task taskItem = new S2C_SyncLevelTaskBattleMessage.Types.Task();
+                
+                //taskItem.Id = task.GetTaskId();
+                foreach (var taskConditionCurrentValue in task.ConditionCurrentValues)
+                {
+                    taskItem.Conditions.Add(taskConditionCurrentValue.Key,taskConditionCurrentValue.Value);
+                }
+                
+            }
+
+            syncLevelTask.BattleId = Id;
+            BroadcastMessage(syncLevelTask);
             //获取所有关卡内的actor
             var actors = m_level.GetAllActors();
             foreach (var actor in actors)
             {
+                actor.IsShip();
+                
                 switch (actor.GetActorType())
                 {
                     case ActorTypeBaseDefine.ShipActorNone:
                         ShipActorBase shipActorBase = actor as ShipActorBase;
+                        
                         S2C_SyncHpShieldStateBattleMessage syncHpShield = new S2C_SyncHpShieldStateBattleMessage();
                         syncHpShield.BattleId = Id;
                         syncHpShield.ActorId = shipActorBase.GetActorID();
