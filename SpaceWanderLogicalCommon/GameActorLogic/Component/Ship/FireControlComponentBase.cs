@@ -116,17 +116,17 @@ namespace GameActorLogic
 
         public void TickFire()
         {
-            //TODO 给所有的准备中武器赋值当前的Actor位置坐标和朝向
+            // 给所有的准备中武器赋值当前的Actor位置坐标和朝向
             foreach (var skillContainer in skills)
             {
-                //container.GetPhysicalinternalBase().GetBody().TriggerDetection(skillContainer.GetBody(), 6);
+                container.GetPhysicalinternalBase().GetBody().TriggerDetection(skillContainer.GetBody(), 1);
             }
 
-            var weaponlist = skills.Where(s => s.GetActorType() == ActorTypeBaseDefine.ContinuousLaserActor).ToList();
-            //TODO 给激光赋值
+            var weaponlist = skillInitList.Where(s => s.GetActorType() == ActorTypeBaseDefine.ContinuousLaserActor).ToList();
+            // 给激光赋值
             foreach (var skillContainer in weaponlist)
             {
-               
+                container.GetPhysicalinternalBase().GetBody().TriggerDetection(skillContainer.GetBody(), 1);
             }
         }
 

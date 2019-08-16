@@ -46,11 +46,9 @@ namespace GameActorLogic
         /// 该传入的engine用于将新的对象进行创建
         /// 应该会放入其他接口
         /// </summary>
-        public PhysicalBase(Body body,Collider collider, IEnvirinfoInternalBase envirinfo)
+        public PhysicalBase(IEnvirinfoInternalBase envirinfo)
         {
             this.envirinfo = envirinfo;
-            m_body = body;
-            m_collider = collider;
             //envirinfo.GetCollisionEvent().colliders.Add(body, collider);
             m_collider.OnCollisionStay += OnCollision;
         }
@@ -79,6 +77,16 @@ namespace GameActorLogic
                 OnColliderExit?.Invoke();
             }
         }
+
+        #region Helper
+
+        public void CreateBody(Body body)
+        {
+            m_body = body;
+        }
+
+        #endregion
+
 
         #region IPhysicalBase
 

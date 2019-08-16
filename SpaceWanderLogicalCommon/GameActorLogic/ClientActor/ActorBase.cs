@@ -27,17 +27,13 @@ namespace GameActorLogic
             ActorType = ActorTypeBaseDefine.ActorNone;
         }
 
-        protected virtual void  CreateComponent()
+        protected virtual void  CreateBaseComponent()
         {
-            
-
             _physicalBase = CreatePhysicalBase();
             //目前只引发移动事件
             _moveComponent = new MoveComponentBase(_physicalBase);
-
             //目前只有最大速度
             _invariantAttributeComponent = new InvariantAttributeComponentBase();
-
         }
 
         public virtual void Update()
@@ -56,20 +52,27 @@ namespace GameActorLogic
         {
             ActorID = id;
         }
-        #endregion
+        #region Helper
 
+        public void CreateBody(Body body)
+        {
+            _physicalBase.CreateBody(body); 
+        }
+        #endregion
+        
+        #endregion
 
         #region 创建组件
 
         /// <summary>
         /// 创建不同的物理对象
         /// </summary>
-        protected virtual PhysicalBase CreatePhysicalBase()
+        protected PhysicalBase CreatePhysicalBase()
         {
-            var body = Factory.CreateTriggleBody(0,0,4,6);
-            var collider = new Collider();
+            return new PhysicalBase(level.GetEnvirinfointernalBase());
+            
+          
 
-            return new PhysicalBase(body,collider,level.GetEnvirinfointernalBase());
         }
 
         #endregion

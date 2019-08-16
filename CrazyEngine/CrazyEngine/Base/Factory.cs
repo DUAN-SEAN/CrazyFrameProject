@@ -14,10 +14,10 @@ namespace CrazyEngine.Base
         /// <param name="height">高</param>
         /// <param name="isStatic"></param>
         /// <returns></returns>
-        public static Body CreateRectangleBody(double x, double y, double width, double height, bool isStatic = false)
+        public static Body CreateRectangleBody(double x, double y, double width, double height, bool isStatic = false,bool isTrigger = false)
         {
             var path = new List<Point> { new Point(0, 0), new Point(width, 0), new Point(width, height), new Point(0,height) };
-            var body = new Body {Static = isStatic};
+            var body = new Body {Static = isStatic,Trigger = isTrigger};
             body.Init(path);
             body.Position = new Point(x, y);
             return body;
@@ -32,10 +32,10 @@ namespace CrazyEngine.Base
         /// <param name="h">高</param>
         /// <param name="isStatic"></param>
         /// <returns></returns>
-        public static Body CreateTriggleBody(double x, double y, double d, double h, bool isStatic = false)
+        public static Body CreateTriggleBody(double x, double y, double d, double h, bool isStatic = false, bool isTrigger = false)
         {
             var path = new List<Point> { new Point(0, 0), new Point(d, 0), new Point(d / 2, h) };
-            var body = new Body { Static = isStatic };
+            var body = new Body { Static = isStatic, Trigger = isTrigger };
             body.Init(path);
             body.Position = new Point(x, y);
             return body;
@@ -50,10 +50,10 @@ namespace CrazyEngine.Base
         /// <param name="height">高</param>
         /// <param name="isStatic"></param>
         /// <returns></returns>
-        public static Body CreateRhombusBody(double x, double y,double width, double height, bool isStatic = false)
+        public static Body CreateRhombusBody(double x, double y,double width, double height, bool isStatic = false, bool isTrigger = false)
         {
             var path = new List<Point> { new Point(0, 0), new Point(width/2, height/2), new Point(width, 0), new Point(width/2, -height/2) };
-            var body = new Body { Static = isStatic };
+            var body = new Body { Static = isStatic, Trigger = isTrigger };
             body.Init(path);
             body.Position = new Point(x, y);
             return body;
@@ -67,7 +67,7 @@ namespace CrazyEngine.Base
         /// <param name="radius">半径</param>
         /// <param name="isStatic"></param>
         /// <returns></returns>
-        public static Body CreateCircleBody(double x, double y, double radius, bool isStatic = false)
+        public static Body CreateCircleBody(double x, double y, double radius, bool isStatic = false, bool isTrigger = false)
         {
             var gr = 0.707107 * radius;//二分之根号2
             var g3r = 0.8660254 * radius; // 二分之根号三
@@ -93,7 +93,7 @@ namespace CrazyEngine.Base
                 };
             }
 
-            var body = new Body { Static = isStatic };
+            var body = new Body { Static = isStatic, Trigger = isTrigger };
             body.Init(path);
             body.Position = new Point(x, y);
             return body;
@@ -109,12 +109,12 @@ namespace CrazyEngine.Base
         /// <param name="bottom">下底</param>
         /// <param name="isStatic"></param>
         /// <returns></returns>
-        public static Body CreateTrapezoidBody(double x, double y, double height, double top, double bottom, bool isStatic = false)
+        public static Body CreateTrapezoidBody(double x, double y, double height, double top, double bottom, bool isStatic = false, bool isTrigger = false)
         {
             var path = new List<Point> {
                 new Point(-top/2, height/2), new Point(top/2, height/2), new Point(bottom/2, -height/2), new Point(-bottom/2, -height/2)
             };
-            var body = new Body { Static = isStatic };
+            var body = new Body { Static = isStatic, Trigger = isTrigger };
             body.Init(path);
             body.Position = new Point(x, y);
             return body;
