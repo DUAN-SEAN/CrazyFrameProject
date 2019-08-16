@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Crazy.Common;
 using Crazy.NetSharp;
+using Task = System.Threading.Tasks.Task;
+
 namespace Crazy.ServerBase
 {
     /// <summary>

@@ -71,6 +71,19 @@ message S2C_SyncPhysicsStateBattleMessage // IBattleMessage
 	double Force_Y = 11;
 	double Torque = 12;
 }
+message S2C_SyncLevelTaskBattleMessage // IBattleMessage 
+{
+	int32 RpcId = 90;
+	uint64 BattleId = 1;
+	uint64 ActorId = 2;
+	repeated TaskState Tasks = 3;
+	message TaskState
+	{
+		int32 Id = 1;
+		int32 State = 2;
+		map<int32,int32> Conditions = 3;
+	}
+}
 message S2C_SyncSkillStateBattleMessage // IBattleMessage 
 {
 	int32 RpcId = 90;

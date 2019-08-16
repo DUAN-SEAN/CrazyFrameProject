@@ -30,6 +30,12 @@ namespace Crazy.Common
 	[Message(BattleMessageOpcode.S2C_SyncPhysicsStateBattleMessage)]
 	public partial class S2C_SyncPhysicsStateBattleMessage : IBattleMessage {}
 
+	[Message(BattleMessageOpcode.S2C_SyncLevelTaskBattleMessage)]
+	public partial class S2C_SyncLevelTaskBattleMessage : IBattleMessage {}
+
+	[Message(BattleMessageOpcode.TaskState)]
+	public partial class TaskState {}
+
 	[Message(BattleMessageOpcode.S2C_SyncSkillStateBattleMessage)]
 	public partial class S2C_SyncSkillStateBattleMessage : IBattleMessage {}
 
@@ -55,9 +61,11 @@ namespace Crazy.Common
 		 public const ushort S2C_EventBattleMessage = 1007;
 		 public const ushort S2C_SyncHpShieldStateBattleMessage = 1008;
 		 public const ushort S2C_SyncPhysicsStateBattleMessage = 1009;
-		 public const ushort S2C_SyncSkillStateBattleMessage = 1010;
-		 public const ushort Skill = 1011;
-		 public const ushort C2S_ExitBattleMessage = 1012;
-		 public const ushort S2C_ExitBattleMessage = 1013;
+		 public const ushort S2C_SyncLevelTaskBattleMessage = 1010;
+		 public const ushort TaskState = 1011;
+		 public const ushort S2C_SyncSkillStateBattleMessage = 1012;
+		 public const ushort Skill = 1013;
+		 public const ushort C2S_ExitBattleMessage = 1014;
+		 public const ushort S2C_ExitBattleMessage = 1015;
 	}
 }
