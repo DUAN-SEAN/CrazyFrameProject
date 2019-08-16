@@ -138,35 +138,55 @@ namespace GameServer.Battle
                     case ActorTypeBaseDefine.ShipActorNone:
                         ShipActorBase shipActorBase = actor as ShipActorBase;
 
-                        {
-                            S2C_SyncHpShieldStateBattleMessage syncHpShield = new S2C_SyncHpShieldStateBattleMessage();
-                            syncHpShield.BattleId = Id;
-                            syncHpShield.ActorId = shipActorBase.GetActorID();
-                            syncHpShield.ActorType = shipActorBase.GetActorType();
-                            syncHpShield.Hp = shipActorBase.GetHP();
-                            syncHpShield.Shield = shipActorBase.GetShieldNum();
+                    {
+                        S2C_SyncHpShieldStateBattleMessage syncHpShield = new S2C_SyncHpShieldStateBattleMessage();
+                        syncHpShield.BattleId = Id;
+                        syncHpShield.ActorId = shipActorBase.GetActorID();
+                        syncHpShield.ActorType = shipActorBase.GetActorType();
+                        syncHpShield.Hp = shipActorBase.GetHP();
+                        syncHpShield.Shield = shipActorBase.GetShieldNum();
 
-                            BroadcastMessage(syncHpShield);
-                        }
+                        BroadcastMessage(syncHpShield);
+                    }
 
-                        {
-                            S2C_SyncPhysicsStateBattleMessage syncPhysics = new S2C_SyncPhysicsStateBattleMessage();
-                            syncPhysics.BattleId = Id;
-                            syncPhysics.ActorId = shipActorBase.GetActorID();
-                            syncPhysics.ActorType = shipActorBase.GetActorType();
-                            syncPhysics.AngleVelocity = shipActorBase.GetAngleVelocity();
-                            syncPhysics.ForceX = shipActorBase.GetForce().X;
-                            syncPhysics.ForceY = shipActorBase.GetForce().Y;
-                            syncPhysics.ForwardAngle = shipActorBase.GetForwardAngle();
-                            syncPhysics.PositionX = shipActorBase.GetPosition().X;
-                            syncPhysics.PositionY = shipActorBase.GetPosition().Y;
-                            syncPhysics.VelocityX = shipActorBase.GetVelocity().X;
-                            syncPhysics.VelocityY = shipActorBase.GetVelocity().Y;
-                            syncPhysics.Torque = shipActorBase.GetTorque();
+                    {
+                        S2C_SyncPhysicsStateBattleMessage syncPhysics = new S2C_SyncPhysicsStateBattleMessage();
+                        syncPhysics.BattleId = Id;
+                        syncPhysics.ActorId = shipActorBase.GetActorID();
+                        syncPhysics.ActorType = shipActorBase.GetActorType();
+                        syncPhysics.AngleVelocity = shipActorBase.GetAngleVelocity();
+                        syncPhysics.ForceX = shipActorBase.GetForce().X;
+                        syncPhysics.ForceY = shipActorBase.GetForce().Y;
+                        syncPhysics.ForwardAngle = shipActorBase.GetForwardAngle();
+                        syncPhysics.PositionX = shipActorBase.GetPosition().X;
+                        syncPhysics.PositionY = shipActorBase.GetPosition().Y;
+                        syncPhysics.VelocityX = shipActorBase.GetVelocity().X;
+                        syncPhysics.VelocityY = shipActorBase.GetVelocity().Y;
+                        syncPhysics.Torque = shipActorBase.GetTorque();
 
-                            BroadcastMessage(syncPhysics);
-                        }
+                        BroadcastMessage(syncPhysics);
+                    }
+                      
+                    {
+                        S2C_SyncSkillStateBattleMessage syncSkillMsg = new S2C_SyncSkillStateBattleMessage();
+                            foreach (var s in shipActorBase.GetSkills())
+                            {
+                                S2C_SyncSkillStateBattleMessage.Types.SkillState skill = new S2C_SyncSkillStateBattleMessage.Types.SkillState();
+                                skill.Id = s.GetId();
+                                skill.CD = s.GetSkillCd();
+                                skill.Count = s.GetSkillCapacity();
+
+                            }
+                           
+
+                       
+                       
                         
+                        //syncSkillMsg.Skills.Add();
+
+                    }
+
+
                         break;
                     default: break;
                 }
