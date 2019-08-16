@@ -114,33 +114,30 @@ namespace GameServer.Battle
 
         private void OnSyncState()
         {
-            S2C_SyncLevelTaskBattleMessage syncLevelTask = new S2C_SyncLevelTaskBattleMessage();
-            syncLevelTask.Tasks.Clear();//如果从池子中取的话可能涉及到未清理干净的现象
-            foreach (var task in m_level.GetAllTaskEvents())
-            {
-                S2C_SyncLevelTaskBattleMessage.Types.Task taskItem = new S2C_SyncLevelTaskBattleMessage.Types.Task();
-                
-                //taskItem.Id = task.GetTaskId();
-                foreach (var taskConditionCurrentValue in task.ConditionCurrentValues)
-                {
-                    taskItem.Conditions.Add(taskConditionCurrentValue.Key,taskConditionCurrentValue.Value);
-                }
-                
-            }
+            OnSyncTaskState();
 
-            syncLevelTask.BattleId = Id;
-            BroadcastMessage(syncLevelTask);
+            OnSyncActor();
+           
+          
+            //分组件封装所有的值
+
+        }
+        /// <summary>
+        /// 同步Actor，除了关卡actor
+        /// </summary>
+        private void OnSyncActor()
+        {
             //获取所有关卡内的actor
             var actors = m_level.GetAllActors();
             foreach (var actor in actors)
             {
                 actor.IsShip();
-                
+
                 switch (actor.GetActorType())
                 {
                     case ActorTypeBaseDefine.ShipActorNone:
                         ShipActorBase shipActorBase = actor as ShipActorBase;
-                        
+
                         S2C_SyncHpShieldStateBattleMessage syncHpShield = new S2C_SyncHpShieldStateBattleMessage();
                         syncHpShield.BattleId = Id;
                         syncHpShield.ActorId = shipActorBase.GetActorID();
@@ -165,16 +162,39 @@ namespace GameServer.Battle
                         syncPhysics.Torque = shipActorBase.GetTorque();
 
                         BroadcastMessage(syncPhysics);
-                        
 
-                        
+
+
                         break;
-                    default:break;
+                    default: break;
                 }
             }
-            //分组件封装所有的值
-
         }
+
+        /// <summary>
+        /// 同步任务状态
+        /// </summary>
+        private void OnSyncTaskState()
+        {
+            S2C_SyncLevelTaskBattleMessage syncLevelTask = new S2C_SyncLevelTaskBattleMessage();
+            syncLevelTask.Tasks.Clear();//如果从池子中取的话可能涉及到未清理干净的现象
+            foreach (var task in m_level.GetAllTaskEvents())
+            {
+                S2C_SyncLevelTaskBattleMessage.Types.TaskState taskItem =
+                    new S2C_SyncLevelTaskBattleMessage.Types.TaskState();
+
+                taskItem.Id = task.GetTaskId();
+                taskItem.State = (int)task.GetTaskState();
+                foreach (var taskConditionCurrentValue in task.ConditionCurrentValues)
+                {
+                    taskItem.Conditions.Add(taskConditionCurrentValue.Key, taskConditionCurrentValue.Value);
+                }
+
+            }
+            syncLevelTask.BattleId = Id;
+            BroadcastMessage(syncLevelTask);
+        }
+
 
         /// <summary>
         /// 处理事件队列，广播游戏事件
@@ -206,6 +226,10 @@ namespace GameServer.Battle
 
 
         }
+        /// <summary>
+        /// 玩家发来的准备确认
+        /// </summary>
+        /// <param name="player"></param>
         public void OnReadyBattle(string player)
         {
             if (readState == null) return;
