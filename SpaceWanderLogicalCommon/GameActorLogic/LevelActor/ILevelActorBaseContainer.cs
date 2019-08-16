@@ -42,6 +42,11 @@ namespace GameActorLogic
         void Dispose();
 
         /// <summary>
+        /// 返回玩家
+        /// </summary>
+        ActorBase GetPlayerActorByString(string id);
+
+        /// <summary>
         /// 当关卡初始化完成
         /// </summary>
         event Action OnLoadingDone;

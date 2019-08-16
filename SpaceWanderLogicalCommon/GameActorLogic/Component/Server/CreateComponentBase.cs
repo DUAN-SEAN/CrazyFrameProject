@@ -49,28 +49,21 @@ namespace GameActorLogic
 
                 #region 飞船Actor
                 case ActorTypeBaseDefine.ShipActorNone:
-                    if (actor == null) 
+                case ActorTypeBaseDefine.EliteShipActorA:
+                case ActorTypeBaseDefine.EliteShipActorB:
+                case ActorTypeBaseDefine.FighterShipActorA:
+                case ActorTypeBaseDefine.FighterShipActorB:
+                case ActorTypeBaseDefine.WaspShipActorA:
+                case ActorTypeBaseDefine.AnnihilationShipActor:
+                case ActorTypeBaseDefine.DroneShipActor:
+                case ActorTypeBaseDefine.PlayerShipActor:
+                    if (actor == null)
                         actor = new ShipActorBase(Id, level);
                     actor.SetActorId(Id);
                     actor.PrepareActor(point_x, point_y, angle);
                     actor.SetCamp(camp);
                     break;
-                case ActorTypeBaseDefine.EliteShipActorA:
-                    break;
-                case ActorTypeBaseDefine.EliteShipActorB:
-                    break;
-                case ActorTypeBaseDefine.FighterShipActorA:
-                    break;
-                case ActorTypeBaseDefine.FighterShipActorB:
-                    break;
-                case ActorTypeBaseDefine.WaspShipActorA:
-                    break;
-                case ActorTypeBaseDefine.AnnihilationShipActor:
-                    break;
-                case ActorTypeBaseDefine.DroneShipActor:
-                    break;
-                case ActorTypeBaseDefine.PlayerShipActor:
-                    break;
+               
 
                 #endregion
 
@@ -83,6 +76,11 @@ namespace GameActorLogic
                 case ActorTypeBaseDefine.TorpedoActor:
                 case ActorTypeBaseDefine.TrackingMissileActor:
                 case ActorTypeBaseDefine.TriggerBombActor:
+                    if (actor == null)
+                        actor = new WeaponActorBase(Id, level);
+                    actor.SetActorId(Id);
+                    actor.PrepareActor(point_x, point_y, angle);
+                    actor.SetCamp(camp);
                     break;
 
                 #endregion

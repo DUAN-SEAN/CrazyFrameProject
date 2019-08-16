@@ -27,11 +27,13 @@ namespace GameActorLogic
         
         protected bool isStart = false;
 
+        protected Dictionary<string, ActorBase> players;
+
         public LevelActorBase()
         {
             CreateComponent();
             OnLoadingDone?.Invoke();
-
+            players = new Dictionary<string, ActorBase>();
         }
 
 
@@ -86,7 +88,10 @@ namespace GameActorLogic
         {
             isStart = true;
             //TODO 可能进行动态初始化
-
+            foreach (var player in players)
+            {
+                this.players.Add(player, null);
+            }
             //先放这里
             OnStartDone?.Invoke();
         }
@@ -107,6 +112,11 @@ namespace GameActorLogic
             //TODO 对子对象进行动态Dispose
 
 
+        }
+
+        public ActorBase GetPlayerActorByString(string id)
+        {
+            return players[id];
         }
 
         public event Action OnLoadingDone;

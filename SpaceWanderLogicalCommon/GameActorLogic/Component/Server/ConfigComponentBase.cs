@@ -25,7 +25,15 @@ namespace GameActorLogic
             ShipArray = ships;
             Skill = skill;
             BarrierArray = barrier;
+            InitializeActor(ships, skill, barrier);
         }
+
+        protected void InitializeActor(GameShipConfig[] ships, GameSkillConfig skill, GameBarrierConfig[] barrier)
+        {
+
+        }
+
+
 
         public bool TryGetActor(Int32 key, out ActorBase actor)
         {
