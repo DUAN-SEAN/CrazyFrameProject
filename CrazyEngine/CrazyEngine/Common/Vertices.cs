@@ -176,6 +176,10 @@ namespace CrazyEngine.Common
 			return centre;
 		}
 
+        /// <summary>
+        /// 将输入顶点的凸壳作为新的点数组返回。
+        /// </summary>
+        /// <returns></returns>
 		public Vertices Hull()
 		{
 			Vertexes.Sort((a, b) =>

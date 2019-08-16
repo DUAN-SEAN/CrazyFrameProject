@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using CrazyEngine.External;
 namespace GameActorLogic
 {
     /// <summary>
@@ -117,7 +117,10 @@ namespace GameActorLogic
         public void TickFire()
         {
             //TODO 给所有的准备中武器赋值当前的Actor位置坐标和朝向
-
+            foreach (var skillContainer in skills)
+            {
+                //container.GetPhysicalinternalBase().GetBody().TriggerDetection(skillContainer.GetBody(), 6);
+            }
 
             var weaponlist = skills.Where(s => s.GetActorType() == ActorTypeBaseDefine.ContinuousLaserActor).ToList();
             //TODO 给激光赋值

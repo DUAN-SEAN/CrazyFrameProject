@@ -9,7 +9,8 @@ namespace CrazyEngine.External
 {
     public class Collider
     {
-        public  Action<Collision> OnCollisionStay;
+
+        public Action<Collision> OnCollisionStay;
 
     }
 }

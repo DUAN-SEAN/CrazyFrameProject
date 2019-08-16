@@ -59,6 +59,10 @@ namespace CrazyEngine.Common
             }
         }
 
+        /// <summary>
+        /// 查找并删除已处于非活动状态的对。
+        /// </summary>
+        /// <param name="timestamp"></param>
         public void RemoveOld(long timestamp)
         {
             var newPairs = new List<Pair>();

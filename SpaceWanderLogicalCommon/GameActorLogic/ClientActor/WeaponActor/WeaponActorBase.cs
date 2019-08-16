@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CrazyEngine.Base;
 
 namespace GameActorLogic
 {
@@ -189,6 +190,10 @@ namespace GameActorLogic
         public event Action<IWeaponBaseContainer> OnStartSkill;
         public event Action<IWeaponBaseContainer> OnEndSkill;
         public event Action<IWeaponBaseContainer> OnDestroySkill;
+        public Body GetBody()
+        {
+            return _physicalBase.GetBody();
+        }
 
         #endregion
 

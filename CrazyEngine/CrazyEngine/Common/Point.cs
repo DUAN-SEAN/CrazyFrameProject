@@ -88,7 +88,7 @@ namespace CrazyEngine.Common
 			X = Y = 0;
 		}
 
-		public double Magnitude()
+        public double Magnitude()
 		{
 			return Math.Sqrt(X * X + Y * Y);
 		}
@@ -114,16 +114,16 @@ namespace CrazyEngine.Common
         }
 
         public void Normalize()
-        {
-            var magnitude = Math.Sqrt(X * X + Y * Y);
-            if (Math.Sign(magnitude) == 0)
-            {
-                X = Y = 0;
-                return;
-            }
-            X /= magnitude;
-            Y /= magnitude;
-        }
+		{
+			var magnitude = Math.Sqrt(X * X + Y * Y);
+			if (Math.Sign(magnitude) == 0)
+			{
+				X = Y = 0;
+				return;
+			}
+			X /= magnitude;
+			Y /= magnitude;
+		}
 
         public static Point Zero()
         {

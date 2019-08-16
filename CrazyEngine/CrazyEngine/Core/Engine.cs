@@ -115,8 +115,7 @@ namespace CrazyEngine.Core
                             continue;
 
                         var pairId = Helper.GetPairId(partA, partB);
-                        Pair pair;
-                        var previousCollision = Pairs.Table.TryGetValue(pairId, out pair) && pair.Active ? pair.Collision : null;
+                        var previousCollision = Pairs.Table.TryGetValue(pairId, out Pair pair) && pair.Active ? pair.Collision : null;
                         var collision = Collides(partA, partB, previousCollision);
                         if (collision.Collided)
                         {
@@ -372,6 +371,11 @@ namespace CrazyEngine.Core
             _tmpPairsList.Clear();
         }
 
+        /// <summary>
+        /// 根据Bound 粗测阶段
+        /// </summary>
+        /// <param name="bodies"></param>
+        /// <param name="forceUpdate"></param>
         private void UpdateBroadphase(List<Body> bodies, bool forceUpdate)
         {
             var gridChanged = false;

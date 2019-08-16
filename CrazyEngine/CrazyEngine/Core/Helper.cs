@@ -243,6 +243,57 @@ namespace CrazyEngine.Core
         }
 
         /// <summary>
+        /// 求两个向量的夹角余弦值.
+        /// </summary>
+        /// <param name="p1"></param>
+        /// <param name="p2"></param>
+        /// <returns></returns>
+        public static double IncludedAngle(this Point p1, Point p2)
+        {
+            p1.Normalize(); p2.Normalize();
+            double dot = Dot(p1, p2);
+            return 2*dot / (p1.Magnitude() + p2.Magnitude());
+        }
+
+        /// <summary>
+        /// 不太好用的 插值 运算
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public static double Lerp(double a, double b, double t)
+        {
+            //return Math.Abs(a - b) > Double.Epsilon ? a > b ? a -= t : a += t : b;
+            if (Math.Abs(a - b) < Double.Epsilon) return b;
+            if (a > b) return a - t;
+            if (a < b) return a + b;
+            return b;
+        }
+
+        /// <summary>
+        /// 返回两个点之间的距离
+        /// </summary>
+        /// <param name="p1"></param>
+        /// <param name="p2"></param>
+        /// <returns></returns>
+        public static double Distance(this Point p1, Point p2)
+        {
+            return Math.Sqrt((p1.X - p2.X) * (p1.X - p2.X) + ((p1.Y - p2.Y) * (p1.Y - p2.Y)));
+        }
+
+        /// <summary>
+        /// 返回两个点之间的距离的平方
+        /// </summary>
+        /// <param name="p1"></param>
+        /// <param name="p2"></param>
+        /// <returns></returns>
+        public static double DistanceNoSqrt(this Point p1, Point p2)
+        {
+            return (p1.X - p2.X) * (p1.X - p2.X) + ((p1.Y - p2.Y) * (p1.Y - p2.Y));
+        }
+
+        /// <summary>
         /// 将Bound转化为Point数组
         /// </summary>
         /// <param name="bound"></param>

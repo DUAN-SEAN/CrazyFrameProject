@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CrazyEngine.Base;
 
 namespace GameActorLogic
 {
@@ -14,7 +15,7 @@ namespace GameActorLogic
         ISkillAttributeComponent,
         ISkillEventComponent
     {
-
+        Body GetBody();
     }
 
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using CrazyEngine.Common;
 
+
 namespace CrazyEngine.Base
 {
     /// <summary>
@@ -15,27 +16,27 @@ namespace CrazyEngine.Base
         public double AngleA { get; set; }
         public double AngleB { get; set; }
         public double Length { get; set; }
-        public double Stiffness { get; set; } = 1d;
+        public double Stiffness { get; set; } = 0.1d;
         public double AngularStiffness { get; set; } = 0d;
 
         public Constraint()
         {
             Type = ObjType.Constraint;
-            Init();
         }
 
         public void Init()
         {
             if (BodyA != null && PointA == null)
-                PointA = new Point();
+                PointA = new Point(0,0);
             if (BodyB != null && PointB == null)
-                PointB = new Point();
+                PointB = new Point(0,0);
 
-            //MonoBehaviour.print(PointA + " " + PointB);
+            //MonoBehaviour.print(BodyA == null);
+
             Point initialPointA = BodyA != null
                 ? (BodyA.Position + PointA)
                 : PointA;
-            Point initialPointB = BodyB != null
+            Point initialPointB = BodyB != null 
                 ? (BodyB.Position + PointB)
                 : PointB;
 

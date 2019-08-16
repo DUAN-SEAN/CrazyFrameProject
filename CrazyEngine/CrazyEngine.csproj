@@ -61,6 +61,7 @@
     <Compile Include="CrazyEngine\Core\Engine.cs" />
     <Compile Include="CrazyEngine\Core\Helper.cs" />
     <Compile Include="CrazyEngine\Core\Runner.cs" />
+    <Compile Include="CrazyEngine\External\BodyExtensions.cs" />
     <Compile Include="CrazyEngine\External\Collider.cs" />
     <Compile Include="CrazyEngine\External\CollisionEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -77,7 +77,8 @@ namespace GameActorLogic
                 case ActorTypeBaseDefine.TrackingMissileActor:
                 case ActorTypeBaseDefine.TriggerBombActor:
                     if (actor == null)
-                        actor = new WeaponActorBase(Id, level);
+                        //actor = new WeaponActorBase(Id, level);
+                        ;
                     actor.SetActorId(Id);
                     actor.PrepareActor(point_x, point_y, angle);
                     actor.SetCamp(camp);

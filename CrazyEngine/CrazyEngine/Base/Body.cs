@@ -119,6 +119,10 @@ namespace CrazyEngine.Base
             }
         }
 
+        /// <summary>
+        /// 初始化body时的朝向
+        /// </summary>
+        /// <param name="angle"></param>
         public void InitAngle(double angle)
         {
             var delta = angle - _angle;
