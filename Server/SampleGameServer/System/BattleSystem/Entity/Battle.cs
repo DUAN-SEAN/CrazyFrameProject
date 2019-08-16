@@ -21,8 +21,17 @@ namespace GameServer.Battle
             m_startTime = DateTime.Now;
             m_level = new LevelActorBase();
             m_binaryFormatter = new BinaryFormatter();
-            
+            m_level.OnLoadingDone += OnReadyBattleFromLevel;
+
         }
+        /// <summary>
+        /// 向客户端发送可以开启战斗了
+        /// </summary>
+        private void OnReadyBattleFromLevel()
+        {
+            levelReady = true;
+        }
+
         /// <summary>
         /// 初始化战斗副本实体
         /// </summary>
@@ -87,7 +96,15 @@ namespace GameServer.Battle
 
                 if (flag)
                 {
-                    BroadcastMessage(new S2CM_ReadyBattleBarrierAck{BattleId = Id});
+                    if (levelReady)
+                    {
+                        BroadcastMessage(new S2CM_ReadyBattleBarrierAck { BattleId = Id });
+                        readState.Clear();
+                        readState = null;
+                    }
+                        
+
+
                 }
             }
 
@@ -109,6 +126,9 @@ namespace GameServer.Battle
                         syncHpShield.ActorType = shipActorBase.GetActorType();
                         syncHpShield.Hp = shipActorBase.GetHP();
                         syncHpShield.Shield = shipActorBase.GetShieldNum();
+
+                        BroadcastMessage(syncHpShield);
+
                         S2C_SyncPhysicsStateBattleMessage syncPhysics = new S2C_SyncPhysicsStateBattleMessage();
                         syncPhysics.BattleId = Id;
                         syncPhysics.ActorId = shipActorBase.GetActorID();
@@ -124,8 +144,9 @@ namespace GameServer.Battle
                         syncPhysics.Torque = shipActorBase.GetTorque();
 
                         BroadcastMessage(syncPhysics);
-                        BroadcastMessage(syncHpShield);
+                        
 
+                        
                         break;
                     default:break;
                 }
@@ -293,9 +314,11 @@ namespace GameServer.Battle
 
         private List<int> readState;
 
+        private bool levelReady = false;
+
         #endregion
 
-     
+
     }
 
     public interface IBroadcastHandler
