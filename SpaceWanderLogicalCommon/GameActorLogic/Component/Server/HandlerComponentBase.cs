@@ -202,7 +202,7 @@ namespace GameActorLogic
         {
             if (!(command is SkillCommand commanditme)) return;
             if (!(GetActor(commanditme.actorid) is ShipActorBase ship)) return;
-            ship.SendButtonState(commanditme.skillcontrol);
+            //ship.SendButtonState(commanditme.skillcontrol);
             //switch (commanditme.skillcontrol)
             //{
             //    case 0:
@@ -221,7 +221,7 @@ namespace GameActorLogic
         #region 回调事件
         public event Action<ulong> OnInitMessageHandler;
         public event Action<ulong> OnDestroyMessageHandler;
-        public event Action<ulong> OnTaskUpdateMessageHandler;
+        public event Action<int> OnTaskUpdateMessageHandler;
 
         #endregion
 

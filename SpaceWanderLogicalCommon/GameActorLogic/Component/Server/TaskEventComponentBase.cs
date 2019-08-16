@@ -42,12 +42,19 @@ namespace GameActorLogic
             return events;
         }
 
-        public ITaskEvent GetTaskEvent(ulong id)
+        public ITaskEvent GetTaskEvent(int id)
         {
             return taskEvents.Find(t => t.GetTaskId() == id);
         }
 
-        public void ActivateTask(ulong id)
+        public void SetTaskConditionAndState(int id, int state, Dictionary<int, int> values)
+        {
+            var taskevent = taskEvents.Find(t => t.GetTaskId() == id);
+            taskevent.ConditionCurrentValues = values;
+            taskevent.SetTaskState((TaskEventState) state);
+        }
+
+        public void ActivateTask(int id)
         {
             taskEvents.Find(t => t.GetTaskId() == id).ActivateTask();
         }

@@ -17,6 +17,6 @@ namespace GameActorLogic
         ActorBase CreateActor(int actortype,int camp, double point_x, double point_y,double angle);
         ActorBase CreateActor(int actortype,int camp, double point_x, double point_y, double angle,ulong actorid);
 
-        ITaskEvent CreateTaskEvent(int taskcondition,int taskresult, ulong taskid, Dictionary<int, int> taskconditions);
+        ITaskEvent CreateTaskEvent(int taskcondition,int taskresult, int taskid, Dictionary<int, int> taskconditions);
     }
 }

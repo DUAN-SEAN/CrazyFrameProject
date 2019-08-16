@@ -45,6 +45,10 @@ namespace GameActorLogic
             return false;
         }
 
-        public Dictionary<int, int> ConditionCurrentValues => Currentvalue;
+        public Dictionary<int, int> ConditionCurrentValues
+        {
+            get => Currentvalue;
+            set => Currentvalue = value;
+        }
     }
 }

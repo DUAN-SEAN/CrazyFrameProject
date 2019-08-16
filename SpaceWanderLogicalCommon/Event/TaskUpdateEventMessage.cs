@@ -13,7 +13,7 @@ namespace GameActorLogic
     [Serializable]
     public class TaskUpdateEventMessage : BattleEventMessageBase
     {
-        public ulong eventid;
+        public int eventid;
         public TaskEventState state;
         public int key;
 
@@ -33,7 +33,7 @@ namespace GameActorLogic
         public bool isBool;
         public bool value_bool;
 
-        public TaskUpdateEventMessage(ulong eventid, TaskEventState state)
+        public TaskUpdateEventMessage(int eventid, TaskEventState state)
         {
             this.eventid = eventid;
             this.state = state;
@@ -42,7 +42,7 @@ namespace GameActorLogic
             isBool = false;
         }
 
-        public TaskUpdateEventMessage(ulong eventid,TaskEventState state,int key,Object value)
+        public TaskUpdateEventMessage(int eventid,TaskEventState state,int key,Object value)
         {
             this.eventid = eventid;
             this.state = state;
@@ -53,7 +53,7 @@ namespace GameActorLogic
             isBool = false;
         }
 
-        public TaskUpdateEventMessage(ulong eventid, TaskEventState state, int key, int value)
+        public TaskUpdateEventMessage(int eventid, TaskEventState state, int key, int value)
         {
             this.eventid = eventid;
             this.state = state;
@@ -64,7 +64,7 @@ namespace GameActorLogic
             isBool = false;
         }
 
-        public TaskUpdateEventMessage(ulong eventid, TaskEventState state, int key, bool value)
+        public TaskUpdateEventMessage(int eventid, TaskEventState state, int key, bool value)
         {
             this.eventid = eventid;
             this.state = state;

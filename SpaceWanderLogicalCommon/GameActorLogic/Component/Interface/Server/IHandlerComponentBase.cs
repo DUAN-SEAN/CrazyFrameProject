@@ -23,7 +23,7 @@ namespace GameActorLogic
         /// <summary>
         /// 当HandMessageList处理任务更新事件时回调
         /// </summary>
-        event Action<ulong> OnTaskUpdateMessageHandler;
+        event Action<int> OnTaskUpdateMessageHandler;
 
         #endregion
     }
