@@ -63,25 +63,37 @@ namespace GameActorLogic
                     actor.PrepareActor(point_x, point_y, angle);
                     actor.SetCamp(camp);
                     break;
-               
+
 
                 #endregion
 
                 #region 武器Acotr
+
+                #region 默认向前飞型武器
                 case ActorTypeBaseDefine.AntiAircraftGunActor:
-                case ActorTypeBaseDefine.ContinuousLaserActor:
                 case ActorTypeBaseDefine.MachineGunActor:
                 case ActorTypeBaseDefine.PowerLaserActor:
-                case ActorTypeBaseDefine.TimeBombActor:
                 case ActorTypeBaseDefine.TorpedoActor:
+                #endregion
+
+                #region 跟踪型武器
+
                 case ActorTypeBaseDefine.TrackingMissileActor:
+
+                #endregion
+
+
+
+                case ActorTypeBaseDefine.ContinuousLaserActor:
+                case ActorTypeBaseDefine.TimeBombActor:
                 case ActorTypeBaseDefine.TriggerBombActor:
-                    if (actor == null)
-                        //actor = new WeaponActorBase(Id, level);
-                        ;
-                    actor.SetActorId(Id);
-                    actor.PrepareActor(point_x, point_y, angle);
-                    actor.SetCamp(camp);
+                    if (actor != null)
+                    {
+                        actor.SetActorId(Id);
+                        actor.PrepareActor(point_x, point_y, angle);
+                        actor.SetCamp(camp);
+                    }
+                   
                     break;
 
                 #endregion

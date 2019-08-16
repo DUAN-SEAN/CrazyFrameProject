@@ -7,7 +7,7 @@ using CrazyEngine.Base;
 
 namespace GameActorLogic
 {
-    public abstract class WeaponActorBase : ActorBase,
+    public class WeaponActorBase : ActorBase,
         IWeaponBaseContainer,
         IWeaponBaseComponentContainer
     {
@@ -15,22 +15,24 @@ namespace GameActorLogic
         protected WeaponEventComponentBase _weaponEventComponent;
         protected WeaponAttributeComponentBase _weaponAttributeComponent;
 
-        protected WeaponActorBase(ulong id,ILevelActorComponentBaseContainer level) : base(id,level)
+        public WeaponActorBase(ulong id,ILevelActorComponentBaseContainer level) : base(id,level)
         {
 
         }
 
-        protected override void CreateComponent()
+        protected override void CreateBaseComponent()
         {
-            base.CreateComponent();
+            base.CreateBaseComponent();
             _weaponEventComponent = new WeaponEventComponentBase(this);
             _weaponAttributeComponent = new WeaponAttributeComponentBase();
-            _aiComponent = CreateAiComponent();
 
 
         }
 
-        public abstract AIComponentBase CreateAiComponent();
+        public void CreateAiComponent(AIComponentBase ai)
+        {
+            _aiComponent = ai;
+        }
 
         public override void Update()
         {

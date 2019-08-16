@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CrazyEngine.Base;
 
 namespace GameActorLogic
 {
@@ -19,9 +20,9 @@ namespace GameActorLogic
 
         }
 
-        protected override void CreateComponent()
+        protected override void CreateBaseComponent()
         {
-            base.CreateComponent();
+            base.CreateBaseComponent();
             //应该在构造器参数中添加武器集合信息
             _fireControlComponent = new FireControlComponentBase(this, level);
             _healthShieldComponent = new HealthShieldComponentBase();
@@ -33,6 +34,10 @@ namespace GameActorLogic
             //护盾恢复逻辑需要被Tick
             _healthShieldComponent.Tick();
         }
+
+  
+
+  
 
         #region IShipBaseContainer
 

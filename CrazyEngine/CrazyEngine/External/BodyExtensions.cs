@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace CrazyEngine.External
 {
-    static class BodyExtensions
+    public static class BodyExtensions
     {
         /// <summary>
         /// 环形检测
