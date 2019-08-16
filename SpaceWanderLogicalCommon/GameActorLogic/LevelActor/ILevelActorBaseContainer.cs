@@ -29,7 +29,7 @@ namespace GameActorLogic
         /// <summary>
         /// 开启关卡
         /// </summary>
-        void Start(List<string> players,int barrierId);
+        void Start(List<Tuple<string, int, int, int, int>> players, int barrierId);
 
         /// <summary>
         /// 由BattleSystem驱动
