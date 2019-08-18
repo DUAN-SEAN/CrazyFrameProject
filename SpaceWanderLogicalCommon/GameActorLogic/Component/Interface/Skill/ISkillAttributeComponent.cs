@@ -30,6 +30,16 @@ namespace GameActorLogic
         /// 设置技能CD
         /// </summary>
         void SetSkillCd(int cd);
+
+        /// <summary>
+        /// 获取最大Cd
+        /// </summary>
+        int GetMaxSkillCd();
+
+        /// <summary>
+        /// 设置最大Cd
+        /// </summary>
+        void SetMaxSkillCd(int cd);
     }
 
 

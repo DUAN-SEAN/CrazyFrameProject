@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using SpaceWanderLogicalCommon.Event;
+
 
 namespace GameActorLogic
 {
@@ -81,15 +80,17 @@ namespace GameActorLogic
             ActorBase actor = null;
             if (initEvent.haveId)
             {
-                actor = levelContainer.GetCreateInternalComponentBase().CreateActor(initEvent.actortype,initEvent.camp,
+                actor = levelContainer.GetCreateInternalComponentBase().CreateActor(initEvent.actortype, initEvent.camp,
                     initEvent.point_x,
-                    initEvent.point_y, initEvent.angle, initEvent.actorid);
+                    initEvent.point_y, initEvent.angle, initEvent.actorid, initEvent.IsPlayer, initEvent.weapontype_a,
+                    initEvent.weapontype_b);
             }
             else
             {
                 actor = levelContainer.GetCreateInternalComponentBase().CreateActor(initEvent.actortype, initEvent.camp,
                     initEvent.point_x,
-                    initEvent.point_y, initEvent.angle);
+                    initEvent.point_y, initEvent.angle, initEvent.IsPlayer, initEvent.weapontype_a,
+                    initEvent.weapontype_b);
             }
 
             if (actor != null)

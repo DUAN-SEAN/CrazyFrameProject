@@ -70,9 +70,6 @@ namespace GameActorLogic
         protected PhysicalBase CreatePhysicalBase()
         {
             return new PhysicalBase(level.GetEnvirinfointernalBase());
-            
-          
-
         }
 
         #endregion

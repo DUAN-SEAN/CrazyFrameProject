@@ -129,24 +129,6 @@ namespace GameActorLogic
             ((IWeaponAttributeBase) _weaponAttributeComponent).SetWeaponCd(cd);
         }
 
-        #endregion
-
-        #endregion
-
-
-        #region IWeaponBaseComponentContainer
-        public IWeaponEventinternalBase GetWeaponEventinternalBase()
-        {
-            return _weaponEventComponent;
-        }
-
-        public IWeaponAttributeInternalBase GetWeaponAttributeinternalBase()
-        {
-            return _weaponAttributeComponent;
-        }
-        #endregion
-
-
         public int GetSkillCapacity()
         {
             return _weaponAttributeComponent.GetSkillCapacity();
@@ -166,6 +148,36 @@ namespace GameActorLogic
         {
             _weaponAttributeComponent.SetSkillCd(cd);
         }
+
+        public int GetMaxSkillCd()
+        {
+            return _weaponAttributeComponent.GetMaxSkillCd();
+        }
+
+        public void SetMaxSkillCd(int cd)
+        {
+            _weaponAttributeComponent.SetMaxSkillCd(cd);
+        }
+
+        #endregion
+
+        #endregion
+
+
+        #region IWeaponBaseComponentContainer
+        public IWeaponEventinternalBase GetWeaponEventinternalBase()
+        {
+            return _weaponEventComponent;
+        }
+
+        public IWeaponAttributeInternalBase GetWeaponAttributeinternalBase()
+        {
+            return _weaponAttributeComponent;
+        }
+        #endregion
+
+
+       
 
         public ISkillAttributeInternalComponent GetSkillAttributeInternalComponent()
         {

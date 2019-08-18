@@ -8,6 +8,9 @@ using GameServer.Configure;
 
 namespace GameActorLogic
 {
+    /// <summary>
+    /// 配置组件
+    /// </summary>
     public class ConfigComponentBase :
         IConfigComponentBase,
         IConfigComponentInternalBase
@@ -16,6 +19,7 @@ namespace GameActorLogic
         protected GameSkillConfig Skill;
         protected GameBarrierConfig[] BarrierArray;
         protected ILevelActorComponentBaseContainer level;
+
         /// <summary>
         /// 从配置文件中加载出来的Actor对象
         /// </summary>
@@ -24,6 +28,8 @@ namespace GameActorLogic
         public ConfigComponentBase(ILevelActorComponentBaseContainer level)
         {
             this.level = level;
+            ConfigActors = new Dictionary<int, ActorBase>();
+
         }
 
 
@@ -32,7 +38,6 @@ namespace GameActorLogic
             ShipArray = ships;
             Skill = skill;
             BarrierArray = barrier;
-            ConfigActors = new Dictionary<int, ActorBase>();
             InitializeActor(ships, skill, barrier);
         }
 
@@ -43,36 +48,70 @@ namespace GameActorLogic
             //歼灭船
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.AnnihilationShipActor, level);
             shipactor.CreateBody(Factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            shipactor.InitializeFireControl(new List<int> // 跟踪导弹 机关枪
+            {
+                ActorTypeBaseDefine.TrackingMissileActor,
+                ActorTypeBaseDefine.MachineGunActor
+            });
             ConfigActors.Add(ActorTypeBaseDefine.AnnihilationShipActor, shipactor);
 
             //精英船A
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.EliteShipActorA, level);
             shipactor.CreateBody(Factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            shipactor.InitializeFireControl(new List<int> // 鱼雷 高射炮
+            {
+                ActorTypeBaseDefine.TorpedoActor,
+                ActorTypeBaseDefine.AntiAircraftGunActor
+            });
             ConfigActors.Add(ActorTypeBaseDefine.EliteShipActorA, shipactor);
 
             //精英船B
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.EliteShipActorB, level);
             shipactor.CreateBody(Factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            shipactor.InitializeFireControl(new List<int> // 跟踪导弹 高射炮
+            {
+                ActorTypeBaseDefine.TrackingMissileActor,
+                ActorTypeBaseDefine.AntiAircraftGunActor
+            });
             ConfigActors.Add(ActorTypeBaseDefine.EliteShipActorB, shipactor);
 
             //战斗机A
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.FighterShipActorA, level);
             shipactor.CreateBody(Factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            shipactor.InitializeFireControl(new List<int> // 机关枪 持续激光
+            {
+                ActorTypeBaseDefine.MachineGunActor,
+                ActorTypeBaseDefine.ContinuousLaserActor
+            });
             ConfigActors.Add(ActorTypeBaseDefine.FighterShipActorA, shipactor);
 
             //战斗机B
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.FighterShipActorB, level);
             shipactor.CreateBody(Factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            shipactor.InitializeFireControl(new List<int> // 高射炮 蓄力激光
+            {
+                ActorTypeBaseDefine.AntiAircraftGunActor,
+                ActorTypeBaseDefine.PowerLaserActor
+            });
             ConfigActors.Add(ActorTypeBaseDefine.FighterShipActorB, shipactor);
 
             //无人机
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.DroneShipActor, level);
             shipactor.CreateBody(Factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            shipactor.InitializeFireControl(new List<int> // 机关枪
+            {
+                ActorTypeBaseDefine.MachineGunActor
+            });
             ConfigActors.Add(ActorTypeBaseDefine.DroneShipActor, shipactor);
 
             //黄蜂飞船
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.WaspShipActorA, level);
             shipactor.CreateBody(Factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            shipactor.InitializeFireControl(new List<int> // 机关枪 高射炮
+            {
+                ActorTypeBaseDefine.MachineGunActor,
+                ActorTypeBaseDefine.AntiAircraftGunActor
+            });
             ConfigActors.Add(ActorTypeBaseDefine.WaspShipActorA, shipactor);
 
             #endregion

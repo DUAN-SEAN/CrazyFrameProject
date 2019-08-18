@@ -36,6 +36,8 @@ namespace GameActorLogic
         /// 设置武器CD
         /// </summary>
         void SetWeaponCd(int cd);
+
+
     }
 
     /// <summary>
@@ -55,6 +57,8 @@ namespace GameActorLogic
         /// -1则武器无限存活
         /// </summary>
         long GetMaxLifeTime();
+
+      
 
 
     }

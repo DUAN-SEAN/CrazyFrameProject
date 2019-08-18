@@ -27,13 +27,18 @@ namespace GameActorLogic
         
         protected bool isStart = false;
 
-        protected Dictionary<string, ActorBase> players;
+        protected Dictionary<string, ulong> players;
 
         public LevelActorBase()
         {
+            players = new Dictionary<string, ulong>();
+            //初始化组件
             CreateComponent();
+            //动态初始化任务配置
+            AddPrepareTask();
+            //动态初始化敌人
+            PrepareEnemy();
             OnLoadingDone?.Invoke();
-            players = new Dictionary<string, ActorBase>();
         }
 
 
@@ -41,12 +46,14 @@ namespace GameActorLogic
 
         protected void CreateComponent()
         {
+            _configComponent = new ConfigComponentBase(this);
             _eventComponent = new EventComponentBase();
             _commandComponent = new CommandComponentBase();
             _envirinfoComponent = new EnvirinfoComponentBase();
             _handlerComponent = new HandlerComponentBase(this);
             _createComponent = new CreateComponentBase(this);
             _taskEventComponent = new TaskEventComponentBase(this);
+
 
         }
 
@@ -57,14 +64,25 @@ namespace GameActorLogic
         protected void AddPrepareTask()
         {
             var container = this as ILevelActorComponentBaseContainer;
+            //准备任务对象
             var task = container.GetCreateInternalComponentBase().CreateTaskEvent(
                 TaskConditionTypeConstDefine.KillTaskEvent,TaskResultTypeConstDefine.Victory, 1, new Dictionary<int, int>
                 {
                     {0, 10}
                 });
+            //添加任务
             container.GeTaskEventComponentInternalBase().AddTaskEvent(task);
         }
-        
+
+        /// <summary>
+        /// 准备敌人
+        /// </summary>
+        protected void PrepareEnemy()
+        {
+            var container = this as ILevelActorComponentBaseContainer;
+            container.GetEventComponentBase().AddEventMessagesToHandlerForward(
+                new InitEventMessage(ActorTypeBaseDefine.AnnihilationShipActor, LevelActorBase.EnemyCamp, 0, 0, 0));
+        }
 
         #endregion
 
@@ -86,12 +104,15 @@ namespace GameActorLogic
         /// <param name="barrierId">关卡类型id</param>
         public void Start(List<Tuple<string, int, int, int, int>> players,int barrierId)
         {
-            isStart = true;
             //TODO 可能进行动态初始化
             foreach (var player in players)
             {
-                this.players.Add(player.Item1, null);
+                var id = _createComponent.GetCreateID();
+                this.players.Add(player.Item1, id);
+                _eventComponent.AddEventMessagesToHandlerForward(new InitEventMessage(id, LevelActorBase.PlayerCamp,
+                    player.Item3, 0, 0, 0, true, player.Item4, player.Item5));
             }
+            isStart = true;
             //先放这里
             OnStartDone?.Invoke();
         }
@@ -116,10 +137,16 @@ namespace GameActorLogic
 
         public ActorBase GetPlayerActorByString(string id)
         {
-            return players[id];
+            return _envirinfoComponent.GetActor(players[id]);
         }
 
+        /// <summary>
+        /// 在构造器中被调用
+        /// </summary>
         public event Action OnLoadingDone;
+        /// <summary>
+        /// 在Start方法中被调用
+        /// </summary>
         public event Action OnStartDone;
 
         #region 关卡环境
@@ -226,6 +253,8 @@ namespace GameActorLogic
 
         #endregion
 
+        #region 对外接口
+
         ICommandInternalComponentBase ILevelActorComponentBaseContainer.GetCommandComponentBase()
         {
             return _commandComponent;
@@ -259,6 +288,7 @@ namespace GameActorLogic
         {
             return _configComponent;
         }
+        #endregion
 
         #region Handler组件
 

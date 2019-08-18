@@ -30,12 +30,12 @@ namespace GameActorLogic
             return IDs++;
         }
 
-        public ActorBase CreateActor(int actortype,int camp, double point_x, double point_y, double angle)
+        public ActorBase CreateActor(int actortype,int camp, double point_x, double point_y, double angle, bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0)
         {
             return CreateActor(actortype,camp, point_x, point_y, angle, GetCreateID());
         }
 
-        public ActorBase CreateActor(int actortype, int camp,double point_x, double point_y, double angle, ulong Id)
+        public ActorBase CreateActor(int actortype, int camp,double point_x, double point_y, double angle, ulong Id, bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0)
         {
             ActorBase actor = null;
             //从配置文件中获取Actor
@@ -58,10 +58,20 @@ namespace GameActorLogic
                 case ActorTypeBaseDefine.DroneShipActor:
                 case ActorTypeBaseDefine.PlayerShipActor:
                     if (actor == null)
-                        actor = new ShipActorBase(Id, level);
+                        actor = new ShipActorBase(Id, actortype, level);
                     actor.SetActorId(Id);
                     actor.PrepareActor(point_x, point_y, angle);
                     actor.SetCamp(camp);
+                    if (isPlayer)
+                    {
+                        var ship = (ShipActorBase) actor;
+                        ship.CreateAiComponent(null);
+                        ship.InitializeFireControl(new List<int>
+                        {
+                            weapontype_a, weapontype_b
+                        });
+                    }
+
                     break;
 
 

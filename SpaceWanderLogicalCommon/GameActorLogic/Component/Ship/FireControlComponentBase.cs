@@ -49,6 +49,8 @@ namespace GameActorLogic
             
         }
 
+
+
         protected void WaitSkillDestroy(ISkillContainer weapon)
         {
             skillInitList.Remove(weapon);
@@ -120,6 +122,8 @@ namespace GameActorLogic
             foreach (var skillContainer in skills)
             {
                 container.GetPhysicalinternalBase().GetBody().TriggerDetection(skillContainer.GetBody(), 1);
+                var cd = skillContainer.GetSkillCd();
+                skillContainer.SetSkillCd((cd + 1) % skillContainer.GetMaxSkillCd());
             }
 
             var weaponlist = skillInitList.Where(s => s.GetActorType() == ActorTypeBaseDefine.ContinuousLaserActor).ToList();

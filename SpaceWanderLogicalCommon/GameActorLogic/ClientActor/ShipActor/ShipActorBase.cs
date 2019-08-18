@@ -37,9 +37,12 @@ namespace GameActorLogic
             _healthShieldComponent.Tick();
         }
 
-  
+        public void CreateAiComponent(AIComponentBase ai)
+        {
+            _aiComponent = ai;
+        }
 
-  
+
 
         #region IShipBaseContainer
 

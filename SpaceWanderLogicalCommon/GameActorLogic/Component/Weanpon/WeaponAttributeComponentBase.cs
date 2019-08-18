@@ -111,5 +111,15 @@ namespace GameActorLogic
         {
             SetWeaponCd(cd);
         }
+
+        public int GetMaxSkillCd()
+        {
+            return maxbulletnum;
+        }
+
+        public void SetMaxSkillCd(int cd)
+        {
+            maxbulletnum = cd;
+        }
     }
 }
