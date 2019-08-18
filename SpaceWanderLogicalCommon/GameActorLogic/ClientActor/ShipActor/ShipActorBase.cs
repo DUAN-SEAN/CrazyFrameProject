@@ -19,10 +19,10 @@ namespace GameActorLogic
 
         public ShipActorBase(ulong id,Int32 type,ILevelActorComponentBaseContainer level) : base(id, type,level)
         {
-
+            CreateBaseComponent();
         }
 
-        protected override void CreateBaseComponent()
+        protected sealed override void CreateBaseComponent()
         {
             base.CreateBaseComponent();
             //应该在构造器参数中添加武器集合信息
