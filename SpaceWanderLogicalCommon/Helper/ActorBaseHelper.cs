@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CrazyEngine.Base;
 using CrazyEngine.Common;
 
 namespace GameActorLogic
@@ -16,6 +17,12 @@ namespace GameActorLogic
             body.Position = new Point(point_x, point_y);
             body.InitAngle(angle);
             body.Angle = angle;
+        }
+
+
+        public static List<Body> ToBodyList(this List<ActorBase> actors)
+        {
+            return actors.ConvertAll(o => ((IBaseComponentContainer) o).GetPhysicalinternalBase().GetBody());
         }
     }
 }
