@@ -58,8 +58,9 @@ namespace GameServer.Battle
             m_players = players;
             m_netHandler = handler;
 
-            
-
+            //初始化配置
+            m_level.InitConfig(m_netHandler.GetGameBarrierConfigs(),m_netHandler.GetGameShipConfigs(),m_netHandler.GetGameSkillConfig());
+            //关卡开启战斗
             m_level.Start(playerShips, barrierId);
         }
         
@@ -102,6 +103,7 @@ namespace GameServer.Battle
                 {
                     if (levelReady)
                     {
+                        Log.Debug("服务器确认所有客户端关卡加载完毕完成第二次握手，可以开启战斗 ，发起第三次握手");
                         BroadcastMessage(new S2CM_ReadyBattleBarrierAck { BattleId = Id });
                         readState.Clear();
                         readState = null;
@@ -398,5 +400,6 @@ namespace GameServer.Battle
     {
         void BroadcastMessage(IBattleMessage message);
         ulong GetBattleId();
+
     }
 }

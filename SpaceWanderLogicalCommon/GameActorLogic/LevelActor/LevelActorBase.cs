@@ -80,6 +80,17 @@ namespace GameActorLogic
             return battleid;
         }
         /// <summary>
+        /// 初始化配置文件
+        /// </summary>
+        /// <param name="gameBarrierConfigs">关卡配置</param>
+        /// <param name="gameShipConfigs">飞船配置</param>
+        /// <param name="gameSkillConfig">技能配置</param>
+        public void InitConfig(List<GameBarrierConfig> gameBarrierConfigs, List<GameShipConfig> gameShipConfigs,
+            GameSkillConfig gameSkillConfig)
+        {
+
+        }
+        /// <summary>
         /// 初始化
         /// </summary>
         /// <param name="players">玩家集合</param>
