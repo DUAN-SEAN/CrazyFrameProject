@@ -42,24 +42,18 @@ namespace GameServer.Battle
         /// <param name="handler">通讯句柄</param>
         public void Init(List<string> players, int barrierId, IBattleSystemHandler handler)
         {
-            List<Tuple<string,int,int,int,int>> playerShips = new List<Tuple<string, int, int, int, int>>();
+            
             readState = new List<int>(players.Count+1);
             foreach (var plyaerId in players)
             {
                 readState.Add(0);
-
-                var plx = GameServer.Instance.PlayerCtxManager.FindPlayerContextByString(plyaerId) as GameServerPlayerContext;
-
-                var shipInfo =  plx.m_gameServerDBPlayer.playerShip;
-                playerShips.Add(new Tuple<string, int, int, int, int>(plyaerId, shipInfo.shipId, shipInfo.shipType, shipInfo.weapon_a, shipInfo.weapon_b));
-
             }
-            
+
             m_players = players;
             m_netHandler = handler;
 
             //初始化配置
-            GameBarrierConfig gameBarrierConfig;
+            GameBarrierConfig gameBarrierConfig = null;
             foreach (var item in m_netHandler.GetGameBarrierConfigs())
             {
                 if (item.Id == barrierId)
@@ -112,10 +106,20 @@ namespace GameServer.Battle
                 {
                     if (levelReady)
                     {
+                        List<Tuple<string, int, int, int, int>> playerShips = new List<Tuple<string, int, int, int, int>>();
 
+                      
+                        foreach (var plyaerId in m_players)
+                        {
+                            readState.Add(0);
 
-                        m_level.Start(m_players);
+                            var plx = GameServer.Instance.PlayerCtxManager.FindPlayerContextByString(plyaerId) as GameServerPlayerContext;
 
+                            var shipInfo = plx.m_gameServerDBPlayer.playerShip;
+                            playerShips.Add(new Tuple<string, int, int, int, int>(plyaerId, shipInfo.shipId, shipInfo.shipType, shipInfo.weapon_a, shipInfo.weapon_b));
+
+                        }
+                        m_level.Start(playerShips);
                         Log.Debug("服务器确认所有客户端关卡加载完毕完成第二次握手，可以开启战斗 ，发起第三次握手");
                         BroadcastMessage(new S2CM_ReadyBattleBarrierAck { BattleId = Id });
                         readState.Clear();
