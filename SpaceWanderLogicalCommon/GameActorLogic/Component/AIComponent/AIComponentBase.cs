@@ -15,7 +15,11 @@ namespace GameActorLogic
         /// </summary>
         protected bool isPause = false;
 
-
+        protected IBaseComponentContainer container;
+        protected AIComponentBase(IBaseComponentContainer container)
+        {
+            this.container = container;
+        }
         public bool StartAILogic()
         {
             isPause = false;

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CrazyEngine.Base;
 
+
 namespace GameActorLogic
 {
     public class WeaponActorBase : ActorBase,
@@ -15,7 +16,7 @@ namespace GameActorLogic
         protected WeaponEventComponentBase _weaponEventComponent;
         protected WeaponAttributeComponentBase _weaponAttributeComponent;
 
-        public WeaponActorBase(ulong id,ILevelActorComponentBaseContainer level) : base(id,level)
+        public WeaponActorBase(ulong id,Int32 type,ILevelActorComponentBaseContainer level) : base(id, type, level)
         {
 
         }
@@ -36,7 +37,7 @@ namespace GameActorLogic
 
         public override void Update()
         {
-            _aiComponent.Update();
+            _aiComponent?.Update();
         }
 
 
@@ -63,6 +64,9 @@ namespace GameActorLogic
         #region 武器事件组件
         public void Start()
         {
+            var position = GetPosition();
+            level.AddEventMessagesToHandlerForward(new InitEventMessage(ActorID, GetCamp(), ActorType, position.X,
+                position.Y, GetForwardAngle()));
             _weaponEventComponent.Start();
         }
 
@@ -73,6 +77,7 @@ namespace GameActorLogic
 
         public void Destroy()
         {
+            level.AddEventMessagesToHandlerForward(new DestroyEventMessage(ActorID));
             _weaponEventComponent.Destroy();
         }
 
@@ -176,17 +181,17 @@ namespace GameActorLogic
 
         public void StartSkill()
         {
-            throw new NotImplementedException();
+            Start();
         }
 
         public void EndSkill()
         {
-            throw new NotImplementedException();
+            End();
         }
 
         public void DestroySkill()
         {
-            throw new NotImplementedException();
+            Destroy();
         }
 
         public event Action<IWeaponBaseContainer> OnStartSkill;

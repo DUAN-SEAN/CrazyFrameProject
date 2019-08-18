@@ -101,7 +101,7 @@ namespace GameActorLogic
             //TODO 可能进行动态初始化
             foreach (var player in players)
             {
-                this.players.Add(player, null);
+                this.players.Add(player.Item1, null);
             }
             //先放这里
             OnStartDone?.Invoke();

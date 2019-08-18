@@ -25,7 +25,7 @@ namespace GameActorLogic
         /// <summary>
         /// 向前加速接口
         /// </summary>
-        void AddThrust(float ang);
+        void AddThrust(float proc = 0.0001f);
     }
 
     /// <summary>
