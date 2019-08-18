@@ -221,7 +221,7 @@ namespace GameServer
             }
             if ((teamId = FindMatchTeamById(playerId))!=default)
             {
-                Log.Error("创建队伍失败，因为玩家已经在队伍中了");
+                Log.Info("创建队伍失败，因为玩家已经在队伍中了");
                 state = S2C_CreateMatchTeamComplete.Types.State.HaveTeam;
                 goto Result;
             }

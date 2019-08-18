@@ -18,7 +18,7 @@ namespace GameActorLogic
 
         public WeaponActorBase(ulong id,Int32 type,ILevelActorComponentBaseContainer level) : base(id, type, level)
         {
-
+            CreateBaseComponent();
         }
 
         protected override void CreateBaseComponent()

@@ -98,7 +98,7 @@ namespace GameServer
         {
             string account = message.Account;
             string password = message.Password;
-            S2C_LoginMessage response = null;
+            S2C_LoginMessage response ;
             S2C_LoginMessage.Types.State result = S2C_LoginMessage.Types.State.Ok;
             //设置现场状态
             if(m_csm.SetStateCheck(PlayerContextStateMachine.EventOnAuthLoginReq) == -1)
