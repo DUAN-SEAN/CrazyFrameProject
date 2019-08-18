@@ -34,11 +34,6 @@ namespace GameActorLogic
             players = new Dictionary<string, ulong>();
             //初始化组件
             CreateComponent();
-            //动态初始化任务配置
-            AddPrepareTask();
-            //动态初始化敌人
-            PrepareEnemy();
-            OnLoadingDone?.Invoke();
         }
 
 
@@ -107,6 +102,9 @@ namespace GameActorLogic
             GameSkillConfig gameSkillConfig)
         {
             _configComponent.InitializeConfig(gameShipConfigs.ToArray(), gameSkillConfig, gameBarrierConfigs);
+           
+
+            OnLoadingDone?.Invoke();
         }
         /// <summary>
         /// 初始化
@@ -123,8 +121,14 @@ namespace GameActorLogic
                 _eventComponent.AddEventMessagesToHandlerForward(new InitEventMessage(id, LevelActorBase.PlayerCamp,
                     player.Item3, 0, 0, 0, true, player.Item4, player.Item5));
             }
-            isStart = true;
+           
             //先放这里
+
+            //动态初始化任务配置
+            AddPrepareTask();
+            //动态初始化敌人
+            PrepareEnemy();
+            isStart = true;
             OnStartDone?.Invoke();
         }
 
