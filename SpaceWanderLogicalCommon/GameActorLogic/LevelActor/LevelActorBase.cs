@@ -106,7 +106,7 @@ namespace GameActorLogic
         public void InitConfig(List<GameBarrierConfig> gameBarrierConfigs, List<GameShipConfig> gameShipConfigs,
             GameSkillConfig gameSkillConfig)
         {
-
+            _configComponent.InitializeConfig(gameShipConfigs.ToArray(), gameSkillConfig, gameBarrierConfigs.ToArray());
         }
         /// <summary>
         /// 初始化
