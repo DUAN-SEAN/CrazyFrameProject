@@ -41,9 +41,8 @@ namespace GameServer.Battle
         /// <param name="handler">通讯句柄</param>
         public void Init(List<string> players, int barrierId, IBattleSystemHandler handler)
         {
-            List<Tuple<string,int,int,int,int>> playerShips = null;
-            readState = new List<int>(players.Count);
-            int i = 0;
+            List<Tuple<string,int,int,int,int>> playerShips = new List<Tuple<string, int, int, int, int>>();
+            readState = new List<int>(players.Count+1);
             foreach (var plyaerId in players)
             {
                 readState.Add(0);
@@ -62,6 +61,8 @@ namespace GameServer.Battle
             m_level.InitConfig(m_netHandler.GetGameBarrierConfigs(),m_netHandler.GetGameShipConfigs(),m_netHandler.GetGameSkillConfig());
             //关卡开启战斗
             m_level.Start(playerShips, barrierId);
+
+            m_startTime = DateTime.Now;
         }
         
         /// <summary>
@@ -143,47 +144,57 @@ namespace GameServer.Battle
                         ShipActorBase shipActorBase = actor as ShipActorBase;
 
                     {
-                        S2C_SyncHpShieldStateBattleMessage syncHpShield = new S2C_SyncHpShieldStateBattleMessage();
-                        syncHpShield.BattleId = Id;
-                        syncHpShield.ActorId = shipActorBase.GetActorID();
-                        syncHpShield.ActorType = shipActorBase.GetActorType();
-                        syncHpShield.Hp = shipActorBase.GetHP();
-                        syncHpShield.Shield = shipActorBase.GetShieldNum();
+                        S2C_SyncHpShieldStateBattleMessage syncHpShield = new S2C_SyncHpShieldStateBattleMessage
+                        {
+                            BattleId = Id,
+                            ActorId = shipActorBase.GetActorID(),
+                            ActorType = shipActorBase.GetActorType(),
+                            Hp = shipActorBase.GetHP(),
+                            Shield = shipActorBase.GetShieldNum()
+                        };
 
                         BroadcastMessage(syncHpShield);
                     }
 
                     {
-                        S2C_SyncPhysicsStateBattleMessage syncPhysics = new S2C_SyncPhysicsStateBattleMessage();
-                        syncPhysics.BattleId = Id;
-                        syncPhysics.ActorId = shipActorBase.GetActorID();
-                        syncPhysics.ActorType = shipActorBase.GetActorType();
-                        syncPhysics.AngleVelocity = shipActorBase.GetAngleVelocity();
-                        syncPhysics.ForceX = shipActorBase.GetForce().X;
-                        syncPhysics.ForceY = shipActorBase.GetForce().Y;
-                        syncPhysics.ForwardAngle = shipActorBase.GetForwardAngle();
-                        syncPhysics.PositionX = shipActorBase.GetPosition().X;
-                        syncPhysics.PositionY = shipActorBase.GetPosition().Y;
-                        syncPhysics.VelocityX = shipActorBase.GetVelocity().X;
-                        syncPhysics.VelocityY = shipActorBase.GetVelocity().Y;
-                        syncPhysics.Torque = shipActorBase.GetTorque();
+                        S2C_SyncPhysicsStateBattleMessage syncPhysics = new S2C_SyncPhysicsStateBattleMessage
+                        {
+                            BattleId = Id,
+                            ActorId = shipActorBase.GetActorID(),
+                            ActorType = shipActorBase.GetActorType(),
+                            AngleVelocity = shipActorBase.GetAngleVelocity(),
+                            ForceX = shipActorBase.GetForce().X,
+                            ForceY = shipActorBase.GetForce().Y,
+                            ForwardAngle = shipActorBase.GetForwardAngle(),
+                            PositionX = shipActorBase.GetPosition().X,
+                            PositionY = shipActorBase.GetPosition().Y,
+                            VelocityX = shipActorBase.GetVelocity().X,
+                            VelocityY = shipActorBase.GetVelocity().Y,
+                            Torque = shipActorBase.GetTorque()
+                        };
 
                         BroadcastMessage(syncPhysics);
                     }
                       
                     {
-                        S2C_SyncSkillStateBattleMessage syncSkillMsg = new S2C_SyncSkillStateBattleMessage();
-                        syncSkillMsg.BattleId = Id;
-                        syncSkillMsg.ActorId = shipActorBase.GetActorID();
+                        S2C_SyncSkillStateBattleMessage syncSkillMsg = new S2C_SyncSkillStateBattleMessage
+                        {
+                            BattleId = Id, ActorId = shipActorBase.GetActorID()
+                        };
                         foreach (var s in shipActorBase.GetSkills())
                         {
-                            S2C_SyncSkillStateBattleMessage.Types.SkillState skill = new S2C_SyncSkillStateBattleMessage.Types.SkillState();
+                            S2C_SyncSkillStateBattleMessage.Types.SkillState skill =
+                                new S2C_SyncSkillStateBattleMessage.Types.SkillState
+                                {
+                                    ActorId = s.GetActorID(),
+                                    SkillType = s.GetActorType(),
+                                    CD = s.GetSkillCd(),
+                                    Count = s.GetSkillCapacity()
+                                };
 
 
-                            skill.ActorId = s.GetActorID();//获取技能Id
-                            skill.SkillType = s.GetActorType();//获取技能类型 
-                            skill.CD = s.GetSkillCd();
-                            skill.Count = s.GetSkillCapacity();
+                            //获取技能Id
+                            //获取技能类型 
 
                         }
                         BroadcastMessage(syncSkillMsg);
@@ -203,17 +214,19 @@ namespace GameServer.Battle
         /// </summary>
         private void OnSyncTaskState()
         {
-            S2C_SyncLevelTaskBattleMessage syncLevelTask = new S2C_SyncLevelTaskBattleMessage();
-            syncLevelTask.ActorId = 0;
-            syncLevelTask.BattleId = Id;
+            S2C_SyncLevelTaskBattleMessage syncLevelTask = new S2C_SyncLevelTaskBattleMessage
+            {
+                ActorId = 0, BattleId = Id
+            };
             syncLevelTask.Tasks.Clear();//如果从池子中取的话可能涉及到未清理干净的现象
             foreach (var task in m_level.GetAllTaskEvents())
             {
                 S2C_SyncLevelTaskBattleMessage.Types.TaskState taskItem =
-                    new S2C_SyncLevelTaskBattleMessage.Types.TaskState();
+                    new S2C_SyncLevelTaskBattleMessage.Types.TaskState
+                    {
+                        Id = task.GetTaskId(), State = (int) task.GetTaskState()
+                    };
 
-                taskItem.Id = task.GetTaskId();
-                taskItem.State = (int)task.GetTaskState();
                 foreach (var taskConditionCurrentValue in task.ConditionCurrentValues)
                 {
 
