@@ -54,8 +54,9 @@ namespace GameServer
 
                     player.passWord = m_password;
 
-
                     player.createTime = DateTime.UtcNow;
+
+                    player.playerShip = new GameServerDBPlayerShip();
 
                     await collection.InsertOneAsync(player);//插入
                     m_errorInfo += "插入成功\n";
