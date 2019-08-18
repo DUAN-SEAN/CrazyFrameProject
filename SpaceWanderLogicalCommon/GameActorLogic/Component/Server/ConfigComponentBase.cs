@@ -43,6 +43,73 @@ namespace GameActorLogic
 
         protected void InitializeActor(GameShipConfig[] ships, GameSkillConfig skill, GameBarrierConfig barrier)
         {
+            WeaponActorBase weaponactor = null;
+            #region 武器
+
+            #region 往前冲武器
+            //高射炮
+            weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.AntiAircraftGunActor, level);
+            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725));
+            weaponactor.CreateAiComponent(new GogogoAiComponent(weaponactor));
+            ConfigActors.Add(ActorTypeBaseDefine.AntiAircraftGunActor, weaponactor);
+
+            //鱼雷
+            weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.TorpedoActor, level);
+            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725));
+            weaponactor.CreateAiComponent(new GogogoAiComponent(weaponactor));
+            ConfigActors.Add(ActorTypeBaseDefine.TorpedoActor, weaponactor);
+
+            //机关枪
+            weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.MachineGunActor, level);
+            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725));
+            weaponactor.CreateAiComponent(new GogogoAiComponent(weaponactor));
+            ConfigActors.Add(ActorTypeBaseDefine.MachineGunActor, weaponactor);
+            #endregion
+
+
+            //持续激光
+            weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.ContinuousLaserActor, level);
+            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725, isTrigger: true));
+            weaponactor.CreateAiComponent(null);
+            ConfigActors.Add(ActorTypeBaseDefine.ContinuousLaserActor, weaponactor);
+
+
+
+
+            #region 自爆炸武器
+            //定时炸弹
+            weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.TimeBombActor, level);
+            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725));
+            weaponactor.CreateAiComponent(new DeadAiComponent(5000, weaponactor));
+            ConfigActors.Add(ActorTypeBaseDefine.TimeBombActor, weaponactor);
+
+            //触发炸弹
+            weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.TriggerBombActor, level);
+            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725));
+            weaponactor.CreateAiComponent(new DeadAiComponent(5000, weaponactor));
+            ConfigActors.Add(ActorTypeBaseDefine.TriggerBombActor, weaponactor);
+
+            #endregion
+
+
+            //跟踪导弹
+            weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.TrackingMissileActor, level);
+            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725));
+            weaponactor.CreateAiComponent(null);
+            ConfigActors.Add(ActorTypeBaseDefine.TrackingMissileActor, weaponactor);
+
+            //蓄力激光
+            weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.PowerLaserActor, level);
+            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725, isTrigger: true));
+            weaponactor.CreateAiComponent(new DeadAiComponent(5, weaponactor));
+            ConfigActors.Add(ActorTypeBaseDefine.PowerLaserActor, weaponactor);
+
+
+
+            #endregion
+
+
+
             ShipActorBase shipactor = null;
             #region 船
             //歼灭船
@@ -116,71 +183,7 @@ namespace GameActorLogic
 
             #endregion
 
-            WeaponActorBase weaponactor = null;
-            #region 武器
-
-            #region 往前冲武器
-            //高射炮
-            weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.AntiAircraftGunActor, level);
-            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725));
-            weaponactor.CreateAiComponent(new GogogoAiComponent(weaponactor));
-            ConfigActors.Add(ActorTypeBaseDefine.AntiAircraftGunActor, weaponactor);
-
-            //鱼雷
-            weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.TorpedoActor, level);
-            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725));
-            weaponactor.CreateAiComponent(new GogogoAiComponent(weaponactor));
-            ConfigActors.Add(ActorTypeBaseDefine.TorpedoActor, weaponactor);
-
-            //机关枪
-            weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.MachineGunActor, level);
-            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725));
-            weaponactor.CreateAiComponent(new GogogoAiComponent(weaponactor));
-            ConfigActors.Add(ActorTypeBaseDefine.MachineGunActor, weaponactor);
-            #endregion
-
-
-            //持续激光
-            weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.ContinuousLaserActor, level);
-            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725, isTrigger: true));
-            weaponactor.CreateAiComponent(null);
-            ConfigActors.Add(ActorTypeBaseDefine.ContinuousLaserActor, weaponactor);
-
-
-
-
-            #region 自爆炸武器
-            //定时炸弹
-            weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.TimeBombActor, level);
-            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725));
-            weaponactor.CreateAiComponent(new DeadAiComponent(5000, weaponactor));
-            ConfigActors.Add(ActorTypeBaseDefine.TimeBombActor, weaponactor);
-
-            //触发炸弹
-            weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.TriggerBombActor, level);
-            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725));
-            weaponactor.CreateAiComponent(new DeadAiComponent(5000, weaponactor));
-            ConfigActors.Add(ActorTypeBaseDefine.TriggerBombActor, weaponactor);
-
-            #endregion
-
-
-            //跟踪导弹
-            weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.TrackingMissileActor, level);
-            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725));
-            weaponactor.CreateAiComponent(null);
-            ConfigActors.Add(ActorTypeBaseDefine.TrackingMissileActor, weaponactor);
-
-            //蓄力激光
-            weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.PowerLaserActor, level);
-            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725, isTrigger: true));
-            weaponactor.CreateAiComponent(new DeadAiComponent(5, weaponactor));
-            ConfigActors.Add(ActorTypeBaseDefine.PowerLaserActor, weaponactor);
-
-
-
-            #endregion
-
+      
 
         }
 
