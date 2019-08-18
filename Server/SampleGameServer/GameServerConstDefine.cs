@@ -75,12 +75,16 @@ namespace GameServer
         /// 客户端准备战斗
         /// </summary>
         public const Int32 BattleSystemClientReadyBattle = 1104;
+        /// <summary>
+        /// 关闭玩家现场
+        /// </summary>
+        public const Int32 BattleSystemPlayerShutdown = 1105;
         #endregion
 
         /// <summary>
         /// 玩家现场上的timer扫描时间间隔，单位毫秒
         /// </summary>
-        public const Int32 GameServerPlayerCtxTimerPeriod = 5000;
+        public const Int32 GameServerPlayerCtxTimerPeriod = 1000;
 
 
 

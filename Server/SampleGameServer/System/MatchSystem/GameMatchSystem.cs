@@ -83,7 +83,7 @@ namespace GameServer
                     break;
                 case GameServerConstDefine.MatchSystemExitMatchQueue:
                     ExitMatchQueueMessage exitMatchQueueMessage = msg as ExitMatchQueueMessage;
-                    OnExitMatchQueue(exitMatchQueueMessage.teamId, exitMatchQueueMessage.playerId, exitMatchQueueMessage.barrierId);
+                    OnExitMatchQueue(exitMatchQueueMessage.teamId, exitMatchQueueMessage.playerId);
                     break;
                 case GameServerConstDefine.MatchQueueCompleteSingle://来自 MatcingSystemQueue 的消息，通知system匹配完成
                     MatchQueueCompleteSingleMessage matchQueueCompleteSingleMessage = msg as MatchQueueCompleteSingleMessage;
@@ -127,25 +127,34 @@ namespace GameServer
             {
                 return;
             }
-            //TODO:匹配队伍在战斗中需要向战斗系统发送消息
-            if (matchTeam.State == MatchTeam.MatchTeamState.INBATTLE)
-            {
 
-                return;
-            }
-            //匹配队列正在匹配，需要将队伍从匹配队列中删除
-            if(matchTeam.State == MatchTeam.MatchTeamState.Matching)
+            lock (matchTeam)
             {
+               
+                if (matchTeam.State == MatchTeam.MatchTeamState.INBATTLE)
+                {
 
-                return;
+                    Log.Info("玩家掉线，重连超时，退出队伍  TeamId" + matchTeam.Id + "Team State = " + matchTeam.State);
+                    OnExitMatchTeam(teamId, playerId);
+                    return;
+                }
+                //匹配队列正在匹配，需要将队伍从匹配队列中删除
+                if (matchTeam.State == MatchTeam.MatchTeamState.Matching)
+                {
+                    Log.Info("玩家掉线，重连超时，退出队伍  TeamId" + matchTeam.Id + "Team State = " + matchTeam.State);
+                    
+                    OnExitMatchTeam(teamId, playerId);
+                    return;
+                }
+                //最简单的退出 直接交给退出队伍执行
+                if (matchTeam.State == MatchTeam.MatchTeamState.OPEN)
+                {
+                    Log.Info("玩家掉线，重连超时，退出队伍  TeamId" + matchTeam.Id + "Team State = " + matchTeam.State);
+                    OnExitMatchTeam(teamId, playerId);
+                    return;
+                }
             }
-            //最简单的退出 直接交给退出队伍执行
-            if(matchTeam.State == MatchTeam.MatchTeamState.OPEN)
-            {
-                Log.Info("玩家掉线，重连超时，退出队伍  TeamId" +matchTeam.Id);
-                OnExitMatchTeam(teamId, playerId);
-                return;
-            }
+           
         }
         /// <summary>
         /// 玩家重连成功 取得战斗系统玩家实体控制权
@@ -283,6 +292,7 @@ namespace GameServer
                 goto Result;
             }
 
+            OnExitMatchQueue(matchTeam.Id, playerId);
             if (!matchTeam.Remove(playerId))//从队伍中移除
             {
                 message.State = S2CM_ExitMatchTeamComplete.Types.State.Fail;
@@ -432,7 +442,7 @@ namespace GameServer
         /// 队伍离开匹配队列
         /// 任何队伍中的玩家都能发起队伍离开匹配队列
         /// </summary>
-        public void OnExitMatchQueue(ulong teamId, string playerId, int barrierId)
+        public void OnExitMatchQueue(ulong teamId, string playerId)
         {
             //1 验证 队伍是否存在
             MatchTeam matchTeam = null;

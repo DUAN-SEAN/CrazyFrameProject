@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Crazy.Common;
 using Crazy.NetSharp;
 using Crazy.ServerBase;
+using GameServer.Battle;
 using MongoDB.Driver;
 
 namespace GameServer
@@ -220,7 +221,7 @@ namespace GameServer
                 goto RETURN;
             }
             //DB的唯一标识符代表着这个玩家应用层的Id
-            m_gameUserId = m_gameServerDBPlayer._id.ToString();
+            m_gameUserId = m_gameServerDBPlayer.userName.ToString();
 
             //开始验证是否已经存在userid对应的玩家现场
             GameServerPlayerContext oldCtx = (GameServerPlayerContext)GameServer.
@@ -254,7 +255,7 @@ namespace GameServer
         {
             await target.EnterLock();//要操作目标现场需要先把目标现场上锁
 
-
+            //判断状态机
             if (!target.CanAcceptContextTransform())
             {
                 Log.Info("GameServerPlayerContext::ContextTransform can not AcceptContextTransform. target sessionId = "+ target.SessionId+" state = "+  target.m_csm.State);
@@ -278,7 +279,7 @@ namespace GameServer
             // 释放访问权限
             target.LeaveLock();
 
-            Log.Info("GameServerBasePlayerContext::ContextTransform resetSucess="+ resetSucess);
+            Log.Debug("GameServerBasePlayerContext::ContextTransform resetSucess="+ resetSucess);
 
             // 向目标现场发送msg，来执行后续操作
             if (resetSucess)
@@ -609,41 +610,37 @@ namespace GameServer
                 Release();//CtxManager Free Context
             }
             //通知其他独立系统响应
+            Log.Debug("通知各个系统 玩家现场关闭");
             GameServer.Instance.PostMessageToSystem<GameMatchSystem>(new ToMatchPlayerShutdownMessage { playerId = m_gameUserId});
+            GameServer.Instance.PostMessageToSystem<BattleSystem>(new ToBattlePlayerShutdownMessage{playerId =  m_gameUserId});
             return Task.CompletedTask;
 
         }
-#pragma warning disable CS0628 // '“GameServerPlayerContext.OnDisconnectedWaitTimeOut()”: 在密封类中声明了新的保护成员
         /// <summary>
         /// 当断线延时也超时了
         /// </summary>
         /// <returns></returns>
         protected  Task OnDisconnectedWaitTimeOut()
-#pragma warning restore CS0628 // '“GameServerPlayerContext.OnDisconnectedWaitTimeOut()”: 在密封类中声明了新的保护成员
         {
-            Log.Error("GameServerBasePlayerContext::OnDisconnectedWaitTimeOut");
+            Log.Debug("GameServerBasePlayerContext::OnDisconnectedWaitTimeOut");
             ShutdownContext();
             return Task.CompletedTask;
         }
-#pragma warning disable CS0628 // '“GameServerPlayerContext.OnShutDownTimeOut()”: 在密封类中声明了新的保护成员
         /// <summary>
         /// 当shutdown现场超时
         /// </summary>
         /// <returns></returns>
         protected Task OnShutDownTimeOut()
-#pragma warning restore CS0628 // '“GameServerPlayerContext.OnShutDownTimeOut()”: 在密封类中声明了新的保护成员
         {
-            Log.Error("GameServerBasePlayerContext::OnShutDownTimeOut");
+            Log.Debug("GameServerBasePlayerContext::OnShutDownTimeOut");
             ShutdownContext(true);
             return Task.CompletedTask;
         }
-#pragma warning disable CS0628 // '“GameServerPlayerContext.OnConnectedTimeOut()”: 在密封类中声明了新的保护成员
         /// <summary>
         /// 当发生了连接状态下的超时
         /// </summary>
         /// <returns></returns>
         protected Task OnConnectedTimeOut()
-#pragma warning restore CS0628 // '“GameServerPlayerContext.OnConnectedTimeOut()”: 在密封类中声明了新的保护成员
         {
             Log.Error("GameServerBasePlayerContext::OnConnectedTimeOut");
             ShutdownContext(true);
@@ -669,8 +666,10 @@ namespace GameServer
             }
             // 记录连接断开的时间
             m_disconnectedTime = DateTime.Now;
+            Log.Debug("GameServerBasePlayerContext::OnDisconnected NowTime = " + m_disconnectedTime);
+            Log.Debug("GameServerBasePlayerContext::OnDisconnected DisconnectTime = " + GameServer.Instance.m_gameServerGlobalConfig.GameServerPlayerContext.DisconnectTimeOut);
             m_disconnetedWaitTimeOutTime = m_disconnectedTime.AddMilliseconds(GameServer.Instance.m_gameServerGlobalConfig.GameServerPlayerContext.DisconnectTimeOut);
-            Log.Debug("GameServerBasePlayerContext::OnDisconnected disconnectedTime"+m_disconnectedTime);
+            Log.Debug("GameServerBasePlayerContext::OnDisconnected disconnectedTime = "+ m_disconnetedWaitTimeOutTime);
 
             // 如果已经在shutdown过程中 
             if (m_shutdownTime != DateTime.MaxValue)

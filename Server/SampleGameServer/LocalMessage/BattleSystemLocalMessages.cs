@@ -6,6 +6,16 @@ using GameActorLogic;
 namespace GameServer
 {
     /// <summary>
+    /// 玩家现场被关闭时发送给匹配系统
+    /// </summary>
+    public class ToBattlePlayerShutdownMessage : ILocalMessage
+    {
+        public int MessageId => GameServerConstDefine.BattleSystemPlayerShutdown;
+
+        public string playerId;//玩家Id
+
+    }
+    /// <summary>
     /// 创建战斗关卡
     /// 
     /// </summary>
