@@ -17,7 +17,7 @@ namespace GameActorLogic
     {
         protected GameShipConfig[] ShipArray;
         protected GameSkillConfig Skill;
-        protected GameBarrierConfig[] BarrierArray;
+        protected GameBarrierConfig BarrierArray;
         protected ILevelActorComponentBaseContainer level;
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace GameActorLogic
         }
 
 
-        public void InitializeConfig(GameShipConfig[] ships, GameSkillConfig skill, GameBarrierConfig[] barrier)
+        public void InitializeConfig(GameShipConfig[] ships, GameSkillConfig skill, GameBarrierConfig barrier)
         {
             ShipArray = ships;
             Skill = skill;
@@ -41,7 +41,7 @@ namespace GameActorLogic
             InitializeActor(ships, skill, barrier);
         }
 
-        protected void InitializeActor(GameShipConfig[] ships, GameSkillConfig skill, GameBarrierConfig[] barrier)
+        protected void InitializeActor(GameShipConfig[] ships, GameSkillConfig skill, GameBarrierConfig barrier)
         {
             ShipActorBase shipactor = null;
             #region 船

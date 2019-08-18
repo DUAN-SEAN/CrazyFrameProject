@@ -106,7 +106,7 @@ namespace GameActorLogic
         public void InitConfig(GameBarrierConfig gameBarrierConfigs, List<GameShipConfig> gameShipConfigs,
             GameSkillConfig gameSkillConfig)
         {
-            _configComponent.InitializeConfig(gameShipConfigs.ToArray(), gameSkillConfig, gameBarrierConfigs.ToArray());
+            _configComponent.InitializeConfig(gameShipConfigs.ToArray(), gameSkillConfig, gameBarrierConfigs);
         }
         /// <summary>
         /// 初始化
@@ -255,7 +255,7 @@ namespace GameActorLogic
 
         #region 配置文件组件
 
-        public void InitializeConfig(GameShipConfig[] ships, GameSkillConfig skill, GameBarrierConfig[] barrier)
+        public void InitializeConfig(GameShipConfig[] ships, GameSkillConfig skill, GameBarrierConfig barrier)
         {
             _configComponent.InitializeConfig(ships, skill, barrier);
         }

@@ -12,7 +12,7 @@ namespace GameActorLogic
     /// </summary>
     public interface IConfigComponentBase
     {
-        void InitializeConfig(GameShipConfig[] ships, GameSkillConfig skill,GameBarrierConfig[] barrier);
+        void InitializeConfig(GameShipConfig[] ships, GameSkillConfig skill,GameBarrierConfig barrier);
     }
 
 
