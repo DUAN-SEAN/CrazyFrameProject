@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using GameActorLogic;
+using GameServer.Configure;
 using Google.Protobuf;
 using Google.Protobuf.Collections;
 
@@ -58,9 +59,16 @@ namespace GameServer.Battle
             m_netHandler = handler;
 
             //初始化配置
-            m_level.InitConfig(m_netHandler.GetGameBarrierConfigs(),m_netHandler.GetGameShipConfigs(),m_netHandler.GetGameSkillConfig());
+            GameBarrierConfig gameBarrierConfig;
+            foreach (var item in m_netHandler.GetGameBarrierConfigs())
+            {
+                if (item.Id == barrierId)
+                {
+                    gameBarrierConfig = item;
+                }
+            }
+            m_level.InitConfig(gameBarrierConfig, m_netHandler.GetGameShipConfigs(),m_netHandler.GetGameSkillConfig());
             //关卡开启战斗
-            m_level.Start(playerShips, barrierId);
 
             m_startTime = DateTime.Now;
         }
@@ -104,6 +112,10 @@ namespace GameServer.Battle
                 {
                     if (levelReady)
                     {
+
+
+                        m_level.Start(m_players);
+
                         Log.Debug("服务器确认所有客户端关卡加载完毕完成第二次握手，可以开启战斗 ，发起第三次握手");
                         BroadcastMessage(new S2CM_ReadyBattleBarrierAck { BattleId = Id });
                         readState.Clear();

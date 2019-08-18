@@ -103,7 +103,7 @@ namespace GameActorLogic
         /// <param name="gameBarrierConfigs">关卡配置</param>
         /// <param name="gameShipConfigs">飞船配置</param>
         /// <param name="gameSkillConfig">技能配置</param>
-        public void InitConfig(List<GameBarrierConfig> gameBarrierConfigs, List<GameShipConfig> gameShipConfigs,
+        public void InitConfig(GameBarrierConfig gameBarrierConfigs, List<GameShipConfig> gameShipConfigs,
             GameSkillConfig gameSkillConfig)
         {
             _configComponent.InitializeConfig(gameShipConfigs.ToArray(), gameSkillConfig, gameBarrierConfigs.ToArray());
@@ -113,7 +113,7 @@ namespace GameActorLogic
         /// </summary>
         /// <param name="players">玩家集合</param>
         /// <param name="barrierId">关卡类型id</param>
-        public void Start(List<Tuple<string, int, int, int, int>> players,int barrierId)
+        public void Start(List<Tuple<string, int, int, int, int>> players)
         {
             //TODO 可能进行动态初始化
             foreach (var player in players)
