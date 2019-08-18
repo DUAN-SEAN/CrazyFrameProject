@@ -49,8 +49,8 @@ namespace GameActorLogic
         public PhysicalBase(IEnvirinfoInternalBase envirinfo)
         {
             this.envirinfo = envirinfo;
-            //envirinfo.GetCollisionEvent().colliders.Add(body, collider);
-            m_collider.OnCollisionStay += OnCollision;
+            
+            m_collider = new Collider();
         }
 
         /// <summary>
@@ -83,6 +83,7 @@ namespace GameActorLogic
         public void CreateBody(Body body)
         {
             m_body = body;
+            m_collider.OnCollisionStay += OnCollision;
         }
 
         #endregion
