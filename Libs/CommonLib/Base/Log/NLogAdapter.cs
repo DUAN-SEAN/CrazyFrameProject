@@ -16,6 +16,7 @@ namespace Crazy.Common
         public void Trace(string message)
         {
             this.logger.Trace(message);
+            
         }
 
         public void Warning(string message)

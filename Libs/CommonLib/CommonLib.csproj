@@ -100,13 +100,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Base\Log\Configure\NLog.config" />
     <None Include="Configure\Configure\XML\GameServerConfig.config" />
     <None Include="Proto\BattleMessage.proto" />
     <None Include="Proto\RpcMessage.proto" />
     <None Include="Proto\Message.proto" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Base\Log\Configure\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -269,7 +269,7 @@ namespace GameServer.Battle
 
             }
            
-            //Log.Info(syncLevelTask.ToJson());
+            //Log.Trace(syncLevelTask.ToJson());
             syncLevelTask.BattleId = Id;
             BroadcastMessage(syncLevelTask);
         }
@@ -348,8 +348,8 @@ namespace GameServer.Battle
             {
                 Log.Debug("BroadcastMessage::m_players is NULL");
             }
-            //Log.Info(message.ToJson());
-            //Log.Info("message size = "+(message as Google.Protobuf.IMessage).CalculateSize());
+            //Log.Trace(message.ToJson());
+            //Log.Trace("message size = "+(message as Google.Protobuf.IMessage).CalculateSize());
             m_netHandler.SendMessageToClient(message, m_players);
         }
         /// <summary>
@@ -365,7 +365,7 @@ namespace GameServer.Battle
         public override void Dispose()
         {
             
-            Log.Info("Dispose Battle Id = " + Id);
+            Log.Trace("Dispose Battle Id = " + Id);
 
             m_players.Clear();
 
@@ -374,7 +374,7 @@ namespace GameServer.Battle
             m_players = null;
             m_level = null;
             m_netHandler = null;
-            Log.Info("战斗总时长为："+(DateTime.Now.Ticks-m_startTime.Ticks)/10000000+"s");
+            Log.Trace("战斗总时长为："+(DateTime.Now.Ticks-m_startTime.Ticks)/10000000+"s");
             //todo:存入数据库
 
             base.Dispose();
@@ -385,7 +385,7 @@ namespace GameServer.Battle
         #region BattleSystem
         public void SendCommandToLevel(ICommand commandMsg)
         {
-            Log.Info("Battle收到一条指令:"+commandMsg.CommandType);
+            Log.Trace("Battle收到一条指令:"+commandMsg.CommandType);
             m_level.PostCommand(commandMsg);
         }
 
@@ -413,10 +413,10 @@ namespace GameServer.Battle
                 //1 检查
                 if (!m_players.Contains(playerId))
                     return;
-                S2C_ExitBattleMessage response = new S2C_ExitBattleMessage();
-                response.PlayerId = playerId;
-                response.BattleId = Id;
-                response.State = S2C_ExitBattleMessage.Types.State.Ok;
+                S2C_ExitBattleMessage response = new S2C_ExitBattleMessage
+                {
+                    PlayerId = playerId, BattleId = Id, State = S2C_ExitBattleMessage.Types.State.Ok
+                };
                 BroadcastMessage(response);
                 //4 从集合删除
                 m_players.Remove(playerId);
@@ -459,7 +459,6 @@ namespace GameServer.Battle
 
         private BinaryFormatter m_binaryFormatter;
 
-        private List<int> readState;
 
         private Dictionary<string, int> _readyDic;
 

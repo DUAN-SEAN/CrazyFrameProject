@@ -111,9 +111,10 @@ namespace GameServer.Battle
         private void OnExitBattle(ExitBattleLocalMessage msg)
         {
             m_battleDic.TryGetValue(msg.BattleId, out Battle battle);
-            S2C_ExitBattleMessage response = new S2C_ExitBattleMessage();
-            response.PlayerId = msg.PlayerId;
-            response.BattleId = msg.BattleId;
+            S2C_ExitBattleMessage response = new S2C_ExitBattleMessage
+            {
+                PlayerId = msg.PlayerId, BattleId = msg.BattleId
+            };
             if (battle == null)
             {
                 PostLocalMessageToCtx(new SystemSendNetMessage{Message = response,PlayerId = msg.PlayerId}, msg.PlayerId);
@@ -148,7 +149,7 @@ namespace GameServer.Battle
             var battleId = clientReadyBattleLocalMessage.battleId;
             if (m_battleDic.TryGetValue(battleId, out Battle battle))
             {
-                Log.Info("收到玩家发来的战斗准备完成请求 PlayerId = "+ clientReadyBattleLocalMessage.playerId);
+                Log.Trace("收到玩家发来的战斗准备完成请求 PlayerId = "+ clientReadyBattleLocalMessage.playerId);
                 battle.OnReadyBattle(clientReadyBattleLocalMessage.playerId);
             }
         }
@@ -158,7 +159,7 @@ namespace GameServer.Battle
         /// <param name="playerId"></param>
         private void OnPlayerShutdown(string playerId)
         {
-            Log.Debug("battlesystem::关闭玩家战斗");
+            Log.Trace("battlesystem::关闭玩家战斗");
             foreach (var battle in m_battleDic.Values)
             {
                 if (battle.Players.Contains(playerId))
@@ -181,8 +182,7 @@ namespace GameServer.Battle
         /// </summary>
         public void OnReleaseBattle(ulong battleId)
         {
-            Battle battleEntity = null;
-            if (!m_battleDic.TryGetValue(battleId, out battleEntity))
+            if (!m_battleDic.TryGetValue(battleId, out var battleEntity))
             {
                 Log.Error("OnReleaseBattle Find Null");
                 return;
@@ -190,7 +190,7 @@ namespace GameServer.Battle
 
             lock (battleEntity)
             {
-                Log.Debug("释放一场战斗 Id = " + battleId);
+                Log.Trace("释放一场战斗 Id = " + battleId);
 
                 TimerManager.UnsetLoopTimer(battleEntity.GetTimerId());//解除绑定
 

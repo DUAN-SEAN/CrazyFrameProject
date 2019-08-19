@@ -25,7 +25,7 @@ namespace GameServer
             {
                 Log.Error("初始化服务器错误");
             }
-            Log.Info("服务器初始化成功！！！");
+            Log.Trace("服务器初始化成功！！！");
             while (true)
             {
                 string cmd =  Console.ReadLine();
