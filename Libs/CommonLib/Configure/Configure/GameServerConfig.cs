@@ -258,9 +258,13 @@ namespace GameServer.Configure
         [XmlAttribute("MemberCount")]
         public int MemberCount { get; set; }
 
+        [XmlAttribute("Time")]
+        public long Time { get; set; }
+
         [XmlArray("TaskConfigs"), XmlArrayItem("TaskItem")]
         public TaskConfigs[] TaskConfigs { get; set; }
 
+        
     }
 
 

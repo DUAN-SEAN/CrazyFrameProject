@@ -220,10 +220,6 @@ namespace Crazy.ServerBase
             m_objectPool = new ObjectPool();
             if (m_objectPool == null) return false;
             if (!MessageFactory.Adapting(m_objectPool)) return false;
-
-            var message = MessageFactory.CreateMessage<S2C_LoginMessage>();
-            message.State = S2C_LoginMessage.Types.State.Ok;
-            Log.Info(message.ToString());
             return true;
 
         }

@@ -59,7 +59,7 @@ namespace Crazy.Common
                 this.dictionary.Add(type, queue);
             }
             //内存降温
-            if (queue.Count > 100)
+            if (queue.Count > 10)
             {
                 queue.Clear();
             }
