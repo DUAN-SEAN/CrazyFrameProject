@@ -29,7 +29,11 @@ namespace GameServer
             while (true)
             {
                 string cmd =  Console.ReadLine();
-                Log.Fatal(cmd);
+                if (cmd == "close-a")
+                {
+
+                }
+                Log.Debug(cmd);
             }
         }
     }
