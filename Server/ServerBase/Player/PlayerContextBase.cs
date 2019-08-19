@@ -256,7 +256,7 @@ namespace Crazy.ServerBase
                         Log.Debug("要发送的网络消息为空");
                         return;
                     }
-                    Log.Info("系统向玩家发送消息 " + snm.PlayerId + "  " + snm.Message.GetType());
+                    //Log.Info("系统向玩家发送消息 " + snm.PlayerId + "  " + snm.Message.GetType());
                     Send(snm.Message);
                    
                         

@@ -58,6 +58,11 @@ namespace Crazy.Common
                 queue = new Queue<object>();
                 this.dictionary.Add(type, queue);
             }
+            //内存降温
+            if (queue.Count > 100)
+            {
+                queue.Clear();
+            }
             queue.Enqueue(obj);
         }
     }

@@ -24,13 +24,14 @@ namespace GameServer.Battle
             m_level = new LevelActorBase();
             m_binaryFormatter = new BinaryFormatter();
             m_level.OnLoadingDone += OnReadyBattleFromLevel;
-
+            _readyDic = new Dictionary<string, int>();
         }
         /// <summary>
         /// 向客户端发送可以开启战斗了
         /// </summary>
         private void OnReadyBattleFromLevel()
         {
+            Log.Debug("服务器加载关卡配置完成");
             levelReady = true;
         }
 
@@ -43,16 +44,15 @@ namespace GameServer.Battle
         public void Init(List<string> players, int barrierId, IBattleSystemHandler handler)
         {
             
-            readState = new List<int>(players.Count+1);
             foreach (var plyaerId in players)
             {
-                readState.Add(0);
+                _readyDic.Add(plyaerId,0);
             }
 
             m_players = players;
             m_netHandler = handler;
 
-            //初始化配置
+            //初始化关卡配置
             GameBarrierConfig gameBarrierConfig = null;
             foreach (var item in m_netHandler.GetGameBarrierConfigs())
             {
@@ -73,8 +73,13 @@ namespace GameServer.Battle
         public override void Update()
         {
             base.Update();
+
+            CheckBattleState();
+
             //获取是否可以开启战斗
             CheckReadyState();
+
+            if (!canBattle) return ;
             //0 获取同步状态
             OnSyncState();
 
@@ -89,20 +94,29 @@ namespace GameServer.Battle
 
         }
         /// <summary>
+        /// 检查战斗状态
+        /// </summary>
+        private void CheckBattleState()
+        {
+            if (m_players == null || m_players.Count == 0)
+            {
+
+                m_netHandler.OnReleaseBattle(Id);
+                return;
+            }
+        }
+
+        /// <summary>
         /// 检查是否可以开始游戏
         /// </summary>
         private void CheckReadyState()
         {
-            if (readState != null)
+            if (_readyDic != null)
             {
-                bool flag = true;
-                foreach (var i in readState)
-                {
-                    if (i == 0)
-                        flag = false;
-                }
+                bool flag = _readyDic.ContainsValue(0);
+                
 
-                if (flag)
+                if (!flag)
                 {
                     if (levelReady)
                     {
@@ -111,7 +125,7 @@ namespace GameServer.Battle
                       
                         foreach (var plyaerId in m_players)
                         {
-                            readState.Add(0);
+                            
 
                             var plx = GameServer.Instance.PlayerCtxManager.FindPlayerContextByString(plyaerId) as GameServerPlayerContext;
 
@@ -122,8 +136,9 @@ namespace GameServer.Battle
                         m_level.Start(playerShips);
                         Log.Debug("服务器确认所有客户端关卡加载完毕完成第二次握手，可以开启战斗 ，发起第三次握手");
                         BroadcastMessage(new S2CM_ReadyBattleBarrierAck { BattleId = Id });
-                        readState.Clear();
-                        readState = null;
+                        _readyDic.Clear();
+                        _readyDic = null;
+                        canBattle = true;
                     }
                         
 
@@ -235,6 +250,7 @@ namespace GameServer.Battle
                 ActorId = 0, BattleId = Id
             };
             syncLevelTask.Tasks.Clear();//如果从池子中取的话可能涉及到未清理干净的现象
+
             foreach (var task in m_level.GetAllTaskEvents())
             {
                 S2C_SyncLevelTaskBattleMessage.Types.TaskState taskItem =
@@ -248,8 +264,11 @@ namespace GameServer.Battle
 
                     taskItem.Conditions.Add(taskConditionCurrentValue.Key, taskConditionCurrentValue.Value);
                 }
+                syncLevelTask.Tasks.Add(taskItem);
 
             }
+           
+            //Log.Info(syncLevelTask.ToJson());
             syncLevelTask.BattleId = Id;
             BroadcastMessage(syncLevelTask);
         }
@@ -291,13 +310,11 @@ namespace GameServer.Battle
         /// <param name="player"></param>
         public void OnReadyBattle(string player)
         {
-            if (readState == null) return;
+            if (_readyDic == null) return;
 
-            var index = Players.IndexOf(player);
+            _readyDic[player] = 1;
 
-            readState[index] = 1;
 
-            
         }
        
         public void SetTimer(long timerId)
@@ -316,7 +333,7 @@ namespace GameServer.Battle
 
         #region IBroadcastHandler
         /// <summary>
-        /// 广播战斗消息
+        /// 广播战斗消息,向所有玩家广播
         /// </summary>
         /// <param name="message"></param>
         public void BroadcastMessage(IBattleMessage message)
@@ -355,6 +372,8 @@ namespace GameServer.Battle
             m_players = null;
             m_level = null;
             m_netHandler = null;
+            Log.Info("战斗总时长为："+(DateTime.Now.Ticks-m_startTime.Ticks)/10000000+"s");
+            //todo:存入数据库
 
             base.Dispose();
         }
@@ -362,29 +381,49 @@ namespace GameServer.Battle
         #region BattleSystem
         public void SendCommandToLevel(ICommand commandMsg)
         {
+            Log.Info("Battle收到一条指令:"+commandMsg.CommandType);
             m_level.PostCommand(commandMsg);
         }
 
         public void OnExitBattle(string playerId,S2C_ExitBattleMessage response)
         {
-            //1 检查
-            if (!m_players.Contains(playerId))
-                return;
-            //2 todo:通知关卡实体移除对应的飞船实体
+            lock (m_players)
+            {
+                //1 检查
+                if (!m_players.Contains(playerId))
+                    return;
+                //2 todo:通知关卡实体移除对应的飞船实体
 
-            //3 广播
-            response.State = S2C_ExitBattleMessage.Types.State.Ok;
-            response.BattleId = Id;
-            BroadcastMessage(response);
-            //4 从集合删除
-            m_players.Remove(playerId);
+                //3 广播
+                response.State = S2C_ExitBattleMessage.Types.State.Ok;
+                response.BattleId = Id;
+                BroadcastMessage(response);
+                //4 从集合删除
+                m_players.Remove(playerId);
+            }
         }
-
+        public void OnReleasePlayer(string playerId)
+        {
+            lock (m_players)
+            {
+                //1 检查
+                if (!m_players.Contains(playerId))
+                    return;
+                S2C_ExitBattleMessage response = new S2C_ExitBattleMessage();
+                response.PlayerId = playerId;
+                response.BattleId = Id;
+                response.State = S2C_ExitBattleMessage.Types.State.Ok;
+                BroadcastMessage(response);
+                //4 从集合删除
+                m_players.Remove(playerId);
+            }
+            
+        }
         #endregion
 
         #region 属性
 
-        public List<string> Players;
+        public List<string> Players => m_players;
 
         #endregion
 
@@ -418,11 +457,16 @@ namespace GameServer.Battle
 
         private List<int> readState;
 
+        private Dictionary<string, int> _readyDic;
+
         private bool levelReady = false;
+
+        private bool canBattle = false;
 
         #endregion
 
 
+       
     }
 
     public interface IBroadcastHandler

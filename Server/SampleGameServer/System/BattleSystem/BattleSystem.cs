@@ -44,15 +44,17 @@ namespace GameServer.Battle
                     ClientReadyBattleLocalMessage clientReadyBattleLocalMessage = msg as ClientReadyBattleLocalMessage;
                     OnReadyBattle(clientReadyBattleLocalMessage);
                     break;
-                    
+                case GameServerConstDefine.BattleSystemPlayerShutdown:
+                    ToBattlePlayerShutdownMessage toBattlePlayerShutdownMessage = msg as ToBattlePlayerShutdownMessage;
+                    OnPlayerShutdown(toBattlePlayerShutdownMessage.playerId);
+                    break;
                 default: return base.OnMessage(msg);
             }
             return Task.CompletedTask;
 
         }
 
-       
-
+        
 
         /// <summary>
         /// GameServer初始化战斗系统
@@ -151,6 +153,22 @@ namespace GameServer.Battle
             }
         }
         /// <summary>
+        /// 玩家现场发来的关闭
+        /// </summary>
+        /// <param name="playerId"></param>
+        private void OnPlayerShutdown(string playerId)
+        {
+            Log.Debug("battlesystem::关闭玩家战斗");
+            foreach (var battle in m_battleDic.Values)
+            {
+                if (battle.Players.Contains(playerId))
+                {
+                    battle.OnReleasePlayer(playerId);
+                }
+            }
+        }
+
+        /// <summary>
         /// 释放关卡战斗资源：
         /// 修改关卡战斗实体状态为正在关闭
         /// 暂停所有物理层逻辑
@@ -161,40 +179,69 @@ namespace GameServer.Battle
         /// 解除战斗系统关于关卡战斗实体的注册
         /// PS 该方法可以由各层调用：实体自身、战斗系统、GameSever
         /// </summary>
-        private void OnReleaseBattle(ulong battleId)
+        public void OnReleaseBattle(ulong battleId)
         {
-            //Battle battleEntity = null;
-            //if(!m_battleDic.TryGetValue(battleId,out battleEntity))
-            //{
-            //    Log.Error("OnReleaseBattle Find Null");
-            //}
-            //TimerManager.UnsetLoopTimer(battleEntity.GetTimerId());//解除绑定
+            Battle battleEntity = null;
+            if (!m_battleDic.TryGetValue(battleId, out battleEntity))
+            {
+                Log.Error("OnReleaseBattle Find Null");
+                return;
+            }
 
-            //battleEntity.Dispose();//最终Dispose战斗实体 释放资源
-            
+            lock (battleEntity)
+            {
+                Log.Debug("释放一场战斗 Id = " + battleId);
+
+                TimerManager.UnsetLoopTimer(battleEntity.GetTimerId());//解除绑定
+
+                m_battleDic.Remove(battleId);
+
+                battleEntity.Dispose();//最终Dispose战斗实体 释放资源
+            }
+           
+
         }
+        /// <summary>
+        /// 向玩家发送战斗消息
+        /// </summary>
+        /// <param name="message">battleMessage</param>
+        /// <param name="playerId">玩家Id</param>
         public void SendMessageToClient(IBattleMessage message,string playerId)
         {
             PostLocalMessageToCtx(new SystemSendNetMessage { Message = message, PlayerId = playerId }, playerId);
             
 
         }
+        /// <summary>
+        /// 向玩家发送战斗消息
+        /// </summary>
+        /// <param name="message">battleMessage</param>
+        /// <param name="players">玩家Id集合</param>
         public void SendMessageToClient(IBattleMessage message, List<string> players)
         {
             PostLocalMessageToCtx(new SystemSendNetMessage { Message = message }, players);
 
         }
-
+        /// <summary>
+        /// 获取战斗关卡配置
+        /// </summary>
+        /// <returns></returns>
         public List<GameBarrierConfig> GetGameBarrierConfigs()
         {
             return m_gameBarrierConfigs?.ToList();
         }
-
+        /// <summary>
+        /// 获取飞船配置
+        /// </summary>
+        /// <returns></returns>
         public List<GameShipConfig> GetGameShipConfigs()
         {
             return m_gameShipInfoConfigs?.ToList();
         }
-
+        /// <summary>
+        /// 获取技能配置
+        /// </summary>
+        /// <returns></returns>
         public GameSkillConfig GetGameSkillConfig()
         {
             return m_gameSkillConfig;
@@ -236,6 +283,6 @@ namespace GameServer.Battle
 
         GameSkillConfig GetGameSkillConfig();
 
-
+        void OnReleaseBattle(ulong battleId);
     }
 }
