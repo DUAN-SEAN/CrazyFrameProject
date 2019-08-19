@@ -65,6 +65,11 @@ namespace GameActorLogic
                 {
                     {0, 10}
                 });
+            var task1 = container.GetCreateInternalComponentBase().CreateTaskEvent(
+                TaskConditionTypeConstDefine.TimeTaskEvent, TaskResultTypeConstDefine.Fail, 2, new Dictionary<int, int>
+                {
+                    {0,600000 }
+                });
             //添加任务
             container.GeTaskEventComponentInternalBase().AddTaskEvent(task);
         }
@@ -119,7 +124,7 @@ namespace GameActorLogic
                 var id = _createComponent.GetCreateID();
                 this.players.Add(player.Item1, id);
                 _eventComponent.AddEventMessagesToHandlerForward(new InitEventMessage(id, LevelActorBase.PlayerCamp,
-                    player.Item3, 0, 0, 0, true, player.Item4, player.Item5));
+                    player.Item3, 0, 0, 0, true, player.Item4, player.Item5,player.Item1));
             }
            
             //先放这里
@@ -162,7 +167,12 @@ namespace GameActorLogic
 
         public ActorBase GetPlayerActorByString(string id)
         {
-            return _envirinfoComponent.GetActor(players[id]);
+            if (players.TryGetValue(id, out battleid))
+                return _envirinfoComponent.GetActor(battleid);
+            else
+            {
+                return _envirinfoComponent.GetAllActors().Find(o => o.GetActorName() == id);
+            }
         }
 
         /// <summary>
@@ -173,6 +183,8 @@ namespace GameActorLogic
         /// 在Start方法中被调用
         /// </summary>
         public event Action OnStartDone;
+
+
 
         #region 关卡环境
 
@@ -335,6 +347,17 @@ namespace GameActorLogic
             remove => _handlerComponent.OnTaskUpdateMessageHandler -= value;
         }
 
+        public event Action OnGameVictory
+        {
+            add => ((IHandlerComponentBase) _handlerComponent).OnGameVictory += value;
+            remove => ((IHandlerComponentBase) _handlerComponent).OnGameVictory -= value;
+        }
+
+        public event Action OnGameFail
+        {
+            add => ((IHandlerComponentBase) _handlerComponent).OnGameFail += value;
+            remove => ((IHandlerComponentBase) _handlerComponent).OnGameFail -= value;
+        }
 
         #endregion
 

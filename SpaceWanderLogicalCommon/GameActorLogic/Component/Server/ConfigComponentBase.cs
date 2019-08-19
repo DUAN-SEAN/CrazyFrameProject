@@ -43,6 +43,13 @@ namespace GameActorLogic
 
         protected void InitializeActor(GameShipConfig[] ships, GameSkillConfig skill, GameBarrierConfig barrier)
         {
+            #region 任务配置
+
+            
+
+            #endregion
+
+
             WeaponActorBase weaponactor = null;
             #region 武器
 

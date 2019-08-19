@@ -26,6 +26,7 @@ namespace GameActorLogic
 
         protected int camp;
 
+
         public InvariantAttributeComponentBase(int camp = 0,double maxSpeed  = 2,float maxForceProc = 0.0002f)
         {
             this.maxSpeed = maxSpeed;

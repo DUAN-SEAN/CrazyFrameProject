@@ -42,6 +42,9 @@ namespace GameActorLogic
         IColliderBase
     {
         ulong GetActorID();
+
+        string GetActorName();
+
         /// <summary>
         /// 返回具体类型的相对应常量
         /// </summary>

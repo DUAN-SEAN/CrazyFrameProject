@@ -46,6 +46,7 @@
     <Compile Include="Command\ICommand.cs" />
     <Compile Include="Command\MoveCommand\ForwardCommand.cs" />
     <Compile Include="Command\MoveCommand\SkillCommand.cs" />
+    <Compile Include="Event\FailEventMessage.cs" />
     <Compile Include="Event\TaskUpdateEventMessage.cs" />
     <Compile Include="Event\VictoryEventMessage.cs" />
     <Compile Include="GameActorLogic\ClientActor\ActorHelper.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="TaskEvent\TaskConditionTypeConstDefine.cs" />
     <Compile Include="TaskEvent\TaskResultTypeConstDefine.cs" />
     <Compile Include="TaskEvent\TaskResult\ActivateTaskResult.cs" />
+    <Compile Include="TaskEvent\TaskResult\FailTaskResult.cs" />
     <Compile Include="TaskEvent\TaskResult\VictoryTaskResult.cs" />
   </ItemGroup>
   <ItemGroup>
