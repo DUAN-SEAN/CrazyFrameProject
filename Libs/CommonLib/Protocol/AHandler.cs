@@ -28,7 +28,7 @@ namespace Crazy.Common
                 return;
             }
             Run(sender, message);
-            MessageFactory.Recycle(message as IMessage);
+            //MessageFactory.Recycle(message as IMessage);
         }
     }
 
@@ -72,7 +72,7 @@ namespace Crazy.Common
                     response.RpcId = rpcId;
                     sender.Reply(response);
                 });
-                MessageFactory.Recycle(request as IMessage);//2019 7 17 更新对象池
+                //MessageFactory.Recycle(request as IMessage);//2019 7 17 更新对象池
             }
             catch (Exception e)
             {
