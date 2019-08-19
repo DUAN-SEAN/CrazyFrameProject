@@ -19,6 +19,7 @@ namespace GameActorLogic
 
         protected ulong ActorID;
         protected Int32 ActorType;
+        protected string Actorname;
         protected ActorBase(ulong id,Int32 actortype,ILevelActorComponentBaseContainer level)
         {
             ActorID = id;
@@ -52,6 +53,11 @@ namespace GameActorLogic
         {
             ActorID = id;
         }
+
+        public void SetActorName(string name)
+        {
+            Actorname = name;
+        }
         #region Helper
 
         public void CreateBody(Body body)
@@ -79,6 +85,11 @@ namespace GameActorLogic
         public ulong GetActorID()
         {
             return ActorID;
+        }
+
+        public string GetActorName()
+        {
+            return Actorname;
         }
 
         public int GetActorType()

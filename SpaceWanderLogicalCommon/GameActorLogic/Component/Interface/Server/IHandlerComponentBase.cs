@@ -25,6 +25,15 @@ namespace GameActorLogic
         /// </summary>
         event Action<int> OnTaskUpdateMessageHandler;
 
+        /// <summary>
+        /// 当胜利调用
+        /// </summary>
+        event Action OnGameVictory;
+
+        /// <summary>
+        /// 当失败调用未实现
+        /// </summary>
+        event Action OnGameFail;
         #endregion
     }
 

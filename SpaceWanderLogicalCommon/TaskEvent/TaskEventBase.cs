@@ -101,6 +101,9 @@ namespace GameActorLogic
                     break;
                 case TaskResultTypeConstDefine.ActivateTask:
                     break;
+                case TaskResultTypeConstDefine.Fail:
+                    taskresult = new VictoryTaskResult(levelActor);
+                    break;
             }
             return taskresult;
         }

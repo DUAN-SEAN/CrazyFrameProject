@@ -21,6 +21,8 @@ namespace GameActorLogic
 
         #region 关卡事件
         public const Int32 VictoryEvent = 1006;
+        public const Int32 FailEvent = 1007;
+
         #endregion
 
 

@@ -56,6 +56,8 @@ namespace GameActorLogic
         /// </summary>
         event Action OnStartDone;
 
+
+
     }
 
     /// <summary>
@@ -97,6 +99,8 @@ namespace GameActorLogic
         /// 配置文件组件
         /// </summary>
         IConfigComponentInternalBase GetConfigComponentInternalBase();
+
+
 
     }
 }

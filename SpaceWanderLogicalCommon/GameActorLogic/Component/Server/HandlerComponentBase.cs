@@ -66,6 +66,12 @@ namespace GameActorLogic
                 case EventMessageConstDefine.TaskUpdateEvent:
                     HandlerTaskUpdateEvent(eventMessage as TaskUpdateEventMessage);
                     break;
+                case EventMessageConstDefine.VictoryEvent:
+                    OnGameVictory?.Invoke();
+                    break;
+                case EventMessageConstDefine.FailEvent:
+                    OnGameFail?.Invoke();
+                    break;
                     
 
             }
@@ -223,6 +229,8 @@ namespace GameActorLogic
         public event Action<ulong> OnInitMessageHandler;
         public event Action<ulong> OnDestroyMessageHandler;
         public event Action<int> OnTaskUpdateMessageHandler;
+        public event Action OnGameVictory;
+        public event Action OnGameFail;
 
         #endregion
 
