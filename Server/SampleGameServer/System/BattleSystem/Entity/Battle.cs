@@ -52,7 +52,7 @@ namespace GameServer.Battle
             m_players = players;
             m_netHandler = handler;
 
-            //初始化配置
+            //初始化关卡配置
             GameBarrierConfig gameBarrierConfig = null;
             foreach (var item in m_netHandler.GetGameBarrierConfigs())
             {
@@ -73,12 +73,9 @@ namespace GameServer.Battle
         public override void Update()
         {
             base.Update();
-            if (m_players == null || m_players.Count == 0)
-            {
 
-                m_netHandler.OnReleaseBattle(Id);
-                return;
-            }
+            CheckBattleState();
+
             //获取是否可以开启战斗
             CheckReadyState();
 
@@ -96,6 +93,19 @@ namespace GameServer.Battle
 
 
         }
+        /// <summary>
+        /// 检查战斗状态
+        /// </summary>
+        private void CheckBattleState()
+        {
+            if (m_players == null || m_players.Count == 0)
+            {
+
+                m_netHandler.OnReleaseBattle(Id);
+                return;
+            }
+        }
+
         /// <summary>
         /// 检查是否可以开始游戏
         /// </summary>
@@ -323,7 +333,7 @@ namespace GameServer.Battle
 
         #region IBroadcastHandler
         /// <summary>
-        /// 广播战斗消息
+        /// 广播战斗消息,向所有玩家广播
         /// </summary>
         /// <param name="message"></param>
         public void BroadcastMessage(IBattleMessage message)
@@ -362,6 +372,8 @@ namespace GameServer.Battle
             m_players = null;
             m_level = null;
             m_netHandler = null;
+            Log.Info("战斗总时长为："+(DateTime.Now.Ticks-m_startTime.Ticks)/10000000+"s");
+            //todo:存入数据库
 
             base.Dispose();
         }
@@ -369,6 +381,7 @@ namespace GameServer.Battle
         #region BattleSystem
         public void SendCommandToLevel(ICommand commandMsg)
         {
+            Log.Info("Battle收到一条指令:"+commandMsg.CommandType);
             m_level.PostCommand(commandMsg);
         }
 

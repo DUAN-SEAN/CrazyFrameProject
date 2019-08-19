@@ -185,35 +185,63 @@ namespace GameServer.Battle
             if (!m_battleDic.TryGetValue(battleId, out battleEntity))
             {
                 Log.Error("OnReleaseBattle Find Null");
+                return;
             }
-            Log.Debug("释放一场战斗 Id = "+battleId);
-            TimerManager.UnsetLoopTimer(battleEntity.GetTimerId());//解除绑定
 
-            battleEntity.Dispose();//最终Dispose战斗实体 释放资源
+            lock (battleEntity)
+            {
+                Log.Debug("释放一场战斗 Id = " + battleId);
+
+                TimerManager.UnsetLoopTimer(battleEntity.GetTimerId());//解除绑定
+
+                m_battleDic.Remove(battleId);
+
+                battleEntity.Dispose();//最终Dispose战斗实体 释放资源
+            }
+           
 
         }
+        /// <summary>
+        /// 向玩家发送战斗消息
+        /// </summary>
+        /// <param name="message">battleMessage</param>
+        /// <param name="playerId">玩家Id</param>
         public void SendMessageToClient(IBattleMessage message,string playerId)
         {
             PostLocalMessageToCtx(new SystemSendNetMessage { Message = message, PlayerId = playerId }, playerId);
             
 
         }
+        /// <summary>
+        /// 向玩家发送战斗消息
+        /// </summary>
+        /// <param name="message">battleMessage</param>
+        /// <param name="players">玩家Id集合</param>
         public void SendMessageToClient(IBattleMessage message, List<string> players)
         {
             PostLocalMessageToCtx(new SystemSendNetMessage { Message = message }, players);
 
         }
-
+        /// <summary>
+        /// 获取战斗关卡配置
+        /// </summary>
+        /// <returns></returns>
         public List<GameBarrierConfig> GetGameBarrierConfigs()
         {
             return m_gameBarrierConfigs?.ToList();
         }
-
+        /// <summary>
+        /// 获取飞船配置
+        /// </summary>
+        /// <returns></returns>
         public List<GameShipConfig> GetGameShipConfigs()
         {
             return m_gameShipInfoConfigs?.ToList();
         }
-
+        /// <summary>
+        /// 获取技能配置
+        /// </summary>
+        /// <returns></returns>
         public GameSkillConfig GetGameSkillConfig()
         {
             return m_gameSkillConfig;

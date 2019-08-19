@@ -84,10 +84,6 @@ namespace GameServer
                    
             }
 
-
-#pragma warning disable CS0162 // 检测到无法访问的代码
-            return Task.CompletedTask;
-#pragma warning restore CS0162 // 检测到无法访问的代码
         }
         #region GameServerPlayerContext基础设施
         /// <summary>
