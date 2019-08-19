@@ -45,7 +45,17 @@ namespace GameActorLogic
         {
             #region 任务配置
 
-            
+            foreach (var barrierTaskConfig in barrier.TaskConfigs)
+            {
+                int id = barrierTaskConfig.Id;
+                int condition = barrierTaskConfig.StartCondition;
+                int result = barrierTaskConfig.Result;
+                var task1 = level.GetCreateInternalComponentBase().CreateTaskEvent(
+                    condition, result, id, new Dictionary<int, int>
+                    {
+                        {0,600000 }
+                    });
+            }
 
             #endregion
 
@@ -194,6 +204,25 @@ namespace GameActorLogic
 
         }
 
+        #region Helper
+
+        protected Dictionary<int, int> CreateValues(int condition,Dictionary<int,int> valuesdic)
+        {
+            var values = valuesdic;
+            switch (condition)
+            {
+                case TaskConditionTypeConstDefine.TimeTaskEvent:
+                    foreach (var value in values)
+                    {
+                        values[value.Key] = value.Value * 60000;
+                    }
+                    break;
+            }
+
+            return values;
+        }
+
+        #endregion
 
 
         public bool TryGetActor(Int32 key, out ActorBase actor)

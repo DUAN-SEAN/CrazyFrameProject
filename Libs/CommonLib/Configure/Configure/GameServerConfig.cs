@@ -277,6 +277,9 @@ namespace GameServer.Configure
         [XmlAttribute("StartCondition")]
         public int StartCondition { get; set; }
 
+        [XmlAttribute("Result")]
+        public int Result { get; set; }
+
         [XmlAttribute("Description")]
         public string Description { get; set; }
 

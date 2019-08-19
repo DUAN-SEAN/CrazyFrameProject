@@ -72,6 +72,8 @@ namespace GameActorLogic
                 });
             //添加任务
             container.GeTaskEventComponentInternalBase().AddTaskEvent(task);
+            container.GeTaskEventComponentInternalBase().AddTaskEvent(task1);
+
         }
 
         /// <summary>
