@@ -24,6 +24,7 @@ namespace GameServer.Battle
             m_level = new LevelActorBase();
             m_binaryFormatter = new BinaryFormatter();
             m_level.OnLoadingDone += OnReadyBattleFromLevel;
+
             _readyDic = new Dictionary<string, int>();
         }
         /// <summary>
@@ -363,6 +364,7 @@ namespace GameServer.Battle
 
         public override void Dispose()
         {
+            
             Log.Info("Dispose Battle Id = " + Id);
 
             m_players.Clear();
@@ -376,6 +378,8 @@ namespace GameServer.Battle
             //todo:存入数据库
 
             base.Dispose();
+
+            BEntityFactory.Recycle(this);
         }
 
         #region BattleSystem
