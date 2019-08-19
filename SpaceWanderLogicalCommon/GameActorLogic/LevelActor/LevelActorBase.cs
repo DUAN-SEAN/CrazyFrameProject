@@ -132,6 +132,16 @@ namespace GameActorLogic
             OnStartDone?.Invoke();
         }
 
+        /// <summary>
+        /// 客户端Start函数
+        /// </summary>
+        public void Start()
+        {
+            AddPrepareTask();
+            isStart = true;
+            OnStartDone?.Invoke();
+        }
+
         public virtual void Update()
         {
             if(isStart == false) return;
