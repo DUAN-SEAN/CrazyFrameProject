@@ -68,7 +68,7 @@ namespace GameActorLogic
         {
             var list = new List<IEventMessage>(_handleeventmessages);
             _handleeventmessages.Clear();
-            return _handleeventmessages;
+            return list;
         }
         #endregion
 
