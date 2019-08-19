@@ -15,9 +15,7 @@ namespace Crazy.Common
 
         public void Handle(ISession sender, object msg)
         {
-            Message message = msg as Message;
-
-            if (message == null)
+            if (!(msg is Message message))
             {
                 Log.Error($"消息类型转换错误: {msg.GetType().Name} to {typeof(Message).Name}");
                 return;

@@ -41,8 +41,7 @@ namespace Crazy.Common
                 //    continue;
                 //}
 
-                IMHandler iMHandler = Activator.CreateInstance(type) as IMHandler;
-                if (iMHandler == null)
+                if (!(Activator.CreateInstance(type) is IMHandler iMHandler))
                 {
                     Log.Error($"message handle {type.Name} 需要继承 IMHandler");
                     continue;
@@ -73,8 +72,7 @@ namespace Crazy.Common
 
         public void Handle(ISession sender, MessageInfo messageInfo)
         {
-            List<IMHandler> handlers;
-            if (!Handlers.TryGetValue(messageInfo.Opcode, out handlers))
+            if (!Handlers.TryGetValue(messageInfo.Opcode, out var handlers))
             {
                 Log.Error($"消息没有处理:{messageInfo.Opcode} {messageInfo.Message}");
 

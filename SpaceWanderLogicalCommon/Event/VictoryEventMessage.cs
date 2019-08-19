@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameActorLogic
 {
+    [Serializable]
     public class VictoryEventMessage : BattleEventMessageBase
     {
         public long levelid;

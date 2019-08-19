@@ -147,7 +147,7 @@ namespace Crazy.ServerBase
             client.SetSocketSendBufferSize(m_globalConfigure.Global.Network.SocketOutputBufferLen);
 
             // 将client和ctx关联起来
-            playerCtx.AttachClient(client,OpcodeTypeDic);
+            playerCtx.AttachClient(client);
 
             // 通知玩家现场连接完成
             playerCtx.OnConnected();

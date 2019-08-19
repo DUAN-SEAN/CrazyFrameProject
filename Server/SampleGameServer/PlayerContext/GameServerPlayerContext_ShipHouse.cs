@@ -32,10 +32,7 @@ namespace GameServer
         }
 
         #region DB
-
-#pragma warning disable CS1998 // 此异步方法缺少 "await" 运算符，将以同步方式运行。请考虑使用 "await" 运算符等待非阻止的 API 调用，或者使用 "await Task.Run(...)" 在后台线程上执行占用大量 CPU 的工作。
         private async Task<bool> UpdatePlayerShipInfo(GameServerDBPlayerShip shipInfo)
-#pragma warning restore CS1998 // 此异步方法缺少 "await" 运算符，将以同步方式运行。请考虑使用 "await" 运算符等待非阻止的 API 调用，或者使用 "await Task.Run(...)" 在后台线程上执行占用大量 CPU 的工作。
         {
             
             //获取要执行操作的数据库collection
@@ -51,13 +48,13 @@ namespace GameServer
 
             var update = Builders<GameServerDBPlayer>.Update.Set(SampleGameServerDBItemDefine.PLAYER_SHIPINFO, shipInfo);
 
-            var result = collection.UpdateOne(filter, update);
+            var result = await collection.UpdateOneAsync(filter, update);
             if (result.ModifiedCount > 0)
             {
                 return true;
             }
 
-            return false;
+            return true;
         }
 
 

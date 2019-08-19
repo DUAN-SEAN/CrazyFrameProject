@@ -100,8 +100,9 @@ namespace GameServer
             //设置现场状态
             if(m_csm.SetStateCheck(PlayerContextStateMachine.EventOnAuthLoginReq) == -1)
             {
-                Log.Info("OnAuthByLogin::PlayerContextStateMachine switch Fail to LoginReq");
+                Log.Trace("OnAuthByLogin::PlayerContextStateMachine switch Fail to LoginReq ");
                 result = S2C_LoginMessage.Types.State.Fail;
+                //PostLocalMessage(new LocalMessageShutdownContext { m_shutdownRightNow = true });
                 goto RETURN;
             }
             // 进行数据库验证
@@ -129,7 +130,7 @@ namespace GameServer
                 goto RETURN;
             }
             //DB的唯一标识符代表着这个玩家应用层的Id
-            m_gameUserId = m_gameServerDBPlayer.userName.ToString();
+            m_gameUserId = m_gameServerDBPlayer.userName;
 
             //将玩家现场注册到应用层上
             var brpc = GameServer.Instance.PlayerCtxManager.RegisterPlayerContextByString(m_gameUserId, this);
@@ -139,13 +140,19 @@ namespace GameServer
                 var oldCtx = GameServer.Instance.PlayerCtxManager.FindPlayerContextByString(m_gameUserId);
                 if (oldCtx != null)
                 {
-                    //TODO:通知旧现场去关闭 逻辑先留着不写
+                    
                     oldCtx.PostLocalMessage(new LocalMessageShutdownContext {  m_shutdownRightNow= true});
+                    var loginMsg = "用户已登录,服务器关闭旧用户，请重新登录";
+                    result = S2C_LoginMessage.Types.State.Fail;
+                    Log.Debug("userName = "+m_gameUserId+"\nMessage = "+loginMsg);
+                    goto RETURN;
+
                 }
             }
             //修改玩家现场状态机
             if(m_csm.SetStateCheck(PlayerContextStateMachine.EventOnAuthLoginOK)== -1)
             {
+                
                 Log.Info("OnAuthByLogin::PlayerContextStateMachine switch Fail To LoginOk");
                 result = S2C_LoginMessage.Types.State.Fail;
                 goto RETURN;
@@ -168,9 +175,6 @@ namespace GameServer
             else
                 response = new S2C_LoginMessage { PlayerGameId = message.Account, State = result };
             reply(response);
-            
-            
-            return ;
         }
         /// <summary>
         /// 当登录成功时触发
@@ -756,30 +760,22 @@ namespace GameServer
         /// 现场关闭用时
         /// </summary>
         private DateTime m_shutdownTime = DateTime.MaxValue;
-#pragma warning disable CS0628 // '“GameServerPlayerContext.m_disconnectedTime”: 在密封类中声明了新的保护成员
         /// <summary>
         /// 记录断线的时间
         /// </summary>
-        protected DateTime m_disconnectedTime = DateTime.MaxValue;
-#pragma warning restore CS0628 // '“GameServerPlayerContext.m_disconnectedTime”: 在密封类中声明了新的保护成员
-#pragma warning disable CS0628 // '“GameServerPlayerContext.m_disconnetedWaitTimeOutTime”: 在密封类中声明了新的保护成员
+        private DateTime m_disconnectedTime = DateTime.MaxValue;
         /// <summary>
         /// 记录的断线超时时间
         /// </summary>
-        protected DateTime m_disconnetedWaitTimeOutTime = DateTime.MaxValue;
-#pragma warning restore CS0628 // '“GameServerPlayerContext.m_disconnetedWaitTimeOutTime”: 在密封类中声明了新的保护成员
-#pragma warning disable CS0628 // '“GameServerPlayerContext.m_resumingFromWaitForReconnect”: 在密封类中声明了新的保护成员
+        private DateTime m_disconnetedWaitTimeOutTime = DateTime.MaxValue;
         /// <summary>
         /// 是否正在断线重联的恢复中
         /// </summary>
-        protected bool m_resumingFromWaitForReconnect;
-#pragma warning restore CS0628 // '“GameServerPlayerContext.m_resumingFromWaitForReconnect”: 在密封类中声明了新的保护成员
-#pragma warning disable CS0628 // '“GameServerPlayerContext.m_connectedTime”: 在密封类中声明了新的保护成员
+        private bool m_resumingFromWaitForReconnect;
         /// <summary>
         /// 玩家连接时间
         /// </summary>
-        protected DateTime m_connectedTime = DateTime.MaxValue;
-#pragma warning restore CS0628 // '“GameServerPlayerContext.m_connectedTime”: 在密封类中声明了新的保护成员
+        private DateTime m_connectedTime = DateTime.MaxValue;
 
         /// <summary>
         /// 用来tick玩家现场的timerid

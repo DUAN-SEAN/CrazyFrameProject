@@ -33,16 +33,13 @@ namespace GameServer.System.NetHandlerSystem
         /// <param name="message">网络消息</param>
         protected override void Run(ISession playerContext, C2S_CommandBattleMessage message)
         {
-            GameServerPlayerContext ctx = playerContext as GameServerPlayerContext;
-
-            CommandBattleLocalMessage localMessage = new CommandBattleLocalMessage();
-            localMessage.battleId = message.BattleId;
+            CommandBattleLocalMessage localMessage = new CommandBattleLocalMessage {battleId = message.BattleId};
 
             using (MemoryStream ms = new MemoryStream(message.Command.ToByteArray()))
             {
                 localMessage.ICommand = bf.Deserialize(ms) as ICommand;//将其反序列化
 
-
+                Log.Debug("接收到一条指令:"+localMessage.ICommand.CommandType);
                 GameServer.Instance.PostMessageToSystem<BattleSystem>(localMessage);
 
             }
@@ -53,12 +50,11 @@ namespace GameServer.System.NetHandlerSystem
     {
         protected override void Run(ISession playerContext, C2S_ExitBattleMessage message)
         {
-            GameServerPlayerContext ctx = playerContext as GameServerPlayerContext;
-            
-            ExitBattleLocalMessage localMessage = new ExitBattleLocalMessage();
+            ExitBattleLocalMessage localMessage = new ExitBattleLocalMessage
+            {
+                BattleId = message.BattleId, PlayerId = message.PlayerId
+            };
 
-            localMessage.BattleId = message.BattleId;
-            localMessage.PlayerId = message.PlayerId;
 
             GameServer.Instance.PostMessageToSystem<BattleSystem>(localMessage);
         }
@@ -69,11 +65,10 @@ namespace GameServer.System.NetHandlerSystem
     {
         protected override void Run(ISession playerContext, C2S_ReadyBattleBarrierReq message)
         {
-            GameServerPlayerContext ctx = playerContext as GameServerPlayerContext;
-
-            ClientReadyBattleLocalMessage crblm = new ClientReadyBattleLocalMessage();
-            crblm.battleId = message.BattleId;
-            crblm.playerId = message.PlayerId;
+            ClientReadyBattleLocalMessage crblm = new ClientReadyBattleLocalMessage
+            {
+                battleId = message.BattleId, playerId = message.PlayerId
+            };
             GameServer.Instance.PostMessageToSystem<BattleSystem>(crblm);
         }
     }

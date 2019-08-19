@@ -29,14 +29,13 @@ namespace GameServer
         /// <returns></returns>
         public static IMongoDatabase GetDataBaseEntity(string dbName)
         {
-            IMongoDatabase mongoDatabase = null;
-            if(_dbEntityDic.TryGetValue(dbName,out mongoDatabase))
+            if(_dbEntityDic.TryGetValue(dbName,out var mongoDatabase))
             {
                 return mongoDatabase;
             }
-            DBConfigInfo dBConfigInfo = null;
+
             // 之前没有记录，说明是第一次构造这个MongoDatabase
-            if (!_dbConfigDic.TryGetValue(dbName, out dBConfigInfo))
+            if (!_dbConfigDic.TryGetValue(dbName, out var dBConfigInfo))
             {
                 Log.Fatal("DBConfig is Empty");
                 return null;
