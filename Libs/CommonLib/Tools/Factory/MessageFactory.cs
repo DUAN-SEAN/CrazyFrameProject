@@ -9,8 +9,6 @@ namespace Crazy.Common
 {
     public static class  MessageFactory
     {
-    
-
         public static bool Adapting(ObjectPool objectPool)
         {
             m_objectPool = objectPool;
