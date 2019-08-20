@@ -20,6 +20,7 @@ namespace GameServer.Battle
         public override void Start(ulong id)
         {
             base.Start(id);
+            m_isDispose = false;
             m_startTime = DateTime.Now;
             m_level = new LevelActorBase();
             m_binaryFormatter = new BinaryFormatter();
@@ -97,7 +98,7 @@ namespace GameServer.Battle
         public override void Update()
         {
             base.Update();
-
+            if (IsRelease) return;
             CheckBattleState();
 
             //获取是否可以开启战斗
@@ -125,7 +126,7 @@ namespace GameServer.Battle
             if (m_players == null || m_players.Count == 0)
             {
 
-                m_netHandler.OnReleaseBattle(Id);
+                m_netHandler?.OnReleaseBattle(Id);
                 return;
             }
         }
@@ -413,11 +414,16 @@ namespace GameServer.Battle
 
         public override void Dispose()
         {
+            if (m_isDispose)
+            {
+                return;
+            }
             try
             {
                 Log.Trace("Dispose Battle Id = " + Id);
                 canBattle = false;
                 levelReady = false;
+                m_isDispose = true;
 
                 m_players.Clear();
                 m_players = null;
@@ -489,6 +495,7 @@ namespace GameServer.Battle
 
         public List<string> Players => m_players;
 
+        private bool IsRelease => m_isDispose;
         #endregion
 
         #region 字段
@@ -529,12 +536,15 @@ namespace GameServer.Battle
         private bool levelReady = false;
 
         private bool canBattle = false;
-  
+
+        private bool m_isDispose = false;
+
+        
 
         #endregion
 
 
-       
+
     }
 
     public interface IBroadcastHandler

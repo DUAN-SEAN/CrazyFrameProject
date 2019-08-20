@@ -402,16 +402,11 @@ namespace GameServer
                     // base.OnPlayerContextTimer(lmsg); 什么也没有做，所以直接返回
                     return;
             }
-#pragma warning disable CS0162 // 检测到无法访问的代码
-            return ;
-#pragma warning restore CS0162 // 检测到无法访问的代码
         }
-#pragma warning disable CS0628 // '“GameServerPlayerContext.OnTimerTick()”: 在密封类中声明了新的保护成员
         /// <summary>
         /// 5秒一次的扫描
         /// </summary>
         protected async Task OnTimerTick()
-#pragma warning restore CS0628 // '“GameServerPlayerContext.OnTimerTick()”: 在密封类中声明了新的保护成员
         {
             //this.LogDebugFormat("OnTimerTick",
             //    _sessionId.ToString());
@@ -609,6 +604,7 @@ namespace GameServer
                 Log.Info("neeRelease:" + ContextStringName);
                 Release();//CtxManager Free Context
             }
+            if (ContextStringName == null | ContextStringName == default) return Task.CompletedTask;
             //通知其他独立系统响应
             Log.Debug("通知各个系统 玩家现场关闭");
             GameServer.Instance.PostMessageToSystem<GameMatchSystem>(new ToMatchPlayerShutdownMessage { playerId = m_gameUserId});
@@ -642,7 +638,7 @@ namespace GameServer
         /// <returns></returns>
         protected Task OnConnectedTimeOut()
         {
-            Log.Error("GameServerBasePlayerContext::OnConnectedTimeOut");
+            Log.Debug("GameServerBasePlayerContext::OnConnectedTimeOut Ps:连接超时、未认证释放");
             ShutdownContext(true);
             return Task.CompletedTask;
         }
@@ -657,7 +653,7 @@ namespace GameServer
             // 由于基类调用了 ServerBase.Instance.PlayerCtxManager.FreePlayerContext(this); 
             // 所以这里要实现延时删除必须覆盖基类实现,在Shutdown中 最终释放现场
 
-            Log.Info("现场感知到玩家断线，进入断线状态 playerId = "+m_gameUserId);
+           
             // 设置状态，等待timer来进行删除
             if (m_csm.SetStateCheck(PlayerContextStateMachine.EventOnDisconnected) == -1)
             {
@@ -666,10 +662,7 @@ namespace GameServer
             }
             // 记录连接断开的时间
             m_disconnectedTime = DateTime.Now;
-            Log.Debug("GameServerBasePlayerContext::OnDisconnected NowTime = " + m_disconnectedTime);
-            Log.Debug("GameServerBasePlayerContext::OnDisconnected DisconnectTime = " + GameServer.Instance.m_gameServerGlobalConfig.GameServerPlayerContext.DisconnectTimeOut);
-            m_disconnetedWaitTimeOutTime = m_disconnectedTime.AddMilliseconds(GameServer.Instance.m_gameServerGlobalConfig.GameServerPlayerContext.DisconnectTimeOut);
-            Log.Debug("GameServerBasePlayerContext::OnDisconnected disconnectedTime = "+ m_disconnetedWaitTimeOutTime);
+            
 
             // 如果已经在shutdown过程中 
             if (m_shutdownTime != DateTime.MaxValue)
@@ -680,10 +673,15 @@ namespace GameServer
             // 如果不处于断线等待状态也要关闭现场 也就是已经在断线状态了 也要关闭
             if (m_csm.State == PlayerContextStateMachine.StateDisconnected)
             {
-                
+                Log.Debug("现场感知到玩家未登录断线,直接关闭现场");
                 ShutdownContext();
                 return Task.CompletedTask;
             }
+            Log.Debug("现场感知到玩家断线，进入断线状态 playerId = " + m_gameUserId);
+            //Log.Debug("GameServerBasePlayerContext::OnDisconnected NowTime = " + m_disconnectedTime);
+            //Log.Debug("GameServerBasePlayerContext::OnDisconnected DisconnectTime = " + GameServer.Instance.m_gameServerGlobalConfig.GameServerPlayerContext.DisconnectTimeOut);
+            m_disconnetedWaitTimeOutTime = m_disconnectedTime.AddMilliseconds(GameServer.Instance.m_gameServerGlobalConfig.GameServerPlayerContext.DisconnectTimeOut);
+            Log.Debug("GameServerBasePlayerContext::OnDisconnected disconnectedTime = " + m_disconnetedWaitTimeOutTime);
             return Task.CompletedTask ;
         }
         /// <summary>
