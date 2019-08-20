@@ -26,5 +26,7 @@ namespace GameActorLogic
         public const Int32 SkillCommand = 1004;
 
 
+
+
     }
 }
