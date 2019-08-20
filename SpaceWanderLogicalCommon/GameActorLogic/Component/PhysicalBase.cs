@@ -26,6 +26,10 @@ namespace GameActorLogic
         protected Collider m_collider;
         protected IEnvirinfoBase envirinfo;
 
+        //copy值以防物理清除值
+        protected Point Force_copy;
+        protected double Torque_copy;
+        protected double angleVelocity_copy;
         /// <summary>
         /// 碰撞方法被
         /// </summary>
@@ -71,12 +75,17 @@ namespace GameActorLogic
 
         public void Update()
         {
-            m_body.AngularVelocity = 0;
+           
             if (isColliderStay == true && isColliderMethodEnter == false)
             {
                 isColliderStay = false;
                 OnColliderExit?.Invoke();
             }
+
+            //附上值
+            Force_copy = m_body.Force;
+            angleVelocity_copy = m_body.AngularVelocity;
+            Torque_copy = m_body.Torque;
         }
 
         #region Helper
@@ -112,20 +121,21 @@ namespace GameActorLogic
         {
             return m_body.Angle;
         }
-
+        
         public double GetAngleVelocity()
         {
-            return m_body.AngularVelocity;
+            return angleVelocity_copy;
         }
-
+        
         public Point GetForce()
         {
-            return m_body.Force;
+            return Force_copy;
         }
 
+        
         public double GetTorque()
         {
-            return m_body.Torque;
+            return Torque_copy;
         }
 
         public void SetPhysicalValue(ulong actorId, double angleVelocity, double forceX, double forceY,

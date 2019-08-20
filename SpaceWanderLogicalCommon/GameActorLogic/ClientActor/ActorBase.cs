@@ -39,7 +39,7 @@ namespace GameActorLogic
 
         public virtual void Update()
         {
-
+            _physicalBase.Update();
         }
 
         #region 相关方法

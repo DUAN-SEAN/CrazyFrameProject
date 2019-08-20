@@ -41,7 +41,7 @@ namespace CrazyEngine.Core
             var bodies = World.AllBodies.ToList();
             var constraints = World.AllConstraints.ToList();
 
-            BodiesApplyGravity(bodies, World.Gravity);
+            //BodiesApplyGravity(bodies, World.Gravity);
             BodiesUpdate(bodies, delta, Timescale, correction, World.Bounds);
             SolveConstraint(constraints, bodies);
             UpdateBroadphase(bodies, World.Modified);
@@ -84,6 +84,7 @@ namespace CrazyEngine.Core
             {
                 body.Force.Clear();
                 body.Torque = 0;
+                body.AngularVelocity = 0;
             }
         }
 

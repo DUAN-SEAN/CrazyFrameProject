@@ -37,6 +37,8 @@ namespace GameActorLogic
 
         public override void Update()
         {
+            base.Update();
+
             _aiComponent?.Update();
         }
 
