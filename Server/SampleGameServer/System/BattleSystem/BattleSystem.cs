@@ -33,20 +33,24 @@ namespace GameServer.Battle
                     OnCreateBattleBarrier((CreateBattleBarrierMessage)msg);
                     break;
                 case GameServerConstDefine.BattleSystemCommandUpLoad:
-                    CommandBattleLocalMessage commandBattleLocalMessage = msg as CommandBattleLocalMessage;
+                    var commandBattleLocalMessage = msg as CommandBattleLocalMessage;
                     OnBattleCommand(commandBattleLocalMessage);
                     break;
                 case GameServerConstDefine.BattleSystemExitBattleBarrier:
-                    ExitBattleLocalMessage exitBattleLocal = msg as ExitBattleLocalMessage;
+                    var exitBattleLocal = msg as ExitBattleLocalMessage;
                     OnExitBattle(exitBattleLocal);
                     break;
                 case GameServerConstDefine.BattleSystemClientReadyBattle:
-                    ClientReadyBattleLocalMessage clientReadyBattleLocalMessage = msg as ClientReadyBattleLocalMessage;
+                    var clientReadyBattleLocalMessage = msg as ClientReadyBattleLocalMessage;
                     OnReadyBattle(clientReadyBattleLocalMessage);
                     break;
                 case GameServerConstDefine.BattleSystemPlayerShutdown:
-                    ToBattlePlayerShutdownMessage toBattlePlayerShutdownMessage = msg as ToBattlePlayerShutdownMessage;
+                    var toBattlePlayerShutdownMessage = msg as ToBattlePlayerShutdownMessage;
                     OnPlayerShutdown(toBattlePlayerShutdownMessage.playerId);
+                    break;
+                case GameServerConstDefine.BattleSystemNeedReleaseBattleTimer:
+                    var releaseBattleTimerLocalMessage = msg as ReleaseBattleTimerLocalMessage;
+                    OnReleaseBattleTimer(releaseBattleTimerLocalMessage.TimerId);
                     break;
                 default: return base.OnMessage(msg);
             }
@@ -188,18 +192,21 @@ namespace GameServer.Battle
                 return;
             }
 
-            lock (battleEntity)
-            {
-                Log.Trace("释放一场战斗 Id = " + battleId);
+            var timerId = battleEntity.GetTimerId();
+          
+            battleEntity.Dispose();//最终Dispose战斗实体 释放资源
 
-                TimerManager.UnsetLoopTimer(battleEntity.GetTimerId());//解除绑定
+            m_battleDic.Remove(battleId);
 
-                m_battleDic.Remove(battleId);
+            //向当前系统发送关闭Timer
+            PostLocalMessage(new ReleaseBattleTimerLocalMessage {TimerId = timerId});
 
-                battleEntity.Dispose();//最终Dispose战斗实体 释放资源
-            }
-           
 
+        }
+        public void OnReleaseBattleTimer(long timerId)
+        {
+            TimerManager.UnsetLoopTimer(timerId);//解除绑定
+            Log.Trace("释放一场战斗Timer Id = "+timerId );
         }
         /// <summary>
         /// 向玩家发送战斗消息
@@ -264,7 +271,6 @@ namespace GameServer.Battle
         /// 飞船配置信息
         /// </summary>
         private GameSkillConfig m_gameSkillConfig;
-
         /// <summary>
         /// 战斗系统的Timer管理
         /// </summary>

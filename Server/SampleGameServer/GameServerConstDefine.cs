@@ -79,12 +79,20 @@ namespace GameServer
         /// 关闭玩家现场
         /// </summary>
         public const Int32 BattleSystemPlayerShutdown = 1105;
+        /// <summary>
+        /// 战斗系统需要释放battleTimer
+        /// </summary>
+        public const Int32 BattleSystemNeedReleaseBattleTimer = 1106;
         #endregion
 
         /// <summary>
         /// 玩家现场上的timer扫描时间间隔，单位毫秒
         /// </summary>
-        public const Int32 GameServerPlayerCtxTimerPeriod = 1000;
+        public const Int32 GameServerPlayerCtxTimerPeriod = 1000;//1s
+        /// <summary>
+        /// Battle最多等待玩家时长
+        /// </summary>
+        public const Int32 BattleSystemWaitPlayerReadySuperiorTime = 60000;//1分钟
 
 
 
