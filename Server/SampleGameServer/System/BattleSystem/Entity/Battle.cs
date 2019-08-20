@@ -254,7 +254,7 @@ namespace GameServer.Battle
                             VelocityY = shipActorBase.GetVelocity().Y,
                             Torque = shipActorBase.GetTorque()
                         };
-
+                        //Log.Info(syncPhysics.ToJson());
                         BroadcastMessage(syncPhysics);
                     }
                       
