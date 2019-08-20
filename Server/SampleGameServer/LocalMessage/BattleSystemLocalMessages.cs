@@ -65,7 +65,14 @@ namespace GameServer
         public ulong BattleId;
 
         public string PlayerId;
+    }
+    public class ReleaseBattleTimerLocalMessage:ILocalMessage
+    {
+        public int MessageId
+        {
+            get => GameServerConstDefine.BattleSystemNeedReleaseBattleTimer;
+        }
 
-      
+        public long TimerId;
     }
 }

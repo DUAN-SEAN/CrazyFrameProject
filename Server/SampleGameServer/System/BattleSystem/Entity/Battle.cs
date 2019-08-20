@@ -20,13 +20,31 @@ namespace GameServer.Battle
         public override void Start(ulong id)
         {
             base.Start(id);
+            m_isDispose = false;
             m_startTime = DateTime.Now;
             m_level = new LevelActorBase();
             m_binaryFormatter = new BinaryFormatter();
             m_level.OnLoadingDone += OnReadyBattleFromLevel;
-
+            m_level.OnGameFail += OnGameFail;
+            m_level.OnGameVictory += OnGameVictory;
+            m_players = new List<string>();
             _readyDic = new Dictionary<string, int>();
         }
+
+        private void OnGameVictory()
+        {
+
+            Log.Trace("OnGameVictory");
+
+        }
+
+        private void OnGameFail()
+        {
+
+            Log.Trace("OnGameFail");
+
+        }
+
         /// <summary>
         /// 向客户端发送可以开启战斗了
         /// </summary>
@@ -34,6 +52,8 @@ namespace GameServer.Battle
         {
             Log.Debug("服务器加载关卡配置完成");
             levelReady = true;
+            m_readyWaitTime =
+                DateTime.Now.AddMilliseconds(GameServerConstDefine.BattleSystemWaitPlayerReadySuperiorTime);
         }
 
         /// <summary>
@@ -50,7 +70,11 @@ namespace GameServer.Battle
                 _readyDic.Add(plyaerId,0);
             }
 
-            m_players = players;
+            foreach (var pId in players)
+            {
+                m_players.Add(pId);
+            }
+            
             m_netHandler = handler;
 
             //初始化关卡配置
@@ -74,7 +98,7 @@ namespace GameServer.Battle
         public override void Update()
         {
             base.Update();
-
+            if (IsRelease) return;
             CheckBattleState();
 
             //获取是否可以开启战斗
@@ -102,7 +126,7 @@ namespace GameServer.Battle
             if (m_players == null || m_players.Count == 0)
             {
 
-                m_netHandler.OnReleaseBattle(Id);
+                m_netHandler?.OnReleaseBattle(Id);
                 return;
             }
         }
@@ -112,14 +136,14 @@ namespace GameServer.Battle
         /// </summary>
         private void CheckReadyState()
         {
-            if (_readyDic != null)
+            if (_readyDic != null&&!canBattle)
             {
-                bool flag = _readyDic.ContainsValue(0);
-                
-
-                if (!flag)
+                if (levelReady)
                 {
-                    if (levelReady)
+
+
+                    bool flag = _readyDic.ContainsValue(0);
+                    if (!flag)
                     {
                         List<Tuple<string, int, int, int, int>> playerShips = new List<Tuple<string, int, int, int, int>>();
 
@@ -131,7 +155,7 @@ namespace GameServer.Battle
                             var plx = GameServer.Instance.PlayerCtxManager.FindPlayerContextByString(plyaerId) as GameServerPlayerContext;
 
                             var shipInfo = plx.m_gameServerDBPlayer.playerShip;
-                            playerShips.Add(new Tuple<string, int, int, int, int>(plyaerId, shipInfo.shipId, shipInfo.shipType, shipInfo.weapon_a, shipInfo.weapon_b));
+                            playerShips.Add(new Tuple<string, int, int, int, int>(plyaerId, shipInfo.shipId, 1004, 1012, 1013));
 
                         }
                         m_level.Start(playerShips);
@@ -140,6 +164,24 @@ namespace GameServer.Battle
                         _readyDic.Clear();
                         _readyDic = null;
                         canBattle = true;
+                    }
+                    else
+                    {
+                        //等待玩家确认准备超时
+                        if (m_readyWaitTime < DateTime.Now)
+                        {
+                            //目前直接释放资源
+                            Log.Trace("等待玩家确认准备超时,直接释放资源");
+                            Log.Trace("超时玩家为：");
+                            foreach (var ready in _readyDic)
+                            {
+                                if (ready.Value == 0)
+                                {
+                                    Log.Trace("playerId = "+ready.Key);
+                                }
+                            }
+                            m_netHandler.OnReleaseBattle(Id);
+                        }
                     }
                         
 
@@ -173,6 +215,14 @@ namespace GameServer.Battle
                 switch (actor.GetActorType())
                 {
                     case ActorTypeBaseDefine.ShipActorNone:
+                    case ActorTypeBaseDefine.EliteShipActorA:
+                    case ActorTypeBaseDefine.EliteShipActorB:
+                    case ActorTypeBaseDefine.FighterShipActorA:
+                    case ActorTypeBaseDefine.FighterShipActorB:
+                    case ActorTypeBaseDefine.WaspShipActorA:
+                    case ActorTypeBaseDefine.AnnihilationShipActor:
+                    case ActorTypeBaseDefine.DroneShipActor:
+                    case ActorTypeBaseDefine.PlayerShipActor:
                         ShipActorBase shipActorBase = actor as ShipActorBase;
 
                     {
@@ -364,22 +414,38 @@ namespace GameServer.Battle
 
         public override void Dispose()
         {
-            
-            Log.Trace("Dispose Battle Id = " + Id);
+            if (m_isDispose)
+            {
+                return;
+            }
+            try
+            {
+                Log.Trace("Dispose Battle Id = " + Id);
+                canBattle = false;
+                levelReady = false;
+                m_isDispose = true;
 
-            m_players.Clear();
+                m_players.Clear();
+                m_players = null;
+                m_netHandler = null;
+                Log.Trace("战斗总时长为：" + (DateTime.Now.Ticks - m_startTime.Ticks) / 10000000 + "s");
+                //todo:存入数据库
+                
+                m_level.Dispose();
+                m_level = null;
+                base.Dispose();
 
-            m_level.Dispose();
+                m_readyWaitTime = DateTime.MaxValue;
+                m_startTime = DateTime.MaxValue;
+                m_timerId = default;
+                BEntityFactory.Recycle(this);
 
-            m_players = null;
-            m_level = null;
-            m_netHandler = null;
-            Log.Trace("战斗总时长为："+(DateTime.Now.Ticks-m_startTime.Ticks)/10000000+"s");
-            //todo:存入数据库
-
-            base.Dispose();
-
-            BEntityFactory.Recycle(this);
+            }
+            catch(Exception e)
+            {
+                Log.Error(e);
+            }
+          
         }
 
         #region BattleSystem
@@ -429,6 +495,7 @@ namespace GameServer.Battle
 
         public List<string> Players => m_players;
 
+        private bool IsRelease => m_isDispose;
         #endregion
 
         #region 字段
@@ -437,6 +504,10 @@ namespace GameServer.Battle
         /// 战斗开始时间
         /// </summary>
         private DateTime m_startTime;
+        /// <summary>
+        /// 最长等待时间
+        /// </summary>
+        private DateTime m_readyWaitTime;
         /// <summary>
         /// timeId
         /// </summary>
@@ -466,10 +537,14 @@ namespace GameServer.Battle
 
         private bool canBattle = false;
 
+        private bool m_isDispose = false;
+
+        
+
         #endregion
 
 
-       
+
     }
 
     public interface IBroadcastHandler
