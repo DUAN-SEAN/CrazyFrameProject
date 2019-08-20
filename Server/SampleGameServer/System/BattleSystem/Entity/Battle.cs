@@ -495,7 +495,7 @@ namespace GameServer.Battle
 
         public List<string> Players => m_players;
 
-        private bool IsRelease => m_isDispose;
+        public bool IsRelease => m_isDispose;
         #endregion
 
         #region 字段

@@ -166,7 +166,7 @@ namespace GameServer.Battle
             Log.Trace("battlesystem::关闭玩家战斗");
             foreach (var battle in m_battleDic.Values)
             {
-                if(battle)
+                if(battle.IsRelease) continue;
                 if (battle.Players.Contains(playerId))
                 {
                     battle.OnReleasePlayer(playerId);
