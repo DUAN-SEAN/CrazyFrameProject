@@ -26,5 +26,10 @@ namespace GameActorLogic
         public const Int32 SkillCommand = 1004;
 
 
+        /// <summary>
+        /// 遥控指令
+        /// </summary>
+        public const Int32 RemoteCommand = 1005;
+
     }
 }

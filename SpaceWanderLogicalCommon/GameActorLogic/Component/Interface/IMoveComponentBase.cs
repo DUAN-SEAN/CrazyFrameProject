@@ -29,6 +29,11 @@ namespace GameActorLogic
         /// 0.00001
         /// </summary>
         void AddThrust(float proc = 0.00001f);
+
+        /// <summary>
+        /// x y 对应摇杆移动的方法和长度
+        /// </summary>
+        void Remote(float x, float y);
     }
 
     /// <summary>

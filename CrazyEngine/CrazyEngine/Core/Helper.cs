@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace CrazyEngine.Core
 {
-    static class Helper
+    public static class Helper
     {
         /// <summary>
         /// 获取一个边框Bound的ID

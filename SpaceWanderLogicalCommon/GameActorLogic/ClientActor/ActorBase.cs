@@ -180,6 +180,12 @@ namespace GameActorLogic
         {
             _moveComponent.AddThrust(ang);
         }
+
+        public void Remote(float x, float y)
+        {
+            _moveComponent.Remote(x, y);
+        }
+
         #endregion
 
         #region InvariantAttributeComponentBase

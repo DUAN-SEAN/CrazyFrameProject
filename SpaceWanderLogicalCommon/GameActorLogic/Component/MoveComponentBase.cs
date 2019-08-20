@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CrazyEngine.Common;
+using CrazyEngine.Core;
 using GameActorLogic;
 
 namespace GameActorLogic
@@ -42,6 +44,26 @@ namespace GameActorLogic
             OnThrust?.Invoke(ang);
         }
 
+        public void Remote(float x, float y)
+        {
+            if (physical == null) return;
+            if (physical.GetBody() == null) return;
+            var point = new Point(x, y);
+            var cross = point.Cross(physical?.GetBody().Forward);
+            //算出力的大小
+            var cos = point.IncludedAngle(physical?.GetBody().Forward);
+            float angle = (float)Math.Acos(cos);
+            float anglepro = (float) (angle / Math.PI);
+            physical?.AddThrust(0.00001f * 5 * anglepro);
+            if ( cross > 0)
+            {
+                physical?.AddForward(0.05);
+            }
+            else
+            {
+                physical?.AddForward(-0.05);
+            }
+        }
 
         #endregion
 

@@ -181,6 +181,9 @@ namespace GameActorLogic
                 case CommandConstDefine.SkillCommand:
                     HandlerSkillCommand(command);
                     break;
+                case CommandConstDefine.RemoteCommand:
+                    HandlerRemoteCommand(command);
+                    break;
             }
         }
 
@@ -209,6 +212,7 @@ namespace GameActorLogic
         {
             if (!(command is SkillCommand commanditme)) return;
             if (!(GetActor(commanditme.actorid) is ShipActorBase ship)) return;
+            ship.SendButtonState(commanditme.actorid,commanditme.skilltype,commanditme.skillcontrol);
             //ship.SendButtonState(commanditme.skillcontrol);
             //switch (commanditme.skillcontrol)
             //{
@@ -220,6 +224,13 @@ namespace GameActorLogic
             //        break;
             //}
 
+        }
+
+        protected void HandlerRemoteCommand(ICommand command)
+        {
+            if(!(command is RemoteCommand commanditme)) return;
+            if(!(GetActor(commanditme.actorid) is ShipActorBase ship)) return;
+            ship.Remote(commanditme.remote_x, commanditme.remote_y);
         }
 
 

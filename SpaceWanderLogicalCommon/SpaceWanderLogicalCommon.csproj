@@ -45,6 +45,7 @@
     <Compile Include="Command\CommandTypeConstDefine.cs" />
     <Compile Include="Command\ICommand.cs" />
     <Compile Include="Command\MoveCommand\ForwardCommand.cs" />
+    <Compile Include="Command\MoveCommand\RemoteCommand.cs" />
     <Compile Include="Command\MoveCommand\SkillCommand.cs" />
     <Compile Include="Event\FailEventMessage.cs" />
     <Compile Include="Event\TaskUpdateEventMessage.cs" />

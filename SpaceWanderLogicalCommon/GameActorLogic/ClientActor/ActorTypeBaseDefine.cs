@@ -58,6 +58,11 @@ namespace GameActorLogic
 
         #region 武器定义
         /// <summary>
+        /// 武器默认
+        /// </summary>
+        public const Int32 WeaponNone = 1020;
+
+        /// <summary>
         /// 机关枪
         /// </summary>
         public const Int32 MachineGunActor = 1012;
@@ -89,6 +94,31 @@ namespace GameActorLogic
         /// 触发炸弹
         /// </summary>
         public const Int32 TriggerBombActor = 1019;
+
+        #endregion
+
+
+        #region 道具
+
+        /// <summary>
+        /// 道具默认
+        /// </summary>
+        public const Int32 PropNone = 1021;
+
+        /// <summary>
+        /// 召唤道具默认
+        /// </summary>
+        public const Int32 SummonNone = 1022;
+
+        /// <summary>
+        /// 恢复道具默认
+        /// </summary>
+        public const Int32 RecoveryNone = 1023;
+
+        /// <summary>
+        /// 增益道具默认
+        /// </summary>
+        public const Int32 GainNone = 1024;
 
         #endregion
     }
