@@ -71,6 +71,7 @@ namespace GameActorLogic
 
         public void Update()
         {
+            m_body.AngularVelocity = 0;
             if (isColliderStay == true && isColliderMethodEnter == false)
             {
                 isColliderStay = false;
@@ -157,7 +158,7 @@ namespace GameActorLogic
         /// <summary>
         /// 给飞船一个与朝向相同的推力
         /// </summary>
-        public void AddThrust(float proc = 0.0001f)
+        public void AddThrust(float proc = 0.00001f)
         {
             m_body.Force += m_body.Mass * m_body.Forward * /*engine.World.Gravity.Scaling * */  proc;
         }
@@ -165,7 +166,7 @@ namespace GameActorLogic
         /// <summary>
         /// 给一个弧度
         /// 左右以正负来描述
-        /// 默认0.001
+        /// 默认0.05
         /// </summary>
         public void AddForward(double angular)
         {

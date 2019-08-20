@@ -31,7 +31,7 @@ namespace CrazyEngine.Base
             if (BodyB != null && PointB == null)
                 PointB = new Point(0,0);
 
-            //MonoBehaviour.print(BodyA == null);
+           
 
             Point initialPointA = BodyA != null
                 ? (BodyA.Position + PointA)

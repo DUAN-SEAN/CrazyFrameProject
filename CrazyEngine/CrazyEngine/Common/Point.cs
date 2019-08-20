@@ -93,6 +93,11 @@ namespace CrazyEngine.Common
 			return Math.Sqrt(X * X + Y * Y);
 		}
 
+        public double MagnitudeNoSqrt()
+        {
+            return X * X + Y * Y;
+        }
+
         public void Set(double x, double y)
         {
             X = x;

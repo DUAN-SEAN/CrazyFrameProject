@@ -3,6 +3,7 @@ using CrazyEngine.Common;
 using CrazyEngine.Core;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 
 namespace CrazyEngine.External
@@ -16,20 +17,21 @@ namespace CrazyEngine.External
         /// <param name="bodies">被检测的物体组</param>
         /// <param name="radius">检测的半径</param>
         /// <param name="layer">检测的层</param>
-        /// <returns>检测到的物体</returns>
+        /// <returns>检测到的物体,按照距离进行排序</returns>
         public static List<Body> RingDetection(this Body body ,IEnumerable<Body> bodies , double radius , DectectionLayer layer = DectectionLayer.All)
         {
-            List<Body> CollisionalBodies = new List<Body>();
+            List<tempBody> CollisionalBodies = new List<tempBody>();
 
             foreach(var b in bodies)
             {
-                if(Helper.DistanceNoSqrt(body.Position, b.Position) < radius * radius)
+                var distanceNoSqrt = Helper.DistanceNoSqrt(body.Position, b.Position);
+                if (distanceNoSqrt < radius * radius)
                 {
-                    CollisionalBodies.Add(b);
+                    CollisionalBodies.Add(new tempBody(b, Math.Sqrt(distanceNoSqrt)));
                 }
             }
 
-            return CollisionalBodies;
+            return (from o in CollisionalBodies.OrderBy(o => o.Distance) select o.Body).ToList();
         }
 
         /// <summary>
@@ -39,6 +41,8 @@ namespace CrazyEngine.External
         /// <param name="targetPoint"></param>
         public static void FollowTarget(this Body body, Point targetPoint)
         {
+            if (Helper.DistanceNoSqrt(body.Position, targetPoint) < double.Epsilon) return;
+
             Point tmp = targetPoint - body.Position;
             bool isClockwise = Helper.Cross(tmp, body.Forward) > 0;
             double cos = Helper.IncludedAngle(tmp, body.Forward);
@@ -53,26 +57,42 @@ namespace CrazyEngine.External
             }
         }
 
-        public static void OnCollisionStay(this Body body, Common.Collision collision)
-        {
-
-        }
-
         /// <summary>
         /// 触发检测
         /// </summary>
         /// <param name="body"></param>
         /// <param name="trigger"></param>
         /// <param name="distance"></param>
-        public static void TriggerDetection(this Body body, Body trigger, double distance,
-            DectectionLayer dectectionLayer = DectectionLayer.All)
+        public static void TriggerDetection(this Body body, Body trigger, double distance, DectectionLayer dectectionLayer = DectectionLayer.All)
         {
             if (!trigger.Trigger) return;
             trigger.Position = body.Position + body.Forward * distance;
             trigger.InitAngle(body.Angle);
         }
 
+        /// <summary>
+        /// 距离检测
+        /// </summary>
+        /// <param name="body"></param>
+        /// <param name="point"></param>
+        /// <param name="distance"></param>
+        /// <returns>在距离内返回true，否则返回false</returns>
+        public static bool DistanceDetection(this Body body, Point point, double distance)
+        {
+            return Helper.DistanceNoSqrt(body.Position, point) <= distance * distance;
+        }
 
+    }
+
+    public struct tempBody
+    {
+        public Body Body;
+        public double Distance;
+        public tempBody(Body body, double distance)
+        {
+            Body = body;
+            Distance = distance;
+        }
     }
 
     public enum DectectionLayer

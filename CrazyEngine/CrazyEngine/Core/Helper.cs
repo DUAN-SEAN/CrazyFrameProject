@@ -279,7 +279,7 @@ namespace CrazyEngine.Core
         /// <returns></returns>
         public static double Distance(this Point p1, Point p2)
         {
-            return Math.Sqrt((p1.X - p2.X) * (p1.X - p2.X) + ((p1.Y - p2.Y) * (p1.Y - p2.Y)));
+            return Math.Sqrt((p1.X - p2.X) * (p1.X - p2.X) + (p1.Y - p2.Y) * (p1.Y - p2.Y));
         }
 
         /// <summary>
@@ -290,7 +290,7 @@ namespace CrazyEngine.Core
         /// <returns></returns>
         public static double DistanceNoSqrt(this Point p1, Point p2)
         {
-            return (p1.X - p2.X) * (p1.X - p2.X) + ((p1.Y - p2.Y) * (p1.Y - p2.Y));
+            return (p1.X - p2.X) * (p1.X - p2.X) + (p1.Y - p2.Y) * (p1.Y - p2.Y);
         }
 
         /// <summary>

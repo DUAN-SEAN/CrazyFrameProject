@@ -11,6 +11,5 @@ namespace CrazyEngine.External
     {
 
         public Action<Collision> OnCollisionStay;
-
     }
 }

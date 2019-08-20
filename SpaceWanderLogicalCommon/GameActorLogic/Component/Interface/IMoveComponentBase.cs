@@ -14,18 +14,21 @@ namespace GameActorLogic
     {
         /// <summary>
         /// 向左转向接口
+        /// 0.05
         /// </summary>
         void Left(double proc);
 
         /// <summary>
         /// 向右转向接口
+        /// -0.05
         /// </summary>
         void Right(double proc);
 
         /// <summary>
         /// 向前加速接口
+        /// 0.00001
         /// </summary>
-        void AddThrust(float proc = 0.0001f);
+        void AddThrust(float proc = 0.00001f);
     }
 
     /// <summary>
