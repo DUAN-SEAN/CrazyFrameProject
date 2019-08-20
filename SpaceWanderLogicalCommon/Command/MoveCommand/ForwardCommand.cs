@@ -6,7 +6,13 @@ namespace GameActorLogic
     [Serializable]
     public class ForwardCommand : Command
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public double ang = 0.05;
+        /// <summary>
+        /// actorId
+        /// </summary>
         public ulong actorid;
         public ForwardCommand(ulong actorid)
         {
