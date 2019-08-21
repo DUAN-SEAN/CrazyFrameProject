@@ -59,18 +59,18 @@ namespace GameActorLogic
             float forcepro = (float)Helper.DistanceNoSqrt(Point.Zero(), point);
             physical?.AddThrust(0.00001f * 5 * anglepro * forcepro);
 
-            if (cos > 0.6)
-            {
-                point.Normalize();
-                physical?.SetForwardAngle(Math.Atan2(point.Y , point.X));
-                return;
-            }
+            //if (cos > 0.6)
+            //{
+            //    point.Normalize();
+            //    physical?.SetForwardAngle(Math.Atan2(point.Y , point.X));
+            //    return;
+            //}
             
             if ( cross > 0)
             {
                 physical?.AddForward(0.05);
             }
-            else if (cross < -0)
+            else if (cross < 0)
             {
                 physical?.AddForward(-0.05);
             }

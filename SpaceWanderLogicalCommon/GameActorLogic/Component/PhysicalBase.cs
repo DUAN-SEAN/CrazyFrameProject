@@ -186,7 +186,7 @@ namespace GameActorLogic
         /// </summary>
         public void AddForward(double angular)
         {
-            m_body.AngularVelocity += angular;
+            m_body.AngularVelocity = angular;
         }
 
         public void SetForwardAngle(double angle)
