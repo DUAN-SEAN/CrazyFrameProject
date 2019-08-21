@@ -425,7 +425,7 @@ namespace GameServer.Battle
                 levelReady = false;
                 m_isDispose = true;
 
-                m_players.Clear();
+                m_players?.Clear();
                 m_players = null;
                 m_netHandler = null;
                 Log.Trace("战斗总时长为：" + (DateTime.Now.Ticks - m_startTime.Ticks) / 10000000 + "s");
@@ -451,7 +451,8 @@ namespace GameServer.Battle
         #region BattleSystem
         public void SendCommandToLevel(ICommand commandMsg)
         {
-            Log.Trace("Battle收到一条指令:"+commandMsg.CommandType);
+            Log.Fatal("Battle收到一条指令:" + commandMsg.CommandType);
+            Log.Fatal(commandMsg.ToString());
             m_level.PostCommand(commandMsg);
         }
 

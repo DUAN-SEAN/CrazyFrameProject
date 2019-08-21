@@ -26,5 +26,10 @@ namespace GameActorLogic
             this.ang = ang;
             this.actorid = actorid;
         }
+
+        public override string tostring()
+        {
+            return base.tostring() + " " + ;
+        }
     }
 }

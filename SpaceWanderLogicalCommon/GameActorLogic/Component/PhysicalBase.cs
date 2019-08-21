@@ -102,6 +102,12 @@ namespace GameActorLogic
         #region IPhysicalBase
 
         #region 物理同步
+
+        public Point GetForward()
+        {
+            return m_body.Forward;
+        }
+
         public Point GetVelocity()
         {
             return m_body.Velocity;

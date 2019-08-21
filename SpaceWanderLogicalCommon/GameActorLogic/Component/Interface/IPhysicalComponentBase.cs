@@ -29,6 +29,8 @@ namespace GameActorLogic {
         /// </summary>
         double GetForwardAngle();
 
+        Point GetForward();
+
         /// <summary>
         /// 得到当前速度矢量
         /// </summary>

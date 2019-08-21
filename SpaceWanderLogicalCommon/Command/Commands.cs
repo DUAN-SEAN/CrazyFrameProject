@@ -16,8 +16,10 @@ namespace GameActorLogic
             get => _commandtype;
         }
 
-
-
+        public virtual string tostring()
+        {
+            return _commandtype + "";
+        }
     }
 
 }

@@ -194,10 +194,22 @@ namespace GameServer.Battle
             }
 
             var timerId = battleEntity.GetTimerId();
-          
-            battleEntity.Dispose();//最终Dispose战斗实体 释放资源
+            try
+            {
+                battleEntity.Dispose(); //最终Dispose战斗实体 释放资源
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+                throw;
+            }
+            finally
+            {
+                m_battleDic.Remove(battleId);
+            }
+           
 
-            m_battleDic.Remove(battleId);
+            
 
             //向当前系统发送关闭Timer
             PostLocalMessage(new ReleaseBattleTimerLocalMessage {TimerId = timerId});

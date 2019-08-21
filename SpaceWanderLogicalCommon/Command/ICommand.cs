@@ -9,6 +9,6 @@ namespace GameActorLogic
     public interface ICommand
     {
         Int32 CommandType { get; }
-
+        string tostring();
     }
 }
