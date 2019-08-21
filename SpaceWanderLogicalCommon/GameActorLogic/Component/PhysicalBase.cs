@@ -27,7 +27,7 @@ namespace GameActorLogic
         protected IEnvirinfoBase envirinfo;
 
         //copy值以防物理清除值
-        protected Point Force_copy;
+        protected Point Force_copy = new Point();
         protected double Torque_copy;
         protected double angleVelocity_copy;
         /// <summary>

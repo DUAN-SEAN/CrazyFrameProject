@@ -8,11 +8,12 @@ namespace CrazyEngine.Common
 
 		public double Y { get; set; }
 
-		public Point()
-		{
-		}
+	public Point()
+        {
 
-		public Point(double x, double y)
+        }
+
+    public Point(double x, double y)
 		{
 			X = x;
 			Y = y;
