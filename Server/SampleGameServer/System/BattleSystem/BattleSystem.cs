@@ -18,15 +18,22 @@ namespace GameServer.Battle
     /// </summary>
     public class BattleSystem:BaseSystem, IBattleSystemHandler
     {
+        public override void Update()
+        {
+            //Log.Trace("BattleSystem::LocalMessageCount = " + p_localMessages.Count);
+            base.Update();
+        }
 
         public override void Update(int data1 = 0, long data2 = 0, object data3 = null)
         {
+            
             base.Update(data1, data2, data3);
 
         }
 
         public override Task OnMessage(ILocalMessage msg)
         {
+            
             switch (msg.MessageId)
             {
                 case GameServerConstDefine.BattleSystemCreateBattleBarrier:
@@ -194,22 +201,10 @@ namespace GameServer.Battle
             }
 
             var timerId = battleEntity.GetTimerId();
-            try
-            {
-                battleEntity.Dispose(); //最终Dispose战斗实体 释放资源
-            }
-            catch (Exception e)
-            {
-                Log.Error(e);
-                throw;
-            }
-            finally
-            {
-                m_battleDic.Remove(battleId);
-            }
-           
-
             
+            battleEntity.Dispose();//最终Dispose战斗实体 释放资源
+
+            m_battleDic.Remove(battleId);
 
             //向当前系统发送关闭Timer
             PostLocalMessage(new ReleaseBattleTimerLocalMessage {TimerId = timerId});
@@ -241,6 +236,15 @@ namespace GameServer.Battle
         {
             PostLocalMessageToCtx(new SystemSendNetMessage { Message = message }, players);
 
+        }
+        
+        public Battle GetBattleEntity(ulong battleId)
+        {
+            if(m_battleDic.TryGetValue(battleId,out Battle battle))
+            {
+                return battle;
+            }
+            return null;
         }
         /// <summary>
         /// 获取战斗关卡配置
