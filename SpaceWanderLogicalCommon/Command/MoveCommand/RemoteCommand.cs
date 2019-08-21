@@ -14,12 +14,14 @@ namespace GameActorLogic
         public ulong actorid;
         public RemoteCommand(ulong actorid)
         {
+            currenttime = DateTime.Now.Ticks;
             _commandtype = CommandConstDefine.RemoteCommand;
             this.actorid = actorid;
         }
 
         public RemoteCommand(ulong actorid, float x,float y)
         {
+            currenttime = DateTime.Now.Ticks;
             _commandtype = CommandConstDefine.RemoteCommand;
             remote_x = x;
             remote_y = y;

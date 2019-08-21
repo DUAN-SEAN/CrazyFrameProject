@@ -230,7 +230,7 @@ namespace GameActorLogic
         {
             if(!(command is RemoteCommand commanditme)) return;
             if(!(GetActor(commanditme.actorid) is ShipActorBase ship)) return;
-            ship.Remote(commanditme.remote_x, commanditme.remote_y);
+            ship.Remote(commanditme.remote_x, -commanditme.remote_y);
         }
 
 

@@ -90,6 +90,11 @@ namespace GameActorLogic {
         void AddForward(double ang);
 
         /// <summary>
+        /// 设置朝向角度
+        /// </summary>
+        void SetForwardAngle(double angle);
+
+        /// <summary>
         /// 返回自己的Body实体 用于添加到物理引擎中
         /// </summary>
         Body GetBody();
