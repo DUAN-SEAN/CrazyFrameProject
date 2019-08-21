@@ -26,7 +26,7 @@ namespace GameServer.Battle
 
         public override void Update(int data1 = 0, long data2 = 0, object data3 = null)
         {
-            
+            base.Update(data1, data2, data3);
             base.Update(data1, data2, data3);
 
         }
@@ -137,6 +137,7 @@ namespace GameServer.Battle
 
 
         /// <summary>
+        /// 弃用了原因是太慢
         /// 玩家发来的战斗指令
         /// 根据battleId进行转发 
         /// </summary>

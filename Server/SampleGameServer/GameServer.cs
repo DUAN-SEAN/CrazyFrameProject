@@ -102,10 +102,14 @@ namespace GameServer
             return true;
         }
 
+        public T GetSystem<T>() where T : BaseSystem
+        {
+            m_systemDic.TryGetValue(typeof(T), out BaseSystem t);
+            return t as T;
+        }
 
 
 
-       
         /// <summary>
         /// 获取当前服务器特定配置数据
         /// </summary>
@@ -116,10 +120,6 @@ namespace GameServer
         public SampleGameServerAsyncActionSequenceQueuePool AsyncActionQueuePool { get; private set; }
 
 
-        public T GetSystem<T>()where T:BaseSystem
-        {
-            m_systemDic.TryGetValue(typeof(T), out BaseSystem t);
-            return t as T;
-        }
+     
     }
 }
