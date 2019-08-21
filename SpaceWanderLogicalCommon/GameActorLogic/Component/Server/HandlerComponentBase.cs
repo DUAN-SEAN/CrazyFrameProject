@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Crazy.Common;
 
 
 namespace GameActorLogic
@@ -168,6 +169,7 @@ namespace GameActorLogic
         #region 处理指令
         protected void HandlerCommand(ICommand command)
         {
+           // Log.Trace("指令处理时间："+DateTime.Now);
             switch (command.CommandType)
             {
                 case CommandConstDefine.CommandDefine:
