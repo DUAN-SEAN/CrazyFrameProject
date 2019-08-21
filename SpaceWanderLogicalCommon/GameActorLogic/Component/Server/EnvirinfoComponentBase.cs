@@ -108,7 +108,7 @@ namespace GameActorLogic
             IBaseComponentContainer container = actor as IBaseComponentContainer;
             var body = container.GetPhysicalinternalBase().GetBody();
             var collider = container.GetPhysicalinternalBase().GetCollider();
-            m_collision.colliders.Add(body, collider);
+            m_collision.colliders.Add(body.Id.Value, collider);
             m_engine.World.Add(body);
             _actorList.Add(actor);
         }
@@ -117,7 +117,7 @@ namespace GameActorLogic
         {
             IBaseComponentContainer container = actor as IBaseComponentContainer;
             var body = container.GetPhysicalinternalBase().GetBody();
-            m_collision.colliders.Remove(body);
+            m_collision.colliders.Remove(body.Id.Value);
             m_engine.World.Remove(body);
             _actorList.Remove(actor);
         }

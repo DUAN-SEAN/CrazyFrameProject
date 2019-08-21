@@ -11,7 +11,7 @@ namespace CrazyEngine.External
     {
         public Engine engine;
         public List<Pair> pairList;
-        public Dictionary<Body, Collider> colliders = new Dictionary<Body, Collider>();
+        public Dictionary<int, Collider> colliders = new Dictionary<int, Collider>();
 
         public CollisionEvent(Engine engine)
         {
@@ -24,9 +24,9 @@ namespace CrazyEngine.External
             {
                 Body bodyA = pair.Collision.BodyA;
                 Body bodyB = pair.Collision.BodyB;
-                if (colliders.TryGetValue(bodyA, out Collider colliderA))
+                if (colliders.TryGetValue(bodyA.Id.Value, out Collider colliderA))
                     colliderA.OnCollisionStay(pair.Collision);
-                if (colliders.TryGetValue(bodyB, out Collider colliderB))
+                if (colliders.TryGetValue(bodyB.Id.Value, out Collider colliderB))
                     colliderB.OnCollisionStay(pair.Collision);
             }
         }
