@@ -451,8 +451,8 @@ namespace GameServer.Battle
         #region BattleSystem
         public void SendCommandToLevel(ICommand commandMsg)
         {
-            Log.Fatal("Battle收到一条指令:" + commandMsg.CommandType);
-            Log.Fatal(commandMsg.tostring());
+            //Log.Fatal("Battle收到一条指令:" + commandMsg.CommandType);
+            //Log.Fatal(commandMsg.tostring());
             m_level.PostCommand(commandMsg);
         }
 

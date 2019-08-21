@@ -115,6 +115,11 @@ namespace GameServer
         /// </summary>
         public SampleGameServerAsyncActionSequenceQueuePool AsyncActionQueuePool { get; private set; }
 
-      
+
+        public T GetSystem<T>()where T:BaseSystem
+        {
+            m_systemDic.TryGetValue(typeof(T), out BaseSystem t);
+            return t as T;
+        }
     }
 }

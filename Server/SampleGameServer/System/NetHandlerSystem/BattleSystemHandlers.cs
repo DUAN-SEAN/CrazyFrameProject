@@ -40,8 +40,8 @@ namespace GameServer.System.NetHandlerSystem
                 localMessage.ICommand = bf.Deserialize(ms) as ICommand;//将其反序列化
 
                 //Log.Debug("接收到一条指令:"+localMessage.ICommand.CommandType);
-                GameServer.Instance.PostMessageToSystem<BattleSystem>(localMessage);
-
+                //GameServer.Instance.PostMessageToSystem<BattleSystem>(localMessage);
+                GameServer.Instance.GetSystem<BattleSystem>().GetBattleEntity(message.BattleId)?.SendCommandToLevel(localMessage.ICommand);
             }
         }
     }
