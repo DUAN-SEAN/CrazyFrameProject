@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CrazyEngine.Base;
+using CrazyEngine.Common;
 using GameServer.Configure;
 
 namespace GameActorLogic
@@ -234,6 +235,8 @@ namespace GameActorLogic
         {
             bool result = ConfigActors.TryGetValue(key, out var value);
             actor = value.Clone();
+            ((IBaseComponentContainer)(actor)).GetPhysicalinternalBase().GetBody().Id = Id.Create();
+
             return result;
         }
 

@@ -82,6 +82,31 @@ namespace CrazyEngine.External
             return Helper.DistanceNoSqrt(body.Position, point) <= distance * distance;
         }
 
+        /// <summary>
+        /// 朝向目标
+        /// </summary>
+        /// <param name="body"></param>
+        /// <param name="targetPoint"></param>
+        /// <returns></returns>
+        public static bool ForwardToTarget(this Body body, Point targetPoint)
+        {
+            Point tmp = targetPoint - body.Position;
+            bool isClockwise = Helper.Cross(tmp, body.Forward) > 0;
+            double cos = Helper.IncludedAngle(tmp, body.Forward);
+
+            if (isClockwise)
+            {
+                body.AngularVelocity = -0.01;
+            }
+            else
+            {
+                body.AngularVelocity = 0.01;
+            }
+
+            return cos > 0.9;
+        }
+
+
     }
 
     public struct tempBody

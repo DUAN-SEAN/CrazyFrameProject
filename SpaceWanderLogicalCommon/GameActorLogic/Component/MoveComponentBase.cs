@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,20 +47,22 @@ namespace GameActorLogic
 
         public void Remote(float x, float y)
         {
-            if (physical == null) return;
-            if (physical.GetBody() == null) return;
+            if (x < 0.005 && y < 0.005 && x > -0.005 && y > -0.005) return;
+            if (physical?.GetBody() == null) return;
             var point = new Point(x, y);
+
             var cross = point.Cross(physical?.GetBody().Forward);
             //算出力的大小
             var cos = point.IncludedAngle(physical?.GetBody().Forward);
             float angle = (float)Math.Acos(cos);
             float anglepro = (float) (angle / Math.PI);
-            physical?.AddThrust(0.00001f * 5 * anglepro);
+            float forcepro = (float)Helper.DistanceNoSqrt(Point.Zero(), point);
+            physical?.AddThrust(0.00001f * 5 * anglepro * forcepro);
             if ( cross > 0)
             {
                 physical?.AddForward(0.05);
             }
-            else
+            else if (cross < 0)
             {
                 physical?.AddForward(-0.05);
             }

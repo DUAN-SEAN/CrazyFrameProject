@@ -12,7 +12,7 @@ namespace CrazyEngine.Base
         /// <summary>
         /// 编号
         /// </summary>
-        public Id Id { get; private set; } = Id.Create();
+        public Id Id { get; set; } = Id.Create();
 
         /// <summary>
         /// 类型
