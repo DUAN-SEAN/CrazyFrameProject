@@ -16,12 +16,14 @@ namespace GameActorLogic
         public ulong actorid;
         public ForwardCommand(ulong actorid)
         {
+            currenttime = DateTime.Now.Ticks;
             _commandtype = CommandConstDefine.ForwardCommand;
             this.actorid = actorid;
         }
 
         public ForwardCommand(ulong actorid, double ang = 0.05)
         {
+            currenttime = DateTime.Now.Ticks;
             _commandtype = CommandConstDefine.ForwardCommand;
             this.ang = ang;
             this.actorid = actorid;

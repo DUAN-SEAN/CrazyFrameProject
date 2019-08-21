@@ -189,6 +189,12 @@ namespace GameActorLogic
             m_body.AngularVelocity += angular;
         }
 
+        public void SetForwardAngle(double angle)
+        {
+            m_body.InitAngle(angle);
+            m_body.Angle = angle;
+        }
+
         public Body GetBody()
         {
             return m_body;
