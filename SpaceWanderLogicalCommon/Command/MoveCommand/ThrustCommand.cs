@@ -13,14 +13,12 @@ namespace GameActorLogic
 
         public ThrustCommand(ulong actorid)
         {
-            currenttime = DateTime.Now.Ticks;
             _commandtype = CommandConstDefine.ThrustCommand;
             this.actorid = actorid;
         }
 
         public ThrustCommand(ulong actorid, float thrustproc)
         {
-            currenttime = DateTime.Now.Ticks;
 
             _commandtype = CommandConstDefine.ThrustCommand;
             Thrustproc = thrustproc;

@@ -14,14 +14,12 @@ namespace GameActorLogic
         public ulong actorid;
         public RightCommand(ulong actorid)
         {
-            currenttime = DateTime.Now.Ticks;
             _commandtype = CommandConstDefine.ForwardCommand;
             this.actorid = actorid;
         }
 
         public RightCommand(ulong actorid, double rightang)
         {
-            currenttime = DateTime.Now.Ticks;
 
             _commandtype = CommandConstDefine.ForwardCommand;
             Rightang = rightang;

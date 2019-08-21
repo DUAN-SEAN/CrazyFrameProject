@@ -27,7 +27,6 @@ namespace GameActorLogic
 
         public SkillCommand(ulong actorid,int skilltype,int skillcontrol)
         {
-            currenttime = DateTime.Now.Ticks;
 
             _commandtype = CommandConstDefine.SkillCommand;
             this.skillcontrol = skillcontrol;
