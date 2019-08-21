@@ -38,7 +38,8 @@ namespace GameServer.System.NetHandlerSystem
             using (MemoryStream ms = new MemoryStream(message.Command.ToByteArray()))
             {
                 localMessage.ICommand = bf.Deserialize(ms) as ICommand;//将其反序列化
-
+                //Log.Info("服务器收到指令时间："+ (localMessage.ICommand as Command).currenttime);
+               // (localMessage.ICommand as Command).currenttime = DateTime.Now;
                 //Log.Debug("接收到一条指令:"+localMessage.ICommand.CommandType);
                 //GameServer.Instance.PostMessageToSystem<BattleSystem>(localMessage);
                 GameServer.Instance.GetSystem<BattleSystem>().GetBattleEntity(message.BattleId)?.SendCommandToLevel(localMessage.ICommand);

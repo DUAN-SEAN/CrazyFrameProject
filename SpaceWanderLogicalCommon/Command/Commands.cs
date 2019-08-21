@@ -10,7 +10,7 @@ namespace GameActorLogic
     public class Command:ICommand
     {
         protected int _commandtype = CommandConstDefine.CommandDefine;
-        public long currenttime;
+        public DateTime currenttime;
         public int CommandType
         {
             get => _commandtype;

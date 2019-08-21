@@ -453,6 +453,7 @@ namespace GameServer.Battle
         {
             //Log.Fatal("Battle收到一条指令:" + commandMsg.CommandType);
             //Log.Fatal(commandMsg.tostring());
+            //Log.Trace("指令序列化完成时间："+(commandMsg as Command).currenttime);
             m_level.PostCommand(commandMsg);
         }
 
