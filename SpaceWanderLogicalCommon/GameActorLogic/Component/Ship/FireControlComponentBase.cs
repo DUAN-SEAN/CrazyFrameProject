@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CrazyEngine.Common;
 using CrazyEngine.External;
 namespace GameActorLogic
 {
@@ -142,11 +143,16 @@ namespace GameActorLogic
             {
                 if (skills[j].GetActorType() == i && skills[j] is ISkillContainer actor)
                 {
-                    var weapon = actor.Clone() as ISkillContainer;
-                    skillInitList.Add(weapon);
+
+                    var weaponactor = actor.Clone();
+                    weaponactor.SetActorId(level.GetCreateInternalComponentBase().GetCreateID());
+                    var weapon = weaponactor as ISkillContainer;
+                    weapon.GetBody().Id = Id.Create();
+
                     weapon.OnDestroySkill += WaitSkillDestroy;
-                    level.GetEnvirinfointernalBase().AddActor(weapon as ActorBase);
+                    //level.GetEnvirinfointernalBase().AddActor(weapon as ActorBase);
                     weapon.StartSkill();
+                    skillInitList.Add(weapon);
                     OnFire?.Invoke(weapon);
                 }
             }
