@@ -25,5 +25,10 @@ namespace GameActorLogic
             remote_y = y;
             this.actorid = actorid;
         }
+
+        public override string tostring()
+        {
+            return base.tostring() + "remote x" + remote_x + "remote y" + remote_y;
+        }
     }
 }

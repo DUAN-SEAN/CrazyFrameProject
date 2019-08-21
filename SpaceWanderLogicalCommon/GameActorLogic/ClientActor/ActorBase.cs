@@ -118,6 +118,11 @@ namespace GameActorLogic
             return _physicalBase.GetForwardAngle();
         }
 
+        public Point GetForward()
+        {
+            return _physicalBase.GetForward();
+        }
+
         public Point GetVelocity()
         {
             return _physicalBase.GetVelocity();

@@ -29,7 +29,7 @@ namespace GameActorLogic
 
         public override string tostring()
         {
-            return base.tostring() + " " + ;
+            return base.tostring() ;
         }
     }
 }

@@ -452,7 +452,7 @@ namespace GameServer.Battle
         public void SendCommandToLevel(ICommand commandMsg)
         {
             Log.Fatal("Battle收到一条指令:" + commandMsg.CommandType);
-            Log.Fatal(commandMsg.ToString());
+            Log.Fatal(commandMsg.tostring());
             m_level.PostCommand(commandMsg);
         }
 
