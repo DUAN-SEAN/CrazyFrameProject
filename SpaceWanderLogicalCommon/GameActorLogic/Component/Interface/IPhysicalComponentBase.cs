@@ -51,6 +51,11 @@ namespace GameActorLogic {
         double GetTorque();
 
         /// <summary>
+        /// 角速度
+        /// </summary>
+        void SetAngularVelocity(double vel);
+
+        /// <summary>
         /// 设置物理数据
         /// </summary>
         void SetPhysicalValue(ulong actorId, double angleVelocity, double forceX, double forceY,

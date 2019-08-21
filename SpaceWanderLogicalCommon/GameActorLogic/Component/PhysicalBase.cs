@@ -144,6 +144,11 @@ namespace GameActorLogic
             return Torque_copy;
         }
 
+        public void SetAngularVelocity(double vel)
+        {
+            m_body.AngularVelocity = vel;
+        }
+
         public void SetPhysicalValue(ulong actorId, double angleVelocity, double forceX, double forceY,
             double forwardAngle, double positionX, double positionY, double velocityX, double velocityY, double torque)
 
