@@ -191,7 +191,7 @@ namespace Crazy.ServerBase
         /// <param name="globalConfPath"></param>
         /// <param name="serverDNName"></param>
         /// <returns></returns>
-        protected virtual bool InitlizeServerConfigure<TGlobalConfigClass>(string globalConfPath,
+        public virtual bool InitlizeServerConfigure<TGlobalConfigClass>(string globalConfPath,
             string serverDNName)
             where TGlobalConfigClass :ServerBaseGlobalConfigure, new()
         {
@@ -297,7 +297,7 @@ namespace Crazy.ServerBase
         /// <summary>
         ///当前服务器的配置
         /// </summary>
-        private Crazy.Common.Server m_configServer;
+        protected Crazy.Common.Server m_configServer;
         /// <summary>
         /// 消息分发 所有走网络的消息都通过这个进行分发
         /// </summary>
