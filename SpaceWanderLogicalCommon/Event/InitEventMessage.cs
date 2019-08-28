@@ -35,6 +35,7 @@ namespace GameActorLogic
             haveId = true;
             IsPlayer = isPlayer;
             this.name = name;
+            this.camp = camp;
         }
         public InitEventMessage(Int32 actortype,int camp, double point_x, double point_y, double angle,bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0, string name = "")
         {
@@ -48,6 +49,7 @@ namespace GameActorLogic
             haveId = false;
             IsPlayer = isPlayer;
             this.name = name;
+            this.camp = camp;
         }
     }
 }
