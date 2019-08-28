@@ -26,6 +26,9 @@ namespace GameActorLogic
         /// </summary>
         ulong GetBattleID();
 
+        long GetCurrentFrame();
+        void SetCurrentFrame(long frame);
+
         /// <summary>
         /// 开启关卡
         /// </summary>

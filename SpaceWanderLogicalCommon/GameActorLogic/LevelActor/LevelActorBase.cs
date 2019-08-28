@@ -27,13 +27,22 @@ namespace GameActorLogic
         
         protected bool isStart = false;
 
+        /// <summary>
+        /// 在Update中每次加一
+        /// LevelActor中Update的频率目前受外界调用控制
+        /// 从1开始计算
+        /// </summary>
+        protected long Currentframe;
+
         protected Dictionary<string, ulong> players;
 
         public LevelActorBase()
         {
             players = new Dictionary<string, ulong>();
+            Currentframe = 0;
             //初始化组件
             CreateComponent();
+
         }
 
 
@@ -99,6 +108,17 @@ namespace GameActorLogic
         {
             return battleid;
         }
+
+        public long GetCurrentFrame()
+        {
+            return Currentframe;
+        }
+
+        public void SetCurrentFrame(long frame)
+        {
+            Currentframe = frame;
+        }
+
         /// <summary>
         /// 初始化配置文件
         /// </summary>
@@ -152,11 +172,13 @@ namespace GameActorLogic
         public virtual void Update()
         {
             if(isStart == false) return;
+            Currentframe++;
 
-           _handlerComponent.Update();
+            _handlerComponent.Update();
 
            _envirinfoComponent.Tick();
 
+           
         }
 
         public void Dispose()
