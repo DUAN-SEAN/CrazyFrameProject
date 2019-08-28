@@ -98,6 +98,7 @@ namespace GameActorLogic
                     initEvent.point_x,
                     initEvent.point_y, initEvent.angle, initEvent.IsPlayer, initEvent.weapontype_a,
                     initEvent.weapontype_b);
+                initEvent.actorid = actor.GetActorID();
             }
 
             if (actor != null)
