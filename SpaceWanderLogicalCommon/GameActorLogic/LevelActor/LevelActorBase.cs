@@ -92,7 +92,7 @@ namespace GameActorLogic
         {
             var container = this as ILevelActorComponentBaseContainer;
             container.GetEventComponentBase().AddEventMessagesToHandlerForward(
-                new InitEventMessage(ActorTypeBaseDefine.AnnihilationShipActor, LevelActorBase.EnemyCamp, 0, 0, 0));
+                new InitEventMessage(_createComponent.GetCreateID(), ActorTypeBaseDefine.AnnihilationShipActor, LevelActorBase.EnemyCamp, 0, 0, 0));
         }
 
         #endregion
