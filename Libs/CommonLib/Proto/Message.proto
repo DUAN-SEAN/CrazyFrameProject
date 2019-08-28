@@ -156,3 +156,4 @@ message C2S_ReConnectByLogin  // IMessage
 	string Account = 1;
 	string Password = 2;
 }
+

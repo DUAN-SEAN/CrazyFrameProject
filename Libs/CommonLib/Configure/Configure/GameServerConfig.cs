@@ -18,6 +18,10 @@ namespace GameServer.Configure
         /// </summary>
         [XmlElement("ServerContext")]
         public GameServerContext ServerContext { get; set; }
+
+        [XmlElement("BattleConfig")]
+        public GameBattleConfig GameBattleConfig { get; set; }
+
         /// <summary>
         /// 服务器数据库列表
         /// </summary>
@@ -44,7 +48,9 @@ namespace GameServer.Configure
         /// </summary>
         [XmlArray("ShipConfig"), XmlArrayItem("Ship")]
         public GameShipConfig[] GameShipConfig { get; set; }
-
+        /// <summary>
+        /// 技能配置
+        /// </summary>
         [XmlElement("GameSkillConfig")]
         public GameSkillConfig GameSkillConfig { get; set; }
 
@@ -52,6 +58,14 @@ namespace GameServer.Configure
 
 
     }
+
+    [Serializable]
+    public class GameBattleConfig
+    {
+        [XmlAttribute("TickTime")]
+        public int TickTime { get; set; }
+    }
+
     [Serializable]
     public class GameSkillConfig
     {

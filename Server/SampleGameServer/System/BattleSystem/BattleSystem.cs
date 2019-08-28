@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Task = System.Threading.Tasks.Task;
 
@@ -78,9 +79,11 @@ namespace GameServer.Battle
             m_gameBarrierConfigs = GameServer.Instance.m_gameServerGlobalConfig.BarrierConfigs;
             m_gameShipInfoConfigs =  GameServer.Instance.m_gameServerGlobalConfig.GameShipConfig;
             m_gameSkillConfig = GameServer.Instance.m_gameServerGlobalConfig.GameSkillConfig;
+            m_gameBattleConfig = GameServer.Instance.m_gameServerGlobalConfig.GameBattleConfig;
             if (m_gameBarrierConfigs == null) return false;
             if (m_gameShipInfoConfigs == null) return false;
             if (m_gameSkillConfig == null) return false;
+            if (m_gameBattleConfig == null) return false;
 
             TimerManager = new BattleTimerManager();
             TimerManager.Start();
@@ -98,10 +101,12 @@ namespace GameServer.Battle
         {
             ////TODO:战斗场景在此生成
             ////每场关卡运行在独立的线程中
-            Battle battleEntity = BEntityFactory.CreateEntity<Battle>();
+            //Battle battleEntity = BEntityFactory.CreateEntity<Battle>();
+            Battle battleEntity = new Battle();
+            battleEntity.Start(BattleGenerateId++);
 
             battleEntity.Init(msg.Players, msg.BarrierId, this);
-            var timerId = TimerManager.SetLoopTimer(50, battleEntity.Update);//设置Tick步长
+            var timerId = TimerManager.SetLoopTimer(m_gameBattleConfig.TickTime, battleEntity.Update);//设置Tick步长
             battleEntity.SetTimer(timerId);
             //字典添加
             m_battleDic.Add(battleEntity.Id, battleEntity);
@@ -202,8 +207,10 @@ namespace GameServer.Battle
             }
 
             var timerId = battleEntity.GetTimerId();
-            
-            battleEntity.Dispose();//最终Dispose战斗实体 释放资源
+            lock (battleEntity)
+            {
+                battleEntity.Dispose();//最终Dispose战斗实体 释放资源
+            }
 
             m_battleDic.Remove(battleId);
 
@@ -290,10 +297,17 @@ namespace GameServer.Battle
         /// </summary>
         private GameSkillConfig m_gameSkillConfig;
         /// <summary>
+        /// 战斗配置
+        /// </summary>
+        public GameBattleConfig m_gameBattleConfig;
+        /// <summary>
         /// 战斗系统的Timer管理
         /// </summary>
         public BattleTimerManager TimerManager { get; protected set; }
-
+        /// <summary>
+        /// 生成battleId
+        /// </summary>
+        private static UInt64 BattleGenerateId = 1;
     }
 
     public interface IBattleSystemHandler
