@@ -139,7 +139,7 @@ namespace GameActorLogic
             // 给所有的准备中武器赋值当前的Actor位置坐标和朝向
             foreach (var skillContainer in skills)
             {
-                container.GetPhysicalinternalBase().GetBody().Detection(skillContainer.GetBody(), 1);
+                container.GetPhysicalinternalBase().GetBody().Detection(skillContainer.GetBody(), 3);
                 var cd = skillContainer.GetSkillCd();
                 skillContainer.SetSkillCd((cd + 1) % skillContainer.GetMaxSkillCd());
             }
@@ -148,7 +148,7 @@ namespace GameActorLogic
             // 给激光赋值
             foreach (var skillContainer in weaponlist)
             {
-                container.GetPhysicalinternalBase().GetBody().Detection(skillContainer.GetBody(), 1);
+                container.GetPhysicalinternalBase().GetBody().Detection(skillContainer.GetBody(), 2);
             }
         }
 
