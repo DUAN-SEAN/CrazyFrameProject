@@ -31,6 +31,7 @@ namespace GameActorLogic
         public FireControlComponentBase(IShipComponentBaseContainer container, ILevelActorComponentBaseContainer create)
         {
             skills = new List<ISkillContainer>();
+            skillInitList= new List<ISkillContainer>();
             this.container = container;
             this.level = create;
         }
@@ -39,6 +40,7 @@ namespace GameActorLogic
         {
             this.container = container;
             this.skills = new List<ISkillContainer>();
+            skillInitList = new List<ISkillContainer>();
             this.level = create;
 
             foreach (var weapon in weapons)
