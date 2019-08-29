@@ -12,14 +12,14 @@ namespace GameActorLogic
 
         public GogogoAiComponent(IBaseComponentContainer container) : base(container)
         {
-            container.GetPhysicalinternalBase().GetBody().Velocity = container.GetForward() * 2;
+            container.GetPhysicalinternalBase().GetBody().Velocity = container.GetForward() * 10;
 
         }
 
         public GogogoAiComponent(GogogoAiComponent clone, IBaseComponentContainer container) : base(clone, container)
         {
             
-            container.GetPhysicalinternalBase().GetBody().Velocity = container.GetForward() * 2;
+            container.GetPhysicalinternalBase().GetBody().Velocity = container.GetForward() * 10;
         }
 
         public override AIComponentBase Clone(IBaseComponentContainer container)
