@@ -71,6 +71,19 @@ namespace CrazyEngine.External
         }
 
         /// <summary>
+        /// 将trigger位置摆到body位置前面
+        /// </summary>
+        /// <param name="body"></param>
+        /// <param name="trigger"></param>
+        /// <param name="distance"></param>
+        /// <param name="dectectionLayer"></param>
+        public static void Detection(this Body body, Body trigger, double distance, DectectionLayer dectectionLayer = DectectionLayer.All)
+        {
+            trigger.Position = body.Position + body.Forward * distance;
+            trigger.InitAngle(body.Angle);
+        }
+
+        /// <summary>
         /// 距离检测
         /// </summary>
         /// <param name="body"></param>
