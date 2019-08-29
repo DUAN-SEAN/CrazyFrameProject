@@ -52,7 +52,7 @@ namespace GameActorLogic
             
         }
 
-        public FireControlComponentBase(FireControlComponentBase clone)
+        public FireControlComponentBase(IShipComponentBaseContainer container, FireControlComponentBase clone)
         {
             this.container = clone.container;
             this.skills = new List<ISkillContainer>();

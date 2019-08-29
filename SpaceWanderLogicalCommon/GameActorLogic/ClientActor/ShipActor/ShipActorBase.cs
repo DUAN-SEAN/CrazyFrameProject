@@ -53,7 +53,7 @@ namespace GameActorLogic
             clone._moveComponent = new MoveComponentBase(clone._physicalBase);
 
             clone._aiComponent = clone?._aiComponent?.Clone(clone);
-            clone._fireControlComponent = new FireControlComponentBase(clone._fireControlComponent);
+            clone._fireControlComponent = new FireControlComponentBase(clone,clone._fireControlComponent);
             clone._healthShieldComponent = new HealthShieldComponentBase(clone._healthShieldComponent);
             clone._shipEventComponent = new ShipEventComponentBase(clone._shipEventComponent);
             return clone;
