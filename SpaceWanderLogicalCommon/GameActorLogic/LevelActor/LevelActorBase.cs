@@ -139,7 +139,7 @@ namespace GameActorLogic
             GameSkillConfig gameSkillConfig)
         {
             _configComponent.InitializeConfig(gameShipConfigs.ToArray(), gameSkillConfig, gameBarrierConfigs);
-           
+            
 
             OnLoadingDone?.Invoke();
         }
