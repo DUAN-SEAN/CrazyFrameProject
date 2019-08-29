@@ -36,6 +36,8 @@ namespace GameActorLogic
             base.Update();
             //护盾恢复逻辑需要被Tick
             _healthShieldComponent.Tick();
+            _fireControlComponent.TickFire();
+            _aiComponent?.Update();
         }
 
         public void CreateAiComponent(AIComponentBase ai)
