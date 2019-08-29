@@ -17,6 +17,7 @@ namespace GameServer.Battle
     /// </summary> 
     public class Battle : BEntity, IBroadcastHandler
     {
+        private long t;
         public override void Start(ulong id)
         {
             base.Start(id);
@@ -29,6 +30,7 @@ namespace GameServer.Battle
             m_level.OnGameVictory += OnGameVictory;
             m_players = new List<string>();
             _readyDic = new Dictionary<string, int>();
+            t = DateTime.Now.Ticks;
         }
 
         private void OnGameVictory()
@@ -97,6 +99,8 @@ namespace GameServer.Battle
         /// </summary>
         public override void Update()
         {
+            //Log.Info("BattleId = "+Id+"  帧间隔为："+(DateTime.Now.Ticks-t)/10000);
+            t = DateTime.Now.Ticks;
             base.Update();
             if (IsRelease) return;
             CheckBattleState();
@@ -474,12 +478,22 @@ namespace GameServer.Battle
                 levelReady = false;
                 m_isDispose = true;
 
+                if (_readyDic != null)
+                {
+                    _readyDic.Clear();
+                    _readyDic = null;
+                }
                 m_players?.Clear();
                 m_players = null;
                 m_netHandler = null;
+                m_binaryFormatter = null;
                 Log.Trace("战斗总时长为：" + (DateTime.Now.Ticks - m_startTime.Ticks) / 10000000 + "s");
                 //todo:存入数据库
-                
+
+                m_level.OnLoadingDone -= OnReadyBattleFromLevel;
+                m_level.OnGameFail -= OnGameFail;
+                m_level.OnGameVictory -= OnGameVictory;
+
                 m_level.Dispose();
                 m_level = null;
                 base.Dispose();
@@ -487,7 +501,7 @@ namespace GameServer.Battle
                 m_readyWaitTime = DateTime.MaxValue;
                 m_startTime = DateTime.MaxValue;
                 m_timerId = default;
-                BEntityFactory.Recycle(this);
+                //BEntityFactory.Recycle(this);
 
             }
             catch(Exception e)
@@ -540,6 +554,7 @@ namespace GameServer.Battle
             }
             
         }
+       
         #endregion
 
         #region 属性
