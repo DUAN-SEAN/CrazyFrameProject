@@ -22,8 +22,8 @@ namespace GameActorLogic
         /// </summary>
         bool PauseAILogic();
 
+        AIComponentBase Clone(IBaseComponentContainer container);
 
-        
     }
 
     /// <summary>

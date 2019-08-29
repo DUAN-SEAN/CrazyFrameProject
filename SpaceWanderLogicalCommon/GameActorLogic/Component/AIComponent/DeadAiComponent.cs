@@ -18,6 +18,16 @@ namespace GameActorLogic
             this.time = time;
         }
 
+        public DeadAiComponent(DeadAiComponent clone, IBaseComponentContainer container) :base(clone,container)
+        {
+            inittime = DateTime.Now.Ticks;
+            this.time = clone.time;
+        }
+
+        public override AIComponentBase Clone(IBaseComponentContainer container)
+        {
+            return new DeadAiComponent(this, container);
+        }
 
         public override void TickLogical()
         {

@@ -44,9 +44,13 @@ namespace GameActorLogic
 
         #region 相关方法
 
-        public ActorBase Clone()
+        public virtual ActorBase Clone()
         {
-            return this.MemberwiseClone() as ActorBase;
+            var clone = this.MemberwiseClone() as ActorBase;
+            clone._invariantAttributeComponent = new InvariantAttributeComponentBase(clone._invariantAttributeComponent);
+            clone._physicalBase = new PhysicalBase(clone._physicalBase);
+            clone._moveComponent = new MoveComponentBase(clone._physicalBase);
+            return clone;
         }
 
         public void SetActorId(ulong id)

@@ -41,6 +41,16 @@ namespace GameActorLogic
             this.maxbulletnum = maxbulletnum;
             this.lifetime = lifetime;
         }
+
+        public WeaponAttributeComponentBase(WeaponAttributeComponentBase clone)
+        {
+            this.bulletnum = clone.bulletnum;
+            this.weanpontype = clone.weanpontype;
+            this.maxbulletnum = clone.maxbulletnum;
+            this.lifetime = clone.lifetime;
+            this.weaponcd = clone.weaponcd;
+        }
+
         #region IWeaponAttributeBase
         public int GetBulletNum()
         {

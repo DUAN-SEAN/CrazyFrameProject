@@ -52,6 +52,21 @@ namespace GameActorLogic
             
         }
 
+        public FireControlComponentBase(FireControlComponentBase clone)
+        {
+            this.container = clone.container;
+            this.skills = new List<ISkillContainer>();
+            this.skillInitList = new List<ISkillContainer>();
+            this.level = clone.level;
+
+            foreach (var skillContainer in clone.skills)
+            {
+                if(skillContainer.Clone() is ISkillContainer weaponBase)
+                    this.skills.Add(weaponBase);
+            }
+            
+        }
+
 
 
         protected void WaitSkillDestroy(ISkillContainer weapon)

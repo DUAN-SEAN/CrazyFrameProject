@@ -42,7 +42,18 @@ namespace GameActorLogic
             _aiComponent?.Update();
         }
 
+        public override ActorBase Clone()
+        {
+            var clone = this.MemberwiseClone() as WeaponActorBase;
+            clone._invariantAttributeComponent = new InvariantAttributeComponentBase(clone._invariantAttributeComponent);
+            clone._physicalBase = new PhysicalBase(clone._physicalBase);
+            clone._moveComponent = new MoveComponentBase(clone._physicalBase);
 
+            clone._aiComponent = clone._aiComponent.Clone(clone);
+            clone._weaponAttributeComponent = new WeaponAttributeComponentBase(clone._weaponAttributeComponent);
+            clone._weaponEventComponent = new WeaponEventComponentBase(clone, clone._weaponEventComponent);
+            return clone;
+        }
 
         #region IWeaponBaseContainer
 
@@ -56,6 +67,12 @@ namespace GameActorLogic
         {
             return _aiComponent.PauseAILogic();
         }
+
+        AIComponentBase IAIBase.Clone(IBaseComponentContainer container)
+        {
+            return _aiComponent.Clone(container);
+        }
+
 
         public IAIInternalBase GetAIinternalBase()
         {
