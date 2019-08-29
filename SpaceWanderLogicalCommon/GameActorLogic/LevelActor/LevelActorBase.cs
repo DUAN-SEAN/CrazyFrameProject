@@ -165,7 +165,7 @@ namespace GameActorLogic
             //动态初始化任务配置
             AddPrepareTask();
             //动态初始化敌人
-            PrepareEnemy();
+            //PrepareEnemy();
             isStart = true;
             OnStartDone?.Invoke();
         }
