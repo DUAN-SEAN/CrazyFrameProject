@@ -193,6 +193,8 @@ namespace GameServer.Battle
 
         private void OnSyncState()
         {
+            OnSyncLevelState();
+
             OnSyncTaskState();
 
             OnSyncActor();
@@ -201,6 +203,17 @@ namespace GameServer.Battle
             //分组件封装所有的值
 
         }
+        /// <summary>
+        /// 同步关卡状态
+        /// </summary>
+        private void OnSyncLevelState()
+        {
+            S2C_SyncLevelStateBattleMessage message = new S2C_SyncLevelStateBattleMessage();
+            message.BattleId = Id;
+            message.Frame = m_level.GetCurrentFrame();
+            BroadcastMessage(message);
+        }
+
         /// <summary>
         /// 同步Actor，除了关卡actor
         /// </summary>
@@ -212,6 +225,7 @@ namespace GameServer.Battle
             {
                 actor.IsShip();
                 actor.IsPlayer();
+                actor.IsWeapon();
                 switch (actor.GetActorType())
                 {
                     case ActorTypeBaseDefine.ShipActorNone:
@@ -223,6 +237,14 @@ namespace GameServer.Battle
                     case ActorTypeBaseDefine.AnnihilationShipActor:
                     case ActorTypeBaseDefine.DroneShipActor:
                     case ActorTypeBaseDefine.PlayerShipActor:
+                    case ActorTypeBaseDefine.AntiAircraftGunActor:
+                    case ActorTypeBaseDefine.ContinuousLaserActor:
+                    case ActorTypeBaseDefine.MachineGunActor:
+                    case ActorTypeBaseDefine.PowerLaserActor:
+                    case ActorTypeBaseDefine.TimeBombActor:
+                    case ActorTypeBaseDefine.TorpedoActor:
+                    case ActorTypeBaseDefine.TrackingMissileActor:
+                    case ActorTypeBaseDefine.TriggerBombActor:
                         ShipActorBase shipActorBase = actor as ShipActorBase;
 
                     {

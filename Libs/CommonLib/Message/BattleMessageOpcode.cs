@@ -42,6 +42,9 @@ namespace Crazy.Common
 	[Message(BattleMessageOpcode.SkillState)]
 	public partial class SkillState {}
 
+	[Message(BattleMessageOpcode.S2C_SyncLevelStateBattleMessage)]
+	public partial class S2C_SyncLevelStateBattleMessage : IBattleMessage {}
+
 	[Message(BattleMessageOpcode.C2S_ExitBattleMessage)]
 	public partial class C2S_ExitBattleMessage : IBattleMessage {}
 
@@ -65,7 +68,8 @@ namespace Crazy.Common
 		 public const ushort TaskState = 1011;
 		 public const ushort S2C_SyncSkillStateBattleMessage = 1012;
 		 public const ushort SkillState = 1013;
-		 public const ushort C2S_ExitBattleMessage = 1014;
-		 public const ushort S2C_ExitBattleMessage = 1015;
+		 public const ushort S2C_SyncLevelStateBattleMessage = 1014;
+		 public const ushort C2S_ExitBattleMessage = 1015;
+		 public const ushort S2C_ExitBattleMessage = 1016;
 	}
 }

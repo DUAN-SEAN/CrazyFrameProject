@@ -99,6 +99,13 @@ message S2C_SyncSkillStateBattleMessage // IBattleMessage
 	}
 
 }
+message S2C_SyncLevelStateBattleMessage // IBattleMessage 
+{
+	int32 RpcId = 90;
+	uint64 BattleId = 1;
+	uint64 ActorId = 2;
+	int64 Frame = 3;
+}
 message C2S_ExitBattleMessage // IBattleMessage 
 {
 	int32 RpcId = 90;
