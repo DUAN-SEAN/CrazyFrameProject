@@ -51,7 +51,7 @@ namespace GameActorLogic
         Int32 GetActorType();
 
         /// <summary>
-        /// 获得该对象的浅拷贝
+        /// 获得该对象的深拷贝
         /// </summary>
         ActorBase Clone();
     }

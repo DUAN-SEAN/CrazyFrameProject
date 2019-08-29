@@ -24,7 +24,7 @@ namespace GameActorLogic
             this.physical = physical;
         }
 
-
+       
 
         #region IMoveBase
         public void Left(double proc)

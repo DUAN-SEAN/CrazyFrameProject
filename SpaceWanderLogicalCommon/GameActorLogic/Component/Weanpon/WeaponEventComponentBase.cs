@@ -22,7 +22,14 @@ namespace GameActorLogic
         {
             this.weapon = weapon;
         }
-
+        public WeaponEventComponentBase(IWeaponBaseComponentContainer weapon, WeaponEventComponentBase clone)
+        {
+            
+            this.weapon = weapon;
+            OnStart = clone.OnStart;
+            OnEnd = clone.OnEnd;
+            OnDestroy = clone.OnDestroy;
+        }
         #region IWeaponEventBaes
         public void Start()
         {

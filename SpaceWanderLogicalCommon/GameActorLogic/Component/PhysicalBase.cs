@@ -57,6 +57,14 @@ namespace GameActorLogic
             m_collider = new Collider();
         }
 
+        public PhysicalBase(PhysicalBase clone)
+        {
+            this.envirinfo = clone.envirinfo;
+            this.m_collider = new Collider();
+            // 朱颖 clone body
+            this.m_body = Factory.CreateCloneBody(clone.m_body);
+        }
+
         /// <summary>
         /// 碰撞逻辑检测
         /// 调用相应的碰撞方法

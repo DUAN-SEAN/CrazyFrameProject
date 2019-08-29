@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CrazyEngine.Common;
 
 namespace CrazyEngine.Base
@@ -118,6 +119,31 @@ namespace CrazyEngine.Base
             body.Init(path);
             body.Position = new Point(x, y);
             return body;
+        }
+
+        /// <summary>
+        /// 克隆物体
+        /// </summary>
+        /// <param name="body"></param>
+        /// <returns></returns>
+        public static Body CreateCloneBody(Body body)
+        {
+            var cloneBody = new Body()
+            {
+                Type = body.Type,
+                Angle = body.Angle,
+                Velocity = body.Velocity,
+                Force = body.Force,
+                AngularVelocity = body.AngularVelocity,
+                Static = body.Static,
+                Trigger = body.Trigger
+            };
+
+            cloneBody.Init(body.Vertices.ToPoints().ToList());
+            cloneBody.InitAngle(body.Angle);
+            cloneBody.Position = body.Position;
+
+            return cloneBody;
         }
 
     }

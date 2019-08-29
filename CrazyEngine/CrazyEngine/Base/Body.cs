@@ -24,6 +24,8 @@ namespace CrazyEngine.Base
 
         public Body Parent { get; set; }
 
+        
+
         public void Init(List<Point> path)
         {
             Vertices = Vertices.Create(this, path);

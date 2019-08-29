@@ -78,6 +78,18 @@ namespace GameActorLogic
 
         }
 
+        public HealthShieldComponentBase(HealthShieldComponentBase clone)
+        {
+            _hp = clone._hp;
+            _shieldval = clone._shieldval;
+            _maxshieldVal = clone._maxshieldVal;
+            _shieldrecoverVal = clone._shieldrecoverVal;
+            _addshieldrecoverVal = clone._addshieldrecoverVal;
+            reducerecoveryinterval = clone.reducerecoveryinterval;
+            lastTime = DateTime.Now.Ticks;
+
+        }
+
         public virtual void Tick()
         {
             //TODO 回复护盾功能

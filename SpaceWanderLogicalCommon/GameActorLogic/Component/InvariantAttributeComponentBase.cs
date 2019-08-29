@@ -34,6 +34,12 @@ namespace GameActorLogic
             this.camp = camp;
         }
 
+        public InvariantAttributeComponentBase(InvariantAttributeComponentBase clone)
+        {
+            this.maxSpeed = clone.maxSpeed;
+            this.maxForceProc = clone.maxForceProc;
+            this.camp = clone.camp;
+        }
         #region IInvariantAttributeInternalBase
 
         public void InitializeInvariantAttributeBase(int camp, double maxSpeed, float maxForceProc)
@@ -42,6 +48,9 @@ namespace GameActorLogic
             this.maxForceProc = maxForceProc;
             this.camp = camp;
         }
+
+      
+
 
         public double GetMaxSpeed()
         {

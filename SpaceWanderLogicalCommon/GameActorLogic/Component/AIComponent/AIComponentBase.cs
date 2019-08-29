@@ -20,6 +20,12 @@ namespace GameActorLogic
         {
             this.container = container;
         }
+
+        protected AIComponentBase(AIComponentBase clone, IBaseComponentContainer container)
+        {
+            this.container = container;
+            this.isPause = clone.isPause;
+        }
         public bool StartAILogic()
         {
             isPause = false;
@@ -31,6 +37,9 @@ namespace GameActorLogic
             isPause = true;
             return isPause;
         }
+
+        public abstract AIComponentBase Clone(IBaseComponentContainer container);
+        
 
         /// <summary>
         /// -1表示该AI组件没有被特化 没有AI逻辑

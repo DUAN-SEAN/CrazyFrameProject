@@ -43,6 +43,19 @@ namespace GameActorLogic
             _aiComponent = ai;
         }
 
+        public override ActorBase Clone()
+        {
+            var clone = this.MemberwiseClone() as ShipActorBase;
+            clone._invariantAttributeComponent = new InvariantAttributeComponentBase(clone._invariantAttributeComponent);
+            clone._physicalBase = new PhysicalBase(clone._physicalBase);
+            clone._moveComponent = new MoveComponentBase(clone._physicalBase);
+
+            clone._aiComponent = clone._aiComponent.Clone(clone);
+            clone._fireControlComponent = new FireControlComponentBase(clone._fireControlComponent);
+            clone._healthShieldComponent = new HealthShieldComponentBase(clone._healthShieldComponent);
+            clone._shipEventComponent = new ShipEventComponentBase(clone._shipEventComponent);
+            return clone;
+        }
 
 
         #region IShipBaseContainer
@@ -191,6 +204,10 @@ namespace GameActorLogic
             return _aiComponent.PauseAILogic();
         }
 
+        AIComponentBase IAIBase.Clone(IBaseComponentContainer container)
+        {
+            return _aiComponent.Clone(container);
+        }
 
         #endregion
 
