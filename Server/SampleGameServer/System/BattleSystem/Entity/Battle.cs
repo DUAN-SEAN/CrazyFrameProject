@@ -602,6 +602,5 @@ namespace GameServer.Battle
     {
         void BroadcastMessage(IBattleMessage message);
         ulong GetBattleId();
-
     }
 }
