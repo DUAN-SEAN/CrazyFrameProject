@@ -186,7 +186,7 @@ namespace GameActorLogic
 
             _handlerComponent.Update();
 
-           _envirinfoComponent.Tick();
+            _envirinfoComponent.Tick();
 
            
         }
