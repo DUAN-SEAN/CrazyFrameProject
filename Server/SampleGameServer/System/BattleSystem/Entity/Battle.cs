@@ -387,9 +387,9 @@ namespace GameServer.Battle
             var eventList =  m_level.GetForWardEventMessages();
 
 
-
             foreach (var e in eventList)
             {
+                Log.Info(e.MessageId.ToString());
                 S2C_EventBattleMessage eventBattleMessage = new S2C_EventBattleMessage();
                 using (MemoryStream ms = new MemoryStream())
                 {

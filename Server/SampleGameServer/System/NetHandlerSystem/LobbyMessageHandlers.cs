@@ -52,7 +52,7 @@ namespace GameServer.System.NetHandlerSystem
             }
         }
     }
-
+    [MessageHandler]
     public class C2S_UpLoadPlayerShipInfoMessageHandler:AMRpcHandler<C2S_UpLoadShipInfoReq,S2C_UpLoadShipInfoAck>
     {
         protected async override void Run(ISession playerContext, C2S_UpLoadShipInfoReq message, Action<S2C_UpLoadShipInfoAck> reply)
