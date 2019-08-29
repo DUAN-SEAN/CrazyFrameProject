@@ -28,7 +28,7 @@ namespace GameActorLogic
         public override void TickLogical()
         {
             base.TickLogical();
-            container.AddThrust();
+            container.AddThrust(0.00001f * 5);
         }
     }
 }
