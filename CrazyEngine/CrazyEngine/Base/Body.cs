@@ -35,25 +35,23 @@ namespace CrazyEngine.Base
 
         public void Dispose()
         {
-            Position = null;
-            PositionPrev = null;
-            PositionImpulse = null;
-            ConstraintImpulse = null;
-            Force = null;
-            Velocity = null;
+            _position = null;
+            _velocity = null;
             Bounds.Dispose();
             Region.Dispose();
-            Vertices.Dispose();
+            _vertices.Dispose();
             Axes.Dispose();
-            Parts.Clear();
-            Parts = null;
+            _parts.Clear();
+            _parts = null;
         }
+
 
         public Point Position
         {
             get { return _position; }
             set
             {
+                if(value == null) return;
                 var delta = value - _position;
                 PositionPrev.Offset(delta);
 

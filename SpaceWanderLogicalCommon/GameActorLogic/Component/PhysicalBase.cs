@@ -100,8 +100,8 @@ namespace GameActorLogic
         public void Dispose()
         {
             envirinfo = null;
+
             m_body.Dispose();
-            
             m_body = null;
 
             m_collider = null;
