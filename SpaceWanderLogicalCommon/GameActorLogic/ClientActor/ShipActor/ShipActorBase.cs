@@ -40,6 +40,23 @@ namespace GameActorLogic
             _aiComponent?.Update();
         }
 
+        public override void Dispose()
+        {
+            base.Dispose();
+
+            _aiComponent?.Dispose();
+            _aiComponent = null;
+
+            _fireControlComponent.Dispose();
+            _fireControlComponent = null;
+
+            _healthShieldComponent = null;
+
+            _shipEventComponent = null;
+
+            
+        }
+
         public void CreateAiComponent(AIComponentBase ai)
         {
             _aiComponent = ai;

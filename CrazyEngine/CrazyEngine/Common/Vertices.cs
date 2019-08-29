@@ -18,8 +18,13 @@ namespace CrazyEngine.Common
 		{
 			Vertexes = vertexes;
 		}
+        public void Dispose()
+        {
+            Vertexes.Clear();
+            Vertexes = null;
+        }
 
-		public void Translate(Point pt)
+        public void Translate(Point pt)
 		{
 			foreach (var vertex in Vertexes)
 			{

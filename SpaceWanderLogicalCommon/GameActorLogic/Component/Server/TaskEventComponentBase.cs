@@ -19,6 +19,17 @@ namespace GameActorLogic
             levelcontainer = level;
             taskEvents = new List<ITaskEvent>();
         }
+
+        public void Dispose()
+        {
+            levelcontainer = null;
+            foreach (var taskEvent in taskEvents)
+            {
+                taskEvent.Dispose();
+            }
+            taskEvents.Clear();
+            taskEvents = null;
+        }
         public void AddTaskEvent(ITaskEvent task)
         {
             taskEvents.Add(task);

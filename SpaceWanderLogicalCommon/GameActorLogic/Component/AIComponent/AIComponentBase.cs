@@ -26,6 +26,12 @@ namespace GameActorLogic
             this.container = container;
             this.isPause = clone.isPause;
         }
+
+        public virtual void Dispose()
+        {
+            container = null;
+            isPause = true;
+        }
         public bool StartAILogic()
         {
             isPause = false;

@@ -7,7 +7,13 @@ namespace CrazyEngine.Common
 	{
 		public List<Point> Points { get; private set; } = new List<Point>();
 
-		public void Rotate(double angle)
+        public void Dispose()
+        {
+            Points.Clear();
+            Points = null;
+        }
+
+        public void Rotate(double angle)
 		{
 			if (Math.Sign(angle) == 0)
 				return;

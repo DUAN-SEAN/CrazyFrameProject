@@ -42,6 +42,16 @@ namespace GameActorLogic
             _physicalBase.Update();
         }
 
+        public virtual void Dispose()
+        {
+            level = null;
+            _physicalBase.Dispose();
+            _physicalBase = null;
+            _moveComponent.Dispose();
+            _moveComponent = null;
+            _invariantAttributeComponent = null;
+        }
+
         #region 相关方法
 
         public virtual ActorBase Clone()

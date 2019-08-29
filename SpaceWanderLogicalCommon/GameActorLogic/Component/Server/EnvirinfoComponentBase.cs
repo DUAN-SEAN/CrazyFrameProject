@@ -123,5 +123,22 @@ namespace GameActorLogic
         }
         #endregion
 
+        public void Dispose()
+        {
+            foreach (var actorBase in _actorList)
+            {
+                actorBase.Dispose();
+            }
+            _actorList.Clear();
+            _actorList = null;
+
+            m_collision.Dispose();
+            m_collision = null;
+
+            m_engine = null;
+            m_runner = null;
+           
+            
+        }
     }
 }

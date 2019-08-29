@@ -36,6 +36,11 @@ namespace GameActorLogic
 
         }
 
+        public void Dispose()
+        {
+            levelContainer = null;
+
+        }
         protected ActorBase GetActor(ulong id)
         {
             var allactor = levelContainer.GetEnvirinfointernalBase().GetAllActors();

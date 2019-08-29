@@ -8,7 +8,7 @@ namespace GameActorLogic
 {
     public class TimeTaskCondition:ITaskCondition
     {
-        protected readonly ITaskEvent m_event;
+        protected ITaskEvent m_event;
         protected readonly int key;
         protected readonly long Inittime;
 
@@ -20,6 +20,13 @@ namespace GameActorLogic
             this.key = key;
             Inittime = DateTime.Now.Ticks;
             CurrentValue.Add(key, 0);
+        }
+
+        public void Dispose()
+        {
+            m_event = null;
+            CurrentValue.Clear();
+            CurrentValue = null;
         }
         public bool TickCondition()
         {

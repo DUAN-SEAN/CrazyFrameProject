@@ -23,10 +23,7 @@ namespace GameActorLogic
         ,IShipComponentBaseContainer
     {
 
-        /// <summary>
-        /// 获取AI对内接口
-        /// </summary>
-        IAIInternalBase GetAIinternalBase();
+        
 
 
 

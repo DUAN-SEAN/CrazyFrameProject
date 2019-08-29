@@ -30,6 +30,12 @@ namespace GameActorLogic
             OnEnd = clone.OnEnd;
             OnDestroy = clone.OnDestroy;
         }
+
+        public void Dispose()
+        {
+            weapon = null;
+
+        }
         #region IWeaponEventBaes
         public void Start()
         {

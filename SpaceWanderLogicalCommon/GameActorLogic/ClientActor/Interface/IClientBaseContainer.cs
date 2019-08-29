@@ -54,6 +54,8 @@ namespace GameActorLogic
         /// 获得该对象的深拷贝
         /// </summary>
         ActorBase Clone();
+
+        void Dispose();
     }
 
     /// <summary>

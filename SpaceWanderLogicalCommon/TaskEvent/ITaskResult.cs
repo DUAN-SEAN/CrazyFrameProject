@@ -9,5 +9,7 @@ namespace GameActorLogic
     public interface ITaskResult
     {
         void Execute();
+
+        void Dispose();
     }
 }

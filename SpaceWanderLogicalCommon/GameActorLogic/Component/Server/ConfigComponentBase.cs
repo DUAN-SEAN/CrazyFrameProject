@@ -241,5 +241,13 @@ namespace GameActorLogic
             return result;
         }
 
+        public void Dispose()
+        {
+            level = null;
+            ShipArray = null;
+            Skill = null;
+            BarrierArray = null;
+            ConfigActors = null;
+        }
     }
 }

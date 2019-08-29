@@ -31,5 +31,14 @@ namespace CrazyEngine.External
             }
         }
 
+        public void Dispose()
+        {
+            engine = null;
+            pairList.Clear();
+            pairList = null;
+            colliders.Clear();
+            colliders = null;
+        }
+
     }
 }

@@ -171,6 +171,17 @@ namespace GameActorLogic
             return taskcondition.TryGetValue(key, out value);
         }
 
+        public void Dispose()
+        {
+            levelActor = null;
+            taskCondition.Dispose();
+            taskCondition = null;
+            taskResult.Dispose();
+            taskResult = null;
+            taskcondition.Clear();
+            taskcondition = null;
+        }
+
         public void SetValue(int key, object value)
         {
 

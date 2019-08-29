@@ -9,7 +9,7 @@ namespace GameActorLogic
     public class KillTaskCondition:ITaskCondition
     {
 
-        protected readonly ITaskEvent m_event;
+        protected ITaskEvent m_event;
         protected readonly int key;
         protected ILevelActorComponentBaseContainer level;
 
@@ -43,6 +43,15 @@ namespace GameActorLogic
             if (Currentvalue[key] >= killvalue) return true;
             //未到达
             return false;
+        }
+
+        public void Dispose()
+        {
+            level = null;
+            m_event = null;
+            Currentvalue.Clear();
+            Currentvalue = null;
+
         }
 
         public Dictionary<int, int> ConditionCurrentValues

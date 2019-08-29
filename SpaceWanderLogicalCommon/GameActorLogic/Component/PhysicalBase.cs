@@ -94,6 +94,19 @@ namespace GameActorLogic
             Force_copy = m_body.Force;
             angleVelocity_copy = m_body.AngularVelocity;
             Torque_copy = m_body.Torque;
+
+        }
+
+        public void Dispose()
+        {
+            envirinfo = null;
+            m_body.Dispose();
+            
+            m_body = null;
+
+            m_collider = null;
+            
+            Force_copy = null;
         }
 
         #region Helper

@@ -23,6 +23,11 @@ namespace GameActorLogic
             this.level = level;
         }
 
+        public void Dispose()
+        {
+            level = null;
+        }
+
         #region 创建Actor
 
         public ulong GetCreateID()

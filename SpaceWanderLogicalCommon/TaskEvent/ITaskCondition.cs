@@ -17,6 +17,8 @@ namespace GameActorLogic
         /// </summary>
         bool TickCondition();
 
+        void Dispose();
+
         /// <summary>
         /// 获取当前条件值
         /// </summary>

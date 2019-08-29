@@ -61,6 +61,8 @@ namespace GameActorLogic
         /// </summary>
         bool TryGetValue(int key, out int value);
 
+        void Dispose();
+
         #region 同步逻辑
         /// <summary>
         /// 通过key来设置相应的值

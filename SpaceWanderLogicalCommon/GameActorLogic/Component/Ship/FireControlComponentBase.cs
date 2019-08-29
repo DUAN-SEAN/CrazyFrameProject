@@ -67,7 +67,20 @@ namespace GameActorLogic
             
         }
 
+        public void Dispose()
+        {
+            level = null;
+            container = null;
+            skillInitList.Clear();
+            skillInitList = null;
+            foreach (var skillContainer in skills)
+            {
+                skillContainer.Dispose();
+            }
+            skills.Clear();
+            skills = null;
 
+        }
 
         protected void WaitSkillDestroy(ISkillContainer weapon)
         {

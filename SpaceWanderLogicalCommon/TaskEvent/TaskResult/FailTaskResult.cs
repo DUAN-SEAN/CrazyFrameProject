@@ -16,6 +16,11 @@ namespace GameActorLogic
         {
             this.level = level;
         }
+
+        public void Dispose()
+        {
+            level = null;
+        }
         public void Execute()
         {
             level.GetEventComponentBase().AddEventMessagesToHandlerForward(new FailEventMessage(level.GetLevelID()));

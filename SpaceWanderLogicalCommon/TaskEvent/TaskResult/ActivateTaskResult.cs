@@ -16,6 +16,11 @@ namespace GameActorLogic
             this.level = level;
             this.activateid = activateid;
         }
+
+        public void Dispose()
+        {
+            level = null;
+        }
         public void Execute()
         {
             level.GeTaskEventComponentInternalBase().ActivateTask(activateid);

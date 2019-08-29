@@ -24,7 +24,10 @@ namespace GameActorLogic
             this.physical = physical;
         }
 
-       
+       public void Dispose()
+       {
+           physical = null;
+       }
 
         #region IMoveBase
         public void Left(double proc)

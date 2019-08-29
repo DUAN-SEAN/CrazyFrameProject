@@ -17,6 +17,12 @@ namespace GameActorLogic
             _commands = new List<ICommand>();
         }
 
+        public void Dispose()
+        {
+            _commands.Clear();
+            _commands = null;
+        }
+
         #region ICommandComponentBase
 
         public List<ICommand> GetCommands()

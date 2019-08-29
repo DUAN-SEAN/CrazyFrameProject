@@ -45,6 +45,7 @@ namespace GameActorLogic
 
         }
 
+        
 
         #region 创建组件
 
@@ -195,7 +196,28 @@ namespace GameActorLogic
         {
             isStart = false;
             //TODO 对子对象进行动态Dispose
+            _handlerComponent.Dispose();
+            _handlerComponent = null;
 
+            _commandComponent.Dispose();
+            _commandComponent = null;
+
+
+            _eventComponent.Dispose();
+            _eventComponent = null;
+
+            _taskEventComponent.Dispose();
+            _taskEventComponent = null;
+
+            _createComponent.Dispose();
+            _createComponent = null;
+
+
+            _configComponent.Dispose();
+            _configComponent = null;
+
+            _envirinfoComponent.Dispose();
+            _envirinfoComponent = null;
 
         }
 

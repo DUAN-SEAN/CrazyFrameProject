@@ -33,6 +33,22 @@ namespace CrazyEngine.Base
             Parent = this;
         }
 
+        public void Dispose()
+        {
+            Position = null;
+            PositionPrev = null;
+            PositionImpulse = null;
+            ConstraintImpulse = null;
+            Force = null;
+            Velocity = null;
+            Bounds.Dispose();
+            Region.Dispose();
+            Vertices.Dispose();
+            Axes.Dispose();
+            Parts.Clear();
+            Parts = null;
+        }
+
         public Point Position
         {
             get { return _position; }

@@ -90,6 +90,7 @@ namespace GameActorLogic
 
         }
 
+        
         public virtual void Tick()
         {
             //TODO 回复护盾功能

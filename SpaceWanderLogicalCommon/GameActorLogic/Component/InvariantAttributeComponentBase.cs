@@ -49,7 +49,7 @@ namespace GameActorLogic
             this.camp = camp;
         }
 
-      
+        
 
 
         public double GetMaxSpeed()

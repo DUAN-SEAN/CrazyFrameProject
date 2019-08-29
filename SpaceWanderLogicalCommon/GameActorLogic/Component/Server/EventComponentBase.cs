@@ -29,7 +29,13 @@ namespace GameActorLogic
             _forwardeventmessages = new List<IEventMessage>();
         }
 
-       
+       public void Dispose()
+        {
+            _handleeventmessages.Clear();
+            _handleeventmessages = null;
+            _forwardeventmessages.Clear();
+            _forwardeventmessages = null;
+        }
 
 
         #region 对外接口

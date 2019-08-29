@@ -21,6 +21,19 @@ namespace GameActorLogic
             CreateBaseComponent();
         }
 
+        public override void Dispose()
+        {
+            _aiComponent?.Dispose();
+            _aiComponent = null;
+
+            _weaponEventComponent.Dispose();
+            _weaponEventComponent = null;
+
+            _weaponAttributeComponent = null;
+
+
+        }
+
         protected override void CreateBaseComponent()
         {
             base.CreateBaseComponent();

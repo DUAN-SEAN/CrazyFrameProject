@@ -8,6 +8,12 @@ namespace CrazyEngine.Common
 
         public Point Max { get; set; } = new Point(double.MaxValue, double.MaxValue);
 
+        public void Dispose()
+        {
+            Min = null;
+            Max = null;
+        }
+
         public void Update(Vertices vertices, Point velocity)
         {
             Min.X = vertices.Vertexes.Min(x => x.X);
