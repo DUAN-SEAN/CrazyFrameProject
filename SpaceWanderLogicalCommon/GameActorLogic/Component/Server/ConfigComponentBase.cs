@@ -79,7 +79,8 @@ namespace GameActorLogic
 
             //机关枪
             weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.MachineGunActor, level);
-            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725));
+            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725, isTrigger: true));
+            weaponactor.GetBody().FrictionAir = 0.001;
             weaponactor.CreateAiComponent(new GogogoAiComponent(weaponactor));
             ConfigActors.Add(ActorTypeBaseDefine.MachineGunActor, weaponactor);
             #endregion
