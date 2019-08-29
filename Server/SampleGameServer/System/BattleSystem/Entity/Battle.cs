@@ -223,93 +223,120 @@ namespace GameServer.Battle
             var actors = m_level.GetAllActors();
             foreach (var actor in actors)
             {
-                actor.IsShip();
-                actor.IsPlayer();
-                actor.IsWeapon();
-                switch (actor.GetActorType())
+                
+                if (actor.IsShip())
                 {
-                    case ActorTypeBaseDefine.ShipActorNone:
-                    case ActorTypeBaseDefine.EliteShipActorA:
-                    case ActorTypeBaseDefine.EliteShipActorB:
-                    case ActorTypeBaseDefine.FighterShipActorA:
-                    case ActorTypeBaseDefine.FighterShipActorB:
-                    case ActorTypeBaseDefine.WaspShipActorA:
-                    case ActorTypeBaseDefine.AnnihilationShipActor:
-                    case ActorTypeBaseDefine.DroneShipActor:
-                    case ActorTypeBaseDefine.PlayerShipActor:
-                    case ActorTypeBaseDefine.AntiAircraftGunActor:
-                    case ActorTypeBaseDefine.ContinuousLaserActor:
-                    case ActorTypeBaseDefine.MachineGunActor:
-                    case ActorTypeBaseDefine.PowerLaserActor:
-                    case ActorTypeBaseDefine.TimeBombActor:
-                    case ActorTypeBaseDefine.TorpedoActor:
-                    case ActorTypeBaseDefine.TrackingMissileActor:
-                    case ActorTypeBaseDefine.TriggerBombActor:
-                        ShipActorBase shipActorBase = actor as ShipActorBase;
-
+                    switch (actor.GetActorType())
                     {
-                        S2C_SyncHpShieldStateBattleMessage syncHpShield = new S2C_SyncHpShieldStateBattleMessage
-                        {
-                            BattleId = Id,
-                            ActorId = shipActorBase.GetActorID(),
-                            ActorType = shipActorBase.GetActorType(),
-                            Hp = shipActorBase.GetHP(),
-                            Shield = shipActorBase.GetShieldNum()
-                        };
+                        case ActorTypeBaseDefine.ShipActorNone:
+                        case ActorTypeBaseDefine.EliteShipActorA:
+                        case ActorTypeBaseDefine.EliteShipActorB:
+                        case ActorTypeBaseDefine.FighterShipActorA:
+                        case ActorTypeBaseDefine.FighterShipActorB:
+                        case ActorTypeBaseDefine.WaspShipActorA:
+                        case ActorTypeBaseDefine.AnnihilationShipActor:
+                        case ActorTypeBaseDefine.DroneShipActor:
+                        case ActorTypeBaseDefine.PlayerShipActor:
+                            ShipActorBase shipActorBase = actor as ShipActorBase;
 
-                        BroadcastMessage(syncHpShield);
-                    }
-
-                    {
-                        S2C_SyncPhysicsStateBattleMessage syncPhysics = new S2C_SyncPhysicsStateBattleMessage
-                        {
-                            BattleId = Id,
-                            ActorId = shipActorBase.GetActorID(),
-                            ActorType = shipActorBase.GetActorType(),
-                            AngleVelocity = shipActorBase.GetAngleVelocity(),
-                            ForceX = shipActorBase.GetForce().X,
-                            ForceY = shipActorBase.GetForce().Y,
-                            ForwardAngle = shipActorBase.GetForwardAngle(),
-                            PositionX = shipActorBase.GetPosition().X,
-                            PositionY = shipActorBase.GetPosition().Y,
-                            VelocityX = shipActorBase.GetVelocity().X,
-                            VelocityY = shipActorBase.GetVelocity().Y,
-                            Torque = shipActorBase.GetTorque()
-                        };
-                            //Log.Info(syncPhysics.ToJson());
-                            BroadcastMessage(syncPhysics);
-                    }
-                      
-                    {
-                        S2C_SyncSkillStateBattleMessage syncSkillMsg = new S2C_SyncSkillStateBattleMessage
-                        {
-                            BattleId = Id, ActorId = shipActorBase.GetActorID()
-                        };
-                        foreach (var s in shipActorBase.GetSkills())
-                        {
-                            S2C_SyncSkillStateBattleMessage.Types.SkillState skill =
-                                new S2C_SyncSkillStateBattleMessage.Types.SkillState
+                            {
+                                S2C_SyncHpShieldStateBattleMessage syncHpShield = new S2C_SyncHpShieldStateBattleMessage
                                 {
-                                    ActorId = s.GetActorID(),
-                                    SkillType = s.GetActorType(),
-                                    CD = s.GetSkillCd(),
-                                    Count = s.GetSkillCapacity()
+                                    BattleId = Id,
+                                    ActorId = shipActorBase.GetActorID(),
+                                    ActorType = shipActorBase.GetActorType(),
+                                    Hp = shipActorBase.GetHP(),
+                                    Shield = shipActorBase.GetShieldNum()
                                 };
 
+                                BroadcastMessage(syncHpShield);
+                            }
 
-                            //获取技能Id
-                            //获取技能类型 
+                            {
+                                S2C_SyncPhysicsStateBattleMessage syncPhysics = new S2C_SyncPhysicsStateBattleMessage
+                                {
+                                    BattleId = Id,
+                                    ActorId = shipActorBase.GetActorID(),
+                                    ActorType = shipActorBase.GetActorType(),
+                                    AngleVelocity = shipActorBase.GetAngleVelocity(),
+                                    ForceX = shipActorBase.GetForce().X,
+                                    ForceY = shipActorBase.GetForce().Y,
+                                    ForwardAngle = shipActorBase.GetForwardAngle(),
+                                    PositionX = shipActorBase.GetPosition().X,
+                                    PositionY = shipActorBase.GetPosition().Y,
+                                    VelocityX = shipActorBase.GetVelocity().X,
+                                    VelocityY = shipActorBase.GetVelocity().Y,
+                                    Torque = shipActorBase.GetTorque()
+                                };
+                                //Log.Info(syncPhysics.ToJson());
+                                BroadcastMessage(syncPhysics);
+                            }
 
-                        }
-                        BroadcastMessage(syncSkillMsg);
-                        //syncSkillMsg.Skills.Add();
+                            {
+                                S2C_SyncSkillStateBattleMessage syncSkillMsg = new S2C_SyncSkillStateBattleMessage
+                                {
+                                    BattleId = Id,
+                                    ActorId = shipActorBase.GetActorID()
+                                };
+                                foreach (var s in shipActorBase.GetSkills())
+                                {
+                                    S2C_SyncSkillStateBattleMessage.Types.SkillState skill =
+                                        new S2C_SyncSkillStateBattleMessage.Types.SkillState
+                                        {
+                                            ActorId = s.GetActorID(),
+                                            SkillType = s.GetActorType(),
+                                            CD = s.GetSkillCd(),
+                                            Count = s.GetSkillCapacity()
+                                        };
 
+
+                                    //获取技能Id
+                                    //获取技能类型 
+
+                                }
+                                BroadcastMessage(syncSkillMsg);
+                                //syncSkillMsg.Skills.Add();
+                                break;
+                            }
+                        default: break;
                     }
-
-
-                        break;
-                    default: break;
                 }
+                else if (actor.IsWeapon())
+                {
+                    switch (actor.GetActorType())
+                    {
+                        case ActorTypeBaseDefine.AntiAircraftGunActor:
+                        case ActorTypeBaseDefine.ContinuousLaserActor:
+                        case ActorTypeBaseDefine.MachineGunActor:
+                        case ActorTypeBaseDefine.PowerLaserActor:
+                        case ActorTypeBaseDefine.TimeBombActor:
+                        case ActorTypeBaseDefine.TorpedoActor:
+                        case ActorTypeBaseDefine.TrackingMissileActor:
+                        case ActorTypeBaseDefine.TriggerBombActor:
+                            WeaponActorBase weaponActorBase = actor as WeaponActorBase;
+                            S2C_SyncPhysicsStateBattleMessage syncPhysics = new S2C_SyncPhysicsStateBattleMessage
+                            {
+                                BattleId = Id,
+                                ActorId = weaponActorBase.GetActorID(),
+                                ActorType = weaponActorBase.GetActorType(),
+                                AngleVelocity = weaponActorBase.GetAngleVelocity(),
+                                ForceX = weaponActorBase.GetForce().X,
+                                ForceY = weaponActorBase.GetForce().Y,
+                                ForwardAngle = weaponActorBase.GetForwardAngle(),
+                                PositionX = weaponActorBase.GetPosition().X,
+                                PositionY = weaponActorBase.GetPosition().Y,
+                                VelocityX = weaponActorBase.GetVelocity().X,
+                                VelocityY = weaponActorBase.GetVelocity().Y,
+                                Torque = weaponActorBase.GetTorque()
+                            };
+                            //Log.Info(syncPhysics.ToJson());
+                            BroadcastMessage(syncPhysics);
+                            break;
+                            
+                        default: break;
+                    }
+                }
+
             }
         }
 
