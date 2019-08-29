@@ -119,6 +119,16 @@ namespace GameActorLogic
             Currentframe = frame;
         }
 
+        public Dictionary<string, ulong> GetPlayerDict()
+        {
+            return players;
+        }
+
+        public void SetPlayerDict(Dictionary<string,ulong> dict)
+        {
+            players = dict;
+        }
+
         /// <summary>
         /// 初始化配置文件
         /// </summary>

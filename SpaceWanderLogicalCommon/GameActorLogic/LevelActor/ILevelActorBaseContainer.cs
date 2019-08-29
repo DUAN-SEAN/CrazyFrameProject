@@ -30,6 +30,16 @@ namespace GameActorLogic
         void SetCurrentFrame(long frame);
 
         /// <summary>
+        /// 获取PlayersId与ActorId的映射表
+        /// </summary>
+        Dictionary<string, ulong> GetPlayerDict();
+
+        /// <summary>
+        /// 设置PlayersId与ActorId的映射表
+        /// </summary>
+        void SetPlayerDict(Dictionary<string,ulong> dict);
+
+        /// <summary>
         /// 开启关卡
         /// </summary>
         void Start(List<Tuple<string, int, int, int, int>> players);
