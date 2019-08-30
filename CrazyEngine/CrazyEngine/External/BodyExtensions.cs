@@ -81,6 +81,8 @@ namespace CrazyEngine.External
         {
             trigger.Position = body.Position + body.Forward * distance;
             trigger.InitAngle(body.Angle);
+            trigger.Velocity.X = body.Velocity.X;
+            trigger.Velocity.Y = body.Velocity.Y;
         }
 
         /// <summary>
