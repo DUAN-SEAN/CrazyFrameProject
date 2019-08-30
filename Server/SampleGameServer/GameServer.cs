@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using Crazy.Common;
 using Crazy.NetSharp;
 using Crazy.ServerBase;
 using GameServer.Battle;
+using GameServer.Helper;
 
 
 namespace GameServer
@@ -43,8 +45,12 @@ namespace GameServer
             //数据库配置
             var dbConfig = m_gameServerGlobalConfig.DBConfigInfos[0];
             //Log.Info($"ip:{dbConfig.ConnectHost} port:{dbConfig.Port} serviceName:{dbConfig.DataBase} username:{dbConfig.UserName} password:{dbConfig.Password}");
+            GCNotification.GCDone += i =>
+            {
+                Log.Debug("GC = "+i);
 
-
+            };
+            Log.Debug("GameServer is running with server GC = "+GCSettings.IsServerGC);
             //MongoDBHelper.CreateDBClient(); //测试
             //mongodb测试
 

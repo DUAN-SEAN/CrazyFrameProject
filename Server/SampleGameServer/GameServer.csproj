@@ -120,6 +120,7 @@
     <Compile Include="AsyncActions\DBContextAsyncAction\GameServerDBOperationDefine.cs" />
     <Compile Include="AsyncActions\DBDataDefine\GameServerDBarrierRecord.cs" />
     <Compile Include="AsyncActions\DBDataDefine\GameServerDBPlayer.cs" />
+    <Compile Include="Helper\GCNotification.cs" />
     <Compile Include="LocalMessage\BattleSystemLocalMessages.cs" />
     <Compile Include="LocalMessage\PlayerContextLocalMessages.cs" />
     <Compile Include="PlayerContext\GameServerPlayerContext_ShipHouse.cs" />
