@@ -91,7 +91,8 @@ namespace GameActorLogic
             }
 
             //附上值
-            Force_copy = m_body.Force;
+            Force_copy.X = m_body.Force.X;
+            Force_copy.Y = m_body.Force.Y;
             angleVelocity_copy = m_body.AngularVelocity;
             Torque_copy = m_body.Torque;
 

@@ -51,14 +51,14 @@ namespace GameActorLogic
         /// </summary>
         public void Tick()
         {
-            m_runner.Update(DateTime.Now.Ticks);
-            m_collision.Update();
+           
 
             for (int i = 0; i < _actorList.Count; i++)
             {
                 _actorList[i].Update();
             }
-
+            m_runner.Update(DateTime.Now.Ticks);
+            m_collision.Update();
 
         }
 

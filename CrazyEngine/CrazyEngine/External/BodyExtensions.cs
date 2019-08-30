@@ -80,7 +80,6 @@ namespace CrazyEngine.External
         public static void Detection(this Body body, Body trigger, double distance, DectectionLayer dectectionLayer = DectectionLayer.All)
         {
             trigger.Position = body.Position + body.Forward * distance;
-            trigger.Angle = body.Angle;
             trigger.InitAngle(body.Angle);
         }
 
