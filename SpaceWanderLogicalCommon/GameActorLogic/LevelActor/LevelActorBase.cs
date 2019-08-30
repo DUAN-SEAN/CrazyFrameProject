@@ -93,7 +93,7 @@ namespace GameActorLogic
         {
             var container = this as ILevelActorComponentBaseContainer;
             container.GetEventComponentBase().AddEventMessagesToHandlerForward(
-                new InitEventMessage(actorid:_createComponent.GetCreateID(), actortype:ActorTypeBaseDefine.AnnihilationShipActor,camp: LevelActorBase.EnemyCamp, point_x:0, point_y:0, angle:0));
+                new InitEventMessage(actorid:_createComponent.GetCreateID(), actortype:ActorTypeBaseDefine.FighterShipActorA,camp: LevelActorBase.EnemyCamp, point_x:10, point_y:10, angle:0));
         }
 
         #endregion
