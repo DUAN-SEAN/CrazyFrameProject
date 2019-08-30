@@ -171,10 +171,11 @@ namespace GameActorLogic
         }
 
         public void SetPhysicalValue(ulong actorId, double angleVelocity, double forceX, double forceY,
-            double forwardAngle, double positionX, double positionY, double velocityX, double velocityY, double torque)
+            double forwardAngle, double positionX, double positionY, double positionPrevX, double positionPrevY, double velocityX, double velocityY, double torque)
 
         {
             m_body.Position.Set(positionX,positionY);
+            m_body.PositionPrev.Set(positionPrevX, positionPrevY);
             m_body.Velocity.Set(velocityX,velocityY);
             m_body.Force.Set(forceX,forceY);
             m_body.InitAngle(forwardAngle);

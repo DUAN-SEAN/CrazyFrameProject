@@ -59,7 +59,7 @@ namespace GameActorLogic {
         /// 设置物理数据
         /// </summary>
         void SetPhysicalValue(ulong actorId, double angleVelocity, double forceX, double forceY,
-            double forwardAngle, double positionX, double positionY, double velocityX, double velocityY, double torque);
+            double forwardAngle, double positionX, double positionY,double positionPrevX, double positionPrevY, double velocityX, double velocityY, double torque);
 
 
         
