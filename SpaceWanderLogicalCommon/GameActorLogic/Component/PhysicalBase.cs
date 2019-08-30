@@ -144,6 +144,11 @@ namespace GameActorLogic
             return m_body.Position;
         }
 
+        public Point GetPositionPrev()
+        {
+            return m_body.PositionPrev;
+        }
+
         public double GetForwardAngle()
         {
             return m_body.Angle;

@@ -127,6 +127,11 @@ namespace GameActorLogic
             return _physicalBase.GetPosition();
         }
 
+        public Point GetPositionPrev()
+        {
+            return ((IPhysicalBase) _physicalBase).GetPositionPrev();
+        }
+
         public double GetForwardAngle()
         {
             return _physicalBase.GetForwardAngle();
@@ -163,11 +168,13 @@ namespace GameActorLogic
         }
 
         public void SetPhysicalValue(ulong actorId, double angleVelocity, double forceX, double forceY, double forwardAngle,
-            double positionX, double positionY, double velocityX, double velocityY, double torque)
+            double positionX, double positionY, double positionPrevX, double positionPrevY, double velocityX, double velocityY,
+            double torque)
         {
-            _physicalBase.SetPhysicalValue(actorId, angleVelocity, forceX, forceY, forwardAngle, positionX, positionY, velocityX, velocityY, torque);
+            _physicalBase.SetPhysicalValue(actorId, angleVelocity, forceX, forceY, forwardAngle, positionX, positionY, positionPrevX, positionPrevY, velocityX, velocityY, torque);
         }
 
+     
 
         /// <summary>
         /// 得到当前速度

@@ -268,6 +268,8 @@ namespace GameServer.Battle
                                     ForwardAngle = shipActorBase.GetForwardAngle(),
                                     PositionX = shipActorBase.GetPosition().X,
                                     PositionY = shipActorBase.GetPosition().Y,
+                                    PositionPrevX = shipActorBase.GetPositionPrev().X,
+                                    PositionPrevY = shipActorBase.GetPositionPrev().Y,
                                     VelocityX = shipActorBase.GetVelocity().X,
                                     VelocityY = shipActorBase.GetVelocity().Y,
                                     Torque = shipActorBase.GetTorque()
@@ -329,6 +331,8 @@ namespace GameServer.Battle
                                 ForwardAngle = weaponActorBase.GetForwardAngle(),
                                 PositionX = weaponActorBase.GetPosition().X,
                                 PositionY = weaponActorBase.GetPosition().Y,
+                                PositionPrevX = weaponActorBase.GetPositionPrev().X,
+                                PositionPrevY = weaponActorBase.GetPositionPrev().Y, 
                                 VelocityX = weaponActorBase.GetVelocity().X,
                                 VelocityY = weaponActorBase.GetVelocity().Y,
                                 Torque = weaponActorBase.GetTorque()

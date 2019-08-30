@@ -25,6 +25,10 @@ namespace GameActorLogic {
         Point GetPosition();
 
         /// <summary>
+        /// 获取上一帧位置坐标
+        /// </summary>
+        Point GetPositionPrev();
+        /// <summary>
         /// 获取朝向
         /// </summary>
         double GetForwardAngle();
