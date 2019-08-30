@@ -38,34 +38,35 @@ namespace Crazy.Common {
             "bGVJZBgBIAEoBBINCgVFdmVudBgCIAEoDCKFAQoiUzJDX1N5bmNIcFNoaWVs",
             "ZFN0YXRlQmF0dGxlTWVzc2FnZRINCgVScGNJZBhaIAEoBRIQCghCYXR0bGVJ",
             "ZBgBIAEoBBIPCgdBY3RvcklkGAIgASgEEhEKCUFjdG9yVHlwZRgDIAEoBRIK",
-            "CgJIcBgEIAEoBRIOCgZTaGllbGQYBSABKAUilwIKIVMyQ19TeW5jUGh5c2lj",
+            "CgJIcBgEIAEoBRIOCgZTaGllbGQYBSABKAUixQIKIVMyQ19TeW5jUGh5c2lj",
             "c1N0YXRlQmF0dGxlTWVzc2FnZRINCgVScGNJZBhaIAEoBRIQCghCYXR0bGVJ",
             "ZBgBIAEoBBIPCgdBY3RvcklkGAIgASgEEhEKCUFjdG9yVHlwZRgDIAEoBRIS",
             "CgpQb3NpdGlvbl9YGAQgASgBEhIKClBvc2l0aW9uX1kYBSABKAESFAoMRm9y",
             "d2FyZEFuZ2xlGAYgASgBEhIKClZlbG9jaXR5X1gYByABKAESEgoKVmVsb2Np",
             "dHlfWRgIIAEoARIVCg1BbmdsZVZlbG9jaXR5GAkgASgBEg8KB0ZvcmNlX1gY",
-            "CiABKAESDwoHRm9yY2VfWRgLIAEoARIOCgZUb3JxdWUYDCABKAEi0QIKHlMy",
-            "Q19TeW5jTGV2ZWxUYXNrQmF0dGxlTWVzc2FnZRINCgVScGNJZBhaIAEoBRIQ",
-            "CghCYXR0bGVJZBgBIAEoBBIPCgdBY3RvcklkGAIgASgEEkUKBVRhc2tzGAMg",
-            "AygLMjYuQ3JhenkuQ29tbW9uLlMyQ19TeW5jTGV2ZWxUYXNrQmF0dGxlTWVz",
-            "c2FnZS5UYXNrU3RhdGUatQEKCVRhc2tTdGF0ZRIKCgJJZBgBIAEoBRINCgVT",
-            "dGF0ZRgCIAEoBRJaCgpDb25kaXRpb25zGAMgAygLMkYuQ3JhenkuQ29tbW9u",
-            "LlMyQ19TeW5jTGV2ZWxUYXNrQmF0dGxlTWVzc2FnZS5UYXNrU3RhdGUuQ29u",
-            "ZGl0aW9uc0VudHJ5GjEKD0NvbmRpdGlvbnNFbnRyeRILCgNrZXkYASABKAUS",
-            "DQoFdmFsdWUYAiABKAU6AjgBIuoBCh9TMkNfU3luY1NraWxsU3RhdGVCYXR0",
-            "bGVNZXNzYWdlEg0KBVJwY0lkGFogASgFEhAKCEJhdHRsZUlkGAEgASgEEg8K",
-            "B0FjdG9ySWQYAiABKAQSSAoGU2tpbGxzGAMgAygLMjguQ3JhenkuQ29tbW9u",
-            "LlMyQ19TeW5jU2tpbGxTdGF0ZUJhdHRsZU1lc3NhZ2UuU2tpbGxTdGF0ZRpL",
-            "CgpTa2lsbFN0YXRlEg8KB0FjdG9ySWQYASABKAQSDQoFQ291bnQYAiABKAUS",
-            "CgoCQ0QYAyABKAUSEQoJU2tpbGxUeXBlGAQgASgFImIKH1MyQ19TeW5jTGV2",
-            "ZWxTdGF0ZUJhdHRsZU1lc3NhZ2USDQoFUnBjSWQYWiABKAUSEAoIQmF0dGxl",
-            "SWQYASABKAQSDwoHQWN0b3JJZBgCIAEoBBINCgVGcmFtZRgDIAEoAyJKChVD",
-            "MlNfRXhpdEJhdHRsZU1lc3NhZ2USDQoFUnBjSWQYWiABKAUSEAoIQmF0dGxl",
-            "SWQYASABKAQSEAoIUGxheWVySWQYAiABKAkinwEKFVMyQ19FeGl0QmF0dGxl",
-            "TWVzc2FnZRINCgVScGNJZBhaIAEoBRIQCghCYXR0bGVJZBgBIAEoBBIQCghQ",
-            "bGF5ZXJJZBgCIAEoCRI4CgVzdGF0ZRgDIAEoDjIpLkNyYXp5LkNvbW1vbi5T",
-            "MkNfRXhpdEJhdHRsZU1lc3NhZ2UuU3RhdGUiGQoFU3RhdGUSCAoERmFpbBAA",
-            "EgYKAk9LEAFiBnByb3RvMw=="));
+            "CiABKAESDwoHRm9yY2VfWRgLIAEoARIOCgZUb3JxdWUYDCABKAESFQoNUG9z",
+            "aXRpb25QcmV2WBgNIAEoARIVCg1Qb3NpdGlvblByZXZZGA4gASgBItECCh5T",
+            "MkNfU3luY0xldmVsVGFza0JhdHRsZU1lc3NhZ2USDQoFUnBjSWQYWiABKAUS",
+            "EAoIQmF0dGxlSWQYASABKAQSDwoHQWN0b3JJZBgCIAEoBBJFCgVUYXNrcxgD",
+            "IAMoCzI2LkNyYXp5LkNvbW1vbi5TMkNfU3luY0xldmVsVGFza0JhdHRsZU1l",
+            "c3NhZ2UuVGFza1N0YXRlGrUBCglUYXNrU3RhdGUSCgoCSWQYASABKAUSDQoF",
+            "U3RhdGUYAiABKAUSWgoKQ29uZGl0aW9ucxgDIAMoCzJGLkNyYXp5LkNvbW1v",
+            "bi5TMkNfU3luY0xldmVsVGFza0JhdHRsZU1lc3NhZ2UuVGFza1N0YXRlLkNv",
+            "bmRpdGlvbnNFbnRyeRoxCg9Db25kaXRpb25zRW50cnkSCwoDa2V5GAEgASgF",
+            "Eg0KBXZhbHVlGAIgASgFOgI4ASLqAQofUzJDX1N5bmNTa2lsbFN0YXRlQmF0",
+            "dGxlTWVzc2FnZRINCgVScGNJZBhaIAEoBRIQCghCYXR0bGVJZBgBIAEoBBIP",
+            "CgdBY3RvcklkGAIgASgEEkgKBlNraWxscxgDIAMoCzI4LkNyYXp5LkNvbW1v",
+            "bi5TMkNfU3luY1NraWxsU3RhdGVCYXR0bGVNZXNzYWdlLlNraWxsU3RhdGUa",
+            "SwoKU2tpbGxTdGF0ZRIPCgdBY3RvcklkGAEgASgEEg0KBUNvdW50GAIgASgF",
+            "EgoKAkNEGAMgASgFEhEKCVNraWxsVHlwZRgEIAEoBSJiCh9TMkNfU3luY0xl",
+            "dmVsU3RhdGVCYXR0bGVNZXNzYWdlEg0KBVJwY0lkGFogASgFEhAKCEJhdHRs",
+            "ZUlkGAEgASgEEg8KB0FjdG9ySWQYAiABKAQSDQoFRnJhbWUYAyABKAMiSgoV",
+            "QzJTX0V4aXRCYXR0bGVNZXNzYWdlEg0KBVJwY0lkGFogASgFEhAKCEJhdHRs",
+            "ZUlkGAEgASgEEhAKCFBsYXllcklkGAIgASgJIp8BChVTMkNfRXhpdEJhdHRs",
+            "ZU1lc3NhZ2USDQoFUnBjSWQYWiABKAUSEAoIQmF0dGxlSWQYASABKAQSEAoI",
+            "UGxheWVySWQYAiABKAkSOAoFc3RhdGUYAyABKA4yKS5DcmF6eS5Db21tb24u",
+            "UzJDX0V4aXRCYXR0bGVNZXNzYWdlLlN0YXRlIhkKBVN0YXRlEggKBEZhaWwQ",
+            "ABIGCgJPSxABYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -76,7 +77,7 @@ namespace Crazy.Common {
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.C2S_CommandBattleMessage), global::Crazy.Common.C2S_CommandBattleMessage.Parser, new[]{ "RpcId", "BattleId", "Command" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_EventBattleMessage), global::Crazy.Common.S2C_EventBattleMessage.Parser, new[]{ "RpcId", "BattleId", "Event" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncHpShieldStateBattleMessage), global::Crazy.Common.S2C_SyncHpShieldStateBattleMessage.Parser, new[]{ "RpcId", "BattleId", "ActorId", "ActorType", "Hp", "Shield" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncPhysicsStateBattleMessage), global::Crazy.Common.S2C_SyncPhysicsStateBattleMessage.Parser, new[]{ "RpcId", "BattleId", "ActorId", "ActorType", "PositionX", "PositionY", "ForwardAngle", "VelocityX", "VelocityY", "AngleVelocity", "ForceX", "ForceY", "Torque" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncPhysicsStateBattleMessage), global::Crazy.Common.S2C_SyncPhysicsStateBattleMessage.Parser, new[]{ "RpcId", "BattleId", "ActorId", "ActorType", "PositionX", "PositionY", "ForwardAngle", "VelocityX", "VelocityY", "AngleVelocity", "ForceX", "ForceY", "Torque", "PositionPrevX", "PositionPrevY" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncLevelTaskBattleMessage), global::Crazy.Common.S2C_SyncLevelTaskBattleMessage.Parser, new[]{ "RpcId", "BattleId", "ActorId", "Tasks" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncLevelTaskBattleMessage.Types.TaskState), global::Crazy.Common.S2C_SyncLevelTaskBattleMessage.Types.TaskState.Parser, new[]{ "Id", "State", "Conditions" }, null, null, new pbr::GeneratedClrTypeInfo[] { null, })}),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncSkillStateBattleMessage), global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Parser, new[]{ "RpcId", "BattleId", "ActorId", "Skills" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Types.SkillState), global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Types.SkillState.Parser, new[]{ "ActorId", "Count", "CD", "SkillType" }, null, null, null)}),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncLevelStateBattleMessage), global::Crazy.Common.S2C_SyncLevelStateBattleMessage.Parser, new[]{ "RpcId", "BattleId", "ActorId", "Frame" }, null, null, null),
@@ -1549,6 +1550,8 @@ namespace Crazy.Common {
       forceX_ = other.forceX_;
       forceY_ = other.forceY_;
       torque_ = other.torque_;
+      positionPrevX_ = other.positionPrevX_;
+      positionPrevY_ = other.positionPrevY_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1700,6 +1703,28 @@ namespace Crazy.Common {
       }
     }
 
+    /// <summary>Field number for the "PositionPrevX" field.</summary>
+    public const int PositionPrevXFieldNumber = 13;
+    private double positionPrevX_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public double PositionPrevX {
+      get { return positionPrevX_; }
+      set {
+        positionPrevX_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "PositionPrevY" field.</summary>
+    public const int PositionPrevYFieldNumber = 14;
+    private double positionPrevY_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public double PositionPrevY {
+      get { return positionPrevY_; }
+      set {
+        positionPrevY_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as S2C_SyncPhysicsStateBattleMessage);
@@ -1726,6 +1751,8 @@ namespace Crazy.Common {
       if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(ForceX, other.ForceX)) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(ForceY, other.ForceY)) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(Torque, other.Torque)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(PositionPrevX, other.PositionPrevX)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(PositionPrevY, other.PositionPrevY)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1745,6 +1772,8 @@ namespace Crazy.Common {
       if (ForceX != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(ForceX);
       if (ForceY != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(ForceY);
       if (Torque != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Torque);
+      if (PositionPrevX != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(PositionPrevX);
+      if (PositionPrevY != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(PositionPrevY);
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1806,6 +1835,14 @@ namespace Crazy.Common {
         output.WriteRawTag(97);
         output.WriteDouble(Torque);
       }
+      if (PositionPrevX != 0D) {
+        output.WriteRawTag(105);
+        output.WriteDouble(PositionPrevX);
+      }
+      if (PositionPrevY != 0D) {
+        output.WriteRawTag(113);
+        output.WriteDouble(PositionPrevY);
+      }
       if (RpcId != 0) {
         output.WriteRawTag(208, 5);
         output.WriteInt32(RpcId);
@@ -1857,6 +1894,12 @@ namespace Crazy.Common {
       if (Torque != 0D) {
         size += 1 + 8;
       }
+      if (PositionPrevX != 0D) {
+        size += 1 + 8;
+      }
+      if (PositionPrevY != 0D) {
+        size += 1 + 8;
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1906,6 +1949,12 @@ namespace Crazy.Common {
       }
       if (other.Torque != 0D) {
         Torque = other.Torque;
+      }
+      if (other.PositionPrevX != 0D) {
+        PositionPrevX = other.PositionPrevX;
+      }
+      if (other.PositionPrevY != 0D) {
+        PositionPrevY = other.PositionPrevY;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1964,6 +2013,14 @@ namespace Crazy.Common {
           }
           case 97: {
             Torque = input.ReadDouble();
+            break;
+          }
+          case 105: {
+            PositionPrevX = input.ReadDouble();
+            break;
+          }
+          case 113: {
+            PositionPrevY = input.ReadDouble();
             break;
           }
           case 720: {

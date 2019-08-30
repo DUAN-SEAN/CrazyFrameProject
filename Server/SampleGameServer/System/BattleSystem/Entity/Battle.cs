@@ -393,7 +393,7 @@ namespace GameServer.Battle
 
             foreach (var e in eventList)
             {
-                Log.Info(e.MessageId.ToString());
+                //Log.Info(e.MessageId.ToString());
                 S2C_EventBattleMessage eventBattleMessage = new S2C_EventBattleMessage();
                 using (MemoryStream ms = new MemoryStream())
                 {
