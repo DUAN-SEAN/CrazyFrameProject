@@ -31,7 +31,7 @@ namespace CrazyEngine.Core
 
         private Dictionary<string, TmpPair> _tmpPairs = new Dictionary<string, TmpPair>();
 
-        private List<TmpPair> _tmpPairsList = new List<TmpPair>();
+        public List<TmpPair> _tmpPairsList = new List<TmpPair>();
 
         public static readonly Point BucketSize = new Point(40, 40);
 
@@ -340,7 +340,7 @@ namespace CrazyEngine.Core
             projection.Y = dot.Max();
         }
 
-        class TmpPair
+        public class TmpPair
         {
             public Body BodyA { get; set; }
             public Body BodyB { get; set; }
