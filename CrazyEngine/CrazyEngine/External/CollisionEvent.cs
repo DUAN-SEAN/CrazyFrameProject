@@ -38,7 +38,7 @@ namespace CrazyEngine.External
             engine = null;
             pairList?.Clear();
             pairList = null;
-            colliders.Clear();
+            colliders?.Clear();
             colliders = null;
         }
 

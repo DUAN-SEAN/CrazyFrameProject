@@ -82,7 +82,7 @@ namespace GameActorLogic
             clone._weaponEventComponent = new WeaponEventComponentBase(clone, clone._weaponEventComponent);
             clone._aiComponent = clone?._aiComponent?.Clone(clone);
 
-            AddColliderFunction();
+            clone.AddColliderFunction();
             return clone;
         }
 
