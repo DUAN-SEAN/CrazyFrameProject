@@ -36,23 +36,23 @@ namespace GameServer
         /// <summary>
         /// 飞船Id
         /// </summary>
-        public Int32 shipId =1;
+        public Int32 shipId =1004;
         /// <summary>
         /// 飞船类型
         /// </summary>
-        public Int32 shipType = 1;
+        public Int32 shipType = 1004;
         /// <summary>
         /// 飞船名称
         /// </summary>
-        public string shipName = "默认";
+        public string shipName = "大黄蜂";
         /// <summary>
         /// 配置武器a
         /// </summary>
-        public Int32 weapon_a = 1;
+        public Int32 weapon_a = 1012;
         /// <summary>
         /// 配置武器b
         /// </summary>
-        public Int32 weapon_b = 1;
+        public Int32 weapon_b = 1013;
         /// <summary>
         /// 最后修改的时间
         /// </summary>

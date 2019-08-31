@@ -166,7 +166,7 @@ namespace GameServer.Battle
 
                             var shipInfo = plx.m_gameServerDBPlayer.playerShip;
                             playerShips.Add(new Tuple<string, int, int, int, int>(plyaerId, shipInfo.shipId, shipInfo.shipType, shipInfo.weapon_a, shipInfo.weapon_b));
-                            Log.Info("player shipType = "+shipInfo.shipType);
+                            Log.Info("player shipType = "+shipInfo.shipType +"skillType_a = "+shipInfo.weapon_a+ "skillType_b = " + shipInfo.weapon_b);
                             //playerShips.Add(new Tuple<string, int, int, int, int>(plyaerId, shipInfo.shipId, 1004, 1012, 1013));
 
                         }
