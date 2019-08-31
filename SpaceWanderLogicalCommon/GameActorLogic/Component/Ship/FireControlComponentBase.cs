@@ -100,6 +100,7 @@ namespace GameActorLogic
                 if (actor is IWeaponBaseContainer weaponBase)
                 {
                     weaponBase.SetOwnerID(actor.GetActorID());
+                    weaponBase.SetCamp(actor.GetCamp());
                     this.skills.Add(weaponBase);
                 }
             }
@@ -161,6 +162,7 @@ namespace GameActorLogic
                 var cd = skillContainer.GetSkillCd();
                 skillContainer.SetSkillCd((cd + 1) % skillContainer.GetMaxSkillCd());
                 skillContainer.SetOwnerID(container.GetActorID());
+                skillContainer.SetCamp(container.GetCamp());
             }
 
             var weaponlist = skillInitList.Where(s => s.GetActorType() == ActorTypeBaseDefine.ContinuousLaserActor).ToList();
