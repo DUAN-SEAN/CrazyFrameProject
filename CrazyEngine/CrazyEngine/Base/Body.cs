@@ -38,7 +38,7 @@ namespace CrazyEngine.Base
             _position = null;
             _velocity = null;
             Bounds.Dispose();
-            Region.Dispose();
+            Region?.Dispose();
             _vertices.Dispose();
             Axes.Dispose();
             _parts.Clear();
