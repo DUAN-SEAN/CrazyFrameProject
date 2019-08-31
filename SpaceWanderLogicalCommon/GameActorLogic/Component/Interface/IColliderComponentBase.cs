@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CrazyEngine.Base;
 
 namespace GameActorLogic
 {
@@ -21,11 +22,11 @@ namespace GameActorLogic
         /// <summary>
         /// 碰撞机被进入调用一次
         /// </summary>
-        event Action OnColliderEnter;
+        event Action<Body> OnColliderEnter;
         /// <summary>
         /// 碰撞机中有碰撞持续调用
         /// </summary>
-        event Action OnColliderStay;
+        event Action<Body> OnColliderStay;
         /// <summary>
         /// 碰撞机退出后调用一次
         /// </summary>

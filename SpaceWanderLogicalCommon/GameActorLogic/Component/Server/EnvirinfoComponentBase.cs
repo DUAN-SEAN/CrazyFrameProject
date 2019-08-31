@@ -90,6 +90,11 @@ namespace GameActorLogic
             return _actorList.Find(actor => actor.GetActorID() == id);
         }
 
+        public ActorBase GetActorByBodyId(int bodyid)
+        {
+            return _actorList.Find(actor => actor.GetBodyId() == bodyid);
+        }
+
         #endregion
 
         #region IEnvirinfoInternalBase

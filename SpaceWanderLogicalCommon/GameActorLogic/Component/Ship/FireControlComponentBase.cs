@@ -84,6 +84,7 @@ namespace GameActorLogic
 
         protected void WaitSkillDestroy(ISkillContainer weapon)
         {
+            weapon.OnDestroySkill -= WaitSkillDestroy;
             skillInitList.Remove(weapon);
         }
 
@@ -95,8 +96,12 @@ namespace GameActorLogic
             foreach (var weapon in containers)
             {
                 level.GetConfigComponentInternalBase().GetActorClone(weapon, out var actor);
+                
                 if (actor is IWeaponBaseContainer weaponBase)
+                {
+                    weaponBase.SetOwnerID(actor.GetActorID());
                     this.skills.Add(weaponBase);
+                }
             }
         }
 

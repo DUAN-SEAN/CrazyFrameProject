@@ -15,11 +15,13 @@ namespace CrazyEngine.External
 
         public CollisionEvent(Engine engine)
         {
-            pairList = engine.Pairs.PairList.Where(x => x.Active).ToList();
+            this.engine = engine;
         }
 
         public void Update()
         {
+            pairList = engine.Pairs.PairList.Where(x => x.Active).ToList();
+            
             foreach(var pair in pairList)
             {
                 Body bodyA = pair.Collision.BodyA;

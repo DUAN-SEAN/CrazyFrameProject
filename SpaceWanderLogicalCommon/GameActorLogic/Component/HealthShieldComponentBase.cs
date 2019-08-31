@@ -13,6 +13,13 @@ namespace GameActorLogic
         IHealthShieldBase,
         IHealthShieldInternalBase
     {
+        /// <summary>
+        /// 关卡对象
+        /// </summary>
+        protected ILevelActorComponentBaseContainer level;
+
+        protected IShipBaseContainer Actor;
+
         protected int _hp;
         protected int _shieldval;
 
@@ -56,7 +63,7 @@ namespace GameActorLogic
         #endregion
 
 
-        public HealthShieldComponentBase()
+        public HealthShieldComponentBase(ILevelActorComponentBaseContainer level, IShipBaseContainer ActorId)
         {
             _hp = 3;
             _shieldval = 0;
@@ -64,9 +71,11 @@ namespace GameActorLogic
             _shieldrecoverVal = 1;
             _addshieldrecoverVal = 0;
             reducerecoveryinterval = 0;
+            this.level = level;
+            this.Actor = ActorId;
             lastTime = DateTime.Now.Ticks;
         }
-        public  HealthShieldComponentBase(int hp,int shieldval,int maxshield,int shieldrecoverVal)
+        public  HealthShieldComponentBase(int hp,int shieldval,int maxshield,int shieldrecoverVal, ILevelActorComponentBaseContainer level, IShipBaseContainer ActorId)
         {
             _hp = hp;
             _shieldval = shieldval;
@@ -75,7 +84,8 @@ namespace GameActorLogic
             _addshieldrecoverVal = 0;
             reducerecoveryinterval = 0;
             lastTime = DateTime.Now.Ticks;
-
+            this.level = level;
+            this.Actor = ActorId;
         }
 
         public HealthShieldComponentBase(HealthShieldComponentBase clone)
@@ -87,7 +97,8 @@ namespace GameActorLogic
             _addshieldrecoverVal = clone._addshieldrecoverVal;
             reducerecoveryinterval = clone.reducerecoveryinterval;
             lastTime = DateTime.Now.Ticks;
-
+            level = clone.level;
+            Actor = clone.Actor;
         }
 
         
@@ -198,6 +209,7 @@ namespace GameActorLogic
             if (_hp <= 0)
             {
                 //TODO 调用死亡方法
+                Actor.Destroy();
             }
         }
 
@@ -207,7 +219,10 @@ namespace GameActorLogic
         }
         #endregion
 
-
+        public void Dispose()
+        {
+            level = null;
+        }
 
     }
 }

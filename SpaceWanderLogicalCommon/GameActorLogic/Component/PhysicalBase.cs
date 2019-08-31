@@ -72,13 +72,14 @@ namespace GameActorLogic
         protected void OnCollision(Collision collision)
         {
             isColliderMethodEnter = true;
+            var body = m_body.Id != collision.BodyA.Id ? collision.BodyA : collision.BodyB;
             if(isColliderStay == false)
             {
-                OnColliderEnter?.Invoke();
+                OnColliderEnter?.Invoke(body);
                 isColliderStay = true;
             }
             if (isColliderStay)
-                OnColliderStay?.Invoke();
+                OnColliderStay?.Invoke(body);
         }
 
         public void Update()
@@ -104,7 +105,8 @@ namespace GameActorLogic
 
             m_body.Dispose();
             m_body = null;
-
+           
+            m_collider.OnCollisionStay -= OnCollision;
             m_collider = null;
             
             Force_copy = null;
@@ -138,6 +140,11 @@ namespace GameActorLogic
         public void InitializePhysicalBase()
         {
             
+        }
+
+        public int GetBodyId()
+        {
+            return m_body.Id.Value;
         }
 
         public Point GetPosition()
@@ -241,8 +248,8 @@ namespace GameActorLogic
         #endregion
 
 
-        public event Action OnColliderEnter;
-        public event Action OnColliderStay;
+        public event Action<Body> OnColliderEnter;
+        public event Action<Body> OnColliderStay;
         public event Action OnColliderExit;
     }
 }

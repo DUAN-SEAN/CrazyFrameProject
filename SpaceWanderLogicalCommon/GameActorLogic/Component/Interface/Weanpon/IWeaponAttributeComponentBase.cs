@@ -37,6 +37,19 @@ namespace GameActorLogic
         /// </summary>
         void SetWeaponCd(int cd);
 
+        /// <summary>
+        /// 获取武器伤害
+        /// </summary>
+        int GetWeaponDamage();
+
+        /// <summary>
+        /// 设置武器伤害
+        /// </summary>
+        void SetWeaponDamage(int damage);
+
+        ulong GetOwnerID();
+        
+        void SetOwnerID(ulong id);
 
     }
 

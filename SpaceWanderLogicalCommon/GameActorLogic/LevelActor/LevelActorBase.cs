@@ -272,6 +272,11 @@ namespace GameActorLogic
             return ((IEnvirinfoBase) _envirinfoComponent).GetActor(id);
         }
 
+        public ActorBase GetActorByBodyId(int bodyid)
+        {
+            return _envirinfoComponent.GetActorByBodyId(bodyid);
+        }
+
         #endregion
 
 

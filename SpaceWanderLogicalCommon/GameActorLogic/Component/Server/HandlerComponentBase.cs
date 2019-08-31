@@ -129,9 +129,9 @@ namespace GameActorLogic
                 if (actorBase.GetActorID() == destroyEvent.actorid)
                     actor = actorBase;
             }
+            if(actor == null) return;
             levelContainer.GetEnvirinfointernalBase().RemoveActor(actor);
-
-
+            actor.Dispose();
         }
 
         /// <summary>

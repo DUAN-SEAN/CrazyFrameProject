@@ -53,6 +53,13 @@ namespace GameActorLogic
         }
 
         #region 相关方法
+        /// <summary>
+        /// 添加碰撞函数
+        /// </summary>
+        protected virtual void AddColliderFunction()
+        {
+
+        }
 
         public virtual ActorBase Clone()
         {
@@ -117,6 +124,11 @@ namespace GameActorLogic
         public void InitializePhysicalBase()
         {
             _physicalBase.InitializePhysicalBase();
+        }
+
+        public int GetBodyId()
+        {
+            return ((IPhysicalBase) _physicalBase).GetBodyId();
         }
 
         /// <summary>

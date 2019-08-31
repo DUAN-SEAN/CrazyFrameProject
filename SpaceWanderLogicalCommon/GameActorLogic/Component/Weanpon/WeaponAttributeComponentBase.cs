@@ -25,21 +25,30 @@ namespace GameActorLogic
         protected long lifetime;
 
         protected int weaponcd;
+
+        protected int weaponDamage;
+
+        protected ulong OwnerActorId;
         public WeaponAttributeComponentBase()
         {
             bulletnum = 0;
             weanpontype = -1;
             maxbulletnum = 1;
+            weaponDamage = 20;
             // 3s
             lifetime = 3000000;
+
+            OwnerActorId = ulong.MaxValue;
         }
 
-        public WeaponAttributeComponentBase(int bulletnum,int weanpontype,int maxbulletnum,long lifetime)
+        public WeaponAttributeComponentBase(int bulletnum,int weanpontype,int maxbulletnum,long lifetime,int Damage,ulong OwnerActorId)
         {
             this.bulletnum = bulletnum;
             this.weanpontype = weanpontype;
             this.maxbulletnum = maxbulletnum;
             this.lifetime = lifetime;
+            this.weaponDamage = Damage;
+            this.OwnerActorId = OwnerActorId;
         }
 
         public WeaponAttributeComponentBase(WeaponAttributeComponentBase clone)
@@ -49,6 +58,8 @@ namespace GameActorLogic
             this.maxbulletnum = clone.maxbulletnum;
             this.lifetime = clone.lifetime;
             this.weaponcd = clone.weaponcd;
+            this.weaponDamage = clone.weaponDamage;
+            this.OwnerActorId = clone.OwnerActorId;
         }
 
         #region IWeaponAttributeBase
@@ -75,6 +86,26 @@ namespace GameActorLogic
         public void SetWeaponCd(int cd)
         {
             weaponcd = cd;
+        }
+
+        public void SetWeaponDamage(int damage)
+        {
+            weaponDamage = damage;
+        }
+
+        public ulong GetOwnerID()
+        {
+            return OwnerActorId;
+        }
+
+        public void SetOwnerID(ulong id)
+        {
+            OwnerActorId = id;
+        }
+
+        public int GetWeaponDamage()
+        {
+            return weaponDamage;
         }
 
         #endregion

@@ -27,8 +27,29 @@ namespace GameActorLogic
             base.CreateBaseComponent();
             //应该在构造器参数中添加武器集合信息
             _fireControlComponent = new FireControlComponentBase(this, level);
-            _healthShieldComponent = new HealthShieldComponentBase();
+            _healthShieldComponent = new HealthShieldComponentBase(level,this);
             _shipEventComponent = new ShipEventComponentBase();
+        }
+
+        protected override void AddColliderFunction()
+        {
+            _physicalBase.OnColliderEnter += Collider;
+        }
+
+        protected void Collider(Body body)
+        {
+
+            var actor = level.GetEnvirinfointernalBase().GetActorByBodyId(body.Id.Value);
+            if (actor.GetCamp() == GetCamp()) return;
+            if (actor is WeaponActorBase weapon)
+            {
+                _healthShieldComponent.LossBlood(weapon.GetWeaponDamage());
+            }
+
+            if (actor is ShipActorBase ship)
+            {
+                _healthShieldComponent.LossBlood(1);
+            }
         }
 
         public override void Update()
@@ -43,6 +64,7 @@ namespace GameActorLogic
         public override void Dispose()
         {
             base.Dispose();
+            _physicalBase.OnColliderEnter -= Collider;
 
             _aiComponent?.Dispose();
             _aiComponent = null;

@@ -17,7 +17,6 @@ namespace GameActorLogic
 
         public GogogoAiComponent(GogogoAiComponent clone, IBaseComponentContainer container) : base(clone, container)
         {
-            
             container.GetPhysicalinternalBase().GetBody().Velocity = container.GetForward() * 10;
         }
 
@@ -30,7 +29,6 @@ namespace GameActorLogic
         {
             base.TickLogical();
             container.GetPhysicalinternalBase().GetBody().Velocity = container.GetForward() * 10;
-
         }
     }
 }

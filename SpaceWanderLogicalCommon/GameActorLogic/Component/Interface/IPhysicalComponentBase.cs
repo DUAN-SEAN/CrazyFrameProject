@@ -16,6 +16,7 @@ namespace GameActorLogic {
     {
         void InitializePhysicalBase();
 
+        int GetBodyId();
 
         #region 物理同步
 

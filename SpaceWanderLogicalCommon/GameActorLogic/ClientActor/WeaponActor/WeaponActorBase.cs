@@ -23,6 +23,7 @@ namespace GameActorLogic
 
         public override void Dispose()
         {
+            _physicalBase.OnColliderEnter -= Collider;
             _aiComponent?.Dispose();
             _aiComponent = null;
 
@@ -34,13 +35,27 @@ namespace GameActorLogic
 
         }
 
+
         protected override void CreateBaseComponent()
         {
             base.CreateBaseComponent();
             _weaponEventComponent = new WeaponEventComponentBase(this);
             _weaponAttributeComponent = new WeaponAttributeComponentBase();
 
+            AddColliderFunction();
+        }
 
+        protected override void AddColliderFunction()
+        {
+            _physicalBase.OnColliderEnter += Collider;
+        }
+
+        protected void Collider(Body body)
+        {
+
+            var actor = level.GetEnvirinfointernalBase().GetActorByBodyId(body.Id.Value);
+            if (actor.GetCamp() == GetCamp()) return;
+            DestroySkill();
         }
 
         public void CreateAiComponent(AIComponentBase ai)
@@ -99,7 +114,7 @@ namespace GameActorLogic
         {
             var position = GetPosition();
             level.AddEventMessagesToHandlerForward(new InitEventMessage(ActorID, GetCamp(), ActorType, position.X,
-                position.Y, GetForwardAngle()));
+                position.Y, GetForwardAngle(),ownerid:GetOwnerID()));
             _weaponEventComponent.Start();
         }
 
@@ -160,6 +175,26 @@ namespace GameActorLogic
         public void SetWeaponCd(int cd)
         {
             ((IWeaponAttributeBase) _weaponAttributeComponent).SetWeaponCd(cd);
+        }
+
+        public int GetWeaponDamage()
+        {
+            return _weaponAttributeComponent.GetWeaponDamage();
+        }
+
+        public void SetWeaponDamage(int damage)
+        {
+            _weaponAttributeComponent.SetWeaponDamage(damage);
+        }
+
+        public ulong GetOwnerID()
+        {
+            return _weaponAttributeComponent.GetOwnerID();
+        }
+
+        public void SetOwnerID(ulong id)
+        {
+            _weaponAttributeComponent.SetOwnerID(id);
         }
 
         public int GetSkillCapacity()

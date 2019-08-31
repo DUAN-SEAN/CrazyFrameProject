@@ -41,6 +41,8 @@ namespace GameActorLogic
         /// </summary>
         ActorBase GetActor(ulong id);
 
+        ActorBase GetActorByBodyId(int bodyid);
+
 
     }
 

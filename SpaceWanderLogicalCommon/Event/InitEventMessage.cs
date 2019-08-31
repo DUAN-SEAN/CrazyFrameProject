@@ -11,6 +11,7 @@ namespace GameActorLogic
     public class InitEventMessage : BattleEventMessageBase
     {
         public ulong actorid;
+        public ulong onwerid;
         public Int32 actortype;
         public int camp;
         public double point_x;
@@ -22,7 +23,7 @@ namespace GameActorLogic
         public Int32 weapontype_b;
         public string name;
 
-        public InitEventMessage(ulong actorid,int camp, Int32 actortype, double point_x, double point_y, double angle,bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0,string name = "")
+        public InitEventMessage(ulong actorid,int camp, Int32 actortype, double point_x, double point_y, double angle,bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0,string name = "", ulong ownerid = ulong.MaxValue)
         {
             _eventMessageId = EventMessageConstDefine.InitEvent;
             this.actorid = actorid;
@@ -36,8 +37,9 @@ namespace GameActorLogic
             IsPlayer = isPlayer;
             this.name = name;
             this.camp = camp;
+            this.onwerid = ownerid;
         }
-        public InitEventMessage(Int32 actortype,int camp, double point_x, double point_y, double angle,bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0, string name = "")
+        public InitEventMessage(Int32 actortype,int camp, double point_x, double point_y, double angle,bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0, string name = "", ulong ownerid = ulong.MaxValue)
         {
             _eventMessageId = EventMessageConstDefine.InitEvent;
             this.actortype = actortype;
@@ -50,6 +52,7 @@ namespace GameActorLogic
             IsPlayer = isPlayer;
             this.name = name;
             this.camp = camp;
+            this.onwerid = ownerid;
         }
     }
 }
