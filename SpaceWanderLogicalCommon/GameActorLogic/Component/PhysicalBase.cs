@@ -98,7 +98,7 @@ namespace GameActorLogic
             Force_copy.Y = m_body.Force.Y;
             angleVelocity_copy = m_body.AngularVelocity;
             Torque_copy = m_body.Torque;
-
+            isColliderMethodEnter = false;
         }
 
         public void Dispose()
