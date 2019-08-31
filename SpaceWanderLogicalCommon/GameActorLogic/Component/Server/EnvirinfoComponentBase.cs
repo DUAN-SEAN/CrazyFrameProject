@@ -123,9 +123,14 @@ namespace GameActorLogic
             IBaseComponentContainer container = actor as IBaseComponentContainer;
             var body = container.GetPhysicalinternalBase().GetBody();
             m_collision.colliders.Remove(body.Id.Value);
-            m_engine.Pairs.PairList.RemoveAll(o => o.Collision.BodyA == body || o.Collision.BodyB == body);
-            m_engine._tmpPairsList.RemoveAll(o => o.BodyA == body || o.BodyB == body);
             m_engine.World.Remove(body);
+            var pairs = m_engine.Pairs.PairList.FindAll(o => o.Collision.BodyA == body || o.Collision.BodyB == body);
+            foreach (var pair in pairs)
+            {
+                m_engine._tmpPairs.Remove(pair.Id);
+            }
+            m_engine._tmpPairsList.RemoveAll(o => o.BodyA == body || o.BodyB == body);
+            m_engine.Pairs.PairList.RemoveAll(o => o.Collision.BodyA == body || o.Collision.BodyB == body);
             _actorList.Remove(actor);
         }
         #endregion

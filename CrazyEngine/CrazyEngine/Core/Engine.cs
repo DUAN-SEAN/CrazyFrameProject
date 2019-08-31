@@ -29,7 +29,7 @@ namespace CrazyEngine.Core
 
         public Dictionary<string, List<Body>> Buckets { get; set; } = new Dictionary<string, List<Body>>();
 
-        private Dictionary<string, TmpPair> _tmpPairs = new Dictionary<string, TmpPair>();
+        public Dictionary<string, TmpPair> _tmpPairs = new Dictionary<string, TmpPair>();
 
         public List<TmpPair> _tmpPairsList = new List<TmpPair>();
 
