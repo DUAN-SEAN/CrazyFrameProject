@@ -99,6 +99,8 @@ namespace GameActorLogic
             clone._fireControlComponent = new FireControlComponentBase(clone,clone._fireControlComponent);
             clone._healthShieldComponent = new HealthShieldComponentBase(clone._healthShieldComponent);
             clone._shipEventComponent = new ShipEventComponentBase(clone._shipEventComponent);
+
+            AddColliderFunction();
             return clone;
         }
 
