@@ -105,7 +105,8 @@ namespace CrazyEngine.Core
 
                 if ((bodyA.Static || bodyA.Sleep) && (bodyB.Static || bodyB.Sleep))
                     continue;
-                if (bodyA.Bounds == null || bodyB.Bounds == null)
+                if (bodyA.Bounds == null || bodyB.Bounds == null || bodyA.Bounds.Max == null || bodyA.Bounds.Min == null||
+                    bodyB.Bounds.Max == null || bodyB.Bounds.Min == null)
                     continue;
                 if (!bodyA.Bounds.Intersect(bodyB.Bounds))
                     continue;
