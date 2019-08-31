@@ -63,6 +63,8 @@ namespace GameActorLogic
             this.m_collider = new Collider();
             // 朱颖 clone body
             this.m_body = Factory.CreateCloneBody(clone.m_body);
+            m_collider.OnCollisionStay += OnCollision;
+
         }
 
         /// <summary>

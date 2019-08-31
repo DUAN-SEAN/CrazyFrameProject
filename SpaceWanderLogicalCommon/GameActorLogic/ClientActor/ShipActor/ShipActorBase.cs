@@ -100,7 +100,7 @@ namespace GameActorLogic
             clone._healthShieldComponent = new HealthShieldComponentBase(clone._healthShieldComponent);
             clone._shipEventComponent = new ShipEventComponentBase(clone._shipEventComponent);
 
-            AddColliderFunction();
+            clone.AddColliderFunction();
             return clone;
         }
 

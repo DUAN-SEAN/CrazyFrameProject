@@ -105,6 +105,12 @@ namespace CrazyEngine.Common
             Y = y;
         }
 
+        public void Set(Point point)
+        {
+            X = point.X;
+            Y = point.Y;
+        }
+
         public Point Normalized
         {
             get

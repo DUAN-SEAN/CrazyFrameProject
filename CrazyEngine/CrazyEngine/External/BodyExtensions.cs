@@ -79,13 +79,11 @@ namespace CrazyEngine.External
         /// <param name="dectectionLayer"></param>
         public static void Detection(this Body body, Body trigger, double distance, DectectionLayer dectectionLayer = DectectionLayer.All)
         {
-            trigger.Position.X = body.Position.X + body.Forward.X * distance;
-            trigger.Position.Y = body.Position.Y + body.Forward.Y * distance;
+            trigger.Position.Set(body.Position);
             trigger.InitAngle(body.Angle);
-            //trigger.Velocity.X = body.Velocity.X;
-            //trigger.Velocity.Y = body.Velocity.Y;
-            trigger.Velocity.X = (body.Speed + 20) * trigger.Forward.X;
-            trigger.Velocity.Y = (body.Speed + 20) * trigger.Forward.Y;
+            trigger.PositionPrev.Set(body.PositionPrev - body.Forward * 10);
+            trigger.Velocity.Set(body.Velocity + body.Forward * 10);
+            trigger.AngularVelocity = 0;
 
         }
 
