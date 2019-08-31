@@ -23,6 +23,8 @@ namespace GameServer.Battle
             base.Start(id);
             m_isDispose = false;
             m_startTime = DateTime.Now;
+            m_battleInterval = 0L;
+            m_oldIntervalTime = DateTime.Now.Ticks;
             m_level = new LevelActorBase();
             m_binaryFormatter = new BinaryFormatter();
             m_level.OnLoadingDone += OnReadyBattleFromLevel;
@@ -101,6 +103,10 @@ namespace GameServer.Battle
         {
             //Log.Info("BattleId = "+Id+"  帧间隔为："+(DateTime.Now.Ticks-t)/10000);
             t = DateTime.Now.Ticks;
+
+            m_battleInterval = DateTime.Now.Ticks - m_oldIntervalTime;
+            m_oldIntervalTime = DateTime.Now.Ticks;
+
             base.Update();
             if (IsRelease) return;
             CheckBattleState();
@@ -214,6 +220,8 @@ namespace GameServer.Battle
         {
             S2C_SyncLevelStateBattleMessage message = new S2C_SyncLevelStateBattleMessage();
             message.BattleId = Id;
+            message.IntervalTime = m_battleInterval;
+            message.Time = DateTime.Now.Ticks;
             message.Frame = m_level.GetCurrentFrame();
             BroadcastMessage(message);
         }
@@ -397,7 +405,7 @@ namespace GameServer.Battle
 
             foreach (var e in eventList)
             {
-                //Log.Info(e.MessageId.ToString());
+                Log.Info(e.MessageId.ToString());
                 S2C_EventBattleMessage eventBattleMessage = new S2C_EventBattleMessage();
                 using (MemoryStream ms = new MemoryStream())
                 {
@@ -597,6 +605,14 @@ namespace GameServer.Battle
         /// 网路通信句柄
         /// </summary>
         private IBattleSystemHandler m_netHandler;
+        /// <summary>
+        /// 战斗帧屏时间
+        /// </summary>
+        private long m_battleInterval;
+
+        private long m_oldIntervalTime;
+
+
 
         private BinaryFormatter m_binaryFormatter;
 

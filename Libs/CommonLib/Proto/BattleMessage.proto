@@ -107,6 +107,8 @@ message S2C_SyncLevelStateBattleMessage // IBattleMessage
 	uint64 BattleId = 1;
 	uint64 ActorId = 2;
 	int64 Frame = 3;
+	int64 IntervalTime = 4;
+	int64 Time = 5;
 }
 message C2S_ExitBattleMessage // IBattleMessage 
 {

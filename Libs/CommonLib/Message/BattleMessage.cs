@@ -58,15 +58,16 @@ namespace Crazy.Common {
             "CgdBY3RvcklkGAIgASgEEkgKBlNraWxscxgDIAMoCzI4LkNyYXp5LkNvbW1v",
             "bi5TMkNfU3luY1NraWxsU3RhdGVCYXR0bGVNZXNzYWdlLlNraWxsU3RhdGUa",
             "SwoKU2tpbGxTdGF0ZRIPCgdBY3RvcklkGAEgASgEEg0KBUNvdW50GAIgASgF",
-            "EgoKAkNEGAMgASgFEhEKCVNraWxsVHlwZRgEIAEoBSJiCh9TMkNfU3luY0xl",
-            "dmVsU3RhdGVCYXR0bGVNZXNzYWdlEg0KBVJwY0lkGFogASgFEhAKCEJhdHRs",
-            "ZUlkGAEgASgEEg8KB0FjdG9ySWQYAiABKAQSDQoFRnJhbWUYAyABKAMiSgoV",
-            "QzJTX0V4aXRCYXR0bGVNZXNzYWdlEg0KBVJwY0lkGFogASgFEhAKCEJhdHRs",
-            "ZUlkGAEgASgEEhAKCFBsYXllcklkGAIgASgJIp8BChVTMkNfRXhpdEJhdHRs",
-            "ZU1lc3NhZ2USDQoFUnBjSWQYWiABKAUSEAoIQmF0dGxlSWQYASABKAQSEAoI",
-            "UGxheWVySWQYAiABKAkSOAoFc3RhdGUYAyABKA4yKS5DcmF6eS5Db21tb24u",
-            "UzJDX0V4aXRCYXR0bGVNZXNzYWdlLlN0YXRlIhkKBVN0YXRlEggKBEZhaWwQ",
-            "ABIGCgJPSxABYgZwcm90bzM="));
+            "EgoKAkNEGAMgASgFEhEKCVNraWxsVHlwZRgEIAEoBSKGAQofUzJDX1N5bmNM",
+            "ZXZlbFN0YXRlQmF0dGxlTWVzc2FnZRINCgVScGNJZBhaIAEoBRIQCghCYXR0",
+            "bGVJZBgBIAEoBBIPCgdBY3RvcklkGAIgASgEEg0KBUZyYW1lGAMgASgDEhQK",
+            "DEludGVydmFsVGltZRgEIAEoAxIMCgRUaW1lGAUgASgDIkoKFUMyU19FeGl0",
+            "QmF0dGxlTWVzc2FnZRINCgVScGNJZBhaIAEoBRIQCghCYXR0bGVJZBgBIAEo",
+            "BBIQCghQbGF5ZXJJZBgCIAEoCSKfAQoVUzJDX0V4aXRCYXR0bGVNZXNzYWdl",
+            "Eg0KBVJwY0lkGFogASgFEhAKCEJhdHRsZUlkGAEgASgEEhAKCFBsYXllcklk",
+            "GAIgASgJEjgKBXN0YXRlGAMgASgOMikuQ3JhenkuQ29tbW9uLlMyQ19FeGl0",
+            "QmF0dGxlTWVzc2FnZS5TdGF0ZSIZCgVTdGF0ZRIICgRGYWlsEAASBgoCT0sQ",
+            "AWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -80,7 +81,7 @@ namespace Crazy.Common {
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncPhysicsStateBattleMessage), global::Crazy.Common.S2C_SyncPhysicsStateBattleMessage.Parser, new[]{ "RpcId", "BattleId", "ActorId", "ActorType", "PositionX", "PositionY", "ForwardAngle", "VelocityX", "VelocityY", "AngleVelocity", "ForceX", "ForceY", "Torque", "PositionPrevX", "PositionPrevY" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncLevelTaskBattleMessage), global::Crazy.Common.S2C_SyncLevelTaskBattleMessage.Parser, new[]{ "RpcId", "BattleId", "ActorId", "Tasks" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncLevelTaskBattleMessage.Types.TaskState), global::Crazy.Common.S2C_SyncLevelTaskBattleMessage.Types.TaskState.Parser, new[]{ "Id", "State", "Conditions" }, null, null, new pbr::GeneratedClrTypeInfo[] { null, })}),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncSkillStateBattleMessage), global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Parser, new[]{ "RpcId", "BattleId", "ActorId", "Skills" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Types.SkillState), global::Crazy.Common.S2C_SyncSkillStateBattleMessage.Types.SkillState.Parser, new[]{ "ActorId", "Count", "CD", "SkillType" }, null, null, null)}),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncLevelStateBattleMessage), global::Crazy.Common.S2C_SyncLevelStateBattleMessage.Parser, new[]{ "RpcId", "BattleId", "ActorId", "Frame" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SyncLevelStateBattleMessage), global::Crazy.Common.S2C_SyncLevelStateBattleMessage.Parser, new[]{ "RpcId", "BattleId", "ActorId", "Frame", "IntervalTime", "Time" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.C2S_ExitBattleMessage), global::Crazy.Common.C2S_ExitBattleMessage.Parser, new[]{ "RpcId", "BattleId", "PlayerId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_ExitBattleMessage), global::Crazy.Common.S2C_ExitBattleMessage.Parser, new[]{ "RpcId", "BattleId", "PlayerId", "State" }, null, new[]{ typeof(global::Crazy.Common.S2C_ExitBattleMessage.Types.State) }, null)
           }));
@@ -2876,6 +2877,8 @@ namespace Crazy.Common {
       battleId_ = other.battleId_;
       actorId_ = other.actorId_;
       frame_ = other.frame_;
+      intervalTime_ = other.intervalTime_;
+      time_ = other.time_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2928,6 +2931,28 @@ namespace Crazy.Common {
       }
     }
 
+    /// <summary>Field number for the "IntervalTime" field.</summary>
+    public const int IntervalTimeFieldNumber = 4;
+    private long intervalTime_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long IntervalTime {
+      get { return intervalTime_; }
+      set {
+        intervalTime_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Time" field.</summary>
+    public const int TimeFieldNumber = 5;
+    private long time_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long Time {
+      get { return time_; }
+      set {
+        time_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as S2C_SyncLevelStateBattleMessage);
@@ -2945,6 +2970,8 @@ namespace Crazy.Common {
       if (BattleId != other.BattleId) return false;
       if (ActorId != other.ActorId) return false;
       if (Frame != other.Frame) return false;
+      if (IntervalTime != other.IntervalTime) return false;
+      if (Time != other.Time) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2955,6 +2982,8 @@ namespace Crazy.Common {
       if (BattleId != 0UL) hash ^= BattleId.GetHashCode();
       if (ActorId != 0UL) hash ^= ActorId.GetHashCode();
       if (Frame != 0L) hash ^= Frame.GetHashCode();
+      if (IntervalTime != 0L) hash ^= IntervalTime.GetHashCode();
+      if (Time != 0L) hash ^= Time.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2980,6 +3009,14 @@ namespace Crazy.Common {
         output.WriteRawTag(24);
         output.WriteInt64(Frame);
       }
+      if (IntervalTime != 0L) {
+        output.WriteRawTag(32);
+        output.WriteInt64(IntervalTime);
+      }
+      if (Time != 0L) {
+        output.WriteRawTag(40);
+        output.WriteInt64(Time);
+      }
       if (RpcId != 0) {
         output.WriteRawTag(208, 5);
         output.WriteInt32(RpcId);
@@ -3004,6 +3041,12 @@ namespace Crazy.Common {
       if (Frame != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Frame);
       }
+      if (IntervalTime != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(IntervalTime);
+      }
+      if (Time != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Time);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -3027,6 +3070,12 @@ namespace Crazy.Common {
       if (other.Frame != 0L) {
         Frame = other.Frame;
       }
+      if (other.IntervalTime != 0L) {
+        IntervalTime = other.IntervalTime;
+      }
+      if (other.Time != 0L) {
+        Time = other.Time;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -3048,6 +3097,14 @@ namespace Crazy.Common {
           }
           case 24: {
             Frame = input.ReadInt64();
+            break;
+          }
+          case 32: {
+            IntervalTime = input.ReadInt64();
+            break;
+          }
+          case 40: {
+            Time = input.ReadInt64();
             break;
           }
           case 720: {

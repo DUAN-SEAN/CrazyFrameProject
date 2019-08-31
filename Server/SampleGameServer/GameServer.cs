@@ -45,11 +45,13 @@ namespace GameServer
             //数据库配置
             var dbConfig = m_gameServerGlobalConfig.DBConfigInfos[0];
             //Log.Info($"ip:{dbConfig.ConnectHost} port:{dbConfig.Port} serviceName:{dbConfig.DataBase} username:{dbConfig.UserName} password:{dbConfig.Password}");
-            GCNotification.GCDone += i =>
-            {
-                Log.Debug("GC = "+i);
 
-            };
+            //GCNotification.GCDone += i =>
+            //{
+            //    Log.Debug("GC = "+i);
+
+            //};
+
             Log.Debug("GameServer is running with server GC = "+GCSettings.IsServerGC);
             //MongoDBHelper.CreateDBClient(); //测试
             //mongodb测试
@@ -63,12 +65,7 @@ namespace GameServer
                 Log.Info("初始化模块系统失败");
                 return false;
             }
-
-
-
             //下面可以写启动逻辑线程 将上述游戏逻辑丢到逻辑线程中处理
-
-
             return true;
         }
         /// <summary>
