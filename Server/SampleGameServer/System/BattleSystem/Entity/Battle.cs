@@ -165,7 +165,9 @@ namespace GameServer.Battle
                             var plx = GameServer.Instance.PlayerCtxManager.FindPlayerContextByString(plyaerId) as GameServerPlayerContext;
 
                             var shipInfo = plx.m_gameServerDBPlayer.playerShip;
-                            playerShips.Add(new Tuple<string, int, int, int, int>(plyaerId, shipInfo.shipId, 1004, 1012, 1013));
+                            playerShips.Add(new Tuple<string, int, int, int, int>(plyaerId, shipInfo.shipId, shipInfo.shipType, shipInfo.weapon_a, shipInfo.weapon_b));
+                            Log.Info("player shipType = "+shipInfo.shipType);
+                            //playerShips.Add(new Tuple<string, int, int, int, int>(plyaerId, shipInfo.shipId, 1004, 1012, 1013));
 
                         }
                         m_level.Start(playerShips);
