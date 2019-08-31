@@ -27,9 +27,9 @@ namespace CrazyEngine.External
                 Body bodyA = pair.Collision.BodyA;
                 Body bodyB = pair.Collision.BodyB;
                 if (colliders.TryGetValue(bodyA.Id.Value, out Collider colliderA))
-                    colliderA.OnCollisionStay(pair.Collision);
+                    colliderA.OnCollisionStay?.Invoke(pair.Collision);
                 if (colliders.TryGetValue(bodyB.Id.Value, out Collider colliderB))
-                    colliderB.OnCollisionStay(pair.Collision);
+                    colliderB.OnCollisionStay?.Invoke(pair.Collision);
             }
         }
 
