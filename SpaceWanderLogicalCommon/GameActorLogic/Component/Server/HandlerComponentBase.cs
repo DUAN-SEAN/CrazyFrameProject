@@ -122,6 +122,8 @@ namespace GameActorLogic
         protected void HandlerDestroyEvent(DestroyEventMessage destroyEvent)
         {
             if(destroyEvent == null) return;
+            Log.Trace("处理销毁事件"+destroyEvent.actorid);
+
             //先执行回调销毁事件
             OnDestroyMessageHandler?.Invoke(destroyEvent.actorid);
             ActorBase actor = null;

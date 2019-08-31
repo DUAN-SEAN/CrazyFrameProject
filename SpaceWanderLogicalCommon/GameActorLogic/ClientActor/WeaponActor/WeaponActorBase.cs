@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Crazy.Common;
 using CrazyEngine.Base;
 
 
@@ -53,9 +54,13 @@ namespace GameActorLogic
 
         protected void Collider(Body body)
         {
+            Log.Trace("碰撞");
 
             var actor = level.GetEnvirinfointernalBase().GetActorByBodyId(body.Id.Value);
+            Log.Trace("碰撞"+ actor.GetActorID());
             if (actor.GetCamp() == GetCamp()) return;
+            Log.Trace("碰撞 敌方" + actor.GetActorID());
+
             DestroySkill();
         }
 
