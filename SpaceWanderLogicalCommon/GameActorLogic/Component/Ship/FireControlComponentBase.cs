@@ -160,6 +160,7 @@ namespace GameActorLogic
                 container.GetPhysicalinternalBase().GetBody().Detection(skillContainer.GetBody(), 3);
                 var cd = skillContainer.GetSkillCd();
                 skillContainer.SetSkillCd((cd + 1) % skillContainer.GetMaxSkillCd());
+                skillContainer.SetOwnerID(container.GetActorID());
             }
 
             var weaponlist = skillInitList.Where(s => s.GetActorType() == ActorTypeBaseDefine.ContinuousLaserActor).ToList();

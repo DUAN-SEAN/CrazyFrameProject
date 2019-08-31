@@ -40,6 +40,10 @@ namespace GameActorLogic
         /// 设置最大Cd
         /// </summary>
         void SetMaxSkillCd(int cd);
+
+        void SetOwnerID(ulong id);
+
+        ulong GetOwnerID();
     }
 
 

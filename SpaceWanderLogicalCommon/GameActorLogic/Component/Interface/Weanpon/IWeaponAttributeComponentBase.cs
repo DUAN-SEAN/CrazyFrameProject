@@ -47,9 +47,7 @@ namespace GameActorLogic
         /// </summary>
         void SetWeaponDamage(int damage);
 
-        ulong GetOwnerID();
-        
-        void SetOwnerID(ulong id);
+      
 
     }
 

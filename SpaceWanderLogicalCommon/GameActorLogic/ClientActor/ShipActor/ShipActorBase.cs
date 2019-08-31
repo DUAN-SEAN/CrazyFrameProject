@@ -29,6 +29,7 @@ namespace GameActorLogic
             _fireControlComponent = new FireControlComponentBase(this, level);
             _healthShieldComponent = new HealthShieldComponentBase(level,this);
             _shipEventComponent = new ShipEventComponentBase();
+            AddColliderFunction();
         }
 
         protected override void AddColliderFunction()
