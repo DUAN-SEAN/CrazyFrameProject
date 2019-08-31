@@ -252,6 +252,11 @@ namespace Crazy.ServerBase
                         return;
                     }
                     //Log.Info("系统向玩家发送消息 " + snm.PlayerId + "  " + snm.Message.GetType());
+                    //S2C_SyncLevelStateBattleMessage syncLevelStateBattleMessage = snm.Message as S2C_SyncLevelStateBattleMessage;
+                    //if (syncLevelStateBattleMessage != null)
+                    //{
+                    //    Log.Info("服务器转发延迟 = "+(DateTime.Now.Ticks - syncLevelStateBattleMessage.Time)/10000);
+                    //}
                     Send(snm.Message);
                    
                         
