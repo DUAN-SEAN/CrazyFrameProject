@@ -56,6 +56,7 @@ namespace CrazyEngine.Core
         /// <returns></returns>
         public static bool Intersect(this Bound bound, Bound bound2)
         {
+            
             return (bound.Min.X <= bound2.Max.X && bound.Max.X >= bound2.Min.X
                     && bound.Max.Y >= bound2.Min.Y && bound.Min.Y <= bound2.Max.Y);
         }

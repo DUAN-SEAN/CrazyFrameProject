@@ -105,7 +105,8 @@ namespace CrazyEngine.Core
 
                 if ((bodyA.Static || bodyA.Sleep) && (bodyB.Static || bodyB.Sleep))
                     continue;
-
+                if (bodyA.Bounds == null || bodyB.Bounds == null)
+                    continue;
                 if (!bodyA.Bounds.Intersect(bodyB.Bounds))
                     continue;
                 foreach (var partA in bodyA.EnumParts())
