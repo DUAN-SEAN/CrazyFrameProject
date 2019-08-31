@@ -55,6 +55,11 @@ namespace GameActorLogic
         {
 
             var actor = level.GetEnvirinfointernalBase().GetActorByBodyId(body.Id.Value);
+            if (actor == null)
+            {
+                DestroySkill();
+                return;
+            }
             if (actor.GetCamp() == GetCamp()) return;
             DestroySkill();
         }

@@ -14,6 +14,7 @@ namespace GameActorLogic
     {
         public static int PlayerCamp = 1;
         public static int EnemyCamp = 2;
+        public static int WallCamp = 3;
         protected EventComponentBase _eventComponent;
         protected EnvirinfoComponentBase _envirinfoComponent;
         protected CommandComponentBase _commandComponent;
@@ -99,6 +100,14 @@ namespace GameActorLogic
             
         }
 
+        /// <summary>
+        /// 添加空气墙
+        /// </summary>
+        protected  void AddAirWall()
+        {
+            
+        }
+
         #endregion
 
         #region ILevelActorBaseContainer
@@ -167,6 +176,11 @@ namespace GameActorLogic
 
             //动态初始化任务配置
             AddPrepareTask();
+
+            //
+            AddAirWall();
+
+
             //动态初始化敌人
             PrepareEnemy();
             isStart = true;

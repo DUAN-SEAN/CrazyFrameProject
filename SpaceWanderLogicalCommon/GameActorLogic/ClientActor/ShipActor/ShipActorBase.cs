@@ -41,6 +41,7 @@ namespace GameActorLogic
         {
 
             var actor = level.GetEnvirinfointernalBase().GetActorByBodyId(body.Id.Value);
+            if(actor == null) return;
             if (actor.GetCamp() == GetCamp()) return;
             if (actor is WeaponActorBase weapon)
             {
