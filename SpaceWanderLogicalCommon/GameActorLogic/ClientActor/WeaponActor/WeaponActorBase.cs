@@ -32,6 +32,7 @@ namespace GameActorLogic
 
             _weaponAttributeComponent = null;
 
+            base.Dispose();
 
         }
 

@@ -64,9 +64,7 @@ namespace GameActorLogic
 
         public override void Dispose()
         {
-            base.Dispose();
             _physicalBase.OnColliderEnter -= Collider;
-
             _aiComponent?.Dispose();
             _aiComponent = null;
 
@@ -76,6 +74,11 @@ namespace GameActorLogic
             _healthShieldComponent = null;
 
             _shipEventComponent = null;
+
+            base.Dispose();
+          
+
+           
 
             
         }
