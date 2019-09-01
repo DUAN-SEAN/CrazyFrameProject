@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Crazy.Common;
 using CrazyEngine.Base;
 
 
@@ -39,17 +40,21 @@ namespace GameActorLogic
 
         protected void Collider(Body body)
         {
-
+            //Log.Trace("船受到碰撞" + body.Id);
             var actor = level.GetEnvirinfointernalBase().GetActorByBodyId(body.Id.Value);
             if(actor == null) return;
+            //Log.Trace("船受到碰撞" + actor.GetActorID() + "阵营" + actor.GetCamp());
             if (actor.GetCamp() == GetCamp()) return;
+            //Log.Trace("船被攻击类型" + actor.GetType() + actor.GetActorType());
             if (actor is WeaponActorBase weapon)
             {
+                //Log.Trace("船受到武器碰撞" + weapon.GetActorID() +" 伤害"+weapon.GetWeaponDamage());
                 _healthShieldComponent.LossBlood(weapon.GetWeaponDamage());
             }
 
             if (actor is ShipActorBase ship)
             {
+                //Log.Trace("船受到船碰撞" + actor.GetActorID());
                 _healthShieldComponent.LossBlood(1);
             }
         }
@@ -98,7 +103,7 @@ namespace GameActorLogic
 
             clone._aiComponent = clone?._aiComponent?.Clone(clone);
             clone._fireControlComponent = new FireControlComponentBase(clone,clone._fireControlComponent);
-            clone._healthShieldComponent = new HealthShieldComponentBase(clone._healthShieldComponent);
+            clone._healthShieldComponent = new HealthShieldComponentBase(clone,clone._healthShieldComponent);
             clone._shipEventComponent = new ShipEventComponentBase(clone._shipEventComponent);
 
             clone.AddColliderFunction();
@@ -277,6 +282,7 @@ namespace GameActorLogic
         /// </summary>
         public void Destroy()
         {
+            //Log.Trace("销毁船："+ActorID);
             level.AddEventMessagesToHandlerForward(new DestroyEventMessage(ActorID));
             _shipEventComponent.Destroy();
         }

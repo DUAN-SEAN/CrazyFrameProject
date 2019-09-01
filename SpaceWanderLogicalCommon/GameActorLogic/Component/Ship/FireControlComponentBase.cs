@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Crazy.Common;
 using CrazyEngine.Common;
 using CrazyEngine.External;
 namespace GameActorLogic
@@ -158,7 +159,17 @@ namespace GameActorLogic
             // 给所有的准备中武器赋值当前的Actor位置坐标和朝向
             foreach (var skillContainer in skills)
             {
+                //Log.Trace( "武器箱武器 ActorType:"+skillContainer.GetActorType()+" ActorID" + skillContainer.GetActorID() + " Body id:"+skillContainer.GetBody().Id);
+                //Log.Trace("当前Actor Body id" + container.GetBodyId() + " 位置" +
+                //          container.GetPhysicalinternalBase().GetBody().Position + " 朝向" +
+                //          container.GetPhysicalinternalBase().GetBody().Forward);
+                //Log.Trace("复制前Actor Body id" + skillContainer.GetBody().Id + " 位置" +
+                //          skillContainer.GetBody().Position + " 朝向" +
+                //          skillContainer.GetBody().Forward);
                 container.GetPhysicalinternalBase().GetBody().Detection(skillContainer.GetBody(), 3);
+                //Log.Trace("复制后Actor Body id" + skillContainer.GetBody().Id + " 位置" +
+                //          skillContainer.GetBody().Position + " 朝向" +
+                //          skillContainer.GetBody().Forward);
                 var cd = skillContainer.GetSkillCd();
                 skillContainer.SetSkillCd((cd + 1) % skillContainer.GetMaxSkillCd());
                 skillContainer.SetOwnerID(container.GetActorID());
@@ -169,7 +180,7 @@ namespace GameActorLogic
             // 给激光赋值
             foreach (var skillContainer in weaponlist)
             {
-                container.GetPhysicalinternalBase().GetBody().Detection(skillContainer.GetBody(), 2);
+                container.GetPhysicalinternalBase().GetBody().Detection(((IBaseComponentContainer)level.GetActor(skillContainer.GetActorID())).GetPhysicalinternalBase().GetBody(), 2);
             }
         }
 
@@ -186,6 +197,10 @@ namespace GameActorLogic
                     weaponactor.SetActorId(level.GetCreateInternalComponentBase().GetCreateID());
                     var weapon = weaponactor as ISkillContainer;
                     weapon.GetBody().Id = Id.Create();
+                    //Log.Trace("当前发射者 位置：" + container.GetPhysicalinternalBase().GetBody().Position + " 朝向：" +
+                    //          container.GetPhysicalinternalBase().GetBody().Forward);
+                    //Log.Trace("当前武器箱 位置："+actor.GetBody().Position + " 朝向："+actor.GetBody().Forward);
+                    //Log.Trace("被发射武器"+weapon.GetBody().Id+" 位置：" + weapon.GetBody().Position + " 朝向：" + weapon.GetBody().Forward+" 朝向角度："+weapon.GetBody().Angle);
 
                     weapon.OnDestroySkill += WaitSkillDestroy;
                     //level.GetEnvirinfointernalBase().AddActor(weapon as ActorBase);

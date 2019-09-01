@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Crazy.Common;
 using CrazyEngine.Base;
 using CrazyEngine.Common;
 using CrazyEngine.Core;
@@ -63,6 +64,7 @@ namespace GameActorLogic
             this.m_collider = new Collider();
             // 朱颖 clone body
             this.m_body = Factory.CreateCloneBody(clone.m_body);
+            //Log.Trace("物理引擎复制角度值："+m_body.Angle);
             m_collider.OnCollisionStay += OnCollision;
 
         }
@@ -98,7 +100,7 @@ namespace GameActorLogic
             Force_copy.Y = m_body.Force.Y;
             angleVelocity_copy = m_body.AngularVelocity;
             Torque_copy = m_body.Torque;
-
+            isColliderMethodEnter = false;
         }
 
         public void Dispose()
@@ -193,7 +195,7 @@ namespace GameActorLogic
             m_body.PositionPrev.Set(positionPrevX, positionPrevY);
             m_body.Velocity.Set(velocityX,velocityY);
             m_body.Force.Set(forceX,forceY);
-            m_body.InitAngle(forwardAngle);
+            m_body.SetForward(forwardAngle);
             m_body.Angle = forwardAngle;
             m_body.AngularVelocity = angleVelocity;
             m_body.Torque = torque;
@@ -233,8 +235,7 @@ namespace GameActorLogic
 
         public void SetForwardAngle(double angle)
         {
-            m_body.InitAngle(angle);
-            m_body.Angle = angle;
+            m_body.SetForward(angle);
         }
 
         public Body GetBody()

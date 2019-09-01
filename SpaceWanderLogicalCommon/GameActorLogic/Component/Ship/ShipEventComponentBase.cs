@@ -22,8 +22,7 @@ namespace GameActorLogic
 
         public ShipEventComponentBase(ShipEventComponentBase clone)
         {
-            OnInit = clone.OnInit;
-            OnDestroy = clone.OnDestroy;
+            
         }
 
         #region IShipEventBase

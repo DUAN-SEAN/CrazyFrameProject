@@ -54,7 +54,7 @@ namespace GameActorLogic
 
         protected void Collider(Body body)
         {
-            Log.Trace("碰撞");
+            //Log.Trace("武器碰撞");
 
             var actor = level.GetEnvirinfointernalBase().GetActorByBodyId(body.Id.Value);
             if (actor == null)
@@ -62,8 +62,9 @@ namespace GameActorLogic
                 DestroySkill();
                 return;
             }
+            //Log.Trace("武器被攻击类型" + actor.GetType() + actor.GetActorType() + "阵营" + actor.GetCamp());
             if (actor.GetCamp() == GetCamp()) return;
-            Log.Trace("碰撞 敌方" + actor.GetActorID());
+            //Log.Trace("武器碰撞 敌方 actor id" + actor.GetActorID());
 
             DestroySkill();
         }

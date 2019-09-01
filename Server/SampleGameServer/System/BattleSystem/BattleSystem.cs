@@ -77,6 +77,7 @@ namespace GameServer.Battle
         {
             //获取关卡配置文件,获取所有的游戏匹配信息
             m_gameBarrierConfigs = GameServer.Instance.m_gameServerGlobalConfig.BarrierConfigs;
+            Log.Info("m_gameBarrierConfigs 2 count = "+m_gameBarrierConfigs[1].TaskConfigs.Length.ToString());
             m_gameShipInfoConfigs =  GameServer.Instance.m_gameServerGlobalConfig.GameShipConfig;
             m_gameSkillConfig = GameServer.Instance.m_gameServerGlobalConfig.GameSkillConfig;
             m_gameBattleConfig = GameServer.Instance.m_gameServerGlobalConfig.GameBattleConfig;
@@ -260,6 +261,7 @@ namespace GameServer.Battle
         /// <returns></returns>
         public List<GameBarrierConfig> GetGameBarrierConfigs()
         {
+            
             return m_gameBarrierConfigs?.ToList();
         }
         /// <summary>

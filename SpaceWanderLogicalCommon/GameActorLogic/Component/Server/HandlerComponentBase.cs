@@ -122,7 +122,7 @@ namespace GameActorLogic
         protected void HandlerDestroyEvent(DestroyEventMessage destroyEvent)
         {
             if(destroyEvent == null) return;
-            Log.Trace("处理销毁事件"+destroyEvent.actorid);
+            //Log.Trace("处理销毁事件"+destroyEvent.actorid);
 
             //先执行回调销毁事件
             OnDestroyMessageHandler?.Invoke(destroyEvent.actorid);
@@ -205,6 +205,7 @@ namespace GameActorLogic
         {
             if (!(command is ThrustCommand commanditme)) return;
             var actor = GetActor(commanditme.actorid);
+            if(actor.IsWeapon()) return;
             actor?.AddThrust(commanditme.Thrustproc);
         }
 
@@ -213,6 +214,7 @@ namespace GameActorLogic
         {
             if (!(command is ForwardCommand commanditme)) return;
             var actor = GetActor(commanditme.actorid);
+            if(actor.IsWeapon()) return;
             if (commanditme.ang > 0)
                 actor?.Left(commanditme.ang);
             else

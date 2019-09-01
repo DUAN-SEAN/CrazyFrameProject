@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Crazy.Common;
 using CrazyEngine.Base;
 using GameServer.Configure;
 
@@ -248,6 +249,10 @@ namespace GameActorLogic
             }
         }
 
+        ~LevelActorBase()
+        {
+            Log.Trace("从内存中释放Level Id = "+ battleid);
+        }
         /// <summary>
         /// 在构造器中被调用
         /// </summary>

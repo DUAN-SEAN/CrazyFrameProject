@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Diagnostics;
+using Crazy.Common;
 
 namespace GameActorLogic
 {
@@ -89,7 +90,7 @@ namespace GameActorLogic
             this.Actor = ActorId;
         }
 
-        public HealthShieldComponentBase(HealthShieldComponentBase clone)
+        public HealthShieldComponentBase(IShipComponentBaseContainer container,HealthShieldComponentBase clone)
         {
             _hp = clone._hp;
             _shieldval = clone._shieldval;
@@ -99,7 +100,7 @@ namespace GameActorLogic
             reducerecoveryinterval = clone.reducerecoveryinterval;
             lastTime = DateTime.Now.Ticks;
             level = clone.level;
-            Actor = clone.Actor;
+            Actor = container;
         }
 
         
@@ -193,23 +194,27 @@ namespace GameActorLogic
         #region IHealthShieldInternalBase
         public void LossBlood(int loss)
         {
+            //Log.Trace("掉血："+loss);
             if (_shieldval > 0)
             {
+                //Log.Trace("护盾掉血："+loss);
                 _shieldval -= loss;
                 if (_shieldval < 0)
                 {
+                    //Log.Trace("护盾不够 开始掉血："+loss);
                     _hp += _shieldval;
                     _shieldval = 0;
                 }
             }
             else
             {
+                    //Log.Trace("直接开始掉血："+loss);
                 _hp -= loss;
             }
 
             if (_hp <= 0)
             {
-                //TODO 调用死亡方法
+                //Log.Trace("血量无："+Actor.GetActorID());
                 Actor.Destroy();
             }
         }

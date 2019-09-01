@@ -21,6 +21,7 @@ namespace GameServer.Helper
                 if (s_gcDone == null)
                 {
                     new GenObject(0);
+                    new GenObject(1);
                     new GenObject(2);
                     s_gcDone += value;
                 }

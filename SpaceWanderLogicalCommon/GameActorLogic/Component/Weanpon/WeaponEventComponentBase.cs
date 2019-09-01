@@ -26,9 +26,7 @@ namespace GameActorLogic
         {
             
             this.weapon = weapon;
-            OnStart = clone.OnStart;
-            OnEnd = clone.OnEnd;
-            OnDestroy = clone.OnDestroy;
+           
         }
 
         public void Dispose()
