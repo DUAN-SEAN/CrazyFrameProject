@@ -40,6 +40,13 @@ namespace GameActorLogic
         /// </summary>
         protected bool isColliderMethodEnter;
 
+        /// <summary>
+        /// 相对坐标
+        /// 只在武器发射时使用
+        /// 武器移动时不使用
+        /// </summary>
+        protected double RelpositionX;
+        protected double RelpositionY;
         //protected PhysicalBase()
         //{
         //m_body = Factory.CreateCircleBody(1, 1, 1);
@@ -141,6 +148,22 @@ namespace GameActorLogic
             return m_body.Velocity;
         }
 
+       
+        public double GetRelPositionX()
+        {
+            return RelpositionX;
+        }
+
+        public double GetRelPositionY()
+        {
+            return RelpositionY;
+        }
+
+        public void SetRelPosition(double x, double y)
+        {
+            RelpositionX = x;
+            RelpositionY = y;
+        }
 
         public void InitializePhysicalBase()
         {

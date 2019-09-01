@@ -121,6 +121,21 @@ namespace GameActorLogic
 
         #region PhysicalBase
 
+        public double GetRelPositionX()
+        {
+            return _physicalBase.GetRelPositionX();
+        }
+
+        public double GetRelPositionY()
+        {
+            return _physicalBase.GetRelPositionY();
+        }
+
+        public void SetRelPosition(double x, double y)
+        {
+            _physicalBase.SetRelPosition(x, y);
+        }
+
         public void InitializePhysicalBase()
         {
             _physicalBase.InitializePhysicalBase();

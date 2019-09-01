@@ -25,7 +25,9 @@ namespace GameActorLogic
         public Int32 weapontype_b;
         public string name;
 
-        public InitEventMessage(ulong actorid,int camp, Int32 actortype, double point_x, double point_y, double angle, bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0,string name = "", ulong ownerid = ulong.MaxValue)
+        public InitEventMessage(ulong actorid, int camp, Int32 actortype, double point_x, double point_y, double angle,
+            bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0, string name = "",
+            ulong ownerid = ulong.MaxValue, double relatpoint_x = 0, double relatpoint_y = 0)
         {
             _eventMessageId = EventMessageConstDefine.InitEvent;
             this.actorid = actorid;
@@ -40,8 +42,10 @@ namespace GameActorLogic
             this.name = name;
             this.camp = camp;
             this.onwerid = ownerid;
+            this.relatpoint_x = relatpoint_x;
+            this.relatpoint_y = relatpoint_y;
         }
-        public InitEventMessage(Int32 actortype,int camp, double point_x, double point_y, double angle,bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0, string name = "", ulong ownerid = ulong.MaxValue)
+        public InitEventMessage(Int32 actortype,int camp, double point_x, double point_y, double angle,bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0, string name = "", ulong ownerid = ulong.MaxValue, double relatpoint_x = 0, double relatpoint_y = 0)
         {
             _eventMessageId = EventMessageConstDefine.InitEvent;
             this.actortype = actortype;
@@ -55,6 +59,8 @@ namespace GameActorLogic
             this.name = name;
             this.camp = camp;
             this.onwerid = ownerid;
+            this.relatpoint_x = relatpoint_x;
+            this.relatpoint_y = relatpoint_y;
         }
     }
 }

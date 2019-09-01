@@ -14,6 +14,20 @@ namespace GameActorLogic {
     /// </summary>
     public interface IPhysicalBase
     {
+        /// <summary>
+        /// 获取相对坐标X
+        /// </summary>
+        double GetRelPositionX();
+
+        /// <summary>
+        /// 获取相对坐标Y
+        /// </summary>
+        double GetRelPositionY();
+
+        /// <summary>
+        /// 设置相对位置
+        /// </summary>
+        void SetRelPosition(double x, double y);
         void InitializePhysicalBase();
 
         int GetBodyId();

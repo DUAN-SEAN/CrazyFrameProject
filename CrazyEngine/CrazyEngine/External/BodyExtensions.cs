@@ -146,12 +146,8 @@ namespace CrazyEngine.External
         /// <param name="frame"></param>
         /// <param name="frictionAir"></param>
         /// <returns></returns>
-        public static Point PredictPosition(this Body body, double time,float delta)
+        public static Point PredictPosition(Point position, Point velocity, Point force, double mass, double time, double delta, double frictionAir = 0.01)
         {
-            Point position = new Point(body.Position.X, body.Position.Y);
-            Point velocity = new Point(body.Velocity.X, body.Velocity.Y);
-            Point force = new Point(body.Force.X, body.Force.Y);
-
             Point positionPrev = new Point(position.X, position.Y);
 
             Point velocityPrev = new Point(velocity.X, velocity.Y);
@@ -163,8 +159,8 @@ namespace CrazyEngine.External
                 position.X += velocity.X;
                 position.Y += velocity.Y;
 
-                velocity.X = velocityPrev.X * (1 - body.FrictionAir) + force.X / body.Mass * delta * delta;
-                velocity.Y = velocityPrev.Y * (1 - body.FrictionAir) + force.Y / body.Mass * delta * delta;
+                velocity.X = velocityPrev.X * (1 - frictionAir) + force.X / mass * delta * delta;
+                velocity.Y = velocityPrev.Y * (1 - frictionAir) + force.Y / mass * delta * delta;
                 velocityPrev = velocity;
 
                 time -= delta;
@@ -173,6 +169,19 @@ namespace CrazyEngine.External
             return position;
         }
 
+        /// <summary>
+        /// 段瑞要的2
+        /// </summary>
+        /// <param name="anlge"></param>
+        /// <param name="angleVelocity"></param>
+        /// <param name="frame"></param>
+        /// <returns></returns>
+        public static double PredictAngle(double angle, double angleVelocity, double time, double delta)
+        {
+            int t = (int)(time / delta);
+            angle += angleVelocity * t;
+            return angle;
+        }
 
 
     }

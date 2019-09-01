@@ -198,12 +198,13 @@ namespace GameActorLogic
                     weaponactor.SetActorId(level.GetCreateInternalComponentBase().GetCreateID());
                     var weapon = weaponactor as ISkillContainer;
                     weapon.GetBody().Id = Id.Create();
+                    weapon.SetRelPosition(0, 0);
                     //Log.Trace("当前发射者 位置：" + container.GetPhysicalinternalBase().GetBody().Position + " 朝向：" +
                     //          container.GetPhysicalinternalBase().GetBody().Forward);
                     //Log.Trace("当前武器箱 位置："+actor.GetBody().Position + " 朝向："+actor.GetBody().Forward);
                     //Log.Trace("被发射武器"+weapon.GetBody().Id+" 位置：" + weapon.GetBody().Position + " 朝向：" + weapon.GetBody().Forward+" 朝向角度："+weapon.GetBody().Angle);
 
-                    weapon.OnDestroySkill += WaitSkillDestroy;
+                   
                     //level.GetEnvirinfointernalBase().AddActor(weapon as ActorBase);
                     weapon.StartSkill();
                     skillInitList.Add(weapon);
