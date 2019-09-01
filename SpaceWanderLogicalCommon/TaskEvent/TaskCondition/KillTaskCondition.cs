@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Crazy.Common;
 
 namespace GameActorLogic
 {
@@ -30,8 +31,14 @@ namespace GameActorLogic
         {
             level.GetHandlerComponentInternalBase().OnDestroyMessageHandler += obj =>
             {
-                var actor = level.GetEnvirinfointernalBase().GetActor(obj);
-                if (actor == null) return;
+                    var actor = level.GetEnvirinfointernalBase().GetActor(obj);
+                if (actor == null)
+                {
+                    Log.Trace("计数对象为 null" + obj);
+
+                    return;
+                }
+                Log.Trace("计数加一" + actor.GetActorID());
                 if (actor.IsShip() && actor.GetCamp() != LevelActorBase.PlayerCamp) Currentvalue[key]++;
             };
         }
