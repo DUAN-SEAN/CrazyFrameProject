@@ -108,7 +108,12 @@ namespace GameActorLogic
 
             if (actor != null)
             {
-                if (actor is ISkillContainer skill) skill.SetOwnerID(initEvent.onwerid); 
+                if (actor is ISkillContainer skill)
+                {
+                    skill.SetOwnerID(initEvent.onwerid);
+                }
+
+                actor.SetRelPosition(initEvent.relatpoint_x, initEvent.relatpoint_y);
                 levelContainer.GetEnvirinfointernalBase().AddActor(actor);
             }
             //执行回调生成事件
