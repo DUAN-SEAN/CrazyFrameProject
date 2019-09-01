@@ -67,13 +67,13 @@ namespace GameActorLogic
             #region 往前冲武器
             //高射炮
             weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.AntiAircraftGunActor, level);
-            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725));
+            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725, isTrigger: true));
             weaponactor.CreateAiComponent(new GogogoAiComponent(weaponactor));
             ConfigActors.Add(ActorTypeBaseDefine.AntiAircraftGunActor, weaponactor);
 
             //鱼雷
             weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.TorpedoActor, level);
-            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725));
+            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725,isTrigger: true));
             weaponactor.CreateAiComponent(new GogogoAiComponent(weaponactor));
             ConfigActors.Add(ActorTypeBaseDefine.TorpedoActor, weaponactor);
 

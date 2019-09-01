@@ -68,7 +68,7 @@ namespace CrazyEngine.External
             if (!trigger.Trigger) return;
             trigger.Position = body.Position + body.Forward * distance;
             trigger.InitAngle(body.Angle);
-        }
+        }   
 
         /// <summary>
         /// 将trigger位置摆到body位置前面
@@ -80,7 +80,7 @@ namespace CrazyEngine.External
         public static void Detection(this Body body, Body trigger, double distance, DectectionLayer dectectionLayer = DectectionLayer.All)
         {
             trigger.Position.Set(body.Position);
-            trigger.InitAngle(body.Angle);
+            trigger.InitAngle(body.Angle);                    
             trigger.PositionPrev.Set(body.PositionPrev - body.Forward * 10);
             trigger.Velocity.Set(body.Velocity + body.Forward * 10);
             trigger.AngularVelocity = 0;

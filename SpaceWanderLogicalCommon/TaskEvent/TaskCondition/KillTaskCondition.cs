@@ -31,6 +31,7 @@ namespace GameActorLogic
             level.GetHandlerComponentInternalBase().OnDestroyMessageHandler += obj =>
             {
                 var actor = level.GetEnvirinfointernalBase().GetActor(obj);
+                if (actor == null) return;
                 if (actor.IsShip() && actor.GetCamp() != LevelActorBase.PlayerCamp) Currentvalue[key]++;
             };
         }
