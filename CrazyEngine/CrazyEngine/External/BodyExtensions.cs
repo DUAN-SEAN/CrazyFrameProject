@@ -138,6 +138,42 @@ namespace CrazyEngine.External
             return cos > 0.9;
         }
 
+        /// <summary>
+        /// 段瑞要的1
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="velocity"></param>
+        /// <param name="frame"></param>
+        /// <param name="frictionAir"></param>
+        /// <returns></returns>
+        public static Point PredictPosition(this Body body, double time)
+        {
+            Point position = new Point(body.Position.X, body.Position.Y);
+            Point velocity = new Point(body.Velocity.X, body.Velocity.Y);
+            Point force = new Point(body.Force.X, body.Force.Y);
+
+            Point positionPrev = new Point(position.X, position.Y);
+
+            Point velocityPrev = new Point(velocity.X, velocity.Y);
+
+            while (time > 0)
+            {
+                positionPrev.X = position.X;
+                positionPrev.Y = position.Y;
+                position.X += velocity.X;
+                position.Y += velocity.Y;
+
+                velocity.X = velocityPrev.X * (1 - body.FrictionAir) + force.X / body.Mass * body.Delta * body.Delta;
+                velocity.Y = velocityPrev.Y * (1 - body.FrictionAir) + force.Y / body.Mass * body.Delta * body.Delta;
+                velocityPrev = velocity;
+
+                time -= body.Delta;
+            }
+
+            return position;
+        }
+
+
 
     }
 

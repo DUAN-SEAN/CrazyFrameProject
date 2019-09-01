@@ -96,6 +96,7 @@ namespace GameActorLogic
             skills = new List<ISkillContainer>();
             foreach (var weapon in containers)
             {
+                if(weapon == 0) continue;
                 level.GetConfigComponentInternalBase().GetActorClone(weapon, out var actor);
                 
                 if (actor is IWeaponBaseContainer weaponBase)

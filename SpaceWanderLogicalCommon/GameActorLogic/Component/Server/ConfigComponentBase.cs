@@ -236,7 +236,12 @@ namespace GameActorLogic
         public bool GetActorClone(Int32 key, out ActorBase actor)
         {
             bool result = ConfigActors.TryGetValue(key, out var value);
-            if(value == null) Log.Trace("克隆对象为空 key：");
+            if(value == null)
+            {
+                Log.Trace("ConfigComponent: 克隆对象为空 key：" + key);
+                actor = null;
+                return false;
+            }
             actor = value.Clone();
             ((IBaseComponentContainer)(actor)).GetPhysicalinternalBase().GetBody().Id = Id.Create();
 

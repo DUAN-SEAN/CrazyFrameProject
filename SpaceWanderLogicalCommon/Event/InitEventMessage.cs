@@ -16,6 +16,8 @@ namespace GameActorLogic
         public int camp;
         public double point_x;
         public double point_y;
+        public double relatpoint_x;
+        public double relatpoint_y;
         public double angle;
         public readonly bool haveId;
         public bool IsPlayer;
@@ -23,7 +25,7 @@ namespace GameActorLogic
         public Int32 weapontype_b;
         public string name;
 
-        public InitEventMessage(ulong actorid,int camp, Int32 actortype, double point_x, double point_y, double angle,bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0,string name = "", ulong ownerid = ulong.MaxValue)
+        public InitEventMessage(ulong actorid,int camp, Int32 actortype, double point_x, double point_y, double angle, bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0,string name = "", ulong ownerid = ulong.MaxValue)
         {
             _eventMessageId = EventMessageConstDefine.InitEvent;
             this.actorid = actorid;

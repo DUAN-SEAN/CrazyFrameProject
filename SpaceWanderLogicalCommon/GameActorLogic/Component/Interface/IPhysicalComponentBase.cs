@@ -41,6 +41,10 @@ namespace GameActorLogic {
         /// </summary>
         Point GetVelocity();
 
+        void SetDelta(double delta);
+
+        double GetDelta();
+
         /// <summary>
         /// 得到当前角速度
         /// </summary>
