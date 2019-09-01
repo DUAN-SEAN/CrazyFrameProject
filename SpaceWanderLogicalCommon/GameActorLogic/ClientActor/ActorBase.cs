@@ -213,6 +213,16 @@ namespace GameActorLogic
             return _physicalBase.GetSpeed();
         }
 
+        public double GetMass()
+        {
+            return _physicalBase.GetMass();
+        }
+
+        public void SetMass(double mass)
+        {
+            _physicalBase.SetMass(mass);
+        }
+
         #endregion
 
         #region MoveComponent

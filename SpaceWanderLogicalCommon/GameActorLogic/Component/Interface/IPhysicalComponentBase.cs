@@ -91,6 +91,15 @@ namespace GameActorLogic {
         /// </summary>
         double GetSpeed();
 
+        /// <summary>
+        /// 获取质量
+        /// </summary>
+        double GetMass();
+
+        /// <summary>
+        /// 设置质量
+        /// </summary>
+        void SetMass(double mass);
 
 
     }

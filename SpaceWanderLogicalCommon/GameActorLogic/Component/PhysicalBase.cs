@@ -235,6 +235,17 @@ namespace GameActorLogic
         {
             return m_body.AngularVelocity;
         }
+
+        public double GetMass()
+        {
+            return m_body.Mass;
+        }
+
+        public void SetMass(double mass)
+        {
+            m_body.Mass = mass;
+        }
+
         #endregion
 
         #region IPhysicalInternalBase
