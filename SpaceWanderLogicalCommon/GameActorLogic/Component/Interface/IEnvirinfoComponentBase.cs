@@ -43,6 +43,7 @@ namespace GameActorLogic
 
         ActorBase GetActorByBodyId(int bodyid);
 
+        Engine GetEngine();
 
     }
 

@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using CrazyEngine.Core;
 
 namespace GameActorLogic
 {
@@ -53,6 +54,8 @@ namespace GameActorLogic
         /// 清理关卡现场
         /// </summary>
         void Dispose();
+
+        
 
         /// <summary>
         /// 返回玩家

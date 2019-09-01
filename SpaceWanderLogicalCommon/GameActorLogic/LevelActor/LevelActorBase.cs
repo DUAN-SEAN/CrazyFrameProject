@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Crazy.Common;
 using CrazyEngine.Base;
+using CrazyEngine.Core;
 using GameServer.Configure;
 
 namespace GameActorLogic
@@ -294,6 +295,11 @@ namespace GameActorLogic
         public ActorBase GetActorByBodyId(int bodyid)
         {
             return _envirinfoComponent.GetActorByBodyId(bodyid);
+        }
+
+        public Engine GetEngine()
+        {
+            return _envirinfoComponent.GetEngine();
         }
 
         #endregion
