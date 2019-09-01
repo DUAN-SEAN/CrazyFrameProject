@@ -8,7 +8,7 @@
 
         public double DeltaMin { get; set; } = 1000.0 / 60;
 
-        public double DeltaMax { get; set; } = 50000.0 / 60;
+        public double DeltaMax { get; set; } = 3000.0 / 60;
 
         public double TimeScalePrev { get; set; } = 1;
 
