@@ -302,6 +302,16 @@ namespace GameActorLogic
             return _envirinfoComponent.GetEngine();
         }
 
+        public void SetDelta(float delta)
+        {
+            _envirinfoComponent.SetDelta(delta);
+        }
+
+        public float GetDelta()
+        {
+            return _envirinfoComponent.GetDelta();
+        }
+
         #endregion
 
 

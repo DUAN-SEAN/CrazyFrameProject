@@ -102,6 +102,17 @@ namespace GameActorLogic
         {
             return m_engine;
         }
+
+        public void SetDelta(float delta)
+        {
+            m_runner.Delta = delta;
+        }
+
+        public float GetDelta()
+        {
+            return (float) m_runner.Delta;
+        }
+
         public CollisionEvent GetCollisionEvent()
         {
             return m_collision;

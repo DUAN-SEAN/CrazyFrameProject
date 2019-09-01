@@ -159,15 +159,7 @@ namespace GameActorLogic
             return _physicalBase.GetVelocity();
         }
 
-        public void SetDelta(double delta)
-        {
-            _physicalBase.SetDelta(delta);
-        }
 
-        public double GetDelta()
-        {
-            return _physicalBase.GetDelta();
-        }
 
         public double GetAngleVelocity()
         {

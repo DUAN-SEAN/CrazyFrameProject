@@ -135,10 +135,7 @@ namespace CrazyEngine.Base
             }
         }
 
-        /// <summary>
-        /// 时差
-        /// </summary>
-        public double Delta { get; set; }
+
 
         /// <summary>
         /// 初始化body时的朝向
@@ -380,7 +377,6 @@ namespace CrazyEngine.Base
         {
             if (Math.Sign(Mass) == 0) return;
 
-            Delta = delta;
 
             var deltaTimeSquared = Math.Pow(delta * timescale * Timescale, 2);
 

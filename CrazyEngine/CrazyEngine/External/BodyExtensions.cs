@@ -146,7 +146,7 @@ namespace CrazyEngine.External
         /// <param name="frame"></param>
         /// <param name="frictionAir"></param>
         /// <returns></returns>
-        public static Point PredictPosition(this Body body, double time)
+        public static Point PredictPosition(this Body body, double time,float delta)
         {
             Point position = new Point(body.Position.X, body.Position.Y);
             Point velocity = new Point(body.Velocity.X, body.Velocity.Y);
@@ -163,11 +163,11 @@ namespace CrazyEngine.External
                 position.X += velocity.X;
                 position.Y += velocity.Y;
 
-                velocity.X = velocityPrev.X * (1 - body.FrictionAir) + force.X / body.Mass * body.Delta * body.Delta;
-                velocity.Y = velocityPrev.Y * (1 - body.FrictionAir) + force.Y / body.Mass * body.Delta * body.Delta;
+                velocity.X = velocityPrev.X * (1 - body.FrictionAir) + force.X / body.Mass * delta * delta;
+                velocity.Y = velocityPrev.Y * (1 - body.FrictionAir) + force.Y / body.Mass * delta * delta;
                 velocityPrev = velocity;
 
-                time -= body.Delta;
+                time -= delta;
             }
 
             return position;

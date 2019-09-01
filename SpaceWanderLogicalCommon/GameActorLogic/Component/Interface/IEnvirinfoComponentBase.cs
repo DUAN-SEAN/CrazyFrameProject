@@ -45,6 +45,16 @@ namespace GameActorLogic
 
         Engine GetEngine();
 
+        /// <summary>
+        /// 设置物理引擎delta
+        /// </summary>
+        void SetDelta(float delta);
+
+        /// <summary>
+        /// 获取物理引擎delta
+        /// </summary>
+        float GetDelta();
+
     }
 
     /// <summary>
