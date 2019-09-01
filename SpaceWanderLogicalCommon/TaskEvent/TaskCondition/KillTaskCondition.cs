@@ -42,7 +42,7 @@ namespace GameActorLogic
             if (!m_event.TryGetValue(key, out var killvalue)) return false;
             //判断击杀数到达
             if (Currentvalue[key] >= killvalue) return true;
-            //未到达
+            //未到达 
             return false;
         }
 

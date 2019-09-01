@@ -132,6 +132,7 @@ namespace GameActorLogic
 
         public void End()
         {
+            level.AddEventMessagesToHandlerForward(new DestroyEventMessage(ActorID));
             _weaponEventComponent.End();
         }
 
