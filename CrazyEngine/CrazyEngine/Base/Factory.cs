@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using CrazyEngine.Common;
+using CrazyEngine.External;
 
 namespace CrazyEngine.Base
 {
@@ -131,7 +133,6 @@ namespace CrazyEngine.Base
             var cloneBody = new Body()
             {
                 Type = body.Type,
-                Angle = body.Angle,
                 Velocity = body.Velocity,
                 Force = body.Force,
                 AngularVelocity = body.AngularVelocity,
@@ -140,7 +141,7 @@ namespace CrazyEngine.Base
             };
 
             cloneBody.Init(body.Vertices.ToPoints().ToList());
-            cloneBody.InitAngle(body.Angle);
+            cloneBody.SetForward(body.Angle);
             cloneBody.Position = body.Position;
 
             return cloneBody;

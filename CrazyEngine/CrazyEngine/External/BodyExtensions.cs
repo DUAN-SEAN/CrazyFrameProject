@@ -4,6 +4,7 @@ using CrazyEngine.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 
 
 namespace CrazyEngine.External
@@ -58,6 +59,18 @@ namespace CrazyEngine.External
         }
 
         /// <summary>
+        /// 设置方向
+        /// </summary>
+        /// <param name="body"></param>
+        /// <param name="angle"></param>
+        public static void SetForward(this Body body, double angle)
+        {
+            //body.InitAngle(angle);
+            //body.InitAngle(angle);
+            body.Angle = angle;
+        }
+
+        /// <summary>
         /// 触发检测
         /// </summary>
         /// <param name="body"></param>
@@ -79,11 +92,13 @@ namespace CrazyEngine.External
         /// <param name="dectectionLayer"></param>
         public static void Detection(this Body body, Body trigger, double distance, DectectionLayer dectectionLayer = DectectionLayer.All)
         {
+            if(trigger == null) return;
+            
             trigger.Position.Set(body.Position);
             trigger.InitAngle(body.Angle);
-            trigger.PositionPrev.Set(body.PositionPrev - body.Forward * 10);
-            trigger.Velocity.Set(body.Velocity + body.Forward * 10);
+            trigger.Velocity = body.Velocity + body.Forward * 10;
             trigger.AngularVelocity = 0;
+
 
         }
 

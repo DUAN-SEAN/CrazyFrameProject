@@ -74,13 +74,17 @@ namespace GameServer.Battle
                 _readyDic.Add(plyaerId,0);
             }
 
+            int i = 0;
             foreach (var pId in players)
             {
                 m_players.Add(pId);
+                Log.Info("playerId = "+pId);
+                i++;
             }
+            Log.Info("Battle 玩家个数为："+players.Count);
             
             m_netHandler = handler;
-
+            
             //初始化关卡配置
             GameBarrierConfig gameBarrierConfig = null;
             foreach (var item in m_netHandler.GetGameBarrierConfigs())
@@ -407,7 +411,7 @@ namespace GameServer.Battle
 
             foreach (var e in eventList)
             {
-                Log.Info(e.MessageId.ToString());
+                //Log.Info(e.MessageId.ToString());
                 S2C_EventBattleMessage eventBattleMessage = new S2C_EventBattleMessage();
                 using (MemoryStream ms = new MemoryStream())
                 {
@@ -479,6 +483,10 @@ namespace GameServer.Battle
         }
         #endregion
 
+        ~Battle()
+        {
+            Log.Trace("从内存中释放Battle Id = "+Id);
+        }
         public override void Dispose()
         {
             if (m_isDispose)

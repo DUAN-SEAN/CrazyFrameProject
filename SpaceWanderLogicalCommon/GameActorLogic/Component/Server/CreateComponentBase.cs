@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Crazy.Common;
 using CrazyEngine.Common;
 
 namespace GameActorLogic
@@ -109,6 +110,7 @@ namespace GameActorLogic
                         actor.SetActorId(Id);
                         actor.PrepareActor(point_x, point_y, angle);
                         actor.SetCamp(camp);
+                        //Log.Trace("actor id" + actor.GetActorID() + " body id" + actor.GetBodyId() + " trigger:" + ((IBaseComponentContainer)actor).GetPhysicalinternalBase().GetBody().Trigger);
                     }
                    
                     break;

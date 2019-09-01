@@ -389,7 +389,7 @@ namespace CrazyEngine.Base
             Position.X += Velocity.X;
             Position.Y += Velocity.Y;
 
-            _angularVelocity = (Angle - AnglePrev) * frictionAir * correction + Torque / Inertia * deltaTimeSquared;
+            //_angularVelocity = (Angle - AnglePrev) * frictionAir * correction + Torque / Inertia * deltaTimeSquared;
             AnglePrev = Angle;
             Angle += AngularVelocity;
 
