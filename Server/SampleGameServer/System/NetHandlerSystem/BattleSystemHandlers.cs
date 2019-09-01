@@ -43,6 +43,8 @@ namespace GameServer.System.NetHandlerSystem
                 //Log.Debug("接收到一条指令:"+localMessage.ICommand.CommandType);
                 //GameServer.Instance.PostMessageToSystem<BattleSystem>(localMessage);
                 GameServer.Instance.GetSystem<BattleSystem>().GetBattleEntity(message.BattleId)?.SendCommandToLevel(localMessage.ICommand);
+
+
             }
         }
     }
@@ -71,6 +73,19 @@ namespace GameServer.System.NetHandlerSystem
                 battleId = message.BattleId, playerId = message.PlayerId
             };
             GameServer.Instance.PostMessageToSystem<BattleSystem>(crblm);
+        }
+    }
+
+
+    [MessageHandler]
+    public class C2S_DelayReqHandler:AMRpcHandler<C2S_DelayReq,S2C_DelayAck>
+    {
+        protected override void Run(ISession playerContext, C2S_DelayReq message, Action<S2C_DelayAck> reply)
+        {
+            S2C_DelayAck response = new S2C_DelayAck();
+            response.Time = DateTime.Now.Ticks;
+            reply(response);
+
         }
     }
 }

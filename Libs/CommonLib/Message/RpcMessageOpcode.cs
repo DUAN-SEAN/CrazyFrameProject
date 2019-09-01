@@ -40,6 +40,14 @@ namespace Crazy.Common
 	[Message(RpcMessageOpcode.S2C_UpLoadShipInfoAck)]
 	public partial class S2C_UpLoadShipInfoAck : IResponse {}
 
+//��ȡ�ɴ��б�
+	[Message(RpcMessageOpcode.C2S_DelayReq)]
+	public partial class C2S_DelayReq : IRequest {}
+
+//��ȡ�ɴ��б�
+	[Message(RpcMessageOpcode.S2C_DelayAck)]
+	public partial class S2C_DelayAck : IResponse {}
+
 }
 namespace Crazy.Common
 {
@@ -56,5 +64,7 @@ namespace Crazy.Common
 		 public const ushort S2C_ShipInfoAck = 1045;
 		 public const ushort C2S_UpLoadShipInfoReq = 1046;
 		 public const ushort S2C_UpLoadShipInfoAck = 1047;
+		 public const ushort C2S_DelayReq = 1048;
+		 public const ushort S2C_DelayAck = 1049;
 	}
 }

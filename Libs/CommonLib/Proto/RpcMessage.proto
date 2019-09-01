@@ -108,3 +108,18 @@ message S2C_UpLoadShipInfoAck // IResponse
 		OK = 1;
 	}
 }
+
+//获取飞船列表
+message C2S_DelayReq // IRequest
+{
+	int32 RpcId = 90;
+}
+
+//获取飞船列表
+message S2C_DelayAck // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int64 Time = 1;
+}
