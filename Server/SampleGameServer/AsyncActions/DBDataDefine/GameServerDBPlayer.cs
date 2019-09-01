@@ -44,7 +44,7 @@ namespace GameServer
         /// <summary>
         /// 飞船名称
         /// </summary>
-        public string shipName = "大黄蜂";
+        public string shipName = "空";
         /// <summary>
         /// 配置武器a
         /// </summary>
