@@ -146,7 +146,7 @@ namespace CrazyEngine.External
         /// <param name="frame"></param>
         /// <param name="frictionAir"></param>
         /// <returns></returns>
-        public static Point PredictPosition(Point position, Point velocity, Point force, double mass, double time, double delta, double frictionAir = 0.01)
+        public static Point PredictPosition(Point position, Point velocity, Point force, double mass, double time, double delta, double frictionAir = 0.005)
         {
             Point positionPrev = new Point(position.X, position.Y);
 

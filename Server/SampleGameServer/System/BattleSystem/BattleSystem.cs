@@ -29,7 +29,7 @@ namespace GameServer.Battle
         {
             base.Update(data1, data2, data3);
             base.Update(data1, data2, data3);
-
+           
         }
 
         public override Task OnMessage(ILocalMessage msg)

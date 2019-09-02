@@ -295,7 +295,7 @@ namespace CrazyEngine.Base
         /// <summary>
         /// 在无碰撞时的摩擦力
         /// </summary>
-        public double FrictionAir { get; set; } = 0.01;
+        public double FrictionAir { get; set; } = 0.005;
 
         public Vertices Vertices
         {

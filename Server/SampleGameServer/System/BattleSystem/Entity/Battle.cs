@@ -94,6 +94,7 @@ namespace GameServer.Battle
                     gameBarrierConfig = item;
                 }
             }
+            //Log.Info("barrier Id="+gameBarrierConfig.Id);
             m_level.InitConfig(gameBarrierConfig, m_netHandler.GetGameShipConfigs(),m_netHandler.GetGameSkillConfig());
             //关卡开启战斗
 
