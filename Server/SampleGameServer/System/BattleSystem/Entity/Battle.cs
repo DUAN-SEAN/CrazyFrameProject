@@ -125,10 +125,10 @@ namespace GameServer.Battle
             //1 接收逻辑事件(生成、销毁、状态)
             OnEventMessage();
             
-            //2 驱动物理引擎
-            if (m_level == null)
-                return;
-            m_level.Update();
+            ////2 驱动物理引擎
+            //if (m_level == null)
+            //    return;
+            //m_level.Update();
 
 
         }
@@ -175,6 +175,7 @@ namespace GameServer.Battle
 
                         }
                         m_level.Start(playerShips);
+                        m_levelTimerId = m_netHandler.StartLogicalTimer(m_level.Update);
                         Log.Debug("服务器确认所有客户端关卡加载完毕完成第二次握手，可以开启战斗 ，发起第三次握手");
                         BroadcastMessage(new S2CM_ReadyBattleBarrierAck { BattleId = Id });
                         _readyDic.Clear();
@@ -226,7 +227,7 @@ namespace GameServer.Battle
         {
             S2C_SyncLevelStateBattleMessage message = new S2C_SyncLevelStateBattleMessage();
             message.BattleId = Id;
-            message.IntervalTime = m_battleInterval;
+            message.IntervalTime =(long) m_level.GetDelta();
             message.Time = DateTime.Now.Ticks;
             message.Frame = m_level.GetCurrentFrame();
             BroadcastMessage(message);
@@ -496,7 +497,11 @@ namespace GameServer.Battle
             try
             {
                 Log.Trace("Dispose Battle Id = " + Id);
-                canBattle = false;
+                if (m_netHandler.StopLogicalTimer(m_levelTimerId))
+                {
+                    Log.Trace("释放Level Timer 成功 battleId = "+Id);
+                }
+                canBattle = false;;
                 levelReady = false;
                 m_isDispose = true;
 
@@ -515,7 +520,7 @@ namespace GameServer.Battle
                 m_level.OnLoadingDone -= OnReadyBattleFromLevel;
                 m_level.OnGameFail -= OnGameFail;
                 m_level.OnGameVictory -= OnGameVictory;
-
+                
                 m_level.Dispose();
                 m_level = null;
                 base.Dispose();
@@ -622,6 +627,7 @@ namespace GameServer.Battle
 
         private long m_oldIntervalTime;
 
+        private long m_levelTimerId;
 
 
         private BinaryFormatter m_binaryFormatter;

@@ -1,4 +1,7 @@
-﻿namespace CrazyEngine.Core
+﻿using System.Runtime.Remoting.Messaging;
+using Crazy.Common;
+
+namespace CrazyEngine.Core
 {
     public class Runner
     {
@@ -8,7 +11,7 @@
 
         public double DeltaMin { get; set; } = 1000.0 / 60;
 
-        public double DeltaMax { get; set; } = 3000.0 / 60;
+        public double DeltaMax { get; set; } = 4000.0 / 60;
 
         public double TimeScalePrev { get; set; } = 1;
 

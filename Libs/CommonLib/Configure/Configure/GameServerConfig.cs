@@ -62,8 +62,11 @@ namespace GameServer.Configure
     [Serializable]
     public class GameBattleConfig
     {
-        [XmlAttribute("TickTime")]
-        public int TickTime { get; set; }
+        [XmlAttribute("BattleTickTime")]
+        public int BattleTickTime { get; set; }
+
+        [XmlAttribute("LevelTickTime")]
+        public int LevelTickTime { get; set; }
     }
 
     [Serializable]

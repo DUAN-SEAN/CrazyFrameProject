@@ -46,11 +46,11 @@ namespace GameServer
             var dbConfig = m_gameServerGlobalConfig.DBConfigInfos[0];
             //Log.Info($"ip:{dbConfig.ConnectHost} port:{dbConfig.Port} serviceName:{dbConfig.DataBase} username:{dbConfig.UserName} password:{dbConfig.Password}");
 
-            GCNotification.GCDone += i =>
-            {
-                Log.Debug("GC = " + i);
+            //GCNotification.GCDone += i =>
+            //{
+            //    Log.Debug("GC = " + i);
 
-            };
+            //};
 
             Log.Debug("GameServer is running with server GC = "+GCSettings.IsServerGC);
             //MongoDBHelper.CreateDBClient(); //测试

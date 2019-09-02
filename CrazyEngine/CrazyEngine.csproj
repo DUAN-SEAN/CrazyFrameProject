@@ -66,5 +66,11 @@
     <Compile Include="CrazyEngine\External\CollisionEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Libs\CommonLib\CommonLib.csproj">
+      <Project>{0F3ECC0F-E8F4-434E-AAF9-95A912F2F565}</Project>
+      <Name>CommonLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

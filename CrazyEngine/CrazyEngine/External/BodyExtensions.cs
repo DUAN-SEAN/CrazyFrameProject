@@ -176,11 +176,12 @@ namespace CrazyEngine.External
         /// <param name="angleVelocity"></param>
         /// <param name="frame"></param>
         /// <returns></returns>
-        public static double PredictAngle(double angle, double angleVelocity, double time, double delta)
+        public static Point PredictAngle(double angle, double angleVelocity, double time, double delta)
         {
             int t = (int)(time / delta);
             angle += angleVelocity * t;
-            return angle;
+
+            return new Point(-Math.Sin(angle), Math.Cos(angle));
         }
 
 

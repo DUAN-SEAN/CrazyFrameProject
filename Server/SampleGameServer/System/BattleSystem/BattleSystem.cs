@@ -107,7 +107,7 @@ namespace GameServer.Battle
             battleEntity.Start(BattleGenerateId++);
 
             battleEntity.Init(msg.Players, msg.BarrierId, this);
-            var timerId = TimerManager.SetLoopTimer(m_gameBattleConfig.TickTime, battleEntity.Update);//设置Tick步长
+            var timerId = TimerManager.SetLoopTimer(m_gameBattleConfig.BattleTickTime, battleEntity.Update);//设置Tick步长
             battleEntity.SetTimer(timerId);
             //字典添加
             m_battleDic.Add(battleEntity.Id, battleEntity);
@@ -246,7 +246,16 @@ namespace GameServer.Battle
             PostLocalMessageToCtx(new SystemSendNetMessage { Message = message }, players);
 
         }
-        
+
+        public long StartLogicalTimer(BattleTimerManager.OnBattleTimerCallBack job)
+        {
+            return TimerManager.SetLoopTimer(m_gameBattleConfig.LevelTickTime, job);
+        }
+
+        public bool StopLogicalTimer(long id)
+        {
+            return TimerManager.UnsetLoopTimer(id);
+        } 
         public Battle GetBattleEntity(ulong battleId)
         {
             if(m_battleDic.TryGetValue(battleId,out Battle battle))
@@ -316,6 +325,11 @@ namespace GameServer.Battle
     {
         void SendMessageToClient(IBattleMessage message, string playerId);
         void SendMessageToClient(IBattleMessage message, List<string> players);
+
+        long StartLogicalTimer(BattleTimerManager.OnBattleTimerCallBack job);
+
+        bool StopLogicalTimer(long id);
+
 
         List<GameBarrierConfig> GetGameBarrierConfigs();
 

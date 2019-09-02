@@ -57,7 +57,7 @@ namespace GameActorLogic
             {
                 _actorList[i].Update();
             }
-            m_runner.Update(DateTime.Now.Ticks);
+            m_runner.Update(DateTime.Now.Ticks/10000);
             m_collision.Update();
 
         }
