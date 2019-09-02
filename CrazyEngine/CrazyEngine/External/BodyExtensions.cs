@@ -139,38 +139,32 @@ namespace CrazyEngine.External
         }
 
         /// <summary>
-        /// 段瑞要的1
+        /// 预测位置 按照匀加速运动公式计算
         /// </summary>
         /// <param name="position"></param>
         /// <param name="velocity"></param>
-        /// <param name="frame"></param>
+        /// <param name="force"></param>
+        /// <param name="mass"></param>
+        /// <param name="time"></param>
         /// <param name="frictionAir"></param>
         /// <returns></returns>
-        public static Point PredictPosition(Point position, Point velocity, Point force, double mass, double time, double delta, double frictionAir = 0.005)
+        public static Point PredictPosition(Point position, Point velocity, Point force, double mass, double time, double frictionAir = 0.005)
         {
-            Point positionPrev = new Point(position.X, position.Y);
-
             Point velocityPrev = new Point(velocity.X, velocity.Y);
 
-            while (time > 0)
-            {
-                positionPrev.X = position.X;
-                positionPrev.Y = position.Y;
-                position.X += velocity.X;
-                position.Y += velocity.Y;
+            velocity.X = velocityPrev.X * (1 - frictionAir) + force.X / mass * time ;
+            velocity.Y = velocityPrev.Y * (1 - frictionAir) + force.Y / mass * time ;
 
-                velocity.X = velocityPrev.X * (1 - frictionAir) + force.X / mass * delta * delta;
-                velocity.Y = velocityPrev.Y * (1 - frictionAir) + force.Y / mass * delta * delta;
-                velocityPrev = velocity;
+            position.X += (velocity.X * velocity.X - velocityPrev.X* velocityPrev.X)/(2*force.X/mass);
+            position.Y += (velocity.Y * velocity.Y - velocityPrev.Y*velocityPrev.Y)/(2*force.Y/mass);
 
-                time -= delta;
-            }
+
 
             return position;
         }
 
         /// <summary>
-        /// 段瑞要的2
+        /// 预测角度
         /// </summary>
         /// <param name="anlge"></param>
         /// <param name="angleVelocity"></param>
@@ -178,8 +172,7 @@ namespace CrazyEngine.External
         /// <returns></returns>
         public static Point PredictAngle(double angle, double angleVelocity, double time, double delta)
         {
-            int t = (int)(time / delta);
-            angle += angleVelocity * t;
+            angle += angleVelocity * time;
 
             return new Point(-Math.Sin(angle), Math.Cos(angle));
         }
