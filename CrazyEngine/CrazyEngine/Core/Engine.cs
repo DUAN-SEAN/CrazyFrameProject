@@ -29,20 +29,20 @@ namespace CrazyEngine.Core
 
         public Dictionary<string, List<Body>> Buckets { get; set; } = new Dictionary<string, List<Body>>();
 
-        public Dictionary<string, TmpPair> _tmpPairs = new Dictionary<string, TmpPair>();
+        private Dictionary<string, TmpPair> _tmpPairs = new Dictionary<string, TmpPair>();
 
-        public List<TmpPair> _tmpPairsList = new List<TmpPair>();
+        private List<TmpPair> _tmpPairsList = new List<TmpPair>();
 
         public static readonly Point BucketSize = new Point(40, 40);
 
-        public void Update(double delta, double correction)
+        public void Update(double delta)
         {
             Timestamp += (long)(delta * Timescale);
             var bodies = World.AllBodies.ToList();
             var constraints = World.AllConstraints.ToList();
 
-            //BodiesApplyGravity(bodies, World.Gravity);
-            BodiesUpdate(bodies, delta, Timescale, correction, World.Bounds);
+            BodiesApplyGravity(bodies, World.Gravity);
+            BodiesUpdate(bodies, delta, Timescale, World.Bounds);
             SolveConstraint(constraints, bodies);
             UpdateBroadphase(bodies, World.Modified);
 
@@ -70,11 +70,11 @@ namespace CrazyEngine.Core
             }
         }
 
-        private void BodiesUpdate(IEnumerable<Body> allBodies, double delta, double timescale, double correction, Bound bounds)
+        private void BodiesUpdate(IEnumerable<Body> allBodies, double delta, double timescale, Bound bounds)
         {
             foreach (var body in allBodies.Where(x => !(x.Static || x.Sleep)))
             {
-                body.Update(delta, timescale, correction, bounds);
+                body.Update(delta, timescale, bounds);
             }
         }
 
@@ -84,7 +84,6 @@ namespace CrazyEngine.Core
             {
                 body.Force.Clear();
                 body.Torque = 0;
-                body.AngularVelocity = 0;
             }
         }
 
@@ -105,9 +104,7 @@ namespace CrazyEngine.Core
 
                 if ((bodyA.Static || bodyA.Sleep) && (bodyB.Static || bodyB.Sleep))
                     continue;
-                if (bodyA.Bounds == null || bodyB.Bounds == null || bodyA.Bounds.Max == null || bodyA.Bounds.Min == null||
-                    bodyB.Bounds.Max == null || bodyB.Bounds.Min == null )
-                    continue;
+
                 if (!bodyA.Bounds.Intersect(bodyB.Bounds))
                     continue;
                 foreach (var partA in bodyA.EnumParts())
@@ -342,7 +339,7 @@ namespace CrazyEngine.Core
             projection.Y = dot.Max();
         }
 
-        public class TmpPair
+        class TmpPair
         {
             public Body BodyA { get; set; }
             public Body BodyB { get; set; }
@@ -512,8 +509,8 @@ namespace CrazyEngine.Core
                 {
                     offsetA = pointAWorld - bodyA.Position + force;
 
-                    bodyA.Velocity = bodyA.Position - bodyA.PositionPrev;
-                    bodyA.AngularVelocity = bodyA.Angle - bodyA.AnglePrev;
+                    bodyA.Velocity = (bodyA.Position - bodyA.PositionPrev) * bodyA.FPS;
+                    bodyA.AngularVelocity = (bodyA.Angle - bodyA.AnglePrev) * bodyA.FPS;
 
                     velocityPointA = bodyA.Velocity + (offsetA.Perpendicular() * bodyA.AngularVelocity);
                     oAn = offsetA.Dot(normal);
@@ -529,8 +526,8 @@ namespace CrazyEngine.Core
                 {
                     offsetB = pointBWorld - bodyB.Position + force;
 
-                    bodyB.Velocity = bodyB.Position - bodyB.PositionPrev;
-                    bodyB.AngularVelocity = bodyB.Angle - bodyB.AnglePrev;
+                    bodyB.Velocity = (bodyB.Position - bodyB.PositionPrev) * bodyB.FPS;
+                    bodyB.AngularVelocity = (bodyB.Angle - bodyB.AnglePrev) * bodyB.FPS;
 
                     velocityPointB = bodyB.Velocity + (offsetB.Perpendicular() * bodyB.AngularVelocity);
                     oBn = offsetB.Dot(normal);
@@ -775,10 +772,10 @@ namespace CrazyEngine.Core
                 var contacts = pair.ActiveContacts;
                 var contactShare = 1d / contacts.Count;
 
-                bodyA.Velocity = bodyA.Position - bodyA.PositionPrev;
-                bodyB.Velocity = bodyB.Position - bodyB.PositionPrev;
-                bodyA.AngularVelocity = bodyA.Angle - bodyA.AnglePrev;
-                bodyB.AngularVelocity = bodyB.Angle - bodyB.AnglePrev;
+                bodyA.Velocity = bodyA.Position - bodyA.PositionPrev * bodyA.FPS;
+                bodyB.Velocity = bodyB.Position - bodyB.PositionPrev * bodyB.FPS;
+                bodyA.AngularVelocity = bodyA.Angle - bodyA.AnglePrev * bodyA.FPS;
+                bodyB.AngularVelocity = bodyB.Angle - bodyB.AnglePrev * bodyB.FPS;
 
                 foreach (var contact in contacts)
                 {
@@ -842,7 +839,7 @@ namespace CrazyEngine.Core
                     var impulse = normal * normalImpulse + tangent * tangentImpulse;
 
                     if (!(bodyA.Static || bodyA.Sleep))
-                        {
+                    {
                         bodyA.PositionPrev += impulse * bodyA.InverseMass;
                         bodyA.AnglePrev += offsetA.Cross(impulse) * bodyA.InverseInertia;
                     }

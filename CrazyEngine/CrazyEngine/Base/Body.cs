@@ -18,13 +18,12 @@ namespace CrazyEngine.Base
         private double _angularVelocity;
         private double _density = 0.001;
         private double _inertia;
-        private double _mass = 0.1;
+        private double _mass = 1;
         private Vertices _vertices;
         private double _anglePrev;
+        private double _delta = 1 / 60;
 
         public Body Parent { get; set; }
-
-        
 
         public void Init(List<Point> path)
         {
@@ -38,20 +37,18 @@ namespace CrazyEngine.Base
             _position = null;
             _velocity = null;
             Bounds.Dispose();
-            Region?.Dispose();
+            Region.Dispose();
             _vertices.Dispose();
             Axes.Dispose();
             _parts.Clear();
             _parts = null;
         }
 
-
         public Point Position
         {
             get { return _position; }
             set
             {
-                if(value == null) return;
                 var delta = value - _position;
                 PositionPrev.Offset(delta);
 
@@ -79,8 +76,8 @@ namespace CrazyEngine.Base
             get { return _velocity; }
             set
             {
-                PositionPrev.X = Position.X - value.X;
-                PositionPrev.Y = Position.Y - value.Y;
+                PositionPrev.X = (Position.X - value.X) * FPS;
+                PositionPrev.Y = (Position.Y - value.Y) * FPS;
                 Velocity.X = value.X;
                 Velocity.Y = value.Y;
                 Speed = _velocity.Magnitude();
@@ -105,7 +102,7 @@ namespace CrazyEngine.Base
             get { return _angularVelocity; }
             set
             {
-                AnglePrev = Angle - value;
+                AnglePrev = (Angle - value) * FPS;
                 _angularVelocity = value;
                 AngularSpeed = Math.Abs(_angularVelocity);
             }
@@ -116,8 +113,8 @@ namespace CrazyEngine.Base
             get { return _angle; }
             set
             {
-                _angle = value;
                 var delta = value - _angle;
+                _angle = value;
                 AnglePrev += delta;
 
                 for (var i = 0; i < _parts.Count; i++)
@@ -134,8 +131,6 @@ namespace CrazyEngine.Base
                 }
             }
         }
-
-
 
         /// <summary>
         /// 初始化body时的朝向
@@ -297,6 +292,22 @@ namespace CrazyEngine.Base
         /// </summary>
         public double FrictionAir { get; set; } = 0.005;
 
+        /// <summary>
+        /// 时差
+        /// </summary>
+        public double Delta
+        {
+            get { return _delta; }
+            set
+            {
+                _delta = value;
+                FPS = 1 / value;
+            }
+        }
+
+        public double FPS { get; set; } = 60;
+
+
         public Vertices Vertices
         {
             get { return _vertices; }
@@ -373,28 +384,29 @@ namespace CrazyEngine.Base
             }
         }
 
-        public void Update(double delta, double timescale, double correction, Bound bounds)
+        public void Update(double delta, double timescale, Bound bounds)
         {
             if (Math.Sign(Mass) == 0) return;
 
+            Delta = delta;
 
             var deltaTimeSquared = Math.Pow(delta * timescale * Timescale, 2);
 
             var frictionAir = 1 - FrictionAir * timescale * Timescale;
-            var velocityPrevX = Position.X - PositionPrev.X;
-            var velocityPrevY = Position.Y - PositionPrev.Y;
+            var velocityPrevX = (Position.X - PositionPrev.X) * FPS;
+            var velocityPrevY = (Position.Y - PositionPrev.Y) * FPS;
 
-            Velocity.X = velocityPrevX * frictionAir * correction + Force.X / Mass * deltaTimeSquared;
-            Velocity.Y = velocityPrevY * frictionAir * correction + Force.Y / Mass * deltaTimeSquared;
+            Velocity.X = velocityPrevX * frictionAir + Force.X * InverseMass * delta;
+            Velocity.Y = velocityPrevY * frictionAir + Force.Y * InverseMass * delta;
 
             PositionPrev.X = Position.X;
             PositionPrev.Y = Position.Y;
-            Position.X += Velocity.X;
-            Position.Y += Velocity.Y;
+            Position.X += Velocity.X * delta;
+            Position.Y += Velocity.Y * delta;
 
-            //_angularVelocity = (Angle - AnglePrev) * frictionAir * correction + Torque / Inertia * deltaTimeSquared;
+            //_angularVelocity = (Angle - AnglePrev) * frictionAir + Torque / Inertia * deltaTimeSquared;
             AnglePrev = Angle;
-            Angle += AngularVelocity;
+            Angle += AngularVelocity * delta;
 
             Speed = Velocity.Magnitude();
             AngularSpeed = Math.Abs(AngularVelocity);
@@ -402,18 +414,18 @@ namespace CrazyEngine.Base
             for (var i = 0; i < _parts.Count; i++)
             {
                 var part = _parts[i];
-                part.Vertices.Translate(Velocity);
+                part.Vertices.Translate(Velocity * delta);
                 if (i > 0)
                 {
-                    part._position.Offset(Velocity);
+                    part._position.Offset(Velocity * delta);
                 }
-                part.Vertices.Rotate(AngularVelocity, Position);
-                part.Axes.Rotate(AngularVelocity);
+                part.Vertices.Rotate(AngularVelocity * delta, Position);
+                part.Axes.Rotate(AngularVelocity * delta);
                 if (i > 0)
                 {
-                    part._position.RotateAbout(AngularVelocity, _position);
+                    part._position.RotateAbout(AngularVelocity * delta, _position);
                 }
-                part.Bounds.Update(Vertices, Velocity);
+                part.Bounds.Update(Vertices, Velocity * delta);
             }
         }
 

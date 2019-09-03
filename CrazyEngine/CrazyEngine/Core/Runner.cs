@@ -34,6 +34,7 @@ namespace CrazyEngine.Core
         public Runner(Engine engine)
         {
             m_fixedUpdate= new FixedUpdate(TimeSpan.FromSeconds(1 / 60d), Tick);
+            m_fixedUpdate.Start();
             _engine = engine;
         }
         public void Update2()
@@ -42,7 +43,7 @@ namespace CrazyEngine.Core
         }
         private void Tick()
         {
-            _engine.Update(FixedStep, 1D);
+            _engine.Update(FixedStep);
         }
 
         public void Update(long time)
@@ -67,7 +68,7 @@ namespace CrazyEngine.Core
                 Timestamp = time;
                 _frame = 0;
             }
-            _engine.Update(delta, correction);
+            _engine.Update(delta);
         }
 
         #region 段瑞改，根据服务器逻辑层调用频率，设置积分次数，并记录回落数值
@@ -81,7 +82,7 @@ namespace CrazyEngine.Core
             for (int i = 0; i < n; i++)
             {
 
-                _engine.Update(FixedStep, 1D);
+                _engine.Update(FixedStep);
             }
 
             m_currentTime = DateTime.Now.Ticks;

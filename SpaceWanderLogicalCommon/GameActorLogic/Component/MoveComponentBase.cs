@@ -42,7 +42,7 @@ namespace GameActorLogic
             OnRight?.Invoke(proc);
         }
 
-        public void AddThrust(float ang = 0.0001f)
+        public void AddThrust(float ang = 10000f)
         {
             physical?.AddThrust(ang);
             OnThrust?.Invoke(ang);
@@ -60,7 +60,7 @@ namespace GameActorLogic
             float angle = (float)Math.Acos(cos);
             float anglepro = (float) (angle / Math.PI);
             float forcepro = (float)Helper.DistanceNoSqrt(Point.Zero(), point);
-            physical?.AddThrust(0.00001f* 5  * anglepro * forcepro);
+            physical?.AddThrust(100f* anglepro * forcepro);
 
             if (cos > 0.95)
             {
@@ -70,11 +70,11 @@ namespace GameActorLogic
 
             if ( cross > 0)
             {
-                physical?.AddForward(0.1);
+                physical?.AddForward(0.1f);
             }
             else if (cross < 0)
             {
-                physical?.AddForward(-0.1);
+                physical?.AddForward(-0.1f);
             }
         }
 
