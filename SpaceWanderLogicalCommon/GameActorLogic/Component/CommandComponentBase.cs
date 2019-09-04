@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Crazy.Common;
+using System;
 using System.Collections.Generic;
 
 
@@ -27,8 +28,16 @@ namespace GameActorLogic
 
         public List<ICommand> GetCommands()
         {
-            var list = new List<ICommand>(_commands);
-            _commands.Clear();
+            //if (_commands == null || _commands.Count == 0)
+            //    Log.Trace("CommandComponent: commands 数量" + _commands.Count);
+            List<ICommand> list;
+            lock (_commands)
+            {
+                list = new List<ICommand>(_commands);
+                _commands.Clear();
+            }
+            //list = new List<ICommand>(_commands);
+            //_commands.Clear();
             return list;
         }
 

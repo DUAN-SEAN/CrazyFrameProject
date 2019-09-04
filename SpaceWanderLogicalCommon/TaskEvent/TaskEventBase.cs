@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Crazy.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,19 +53,24 @@ namespace GameActorLogic
         /// 任务结果
         /// </summary>
         protected ITaskResult taskResult;
-        
+       
         #endregion
 
 
 
 
-        public TaskEventBase(int taskid,ILevelActorComponentBaseContainer levelActor,Int32 condition,Int32 result)
+        public TaskEventBase(int taskid,ILevelActorComponentBaseContainer levelActor,Int32 condition,Int32 result,Dictionary<int,int> values)
         {
             this.taskid = taskid;
-            taskcondition = new Dictionary<int, int>();
             this.levelActor = levelActor;
+            taskcondition = new Dictionary<int, int>();
+            foreach (var i in values)
+            {
+                AddValue(i.Key, i.Value);
+            }
             m_taskconditiontypedefine = condition;
             m_taskresulttypedefine = result;
+
             taskCondition = CreateTaskCondition(m_taskconditiontypedefine);
             taskResult = CreateTaskResult(m_taskresulttypedefine);
         }
@@ -84,6 +90,12 @@ namespace GameActorLogic
                 case TaskConditionTypeConstDefine.KillTaskEvent:
                     taskcondition = new KillTaskCondition(this, 0,levelActor);
                     break;
+                case TaskConditionTypeConstDefine.EnemyInitTask:
+                    taskcondition = new EnemyInitTaskCondition(this,levelActor);
+                    break;
+                case TaskConditionTypeConstDefine.LevelStartEvent:
+                    taskcondition = new LevelStartTaskCondition(levelActor);
+                    break;
             }
             return taskcondition;
         }
@@ -100,9 +112,13 @@ namespace GameActorLogic
                     taskresult = new VictoryTaskResult(levelActor);
                     break;
                 case TaskResultTypeConstDefine.ActivateTask:
+                    if (!taskcondition.TryGetValue(1, out int value)){
+                        Log.Trace("TaskEventBase: task id" + taskid + " 未获取到激活任务的ID");
+                    }
+                    taskresult = new ActivateTaskResult(levelActor,value);
                     break;
                 case TaskResultTypeConstDefine.Fail:
-                    taskresult = new VictoryTaskResult(levelActor);
+                    taskresult = new FailTaskResult(levelActor);
                     break;
             }
             return taskresult;
@@ -134,19 +150,21 @@ namespace GameActorLogic
         {
             if (m_taskEventState == TaskEventState.Finished) return false;
             if (m_taskEventState != TaskEventState.Idle) return false;
-            m_taskEventState = TaskEventState.UnFinished;
+            StartTaskEvent();
             return true;
 
         }
 
         public void TickTask()
         {
- 
-            if(m_taskEventState == TaskEventState.Idle) return;
+            //Log.Trace("tick task:" + taskid);
+            if (m_taskEventState == TaskEventState.Idle) return;
             if(m_taskEventState == TaskEventState.Finished) return;
+            //Log.Trace("task:"+taskid + "开始tick");
             //任务已激活 但是未完成 判断条件是否达成
-            if(taskCondition == null) return;
+            if (taskCondition == null) return;
             if (!taskCondition.TickCondition()) return;
+            Log.Trace("任务完成 任务id" + taskid);
             //任务条件已达成
             //如果任务结果未执行 任务不显示已完成
             if(taskResult == null) return;
@@ -163,12 +181,18 @@ namespace GameActorLogic
         {
             if (taskcondition.ContainsKey(key)) return false;
             taskcondition.Add(key, value);
+            Log.Trace("添加值成功 key:" + key + " value:" + value);
             return true;
         }
 
         public bool TryGetValue(int key, out int value)
         {
             return taskcondition.TryGetValue(key, out value);
+        }
+
+        public Dictionary<int, int> GetTaskValues()
+        {
+            return taskcondition;
         }
 
         public void Dispose()
@@ -207,6 +231,13 @@ namespace GameActorLogic
         public void SetTaskState(TaskEventState state)
         {
             m_taskEventState = state;
+        }
+
+        public void StartTaskEvent()
+        {
+            taskCondition.StartCondition();
+            taskResult.StartResult();
+            m_taskEventState = TaskEventState.UnFinished;
         }
 
         #endregion

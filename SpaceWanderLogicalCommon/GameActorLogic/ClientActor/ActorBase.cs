@@ -4,6 +4,28 @@ using System;
 using CrazyEngine.Base;
 using CrazyEngine.Common;
 using CrazyEngine.External;
+/*
+                           _ooOoo_
+                          o8888888o
+                          88" . "88
+                          (| -_- |)
+                          O\  =  /O
+                       ____/`---'\____
+                     .'  \\|     |//  `.
+                    /  \\|||  :  |||//  \
+                   /  _||||| -:- |||||-  \
+                   |   | \\\  -  /// |   |
+                   | \_|  ''\---/''  |   |
+                   \  .-\__  `-`  ___/-. /
+                 ___`. .'  /--.--\  `. . __
+              ."" '<  `.___\_<|>_/___.'  >'"".
+             | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+             \  \ `-.   \_ __\ /__ _/   .-` /  /
+        ======`-.____`-.___\_____/___.-`____.-'======
+                           `=---='
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 佛祖保佑       永无BUG
+*/
 
 namespace GameActorLogic
 {
@@ -26,6 +48,7 @@ namespace GameActorLogic
             //this.envir = envir;
             this.level = level;
             ActorType = actortype;
+            
         }
 
         protected virtual void  CreateBaseComponent()
@@ -40,6 +63,7 @@ namespace GameActorLogic
         public virtual void Update()
         {
             _physicalBase.Update();
+            
         }
 
         public virtual void Dispose()

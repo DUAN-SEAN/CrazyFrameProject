@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Crazy.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace GameActorLogic
     {
         protected ITaskEvent m_event;
         protected readonly int key;
-        protected readonly long Inittime;
+        protected long Inittime;
 
         protected Dictionary<int, int> CurrentValue;
         public TimeTaskCondition(ITaskEvent mEvent,int key)
@@ -30,13 +31,26 @@ namespace GameActorLogic
         }
         public bool TickCondition()
         {
+            //Log.Trace("TickCondition 时间逻辑正在运行");
             //尝试从任务中获取值
             if (!m_event.TryGetValue(key, out var timevalue)) return false;
-            CurrentValue[key] = (int)((DateTime.Now.Ticks - Inittime) / 1000);
+            //Log.Trace("TickCondition 取到时间值:" + timevalue);
+            CurrentValue[key] = (int)((DateTime.Now.Ticks - Inittime));
+
+            //Log.Trace("TickCondition 当前已达到时间：" + (Inittime + timevalue * 6 * 1e7) + " 当前时间：" + DateTime.Now.Ticks);
             //判断时间是否到达时间
-            if (Inittime + timevalue < DateTime.Now.Ticks) return true;
+            if (Inittime + timevalue * 60 * 1e7 < DateTime.Now.Ticks)
+            {
+                Log.Trace("TickCondition 时间到达");
+                return true;
+            }
             //时间到达
             return false;
+        }
+
+        public void StartCondition()
+        {
+            Inittime = DateTime.Now.Ticks;
         }
 
         public Dictionary<int, int> ConditionCurrentValues

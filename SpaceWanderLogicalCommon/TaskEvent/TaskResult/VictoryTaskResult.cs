@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Crazy.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,12 @@ namespace GameActorLogic
         }
         public void Execute()
         {
+            Log.Trace("任务完成：胜利");
             level.GetEventComponentBase().AddEventMessagesToHandlerForward(new VictoryEventMessage(level.GetLevelID()));
+        }
+
+        public void StartResult()
+        {
         }
     }
 }

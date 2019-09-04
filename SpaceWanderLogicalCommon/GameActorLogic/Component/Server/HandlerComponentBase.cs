@@ -116,6 +116,7 @@ namespace GameActorLogic
                 actor.SetRelPosition(initEvent.relatpoint_x, initEvent.relatpoint_y);
                 levelContainer.GetEnvirinfointernalBase().AddActor(actor);
             }
+            //Log.Trace("HandlerComponentBase HandlerInitEvent: 生成一个Actor id" + actor.GetActorID() + " " + actor.GetActorType());
             //执行回调生成事件
             OnInitMessageHandler?.Invoke(initEvent.actorid);
 
@@ -127,7 +128,7 @@ namespace GameActorLogic
         protected void HandlerDestroyEvent(DestroyEventMessage destroyEvent)
         {
             if(destroyEvent == null) return;
-            Log.Trace("处理销毁事件" + destroyEvent.actorid);
+            //Log.Trace("处理销毁事件" + destroyEvent.actorid);
 
             //先执行回调销毁事件
             OnDestroyMessageHandler?.Invoke(destroyEvent.actorid);

@@ -25,5 +25,9 @@ namespace GameActorLogic
         {
             level.GetEventComponentBase().AddEventMessagesToHandlerForward(new FailEventMessage(level.GetLevelID()));
         }
+
+        public void StartResult()
+        {
+        }
     }
 }

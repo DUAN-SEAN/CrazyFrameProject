@@ -28,7 +28,7 @@ namespace GameActorLogic
         /// 向前加速接口
         /// 0.00001
         /// </summary>
-        void AddThrust(float proc = 1f);
+        void AddThrust(float proc = 0.000001f);
 
         /// <summary>
         /// x y 对应摇杆移动的方法和长度

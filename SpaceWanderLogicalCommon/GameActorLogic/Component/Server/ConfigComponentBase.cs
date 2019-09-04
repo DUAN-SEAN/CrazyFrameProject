@@ -41,6 +41,7 @@ namespace GameActorLogic
             Skill = skill;
             BarrierArray = barrier;
             InitializeActor(ships, skill, barrier);
+            InitializeMap();
         }
 
         protected void InitializeActor(GameShipConfig[] ships, GameSkillConfig skill, GameBarrierConfig barrier)
@@ -52,11 +53,16 @@ namespace GameActorLogic
                 int id = barrierTaskConfig.Id;
                 int condition = barrierTaskConfig.StartCondition;
                 int result = barrierTaskConfig.Result;
+                var dict = new Dictionary<int, int>();
+                foreach(var itme in barrierTaskConfig.TaskConditionItemConfig)
+                {
+                    dict.Add(itme.ConditionTarget, itme.ConditionValue);
+                    Log.Trace("加载配置 任务id：" + id + " key" + itme.ConditionTarget + " value" + itme.ConditionValue);
+                }
+
                 var task1 = level.GetCreateInternalComponentBase().CreateTaskEvent(
-                    condition, result, id, new Dictionary<int, int>
-                    {
-                        {0,600000 }
-                    });
+                    condition, result, id, dict);
+                level.AddTaskEvent(task1);
             }
 
             #endregion
@@ -100,13 +106,13 @@ namespace GameActorLogic
             //定时炸弹
             weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.TimeBombActor, level);
             weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725));
-            weaponactor.CreateAiComponent(new DeadAiComponent(5000, weaponactor));
+            weaponactor.CreateAiComponent(new DeadAiComponent(5000000000, weaponactor));
             ConfigActors.Add(ActorTypeBaseDefine.TimeBombActor, weaponactor);
 
             //触发炸弹
             weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.TriggerBombActor, level);
             weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725));
-            weaponactor.CreateAiComponent(new DeadAiComponent(5000, weaponactor));
+            weaponactor.CreateAiComponent(new DeadAiComponent(5000000000, weaponactor));
             ConfigActors.Add(ActorTypeBaseDefine.TriggerBombActor, weaponactor);
 
             #endregion
@@ -121,7 +127,7 @@ namespace GameActorLogic
             //蓄力激光
             weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.PowerLaserActor, level);
             weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725, isTrigger: true));
-            weaponactor.CreateAiComponent(new DeadAiComponent(5, weaponactor));
+            weaponactor.CreateAiComponent(new DeadAiComponent(5000000000, weaponactor));
             ConfigActors.Add(ActorTypeBaseDefine.PowerLaserActor, weaponactor);
 
 
@@ -140,11 +146,13 @@ namespace GameActorLogic
                 ActorTypeBaseDefine.TrackingMissileActor,
                 ActorTypeBaseDefine.MachineGunActor
             });
+            shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
             ConfigActors.Add(ActorTypeBaseDefine.AnnihilationShipActor, shipactor);
 
             //精英船A
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.EliteShipActorA, level);
             shipactor.CreateBody(Factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
             shipactor.InitializeFireControl(new List<int> // 鱼雷 高射炮
             {
                 ActorTypeBaseDefine.TorpedoActor,
@@ -155,6 +163,7 @@ namespace GameActorLogic
             //精英船B
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.EliteShipActorB, level);
             shipactor.CreateBody(Factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
             shipactor.InitializeFireControl(new List<int> // 跟踪导弹 高射炮
             {
                 ActorTypeBaseDefine.TrackingMissileActor,
@@ -165,6 +174,7 @@ namespace GameActorLogic
             //战斗机A
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.FighterShipActorA, level);
             shipactor.CreateBody(Factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
             shipactor.InitializeFireControl(new List<int> // 机关枪 持续激光
             {
                 ActorTypeBaseDefine.MachineGunActor,
@@ -175,7 +185,8 @@ namespace GameActorLogic
             //战斗机B
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.FighterShipActorB, level);
             shipactor.CreateBody(Factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
-            shipactor.InitializeFireControl(new List<int> // 高射炮 蓄力激光
+            shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
+            shipactor.InitializeFireControl(new List<int> // 高射炮 蓄力激光s
             {
                 ActorTypeBaseDefine.AntiAircraftGunActor,
                 ActorTypeBaseDefine.PowerLaserActor
@@ -185,6 +196,7 @@ namespace GameActorLogic
             //无人机
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.DroneShipActor, level);
             shipactor.CreateBody(Factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
             shipactor.InitializeFireControl(new List<int> // 机关枪
             {
                 ActorTypeBaseDefine.MachineGunActor
@@ -194,6 +206,7 @@ namespace GameActorLogic
             //黄蜂飞船
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.WaspShipActorA, level);
             shipactor.CreateBody(Factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
             shipactor.InitializeFireControl(new List<int> // 机关枪 高射炮
             {
                 ActorTypeBaseDefine.MachineGunActor,
@@ -207,6 +220,10 @@ namespace GameActorLogic
 
         }
 
+        protected void InitializeMap()
+        {
+            level.SetMapSize(1000, 1000);
+        }
         #region Helper
 
         protected Dictionary<int, int> CreateValues(int condition,Dictionary<int,int> valuesdic)

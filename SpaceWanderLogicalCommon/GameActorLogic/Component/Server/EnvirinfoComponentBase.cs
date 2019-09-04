@@ -1,8 +1,10 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Crazy.Common;
 using CrazyEngine.Base;
 using CrazyEngine.Core;
 using CrazyEngine.External;
@@ -26,6 +28,11 @@ namespace GameActorLogic
         protected CollisionEvent m_collision;
         protected List<ActorBase> _actorList;
 
+        /// <summary>
+        /// 关卡地图长宽
+        /// </summary>
+        protected double MapHeight;
+        protected double MapWidth;
         public EnvirinfoComponentBase()
         {
             m_engine = new Engine();
@@ -51,14 +58,15 @@ namespace GameActorLogic
         /// </summary>
         public void Tick()
         {
-           
-
+            
             for (int i = 0; i < _actorList.Count; i++)
             {
                 _actorList[i].Update();
+                //Log.Trace("EnvirinfoComponentBase: Actorid" + _actorList[i].GetActorID() + " 位置坐标:" +
+                //_actorList[i].GetPosition() + " 力" + _actorList[i].GetForce() + " 转矩" + _actorList[i].GetAngleVelocity());
             }
-            //m_runner.Update(DateTime.Now.Ticks/10000);
-            m_runner.Update2();
+
+            m_runner.Update(DateTime.Now.Ticks / 10000);
             m_collision.Update();
 
         }
@@ -156,6 +164,24 @@ namespace GameActorLogic
             m_runner = null;
            
             
+        }
+
+        /// <summary>
+        /// 添加空气墙
+        /// </summary>
+        public void AddAirWall()
+        {
+            m_engine.World.Add(Factory.CreateRectangleBody(0, -MapHeight / 2, MapWidth, 5, true));
+            m_engine.World.Add(Factory.CreateRectangleBody(0, MapHeight / 2, MapWidth, 5, true));
+            m_engine.World.Add(Factory.CreateRectangleBody(MapWidth / 2, 0, 5, MapHeight, true));
+            m_engine.World.Add(Factory.CreateRectangleBody(-MapWidth / 2, 0, 5, MapHeight, true));
+
+        }
+
+        public void SetMapSize(double height, double width)
+        {
+            this.MapHeight = height;
+            this.MapWidth = width;
         }
     }
 }
