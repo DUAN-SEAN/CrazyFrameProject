@@ -100,4 +100,12 @@ namespace GameServer.System.NetHandlerSystem
 
         }
     }
+    [MessageHandler]
+    public class C2S_InviteMatchTeamMessageHandler:AMHandler<C2S_InvitePlayerMatchTeam>
+    {
+        protected override void Run(ISession playerContext, C2S_InvitePlayerMatchTeam message)
+        {
+
+        }
+    }
 }
