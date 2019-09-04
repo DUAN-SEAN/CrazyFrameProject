@@ -27,6 +27,10 @@ namespace GameActorLogic
         /// </summary>
         TaskEventState GetTaskState();
 
+        /// <summary>
+        /// 在游戏开始进行时 开启一些相关逻辑
+        /// </summary>
+        void StartTaskEvent();
 
         /// <summary>
         /// 获取当前条件值

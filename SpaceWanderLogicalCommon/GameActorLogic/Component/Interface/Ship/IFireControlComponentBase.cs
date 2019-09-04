@@ -25,8 +25,12 @@ namespace GameActorLogic
         /// <summary>
         /// 发射武器
         /// </summary>
-        /// <param name="i">全局武器类型</param>
         void Fire(int i);
+
+        /// <summary>
+        /// AI发射武器
+        /// </summary>
+        void FireAI(int i);
 
         /// <summary>
         /// 关闭制定武器功能

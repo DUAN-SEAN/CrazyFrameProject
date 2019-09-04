@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Crazy.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -67,7 +68,13 @@ namespace GameActorLogic
 
         public void ActivateTask(int id)
         {
-            taskEvents.Find(t => t.GetTaskId() == id).ActivateTask();
+            var task = taskEvents.Find(t => t.GetTaskId() == id);
+            if(task == null)
+            {
+                Log.Trace("TaskEventComponentBase: ActivateTask 未找到要激活的任务 id：" + id);
+                return;
+            }
+            task.ActivateTask();
         }
 
         public void Update()
@@ -75,9 +82,23 @@ namespace GameActorLogic
             foreach (var taskEvent in taskEvents)
             {
                 if(taskEvent.GetTaskState() == TaskEventState.UnFinished)
+                {
+                    //Log.Trace("task event 任务tick" + taskEvent.GetTaskId());
                     taskEvent.TickTask();
+
+                }
             }
         }
 
+        public void StartTaskEvents()
+        {
+            foreach (var taskEvent in taskEvents)
+            {
+                if (taskEvent.GetTaskConditionTypeDefine() == TaskConditionTypeConstDefine.LevelStartEvent)
+                {
+                    taskEvent.StartTaskEvent();
+                }
+            }
+        }
     }
 }

@@ -12,6 +12,12 @@ namespace GameActorLogic
     /// </summary>
     public interface ITaskCondition
     {
+
+        /// <summary>
+        /// 开启任务条件
+        /// </summary>
+        void StartCondition();
+
         /// <summary>
         /// 检查条件是否达成
         /// </summary>

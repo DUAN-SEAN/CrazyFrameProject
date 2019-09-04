@@ -42,6 +42,10 @@ namespace GameActorLogic
         /// </summary>
         void SetTaskConditionAndState(int id,int state, Dictionary<int, int> values);
 
+        /// <summary>
+        /// 开启所有闲置任务
+        /// </summary>
+        void StartTaskEvents();
        
     }
 

@@ -43,5 +43,7 @@ namespace GameActorLogic
         /// </summary>
         /// <returns></returns>
         IShipEventinternalBase GetShipEventinternalBase();
+
+        ILevelActorComponentBaseContainer GetLevel();
     }
 }

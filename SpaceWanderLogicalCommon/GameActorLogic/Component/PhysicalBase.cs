@@ -253,7 +253,7 @@ namespace GameActorLogic
         /// <summary>
         /// 给飞船一个与朝向相同的推力
         /// </summary>
-        public void AddThrust(float proc = 10000000f)
+        public void AddThrust(float proc = 0.0000001f)
         {
             m_body.Force += m_body.Mass * m_body.Forward * /*engine.World.Gravity.Scaling * */  proc;
         }

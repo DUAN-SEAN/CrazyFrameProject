@@ -27,5 +27,7 @@ namespace GameActorLogic
         {
             return actors.ConvertAll(o => ((IBaseComponentContainer) o).GetPhysicalinternalBase().GetBody());
         }
+
+       
     }
 }

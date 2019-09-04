@@ -142,7 +142,8 @@ namespace CrazyEngine.Base
 
             cloneBody.Init(body.Vertices.ToPoints().ToList());
             cloneBody.SetForward(body.Angle);
-            cloneBody.Position = body.Position;
+            cloneBody.Position.X = body.Position.X;
+            cloneBody.Position.Y = body.Position.Y;
 
             return cloneBody;
         }

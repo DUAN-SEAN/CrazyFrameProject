@@ -9,7 +9,7 @@ namespace GameActorLogic
         /// <summary>
         /// 
         /// </summary>
-        public double ang = 0.05;
+        public double ang = 0.005;
         /// <summary>
         /// actorId
         /// </summary>
@@ -20,7 +20,7 @@ namespace GameActorLogic
             this.actorid = actorid;
         }
 
-        public ForwardCommand(ulong actorid, double ang = 0.05)
+        public ForwardCommand(ulong actorid, double ang = 0.005)
         {
             _commandtype = CommandConstDefine.ForwardCommand;
             this.ang = ang;

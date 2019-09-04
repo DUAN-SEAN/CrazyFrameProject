@@ -55,6 +55,11 @@ namespace GameActorLogic
         /// </summary>
         float GetDelta();
 
+        /// <summary>
+        /// 设置地图尺寸
+        /// </summary>
+        void SetMapSize(double height, double width);
+
     }
 
     /// <summary>

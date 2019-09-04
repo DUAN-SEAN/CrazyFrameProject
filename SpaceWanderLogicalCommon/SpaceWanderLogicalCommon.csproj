@@ -54,6 +54,7 @@
     <Compile Include="GameActorLogic\ClientActor\Interface\ISkillContainer.cs" />
     <Compile Include="GameActorLogic\Component\AIComponent\DeadAiComponent.cs" />
     <Compile Include="GameActorLogic\Component\AIComponent\GogogoAiComponent.cs" />
+    <Compile Include="GameActorLogic\Component\AIComponent\ShipEnemyAiComponent.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Server\IConfigComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Server\IHandlerComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Server\ITaskEventComponentBase.cs" />
@@ -115,7 +116,9 @@
     <Compile Include="TaskEvent\ITaskCondition.cs" />
     <Compile Include="TaskEvent\ITaskEvent.cs" />
     <Compile Include="TaskEvent\ITaskResult.cs" />
+    <Compile Include="TaskEvent\TaskCondition\EnemyInitTaskCondition.cs" />
     <Compile Include="TaskEvent\TaskCondition\KillTaskCondition.cs" />
+    <Compile Include="TaskEvent\TaskCondition\LevelStartTaskCondition.cs" />
     <Compile Include="TaskEvent\TaskCondition\TimeTaskCondition.cs" />
     <Compile Include="TaskEvent\TaskEventBase.cs" />
     <Compile Include="TaskEvent\TaskEventState.cs" />

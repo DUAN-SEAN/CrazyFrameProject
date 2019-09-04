@@ -25,5 +25,9 @@ namespace GameActorLogic
         {
             level.GeTaskEventComponentInternalBase().ActivateTask(activateid);
         }
+
+        public void StartResult()
+        {
+        }
     }
 }

@@ -55,7 +55,10 @@ namespace GameActorLogic
         /// </summary>
         void Dispose();
 
-        
+        /// <summary>
+        /// 获得关卡状态
+        /// </summary>
+        bool GetLevelState();
 
         /// <summary>
         /// 返回玩家

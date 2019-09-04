@@ -124,11 +124,9 @@ namespace GameActorLogic
         public ITaskEvent CreateTaskEvent(int taskcondition,int taskresult, int taskid, Dictionary<int, int> taskconditions)
         {
             ITaskEvent task = null;
-            task = new TaskEventBase(taskid, level, taskcondition, taskresult);
-            foreach (var i in taskconditions)
-            {
-                task?.AddValue(i.Key, i.Value);
-            }
+            Log.Trace("创建任务" + taskid);
+            task = new TaskEventBase(taskid, level, taskcondition, taskresult, taskconditions);
+           
             return task;
         }
 

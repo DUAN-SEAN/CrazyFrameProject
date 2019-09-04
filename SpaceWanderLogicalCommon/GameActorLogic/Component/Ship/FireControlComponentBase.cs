@@ -185,12 +185,43 @@ namespace GameActorLogic
             }
         }
 
+        public void FireAI(int i)
+        {
+            //Log.Trace("FireAI: 发射槽" + i + " 发射槽总数" + skills.Count);
+            if (skills.Count <= i)
+            {
+                //Log.Trace("FireAI: 发射槽 超过了 发射槽总数");
+                return;
+            }
+            if (skills[i] is ISkillContainer actor)
+            {
+
+                var weaponactor = actor.Clone();
+                weaponactor.SetActorId(level.GetCreateInternalComponentBase().GetCreateID());
+                var weapon = weaponactor as ISkillContainer;
+                weapon.GetBody().Id = Id.Create();
+                weapon.SetRelPosition(0, 0);
+                //Log.Trace("当前发射者 位置：" + container.GetPhysicalinternalBase().GetBody().Position + " 朝向：" +
+                //          container.GetPhysicalinternalBase().GetBody().Forward);
+                //Log.Trace("当前武器箱 位置："+actor.GetBody().Position + " 朝向："+actor.GetBody().Forward);
+                //Log.Trace("被发射武器"+weapon.GetBody().Id+" 位置：" + weapon.GetBody().Position + " 朝向：" + weapon.GetBody().Forward+" 朝向角度："+weapon.GetBody().Angle);
+
+
+                //level.GetEnvirinfointernalBase().AddActor(weapon as ActorBase);
+                weapon.StartSkill();
+                skillInitList.Add(weapon);
+                OnFire?.Invoke(weapon);
+            }
+            
+        }
 
 
         public void Fire(int i)
         {
+            Log.Trace("Fire: 发射槽" + i + " 发射槽总数"+ skills.Count);
             for (var j = 0; j < skills.Count; j++)
             {
+
                 if (skills[j].GetActorType() == i && skills[j] is ISkillContainer actor)
                 {
 
@@ -199,12 +230,12 @@ namespace GameActorLogic
                     var weapon = weaponactor as ISkillContainer;
                     weapon.GetBody().Id = Id.Create();
                     weapon.SetRelPosition(0, 0);
-                    //Log.Trace("当前发射者 位置：" + container.GetPhysicalinternalBase().GetBody().Position + " 朝向：" +
-                    //          container.GetPhysicalinternalBase().GetBody().Forward);
+                    Log.Trace("当前发射者 位置：" + container.GetPhysicalinternalBase().GetBody().Position + " 朝向：" +
+                              container.GetPhysicalinternalBase().GetBody().Forward);
                     //Log.Trace("当前武器箱 位置："+actor.GetBody().Position + " 朝向："+actor.GetBody().Forward);
                     //Log.Trace("被发射武器"+weapon.GetBody().Id+" 位置：" + weapon.GetBody().Position + " 朝向：" + weapon.GetBody().Forward+" 朝向角度："+weapon.GetBody().Angle);
 
-                   
+
                     //level.GetEnvirinfointernalBase().AddActor(weapon as ActorBase);
                     weapon.StartSkill();
                     skillInitList.Add(weapon);

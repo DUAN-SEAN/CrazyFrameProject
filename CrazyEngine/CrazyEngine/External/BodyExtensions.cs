@@ -1,4 +1,5 @@
-﻿using CrazyEngine.Base;
+﻿using Crazy.Common;
+using CrazyEngine.Base;
 using CrazyEngine.Common;
 using CrazyEngine.Core;
 using System;
@@ -47,14 +48,14 @@ namespace CrazyEngine.External
             Point tmp = targetPoint - body.Position;
             bool isClockwise = Helper.Cross(tmp, body.Forward) > 0;
             double cos = Helper.IncludedAngle(tmp, body.Forward);
-            if(cos > 0.8) body.Force += body.Mass * body.Forward * 0.000005;
+            if(cos > 0.8) body.Force += body.Mass * body.Forward * 0.00005;
             if (isClockwise)
             {
-                body.AngularVelocity = -0.01;
+                body.AngularVelocity = -0.1;
             }
             else
             {
-                body.AngularVelocity = 0.01;
+                body.AngularVelocity = 0.1;
             }
         }
 
@@ -126,45 +127,44 @@ namespace CrazyEngine.External
             bool isClockwise = Helper.Cross(tmp, body.Forward) > 0;
             double cos = Helper.IncludedAngle(tmp, body.Forward);
 
+                //Log.Trace("BodyExtensions ForwardToTarget: isClockwise:" + isClockwise);
             if (isClockwise)
             {
-                body.AngularVelocity = -0.01;
+                body.AngularVelocity = -0.1;
+                //Log.Trace("BodyExtensions ForwardToTarget: body.AugularVelocity:" + body.AngularVelocity);
             }
             else
             {
-                body.AngularVelocity = 0.01;
+                body.AngularVelocity = 0.1;
+                //Log.Trace("BodyExtensions ForwardToTarget: body.AugularVelocity:" + body.AngularVelocity);
             }
-
+            //Log.Trace("BodyExtensions ForwardToTarget: cos:" + cos);
             return cos > 0.9;
         }
 
         /// <summary>
-        /// 预测位置 按照匀加速运动公式计算
+        /// 段瑞要的1
         /// </summary>
         /// <param name="position"></param>
         /// <param name="velocity"></param>
-        /// <param name="force"></param>
-        /// <param name="mass"></param>
-        /// <param name="time"></param>
+        /// <param name="frame"></param>
         /// <param name="frictionAir"></param>
         /// <returns></returns>
         public static Point PredictPosition(Point position, Point velocity, Point force, double mass, double time, double frictionAir = 0.005)
         {
             Point velocityPrev = new Point(velocity.X, velocity.Y);
 
-            velocity.X = velocityPrev.X * (1 - frictionAir) + force.X / mass * time ;
-            velocity.Y = velocityPrev.Y * (1 - frictionAir) + force.Y / mass * time ;
+            velocity.X = velocityPrev.X * (1 - frictionAir) + force.X / mass  * time;
+            velocity.Y = velocityPrev.Y * (1 - frictionAir) + force.Y / mass  * time;
 
-            position.X += (velocity.X * velocity.X - velocityPrev.X* velocityPrev.X)/(2*force.X/mass);
-            position.Y += (velocity.Y * velocity.Y - velocityPrev.Y*velocityPrev.Y)/(2*force.Y/mass);
-
-
+            position.X += velocity.X * time / 2;
+            position.Y += velocity.Y * time / 2;
 
             return position;
         }
 
         /// <summary>
-        /// 预测角度
+        /// 段瑞要的2
         /// </summary>
         /// <param name="anlge"></param>
         /// <param name="angleVelocity"></param>
@@ -176,6 +176,7 @@ namespace CrazyEngine.External
 
             return new Point(-Math.Sin(angle), Math.Cos(angle));
         }
+
 
 
     }

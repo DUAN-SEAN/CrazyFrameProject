@@ -11,5 +11,7 @@ namespace GameActorLogic
         void Execute();
 
         void Dispose();
+
+        void StartResult();
     }
 }

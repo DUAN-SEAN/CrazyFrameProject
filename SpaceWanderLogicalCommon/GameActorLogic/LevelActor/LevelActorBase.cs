@@ -102,13 +102,7 @@ namespace GameActorLogic
             
         }
 
-        /// <summary>
-        /// 添加空气墙
-        /// </summary>
-        protected  void AddAirWall()
-        {
-            
-        }
+        
 
         #endregion
 
@@ -143,7 +137,10 @@ namespace GameActorLogic
         {
             players = dict;
         }
-
+        public bool GetLevelState()
+        {
+            return isStart;
+        }
         /// <summary>
         /// 初始化配置文件
         /// </summary>
@@ -173,14 +170,17 @@ namespace GameActorLogic
                 _eventComponent.AddEventMessagesToHandlerForward(new InitEventMessage(id, LevelActorBase.PlayerCamp,
                     player.Item3, 0, 0, 0, true, player.Item4, player.Item5,player.Item1));
             }
-           
-            //先放这里
+
+            //开启所有任务
+            _taskEventComponent.StartTaskEvents();
+
+
 
             //动态初始化任务配置
-            AddPrepareTask();
+            //AddPrepareTask();
 
-            //
-            AddAirWall();
+            //设置空气墙
+            _envirinfoComponent.AddAirWall();
 
 
             //动态初始化敌人
@@ -194,8 +194,10 @@ namespace GameActorLogic
         /// </summary>
         public void Start()
         {
-            AddPrepareTask();
+            //AddPrepareTask();
             isStart = true;
+            _envirinfoComponent.AddAirWall();
+
             OnStartDone?.Invoke();
         }
 
@@ -208,6 +210,7 @@ namespace GameActorLogic
 
             _envirinfoComponent.Tick();
 
+            _taskEventComponent.Update();
            
         }
 
@@ -215,8 +218,20 @@ namespace GameActorLogic
         {
             isStart = false;
             //TODO 对子对象进行动态Dispose
+            
+           
+
+            _taskEventComponent.Dispose();
+            _taskEventComponent = null;
+
+            _createComponent.Dispose();
+            _createComponent = null;
+
             _handlerComponent.Dispose();
             _handlerComponent = null;
+
+            _envirinfoComponent.Dispose();
+            _envirinfoComponent = null;
 
             _commandComponent.Dispose();
             _commandComponent = null;
@@ -225,19 +240,8 @@ namespace GameActorLogic
             _eventComponent.Dispose();
             _eventComponent = null;
 
-            _taskEventComponent.Dispose();
-            _taskEventComponent = null;
-
-            _createComponent.Dispose();
-            _createComponent = null;
-
-
             _configComponent.Dispose();
             _configComponent = null;
-
-            _envirinfoComponent.Dispose();
-            _envirinfoComponent = null;
-
         }
 
         public ActorBase GetPlayerActorByString(string id)
@@ -312,6 +316,11 @@ namespace GameActorLogic
             return _envirinfoComponent.GetDelta();
         }
 
+
+        public void SetMapSize(double height ,double width)
+        {
+            _envirinfoComponent.SetMapSize(height, width);
+        }
         #endregion
 
 
@@ -329,6 +338,11 @@ namespace GameActorLogic
         public List<IEventMessage> GetForWardEventMessages()
         {
             return _eventComponent.GetForWardEventMessages();
+        }
+
+        public void StartTaskEvents()
+        {
+            _taskEventComponent.StartTaskEvents();
         }
         #endregion
 
@@ -424,6 +438,8 @@ namespace GameActorLogic
         {
             return _configComponent;
         }
+
+       
         #endregion
 
         #region Handler组件
