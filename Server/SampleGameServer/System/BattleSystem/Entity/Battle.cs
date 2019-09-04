@@ -9,6 +9,7 @@ using GameActorLogic;
 using GameServer.Configure;
 using Google.Protobuf;
 using Google.Protobuf.Collections;
+using SpaceWanderEngine;
 
 namespace GameServer.Battle
 {
@@ -146,6 +147,7 @@ namespace GameServer.Battle
             }
         }
 
+        private Runner runner;
         /// <summary>
         /// 检查是否可以开始游戏
         /// </summary>
@@ -176,7 +178,11 @@ namespace GameServer.Battle
 
                         }
                         m_level.Start(playerShips);
-                        m_levelTimerId = m_netHandler.StartLogicalTimer(m_level.Update);
+                        runner = new Runner();
+                        //m_levelTimerId = m_netHandler.StartLogicalTimer(m_level.Update);
+                        m_levelTimerId = m_netHandler.StartLogicalTimer(runner.Update);
+
+
                         Log.Debug("服务器确认所有客户端关卡加载完毕完成第二次握手，可以开启战斗 ，发起第三次握手");
                         BroadcastMessage(new S2CM_ReadyBattleBarrierAck { BattleId = Id });
                         _readyDic.Clear();
@@ -538,6 +544,9 @@ namespace GameServer.Battle
             }
           
         }
+
+
+
 
         #region BattleSystem
         public void SendCommandToLevel(ICommand commandMsg)

@@ -43,6 +43,7 @@
     <DocumentationFile>
     </DocumentationFile>
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -160,6 +161,10 @@
     <ProjectReference Include="..\..\Libs\CommonLib\CommonLib.csproj">
       <Project>{0f3ecc0f-e8f4-434e-aaf9-95a912f2f565}</Project>
       <Name>CommonLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SpaceWanderEngine\SpaceWanderEngine.csproj">
+      <Project>{b0f2a770-aedb-4fd8-a90b-c533843d393e}</Project>
+      <Name>SpaceWanderEngine</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\SpaceWanderLogicalCommon\SpaceWanderLogicalCommon.csproj">
       <Project>{c7caf6cc-dfeb-489d-be25-770d046b5ad9}</Project>
