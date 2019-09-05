@@ -276,7 +276,7 @@ namespace GameActorLogic
                 return false;
             }
             actor = value.Clone();
-            ((IBaseComponentContainer)(actor)).GetPhysicalinternalBase().GetBody().UserData = new UserData(actor.GetActorID(), actor.GetActorType());
+            //((IBaseComponentContainer)(actor)).GetPhysicalinternalBase().GetBody().UserData = new UserData(actor.GetActorID(), actor.GetActorType());
 
             return result;
         }
