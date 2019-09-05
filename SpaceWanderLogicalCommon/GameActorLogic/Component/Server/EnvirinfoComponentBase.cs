@@ -46,6 +46,7 @@ namespace GameActorLogic
             factory = new Factory(_world);
             m_runner = new Runner(_world);
             _actorList = new List<ActorBase>();
+            _world.IsAutoClearForces = false;
         }
 
         /// <summary>
@@ -74,6 +75,7 @@ namespace GameActorLogic
             }
 
             m_runner.Update();
+           
 
         }
 
