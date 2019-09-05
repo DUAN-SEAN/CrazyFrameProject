@@ -109,7 +109,6 @@ namespace GameActorLogic
                         actor.SetActorId(Id);
                         actor.PrepareActor(Vector2_x, Vector2_y, angle);
                         actor.SetCamp(camp);
-                        //Log.Trace("actor id" + actor.GetActorID() + " body id" + actor.GetBodyId() + " trigger:" + ((IBaseComponentContainer)actor).GetPhysicalinternalBase().GetBody().Trigger);
                     }
                    
                     break;
@@ -123,7 +122,7 @@ namespace GameActorLogic
         public ITaskEvent CreateTaskEvent(int taskcondition,int taskresult, int taskid, Dictionary<int, int> taskconditions)
         {
             ITaskEvent task = null;
-            Log.Trace("创建任务" + taskid);
+            //Log.Trace("创建任务" + taskid);
             task = new TaskEventBase(taskid, level, taskcondition, taskresult, taskconditions);
            
             return task;

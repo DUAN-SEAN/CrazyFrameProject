@@ -24,5 +24,10 @@ namespace GameActorLogic
             ActorID = clone.ActorID;
             ActorType = clone.ActorType;
         }
+
+        public override string ToString()
+        {
+            return "UserData :ActorID " + ActorID + " ActorType:" + ActorType;
+        }
     }
 }

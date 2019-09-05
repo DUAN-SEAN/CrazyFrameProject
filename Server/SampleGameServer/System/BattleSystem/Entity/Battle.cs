@@ -107,7 +107,7 @@ namespace GameServer.Battle
         /// </summary>
         public override void Update()
         {
-            //Log.Info("BattleId = "+Id+"  帧间隔为："+(DateTime.Now.Ticks-t)/10000);
+            
             t = DateTime.Now.Ticks;
 
             m_battleInterval = DateTime.Now.Ticks - m_oldIntervalTime;
@@ -115,8 +115,9 @@ namespace GameServer.Battle
 
             base.Update();
             if (IsRelease) return;
+            
             CheckBattleState();
-
+            //Log.Info("CheckReadyState" + (DateTime.Now.Ticks - t) / 10000);
             //获取是否可以开启战斗
             CheckReadyState();
 
@@ -127,10 +128,10 @@ namespace GameServer.Battle
             //1 接收逻辑事件(生成、销毁、状态)
             OnEventMessage();
             
-            ////2 驱动物理引擎
-            //if (m_level == null)
-            //    return;
-            //m_level.Update();
+            //2 驱动物理引擎
+            if (m_level == null)
+                return;
+            m_level.Update();
 
 
         }
@@ -157,11 +158,12 @@ namespace GameServer.Battle
             {
                 if (levelReady)
                 {
-
+                    //Log.Trace("levelReady");
 
                     bool flag = _readyDic.ContainsValue(0);
                     if (!flag)
                     {
+                        //Log.Trace("levelReady flag");
                         List<Tuple<string, int, int, int, int>> playerShips = new List<Tuple<string, int, int, int, int>>();
 
                       
@@ -178,10 +180,7 @@ namespace GameServer.Battle
 
                         }
                         m_level.Start(playerShips);
-                        //runner = new Runner();
-                        //m_levelTimerId = m_netHandler.StartLogicalTimer(m_level.Update);
-                        //m_levelTimerId = m_netHandler.StartLogicalTimer(runner.Update);
-
+                        
 
                         Log.Debug("服务器确认所有客户端关卡加载完毕完成第二次握手，可以开启战斗 ，发起第三次握手");
                         BroadcastMessage(new S2CM_ReadyBattleBarrierAck { BattleId = Id });
@@ -500,10 +499,10 @@ namespace GameServer.Battle
             try
             {
                 Log.Trace("Dispose Battle Id = " + Id);
-                if (m_netHandler.StopLogicalTimer(m_levelTimerId))
-                {
-                    Log.Trace("释放Level Timer 成功 battleId = "+Id);
-                }
+                //if (m_netHandler.StopLogicalTimer(m_levelTimerId))
+                //{
+                //    Log.Trace("释放Level Timer 成功 battleId = "+Id);
+                //}
                 canBattle = false;;
                 levelReady = false;
                 m_isDispose = true;

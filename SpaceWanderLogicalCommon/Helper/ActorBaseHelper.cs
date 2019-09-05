@@ -15,8 +15,7 @@ namespace GameActorLogic
         public static void PrepareActor(this ActorBase actor, float point_x, float point_y, float angle)
         {
             var container = actor as IBaseComponentContainer;
-            var body = container.GetPhysicalinternalBase().GetBody();
-            body.SetTransform(new Vector2(point_x, point_y),angle);
+            container.SetInitData(point_x, point_y, angle);
             //Log.Trace("PrepareActor 角度值:" + body.Angle);
             //body.Angle = angle;
         }

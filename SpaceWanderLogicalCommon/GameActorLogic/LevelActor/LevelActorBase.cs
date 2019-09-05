@@ -39,11 +39,12 @@ namespace GameActorLogic
 
         public LevelActorBase()
         {
+            Log.Trace("LevelActorBase 开始初始化");
             players = new Dictionary<string, ulong>();
             Currentframe = 0;
             //初始化组件
             CreateComponent();
-
+            Log.Trace("LevelActorBase 初始化完成");
         }
 
         
@@ -160,6 +161,7 @@ namespace GameActorLogic
         /// <param name="barrierId">关卡类型id</param>
         public void Start(List<Tuple<string, int, int, int, int>> players)
         {
+            Log.Trace("Start 开始生成");
             //TODO 可能进行动态初始化
             foreach (var player in players)
             {
@@ -184,6 +186,8 @@ namespace GameActorLogic
             //动态初始化敌人
             //PrepareEnemy();
             isStart = true;
+            Log.Trace("Start 生成完成");
+
             OnStartDone?.Invoke();
         }
 
@@ -202,6 +206,9 @@ namespace GameActorLogic
         public virtual void Update()
         {
             if(isStart == false) return;
+
+            //Log.Trace("Update GOGOGOGOGO");
+
             Currentframe++;
 
             _handlerComponent.Update();

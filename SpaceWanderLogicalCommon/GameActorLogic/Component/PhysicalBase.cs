@@ -132,9 +132,12 @@ namespace GameActorLogic
             angleVelocity_copy = m_body.AngularVelocity;
             Torque_copy = m_body.GetTorque();
             isColliderMethodEnter = false;
-            Force_copy_copy = Force_copy;
-            m_body.AddForce(Force_copy);
-            Force_copy = Vector2.Zero;
+            Force_copy = m_body.GetForce();
+            //Force_copy_copy = Force_copy;
+            //m_body.AddForce(Force_copy);
+            //Log.Trace("已经添加力量:" + m_body.GetForce()+" "+Force_copy);
+            //Log.Trace("Update Mass" + m_body.Mass);
+            //Force_copy = Vector2.Zero;
         }
 
         public void Dispose()
@@ -203,7 +206,7 @@ namespace GameActorLogic
 
         public Vector2 GetPosition()
         {
-            return m_body.GetForward();
+            return m_body.GetPosition();
         }
 
 
@@ -219,7 +222,7 @@ namespace GameActorLogic
         
         public Vector2 GetForce()
         {
-            return Force_copy_copy;
+            return Force_copy;
         }
 
         
@@ -262,7 +265,9 @@ namespace GameActorLogic
         /// </summary>
         public void AddThrust(float pro)
         {
-            Force_copy += m_body.GetForward() * pro;
+            //Force_copy += m_body.GetForward() * pro;
+            //Log.Trace("AddThrust:"+pro + " Forward"+m_body.GetForward());
+            m_body.AddForce(m_body.GetForward() * pro);
         }
 
         /// <summary>
@@ -272,7 +277,7 @@ namespace GameActorLogic
         /// </summary>
         public void AddForward(float angular)
         {
-            m_body.SetAngularVelocity(angular);
+            m_body.AddTorque(angular);
         }
 
        

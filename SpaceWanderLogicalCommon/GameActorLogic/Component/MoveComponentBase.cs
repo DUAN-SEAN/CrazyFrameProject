@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Box2DSharp.Common;
 using Box2DSharp.External;
+using Crazy.Common;
 using GameActorLogic;
 
 namespace GameActorLogic
@@ -53,6 +54,9 @@ namespace GameActorLogic
         {
             if (x < 0.005 && y < 0.005 && x > -0.005 && y > -0.005) return;
             if (physical?.GetBody() == null) return;
+            //Log.Trace("Remote 操作值"+x+" "+y);
+
+
             var point = new Vector2(x, y);
 
             var cross = MathUtils.Cross(point, physical.GetBody().GetForward());
@@ -62,7 +66,7 @@ namespace GameActorLogic
             float angle = (float)Math.Acos(cos);
             float anglepro = (float) (angle / Math.PI);
             float forcepro = (float)Vector2.DistanceSquared(Vector2.Zero, point);
-            physical?.AddThrust(0.00001f* 5  * anglepro * forcepro);
+            physical?.AddThrust(100f* 5  * anglepro * forcepro);
 
             if (cos > 0.95)
             {
@@ -72,11 +76,11 @@ namespace GameActorLogic
 
             if ( cross > 0)
             {
-                physical?.AddForward(0.1f);
+                physical?.AddForward(1000f);
             }
             else if (cross < 0)
             {
-                physical?.AddForward(-0.1f);
+                physical?.AddForward(-1000f);
             }
         }
 

@@ -59,7 +59,7 @@ namespace GameActorLogic
                 foreach (var itme in barrierTaskConfig.TaskConditionItemConfig)
                 {
                     dict.Add(itme.ConditionTarget, itme.ConditionValue);
-                    Log.Trace("加载配置 任务id：" + id + " key" + itme.ConditionTarget + " value" + itme.ConditionValue);
+                    //Log.Trace("加载配置 任务id：" + id + " key" + itme.ConditionTarget + " value" + itme.ConditionValue);
                 }
 
                 var task1 = level.GetCreateInternalComponentBase().CreateTaskEvent(

@@ -8,6 +8,7 @@ using Box2DSharp.Collision.Shapes;
 using Box2DSharp.Common;
 using Box2DSharp.Dynamics.Contacts;
 using Box2DSharp.Dynamics.Joints;
+using Crazy.Common;
 
 namespace Box2DSharp.Dynamics
 {
@@ -858,6 +859,7 @@ namespace Box2DSharp.Dynamics
         /// <param name="wake"></param>
         public void ApplyForceToCenter(in Vector2 force, bool wake)
         {
+            //Log.Trace("ApplyForceToCenter: force"+force);
             if (_type != BodyType.DynamicBody)
             {
                 return;

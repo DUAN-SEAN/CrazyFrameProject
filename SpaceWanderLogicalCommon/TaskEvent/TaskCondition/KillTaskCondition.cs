@@ -49,7 +49,7 @@ namespace GameActorLogic
             {
                 Currentvalue[key]++;
                 m_event.TryGetValue(key, out int i);
-                Log.Trace("计数加一" + actor.GetActorID() + " 当前数量："+Currentvalue[key] + " 需要击杀数量："+i);
+                //Log.Trace("计数加一" + actor.GetActorID() + " 当前数量："+Currentvalue[key] + " 需要击杀数量："+i);
             }
 
         }

@@ -45,7 +45,7 @@ namespace GameActorLogic
         public override void TickLogical()
         {
 
-
+            return;
             //if(i == 0)
             //{
             //    Log.Trace("ShipEnemyAiComponent 开始AI逻辑");

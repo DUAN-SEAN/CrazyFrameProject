@@ -4,6 +4,7 @@ using Box2DSharp.Dynamics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Crazy.Common;
 using Vector2 = System.Numerics.Vector2;
 
 namespace Box2DSharp.External
@@ -120,6 +121,7 @@ namespace Box2DSharp.External
         /// <param name="force"></param>
         public static void AddForce(this Body body, Vector2 force)
         {
+            //Log.Trace("Add" + force);
             body.ApplyForceToCenter(force, true);
         }
 

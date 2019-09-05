@@ -107,6 +107,7 @@ namespace GameServer.Battle
             battleEntity.Start(BattleGenerateId++);
 
             battleEntity.Init(msg.Players, msg.BarrierId, this);
+            //Log.Debug(m_gameBattleConfig.BattleTickTime+"   "+"Battle Update");
             var timerId = TimerManager.SetLoopTimer(m_gameBattleConfig.BattleTickTime, battleEntity.Update);//设置Tick步长
             battleEntity.SetTimer(timerId);
             //字典添加

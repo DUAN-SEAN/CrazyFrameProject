@@ -71,7 +71,7 @@ namespace GameActorLogic
             {
                 _actorList[i].Update();
                 //Log.Trace("EnvirinfoComponentBase: Actorid" + _actorList[i].GetActorID() + " 位置坐标:" +
-                //_actorList[i].GetPosition() + " 力" + _actorList[i].GetForce() + " 转矩" + _actorList[i].GetAngleVelocity());
+                //_actorList[i].GetPosition() + " 力" + _actorList[i].GetForce()+" 速度"+_actorList[i].GetVelocity() + " 转矩" + _actorList[i].GetAngleVelocity());
             }
 
             m_runner.Update();
@@ -133,6 +133,8 @@ namespace GameActorLogic
             var init = container.GetInitData();
             //TODO 添加进世界
             actor.CreateBody(factory.CreateRectangleBody(init.point_x, init.point_y, 10, 10));
+            //Log.Trace("actor id" + actor.GetActorID() + " "+actor.GetBodyUserData());
+
             _actorList.Add(actor);
         }
 

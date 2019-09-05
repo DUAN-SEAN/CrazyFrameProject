@@ -7,6 +7,7 @@ using Box2DSharp.Collision.Collider;
 using Box2DSharp.Common;
 using Box2DSharp.Dynamics.Contacts;
 using Box2DSharp.Dynamics.Joints;
+using Crazy.Common;
 
 namespace Box2DSharp.Dynamics
 {
