@@ -761,7 +761,7 @@ namespace Box2DSharp.Dynamics
                     }
 
                     // Search all contacts connected to this body.
-                    // 查找该物体所有接触点
+                    // 查找该物体所有接触点 遍历该物体的contact信息
                     var node = b.ContactEdges.First;
                     while (node != null)
                     {
@@ -851,7 +851,7 @@ namespace Box2DSharp.Dynamics
                 Profile.SolveVelocity += profile.SolveVelocity;
                 Profile.SolvePosition += profile.SolvePosition;
 
-                // Post solve cleanup.
+                // Post solve cleanup.标记重置
                 for (var i = 0; i < island.BodyCount; ++i)
                 {
                     // Allow static bodies to participate in other islands.
