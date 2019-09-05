@@ -121,10 +121,12 @@ namespace SpaceWanderEngine
     {
         public void BeginContact(Contact contact)
         {
+           
             Log.Trace("开始碰撞");
             Log.Trace("开始碰撞" + contact.FixtureA.Body.UserData?.ToString() + ":" + contact.FixtureB.Body?.UserData?.ToString());
-        }
 
+
+        }
         public void EndContact(Contact contact)
         {
             Log.Trace("结束碰撞");

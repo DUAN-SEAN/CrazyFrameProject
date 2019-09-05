@@ -276,7 +276,9 @@ namespace Box2DSharp.Dynamics.Contacts
                 _velocities[indexB].W = wB;
             }
         }
-
+        /// <summary>
+        /// º∆À„≈ˆ◊≤≥Â¡ø
+        /// </summary>
         public void SolveVelocityConstraints()
         {
             for (var i = 0; i < _contactCount; ++i)
