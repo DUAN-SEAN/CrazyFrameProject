@@ -43,7 +43,7 @@ namespace SpaceWanderEngine
         {
             
             _fiexdFixedUpdate?.Update();
-            
+            _world.ClearForces();
 
         }
 
