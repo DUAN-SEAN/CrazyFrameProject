@@ -143,6 +143,7 @@ namespace GameActorLogic
             IBaseComponentContainer container = actor as IBaseComponentContainer;
             var body = container.GetPhysicalinternalBase().GetBody();
             //TODO 从世界去除
+            _world.DestroyBody(body);
             _actorList.Remove(actor);
         }
         #endregion
