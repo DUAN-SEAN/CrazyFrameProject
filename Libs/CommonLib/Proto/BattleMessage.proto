@@ -61,17 +61,17 @@ message S2C_SyncPhysicsStateBattleMessage // IBattleMessage
 	uint64 BattleId = 1;
 	uint64 ActorId = 2;
 	int32 ActorType = 3;
-	double Position_X = 4;
-	double Position_Y = 5;
-	double ForwardAngle = 6;
-	double Velocity_X = 7;
-	double Velocity_Y = 8;
-	double AngleVelocity = 9;
-	double Force_X = 10;
-	double Force_Y = 11;
-	double Torque = 12;
-	double PositionPrevX = 13;
-	double PositionPrevY = 14;
+	float Position_X = 4;
+	float Position_Y = 5;
+	float ForwardAngle = 6;
+	float Velocity_X = 7;
+	float Velocity_Y = 8;
+	float AngleVelocity = 9;
+	float Force_X = 10;
+	float Force_Y = 11;
+	float Torque = 12;
+	float PositionPrevX = 13;
+	float PositionPrevY = 14;
 }
 message S2C_SyncLevelTaskBattleMessage // IBattleMessage 
 {

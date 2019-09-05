@@ -41,11 +41,11 @@ namespace Crazy.Common {
             "CgJIcBgEIAEoBRIOCgZTaGllbGQYBSABKAUixQIKIVMyQ19TeW5jUGh5c2lj",
             "c1N0YXRlQmF0dGxlTWVzc2FnZRINCgVScGNJZBhaIAEoBRIQCghCYXR0bGVJ",
             "ZBgBIAEoBBIPCgdBY3RvcklkGAIgASgEEhEKCUFjdG9yVHlwZRgDIAEoBRIS",
-            "CgpQb3NpdGlvbl9YGAQgASgBEhIKClBvc2l0aW9uX1kYBSABKAESFAoMRm9y",
-            "d2FyZEFuZ2xlGAYgASgBEhIKClZlbG9jaXR5X1gYByABKAESEgoKVmVsb2Np",
-            "dHlfWRgIIAEoARIVCg1BbmdsZVZlbG9jaXR5GAkgASgBEg8KB0ZvcmNlX1gY",
-            "CiABKAESDwoHRm9yY2VfWRgLIAEoARIOCgZUb3JxdWUYDCABKAESFQoNUG9z",
-            "aXRpb25QcmV2WBgNIAEoARIVCg1Qb3NpdGlvblByZXZZGA4gASgBItECCh5T",
+            "CgpQb3NpdGlvbl9YGAQgASgCEhIKClBvc2l0aW9uX1kYBSABKAISFAoMRm9y",
+            "d2FyZEFuZ2xlGAYgASgCEhIKClZlbG9jaXR5X1gYByABKAISEgoKVmVsb2Np",
+            "dHlfWRgIIAEoAhIVCg1BbmdsZVZlbG9jaXR5GAkgASgCEg8KB0ZvcmNlX1gY",
+            "CiABKAISDwoHRm9yY2VfWRgLIAEoAhIOCgZUb3JxdWUYDCABKAISFQoNUG9z",
+            "aXRpb25QcmV2WBgNIAEoAhIVCg1Qb3NpdGlvblByZXZZGA4gASgCItECCh5T",
             "MkNfU3luY0xldmVsVGFza0JhdHRsZU1lc3NhZ2USDQoFUnBjSWQYWiABKAUS",
             "EAoIQmF0dGxlSWQYASABKAQSDwoHQWN0b3JJZBgCIAEoBBJFCgVUYXNrcxgD",
             "IAMoCzI2LkNyYXp5LkNvbW1vbi5TMkNfU3luY0xldmVsVGFza0JhdHRsZU1l",
@@ -1607,9 +1607,9 @@ namespace Crazy.Common {
 
     /// <summary>Field number for the "Position_X" field.</summary>
     public const int PositionXFieldNumber = 4;
-    private double positionX_;
+    private float positionX_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public double PositionX {
+    public float PositionX {
       get { return positionX_; }
       set {
         positionX_ = value;
@@ -1618,9 +1618,9 @@ namespace Crazy.Common {
 
     /// <summary>Field number for the "Position_Y" field.</summary>
     public const int PositionYFieldNumber = 5;
-    private double positionY_;
+    private float positionY_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public double PositionY {
+    public float PositionY {
       get { return positionY_; }
       set {
         positionY_ = value;
@@ -1629,9 +1629,9 @@ namespace Crazy.Common {
 
     /// <summary>Field number for the "ForwardAngle" field.</summary>
     public const int ForwardAngleFieldNumber = 6;
-    private double forwardAngle_;
+    private float forwardAngle_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public double ForwardAngle {
+    public float ForwardAngle {
       get { return forwardAngle_; }
       set {
         forwardAngle_ = value;
@@ -1640,9 +1640,9 @@ namespace Crazy.Common {
 
     /// <summary>Field number for the "Velocity_X" field.</summary>
     public const int VelocityXFieldNumber = 7;
-    private double velocityX_;
+    private float velocityX_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public double VelocityX {
+    public float VelocityX {
       get { return velocityX_; }
       set {
         velocityX_ = value;
@@ -1651,9 +1651,9 @@ namespace Crazy.Common {
 
     /// <summary>Field number for the "Velocity_Y" field.</summary>
     public const int VelocityYFieldNumber = 8;
-    private double velocityY_;
+    private float velocityY_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public double VelocityY {
+    public float VelocityY {
       get { return velocityY_; }
       set {
         velocityY_ = value;
@@ -1662,9 +1662,9 @@ namespace Crazy.Common {
 
     /// <summary>Field number for the "AngleVelocity" field.</summary>
     public const int AngleVelocityFieldNumber = 9;
-    private double angleVelocity_;
+    private float angleVelocity_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public double AngleVelocity {
+    public float AngleVelocity {
       get { return angleVelocity_; }
       set {
         angleVelocity_ = value;
@@ -1673,9 +1673,9 @@ namespace Crazy.Common {
 
     /// <summary>Field number for the "Force_X" field.</summary>
     public const int ForceXFieldNumber = 10;
-    private double forceX_;
+    private float forceX_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public double ForceX {
+    public float ForceX {
       get { return forceX_; }
       set {
         forceX_ = value;
@@ -1684,9 +1684,9 @@ namespace Crazy.Common {
 
     /// <summary>Field number for the "Force_Y" field.</summary>
     public const int ForceYFieldNumber = 11;
-    private double forceY_;
+    private float forceY_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public double ForceY {
+    public float ForceY {
       get { return forceY_; }
       set {
         forceY_ = value;
@@ -1695,9 +1695,9 @@ namespace Crazy.Common {
 
     /// <summary>Field number for the "Torque" field.</summary>
     public const int TorqueFieldNumber = 12;
-    private double torque_;
+    private float torque_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public double Torque {
+    public float Torque {
       get { return torque_; }
       set {
         torque_ = value;
@@ -1706,9 +1706,9 @@ namespace Crazy.Common {
 
     /// <summary>Field number for the "PositionPrevX" field.</summary>
     public const int PositionPrevXFieldNumber = 13;
-    private double positionPrevX_;
+    private float positionPrevX_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public double PositionPrevX {
+    public float PositionPrevX {
       get { return positionPrevX_; }
       set {
         positionPrevX_ = value;
@@ -1717,9 +1717,9 @@ namespace Crazy.Common {
 
     /// <summary>Field number for the "PositionPrevY" field.</summary>
     public const int PositionPrevYFieldNumber = 14;
-    private double positionPrevY_;
+    private float positionPrevY_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public double PositionPrevY {
+    public float PositionPrevY {
       get { return positionPrevY_; }
       set {
         positionPrevY_ = value;
@@ -1743,17 +1743,17 @@ namespace Crazy.Common {
       if (BattleId != other.BattleId) return false;
       if (ActorId != other.ActorId) return false;
       if (ActorType != other.ActorType) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(PositionX, other.PositionX)) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(PositionY, other.PositionY)) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(ForwardAngle, other.ForwardAngle)) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(VelocityX, other.VelocityX)) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(VelocityY, other.VelocityY)) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(AngleVelocity, other.AngleVelocity)) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(ForceX, other.ForceX)) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(ForceY, other.ForceY)) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(Torque, other.Torque)) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(PositionPrevX, other.PositionPrevX)) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(PositionPrevY, other.PositionPrevY)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(PositionX, other.PositionX)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(PositionY, other.PositionY)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(ForwardAngle, other.ForwardAngle)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(VelocityX, other.VelocityX)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(VelocityY, other.VelocityY)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(AngleVelocity, other.AngleVelocity)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(ForceX, other.ForceX)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(ForceY, other.ForceY)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Torque, other.Torque)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(PositionPrevX, other.PositionPrevX)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(PositionPrevY, other.PositionPrevY)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1764,17 +1764,17 @@ namespace Crazy.Common {
       if (BattleId != 0UL) hash ^= BattleId.GetHashCode();
       if (ActorId != 0UL) hash ^= ActorId.GetHashCode();
       if (ActorType != 0) hash ^= ActorType.GetHashCode();
-      if (PositionX != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(PositionX);
-      if (PositionY != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(PositionY);
-      if (ForwardAngle != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(ForwardAngle);
-      if (VelocityX != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(VelocityX);
-      if (VelocityY != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(VelocityY);
-      if (AngleVelocity != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(AngleVelocity);
-      if (ForceX != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(ForceX);
-      if (ForceY != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(ForceY);
-      if (Torque != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Torque);
-      if (PositionPrevX != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(PositionPrevX);
-      if (PositionPrevY != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(PositionPrevY);
+      if (PositionX != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(PositionX);
+      if (PositionY != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(PositionY);
+      if (ForwardAngle != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(ForwardAngle);
+      if (VelocityX != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(VelocityX);
+      if (VelocityY != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(VelocityY);
+      if (AngleVelocity != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(AngleVelocity);
+      if (ForceX != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(ForceX);
+      if (ForceY != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(ForceY);
+      if (Torque != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Torque);
+      if (PositionPrevX != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(PositionPrevX);
+      if (PositionPrevY != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(PositionPrevY);
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1800,49 +1800,49 @@ namespace Crazy.Common {
         output.WriteRawTag(24);
         output.WriteInt32(ActorType);
       }
-      if (PositionX != 0D) {
-        output.WriteRawTag(33);
-        output.WriteDouble(PositionX);
+      if (PositionX != 0F) {
+        output.WriteRawTag(37);
+        output.WriteFloat(PositionX);
       }
-      if (PositionY != 0D) {
-        output.WriteRawTag(41);
-        output.WriteDouble(PositionY);
+      if (PositionY != 0F) {
+        output.WriteRawTag(45);
+        output.WriteFloat(PositionY);
       }
-      if (ForwardAngle != 0D) {
-        output.WriteRawTag(49);
-        output.WriteDouble(ForwardAngle);
+      if (ForwardAngle != 0F) {
+        output.WriteRawTag(53);
+        output.WriteFloat(ForwardAngle);
       }
-      if (VelocityX != 0D) {
-        output.WriteRawTag(57);
-        output.WriteDouble(VelocityX);
+      if (VelocityX != 0F) {
+        output.WriteRawTag(61);
+        output.WriteFloat(VelocityX);
       }
-      if (VelocityY != 0D) {
-        output.WriteRawTag(65);
-        output.WriteDouble(VelocityY);
+      if (VelocityY != 0F) {
+        output.WriteRawTag(69);
+        output.WriteFloat(VelocityY);
       }
-      if (AngleVelocity != 0D) {
-        output.WriteRawTag(73);
-        output.WriteDouble(AngleVelocity);
+      if (AngleVelocity != 0F) {
+        output.WriteRawTag(77);
+        output.WriteFloat(AngleVelocity);
       }
-      if (ForceX != 0D) {
-        output.WriteRawTag(81);
-        output.WriteDouble(ForceX);
+      if (ForceX != 0F) {
+        output.WriteRawTag(85);
+        output.WriteFloat(ForceX);
       }
-      if (ForceY != 0D) {
-        output.WriteRawTag(89);
-        output.WriteDouble(ForceY);
+      if (ForceY != 0F) {
+        output.WriteRawTag(93);
+        output.WriteFloat(ForceY);
       }
-      if (Torque != 0D) {
-        output.WriteRawTag(97);
-        output.WriteDouble(Torque);
+      if (Torque != 0F) {
+        output.WriteRawTag(101);
+        output.WriteFloat(Torque);
       }
-      if (PositionPrevX != 0D) {
-        output.WriteRawTag(105);
-        output.WriteDouble(PositionPrevX);
+      if (PositionPrevX != 0F) {
+        output.WriteRawTag(109);
+        output.WriteFloat(PositionPrevX);
       }
-      if (PositionPrevY != 0D) {
-        output.WriteRawTag(113);
-        output.WriteDouble(PositionPrevY);
+      if (PositionPrevY != 0F) {
+        output.WriteRawTag(117);
+        output.WriteFloat(PositionPrevY);
       }
       if (RpcId != 0) {
         output.WriteRawTag(208, 5);
@@ -1868,38 +1868,38 @@ namespace Crazy.Common {
       if (ActorType != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(ActorType);
       }
-      if (PositionX != 0D) {
-        size += 1 + 8;
+      if (PositionX != 0F) {
+        size += 1 + 4;
       }
-      if (PositionY != 0D) {
-        size += 1 + 8;
+      if (PositionY != 0F) {
+        size += 1 + 4;
       }
-      if (ForwardAngle != 0D) {
-        size += 1 + 8;
+      if (ForwardAngle != 0F) {
+        size += 1 + 4;
       }
-      if (VelocityX != 0D) {
-        size += 1 + 8;
+      if (VelocityX != 0F) {
+        size += 1 + 4;
       }
-      if (VelocityY != 0D) {
-        size += 1 + 8;
+      if (VelocityY != 0F) {
+        size += 1 + 4;
       }
-      if (AngleVelocity != 0D) {
-        size += 1 + 8;
+      if (AngleVelocity != 0F) {
+        size += 1 + 4;
       }
-      if (ForceX != 0D) {
-        size += 1 + 8;
+      if (ForceX != 0F) {
+        size += 1 + 4;
       }
-      if (ForceY != 0D) {
-        size += 1 + 8;
+      if (ForceY != 0F) {
+        size += 1 + 4;
       }
-      if (Torque != 0D) {
-        size += 1 + 8;
+      if (Torque != 0F) {
+        size += 1 + 4;
       }
-      if (PositionPrevX != 0D) {
-        size += 1 + 8;
+      if (PositionPrevX != 0F) {
+        size += 1 + 4;
       }
-      if (PositionPrevY != 0D) {
-        size += 1 + 8;
+      if (PositionPrevY != 0F) {
+        size += 1 + 4;
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1924,37 +1924,37 @@ namespace Crazy.Common {
       if (other.ActorType != 0) {
         ActorType = other.ActorType;
       }
-      if (other.PositionX != 0D) {
+      if (other.PositionX != 0F) {
         PositionX = other.PositionX;
       }
-      if (other.PositionY != 0D) {
+      if (other.PositionY != 0F) {
         PositionY = other.PositionY;
       }
-      if (other.ForwardAngle != 0D) {
+      if (other.ForwardAngle != 0F) {
         ForwardAngle = other.ForwardAngle;
       }
-      if (other.VelocityX != 0D) {
+      if (other.VelocityX != 0F) {
         VelocityX = other.VelocityX;
       }
-      if (other.VelocityY != 0D) {
+      if (other.VelocityY != 0F) {
         VelocityY = other.VelocityY;
       }
-      if (other.AngleVelocity != 0D) {
+      if (other.AngleVelocity != 0F) {
         AngleVelocity = other.AngleVelocity;
       }
-      if (other.ForceX != 0D) {
+      if (other.ForceX != 0F) {
         ForceX = other.ForceX;
       }
-      if (other.ForceY != 0D) {
+      if (other.ForceY != 0F) {
         ForceY = other.ForceY;
       }
-      if (other.Torque != 0D) {
+      if (other.Torque != 0F) {
         Torque = other.Torque;
       }
-      if (other.PositionPrevX != 0D) {
+      if (other.PositionPrevX != 0F) {
         PositionPrevX = other.PositionPrevX;
       }
-      if (other.PositionPrevY != 0D) {
+      if (other.PositionPrevY != 0F) {
         PositionPrevY = other.PositionPrevY;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -1980,48 +1980,48 @@ namespace Crazy.Common {
             ActorType = input.ReadInt32();
             break;
           }
-          case 33: {
-            PositionX = input.ReadDouble();
+          case 37: {
+            PositionX = input.ReadFloat();
             break;
           }
-          case 41: {
-            PositionY = input.ReadDouble();
+          case 45: {
+            PositionY = input.ReadFloat();
             break;
           }
-          case 49: {
-            ForwardAngle = input.ReadDouble();
+          case 53: {
+            ForwardAngle = input.ReadFloat();
             break;
           }
-          case 57: {
-            VelocityX = input.ReadDouble();
+          case 61: {
+            VelocityX = input.ReadFloat();
             break;
           }
-          case 65: {
-            VelocityY = input.ReadDouble();
+          case 69: {
+            VelocityY = input.ReadFloat();
             break;
           }
-          case 73: {
-            AngleVelocity = input.ReadDouble();
+          case 77: {
+            AngleVelocity = input.ReadFloat();
             break;
           }
-          case 81: {
-            ForceX = input.ReadDouble();
+          case 85: {
+            ForceX = input.ReadFloat();
             break;
           }
-          case 89: {
-            ForceY = input.ReadDouble();
+          case 93: {
+            ForceY = input.ReadFloat();
             break;
           }
-          case 97: {
-            Torque = input.ReadDouble();
+          case 101: {
+            Torque = input.ReadFloat();
             break;
           }
-          case 105: {
-            PositionPrevX = input.ReadDouble();
+          case 109: {
+            PositionPrevX = input.ReadFloat();
             break;
           }
-          case 113: {
-            PositionPrevY = input.ReadDouble();
+          case 117: {
+            PositionPrevY = input.ReadFloat();
             break;
           }
           case 720: {
