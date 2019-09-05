@@ -105,7 +105,9 @@ namespace GameServer.System.NetHandlerSystem
     {
         protected override void Run(ISession playerContext, C2S_InvitePlayerMatchTeam message)
         {
+            GameServerPlayerContext context = playerContext as GameServerPlayerContext;
 
+            
         }
     }
 }

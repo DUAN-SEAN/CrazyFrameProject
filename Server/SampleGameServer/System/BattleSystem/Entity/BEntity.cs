@@ -29,7 +29,7 @@ namespace GameServer.Battle
             if (IsDispose) return;
             m_Id = 0;
             IsDispose = true;
-            BEntityFactory.Recycle(this);
+            //BEntityFactory.Recycle(this);
 
         }
 
