@@ -164,7 +164,7 @@ namespace GameActorLogic
             //任务已激活 但是未完成 判断条件是否达成
             if (taskCondition == null) return;
             if (!taskCondition.TickCondition()) return;
-            Log.Trace("任务完成 任务id" + taskid);
+            //Log.Trace("任务完成 任务id" + taskid);
             //任务条件已达成
             //如果任务结果未执行 任务不显示已完成
             if(taskResult == null) return;
@@ -181,7 +181,7 @@ namespace GameActorLogic
         {
             if (taskcondition.ContainsKey(key)) return false;
             taskcondition.Add(key, value);
-            Log.Trace("添加值成功 key:" + key + " value:" + value);
+            //Log.Trace("添加值成功 key:" + key + " value:" + value);
             return true;
         }
 
