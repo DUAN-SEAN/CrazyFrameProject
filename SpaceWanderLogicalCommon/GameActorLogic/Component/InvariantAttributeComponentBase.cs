@@ -40,6 +40,7 @@ namespace GameActorLogic
             this.maxSpeed = clone.maxSpeed;
             this.maxForceProc = clone.maxForceProc;
             this.camp = clone.camp;
+            this.initData = clone.initData;
         }
         #region IInvariantAttributeInternalBase
 
