@@ -144,7 +144,11 @@ namespace GameActorLogic
         {
             envirinfo = null;
 
+            m_body?.Dispose();
             m_body = null;
+           
+           
+            
             
         }
 

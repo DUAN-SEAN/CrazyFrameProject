@@ -32,6 +32,10 @@ namespace GameActorLogic
             actor.SetInitData(point.X, point.Y, body.GetAngle());
         }
 
-
+        public static void RingDetection(this Body body, IBaseComponentContainer actor)
+        {
+            var point = body.GetPosition();
+            actor.GetPhysicalinternalBase().GetBody().SetTransform(point, body.GetAngle());
+        }
     }
 }

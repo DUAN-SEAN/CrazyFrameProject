@@ -180,7 +180,7 @@ namespace GameActorLogic
             // 给激光赋值
             foreach (var skillContainer in weaponlist)
             {
-                container.GetPhysicalinternalBase().GetBody().Detection(((IBaseComponentContainer)level.GetActor(skillContainer.GetActorID())));
+                container.GetPhysicalinternalBase().GetBody().RingDetection((level.GetActor(skillContainer.GetActorID())));
             }
         }
 
