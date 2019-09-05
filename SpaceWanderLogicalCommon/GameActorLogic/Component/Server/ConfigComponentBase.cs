@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Box2DSharp.External;
 using Crazy.Common;
-using CrazyEngine.Base;
-using CrazyEngine.Common;
 using GameServer.Configure;
 
 namespace GameActorLogic
@@ -46,6 +45,9 @@ namespace GameActorLogic
 
         protected void InitializeActor(GameShipConfig[] ships, GameSkillConfig skill, GameBarrierConfig barrier)
         {
+
+            var factory = level.GetEnvirinfointernalBase().GetFactory();
+
             #region 任务配置
 
             foreach (var barrierTaskConfig in barrier.TaskConfigs)
@@ -54,7 +56,7 @@ namespace GameActorLogic
                 int condition = barrierTaskConfig.StartCondition;
                 int result = barrierTaskConfig.Result;
                 var dict = new Dictionary<int, int>();
-                foreach(var itme in barrierTaskConfig.TaskConditionItemConfig)
+                foreach (var itme in barrierTaskConfig.TaskConditionItemConfig)
                 {
                     dict.Add(itme.ConditionTarget, itme.ConditionValue);
                     Log.Trace("加载配置 任务id：" + id + " key" + itme.ConditionTarget + " value" + itme.ConditionValue);
@@ -74,20 +76,22 @@ namespace GameActorLogic
             #region 往前冲武器
             //高射炮
             weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.AntiAircraftGunActor, level);
-            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725, isTrigger: true));
+            //weaponactor.CreateBody(factory.CreateRectangleBody(0, 0, 0.3f, 2.725f,isSensor:true));
+            weaponactor.CreateInitData(new InitData {});
             weaponactor.CreateAiComponent(new GogogoAiComponent(weaponactor));
             ConfigActors.Add(ActorTypeBaseDefine.AntiAircraftGunActor, weaponactor);
 
             //鱼雷
             weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.TorpedoActor, level);
-            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725,isTrigger: true));
+            //weaponactor.CreateBody(factory.CreateRectangleBody(0, 0, 0.3f, 2.725f, isSensor: true));
+            weaponactor.CreateInitData(new InitData());
             weaponactor.CreateAiComponent(new GogogoAiComponent(weaponactor));
             ConfigActors.Add(ActorTypeBaseDefine.TorpedoActor, weaponactor);
 
             //机关枪
             weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.MachineGunActor, level);
-            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725, isTrigger: true));
-            weaponactor.GetBody().FrictionAir = 0.001;
+            //weaponactor.CreateBody(factory.CreateRectangleBody(0, 0, 0.3f, 2.725f, isSensor: true));
+            weaponactor.CreateInitData(new InitData());
             weaponactor.CreateAiComponent(new GogogoAiComponent(weaponactor));
             ConfigActors.Add(ActorTypeBaseDefine.MachineGunActor, weaponactor);
             #endregion
@@ -95,7 +99,8 @@ namespace GameActorLogic
 
             //持续激光
             weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.ContinuousLaserActor, level);
-            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725, isTrigger: true));
+            //weaponactor.CreateBody(factory.CreateRectangleBody(0, 0, 0.3f, 2.725f, isSensor: true));
+            weaponactor.CreateInitData(new InitData());
             weaponactor.CreateAiComponent(null);
             ConfigActors.Add(ActorTypeBaseDefine.ContinuousLaserActor, weaponactor);
 
@@ -105,13 +110,15 @@ namespace GameActorLogic
             #region 自爆炸武器
             //定时炸弹
             weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.TimeBombActor, level);
-            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725));
+            //weaponactor.CreateBody(factory.CreateRectangleBody(0, 0, 0.3f, 2.725f, isSensor: true));
+            weaponactor.CreateInitData(new InitData());
             weaponactor.CreateAiComponent(new DeadAiComponent(5000000000, weaponactor));
             ConfigActors.Add(ActorTypeBaseDefine.TimeBombActor, weaponactor);
 
             //触发炸弹
             weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.TriggerBombActor, level);
-            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725));
+            //weaponactor.CreateBody(factory.CreateRectangleBody(0, 0, 0.3f, 2.725f, isSensor: true));
+            weaponactor.CreateInitData(new InitData());
             weaponactor.CreateAiComponent(new DeadAiComponent(5000000000, weaponactor));
             ConfigActors.Add(ActorTypeBaseDefine.TriggerBombActor, weaponactor);
 
@@ -120,13 +127,15 @@ namespace GameActorLogic
 
             //跟踪导弹
             weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.TrackingMissileActor, level);
-            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725));
+            //weaponactor.CreateBody(factory.CreateRectangleBody(0, 0, 0.3f, 2.725f, isSensor: true));
+            weaponactor.CreateInitData(new InitData());
             weaponactor.CreateAiComponent(null);
             ConfigActors.Add(ActorTypeBaseDefine.TrackingMissileActor, weaponactor);
 
             //蓄力激光
             weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.PowerLaserActor, level);
-            weaponactor.CreateBody(Factory.CreateRectangleBody(0, 0, 0.3, 2.725, isTrigger: true));
+            //weaponactor.CreateBody(factory.CreateRectangleBody(0, 0, 0.3f, 2.725f, isSensor: true));
+            weaponactor.CreateInitData(new InitData());
             weaponactor.CreateAiComponent(new DeadAiComponent(5000000000, weaponactor));
             ConfigActors.Add(ActorTypeBaseDefine.PowerLaserActor, weaponactor);
 
@@ -140,7 +149,8 @@ namespace GameActorLogic
             #region 船
             //歼灭船
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.AnnihilationShipActor, level);
-            shipactor.CreateBody(Factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            //shipactor.CreateBody(factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            shipactor.CreateInitData(new InitData());
             shipactor.InitializeFireControl(new List<int> // 跟踪导弹 机关枪
             {
                 ActorTypeBaseDefine.TrackingMissileActor,
@@ -151,7 +161,8 @@ namespace GameActorLogic
 
             //精英船A
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.EliteShipActorA, level);
-            shipactor.CreateBody(Factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            //shipactor.CreateBody(factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            shipactor.CreateInitData(new InitData());
             shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
             shipactor.InitializeFireControl(new List<int> // 鱼雷 高射炮
             {
@@ -162,7 +173,8 @@ namespace GameActorLogic
 
             //精英船B
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.EliteShipActorB, level);
-            shipactor.CreateBody(Factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            //shipactor.CreateBody(factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            shipactor.CreateInitData(new InitData());
             shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
             shipactor.InitializeFireControl(new List<int> // 跟踪导弹 高射炮
             {
@@ -173,7 +185,8 @@ namespace GameActorLogic
 
             //战斗机A
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.FighterShipActorA, level);
-            shipactor.CreateBody(Factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            //shipactor.CreateBody(factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            shipactor.CreateInitData(new InitData());
             shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
             shipactor.InitializeFireControl(new List<int> // 机关枪 持续激光
             {
@@ -184,7 +197,8 @@ namespace GameActorLogic
 
             //战斗机B
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.FighterShipActorB, level);
-            shipactor.CreateBody(Factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            //shipactor.CreateBody(factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            shipactor.CreateInitData(new InitData());
             shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
             shipactor.InitializeFireControl(new List<int> // 高射炮 蓄力激光s
             {
@@ -195,7 +209,8 @@ namespace GameActorLogic
 
             //无人机
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.DroneShipActor, level);
-            shipactor.CreateBody(Factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            //shipactor.CreateBody(factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            shipactor.CreateInitData(new InitData());
             shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
             shipactor.InitializeFireControl(new List<int> // 机关枪
             {
@@ -205,7 +220,8 @@ namespace GameActorLogic
 
             //黄蜂飞船
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.WaspShipActorA, level);
-            shipactor.CreateBody(Factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            //shipactor.CreateBody(factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
+            shipactor.CreateInitData(new InitData());
             shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
             shipactor.InitializeFireControl(new List<int> // 机关枪 高射炮
             {
@@ -260,7 +276,7 @@ namespace GameActorLogic
                 return false;
             }
             actor = value.Clone();
-            ((IBaseComponentContainer)(actor)).GetPhysicalinternalBase().GetBody().Id = Id.Create();
+            ((IBaseComponentContainer)(actor)).GetPhysicalinternalBase().GetBody().UserData = new UserData(actor.GetActorID(), actor.GetActorType());
 
             return result;
         }

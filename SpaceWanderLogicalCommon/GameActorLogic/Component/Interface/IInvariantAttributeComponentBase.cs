@@ -32,6 +32,16 @@ namespace GameActorLogic
         /// 设置阵营
         /// </summary>
         void SetCamp(int camp);
+
+        /// <summary>
+        /// 设置生成数据
+        /// </summary>
+        void SetInitData(float x,float y ,float angle);
+
+        /// <summary>
+        /// 获取生成数据
+        /// </summary>
+        InitData GetInitData();
     }
 
     public interface IInvariantAttributeInternalBase : IInvariantAttributeBase

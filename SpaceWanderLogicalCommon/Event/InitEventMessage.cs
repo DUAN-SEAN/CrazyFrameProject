@@ -14,20 +14,20 @@ namespace GameActorLogic
         public ulong onwerid;
         public Int32 actortype;
         public int camp;
-        public double point_x;
-        public double point_y;
-        public double relatpoint_x;
-        public double relatpoint_y;
-        public double angle;
+        public float point_x;
+        public float point_y;
+        public float relatpoint_x;
+        public float relatpoint_y;
+        public float angle;
         public readonly bool haveId;
         public bool IsPlayer;
         public Int32 weapontype_a;
         public Int32 weapontype_b;
         public string name;
 
-        public InitEventMessage(ulong actorid, int camp, Int32 actortype, double point_x, double point_y, double angle,
+        public InitEventMessage(ulong actorid, int camp, Int32 actortype, float point_x, float point_y, float angle,
             bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0, string name = "",
-            ulong ownerid = ulong.MaxValue, double relatpoint_x = 0, double relatpoint_y = 0)
+            ulong ownerid = ulong.MaxValue, float relatpoint_x = 0, float relatpoint_y = 0)
         {
             _eventMessageId = EventMessageConstDefine.InitEvent;
             this.actorid = actorid;
@@ -45,7 +45,7 @@ namespace GameActorLogic
             this.relatpoint_x = relatpoint_x;
             this.relatpoint_y = relatpoint_y;
         }
-        public InitEventMessage(Int32 actortype,int camp, double point_x, double point_y, double angle,bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0, string name = "", ulong ownerid = ulong.MaxValue, double relatpoint_x = 0, double relatpoint_y = 0)
+        public InitEventMessage(Int32 actortype,int camp, float point_x, float point_y, float angle,bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0, string name = "", ulong ownerid = ulong.MaxValue, float relatpoint_x = 0, float relatpoint_y = 0)
         {
             _eventMessageId = EventMessageConstDefine.InitEvent;
             this.actortype = actortype;

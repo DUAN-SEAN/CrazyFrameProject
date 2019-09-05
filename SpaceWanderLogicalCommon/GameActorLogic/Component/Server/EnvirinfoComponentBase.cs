@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Box2DSharp.Dynamics;
+using Box2DSharp.External;
 using Crazy.Common;
-using CrazyEngine.Base;
-using CrazyEngine.Core;
-using CrazyEngine.External;
+using SpaceWanderEngine;
 
 namespace GameActorLogic
 {
@@ -17,38 +18,44 @@ namespace GameActorLogic
         IEnvirinfoInternalBase
     {
         /// <summary>
+        /// 工厂
+        /// </summary>
+        protected Factory factory;
+
+        /// <summary>
         /// 物理引擎
         /// </summary>
-        protected Engine m_engine;
+        protected World _world;
+
         /// <summary>
         /// 物理引擎驱动器
         /// </summary>
         protected Runner m_runner;
 
-        protected CollisionEvent m_collision;
         protected List<ActorBase> _actorList;
 
         /// <summary>
         /// 关卡地图长宽
         /// </summary>
-        protected double MapHeight;
-        protected double MapWidth;
+        protected float MapHeight;
+        protected float MapWidth;
         public EnvirinfoComponentBase()
         {
-            m_engine = new Engine();
-            m_runner = new Runner(m_engine);
-            m_collision = new CollisionEvent(m_engine);
+
+            _world = new World(Vector2.Zero);
+            factory = new Factory(_world);
+            m_runner = new Runner(_world);
             _actorList = new List<ActorBase>();
         }
 
         /// <summary>
         /// engine 应该已经被添加进 runner
         /// </summary>
-        protected EnvirinfoComponentBase(Engine engine,Runner runner)
+        protected EnvirinfoComponentBase(World engine,Runner runner)
         {
-            m_engine = engine;
+            _world = engine;
             m_runner = runner;
-            m_collision = new CollisionEvent(m_engine);
+
             _actorList = new List<ActorBase>();
 
         }
@@ -66,8 +73,7 @@ namespace GameActorLogic
                 //_actorList[i].GetPosition() + " 力" + _actorList[i].GetForce() + " 转矩" + _actorList[i].GetAngleVelocity());
             }
 
-            m_runner.Update(DateTime.Now.Ticks / 10000);
-            m_collision.Update();
+            m_runner.Update();
 
         }
 
@@ -99,42 +105,32 @@ namespace GameActorLogic
             return _actorList.Find(actor => actor.GetActorID() == id);
         }
 
-        public ActorBase GetActorByBodyId(int bodyid)
+        public ActorBase GetActorByBodyUserData(UserData bodyid)
         {
-            return _actorList.Find(actor => actor.GetBodyId() == bodyid);
+            return _actorList.Find(actor => actor.GetBodyUserData() == bodyid);
         }
 
         #endregion
 
         #region IEnvirinfoInternalBase
-        public Engine GetEngine()
-        {
-            return m_engine;
-        }
 
         public void SetDelta(float delta)
         {
-            m_runner.Delta = delta;
         }
 
         public float GetDelta()
         {
-            return (float) m_runner.Delta;
+            return 0;
         }
 
-        public CollisionEvent GetCollisionEvent()
-        {
-            return m_collision;
-        }
 
         public void AddActor(ActorBase actor)
         {
 
             IBaseComponentContainer container = actor as IBaseComponentContainer;
-            var body = container.GetPhysicalinternalBase().GetBody();
-            var collider = container.GetPhysicalinternalBase().GetCollider();
-            m_collision.colliders.Add(body.Id.Value, collider);
-            m_engine.World.Add(body);
+            var init = container.GetInitData();
+            //TODO 添加进世界
+            actor.CreateBody(factory.CreateRectangleBody(init.point_x, init.point_y, 10, 10));
             _actorList.Add(actor);
         }
 
@@ -142,8 +138,7 @@ namespace GameActorLogic
         {
             IBaseComponentContainer container = actor as IBaseComponentContainer;
             var body = container.GetPhysicalinternalBase().GetBody();
-            m_collision.colliders.Remove(body.Id.Value);
-            m_engine.World.Remove(body);
+            //TODO 从世界去除
             _actorList.Remove(actor);
         }
         #endregion
@@ -157,13 +152,11 @@ namespace GameActorLogic
             _actorList.Clear();
             _actorList = null;
 
-            m_collision.Dispose();
-            m_collision = null;
-
-            m_engine = null;
+        
             m_runner = null;
-           
-            
+            _world= null;
+
+
         }
 
         /// <summary>
@@ -171,17 +164,22 @@ namespace GameActorLogic
         /// </summary>
         public void AddAirWall()
         {
-            m_engine.World.Add(Factory.CreateRectangleBody(0, -MapHeight / 2, MapWidth, 5, true));
-            m_engine.World.Add(Factory.CreateRectangleBody(0, MapHeight / 2, MapWidth, 5, true));
-            m_engine.World.Add(Factory.CreateRectangleBody(MapWidth / 2, 0, 5, MapHeight, true));
-            m_engine.World.Add(Factory.CreateRectangleBody(-MapWidth / 2, 0, 5, MapHeight, true));
+            factory.CreateRectangleBody(0, -MapHeight / 2, MapWidth, 5,bodyType:BodyType.StaticBody ,true);
+            factory.CreateRectangleBody(0, MapHeight / 2, MapWidth, 5, bodyType: BodyType.StaticBody, true);
+            factory.CreateRectangleBody(MapWidth / 2, 0, 5, MapHeight, bodyType: BodyType.StaticBody, true);
+            factory.CreateRectangleBody(-MapWidth / 2, 0, 5, MapHeight, bodyType: BodyType.StaticBody, true);
 
         }
 
-        public void SetMapSize(double height, double width)
+        public void SetMapSize(float height, float width)
         {
             this.MapHeight = height;
             this.MapWidth = width;
+        }
+
+        public Factory GetFactory()
+        {
+            return factory;
         }
     }
 }

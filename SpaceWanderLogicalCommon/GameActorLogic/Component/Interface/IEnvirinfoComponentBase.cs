@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Box2DSharp.External;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CrazyEngine.Base;
-using CrazyEngine.Core;
-using CrazyEngine.External;
+
 
 namespace GameActorLogic
 {
@@ -41,9 +40,8 @@ namespace GameActorLogic
         /// </summary>
         ActorBase GetActor(ulong id);
 
-        ActorBase GetActorByBodyId(int bodyid);
+        ActorBase GetActorByBodyUserData(UserData userdate);
 
-        Engine GetEngine();
 
         /// <summary>
         /// 设置物理引擎delta
@@ -58,7 +56,7 @@ namespace GameActorLogic
         /// <summary>
         /// 设置地图尺寸
         /// </summary>
-        void SetMapSize(double height, double width);
+        void SetMapSize(float height, float width);
 
     }
 
@@ -68,15 +66,9 @@ namespace GameActorLogic
     public interface IEnvirinfoInternalBase : IEnvirinfoBase
     {
         /// <summary>
-        /// 获取物理引擎
+        /// 获得工厂
         /// </summary>
-        Engine GetEngine();
-
-        /// <summary>
-        /// 获取碰撞信息收集器
-        /// </summary>
-        CollisionEvent GetCollisionEvent();
-
+        Factory GetFactory();
 
         void AddActor(ActorBase actor);
 

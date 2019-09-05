@@ -16,13 +16,13 @@ namespace GameActorLogic
         /// 向左转向接口
         /// 0.05
         /// </summary>
-        void Left(double proc);
+        void Left(float proc);
 
         /// <summary>
         /// 向右转向接口
         /// -0.05
         /// </summary>
-        void Right(double proc);
+        void Right(float proc);
 
         /// <summary>
         /// 向前加速接口
@@ -44,12 +44,12 @@ namespace GameActorLogic
         /// <summary>
         /// 当向左转向时调用
         /// </summary>
-        event Action<double> OnLeft;
+        event Action<float> OnLeft;
 
         /// <summary>
         /// 当向右转向时调用
         /// </summary>
-        event Action<double> OnRight;
+        event Action<float> OnRight;
 
         /// <summary>
         /// 当向前加速时调用

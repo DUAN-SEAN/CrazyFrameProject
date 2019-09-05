@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Box2DSharp.Dynamics;
 using Crazy.Common;
-using CrazyEngine.Base;
 
 
 namespace GameActorLogic
@@ -49,14 +49,15 @@ namespace GameActorLogic
 
         protected override void AddColliderFunction()
         {
-            _physicalBase.OnColliderEnter += Collider;
+            if (ActorType != ActorTypeBaseDefine.ContinuousLaserActor)
+                _physicalBase.OnColliderEnter += Collider;
         }
 
-        protected void Collider(Body body)
+        protected void Collider(UserData body)
         {
             //Log.Trace("武器碰撞");
 
-            var actor = level.GetEnvirinfointernalBase().GetActorByBodyId(body.Id.Value);
+            var actor = level.GetEnvirinfointernalBase().GetActor(body.ActorID);
             if (actor == null)
             {
                 DestroySkill();
@@ -124,9 +125,9 @@ namespace GameActorLogic
         #region 武器事件组件
         public void Start()
         {
-            var position = GetPosition();
-            level.AddEventMessagesToHandlerForward(new InitEventMessage(ActorID, GetCamp(), ActorType, position.X,
-                position.Y, GetForwardAngle(),ownerid:GetOwnerID(),relatpoint_x:GetRelPositionX(),relatpoint_y:GetRelPositionY()));
+            var init = GetInitData();
+            level.AddEventMessagesToHandlerForward(new InitEventMessage(ActorID, GetCamp(), ActorType, init.point_x,
+                init.point_y, init.angle, ownerid: GetOwnerID(), relatpoint_x: GetRelPositionX(), relatpoint_y: GetRelPositionY()));
             _weaponEventComponent.Start();
         }
 
@@ -276,6 +277,8 @@ namespace GameActorLogic
         {
             Start();
         }
+
+
 
         public void EndSkill()
         {

@@ -16,14 +16,14 @@ namespace SpaceWanderEngine
 {
     public class Runner
     {
-        public Runner()
+        public Runner(World world)
         {
-            
+            this._world = world;
 
 
             _fiexdFixedUpdate = new FixedUpdate(TimeSpan.FromSeconds(_timeStep), Tick);
             _fiexdFixedUpdate.Start();
-            Test();
+           //Test();
         }
 
         /// <summary>

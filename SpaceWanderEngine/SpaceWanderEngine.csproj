@@ -158,6 +158,9 @@
     <Compile Include="Dynamics\TimeStep.cs" />
     <Compile Include="Dynamics\Velocity.cs" />
     <Compile Include="Dynamics\World.cs" />
+    <Compile Include="External\BodyExtensions.cs" />
+    <Compile Include="External\CrazyUtils.cs" />
+    <Compile Include="External\Factory.cs" />
     <Compile Include="FixedUpdate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runner.cs" />

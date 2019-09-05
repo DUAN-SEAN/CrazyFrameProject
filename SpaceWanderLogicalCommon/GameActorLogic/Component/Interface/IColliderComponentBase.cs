@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CrazyEngine.Base;
+using Box2DSharp.Dynamics;
+
 
 namespace GameActorLogic
 {
@@ -12,6 +13,7 @@ namespace GameActorLogic
     /// </summary>
     public interface IColliderBase
     {
+       
     }
 
     /// <summary>
@@ -22,14 +24,14 @@ namespace GameActorLogic
         /// <summary>
         /// 碰撞机被进入调用一次
         /// </summary>
-        event Action<Body> OnColliderEnter;
+        event Action<UserData> OnColliderEnter;
         /// <summary>
         /// 碰撞机中有碰撞持续调用
         /// </summary>
-        event Action<Body> OnColliderStay;
+        event Action<UserData> OnColliderStay;
         /// <summary>
         /// 碰撞机退出后调用一次
         /// </summary>
-        event Action OnColliderExit;
+        event Action<UserData> OnColliderExit;
     }
 }

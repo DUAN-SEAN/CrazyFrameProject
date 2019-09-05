@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Crazy.Common;
-using CrazyEngine.Common;
-using CrazyEngine.External;
+
 namespace GameActorLogic
 {
     /// <summary>
@@ -167,7 +166,7 @@ namespace GameActorLogic
                 //Log.Trace("复制前Actor Body id" + skillContainer.GetBody().Id + " 位置" +
                 //          skillContainer.GetBody().Position + " 朝向" +
                 //          skillContainer.GetBody().Forward);
-                container.GetPhysicalinternalBase().GetBody().Detection(skillContainer.GetBody(), 3);
+                container.GetPhysicalinternalBase().GetBody().Detection(skillContainer);
                 //Log.Trace("复制后Actor Body id" + skillContainer.GetBody().Id + " 位置" +
                 //          skillContainer.GetBody().Position + " 朝向" +
                 //          skillContainer.GetBody().Forward);
@@ -181,7 +180,7 @@ namespace GameActorLogic
             // 给激光赋值
             foreach (var skillContainer in weaponlist)
             {
-                container.GetPhysicalinternalBase().GetBody().Detection(((IBaseComponentContainer)level.GetActor(skillContainer.GetActorID())).GetPhysicalinternalBase().GetBody(), 2);
+                container.GetPhysicalinternalBase().GetBody().Detection(((IBaseComponentContainer)level.GetActor(skillContainer.GetActorID())));
             }
         }
 
@@ -199,7 +198,6 @@ namespace GameActorLogic
                 var weaponactor = actor.Clone();
                 weaponactor.SetActorId(level.GetCreateInternalComponentBase().GetCreateID());
                 var weapon = weaponactor as ISkillContainer;
-                weapon.GetBody().Id = Id.Create();
                 weapon.SetRelPosition(0, 0);
                 //Log.Trace("当前发射者 位置：" + container.GetPhysicalinternalBase().GetBody().Position + " 朝向：" +
                 //          container.GetPhysicalinternalBase().GetBody().Forward);
@@ -228,10 +226,9 @@ namespace GameActorLogic
                     var weaponactor = actor.Clone();
                     weaponactor.SetActorId(level.GetCreateInternalComponentBase().GetCreateID());
                     var weapon = weaponactor as ISkillContainer;
-                    weapon.GetBody().Id = Id.Create();
                     weapon.SetRelPosition(0, 0);
-                    Log.Trace("当前发射者 位置：" + container.GetPhysicalinternalBase().GetBody().Position + " 朝向：" +
-                              container.GetPhysicalinternalBase().GetBody().Forward);
+                    Log.Trace("当前发射者 位置：" + container.GetPhysicalinternalBase().GetBody().GetPosition() + " 朝向：" +
+                              container.GetPhysicalinternalBase().GetBody().GetAngle());
                     //Log.Trace("当前武器箱 位置："+actor.GetBody().Position + " 朝向："+actor.GetBody().Forward);
                     //Log.Trace("被发射武器"+weapon.GetBody().Id+" 位置：" + weapon.GetBody().Position + " 朝向：" + weapon.GetBody().Forward+" 朝向角度："+weapon.GetBody().Angle);
 

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Box2DSharp.Dynamics;
 using Crazy.Common;
-using CrazyEngine.Base;
+
 
 
 namespace GameActorLogic
@@ -36,18 +37,43 @@ namespace GameActorLogic
         protected override void AddColliderFunction()
         {
             _physicalBase.OnColliderEnter += Collider;
+            _physicalBase.OnColliderStay += ColliderStay;
+
         }
 
-        protected void Collider(Body body)
+        protected void Collider(UserData body)
         {
             //Log.Trace("船受到碰撞" + body.Id);
-            var actor = level.GetEnvirinfointernalBase().GetActorByBodyId(body.Id.Value);
+            var actor = level.GetEnvirinfointernalBase().GetActor(body.ActorID);
             if(actor == null) return;
             //Log.Trace("船受到碰撞" + actor.GetActorID() + "阵营" + actor.GetCamp());
             if (actor.GetCamp() == GetCamp()) return;
             //Log.Trace("船被攻击类型" + actor.GetType() + actor.GetActorType());
             if (actor is WeaponActorBase weapon)
             {
+                //Log.Trace("船受到武器碰撞" + weapon.GetActorID() +" 伤害"+weapon.GetWeaponDamage());
+                _healthShieldComponent.LossBlood(weapon.GetWeaponDamage());
+            }
+
+            if (actor is ShipActorBase ship)
+            {
+                //Log.Trace("船受到船碰撞" + actor.GetActorID());
+                _healthShieldComponent.LossBlood(1);
+            }
+        }
+
+        protected void ColliderStay(UserData body)
+        {
+            if (body.ActorType != ActorTypeBaseDefine.ContinuousLaserActor) return;
+            //Log.Trace("船受到碰撞" + body.Id);
+            var actor = level.GetEnvirinfointernalBase().GetActor(body.ActorID);
+            if (actor == null) return;
+            //Log.Trace("船受到碰撞" + actor.GetActorID() + "阵营" + actor.GetCamp());
+            if (actor.GetCamp() == GetCamp()) return;
+            //Log.Trace("船被攻击类型" + actor.GetType() + actor.GetActorType());
+            if (actor is WeaponActorBase weapon)
+            {
+                if(actor.GetActorType() == ActorTypeBaseDefine.ContinuousLaserActor)
                 //Log.Trace("船受到武器碰撞" + weapon.GetActorID() +" 伤害"+weapon.GetWeaponDamage());
                 _healthShieldComponent.LossBlood(weapon.GetWeaponDamage());
             }

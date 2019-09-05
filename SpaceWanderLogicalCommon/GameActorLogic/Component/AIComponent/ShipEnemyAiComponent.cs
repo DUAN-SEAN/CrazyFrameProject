@@ -1,11 +1,12 @@
-﻿using CrazyEngine.External;
-using CrazyEngine.Common;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Crazy.Common;
+using System.Numerics;
+using Box2DSharp.External;
 
 namespace GameActorLogic
 {
@@ -56,7 +57,7 @@ namespace GameActorLogic
             {
                 //Tick 敌人是否在附近
                 var list = container.GetPhysicalinternalBase().GetBody()
-                    .RingDetection(level.GetEnvirinfointernalBase().GetPlayerActors().ToBodyList(), 1000);
+                    .CircleDetection(level.GetEnvirinfointernalBase().GetPlayerActors().ToBodyList(), 1000);
                 //Log.Trace("ShipEnemyAiComponent 附近敌人数量" + list.Count);
                 if (list.Count <= 0) return;
                 //这个list 里面有敌人
@@ -68,8 +69,8 @@ namespace GameActorLogic
                 //判断进入射程
                 //距离小于最远射程是为了保证在移动中有更多打到敌人的机会
                 bool distanceinrange = container.GetPhysicalinternalBase().GetBody()
-                    .DistanceDetection(list[0].Position, 90);
-                Point p = new Point();
+                    .DistanceDetection(list[0].GetPosition(), 90);
+                Vector2 p = new Vector2();
                 if (distanceinrange)
                 {
                     //Log.Trace("ShipEnemyAiComponent 敌人小于90" + list.Count);
@@ -77,7 +78,7 @@ namespace GameActorLogic
                     var body = container.GetPhysicalinternalBase().GetBody();
 
                     //自动转向接口
-                    if (body.ForwardToTarget(list[0].Position))
+                    if (body.FowardToTarget(list[0].GetPosition()))
                     {
                         //攻击
                         container.GetFireControlinternalBase().FireAI(0);
@@ -95,8 +96,8 @@ namespace GameActorLogic
                    
 
                     //环绕
-                    Double deltaX = list[0].Position.X - body.Position.X;
-                    Double deltaY = list[0].Position.Y - body.Position.Y;
+                    Double deltaX = list[0].GetPosition().X - body.GetPosition().X;
+                    Double deltaY = list[0].GetPosition().Y - body.GetPosition().Y;
 
                     //当前方位在第一象限，确定环绕的目标地点
                     if (deltaX >= 0 && deltaY >= 0)
@@ -212,57 +213,57 @@ namespace GameActorLogic
 
                 void EncirclePosition_1()
                 {
-                    p.X = list[0].Position.X + 90 * 0.7071;
-                    p.Y = list[0].Position.Y + 90 * 0.7071;
+                    p.X = list[0].GetPosition().X + 90 * 0.7071f;
+                    p.Y = list[0].GetPosition().Y + 90 * 0.7071f;
                     container.GetPhysicalinternalBase().GetBody().FollowTarget(p);
                 }
 
                 void EncirclePosition_2()
                 {
-                    p.X = list[0].Position.X;
-                    p.Y = list[0].Position.Y + 90;
+                    p.X = list[0].GetPosition().X;
+                    p.Y = list[0].GetPosition().Y + 90;
                     container.GetPhysicalinternalBase().GetBody().FollowTarget(p);
                 }
 
                 void EncirclePosition_3()
                 {
-                    p.X = list[0].Position.X - 90 * 0.7071;
-                    p.Y = list[0].Position.Y + 90 * 0.7071;
+                    p.X = list[0].GetPosition().X - 90 * 0.7071f;
+                    p.Y = list[0].GetPosition().Y + 90 * 0.7071f;
                     container.GetPhysicalinternalBase().GetBody().FollowTarget(p);
                 }
 
                 void EncirclePosition_4()
                 {
-                    p.X = list[0].Position.X - 90;
-                    p.Y = list[0].Position.Y;
+                    p.X = list[0].GetPosition().X - 90;
+                    p.Y = list[0].GetPosition().Y;
                     container.GetPhysicalinternalBase().GetBody().FollowTarget(p);
                 }
 
                 void EncirclePosition_5()
                 {
-                    p.X = list[0].Position.X - 90 * 0.7071;
-                    p.Y = list[0].Position.Y - 90 * 0.7071;
+                    p.X = list[0].GetPosition().X - 90 * 0.7071f;
+                    p.Y = list[0].GetPosition().Y - 90 * 0.7071f;
                     container.GetPhysicalinternalBase().GetBody().FollowTarget(p);
                 }
 
                 void EncirclePosition_6()
                 {
-                    p.X = list[0].Position.X;
-                    p.Y = list[0].Position.Y - 90;
+                    p.X = list[0].GetPosition().X;
+                    p.Y = list[0].GetPosition().Y - 90;
                     container.GetPhysicalinternalBase().GetBody().FollowTarget(p);
                 }
 
                 void EncirclePosition_7()
                 {
-                    p.X = list[0].Position.X + 90 * 0.7071;
-                    p.Y = list[0].Position.Y - 90 * 0.7071;
+                    p.X = list[0].GetPosition().X + 90 * 0.7071f;
+                    p.Y = list[0].GetPosition().Y - 90 * 0.7071f;
                     container.GetPhysicalinternalBase().GetBody().FollowTarget(p);
                 }
 
                 void EncirclePosition_8()
                 {
-                    p.X = list[0].Position.X + 90;
-                    p.Y = list[0].Position.Y;
+                    p.X = list[0].GetPosition().X + 90;
+                    p.Y = list[0].GetPosition().Y;
                     container.GetPhysicalinternalBase().GetBody().FollowTarget(p);
                 }
 

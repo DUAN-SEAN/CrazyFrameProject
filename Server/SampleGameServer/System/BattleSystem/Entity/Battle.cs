@@ -178,9 +178,9 @@ namespace GameServer.Battle
 
                         }
                         m_level.Start(playerShips);
-                        runner = new Runner();
+                        //runner = new Runner();
                         //m_levelTimerId = m_netHandler.StartLogicalTimer(m_level.Update);
-                        m_levelTimerId = m_netHandler.StartLogicalTimer(runner.Update);
+                        //m_levelTimerId = m_netHandler.StartLogicalTimer(runner.Update);
 
 
                         Log.Debug("服务器确认所有客户端关卡加载完毕完成第二次握手，可以开启战斗 ，发起第三次握手");
@@ -290,8 +290,7 @@ namespace GameServer.Battle
                                     ForwardAngle = shipActorBase.GetForwardAngle(),
                                     PositionX = shipActorBase.GetPosition().X,
                                     PositionY = shipActorBase.GetPosition().Y,
-                                    PositionPrevX = shipActorBase.GetPositionPrev().X,
-                                    PositionPrevY = shipActorBase.GetPositionPrev().Y,
+
                                     VelocityX = shipActorBase.GetVelocity().X,
                                     VelocityY = shipActorBase.GetVelocity().Y,
                                     Torque = shipActorBase.GetTorque()
@@ -353,9 +352,7 @@ namespace GameServer.Battle
                                 ForwardAngle = weaponActorBase.GetForwardAngle(),
                                 PositionX = weaponActorBase.GetPosition().X,
                                 PositionY = weaponActorBase.GetPosition().Y,
-                                PositionPrevX = weaponActorBase.GetPositionPrev().X,
-                                PositionPrevY = weaponActorBase.GetPositionPrev().Y, 
-                                VelocityX = weaponActorBase.GetVelocity().X,
+
                                 VelocityY = weaponActorBase.GetVelocity().Y,
                                 Torque = weaponActorBase.GetTorque()
                             };

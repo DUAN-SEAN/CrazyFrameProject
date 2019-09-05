@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Crazy.Common;
-using CrazyEngine.Base;
-using CrazyEngine.Core;
 using GameServer.Configure;
 
 namespace GameActorLogic
@@ -296,15 +294,12 @@ namespace GameActorLogic
             return ((IEnvirinfoBase) _envirinfoComponent).GetActor(id);
         }
 
-        public ActorBase GetActorByBodyId(int bodyid)
+        public ActorBase GetActorByBodyUserData(UserData bodyid)
         {
-            return _envirinfoComponent.GetActorByBodyId(bodyid);
+            return _envirinfoComponent.GetActorByBodyUserData(bodyid);
         }
 
-        public Engine GetEngine()
-        {
-            return _envirinfoComponent.GetEngine();
-        }
+       
 
         public void SetDelta(float delta)
         {
@@ -317,7 +312,7 @@ namespace GameActorLogic
         }
 
 
-        public void SetMapSize(double height ,double width)
+        public void SetMapSize(float height ,float width)
         {
             _envirinfoComponent.SetMapSize(height, width);
         }

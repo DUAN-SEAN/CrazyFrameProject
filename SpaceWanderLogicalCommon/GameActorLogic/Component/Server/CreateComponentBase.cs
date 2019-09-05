@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Crazy.Common;
-using CrazyEngine.Common;
 
 namespace GameActorLogic
 {
@@ -36,13 +35,13 @@ namespace GameActorLogic
             return IDs++;
         }
 
-        public ActorBase CreateActor(int actortype,int camp, double point_x, double point_y, double angle, bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0,string name = "")
+        public ActorBase CreateActor(int actortype,int camp, float Vector2_x, float Vector2_y, float angle, bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0,string name = "")
         {
-            return CreateActor(actortype, camp, point_x, point_y, angle, GetCreateID(), isPlayer, weapontype_a,
+            return CreateActor(actortype, camp, Vector2_x, Vector2_y, angle, GetCreateID(), isPlayer, weapontype_a,
                 weapontype_b, name);
         }
 
-        public ActorBase CreateActor(int actortype, int camp,double point_x, double point_y, double angle, ulong Id, bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0,string name ="")
+        public ActorBase CreateActor(int actortype, int camp, float Vector2_x, float Vector2_y, float angle, ulong Id, bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0,string name ="")
         {
             ActorBase actor = null;
             //从配置文件中获取Actor
@@ -67,7 +66,7 @@ namespace GameActorLogic
                     if (actor == null)
                         actor = new ShipActorBase(Id, actortype, level);
                     actor.SetActorId(Id);
-                    actor.PrepareActor(point_x, point_y, angle);
+                    actor.PrepareActor(Vector2_x, Vector2_y, angle);
                     actor.SetCamp(camp);
                     if (isPlayer)
                     {
@@ -108,7 +107,7 @@ namespace GameActorLogic
                     if (actor != null)
                     {
                         actor.SetActorId(Id);
-                        actor.PrepareActor(point_x, point_y, angle);
+                        actor.PrepareActor(Vector2_x, Vector2_y, angle);
                         actor.SetCamp(camp);
                         //Log.Trace("actor id" + actor.GetActorID() + " body id" + actor.GetBodyId() + " trigger:" + ((IBaseComponentContainer)actor).GetPhysicalinternalBase().GetBody().Trigger);
                     }

@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,16 +52,20 @@
     <Compile Include="Event\TaskUpdateEventMessage.cs" />
     <Compile Include="Event\VictoryEventMessage.cs" />
     <Compile Include="GameActorLogic\ClientActor\ActorHelper.cs" />
+    <Compile Include="GameActorLogic\ClientActor\HelperClass\InitData.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\ISkillContainer.cs" />
+    <Compile Include="GameActorLogic\ClientActor\UserData.cs" />
     <Compile Include="GameActorLogic\Component\AIComponent\DeadAiComponent.cs" />
     <Compile Include="GameActorLogic\Component\AIComponent\GogogoAiComponent.cs" />
     <Compile Include="GameActorLogic\Component\AIComponent\ShipEnemyAiComponent.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Server\IConfigComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\Interface\Server\IContactListenerComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Server\IHandlerComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Server\ITaskEventComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Skill\ISkillAttributeComponent.cs" />
     <Compile Include="GameActorLogic\Component\Interface\Skill\ISkillEventComponent.cs" />
     <Compile Include="GameActorLogic\Component\Server\ConfigComponentBase.cs" />
+    <Compile Include="GameActorLogic\Component\Server\ContactListenerComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Server\HandlerComponentBase.cs" />
     <Compile Include="GameActorLogic\Component\Server\TaskEventComponentBase.cs" />
     <Compile Include="Helper\ActorBaseHelper.cs" />
@@ -132,13 +137,13 @@
     <Folder Include="GameActorLogic\ClientActor\Interface\WeaponContainer\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CrazyEngine\CrazyEngine.csproj">
-      <Project>{f0522629-274c-4631-b2f3-7301aa933b4d}</Project>
-      <Name>CrazyEngine</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Libs\CommonLib\CommonLib.csproj">
       <Project>{0f3ecc0f-e8f4-434e-aaf9-95a912f2f565}</Project>
       <Name>CommonLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpaceWanderEngine\SpaceWanderEngine.csproj">
+      <Project>{b0f2a770-aedb-4fd8-a90b-c533843d393e}</Project>
+      <Name>SpaceWanderEngine</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

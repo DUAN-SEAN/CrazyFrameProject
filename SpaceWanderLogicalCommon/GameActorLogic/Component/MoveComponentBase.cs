@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
-using CrazyEngine.Common;
-using CrazyEngine.Core;
+using Box2DSharp.Common;
+using Box2DSharp.External;
 using GameActorLogic;
 
 namespace GameActorLogic
@@ -30,13 +31,13 @@ namespace GameActorLogic
        }
 
         #region IMoveBase
-        public void Left(double proc)
+        public void Left(float proc)
         {
             physical?.AddForward(proc);
             OnLeft?.Invoke(proc);
         }
 
-        public void Right(double proc)
+        public void Right(float proc)
         {
             physical?.AddForward(proc);
             OnRight?.Invoke(proc);
@@ -52,14 +53,15 @@ namespace GameActorLogic
         {
             if (x < 0.005 && y < 0.005 && x > -0.005 && y > -0.005) return;
             if (physical?.GetBody() == null) return;
-            var point = new Point(x, y);
+            var point = new Vector2(x, y);
 
-            var cross = point.Cross(physical?.GetBody().Forward);
+            var cross = MathUtils.Cross(point, physical.GetBody().GetForward());
+            Vector2 forward = physical.GetBody().GetForward();
             //算出力的大小
-            var cos = point.IncludedAngle(physical?.GetBody().Forward);
+            var cos = CrazyUtils.IncludedAngleCos(point, forward);
             float angle = (float)Math.Acos(cos);
             float anglepro = (float) (angle / Math.PI);
-            float forcepro = (float)Helper.DistanceNoSqrt(Point.Zero(), point);
+            float forcepro = (float)Vector2.DistanceSquared(Vector2.Zero, point);
             physical?.AddThrust(0.00001f* 5  * anglepro * forcepro);
 
             if (cos > 0.95)
@@ -70,19 +72,19 @@ namespace GameActorLogic
 
             if ( cross > 0)
             {
-                physical?.AddForward(0.1);
+                physical?.AddForward(0.1f);
             }
             else if (cross < 0)
             {
-                physical?.AddForward(-0.1);
+                physical?.AddForward(-0.1f);
             }
         }
 
         #endregion
 
         #region IMoveInternalBase
-        public event Action<double> OnLeft;
-        public event Action<double> OnRight;
+        public event Action<float> OnLeft;
+        public event Action<float> OnRight;
         public event Action<float> OnThrust;
         #endregion
 

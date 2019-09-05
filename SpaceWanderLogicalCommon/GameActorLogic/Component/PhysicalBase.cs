@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Box2DSharp.Dynamics;
+using Box2DSharp.External;
 using Crazy.Common;
-using CrazyEngine.Base;
-using CrazyEngine.Common;
-using CrazyEngine.Core;
-using CrazyEngine.External;
+
 using GameActorLogic;
 
 namespace GameActorLogic
@@ -24,13 +24,15 @@ namespace GameActorLogic
         IColliderInternal
     {
         protected Body m_body;
-        protected Collider m_collider;
         protected IEnvirinfoBase envirinfo;
 
         //copy值以防物理清除值
-        protected Point Force_copy = new Point();
-        protected double Torque_copy;
-        protected double angleVelocity_copy;
+        protected Vector2 Force_copy = new Vector2();
+        //之前那个被拿去计算合力 现在这个再次copy
+        protected Vector2 Force_copy_copy = new Vector2();
+
+        protected float Torque_copy;
+        protected float angleVelocity_copy;
         /// <summary>
         /// 碰撞方法被
         /// </summary>
@@ -45,8 +47,8 @@ namespace GameActorLogic
         /// 只在武器发射时使用
         /// 武器移动时不使用
         /// </summary>
-        protected double RelpositionX;
-        protected double RelpositionY;
+        protected float RelpositionX;
+        protected float RelpositionY;
         //protected PhysicalBase()
         //{
         //m_body = Factory.CreateCircleBody(1, 1, 1);
@@ -61,18 +63,20 @@ namespace GameActorLogic
         public PhysicalBase(IEnvirinfoInternalBase envirinfo)
         {
             this.envirinfo = envirinfo;
-            
-            m_collider = new Collider();
+            contactActors = new List<UserData>();
+
+
         }
 
         public PhysicalBase(PhysicalBase clone)
         {
             this.envirinfo = clone.envirinfo;
-            this.m_collider = new Collider();
             // 朱颖 clone body
-            this.m_body = Factory.CreateCloneBody(clone.m_body);
+            //this.m_body = Factory.CreateCloneBody(clone.m_body);
+
+            contactActors = new List<UserData>();
+
             //Log.Trace("物理引擎复制角度值："+m_body.Angle);
-            m_collider.OnCollisionStay += OnCollision;
 
         }
 
@@ -80,34 +84,57 @@ namespace GameActorLogic
         /// 碰撞逻辑检测
         /// 调用相应的碰撞方法
         /// </summary>
-        protected void OnCollision(Collision collision)
+        public void OnCollision(UserData collision)
         {
             isColliderMethodEnter = true;
-            var body = m_body.Id != collision.BodyA.Id ? collision.BodyA : collision.BodyB;
+          
             if(isColliderStay == false)
             {
-                OnColliderEnter?.Invoke(body);
+                OnColliderEnter?.Invoke(collision);
                 isColliderStay = true;
             }
             if (isColliderStay)
-                OnColliderStay?.Invoke(body);
+                OnColliderStay?.Invoke(collision);
         }
+        protected List<UserData> contactActors;
+
+        public void OnContactEnter(UserData data)
+        {
+            OnColliderEnter?.Invoke(data);
+            contactActors.Add(data);
+        }
+
+        public void OnContactExit(UserData data)
+        {
+            OnColliderExit?.Invoke(data);
+            contactActors.Remove(data);
+        }
+
 
         public void Update()
         {
            
+            //老版 物理碰撞
             if (isColliderStay == true && isColliderMethodEnter == false)
             {
                 isColliderStay = false;
-                OnColliderExit?.Invoke();
+                OnColliderExit.Invoke(null);
             }
 
+            //新版物理碰撞
+            if(contactActors.Count > 0)
+            {
+                foreach(var i in contactActors)
+                    //持续伤害
+                    OnColliderStay.Invoke(i);
+            }
             //附上值
-            Force_copy.X = m_body.Force.X;
-            Force_copy.Y = m_body.Force.Y;
             angleVelocity_copy = m_body.AngularVelocity;
-            Torque_copy = m_body.Torque;
+            Torque_copy = m_body.GetTorque();
             isColliderMethodEnter = false;
+            Force_copy_copy = Force_copy;
+            m_body.AddForce(Force_copy);
+            Force_copy = Vector2.Zero;
         }
 
         public void Dispose()
@@ -117,10 +144,9 @@ namespace GameActorLogic
             m_body.Dispose();
             m_body = null;
            
-            m_collider.OnCollisionStay -= OnCollision;
-            m_collider = null;
+           
             
-            Force_copy = null;
+            
         }
 
         #region Helper
@@ -128,7 +154,7 @@ namespace GameActorLogic
         public void CreateBody(Body body)
         {
             m_body = body;
-            m_collider.OnCollisionStay += OnCollision;
+          
         }
 
         #endregion
@@ -138,28 +164,28 @@ namespace GameActorLogic
 
         #region 物理同步
 
-        public Point GetForward()
+        public Vector2 GetForward()
         {
-            return m_body.Forward;
+            return m_body.GetForward();
         }
 
-        public Point GetVelocity()
+        public Vector2 GetVelocity()
         {
-            return m_body.Velocity;
+            return m_body.LinearVelocity;
         }
 
        
-        public double GetRelPositionX()
+        public float GetRelPositionX()
         {
             return RelpositionX;
         }
 
-        public double GetRelPositionY()
+        public float GetRelPositionY()
         {
             return RelpositionY;
         }
 
-        public void SetRelPosition(double x, double y)
+        public void SetRelPosition(float x, float y)
         {
             RelpositionX = x;
             RelpositionY = y;
@@ -170,59 +196,52 @@ namespace GameActorLogic
             
         }
 
-        public int GetBodyId()
+        public UserData GetBodyUserData()
         {
-            return m_body.Id.Value;
+            return m_body.UserData as UserData;
         }
 
-        public Point GetPosition()
+        public Vector2 GetPosition()
         {
-            return m_body.Position;
+            return m_body.GetForward();
         }
 
-        public Point GetPositionPrev()
-        {
-            return m_body.PositionPrev;
-        }
 
-        public double GetForwardAngle()
+        public float GetForwardAngle()
         {
-            return m_body.Angle;
+            return m_body.GetTransform().Rotation.Angle;
         }
         
-        public double GetAngleVelocity()
+        public float GetAngleVelocity()
         {
             return angleVelocity_copy;
         }
         
-        public Point GetForce()
+        public Vector2 GetForce()
         {
-            return Force_copy;
+            return Force_copy_copy;
         }
 
         
-        public double GetTorque()
+        public float GetTorque()
         {
             return Torque_copy;
         }
 
-        public void SetAngularVelocity(double vel)
+        public void SetAngularVelocity(float vel)
         {
-            m_body.AngularVelocity = vel;
+            m_body.SetAngularVelocity(vel);
         }
 
-        public void SetPhysicalValue(ulong actorId, double angleVelocity, double forceX, double forceY,
-            double forwardAngle, double positionX, double positionY, double positionPrevX, double positionPrevY, double velocityX, double velocityY, double torque)
+        public void SetPhysicalValue(ulong actorId, float angleVelocity, float forceX, float forceY,
+            float angle, float positionX, float positionY, float positionPrevX, float positionPrevY, float velocityX, float velocityY, float torque)
 
         {
-            m_body.Position.Set(positionX,positionY);
-            m_body.PositionPrev.Set(positionPrevX, positionPrevY);
-            m_body.Velocity.Set(velocityX,velocityY);
-            m_body.Force.Set(forceX,forceY);
-            m_body.SetForward(forwardAngle);
-            m_body.Angle = forwardAngle;
-            m_body.AngularVelocity = angleVelocity;
-            m_body.Torque = torque;
+            m_body.SetTransform(new Vector2(positionX, positionY), angle);
+            m_body.SetLinearVelocity(new Vector2(velocityX, velocityY));
+            m_body.AddForce(new Vector2(forceX, forceY));
+            m_body.SetAngularVelocity(angleVelocity);
+            m_body.AddTorque(torque);
         }
 
         #endregion
@@ -231,21 +250,9 @@ namespace GameActorLogic
 
 
 
-        public double GetSpeed()
-        {
-            return m_body.AngularVelocity;
-        }
+    
 
-        public double GetMass()
-        {
-            return m_body.Mass;
-        }
-
-        public void SetMass(double mass)
-        {
-            m_body.Mass = mass;
-        }
-
+       
         #endregion
 
         #region IPhysicalInternalBase
@@ -253,9 +260,9 @@ namespace GameActorLogic
         /// <summary>
         /// 给飞船一个与朝向相同的推力
         /// </summary>
-        public void AddThrust(float proc = 0.0000001f)
+        public void AddThrust(float pro)
         {
-            m_body.Force += m_body.Mass * m_body.Forward * /*engine.World.Gravity.Scaling * */  proc;
+            Force_copy += m_body.GetForward() * pro;
         }
 
         /// <summary>
@@ -263,31 +270,26 @@ namespace GameActorLogic
         /// 左右以正负来描述
         /// 默认0.05
         /// </summary>
-        public void AddForward(double angular)
+        public void AddForward(float angular)
         {
-            m_body.AngularVelocity = angular;
+            m_body.SetAngularVelocity(angular);
         }
 
-        public void SetForwardAngle(double angle)
-        {
-            m_body.SetForward(angle);
-        }
+       
 
         public Body GetBody()
         {
             return m_body;
         }
 
-        public Collider GetCollider()
-        {
-            return m_collider;
-        }
+
+ 
 
         #endregion
 
 
-        public event Action<Body> OnColliderEnter;
-        public event Action<Body> OnColliderStay;
-        public event Action OnColliderExit;
+        public event Action<UserData> OnColliderEnter;
+        public event Action<UserData> OnColliderStay;
+        public event Action<UserData> OnColliderExit;
     }
 }

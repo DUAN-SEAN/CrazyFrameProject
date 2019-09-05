@@ -26,6 +26,7 @@ namespace GameActorLogic
 
         protected int camp;
 
+        protected InitData initData;
 
         public InvariantAttributeComponentBase(int camp = 0,double maxSpeed  = 2,float maxForceProc = 0.0002f)
         {
@@ -70,6 +71,22 @@ namespace GameActorLogic
         public void SetCamp(int camp)
         {
             this.camp = camp;
+        }
+
+        public void CreateInitData(InitData data)
+        {
+            initData = data;
+        }
+        public void SetInitData(float x, float y, float angle)
+        {
+            initData.point_x = x;
+            initData.point_y = y;
+            initData.angle = angle;
+        }
+
+        public InitData GetInitData()
+        {
+            return initData;
         }
 
         #endregion

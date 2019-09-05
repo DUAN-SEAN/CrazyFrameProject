@@ -1,9 +1,9 @@
 ﻿
 
 using System;
-using CrazyEngine.Base;
-using CrazyEngine.Common;
-using CrazyEngine.External;
+using System.Numerics;
+using Box2DSharp.Dynamics;
+
 /*
                            _ooOoo_
                           o8888888o
@@ -105,6 +105,11 @@ namespace GameActorLogic
         }
         #region Helper
 
+        public void CreateInitData(InitData data)
+        {
+            _invariantAttributeComponent.CreateInitData(data);
+        }
+
         public void CreateBody(Body body)
         {
             _physicalBase.CreateBody(body); 
@@ -145,17 +150,35 @@ namespace GameActorLogic
 
         #region PhysicalBase
 
-        public double GetRelPositionX()
+        public void OnCollision(UserData data)
+        {
+            _physicalBase.OnCollision(data);
+        }
+
+
+        public void OnContactEnter(UserData data)
+        {
+            _physicalBase.OnContactEnter(data);
+
+        }
+
+        public void OnContactExit(UserData data)
+        {
+            _physicalBase.OnContactExit(data);
+        }
+
+
+        public float GetRelPositionX()
         {
             return _physicalBase.GetRelPositionX();
         }
 
-        public double GetRelPositionY()
+        public float GetRelPositionY()
         {
             return _physicalBase.GetRelPositionY();
         }
 
-        public void SetRelPosition(double x, double y)
+        public void SetRelPosition(float x, float y)
         {
             _physicalBase.SetRelPosition(x, y);
         }
@@ -165,64 +188,60 @@ namespace GameActorLogic
             _physicalBase.InitializePhysicalBase();
         }
 
-        public int GetBodyId()
+        public UserData GetBodyUserData()
         {
-            return ((IPhysicalBase) _physicalBase).GetBodyId();
+            return ((IPhysicalBase) _physicalBase).GetBodyUserData();
         }
 
         /// <summary>
         /// 获得位置坐标
         /// </summary>
-        public Point GetPosition()
+        public Vector2 GetPosition()
         {
             return _physicalBase.GetPosition();
         }
 
-        public Point GetPositionPrev()
-        {
-            return ((IPhysicalBase) _physicalBase).GetPositionPrev();
-        }
-
-        public double GetForwardAngle()
+      
+        public float GetForwardAngle()
         {
             return _physicalBase.GetForwardAngle();
         }
 
-        public Point GetForward()
+        public Vector2 GetForward()
         {
             return _physicalBase.GetForward();
         }
 
-        public Point GetVelocity()
+        public Vector2 GetVelocity()
         {
             return _physicalBase.GetVelocity();
         }
 
 
 
-        public double GetAngleVelocity()
+        public float GetAngleVelocity()
         {
             return _physicalBase.GetAngleVelocity();
         }
 
-        public Point GetForce()
+        public Vector2 GetForce()
         {
             return _physicalBase.GetForce();
         }
 
-        public double GetTorque()
+        public float GetTorque()
         {
             return _physicalBase.GetTorque();
         }
 
-        public void SetAngularVelocity(double vel)
+        public void SetAngularVelocity(float vel)
         {
             _physicalBase.SetAngularVelocity(vel);
         }
 
-        public void SetPhysicalValue(ulong actorId, double angleVelocity, double forceX, double forceY, double forwardAngle,
-            double positionX, double positionY, double positionPrevX, double positionPrevY, double velocityX, double velocityY,
-            double torque)
+        public void SetPhysicalValue(ulong actorId, float angleVelocity, float forceX, float forceY, float forwardAngle,
+            float positionX, float positionY, float positionPrevX, float positionPrevY, float velocityX, float velocityY,
+            float torque)
         {
             _physicalBase.SetPhysicalValue(actorId, angleVelocity, forceX, forceY, forwardAngle, positionX, positionY, positionPrevX, positionPrevY, velocityX, velocityY, torque);
         }
@@ -232,20 +251,10 @@ namespace GameActorLogic
         /// <summary>
         /// 得到当前速度
         /// </summary>
-        public double GetSpeed()
-        {
-            return _physicalBase.GetSpeed();
-        }
 
-        public double GetMass()
-        {
-            return _physicalBase.GetMass();
-        }
+     
 
-        public void SetMass(double mass)
-        {
-            _physicalBase.SetMass(mass);
-        }
+
 
         #endregion
 
@@ -254,7 +263,7 @@ namespace GameActorLogic
         /// <summary>
         /// 向左转向接口
         /// </summary>
-        public void Left(double proc)
+        public void Left(float proc)
         {
             _moveComponent.Left(proc);
         }
@@ -262,7 +271,7 @@ namespace GameActorLogic
         /// <summary>
         /// 向右转向接口
         /// </summary>
-        public void Right(double proc)
+        public void Right(float proc)
         {
             _moveComponent.Right(proc);
         }
@@ -307,7 +316,15 @@ namespace GameActorLogic
         {
             _invariantAttributeComponent.SetCamp(camp);
         }
+        public void SetInitData(float x, float y, float angle)
+        {
+            _invariantAttributeComponent.SetInitData(x, y, angle);
+        }
 
+        public InitData GetInitData()
+        {
+            return _invariantAttributeComponent.GetInitData();
+        }
         #endregion
         #endregion
 
@@ -354,7 +371,11 @@ namespace GameActorLogic
             return _physicalBase;
         }
 
-     
+      
+
+
+
+
         #endregion
 
 
