@@ -52,7 +52,7 @@ namespace GameServer
             //    Log.Debug("GC = " + i);
 
             //};
-            Stopwatch
+            //Stopwatch
             Log.Debug("GameServer is running with server GC = "+GCSettings.IsServerGC);
             //MongoDBHelper.CreateDBClient(); //测试
             //mongodb测试

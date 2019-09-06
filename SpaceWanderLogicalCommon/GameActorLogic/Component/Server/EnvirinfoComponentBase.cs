@@ -75,15 +75,15 @@ namespace GameActorLogic
                 //Log.Trace("EnvirinfoComponentBase: Actorid" + _actorList[i].GetActorID() + " 位置坐标:" + _actorList[i].GetPosition() + " 力" + _actorList[i].GetForce() + " 速度" + _actorList[i].GetVelocity() + " 转矩" + _actorList[i].GetAngleVelocity());
             }
             stopwatch.Stop();
-            if (stopwatch.ElapsedMilliseconds > 0)
-                Log.Trace("Tick _actorList:" + stopwatch.ElapsedMilliseconds);
+            //if (stopwatch.ElapsedMilliseconds > 0)
+            //    Log.Trace("Tick _actorList:" + stopwatch.ElapsedMilliseconds);
             stopwatch.Restart();
 
             m_runner.Update();
 
             stopwatch.Stop();
-            if (stopwatch.ElapsedMilliseconds > 0)
-                Log.Trace("Tick m_runner:" + stopwatch.ElapsedMilliseconds);
+            //if (stopwatch.ElapsedMilliseconds > 0)
+            //    Log.Trace("Tick m_runner:" + stopwatch.ElapsedMilliseconds);
 
         }
 

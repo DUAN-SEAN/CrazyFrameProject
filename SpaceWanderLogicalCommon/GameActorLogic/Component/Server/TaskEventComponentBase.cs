@@ -1,6 +1,7 @@
 ﻿using Crazy.Common;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -76,9 +77,12 @@ namespace GameActorLogic
             }
             task.ActivateTask();
         }
+        protected Stopwatch stopwatch = new Stopwatch();
 
         public void Update()
         {
+           
+            stopwatch.Restart();
             foreach (var taskEvent in taskEvents)
             {
                 if(taskEvent.GetTaskState() == TaskEventState.UnFinished)
@@ -88,6 +92,11 @@ namespace GameActorLogic
 
                 }
             }
+
+            stopwatch.Stop();
+
+            if (stopwatch.ElapsedMilliseconds > 0)
+                Log.Trace("Update  TaskEvent数量" + taskEvents.Count + " 时间：" + stopwatch.ElapsedMilliseconds);
         }
 
         public void StartTaskEvents()

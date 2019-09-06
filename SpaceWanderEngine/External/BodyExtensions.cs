@@ -182,6 +182,85 @@ namespace Box2DSharp.External
         {
             body.AngularVelocity = angularVelocity;
         }
+        /// <summary>
+        /// 获取各个飞船的质量
+        /// </summary>
+        /// <param name="gameModel"></param>
+        /// <returns></returns>
+        public static float GetSpaceWanderMass(GameModel gameModel)
+        {
+            switch (gameModel)
+            {
+                case GameModel.WaspShip:
+                    {
+                        return 75.3f;
+                    }
+                case GameModel.FighterShipA:
+                    {
+                        return 81.25f;
+                    }
+                case GameModel.FighterShipB:
+                    {
+                        return 63f;
+                    }
+                //case GameModel.DroneShip:
+                //    {
+                //        return CreateDroneShipBody(position, angle, userData);
+                //    }
+                //case GameModel.AnnihilationShip:
+                //    {
+                //        return CreateAnnihilationShipBody(position, angle, userData);
+                //    }
+                //case GameModel.EliteShipA:
+                //    {
+                //        return CreateEliteShipABody(position, angle, userData);
+                //    }
+                //case GameModel.EliteShipB:
+                //    {
+                //        return CreateEliteShipBBody(position, angle, userData);
+                //    }
+                //case GameModel.BaseStation:
+                //    {
+                //        return CreateBaseStationBody(position, angle, userData);
+                //    }
+                case GameModel.MachineGun:
+                    {
+                        return 0.3f;
+                    }
+                //case GameModel.AntiAircraftGun:
+                //    {
+                //        return CreateAntiAircraftGunBody(position, angle, userData);
+                //    }
+                //case GameModel.Torpedo:
+                //    {
+                //        return CreateTorpedoBody(position, angle, userData);
+                //    }
+                //case GameModel.TrackingMissile:
+                //    {
+                //        return CreateTrackingMissileBody(position, angle, userData);
+                //    }
+                //case GameModel.ContinuousLaser:
+                //    {
+                //        return CreateContinuousLaserBody(position, angle, userData);
+                //    }
+                //case GameModel.PowerLaser:
+                //    {
+                //        return CreatePowerLaserBody(position, angle, userData);
+                //    }
+                //case GameModel.TimeBomb:
+                //    {
+                //        return CreateTimeBombBody(position, angle, userData);
+                //    }
+                //case GameModel.TriggerBomb:
+                //    {
+                //        return CreateTriggerBomb(position, angle, userData);
+                //    }
+                default:
+                    {
+                        return 1;
+                    }
+            }
+        }
 
         #endregion
     }
