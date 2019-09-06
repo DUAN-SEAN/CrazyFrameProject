@@ -131,8 +131,10 @@ namespace GameActorLogic
             IBaseComponentContainer container = actor as IBaseComponentContainer;
             var init = container.GetInitData();
             //TODO 添加进世界
-            actor.CreateBody(factory.CreateRectangleBody(init.point_x, init.point_y, 10, 10));
-            //Log.Trace("actor id" + actor.GetActorID() + " "+actor.GetBodyUserData());
+            //actor.CreateBody(factory.CreateRectangleBody(init.point_x, init.point_y, 10, 10));
+
+            actor.CreateBody(factory.CreateSpaceWonderBody(new Vector2(init.point_x, init.point_y), init.angle, actor.GetGameModelByActorType(), new UserData(actor.GetActorID(), actor.GetActorType())));
+            Log.Trace("actor id" + actor.GetActorID() + " 生成一个Actor Position:" + actor.GetPosition() + " Forward:" + actor.GetForward());
 
             _actorList.Add(actor);
         }

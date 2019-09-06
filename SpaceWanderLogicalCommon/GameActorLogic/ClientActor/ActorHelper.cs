@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Box2DSharp.External;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -106,6 +107,68 @@ namespace GameActorLogic
             }
             return false;
 
+        }
+
+        /// <summary>
+        /// 将Actor类型转换成游戏模型类型
+        /// </summary>
+        public static GameModel GetGameModelByActorType(this ActorBase actor)
+        {
+
+            switch (actor.GetActorType())
+            {
+                case ActorTypeBaseDefine.ActorNone:
+                    return GameModel.ModelNone;
+                case ActorTypeBaseDefine.AnnihilationShipActor:
+                    return GameModel.AnnihilationShip;
+                case ActorTypeBaseDefine.AntiAircraftGunActor:
+                    return GameModel.AntiAircraftGun;
+                case ActorTypeBaseDefine.BaseStation:
+                    return GameModel.BaseStation;
+                case ActorTypeBaseDefine.ContinuousLaserActor:
+                    return GameModel.ContinuousLaser;
+                case ActorTypeBaseDefine.DroneShipActor:
+                    return GameModel.DroneShip;
+                case ActorTypeBaseDefine.EliteShipActorA:
+                    return GameModel.EliteShipA;
+                case ActorTypeBaseDefine.EliteShipActorB:
+                    return GameModel.EliteShipB;
+                case ActorTypeBaseDefine.FighterShipActorA:
+                    return GameModel.FighterShipA;
+                case ActorTypeBaseDefine.FighterShipActorB:
+                    return GameModel.FighterShipB;
+                case ActorTypeBaseDefine.GainNone:
+                    return GameModel.ModelNone;
+                case ActorTypeBaseDefine.MachineGunActor:
+                    return GameModel.MachineGun;
+                case ActorTypeBaseDefine.PlayerShipActor:
+                    return GameModel.ModelNone;
+                case ActorTypeBaseDefine.PowerLaserActor:
+                    return GameModel.PowerLaser;
+                case ActorTypeBaseDefine.PropNone:
+                    return GameModel.ModelNone;
+                case ActorTypeBaseDefine.RecoveryNone:
+                    return GameModel.ModelNone;
+                case ActorTypeBaseDefine.ShipActorNone:
+                    return GameModel.ModelNone;
+                case ActorTypeBaseDefine.SummonNone:
+                    return GameModel.ModelNone;
+                case ActorTypeBaseDefine.TimeBombActor:
+                    return GameModel.TimeBomb;
+                case ActorTypeBaseDefine.TorpedoActor:
+                    return GameModel.Torpedo;
+                case ActorTypeBaseDefine.TrackingMissileActor:
+                    return GameModel.TrackingMissile;
+                case ActorTypeBaseDefine.TriggerBombActor:
+                    return GameModel.TriggerBomb;
+                case ActorTypeBaseDefine.WaspShipActorA:
+                    return GameModel.WaspShip;
+                case ActorTypeBaseDefine.WeaponNone:
+                    return GameModel.ModelNone;
+            }
+
+
+            return GameModel.ModelNone;
         }
     }
 }
