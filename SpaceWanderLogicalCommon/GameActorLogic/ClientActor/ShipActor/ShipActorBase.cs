@@ -47,21 +47,25 @@ namespace GameActorLogic
             {
                 return;
             }
-            Log.Trace("船受到碰撞" + body.ActorID);
+            //Log.Trace("船受到碰撞" + body.ActorID);
             var actor = level.GetEnvirinfointernalBase().GetActor(body.ActorID);
             if(actor == null) return;
-            Log.Trace("船受到碰撞" + actor.GetActorID() + "阵营" + actor.GetCamp());
-            if (actor.GetCamp() == GetCamp()) return; 
-            Log.Trace("船被攻击类型" + actor.GetType() + actor.GetActorType());
+            //Log.Trace("船受到碰撞" + actor.GetActorID() + "阵营" + actor.GetCamp());
+            if (actor.GetCamp() == GetCamp()) return;
+
+            if (GetDeadState() == true) return;
+            //Log.Trace("船被攻击类型" + actor.GetType() + actor.GetActorType());
+
+
             if (actor is WeaponActorBase weapon)
             {
-                Log.Trace("船受到武器碰撞" + weapon.GetActorID() + " 伤害" + weapon.GetWeaponDamage());
+                //Log.Trace("船受到武器碰撞" + weapon.GetActorID() + " 伤害" + weapon.GetWeaponDamage());
                 _healthShieldComponent.LossBlood(weapon.GetWeaponDamage());
             }
 
             if (actor is ShipActorBase ship)
             {
-                Log.Trace("船受到船碰撞" + actor.GetActorID());
+                //Log.Trace("船受到船碰撞" + actor.GetActorID());
                 _healthShieldComponent.LossBlood(1);
             }
         }
@@ -320,6 +324,7 @@ namespace GameActorLogic
         public void Destroy()
         {
             //Log.Trace("销毁船："+ActorID);
+            SetDeadState(true);
             level.AddEventMessagesToHandlerForward(new DestroyEventMessage(ActorID));
             _shipEventComponent.Destroy();
         }

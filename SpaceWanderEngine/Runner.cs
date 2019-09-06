@@ -38,13 +38,15 @@ namespace SpaceWanderEngine
                 Log.Trace(_body.Transform.ToString());
             }
         }
-        
+
+        protected Stopwatch stopwatch = new Stopwatch();
         public void Update()
         {
-            
+            //Log.Trace("Update 时间：" +stopwatch.Elapsed);
+            stopwatch.Restart();
             _fiexdFixedUpdate?.Update();
             _world.ClearForces();
-
+            stopwatch.Stop();
         }
 
         private void Test()

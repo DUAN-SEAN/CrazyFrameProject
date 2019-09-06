@@ -28,6 +28,8 @@ namespace GameActorLogic
 
         protected InitData initData;
 
+        protected bool isDead;
+
         public InvariantAttributeComponentBase(int camp = 0,double maxSpeed  = 2,float maxForceProc = 0.0002f)
         {
             this.maxSpeed = maxSpeed;
@@ -88,6 +90,16 @@ namespace GameActorLogic
         public InitData GetInitData()
         {
             return initData;
+        }
+
+        public bool GetDeadState()
+        {
+            return isDead;
+        }
+
+        public void SetDeadState(bool dead)
+        {
+            isDead = dead;
         }
 
         #endregion

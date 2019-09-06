@@ -372,7 +372,17 @@ namespace GameActorLogic
             return _physicalBase;
         }
 
-      
+        public bool GetDeadState()
+        {
+            return _invariantAttributeComponent.GetDeadState();
+        }
+
+        public void SetDeadState(bool dead)
+        {
+            _invariantAttributeComponent.SetDeadState(dead);
+        }
+
+
 
 
 

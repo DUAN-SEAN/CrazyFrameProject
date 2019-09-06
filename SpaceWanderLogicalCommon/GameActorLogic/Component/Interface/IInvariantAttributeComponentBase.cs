@@ -42,6 +42,16 @@ namespace GameActorLogic
         /// 获取生成数据
         /// </summary>
         InitData GetInitData();
+
+        /// <summary>
+        /// 获取死亡信息
+        /// </summary>
+        bool GetDeadState();
+
+        /// <summary>
+        /// 设置死亡信息
+        /// </summary>
+        void SetDeadState(bool dead);
     }
 
     public interface IInvariantAttributeInternalBase : IInvariantAttributeBase

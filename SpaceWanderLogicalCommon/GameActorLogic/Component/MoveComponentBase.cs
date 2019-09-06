@@ -63,9 +63,9 @@ namespace GameActorLogic
             var o = Vector2.DistanceSquared(new Vector2(0, 0), point)/1f;
             
             
-            physical?.AddThrust(1000f* o);
+            physical?.AddThrust(500* o);
 
-            physical?.GetBody().MoveForward(point);
+            physical?.GetBody().MoveForward(point,2);
 
             
 

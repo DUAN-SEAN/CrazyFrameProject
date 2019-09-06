@@ -4,6 +4,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Box2DSharp.Common;
 using Box2DSharp.Dynamics;
 using Box2DSharp.External;
 using Crazy.Common;
@@ -138,7 +139,14 @@ namespace GameActorLogic
             Torque_copy = m_body.GetTorque();
             isColliderMethodEnter = false;
             //Force_copy = m_body.GetForce();
+            //if(Force_copy.LengthSquared() > 1000000)
+            //{
+            //    Force_copy.Normalize();
+            //    Force_copy = Force_copy * 31.62277660168379f;
+            //}
+           
             Force_copy_copy = Force_copy;
+            
             m_body.AddForce(Force_copy);
             //Log.Trace("已经添加力量:" + m_body.GetForce()+" "+Force_copy);
             //Log.Trace("Update Mass" + m_body.Mass);

@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -61,20 +62,28 @@ namespace GameActorLogic
 
         }
 
+        protected Stopwatch stopwatch = new Stopwatch();
         /// <summary>
         /// 对物理引擎和Actor对象的逻辑进行Tick
         /// </summary>
         public void Tick()
         {
-            
+            stopwatch.Restart();
             for (int i = 0; i < _actorList.Count; i++)
             {
                 _actorList[i].Update();
-                //Log.Trace("EnvirinfoComponentBase: Actorid" + _actorList[i].GetActorID() + " 位置坐标:" +_actorList[i].GetPosition() + " 力" + _actorList[i].GetForce() + " 速度" + _actorList[i].GetVelocity() + " 转矩" + _actorList[i].GetAngleVelocity());
+                //Log.Trace("EnvirinfoComponentBase: Actorid" + _actorList[i].GetActorID() + " 位置坐标:" + _actorList[i].GetPosition() + " 力" + _actorList[i].GetForce() + " 速度" + _actorList[i].GetVelocity() + " 转矩" + _actorList[i].GetAngleVelocity());
             }
+            stopwatch.Stop();
+            if (stopwatch.ElapsedMilliseconds > 0)
+                Log.Trace("Tick _actorList:" + stopwatch.ElapsedMilliseconds);
+            stopwatch.Restart();
 
             m_runner.Update();
-           
+
+            stopwatch.Stop();
+            if (stopwatch.ElapsedMilliseconds > 0)
+                Log.Trace("Tick m_runner:" + stopwatch.ElapsedMilliseconds);
 
         }
 
@@ -134,7 +143,7 @@ namespace GameActorLogic
             //actor.CreateBody(factory.CreateRectangleBody(init.point_x, init.point_y, 10, 10));
 
             actor.CreateBody(factory.CreateSpaceWonderBody(new Vector2(init.point_x, init.point_y), init.angle, actor.GetGameModelByActorType(), new UserData(actor.GetActorID(), actor.GetActorType())));
-            Log.Trace("actor id" + actor.GetActorID() + " 生成一个Actor Position:" + actor.GetPosition() + " Forward:" + actor.GetForward());
+            //Log.Trace("actor id" + actor.GetActorID() + " 生成一个Actor Position:" + actor.GetPosition() + " Forward:" + actor.GetForward());
 
             _actorList.Add(actor);
         }

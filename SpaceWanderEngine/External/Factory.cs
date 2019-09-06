@@ -13,9 +13,9 @@ namespace Box2DSharp.External
         /// </summary>
         public World world;
 
-        public Factory(World world)
+        public Factory(World world1)
         {
-            this.world = world;
+            world = world1;
         }
 
         #region BodyDef
@@ -128,14 +128,13 @@ namespace Box2DSharp.External
         /// </summary>
         /// <param name="bodyShape"></param>
         /// <returns></returns>
-        internal FixtureDef CreateShipFixtureDef(Shape bodyShape, object userData)
+        internal FixtureDef CreateShipFixtureDef(Shape bodyShape)
         {
             var fixtureDef = new FixtureDef
             {
                 Shape = bodyShape,
                 Density = 1.0f,
                 Friction = 0.3f,
-                UserData = userData
             };
             return fixtureDef;
         }
@@ -145,14 +144,13 @@ namespace Box2DSharp.External
         /// </summary>
         /// <param name="bodyShape"></param>
         /// <returns></returns>
-        internal FixtureDef CreateBulletFixtureDef(Shape bodyShape, object userData)
+        internal FixtureDef CreateBulletFixtureDef(Shape bodyShape)
         {
             var fixtureDef = new FixtureDef
             {
                 Shape = bodyShape,
                 Density = 1.0f,
                 Friction = 0.1f,
-                UserData = userData,
                 IsSensor = true
             };
             return fixtureDef;
@@ -163,14 +161,13 @@ namespace Box2DSharp.External
         /// </summary>
         /// <param name="bodyShape"></param>
         /// <returns></returns>
-        internal FixtureDef CreateMissileFixtureDef(Shape bodyShape, object userData)
+        internal FixtureDef CreateMissileFixtureDef(Shape bodyShape)
         {
             var fixtureDef = new FixtureDef
             {
                 Shape = bodyShape,
                 Density = 1.0f,
                 Friction = 0.1f,
-                UserData = userData,
                 IsSensor = true
             };
             return fixtureDef;
@@ -250,7 +247,7 @@ namespace Box2DSharp.External
                     }
                 default:
                     {
-                        return CreateRectangleBody(0,0,1,1,BodyType.StaticBody);
+                        return CreateRectangleBody(0, 0, 1, 1, BodyType.StaticBody);
                     }
             }
         }
@@ -302,13 +299,11 @@ namespace Box2DSharp.External
             var bodyDef = CreateBodyDef(position.X, position.Y, angle);
             var body = world.CreateBody(bodyDef);
             var bodyShape = CreateRectangleShape(0.3f, 1);
-            var fd1 = CreateBulletFixtureDef(bodyShape, userData);
+            var fd1 = CreateBulletFixtureDef(bodyShape);
             body.CreateFixture(fd1);
             body.UserData = userData;
-
             return body;
         }
-
 
         private Body CreateBaseStationBody(Vector2 position, float angle, object userData)
         {
@@ -371,9 +366,9 @@ namespace Box2DSharp.External
             vertices2[3].Set(1f, 2.5f);
             bodyShape3.Set(vertices2);
 
-            var fd1 = CreateShipFixtureDef(bodyShape, userData);
-            var fd2 = CreateShipFixtureDef(bodyShape2, userData);
-            var fd3 = CreateShipFixtureDef(bodyShape3, userData);
+            var fd1 = CreateShipFixtureDef(bodyShape);
+            var fd2 = CreateShipFixtureDef(bodyShape2);
+            var fd3 = CreateShipFixtureDef(bodyShape3);
 
             body.CreateFixture(fd1);
             body.CreateFixture(fd2);
@@ -411,9 +406,9 @@ namespace Box2DSharp.External
             vertices2[3].Set(1.5f, 3.25f);
             bodyShape3.Set(vertices2);
 
-            var fd1 = CreateShipFixtureDef(bodyShape, userData);
-            var fd2 = CreateShipFixtureDef(bodyShape2, userData);
-            var fd3 = CreateShipFixtureDef(bodyShape3, userData);
+            var fd1 = CreateShipFixtureDef(bodyShape);
+            var fd2 = CreateShipFixtureDef(bodyShape2);
+            var fd3 = CreateShipFixtureDef(bodyShape3);
 
             body.CreateFixture(fd1);
             body.CreateFixture(fd2);
@@ -452,15 +447,15 @@ namespace Box2DSharp.External
             vertices[2].Set(8, 4.25f);
             bodyShape4.Set(vertices);
 
-            var fd1 = CreateShipFixtureDef(bodyShape, userData);
-            var fd2 = CreateShipFixtureDef(bodyShape2, userData);
-            var fd3 = CreateShipFixtureDef(bodyShape3, userData);
-            var fd4 = CreateShipFixtureDef(bodyShape4, userData);
+            var fd1 = CreateShipFixtureDef(bodyShape);
+            var fd2 = CreateShipFixtureDef(bodyShape2);
+            var fd3 = CreateShipFixtureDef(bodyShape3);
+            var fd4 = CreateShipFixtureDef(bodyShape4);
             body.CreateFixture(fd1);
             body.CreateFixture(fd2);
             body.CreateFixture(fd3);
             body.CreateFixture(fd4);
-            body.UserData    = userData;
+            body.UserData = userData;
             return body;
         }
 

@@ -41,11 +41,16 @@ namespace Box2DSharp.External
         /// <param name="body"></param>
         /// <param name="targetPoint"></param>
         /// <returns></returns>
-        public static bool FollowTarget(this Body body, Vector2 targetPoint)
+        public static bool FollowTarget(this Body body, Vector2 targetPoint, float force, float angularVelocityProc)
         {
-            return  FowardToTarget(body, targetPoint);
+            var cos = FowardToTarget(body, targetPoint, angularVelocityProc);
 
-            
+            if (cos > 0.8)
+            {
+                body.AddForce(body.GetForward() * force);
+            }
+
+            return cos > 0.98;
         }
 
         /// <summary>
@@ -53,47 +58,43 @@ namespace Box2DSharp.External
         /// </summary>
         /// <param name="body"></param>
         /// <param name="targetPoint"></param>
+        /// <param name="angularVelocityProc">角速度系数(0.1 - 1)</param>
         /// <returns></returns>
-        public static bool FowardToTarget(this Body body, Vector2 targetPoint)
+        public static float FowardToTarget(this Body body, Vector2 targetPoint, float angularVelocityProc)
         {
-
-            if (Vector2.DistanceSquared(body.GetPosition(), targetPoint) < double.Epsilon) return false;
+            if (Vector2.DistanceSquared(body.GetPosition(), targetPoint) < double.Epsilon) return 0;
 
             Vector2 tmp = targetPoint - body.GetPosition();
             bool isClockwise = MathUtils.Cross(tmp, body.GetForward()) > 0;
             float cos = CrazyUtils.IncludedAngleCos(tmp, body.GetForward());
 
-            if (cos > 0.95f)
-            {
-                body.ApplyAngularImpulse(-body.AngularVelocity * body.Inertia, true);
-                return false;
-            }
 
-            
+            body.ApplyAngularImpulse(-body.AngularVelocity * body.Inertia, true);
+            if (cos > 0.98f)
+            {
+                //body.SetTransform(body.GetPosition(), (float)Math.Atan2(tmp.Y, tmp.X));
+                return cos;
+            }
 
             if (isClockwise)
             {
-                body.ApplyAngularImpulse(-body.AngularVelocity * body.Inertia, true);
-                body.ApplyAngularImpulse(-2f * body.Inertia, true);
-                //body.SetAngularVelocity(-2);
+                body.ApplyAngularImpulse(-angularVelocityProc * body.Inertia, true);
             }
             else
             {
-                body.ApplyAngularImpulse(-body.AngularVelocity * body.Inertia, true);
-                body.ApplyAngularImpulse(2f* body.Inertia, true);
-                //body.SetAngularVelocity(2);
+                body.ApplyAngularImpulse(angularVelocityProc * body.Inertia, true);
             }
-            //Log.Trace(cos + ":cos target:  " + (targetPoint - body.GetPosition()).ToString());
 
-            return true;
+            return cos;
         }
 
-        public static bool MoveForward(this Body body, Vector2 targetPoint)
+        public static float MoveForward(this Body body, Vector2 targetPoint, float angularVelocityProc)
         {
             targetPoint.Normalize();
-            
-            return FowardToTarget(body, targetPoint + body.GetPosition());
+            return FowardToTarget(body, targetPoint + body.GetPosition(), angularVelocityProc);
         }
+
+
 
         /// <summary>
         /// 距离检测

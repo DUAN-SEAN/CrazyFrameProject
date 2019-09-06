@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -206,20 +207,31 @@ namespace GameActorLogic
             OnStartDone?.Invoke();
         }
 
+        protected Stopwatch stopwatch = new Stopwatch();
+
         public virtual void Update()
         {
             if(isStart == false) return;
-
+            Currentframe++;
+            if(stopwatch.ElapsedMilliseconds >0)
+            Log.Trace(Currentframe + "Update _handlerComponent 时间："+ stopwatch.ElapsedMilliseconds);
+            stopwatch.Restart();
             //Log.Trace("Update GOGOGOGOGO");
 
-            Currentframe++;
 
             _handlerComponent.Update();
+            stopwatch.Stop();
 
+            if(stopwatch.ElapsedMilliseconds >0)
+            Log.Trace(Currentframe + "Update _envirinfoComponent 时间：" + stopwatch.ElapsedMilliseconds);
+            stopwatch.Restart();
             _envirinfoComponent.Tick();
-
+            stopwatch.Stop();
+            if(stopwatch.ElapsedMilliseconds >0)
+            Log.Trace(Currentframe + "Update _taskEventComponent 时间：" + stopwatch.ElapsedMilliseconds);
+            stopwatch.Restart();
             _taskEventComponent.Update();
-           
+            stopwatch.Stop();
         }
 
         public void Dispose()
