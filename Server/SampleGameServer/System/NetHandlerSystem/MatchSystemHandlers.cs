@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Crazy.ServerBase;
 
 namespace GameServer.System.NetHandlerSystem
 {
@@ -107,7 +108,7 @@ namespace GameServer.System.NetHandlerSystem
         {
             GameServerPlayerContext context = playerContext as GameServerPlayerContext;
 
-            
+            GameServer.Instance.PlayerCtxManager.SendSingleLocalMessage(new SystemSendNetMessage{ PlayerId = message.AimPlayerId,Message = new S2C_InvitePlayerMatchTeam{ LaunchPlayerId = message.LaunchPlayerId,MatchTeamId = message.MatchTeamId}}, message.AimPlayerId);
         }
     }
 }

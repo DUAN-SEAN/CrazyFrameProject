@@ -40,6 +40,7 @@ namespace GameServer.Battle
         {
 
             Log.Trace("OnGameVictory");
+            m_netHandler?.OnReleaseBattle(Id);
 
         }
 
@@ -47,7 +48,7 @@ namespace GameServer.Battle
         {
 
             Log.Trace("OnGameFail");
-
+            m_netHandler?.OnReleaseBattle(Id);
         }
 
         /// <summary>

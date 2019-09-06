@@ -207,7 +207,11 @@ namespace GameServer.Battle
                 Log.Error("OnReleaseBattle Find Null");
                 return;
             }
+            //玩家大于0 说明战斗是正常结束，则计算反给客户端玩家退出战斗
+            if (battleEntity.Players.Count > 0)
+            {
 
+            }
             var timerId = battleEntity.GetTimerId();
             lock (battleEntity)
             {
