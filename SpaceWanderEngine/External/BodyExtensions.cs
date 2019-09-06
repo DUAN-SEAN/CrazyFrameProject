@@ -62,7 +62,7 @@ namespace Box2DSharp.External
             bool isClockwise = MathUtils.Cross(tmp, body.GetForward()) > 0;
             float cos = CrazyUtils.IncludedAngleCos(tmp, body.GetForward());
 
-            if (Math.Abs(cos) > 0.98f)
+            if (cos > 0.9f)
             {
                 body.ApplyAngularImpulse(-body.AngularVelocity * body.Inertia, true);
                 return false;

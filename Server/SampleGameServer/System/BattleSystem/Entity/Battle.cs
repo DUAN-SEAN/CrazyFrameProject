@@ -132,7 +132,10 @@ namespace GameServer.Battle
             //2 驱动物理引擎
             if (m_level == null)
                 return;
-            m_level.Update();
+            lock (m_level)
+            {
+                m_level?.Update();
+            }
 
 
         }
