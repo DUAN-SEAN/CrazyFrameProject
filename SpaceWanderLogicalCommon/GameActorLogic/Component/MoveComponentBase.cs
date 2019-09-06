@@ -56,19 +56,14 @@ namespace GameActorLogic
             if (physical?.GetBody() == null) return;
             //Log.Trace("Remote 操作值"+x+" "+y);
 
-
             var point = new Vector2(x, y);
 
-            Vector2 forward = physical.GetBody().GetForward();
-
             //算出力的大小
-            var cos = CrazyUtils.IncludedAngleCos(point, forward);
-            float angle = (float)Math.Acos(cos);
-            float anglepro = (float) (angle / Math.PI);
-            float forcepro = (float)Vector2.DistanceSquared(Vector2.Zero, point);
 
-
-            physical?.AddThrust(100f* 5  * anglepro * forcepro);
+            var o = Vector2.DistanceSquared(new Vector2(0, 0), point)/1f;
+            
+            
+            physical?.AddThrust(1000f* o);
 
             physical?.GetBody().MoveForward(point);
 

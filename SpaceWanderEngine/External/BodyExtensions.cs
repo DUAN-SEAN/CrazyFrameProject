@@ -70,15 +70,15 @@ namespace Box2DSharp.External
 
             if (isClockwise)
             {
-                body.ApplyAngularImpulse(-0.1f * body.Inertia, true);
+                body.ApplyAngularImpulse(-0.5f * body.Inertia, true);
                 //body.SetAngularVelocity(-2);
             }
             else
             {
-                body.ApplyAngularImpulse(0.1f* body.Inertia, true);
+                body.ApplyAngularImpulse(0.5f* body.Inertia, true);
                 //body.SetAngularVelocity(2);
             }
-            Log.Trace(cos + ":cos target:  " + (targetPoint - body.GetPosition()).ToString());
+            //Log.Trace(cos + ":cos target:  " + (targetPoint - body.GetPosition()).ToString());
 
             return true;
         }
