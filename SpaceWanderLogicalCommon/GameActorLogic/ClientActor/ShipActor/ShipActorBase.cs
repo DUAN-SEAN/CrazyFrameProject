@@ -43,27 +43,35 @@ namespace GameActorLogic
 
         protected void Collider(UserData body)
         {
-            //Log.Trace("船受到碰撞" + body.Id);
+            if(body == null)
+            {
+                return;
+            }
+            Log.Trace("船受到碰撞" + body.ActorID);
             var actor = level.GetEnvirinfointernalBase().GetActor(body.ActorID);
             if(actor == null) return;
-            //Log.Trace("船受到碰撞" + actor.GetActorID() + "阵营" + actor.GetCamp());
-            if (actor.GetCamp() == GetCamp()) return;
-            //Log.Trace("船被攻击类型" + actor.GetType() + actor.GetActorType());
+            Log.Trace("船受到碰撞" + actor.GetActorID() + "阵营" + actor.GetCamp());
+            if (actor.GetCamp() == GetCamp()) return; 
+            Log.Trace("船被攻击类型" + actor.GetType() + actor.GetActorType());
             if (actor is WeaponActorBase weapon)
             {
-                //Log.Trace("船受到武器碰撞" + weapon.GetActorID() +" 伤害"+weapon.GetWeaponDamage());
+                Log.Trace("船受到武器碰撞" + weapon.GetActorID() + " 伤害" + weapon.GetWeaponDamage());
                 _healthShieldComponent.LossBlood(weapon.GetWeaponDamage());
             }
 
             if (actor is ShipActorBase ship)
             {
-                //Log.Trace("船受到船碰撞" + actor.GetActorID());
+                Log.Trace("船受到船碰撞" + actor.GetActorID());
                 _healthShieldComponent.LossBlood(1);
             }
         }
 
         protected void ColliderStay(UserData body)
         {
+            if (body == null)
+            {
+                return;
+            }
             if (body.ActorType != ActorTypeBaseDefine.ContinuousLaserActor) return;
             //Log.Trace("船受到碰撞" + body.Id);
             var actor = level.GetEnvirinfointernalBase().GetActor(body.ActorID);

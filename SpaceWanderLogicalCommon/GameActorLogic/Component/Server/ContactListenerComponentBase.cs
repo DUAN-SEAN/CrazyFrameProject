@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Box2DSharp.Collision.Collider;
 using Box2DSharp.Dynamics.Contacts;
+using Crazy.Common;
 
 namespace GameActorLogic
 {
@@ -14,13 +15,15 @@ namespace GameActorLogic
         public ContactListenerComponentBase(IEnvirinfoInternalBase envir)
         {
             this.envir = envir;
+            envir.SetContactListener(this);
         }
 
         public void BeginContact(Contact contact)
         {
+            Log.Trace("BeginContact contact" + contact);
             UserData userdateA = contact.FixtureA.Body.UserData as UserData;
             UserData userdateB = contact.FixtureB.Body.UserData as UserData;
-
+            Log.Trace("BeginContact UserDataA:" + userdateA + "    UserDataB" + userdateB);
             if(userdateA != null)
             {
                 var actor = envir.GetActor(userdateA.ActorID);
@@ -28,7 +31,7 @@ namespace GameActorLogic
             }
             if (userdateB != null)
             {
-                var actor = envir.GetActor(userdateA.ActorID);
+                var actor = envir.GetActor(userdateB.ActorID);
                 actor.OnContactEnter(userdateA);
             }
 
@@ -36,8 +39,11 @@ namespace GameActorLogic
 
         public void EndContact(Contact contact)
         {
+            Log.Trace("EndContact contact" + contact);
+
             UserData userdateA = contact.FixtureA.Body.UserData as UserData;
             UserData userdateB = contact.FixtureB.Body.UserData as UserData;
+            Log.Trace("EndContact UserDataA:" + userdateA + "    UserDataB" + userdateB);
 
             if (userdateA != null)
             {
@@ -46,7 +52,7 @@ namespace GameActorLogic
             }
             if (userdateB != null)
             {
-                var actor = envir.GetActor(userdateA.ActorID);
+                var actor = envir.GetActor(userdateB.ActorID);
                 actor.OnContactExit(userdateA);
             }
         }

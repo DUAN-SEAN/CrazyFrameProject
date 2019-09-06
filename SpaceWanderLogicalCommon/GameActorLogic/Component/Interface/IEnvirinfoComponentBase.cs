@@ -1,4 +1,5 @@
-﻿using Box2DSharp.External;
+﻿using Box2DSharp.Dynamics;
+using Box2DSharp.External;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,6 +74,8 @@ namespace GameActorLogic
         void AddActor(ActorBase actor);
 
         void RemoveActor(ActorBase actor);
+
+        void SetContactListener(IContactListener contactListener);
 
     }
 

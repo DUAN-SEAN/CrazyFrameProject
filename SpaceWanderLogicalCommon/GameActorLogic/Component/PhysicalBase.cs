@@ -122,7 +122,7 @@ namespace GameActorLogic
             if (isColliderStay == true && isColliderMethodEnter == false)
             {
                 isColliderStay = false;
-                OnColliderExit.Invoke(null);
+                OnColliderExit?.Invoke(null);
             }
 
             //新版物理碰撞
@@ -130,7 +130,7 @@ namespace GameActorLogic
             {
                 foreach(var i in contactActors)
                     //持续伤害
-                    OnColliderStay.Invoke(i);
+                    OnColliderStay?.Invoke(i);
             }
             //附上值
             angleVelocity_copy = m_body.AngularVelocity;
