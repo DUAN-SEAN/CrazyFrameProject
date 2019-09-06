@@ -78,7 +78,7 @@ namespace GameActorLogic
                     var body = container.GetPhysicalinternalBase().GetBody();
 
                     //自动转向接口
-                    if (body.FowardToTarget(list[0].GetPosition()) > 0)
+                    if (body.FowardToTarget(list[0].GetPosition()) )
                     {
                         //攻击
                         container.GetFireControlinternalBase().FireAI(0);
