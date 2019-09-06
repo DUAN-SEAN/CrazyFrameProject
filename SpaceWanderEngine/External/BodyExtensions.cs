@@ -41,16 +41,11 @@ namespace Box2DSharp.External
         /// <param name="body"></param>
         /// <param name="targetPoint"></param>
         /// <returns></returns>
-        public static float FollowTarget(this Body body, Vector2 targetPoint)
+        public static bool FollowTarget(this Body body, Vector2 targetPoint)
         {
-            var cos = FowardToTarget(body, targetPoint);
+            return  FowardToTarget(body, targetPoint);
 
-            //if(cos > 0.8)
-            //{
-            //    //TODO 加速
-            //}
-
-            return 0;
+            
         }
 
         /// <summary>
@@ -67,9 +62,32 @@ namespace Box2DSharp.External
             bool isClockwise = MathUtils.Cross(tmp, body.GetForward()) > 0;
             float cos = CrazyUtils.IncludedAngleCos(tmp, body.GetForward());
 
-            //body.ApplyTorque
+            if (Math.Abs(cos) > 0.98f)
+            {
+                body.ApplyAngularImpulse(-body.AngularVelocity * body.Inertia, true);
+                return false;
+            }
 
-            return cos > 0;
+            if (isClockwise)
+            {
+                body.ApplyAngularImpulse(-0.1f * body.Inertia, true);
+                //body.SetAngularVelocity(-2);
+            }
+            else
+            {
+                body.ApplyAngularImpulse(0.1f* body.Inertia, true);
+                //body.SetAngularVelocity(2);
+            }
+            Log.Trace(cos + ":cos target:  " + (targetPoint - body.GetPosition()).ToString());
+
+            return true;
+        }
+
+        public static bool MoveForward(this Body body, Vector2 targetPoint)
+        {
+            targetPoint.Normalize();
+            
+            return FowardToTarget(body, targetPoint + body.GetPosition());
         }
 
         /// <summary>
@@ -83,6 +101,11 @@ namespace Box2DSharp.External
         {
             return Vector2.DistanceSquared(body.GetPosition(), point) <= distance * distance;
         }
+
+
+
+        #region  物体属性
+
 
         /// <summary>
         /// 物体的朝向
@@ -121,7 +144,6 @@ namespace Box2DSharp.External
         /// <param name="force"></param>
         public static void AddForce(this Body body, Vector2 force)
         {
-            //Log.Trace("Add" + force);
             body.ApplyForceToCenter(force, true);
         }
 
@@ -155,7 +177,7 @@ namespace Box2DSharp.External
             body.AngularVelocity = angularVelocity;
         }
 
-
+        #endregion
     }
 
     public struct tempBody
