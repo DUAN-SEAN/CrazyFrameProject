@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Runtime;
@@ -51,7 +52,7 @@ namespace GameServer
             //    Log.Debug("GC = " + i);
 
             //};
-
+            Stopwatch
             Log.Debug("GameServer is running with server GC = "+GCSettings.IsServerGC);
             //MongoDBHelper.CreateDBClient(); //测试
             //mongodb测试

@@ -28,6 +28,7 @@ namespace GameServer
         public override void Start()
         {
             base.Start();//初始化本地消息队列
+            Task.Delay()
         }
 
 
@@ -488,13 +489,11 @@ namespace GameServer
                 {
                     flag = false;
                     Log.Error("找不到id对应的队伍 匹配出错");
-                    return;
                 }
                 if (team.State != MatchTeam.MatchTeamState.Matching)
                 {
                     flag = false;
                     Log.Error("队伍状态错误 匹配出错");
-                    return;
                 }
             }
             if (!flag)
