@@ -56,16 +56,20 @@ namespace GameActorLogic
         protected void Collider(UserData body)
         {
             //Log.Trace("武器碰撞");
-
+            if(body == null)
+            {
+                DestroySkill();
+                return;
+            }
             var actor = level.GetEnvirinfointernalBase().GetActor(body.ActorID);
             if (actor == null)
             {
                 DestroySkill();
                 return;
             }
-            //Log.Trace("武器被攻击类型" + actor.GetType() + actor.GetActorType() + "阵营" + actor.GetCamp());
+            Log.Trace("武器被攻击类型" + actor.GetType() + actor.GetActorType() + "阵营" + actor.GetCamp());
             if (actor.GetCamp() == GetCamp()) return;
-            //Log.Trace("武器碰撞 敌方 actor id" + actor.GetActorID());
+            Log.Trace("武器碰撞 敌方 actor id" + actor.GetActorID());
 
             DestroySkill();
         }
@@ -139,6 +143,7 @@ namespace GameActorLogic
 
         public void Destroy()
         {
+            Log.Trace("Destroy: 武器销毁" + ActorID + " 类型" + ActorType);
             level.AddEventMessagesToHandlerForward(new DestroyEventMessage(ActorID));
             _weaponEventComponent.Destroy();
         }

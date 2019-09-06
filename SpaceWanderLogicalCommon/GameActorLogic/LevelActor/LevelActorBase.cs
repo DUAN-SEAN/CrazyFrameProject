@@ -22,6 +22,9 @@ namespace GameActorLogic
         protected CreateComponentBase _createComponent;
         protected TaskEventComponentBase _taskEventComponent;
         protected ConfigComponentBase _configComponent;
+        protected ContactListenerComponentBase contactListenerComponent;
+
+
 
         protected long levelid;
         protected ulong battleid;
@@ -60,7 +63,7 @@ namespace GameActorLogic
             _handlerComponent = new HandlerComponentBase(this);
             _createComponent = new CreateComponentBase(this);
             _taskEventComponent = new TaskEventComponentBase(this);
-
+            contactListenerComponent = new ContactListenerComponentBase(_envirinfoComponent);
 
         }
 

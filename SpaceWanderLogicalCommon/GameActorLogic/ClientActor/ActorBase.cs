@@ -112,6 +112,7 @@ namespace GameActorLogic
 
         public void CreateBody(Body body)
         {
+            body.UserData = new UserData(ActorID, ActorType);
             _physicalBase.CreateBody(body); 
         }
         #endregion

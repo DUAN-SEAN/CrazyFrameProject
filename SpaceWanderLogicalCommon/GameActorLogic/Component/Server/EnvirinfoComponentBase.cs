@@ -168,10 +168,10 @@ namespace GameActorLogic
         /// </summary>
         public void AddAirWall()
         {
-            factory.CreateRectangleBody(0, -MapHeight / 2, MapWidth, 5,bodyType:BodyType.StaticBody ,true);
-            factory.CreateRectangleBody(0, MapHeight / 2, MapWidth, 5, bodyType: BodyType.StaticBody, true);
-            factory.CreateRectangleBody(MapWidth / 2, 0, 5, MapHeight, bodyType: BodyType.StaticBody, true);
-            factory.CreateRectangleBody(-MapWidth / 2, 0, 5, MapHeight, bodyType: BodyType.StaticBody, true);
+            factory.CreateRectangleBody(0, -MapHeight / 2, MapWidth, 5,bodyType:BodyType.StaticBody);
+            factory.CreateRectangleBody(0, MapHeight / 2, MapWidth, 5, bodyType: BodyType.StaticBody);
+            factory.CreateRectangleBody(MapWidth / 2, 0, 5, MapHeight, bodyType: BodyType.StaticBody);
+            factory.CreateRectangleBody(-MapWidth / 2, 0, 5, MapHeight, bodyType: BodyType.StaticBody);
 
         }
 
@@ -184,6 +184,11 @@ namespace GameActorLogic
         public Factory GetFactory()
         {
             return factory;
+        }
+
+        public void SetContactListener(IContactListener contactListener)
+        {
+            _world?.SetContactListener(contactListener);
         }
     }
 }
