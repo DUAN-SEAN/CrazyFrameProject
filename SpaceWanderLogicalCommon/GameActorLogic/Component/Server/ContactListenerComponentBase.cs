@@ -21,10 +21,12 @@ namespace GameActorLogic
         public void BeginContact(Contact contact)
         {
             Log.Trace("BeginContact contact" + contact);
+            Log.Trace("BeginContact userdataA" + contact.FixtureA.Body.UserData);
+            Log.Trace("BeginContact userdataB" + contact.FixtureB.Body.UserData);
             UserData userdateA = contact.FixtureA.Body.UserData as UserData;
             UserData userdateB = contact.FixtureB.Body.UserData as UserData;
             Log.Trace("BeginContact UserDataA:" + userdateA + "    UserDataB" + userdateB);
-            if(userdateA != null)
+            if (userdateA != null)
             {
                 var actor = envir.GetActor(userdateA.ActorID);
                 actor.OnContactEnter(userdateB);

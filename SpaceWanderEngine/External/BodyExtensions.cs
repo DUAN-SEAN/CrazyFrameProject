@@ -4,7 +4,6 @@ using Box2DSharp.Dynamics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Crazy.Common;
 using Vector2 = System.Numerics.Vector2;
 
 namespace Box2DSharp.External
@@ -41,11 +40,16 @@ namespace Box2DSharp.External
         /// <param name="body"></param>
         /// <param name="targetPoint"></param>
         /// <returns></returns>
-        public static bool FollowTarget(this Body body, Vector2 targetPoint)
+        public static float FollowTarget(this Body body, Vector2 targetPoint)
         {
-            return  FowardToTarget(body, targetPoint);
+            var cos = FowardToTarget(body, targetPoint);
 
-            
+            if(cos > 0.8)
+            {
+                //TODO 加速
+            }
+
+            return cos;
         }
 
         /// <summary>
@@ -54,9 +58,9 @@ namespace Box2DSharp.External
         /// <param name="body"></param>
         /// <param name="targetPoint"></param>
         /// <returns></returns>
-        public static bool FowardToTarget(this Body body, Vector2 targetPoint)
+        public static float FowardToTarget(this Body body, Vector2 targetPoint)
         {
-            if (Vector2.DistanceSquared(body.GetPosition(), targetPoint) < double.Epsilon) return false;
+            if (Vector2.DistanceSquared(body.GetPosition(), targetPoint) < double.Epsilon) return 0;
 
             Vector2 tmp = targetPoint - body.GetPosition();
             bool isClockwise = MathUtils.Cross(tmp, body.GetForward()) > 0;
@@ -64,30 +68,28 @@ namespace Box2DSharp.External
 
             if (Math.Abs(cos) > 0.98f)
             {
-                body.ApplyAngularImpulse(-body.AngularVelocity * body.Inertia, true);
-                return false;
+                body.SetAngularVelocity(0);
+                return cos;
             }
 
             if (isClockwise)
             {
-                body.ApplyAngularImpulse(-0.1f * body.Inertia, true);
+                body.ApplyAngularImpulse(-2 * body.Inertia,true);
                 //body.SetAngularVelocity(-2);
             }
             else
             {
-                body.ApplyAngularImpulse(0.1f* body.Inertia, true);
-                //body.SetAngularVelocity(2);
+               body.ApplyAngularImpulse(2 * body.Inertia, true);
+               //body.SetAngularVelocity(2);
             }
-            Log.Trace(cos + ":cos target:  " + (targetPoint - body.GetPosition()).ToString());
 
-            return true;
+            return cos;
         }
 
-        public static bool MoveForward(this Body body, Vector2 targetPoint)
+        public static float MoveForward(this Body body, Vector2 targetPoint)
         {
             targetPoint.Normalize();
-            
-            return FowardToTarget(body, targetPoint + body.GetPosition());
+            return FowardToTarget(body, targetPoint+body.GetPosition());
         }
 
         /// <summary>

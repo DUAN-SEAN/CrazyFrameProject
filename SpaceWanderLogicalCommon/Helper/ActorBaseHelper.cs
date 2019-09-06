@@ -26,16 +26,16 @@ namespace GameActorLogic
             return actors.ConvertAll(o => ((IBaseComponentContainer) o).GetPhysicalinternalBase().GetBody());
         }
 
-        public static void Detection(this Body body,IBaseContainer actor)
+        public static void Detection(this IBaseComponentContainer body,IBaseContainer actor)
         {
             var point = body.GetPosition();
-            actor.SetInitData(point.X, point.Y, body.GetAngle());
+            actor.SetInitData(point.X, point.Y, body.GetForwardAngle());
         }
 
-        public static void RingDetection(this Body body, IBaseComponentContainer actor)
+        public static void RingDetection(this IBaseComponentContainer body, IBaseComponentContainer actor)
         {
             var point = body.GetPosition();
-            actor.GetPhysicalinternalBase().GetBody().SetTransform(point, body.GetAngle());
+            actor.GetPhysicalinternalBase().GetBody().SetTransform(point, body.GetForwardAngle());
         }
     }
 }

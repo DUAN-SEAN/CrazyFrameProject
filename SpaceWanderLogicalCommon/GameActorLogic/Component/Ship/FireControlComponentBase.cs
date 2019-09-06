@@ -166,7 +166,7 @@ namespace GameActorLogic
                 //Log.Trace("复制前Actor Body id" + skillContainer.GetBody().Id + " 位置" +
                 //          skillContainer.GetBody().Position + " 朝向" +
                 //          skillContainer.GetBody().Forward);
-                container.GetPhysicalinternalBase().GetBody().Detection(skillContainer);
+                container.Detection(skillContainer);
                 //Log.Trace("复制后Actor Body id" + skillContainer.GetBody().Id + " 位置" +
                 //          skillContainer.GetBody().Position + " 朝向" +
                 //          skillContainer.GetBody().Forward);
@@ -180,7 +180,7 @@ namespace GameActorLogic
             // 给激光赋值
             foreach (var skillContainer in weaponlist)
             {
-                container.GetPhysicalinternalBase().GetBody().RingDetection((level.GetActor(skillContainer.GetActorID())));
+                container.RingDetection((level.GetActor(skillContainer.GetActorID())));
             }
         }
 
