@@ -59,29 +59,21 @@ namespace GameActorLogic
 
             var point = new Vector2(x, y);
 
-            var cross = MathUtils.Cross(point, physical.GetBody().GetForward());
             Vector2 forward = physical.GetBody().GetForward();
+
             //算出力的大小
             var cos = CrazyUtils.IncludedAngleCos(point, forward);
             float angle = (float)Math.Acos(cos);
             float anglepro = (float) (angle / Math.PI);
             float forcepro = (float)Vector2.DistanceSquared(Vector2.Zero, point);
+
+
             physical?.AddThrust(100f* 5  * anglepro * forcepro);
 
-            if (cos > 0.95)
-            {
-               physical?.SetAngularVelocity(0);
-                return;
-            }
+            physical?.GetBody().MoveForward(point);
 
-            if ( cross > 0)
-            {
-                physical?.AddForward(1000f);
-            }
-            else if (cross < 0)
-            {
-                physical?.AddForward(-1000f);
-            }
+            
+
         }
 
         #endregion
