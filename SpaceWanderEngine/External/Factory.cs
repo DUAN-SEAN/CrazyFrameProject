@@ -304,6 +304,8 @@ namespace Box2DSharp.External
             var bodyShape = CreateRectangleShape(0.3f, 1);
             var fd1 = CreateBulletFixtureDef(bodyShape, userData);
             body.CreateFixture(fd1);
+            body.UserData = userData;
+
             return body;
         }
 
@@ -376,6 +378,7 @@ namespace Box2DSharp.External
             body.CreateFixture(fd1);
             body.CreateFixture(fd2);
             body.CreateFixture(fd3);
+            body.UserData = userData;
             return body;
         }
 
@@ -415,6 +418,7 @@ namespace Box2DSharp.External
             body.CreateFixture(fd1);
             body.CreateFixture(fd2);
             body.CreateFixture(fd3);
+            body.UserData = userData;
             return body;
 
         }
