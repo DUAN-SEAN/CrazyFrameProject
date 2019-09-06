@@ -56,26 +56,31 @@ namespace Box2DSharp.External
         /// <returns></returns>
         public static bool FowardToTarget(this Body body, Vector2 targetPoint)
         {
+
             if (Vector2.DistanceSquared(body.GetPosition(), targetPoint) < double.Epsilon) return false;
 
             Vector2 tmp = targetPoint - body.GetPosition();
             bool isClockwise = MathUtils.Cross(tmp, body.GetForward()) > 0;
             float cos = CrazyUtils.IncludedAngleCos(tmp, body.GetForward());
 
-            if (cos > 0.9f)
+            if (cos > 0.95f)
             {
                 body.ApplyAngularImpulse(-body.AngularVelocity * body.Inertia, true);
                 return false;
             }
 
+            
+
             if (isClockwise)
             {
-                body.ApplyAngularImpulse(-0.5f * body.Inertia, true);
+                body.ApplyAngularImpulse(-body.AngularVelocity * body.Inertia, true);
+                body.ApplyAngularImpulse(-2f * body.Inertia, true);
                 //body.SetAngularVelocity(-2);
             }
             else
             {
-                body.ApplyAngularImpulse(0.5f* body.Inertia, true);
+                body.ApplyAngularImpulse(-body.AngularVelocity * body.Inertia, true);
+                body.ApplyAngularImpulse(2f* body.Inertia, true);
                 //body.SetAngularVelocity(2);
             }
             //Log.Trace(cos + ":cos target:  " + (targetPoint - body.GetPosition()).ToString());
