@@ -20,12 +20,12 @@ namespace GameActorLogic
 
         public void BeginContact(Contact contact)
         {
-            Log.Trace("BeginContact contact" + contact);
-            Log.Trace("BeginContact userdataA" + contact.FixtureA.Body.UserData);
-            Log.Trace("BeginContact userdataB" + contact.FixtureB.Body.UserData);
+            //Log.Trace("BeginContact contact" + contact);
+            //Log.Trace("BeginContact userdataA" + contact.FixtureA.Body.UserData);
+            //Log.Trace("BeginContact userdataB" + contact.FixtureB.Body.UserData);
             UserData userdateA = contact.FixtureA.Body.UserData as UserData;
             UserData userdateB = contact.FixtureB.Body.UserData as UserData;
-            Log.Trace("BeginContact UserDataA:" + userdateA + "    UserDataB" + userdateB);
+            //Log.Trace("BeginContact UserDataA:" + userdateA + "    UserDataB" + userdateB);
             if (userdateA != null)
             {
                 var actor = envir.GetActor(userdateA.ActorID);
@@ -41,11 +41,11 @@ namespace GameActorLogic
 
         public void EndContact(Contact contact)
         {
-            Log.Trace("EndContact contact" + contact);
+            //Log.Trace("EndContact contact" + contact);
 
             UserData userdateA = contact.FixtureA.Body.UserData as UserData;
             UserData userdateB = contact.FixtureB.Body.UserData as UserData;
-            Log.Trace("EndContact UserDataA:" + userdateA + "    UserDataB" + userdateB);
+            //Log.Trace("EndContact UserDataA:" + userdateA + "    UserDataB" + userdateB);
 
             if (userdateA != null)
             {
