@@ -21,6 +21,19 @@ namespace GameActorLogic
         protected long lastlogicalframe;
         protected long delyframe = 1000000;
 
+        /// <summary>
+        /// 开火逻辑 每
+        /// </summary>
+        protected long lastfireframe;
+        protected long delyfireframe = 1000000 * 2;
+        /// <summary>
+        /// AI施力
+        /// </summary>
+        protected float AIForce = 1000;
+        /// <summary>
+        /// AI施转矩
+        /// </summary>
+        protected float AITorque = 2;
         public ShipEnemyAiComponent(ILevelActorComponentBaseContainer level, IShipComponentBaseContainer container) : base(container)
         {
             this.level = level;
@@ -79,8 +92,13 @@ namespace GameActorLogic
                     //自动转向接口
                     if (body.FowardToTarget(list[0].GetPosition(),2) > 0.98f)
                     {
-                        //攻击
-                        container.GetFireControlinternalBase().FireAI(0);
+                        if(DateTime.Now.Ticks - lastfireframe > delyfireframe * 2)
+                        {
+                            //攻击
+                            container.GetFireControlinternalBase().FireAI(0);
+                            lastfireframe = DateTime.Now.Ticks;
+                        }
+
                         //Log.Trace("ShipEnemyAiComponent 攻击敌人" + list.Count);
 
                     }
@@ -214,56 +232,56 @@ namespace GameActorLogic
                 {
                     p.X = list[0].GetPosition().X + 90 * 0.7071f;
                     p.Y = list[0].GetPosition().Y + 90 * 0.7071f;
-                    container.GetPhysicalinternalBase().GetBody().FollowTarget(p,200,2);
+                    container.GetPhysicalinternalBase().GetBody().FollowTarget(p,AIForce,AITorque);
                 }
 
                 void EncirclePosition_2()
                 {
                     p.X = list[0].GetPosition().X;
                     p.Y = list[0].GetPosition().Y + 90;
-                    container.GetPhysicalinternalBase().GetBody().FollowTarget(p,200,2);
+                    container.GetPhysicalinternalBase().GetBody().FollowTarget(p,AIForce,AITorque);
                 }
 
                 void EncirclePosition_3()
                 {
                     p.X = list[0].GetPosition().X - 90 * 0.7071f;
                     p.Y = list[0].GetPosition().Y + 90 * 0.7071f;
-                    container.GetPhysicalinternalBase().GetBody().FollowTarget(p,200,2);
+                    container.GetPhysicalinternalBase().GetBody().FollowTarget(p,AIForce,AITorque);
                 }
 
                 void EncirclePosition_4()
                 {
                     p.X = list[0].GetPosition().X - 90;
                     p.Y = list[0].GetPosition().Y;
-                    container.GetPhysicalinternalBase().GetBody().FollowTarget(p,200,2);
+                    container.GetPhysicalinternalBase().GetBody().FollowTarget(p,AIForce,AITorque);
                 }
 
                 void EncirclePosition_5()
                 {
                     p.X = list[0].GetPosition().X - 90 * 0.7071f;
                     p.Y = list[0].GetPosition().Y - 90 * 0.7071f;
-                    container.GetPhysicalinternalBase().GetBody().FollowTarget(p,200,2);
+                    container.GetPhysicalinternalBase().GetBody().FollowTarget(p,AIForce,AITorque);
                 }
 
                 void EncirclePosition_6()
                 {
                     p.X = list[0].GetPosition().X;
                     p.Y = list[0].GetPosition().Y - 90;
-                    container.GetPhysicalinternalBase().GetBody().FollowTarget(p,200,2);
+                    container.GetPhysicalinternalBase().GetBody().FollowTarget(p,AIForce,AITorque);
                 }
 
                 void EncirclePosition_7()
                 {
                     p.X = list[0].GetPosition().X + 90 * 0.7071f;
                     p.Y = list[0].GetPosition().Y - 90 * 0.7071f;
-                    container.GetPhysicalinternalBase().GetBody().FollowTarget(p,200,2);
+                    container.GetPhysicalinternalBase().GetBody().FollowTarget(p,AIForce,AITorque);
                 }
 
                 void EncirclePosition_8()
                 {
                     p.X = list[0].GetPosition().X + 90;
                     p.Y = list[0].GetPosition().Y;
-                    container.GetPhysicalinternalBase().GetBody().FollowTarget(p,200,2);
+                    container.GetPhysicalinternalBase().GetBody().FollowTarget(p,AIForce,AITorque);
                 }
 
             }
