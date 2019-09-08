@@ -130,12 +130,8 @@ namespace GameServer.Battle
             OnEventMessage();
             
             //2 驱动物理引擎
-            if (m_level == null)
-                return;
-            lock (m_level)
-            {
-                m_level?.Update();
-            }
+            m_level?.Update();
+            
 
 
         }
@@ -148,7 +144,6 @@ namespace GameServer.Battle
             {
 
                 m_netHandler?.OnReleaseBattle(Id);
-                return;
             }
         }
 
@@ -162,7 +157,7 @@ namespace GameServer.Battle
             {
                 if (levelReady)
                 {
-                    //Log.Trace("levelReady");
+                    Log.Trace("levelReady");
 
                     bool flag = _readyDic.ContainsValue(0);
                     if (!flag)
@@ -440,7 +435,7 @@ namespace GameServer.Battle
         public void OnReadyBattle(string player)
         {
             if (_readyDic == null) return;
-
+            Log.Trace("OnReadyBattle"+player);
             _readyDic[player] = 1;
 
 

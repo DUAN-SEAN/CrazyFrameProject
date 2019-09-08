@@ -166,13 +166,14 @@ namespace GameActorLogic
         public void Start(List<Tuple<string, int, int, int, int>> players)
         {
             Log.Trace("Start 开始生成");
+            Random r = new Random();
             //TODO 可能进行动态初始化
             foreach (var player in players)
             {
                 var id = _createComponent.GetCreateID();
                 this.players.Add(player.Item1, id);
                 _eventComponent.AddEventMessagesToHandlerForward(new InitEventMessage(id, LevelActorBase.PlayerCamp,
-                    player.Item3, 0, 0, 0, true, player.Item4, player.Item5,player.Item1));
+                    player.Item3, r.Next(0,400), r.Next(0, 400), 0, true, player.Item4, player.Item5,player.Item1));
             }
 
             //开启所有任务
@@ -213,25 +214,25 @@ namespace GameActorLogic
         {
             if(isStart == false) return;
             Currentframe++;
-            if(stopwatch.ElapsedMilliseconds >0)
-            Log.Trace(Currentframe + "Update _handlerComponent 时间："+ stopwatch.ElapsedMilliseconds);
-            stopwatch.Restart();
+            //if(stopwatch.ElapsedMilliseconds >0)
+            //Log.Trace(Currentframe + "Update _handlerComponent 时间："+ stopwatch.ElapsedMilliseconds);
+            //stopwatch.Restart();
             //Log.Trace("Update GOGOGOGOGO");
 
 
             _handlerComponent.Update();
-            stopwatch.Stop();
+            //stopwatch.Stop();
 
-            if(stopwatch.ElapsedMilliseconds >0)
-            Log.Trace(Currentframe + "Update _envirinfoComponent 时间：" + stopwatch.ElapsedMilliseconds);
-            stopwatch.Restart();
+            //if(stopwatch.ElapsedMilliseconds >0)
+            //Log.Trace(Currentframe + "Update _envirinfoComponent 时间：" + stopwatch.ElapsedMilliseconds);
+            //stopwatch.Restart();
             _envirinfoComponent.Tick();
-            stopwatch.Stop();
-            if(stopwatch.ElapsedMilliseconds >0)
-            Log.Trace(Currentframe + "Update _taskEventComponent 时间：" + stopwatch.ElapsedMilliseconds);
-            stopwatch.Restart();
+            //stopwatch.Stop();
+            //if(stopwatch.ElapsedMilliseconds >0)
+            //Log.Trace(Currentframe + "Update _taskEventComponent 时间：" + stopwatch.ElapsedMilliseconds);
+            //stopwatch.Restart();
             _taskEventComponent.Update();
-            stopwatch.Stop();
+            //stopwatch.Stop();
         }
 
         public void Dispose()

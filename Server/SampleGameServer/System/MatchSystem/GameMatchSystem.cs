@@ -28,7 +28,6 @@ namespace GameServer
         public override void Start()
         {
             base.Start();//初始化本地消息队列
-            Task.Delay()
         }
 
 
