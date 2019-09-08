@@ -2,10 +2,7 @@
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Numerics;
 
 namespace MongoDBRobot
 {
@@ -27,16 +24,44 @@ namespace MongoDBRobot
             BB b = new BB();
             A a = b;
             Console.WriteLine(a.GetType());
+
+
+            var pre = PredictPosition(Vector2.Zero, new Vector2(0, 1), new Vector2(0, 75), 1f);
+
+            Console.WriteLine(pre.ToString());
+
             //ObjectId
 
             Console.ReadKey();
-            
+
+        }
+        /// <summary>
+        /// 位置预测函数
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="velocity"></param>
+        /// <param name="frictionAir"></param>
+        /// <returns></returns>
+        public static Vector2 PredictPosition(Vector2 position, Vector2 velocity, Vector2 Force, float time, float invMass = 1 / 75f, float stepTime = 1 / 60f, float LinearDamping = 0.0f)
+        {
+            Vector2 predictPosition = position;
+            do
+            {
+                velocity += stepTime * (invMass * Force);//速度增加
+                velocity *= 1.0f / (1.0f + stepTime * LinearDamping);//阻尼效应
+
+                predictPosition += stepTime * velocity;//积分
+
+                time -= stepTime;
+            } while (time - stepTime > float.Epsilon);
+
+            return predictPosition;
         }
         static void Test1()
         {
             try
             {
-                
+
 
                 // 连接到单实例MongoDB服务
                 // 这种连接方式不会自动检测连接的节点是主节点还是复制集的成员节点
@@ -103,9 +128,9 @@ namespace MongoDBRobot
                 Array a = null;
 #pragma warning restore CS0219 // 变量“a”已被赋值，但从未使用过它的值
 
-      
 
-   
+
+
                 //// Update Multiple Documents
                 //var builder = Builders<Person>.Filter;
                 //var filter = builder.Eq("Name", "g") & builder.Eq("Pwd", "123");
@@ -168,8 +193,8 @@ namespace MongoDBRobot
     internal class dbConfig
     {
         internal static string ConnectHost = "114.115.146.185";
-        internal static int Port=27017;
-        internal static string DataBase= "SpaceShooter";
+        internal static int Port = 27017;
+        internal static string DataBase = "SpaceShooter";
         internal static string Collection_Players = "Players";
     }
 
@@ -190,10 +215,11 @@ namespace MongoDBRobot
             return $"{_id} {username} {password} {level} ";
         }
     }
-    internal class Friend {
+    internal class Friend
+    {
         public long userId { get; set; }
 
-        public string username{ get; set; }
+        public string username { get; set; }
 
 
     }

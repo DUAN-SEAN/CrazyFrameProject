@@ -281,7 +281,7 @@ namespace Box2DSharp.Dynamics
 
             LinearVelocity = def.LinearVelocity;
             AngularVelocity = def.AngularVelocity;
-
+            
             _linearDamping = def.LinearDamping;
             AngularDamping = def.AngularDamping;
             GravityScale = def.GravityScale;
