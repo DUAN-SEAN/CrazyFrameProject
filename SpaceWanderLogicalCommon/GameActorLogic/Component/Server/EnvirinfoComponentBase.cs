@@ -68,20 +68,20 @@ namespace GameActorLogic
         /// </summary>
         public void Tick()
         {
-            stopwatch.Restart();
+            stopwatch?.Restart();
             for (int i = 0; i < _actorList.Count; i++)
             {
                 _actorList[i].Update();
                 //Log.Trace("EnvirinfoComponentBase: Actorid" + _actorList[i].GetActorID() + " 位置坐标:" + _actorList[i].GetPosition() + " 力" + _actorList[i].GetForce() + " 速度" + _actorList[i].GetVelocity() + " 转矩" + _actorList[i].GetAngleVelocity());
             }
-            stopwatch.Stop();
+            stopwatch?.Stop();
             //if (stopwatch.ElapsedMilliseconds > 0)
             //    Log.Trace("Tick _actorList:" + stopwatch.ElapsedMilliseconds);
-            stopwatch.Restart();
+            stopwatch?.Restart();
 
             m_runner.Update();
 
-            stopwatch.Stop();
+            stopwatch?.Stop();
             //if (stopwatch.ElapsedMilliseconds > 0)
             //    Log.Trace("Tick m_runner:" + stopwatch.ElapsedMilliseconds);
 
