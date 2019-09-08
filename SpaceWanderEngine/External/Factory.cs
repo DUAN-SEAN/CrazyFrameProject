@@ -375,6 +375,7 @@ namespace Box2DSharp.External
             body.CreateFixture(fd2);
             body.CreateFixture(fd3);
             body.UserData = userData;
+            body.LinearDamping = 0.1f;
             return body;
         }
 
@@ -415,6 +416,7 @@ namespace Box2DSharp.External
             body.CreateFixture(fd2);
             body.CreateFixture(fd3);
             body.UserData = userData;
+            body.LinearDamping = 0.1f;
             return body;
 
         }
@@ -456,6 +458,7 @@ namespace Box2DSharp.External
             body.CreateFixture(fd3);
             body.CreateFixture(fd4);
             body.UserData = userData;
+            body.LinearDamping = 0.1f;
             return body;
         }
 
