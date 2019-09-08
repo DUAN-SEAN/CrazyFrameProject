@@ -33,7 +33,7 @@ namespace GameActorLogic
             //Log.Trace("武器Actor id"+container.GetActorID()+" Body id："+container.GetBodyId()+" 施加力"+"角度："+container.GetForwardAngle()+"方向:" + container.GetForward() + " 坐标" + container.GetPosition());
             if(i==0)
             {
-                container.AddThrust(1000);
+                container.AddThrust(10000);
                 //Log.Trace("武器Actor id" + container.GetActorID() + " 施加力" + "角度：" + container.GetForwardAngle() + "方向:" + container.GetForward() + " 坐标" + container.GetPosition());
                 i = 1;
             }

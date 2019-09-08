@@ -76,14 +76,14 @@ namespace GameActorLogic
             }
             stopwatch.Stop();
             //if (stopwatch.ElapsedMilliseconds > 0)
-                //Log.Trace("Tick _actorList:" + stopwatch.ElapsedMilliseconds);
+            //    Log.Trace("Tick _actorList:" + stopwatch.ElapsedMilliseconds);
             stopwatch.Restart();
 
             m_runner.Update();
 
             stopwatch.Stop();
             //if (stopwatch.ElapsedMilliseconds > 0)
-                //Log.Trace("Tick m_runner:" + stopwatch.ElapsedMilliseconds);
+            //    Log.Trace("Tick m_runner:" + stopwatch.ElapsedMilliseconds);
 
         }
 

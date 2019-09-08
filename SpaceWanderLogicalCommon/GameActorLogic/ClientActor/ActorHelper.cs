@@ -109,6 +109,12 @@ namespace GameActorLogic
 
         }
 
+        public static float GetBodyMassByActor(this ActorBase actor)
+        {
+            return BodyExtensions.GetSpaceWanderMass(actor.GetGameModelByActorType());
+        }
+
+
         /// <summary>
         /// 将Actor类型转换成游戏模型类型
         /// </summary>

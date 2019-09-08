@@ -20,7 +20,7 @@ namespace GameActorLogic
         /// </summary>
         protected List<ISkillContainer> skills;
 
-        protected List<ISkillContainer> skillInitList;
+        protected List<UserData> skillInitList;
 
         protected ILevelActorComponentBaseContainer level;
 
@@ -31,7 +31,7 @@ namespace GameActorLogic
         public FireControlComponentBase(IShipComponentBaseContainer container, ILevelActorComponentBaseContainer create)
         {
             skills = new List<ISkillContainer>();
-            skillInitList= new List<ISkillContainer>();
+            skillInitList= new List<UserData>();
             this.container = container;
             this.level = create;
         }
@@ -40,7 +40,7 @@ namespace GameActorLogic
         {
             this.container = container;
             this.skills = new List<ISkillContainer>();
-            skillInitList = new List<ISkillContainer>();
+            skillInitList = new List<UserData>();
             this.level = create;
 
             foreach (var weapon in weapons)
@@ -56,7 +56,7 @@ namespace GameActorLogic
         {
             this.container = container;
             this.skills = new List<ISkillContainer>();
-            this.skillInitList = new List<ISkillContainer>();
+            this.skillInitList = new List<UserData>();
             this.level = clone.level;
 
             foreach (var skillContainer in clone.skills)
@@ -85,7 +85,7 @@ namespace GameActorLogic
         protected void WaitSkillDestroy(ISkillContainer weapon)
         {
             weapon.OnDestroySkill -= WaitSkillDestroy;
-            skillInitList.Remove(weapon);
+            skillInitList.RemoveAll(o => o.ActorID == weapon.GetActorID());
         }
 
         #region IFireControlBase
@@ -176,11 +176,11 @@ namespace GameActorLogic
                 skillContainer.SetCamp(container.GetCamp());
             }
 
-            var weaponlist = skillInitList.Where(s => s.GetActorType() == ActorTypeBaseDefine.ContinuousLaserActor).ToList();
+            var weaponlist = skillInitList.Where(s => s.ActorType == ActorTypeBaseDefine.ContinuousLaserActor).ToList();
             // 给激光赋值
             foreach (var skillContainer in weaponlist)
             {
-                container.RingDetection((level.GetActor(skillContainer.GetActorID())));
+                container.RingDetection((level.GetActor(skillContainer.ActorID)));
             }
         }
 
@@ -195,9 +195,11 @@ namespace GameActorLogic
             if (skills[i] is ISkillContainer actor)
             {
 
-                var weaponactor = actor.Clone();
-                weaponactor.SetActorId(level.GetCreateInternalComponentBase().GetCreateID());
-                var weapon = weaponactor as ISkillContainer;
+                //var weaponactor = actor.Clone();
+                //weaponactor.SetActorId(level.GetCreateInternalComponentBase().GetCreateID());
+                //var weapon = weaponactor as ISkillContainer;
+                var id = level.GetCreateInternalComponentBase().GetCreateID();
+                var weapon = actor as ISkillContainer;
                 weapon.SetRelPosition(0, 0);
                 //Log.Trace("当前发射者 位置：" + container.GetPhysicalinternalBase().GetBody().Position + " 朝向：" +
                 //          container.GetPhysicalinternalBase().GetBody().Forward);
@@ -206,8 +208,10 @@ namespace GameActorLogic
 
 
                 //level.GetEnvirinfointernalBase().AddActor(weapon as ActorBase);
-                weapon.StartSkill();
-                skillInitList.Add(weapon);
+                var init = weapon.GetInitData();
+                level.AddEventMessagesToHandlerForward(new InitEventMessage(id, actor.GetCamp(), actor.GetActorType(), init.point_x, init.point_y, init.angle, ownerid: weapon.GetOwnerID(), relatpoint_x: weapon.GetRelPositionX(), relatpoint_y: weapon.GetRelPositionY()));
+
+                skillInitList.Add(new UserData(id, weapon.GetActorType()));
                 OnFire?.Invoke(weapon);
             }
             
@@ -223,9 +227,10 @@ namespace GameActorLogic
                 if (skills[j].GetActorType() == i && skills[j] is ISkillContainer actor)
                 {
 
-                    var weaponactor = actor.Clone();
-                    weaponactor.SetActorId(level.GetCreateInternalComponentBase().GetCreateID());
-                    var weapon = weaponactor as ISkillContainer;
+                    //var weaponactor = actor.Clone();
+                    //weaponactor.SetActorId(level.GetCreateInternalComponentBase().GetCreateID());
+                    var id = level.GetCreateInternalComponentBase().GetCreateID();
+                    var weapon = actor as ISkillContainer;
                     weapon.SetRelPosition(0, 0);
                     //Log.Trace("当前发射者 位置：" + container.GetPhysicalinternalBase().GetBody().GetPosition() + " 朝向：" +
                     //          container.GetPhysicalinternalBase().GetBody().GetAngle());
@@ -234,8 +239,10 @@ namespace GameActorLogic
 
 
                     //level.GetEnvirinfointernalBase().AddActor(weapon as ActorBase);
-                    weapon.StartSkill();
-                    skillInitList.Add(weapon);
+                    //weapon.StartSkill();
+                    var init = weapon.GetInitData();
+                    level.AddEventMessagesToHandlerForward(new InitEventMessage(id, actor.GetCamp(), actor.GetActorType(), init.point_x, init.point_y, init.angle, ownerid: weapon.GetOwnerID(), relatpoint_x: weapon.GetRelPositionX(), relatpoint_y: weapon.GetRelPositionY()));
+                    skillInitList.Add(new UserData(id,weapon.GetActorType()));
                     OnFire?.Invoke(weapon);
                 }
             }
@@ -246,30 +253,32 @@ namespace GameActorLogic
 
             for (var j = 0; j < skillInitList.Count; j++)
             {
-                if (skillInitList[j].GetActorType() == i)
+                if (skillInitList[j].ActorType == i)
                 {
-                    skillInitList[j].EndSkill();
-                    OnEnd?.Invoke(skillInitList[j]);
+                    var actor = level.GetActor(skillInitList[j].ActorID) as ISkillContainer;
+                    actor.EndSkill();
+                    OnEnd?.Invoke(actor);
                 }
             }
         }
 
         public void Destroy(int i)
         {
-            List<ISkillContainer> weaponList = new List<ISkillContainer>();
+            List<UserData> weaponList = new List<UserData>();
             for (var j = 0; j < skillInitList.Count; j++)
             {
-                if (skillInitList[j].GetActorType() == i)
+                if (skillInitList[j].ActorType == i)
                 {
                     weaponList.Add(skillInitList[j]);
                 }
             }
             //从集合中删除
-            foreach (var weaponBaseContainer in skillInitList)
+            foreach (var weaponBaseContainer in weaponList)
             {
-                weaponList.Remove(weaponBaseContainer);
-                OnDestroy?.Invoke(weaponBaseContainer);
-                weaponBaseContainer.DestroySkill();
+                var actor = level.GetActor(weaponBaseContainer.ActorID) as ISkillContainer;
+                skillInitList.Remove(weaponBaseContainer);
+                OnDestroy?.Invoke(actor);
+                actor.DestroySkill();
             }
 
         }
