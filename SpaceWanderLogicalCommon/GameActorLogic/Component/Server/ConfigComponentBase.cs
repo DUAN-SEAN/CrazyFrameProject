@@ -56,6 +56,7 @@ namespace GameActorLogic
                 int condition = barrierTaskConfig.StartCondition;
                 int result = barrierTaskConfig.Result;
                 var dict = new Dictionary<int, int>();
+                string des = barrierTaskConfig.Description;
                 foreach (var itme in barrierTaskConfig.TaskConditionItemConfig)
                 {
                     dict.Add(itme.ConditionTarget, itme.ConditionValue);
@@ -63,7 +64,7 @@ namespace GameActorLogic
                 }
 
                 var task1 = level.GetCreateInternalComponentBase().CreateTaskEvent(
-                    condition, result, id, dict);
+                    condition, result, id, dict, des);
                 level.AddTaskEvent(task1);
             }
 
@@ -156,14 +157,14 @@ namespace GameActorLogic
                 ActorTypeBaseDefine.TrackingMissileActor,
                 ActorTypeBaseDefine.MachineGunActor
             });
-            shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
+            //shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
             ConfigActors.Add(ActorTypeBaseDefine.AnnihilationShipActor, shipactor);
 
             //精英船A
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.EliteShipActorA, level);
             //shipactor.CreateBody(factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
             shipactor.CreateInitData(new InitData());
-            shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
+            //shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
             shipactor.InitializeFireControl(new List<int> // 鱼雷 高射炮
             {
                 ActorTypeBaseDefine.TorpedoActor,
@@ -175,7 +176,7 @@ namespace GameActorLogic
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.EliteShipActorB, level);
             //shipactor.CreateBody(factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
             shipactor.CreateInitData(new InitData());
-            shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
+            //shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
             shipactor.InitializeFireControl(new List<int> // 跟踪导弹 高射炮
             {
                 ActorTypeBaseDefine.TrackingMissileActor,
@@ -187,7 +188,7 @@ namespace GameActorLogic
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.FighterShipActorA, level);
             //shipactor.CreateBody(factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
             shipactor.CreateInitData(new InitData());
-            shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
+            //shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
             shipactor.InitializeFireControl(new List<int> // 机关枪 持续激光
             {
                 ActorTypeBaseDefine.MachineGunActor,

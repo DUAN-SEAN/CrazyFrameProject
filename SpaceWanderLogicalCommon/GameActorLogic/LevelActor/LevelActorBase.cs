@@ -80,12 +80,12 @@ namespace GameActorLogic
                 TaskConditionTypeConstDefine.KillTaskEvent,TaskResultTypeConstDefine.Victory, 1, new Dictionary<int, int>
                 {
                     {0, 10}
-                });
+                },"kill enemy");
             var task1 = container.GetCreateInternalComponentBase().CreateTaskEvent(
                 TaskConditionTypeConstDefine.TimeTaskEvent, TaskResultTypeConstDefine.Fail, 2, new Dictionary<int, int>
                 {
                     {0,600000 }
-                });
+                },"kill enemy");
             //添加任务
             container.GeTaskEventComponentInternalBase().AddTaskEvent(task);
             container.GeTaskEventComponentInternalBase().AddTaskEvent(task1);
@@ -219,20 +219,20 @@ namespace GameActorLogic
             //Log.Trace("Update GOGOGOGOGO");
 
 
-            _handlerComponent.Update();
+            _handlerComponent?.Update();
             stopwatch?.Stop();
             //if (stopwatch.ElapsedMilliseconds > 0)
             //    Log.Trace(Currentframe + "Update _handlerComponent 时间：" + stopwatch.ElapsedMilliseconds);
 
 
             stopwatch?.Restart();
-            _envirinfoComponent.Tick();
+            _envirinfoComponent?.Tick();
             stopwatch?.Stop();
             //if (stopwatch.ElapsedMilliseconds > 0)
             //    Log.Trace(Currentframe + "Update _envirinfoComponent 时间：" + stopwatch.ElapsedMilliseconds);
 
             stopwatch?.Restart();
-            _taskEventComponent.Update();
+            _taskEventComponent?.Update();
             stopwatch?.Stop();
 
             //if (stopwatch.ElapsedMilliseconds > 0)

@@ -119,11 +119,11 @@ namespace GameActorLogic
             return actor;
         }
 
-        public ITaskEvent CreateTaskEvent(int taskcondition,int taskresult, int taskid, Dictionary<int, int> taskconditions)
+        public ITaskEvent CreateTaskEvent(int taskcondition,int taskresult, int taskid, Dictionary<int, int> taskconditions,string des)
         {
             ITaskEvent task = null;
             //Log.Trace("创建任务" + taskid);
-            task = new TaskEventBase(taskid, level, taskcondition, taskresult, taskconditions);
+            task = new TaskEventBase(taskid, level, taskcondition, taskresult, taskconditions,des);
            
             return task;
         }

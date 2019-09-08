@@ -28,6 +28,12 @@ namespace GameActorLogic
         TaskEventState GetTaskState();
 
         /// <summary>
+        /// 任务描述
+        /// </summary>
+        /// <returns></returns>
+        string GetTaskDescription();
+
+        /// <summary>
         /// 在游戏开始进行时 开启一些相关逻辑
         /// </summary>
         void StartTaskEvent();
@@ -67,11 +73,22 @@ namespace GameActorLogic
 
         void Dispose();
 
+
+        /// <summary>
+        /// 获取当前值
+        /// </summary>
+        int GetCurrentValue();
+
+        /// <summary>
+        /// 获取目标值
+        /// </summary>
+        int GetTargetValue();
+
         #region 同步逻辑
         /// <summary>
         /// 通过key来设置相应的值
         /// </summary>
-        
+
         void SetValue(int key, Object value);
 
         void SetValue(int key, bool value);

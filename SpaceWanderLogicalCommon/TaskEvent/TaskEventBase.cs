@@ -53,13 +53,17 @@ namespace GameActorLogic
         /// 任务结果
         /// </summary>
         protected ITaskResult taskResult;
-       
+
         #endregion
 
+        /// <summary>
+        /// 任务描述
+        /// </summary>
+        protected string taskDescription;
 
 
 
-        public TaskEventBase(int taskid,ILevelActorComponentBaseContainer levelActor,Int32 condition,Int32 result,Dictionary<int,int> values)
+        public TaskEventBase(int taskid,ILevelActorComponentBaseContainer levelActor,Int32 condition,Int32 result,Dictionary<int,int> values, string desc)
         {
             this.taskid = taskid;
             this.levelActor = levelActor;
@@ -73,6 +77,8 @@ namespace GameActorLogic
 
             taskCondition = CreateTaskCondition(m_taskconditiontypedefine);
             taskResult = CreateTaskResult(m_taskresulttypedefine);
+
+            taskDescription = desc;
         }
         /// <summary>
         /// 返回对应类型的条件
@@ -238,6 +244,21 @@ namespace GameActorLogic
             taskCondition.StartCondition();
             taskResult.StartResult();
             m_taskEventState = TaskEventState.UnFinished;
+        }
+
+        public string GetTaskDescription()
+        {
+            return taskDescription;
+        }
+
+        public int GetCurrentValue()
+        {
+            return taskCondition.GetCurrentValue();
+        }
+
+        public int GetTargetValue()
+        {
+            return taskCondition.GetTargetValue();
         }
 
         #endregion

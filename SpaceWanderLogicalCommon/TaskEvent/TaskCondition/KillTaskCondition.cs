@@ -85,6 +85,18 @@ namespace GameActorLogic
             RegisterHandler();
         }
 
+        public int GetCurrentValue()
+        {
+            return Currentvalue[key];
+        }
+
+        public int GetTargetValue()
+        {
+            m_event.TryGetValue(key, out var killvalue);
+            return killvalue;
+
+        }
+
         public Dictionary<int, int> ConditionCurrentValues
         {
             get => Currentvalue;

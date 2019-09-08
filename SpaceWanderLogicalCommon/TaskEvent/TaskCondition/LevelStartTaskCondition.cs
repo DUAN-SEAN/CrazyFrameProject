@@ -41,5 +41,15 @@ namespace GameActorLogic
             IsLevelStart = level.GetLevelState();
             return IsLevelStart;
         }
+
+        public int GetCurrentValue()
+        {
+            return IsLevelStart ? 1 : 0;
+        }
+
+        public int GetTargetValue()
+        {
+            return 1;
+        }
     }
 }

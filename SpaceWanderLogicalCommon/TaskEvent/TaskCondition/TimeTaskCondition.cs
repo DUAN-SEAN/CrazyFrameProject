@@ -53,6 +53,17 @@ namespace GameActorLogic
             Inittime = DateTime.Now.Ticks;
         }
 
+        public int GetCurrentValue()
+        {
+            return (int)((DateTime.Now.Ticks - Inittime) / 60 / 1e7);
+        }
+
+        public int GetTargetValue()
+        {
+            m_event.TryGetValue(key, out var timevalue);
+            return timevalue;
+        }
+
         public Dictionary<int, int> ConditionCurrentValues
         {
             get => CurrentValue;

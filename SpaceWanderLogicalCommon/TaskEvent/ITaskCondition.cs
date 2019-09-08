@@ -29,6 +29,17 @@ namespace GameActorLogic
         /// 获取当前条件值
         /// </summary>
         Dictionary<int, int> ConditionCurrentValues { get; set; }
-    
+
+
+
+        /// <summary>
+        /// 获取当前值
+        /// </summary>
+        int GetCurrentValue();
+
+        /// <summary>
+        /// 获取目标值
+        /// </summary>
+        int GetTargetValue();
     }
 }
