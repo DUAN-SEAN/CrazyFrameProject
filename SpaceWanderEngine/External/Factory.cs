@@ -428,7 +428,6 @@ namespace Box2DSharp.External
             var bodyDef = CreateBodyDef(position.X, position.Y, angle);
             var body = world.CreateBody(bodyDef);
             var bodyShape = CreateRectangleShape(4.2f, 8.5f);
-
             var bodyShape2 = new PolygonShape();
             var vertices = new Vector2[3];
             vertices[0].Set(1.2f, 4.25f);

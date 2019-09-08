@@ -275,7 +275,7 @@ namespace GameServer.Battle
 
                                 BroadcastMessage(syncHpShield);
                             }
-
+                            
                             {
                                 S2C_SyncPhysicsStateBattleMessage syncPhysics = new S2C_SyncPhysicsStateBattleMessage
                                 {
