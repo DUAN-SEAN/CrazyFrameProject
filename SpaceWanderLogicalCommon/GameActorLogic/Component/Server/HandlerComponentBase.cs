@@ -15,6 +15,15 @@ namespace GameActorLogic
     {
         protected ILevelActorComponentBaseContainer levelContainer;
 
+        protected int initMessageNum;
+        protected int DestoryMessageNum;
+
+        protected long lastNumframe;
+        protected long Numdely = 10000000;
+
+
+
+
         public HandlerComponentBase(ILevelActorComponentBaseContainer container)
         {
             levelContainer = container;
@@ -34,7 +43,11 @@ namespace GameActorLogic
                 HandlerEvent(eventMessage);
             }
 
+            TickNum();
+
         }
+
+
 
         public void Dispose()
         {
@@ -52,6 +65,23 @@ namespace GameActorLogic
 
             return null;
         }
+
+        protected void TickNum()
+        {
+
+
+
+            if(DateTime.Now.Ticks - lastNumframe > Numdely)
+            {
+                //if (initMessageNum != 0 || DestoryMessageNum != 0)
+                //    Log.Debug("TickNum 一秒钟消息：生成消息数" + initMessageNum + " 销毁消息数：" + DestoryMessageNum);
+                initMessageNum = 0;
+                DestoryMessageNum = 0;
+
+                lastNumframe = DateTime.Now.Ticks;
+            }
+        }
+
 
         #region 处理事件
 
@@ -119,7 +149,7 @@ namespace GameActorLogic
             //Log.Trace("HandlerComponentBase HandlerInitEvent: 生成一个Actor id" + actor.GetActorID() + " " + actor.GetActorType());
             //执行回调生成事件
             OnInitMessageHandler?.Invoke(initEvent.actorid);
-
+            initMessageNum++;
         }
 
         /// <summary>
@@ -141,6 +171,9 @@ namespace GameActorLogic
             if(actor == null) return;
             levelContainer.GetEnvirinfointernalBase().RemoveActor(actor);
             actor.Dispose();
+
+
+            DestoryMessageNum++;
         }
 
         /// <summary>

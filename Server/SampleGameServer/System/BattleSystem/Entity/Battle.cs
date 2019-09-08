@@ -157,7 +157,7 @@ namespace GameServer.Battle
             {
                 if (levelReady)
                 {
-                    Log.Trace("levelReady");
+                    //Log.Trace("levelReady");
 
                     bool flag = _readyDic.ContainsValue(0);
                     if (!flag)

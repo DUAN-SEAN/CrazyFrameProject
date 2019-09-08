@@ -95,8 +95,8 @@ namespace GameActorLogic
 
             stopwatch.Stop();
 
-            if (stopwatch.ElapsedMilliseconds > 0)
-                Log.Trace("Update  TaskEvent数量" + taskEvents.Count + " 时间：" + stopwatch.ElapsedMilliseconds);
+            //if (stopwatch.ElapsedMilliseconds > 0)
+            //    Log.Trace("Update  TaskEvent数量" + taskEvents.Count + " 时间：" + stopwatch.ElapsedMilliseconds);
         }
 
         public void StartTaskEvents()

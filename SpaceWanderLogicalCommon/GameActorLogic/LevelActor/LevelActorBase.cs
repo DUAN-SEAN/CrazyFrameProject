@@ -221,22 +221,22 @@ namespace GameActorLogic
 
             _handlerComponent.Update();
             stopwatch?.Stop();
-            if (stopwatch.ElapsedMilliseconds > 0)
-                Log.Trace(Currentframe + "Update _handlerComponent 时间：" + stopwatch.ElapsedMilliseconds);
+            //if (stopwatch.ElapsedMilliseconds > 0)
+            //    Log.Trace(Currentframe + "Update _handlerComponent 时间：" + stopwatch.ElapsedMilliseconds);
 
 
             stopwatch?.Restart();
             _envirinfoComponent.Tick();
             stopwatch?.Stop();
-            if (stopwatch.ElapsedMilliseconds > 0)
-                Log.Trace(Currentframe + "Update _envirinfoComponent 时间：" + stopwatch.ElapsedMilliseconds);
+            //if (stopwatch.ElapsedMilliseconds > 0)
+            //    Log.Trace(Currentframe + "Update _envirinfoComponent 时间：" + stopwatch.ElapsedMilliseconds);
 
             stopwatch?.Restart();
             _taskEventComponent.Update();
             stopwatch?.Stop();
 
-            if (stopwatch.ElapsedMilliseconds > 0)
-                Log.Trace(Currentframe + "Update _taskEventComponent 时间：" + stopwatch.ElapsedMilliseconds);
+            //if (stopwatch.ElapsedMilliseconds > 0)
+            //    Log.Trace(Currentframe + "Update _taskEventComponent 时间：" + stopwatch.ElapsedMilliseconds);
         }
 
         public void Dispose()
