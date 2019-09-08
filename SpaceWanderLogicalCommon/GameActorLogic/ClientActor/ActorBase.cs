@@ -168,6 +168,15 @@ namespace GameActorLogic
             _physicalBase.OnContactExit(data);
         }
 
+        public bool GetContactEnterFlag()
+        {
+            return _physicalBase.GetContactEnterFlag();
+        }
+
+        public bool GetContactExitFlag()
+        {
+            return _physicalBase.GetContactExitFlag();
+        }
 
         public float GetRelPositionX()
         {
@@ -218,7 +227,15 @@ namespace GameActorLogic
             return _physicalBase.GetVelocity();
         }
 
+        public float GetDamping()
+        {
+            return _physicalBase.GetDamping();
+        }
 
+        public void SetDamping(float damp)
+        {
+            _physicalBase.SetDamping(damp);
+        }
 
         public float GetAngleVelocity()
         {
@@ -381,6 +398,8 @@ namespace GameActorLogic
         {
             _invariantAttributeComponent.SetDeadState(dead);
         }
+
+     
 
 
 

@@ -26,15 +26,29 @@ namespace GameActorLogic
             UserData userdateA = contact.FixtureA.Body.UserData as UserData;
             UserData userdateB = contact.FixtureB.Body.UserData as UserData;
             //Log.Trace("BeginContact UserDataA:" + userdateA + "    UserDataB" + userdateB);
+            
+            ActorBase actorA = null;
+            ActorBase actorB = null;
+
+
             if (userdateA != null)
             {
-                var actor = envir.GetActor(userdateA.ActorID);
-                actor.OnContactEnter(userdateB);
+                actorA = envir.GetActor(userdateA.ActorID);
+                if (actorA.GetContactEnterFlag()) actorA = null;
             }
             if (userdateB != null)
             {
-                var actor = envir.GetActor(userdateB.ActorID);
-                actor.OnContactEnter(userdateA);
+               actorB = envir.GetActor(userdateB.ActorID);
+                if (actorB.GetContactEnterFlag()) actorB = null;
+            }
+
+            if(actorA != null)
+            {
+                actorA.OnContactEnter(userdateB);
+            }
+            if (actorB != null)
+            {
+                actorB.OnContactEnter(userdateA);
             }
 
         }
@@ -47,15 +61,28 @@ namespace GameActorLogic
             UserData userdateB = contact.FixtureB.Body.UserData as UserData;
             //Log.Trace("EndContact UserDataA:" + userdateA + "    UserDataB" + userdateB);
 
+            ActorBase actorA = null;
+            ActorBase actorB = null;
+
+
             if (userdateA != null)
             {
-                var actor = envir.GetActor(userdateA.ActorID);
-                actor.OnContactExit(userdateB);
+                actorA = envir.GetActor(userdateA.ActorID);
+                if (actorA.GetContactExitFlag()) actorA = null;
             }
             if (userdateB != null)
             {
-                var actor = envir.GetActor(userdateB.ActorID);
-                actor.OnContactExit(userdateA);
+                actorB = envir.GetActor(userdateB.ActorID);
+                if (actorB.GetContactExitFlag()) actorB = null;
+            }
+
+            if (actorA != null)
+            {
+                actorA.OnContactExit(userdateB);
+            }
+            if (actorB != null)
+            {
+                actorB.OnContactExit(userdateA);
             }
         }
 

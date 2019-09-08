@@ -30,6 +30,15 @@ namespace GameActorLogic {
         /// </summary>
         void OnContactExit(UserData data);
 
+        /// <summary>
+        /// 获取间隔时间内是否有碰撞进入标志
+        /// </summary>
+        bool GetContactEnterFlag();
+
+        /// <summary>
+        /// 获取间隔时间内是否碰撞退出标志
+        /// </summary>
+        bool GetContactExitFlag();
 
         /// <summary>
         /// 获取相对坐标X
@@ -48,6 +57,10 @@ namespace GameActorLogic {
         void InitializePhysicalBase();
 
         UserData GetBodyUserData();
+
+        float GetDamping();
+
+        void SetDamping(float damp);
 
         #region 物理同步
 
@@ -89,6 +102,7 @@ namespace GameActorLogic {
         /// 角速度
         /// </summary>
         void SetAngularVelocity(float vel);
+
 
         /// <summary>
         /// 设置物理数据

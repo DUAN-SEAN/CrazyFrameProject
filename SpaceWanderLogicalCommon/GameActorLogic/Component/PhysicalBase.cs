@@ -38,6 +38,7 @@ namespace GameActorLogic
         protected Vector2 LinearVelocity_copy;
 
 
+
         /// <summary>
         /// 碰撞方法被
         /// </summary>
@@ -48,12 +49,31 @@ namespace GameActorLogic
         protected bool isColliderMethodEnter;
 
         /// <summary>
+        /// 间隔时间内是否有碰撞进入标志
+        /// </summary>
+        protected bool isContactEnterFlag;
+
+        /// <summary>
+        /// 间隔时间内是否有碰撞退出标志
+        /// </summary>
+        protected bool isContactExitFlag;
+
+        /// <summary>
         /// 相对坐标
         /// 只在武器发射时使用
         /// 武器移动时不使用
         /// </summary>
         protected float RelpositionX;
         protected float RelpositionY;
+
+        /// <summary>
+        /// 上一次Tick标志的帧
+        /// </summary>
+        protected long lastFlagframe;
+        /// <summary>
+        /// 标志tick间隔
+        /// </summary>
+        protected long Flagdely = 100000;
         //protected PhysicalBase()
         //{
         //m_body = Factory.CreateCircleBody(1, 1, 1);
@@ -105,14 +125,17 @@ namespace GameActorLogic
 
         public void OnContactEnter(UserData data)
         {
+            
             OnColliderEnter?.Invoke(data);
             contactActors.Add(data);
+            isContactEnterFlag = true;
         }
 
         public void OnContactExit(UserData data)
         {
             OnColliderExit?.Invoke(data);
             contactActors.Remove(data);
+            isContactExitFlag = true;
         }
 
 
@@ -151,6 +174,8 @@ namespace GameActorLogic
             //Log.Trace("已经添加力量:" + m_body.GetForce()+" "+Force_copy);
             //Log.Trace("Update Mass" + m_body.Mass);
             Force_copy = Vector2.Zero;
+
+            TickFlag();
         }
 
         public void Dispose()
@@ -159,10 +184,18 @@ namespace GameActorLogic
 
             //m_body?.Dispose();
             m_body = null;
-           
-           
-            
-            
+        }
+      
+
+        public void TickFlag()
+        {
+            if(DateTime.Now.Ticks - lastFlagframe > Flagdely)
+            {
+                isContactEnterFlag = false;
+                isContactExitFlag = false;
+                lastFlagframe = DateTime.Now.Ticks;
+            }
+
         }
 
         #region Helper
@@ -305,8 +338,33 @@ namespace GameActorLogic
             return m_body;
         }
 
+        public bool GetContactEnterFlag()
+        {
+            return isContactEnterFlag;
+        }
 
- 
+        public bool GetContactExitFlag()
+        {
+            return isContactExitFlag;
+        }
+
+        protected float Damping_copy;
+
+        public float GetDamping()
+        {
+            return Damping_copy;
+        }
+
+        public void SetDamping(float damp)
+        {
+            Damping_copy = damp;
+            if(m_body != null)
+                m_body.LinearDamping = damp;
+     
+        }
+
+
+
 
         #endregion
 

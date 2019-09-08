@@ -271,8 +271,8 @@ namespace GameActorLogic
 
         public ActorBase GetPlayerActorByString(string id)
         {
-            if (players.TryGetValue(id, out battleid))
-                return _envirinfoComponent.GetActor(battleid);
+            if (players.TryGetValue(id, out ulong battleactorid))
+                return _envirinfoComponent.GetActor(battleactorid);
             else
             {
                 return _envirinfoComponent.GetAllActors().Find(o => o.GetActorName() == id);

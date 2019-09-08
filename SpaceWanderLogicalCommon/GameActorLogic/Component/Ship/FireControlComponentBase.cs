@@ -220,7 +220,7 @@ namespace GameActorLogic
 
         public void Fire(int i)
         {
-            Log.Trace("Fire: 发射槽" + i + " 发射槽总数"+ skills.Count);
+            //Log.Trace("Fire: 发射槽" + i + " 发射槽总数"+ skills.Count);
             for (var j = 0; j < skills.Count; j++)
             {
 
