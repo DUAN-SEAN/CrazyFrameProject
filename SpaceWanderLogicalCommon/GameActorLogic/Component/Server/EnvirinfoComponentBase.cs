@@ -71,7 +71,7 @@ namespace GameActorLogic
             for (int i = 0; i < _actorList.Count; i++)
             {
                 _actorList[i].Update();
-                Log.Trace("EnvirinfoComponentBase:ActorId"+_actorList[i].GetActorID()+ " ActorType" + _actorList[i].GetActorType() + " 位置坐标:" + _actorList[i].GetPosition() + " 力" + _actorList[i].GetForce() + " 速度" + _actorList[i].GetVelocity() + " 转矩" + _actorList[i].GetAngleVelocity());
+               // Log.Trace("EnvirinfoComponentBase:ActorId"+_actorList[i].GetActorID()+ " ActorType" + _actorList[i].GetActorType() + " 位置坐标:" + _actorList[i].GetPosition() + " 力" + _actorList[i].GetForce() + " 速度" + _actorList[i].GetVelocity() + " 转矩" + _actorList[i].GetAngleVelocity());
             }
             stopwatch?.Stop();
             //if (stopwatch.ElapsedMilliseconds > 0)

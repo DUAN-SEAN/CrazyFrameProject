@@ -51,6 +51,9 @@ namespace Crazy.Common
 	[Message(BattleMessageOpcode.S2C_ExitBattleMessage)]
 	public partial class S2C_ExitBattleMessage : IBattleMessage {}
 
+	[Message(BattleMessageOpcode.S2CM_FinishBattleMessage)]
+	public partial class S2CM_FinishBattleMessage : IBattleMessage {}
+
 }
 namespace Crazy.Common
 {
@@ -71,5 +74,6 @@ namespace Crazy.Common
 		 public const ushort S2C_SyncLevelStateBattleMessage = 1014;
 		 public const ushort C2S_ExitBattleMessage = 1015;
 		 public const ushort S2C_ExitBattleMessage = 1016;
+		 public const ushort S2CM_FinishBattleMessage = 1017;
 	}
 }

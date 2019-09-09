@@ -188,7 +188,7 @@ namespace GameActorLogic
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.FighterShipActorA, level);
             //shipactor.CreateBody(factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
             shipactor.CreateInitData(new InitData());
-            //shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
+            shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
             shipactor.InitializeFireControl(new List<int> // 机关枪 持续激光
             {
                 ActorTypeBaseDefine.MachineGunActor,

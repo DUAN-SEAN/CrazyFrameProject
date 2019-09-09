@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Google.Protobuf;
 using Task = System.Threading.Tasks.Task;
 
 namespace GameServer.Battle
@@ -210,7 +211,8 @@ namespace GameServer.Battle
             //玩家大于0 说明战斗是正常结束，则计算反给客户端玩家退出战斗
             if (battleEntity.Players.Count > 0)
             {
-
+                SendMessageToClient(new S2CM_FinishBattleMessage {BattleId = battleId, Result = ByteString.Empty},
+                    battleEntity.Players);
             }
             var timerId = battleEntity.GetTimerId();
             lock (battleEntity)

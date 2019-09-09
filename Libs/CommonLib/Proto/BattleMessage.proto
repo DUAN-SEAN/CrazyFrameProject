@@ -127,3 +127,9 @@ message S2C_ExitBattleMessage // IBattleMessage
 		OK = 1;
 	}	
 }
+message S2CM_FinishBattleMessage // IBattleMessage 
+{
+	int32 RpcId = 90;
+	uint64 BattleId = 1;
+	bytes Result = 2;
+}
