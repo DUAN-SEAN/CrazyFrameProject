@@ -71,7 +71,9 @@ namespace GameActorLogic
             for (int i = 0; i < _actorList.Count; i++)
             {
                 _actorList[i].Update();
-                Log.Trace("EnvirinfoComponentBase:ActorId"+_actorList[i].GetActorID()+ " ActorType" + _actorList[i].GetActorType() + " 位置坐标:" + _actorList[i].GetPosition() + " 力" + _actorList[i].GetForce() + " 速度" + _actorList[i].GetVelocity() + " 转矩" + _actorList[i].GetAngleVelocity());
+                //Log.Trace("EnvirinfoComponentBase:ActorId" + _actorList[i].GetActorID() + " ActorType" + _actorList[i].GetActorType() + " 位置坐标:" + _actorList[i].GetPosition() + " 力" + _actorList[i].GetForce() + " 速度" + _actorList[i].GetVelocity() + " 转矩" + _actorList[i].GetAngleVelocity());
+                //if(_actorList[i].GetActorType() == ActorTypeBaseDefine.ContinuousLaserActor)
+                //Log.Trace("EnvirinfoComponentBase:ActorId" + _actorList[i].GetActorID() + " ActorType" + _actorList[i].GetActorType()+"Fixture Count"+ ((IBaseComponentContainer)_actorList[i]).GetPhysicalinternalBase().GetBody().FixtureList.Count + " IsSenior"+((IBaseComponentContainer)_actorList[i]).GetPhysicalinternalBase().GetBody().FixtureList[0].IsSensor);
             }
             stopwatch?.Stop();
             //if (stopwatch.ElapsedMilliseconds > 0)
@@ -141,7 +143,7 @@ namespace GameActorLogic
             //actor.CreateBody(factory.CreateRectangleBody(init.point_x, init.point_y, 10, 10));
             
             //判断是否是激光
-            if(actor.GetActorType() != ActorTypeBaseDefine.ContinuousLaserActor || actor.GetActorType() != ActorTypeBaseDefine.PowerLaserActor)
+            if(actor.GetActorType() != ActorTypeBaseDefine.ContinuousLaserActor && actor.GetActorType() != ActorTypeBaseDefine.PowerLaserActor)
             actor.CreateBody(factory.CreateSpaceWonderBody(new Vector2(init.point_x, init.point_y), init.angle, actor.GetGameModelByActorType(), new UserData(actor.GetActorID(), actor.GetActorType())));
             //是持续激光
             else if(actor.GetActorType() == ActorTypeBaseDefine.ContinuousLaserActor)

@@ -286,7 +286,7 @@ namespace GameActorLogic
                 var actor = level.GetActor(weaponBaseContainer.ActorID) as ISkillContainer;
                 skillInitList.Remove(weaponBaseContainer);
                 OnDestroy?.Invoke(actor);
-                actor.DestroySkill();
+                actor?.DestroySkill();
             }
 
         }
