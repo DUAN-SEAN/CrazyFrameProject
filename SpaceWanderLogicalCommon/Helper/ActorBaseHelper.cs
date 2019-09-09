@@ -35,7 +35,7 @@ namespace GameActorLogic
         public static void RingDetection(this IBaseComponentContainer body, IBaseComponentContainer actor)
         {
             var point = body.GetPosition();
-            actor.GetPhysicalinternalBase().GetBody().SetTransform(point, body.GetForwardAngle());
+            actor.GetPhysicalinternalBase().GetBody().SetTransform(new Vector2(point.X, point.Y), body.GetForwardAngle());
         }
     }
 }

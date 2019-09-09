@@ -59,7 +59,7 @@ namespace GameActorLogic
 
             if (actor is WeaponActorBase weapon)
             {
-               // Log.Trace("船受到武器碰撞" + weapon.GetActorID() + " 伤害" + weapon.GetWeaponDamage());
+                //Log.Trace("船受到武器碰撞" + weapon.GetActorID() + " 伤害" + weapon.GetWeaponDamage());
                 _healthShieldComponent.LossBlood(weapon.GetWeaponDamage());
             }
 
