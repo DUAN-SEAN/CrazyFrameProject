@@ -185,6 +185,52 @@ namespace Box2DSharp.External
             }
         }
 
+        /// <summary>
+        /// 获取船头的坐标
+        /// </summary>
+        /// <param name="body"></param>
+        /// <param name="gameModel"></param>
+        /// <returns></returns>
+        public static Vector2 GetSpaceShipNosePosition(this Body body, GameModel gameModel)
+        {
+            switch (gameModel)
+            {
+                case GameModel.WaspShip:
+                    {
+                        return body.GetPosition() + body.GetForward() * 8.25f;
+                    }
+                case GameModel.FighterShipA:
+                    {
+                        return body.GetPosition() + body.GetForward() * 3.25f;
+                    }
+                case GameModel.FighterShipB:
+                    {
+                        return body.GetPosition() + body.GetForward() * 5.5f;
+                    }
+                case GameModel.DroneShip:
+                    {
+                        return body.GetPosition() + body.GetForward();
+                    }
+                case GameModel.AnnihilationShip:
+                    {
+                        return body.GetPosition() + body.GetForward();
+                    }
+                case GameModel.EliteShipA:
+                    {
+                        return body.GetPosition() + body.GetForward() * 210f;
+                    }
+                case GameModel.EliteShipB:
+                    {
+                        return body.GetPosition() + body.GetForward() * 26f;
+                    }
+                default:
+                    {
+                        return Vector2.Zero;
+                    }
+            }
+        }
+
+
         #region  物体属性
 
 

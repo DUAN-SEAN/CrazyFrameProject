@@ -5,6 +5,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Box2DSharp.Dynamics;
+using Box2DSharp.External;
 using Crazy.Common;
 
 
@@ -28,14 +29,19 @@ namespace GameActorLogic
 
         public static void Detection(this IBaseComponentContainer body,IBaseContainer actor)
         {
-            var point = body.GetPosition();
-            actor.SetInitData(point.X, point.Y, body.GetForwardAngle());
+            var body1 = body.GetPhysicalinternalBase().GetBody();
+            var nose = body1.GetSpaceShipNosePosition(body.GetGameModelByActorType());
+            var result = nose;
+
+            actor.SetInitData(result.X, result.Y, body.GetForwardAngle());
         }
 
         public static void RingDetection(this IBaseComponentContainer body, IBaseComponentContainer actor)
         {
-            var point = body.GetPosition();
-            actor.GetPhysicalinternalBase().GetBody().SetTransform(new Vector2(point.X, point.Y), body.GetForwardAngle());
+            var body1 = body.GetPhysicalinternalBase().GetBody();
+            var nose = body1.GetSpaceShipNosePosition(body.GetGameModelByActorType());
+            //var height = 
+            actor.GetPhysicalinternalBase().GetBody().SetTransform(nose  , body.GetForwardAngle());
         }
     }
 }

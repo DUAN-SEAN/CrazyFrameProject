@@ -118,7 +118,7 @@ namespace GameActorLogic
         /// <summary>
         /// 将Actor类型转换成游戏模型类型
         /// </summary>
-        public static GameModel GetGameModelByActorType(this ActorBase actor)
+        public static GameModel GetGameModelByActorType(this IBaseContainer actor)
         {
 
             switch (actor.GetActorType())

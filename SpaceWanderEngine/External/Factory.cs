@@ -95,6 +95,25 @@ namespace Box2DSharp.External
         }
 
         /// <summary>
+        /// 矩形外形(原点在下底)
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <returns></returns>
+        internal PolygonShape CreateRectangleShape2(float width, float height, float offsetX = 0, float offsetY = 0)
+        {
+            var bodyShape = new PolygonShape();
+            //bodyShape.SetAsBox(width / 2, height / 2);
+            var vertices = new Vector2[4];
+            vertices[0].Set(-width / 2 + offsetX, offsetY);
+            vertices[1].Set(-width / 2 + offsetX, height + offsetY);
+            vertices[2].Set(width / 2 + offsetX, height + offsetY);
+            vertices[3].Set(width / 2 + offsetX, offsetY);
+            bodyShape.Set(vertices);
+            return bodyShape;
+        }
+
+        /// <summary>
         /// 圆形外形
         /// </summary>
         /// <param name="radius"></param>
@@ -273,7 +292,7 @@ namespace Box2DSharp.External
             var bodyDef = CreateBodyDef(position.X, position.Y, angle);
             var body = world.CreateBody(bodyDef);
 
-            var bodyShape = CreateRectangleShape(width, height);
+            var bodyShape = CreateRectangleShape2(width, height);
 
             var fd1 = CreateMissileFixtureDef(bodyShape);
 

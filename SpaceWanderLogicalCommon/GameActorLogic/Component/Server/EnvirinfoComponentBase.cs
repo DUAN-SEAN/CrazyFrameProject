@@ -185,7 +185,7 @@ namespace GameActorLogic
             switch (actortype)
             {
                 default:
-                    return new Vector2(1,10);
+                    return new Vector2(1,40);
             }
         }
 
@@ -195,7 +195,7 @@ namespace GameActorLogic
             switch (actortype)
             {
                 default:
-                    return new Vector2(1, 10);
+                    return new Vector2(1, 40);
 
             }
         }
