@@ -1,24 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Runtime;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Crazy.Common;
-using Crazy.NetSharp;
+﻿using Crazy.Common;
 using Crazy.ServerBase;
 using GameServer.Battle;
-using GameServer.Helper;
+using System;
+using System.Reflection;
+using System.Runtime;
 
 
 namespace GameServer
 {
-    public sealed class GameServer:ServerBase
+    public sealed class GameServer : ServerBase
     {
-        public GameServer():base()
+        public GameServer() : base()
         {
             m_instance = this;
         }
@@ -30,11 +22,11 @@ namespace GameServer
         public override bool Initialize<GlobalConfigureType, PlayerContextBase>(string globalPath, Type plyaerContextType, IMessagePacker messagePraser, string serverName)
         {
             //初始化程序集
-            TypeManager.Instance.Add(DLLType.Common,Assembly.GetAssembly(typeof(TypeManager)));
+            TypeManager.Instance.Add(DLLType.Common, Assembly.GetAssembly(typeof(TypeManager)));
             TypeManager.Instance.Add(DLLType.ServerBase, Assembly.GetAssembly(typeof(ServerBase)));
             TypeManager.Instance.Add(DLLType.GameServer, Assembly.GetAssembly(typeof(GameServer)));
 
-            if(!base.Initialize<GlobalConfigureType, PlayerContextBase>(globalPath, plyaerContextType, messagePraser, serverName))
+            if (!base.Initialize<GlobalConfigureType, PlayerContextBase>(globalPath, plyaerContextType, messagePraser, serverName))
             {
                 return false;
             }
@@ -52,7 +44,7 @@ namespace GameServer
             //    Log.Debug("GC = " + i);
 
             //};
-            Log.Debug("GameServer is running with server GC = "+GCSettings.IsServerGC);
+            Log.Debug("GameServer is running with server GC = " + GCSettings.IsServerGC);
             //MongoDBHelper.CreateDBClient(); //测试
             //mongodb测试
 
@@ -123,6 +115,6 @@ namespace GameServer
         public SampleGameServerAsyncActionSequenceQueuePool AsyncActionQueuePool { get; private set; }
 
 
-     
+
     }
 }

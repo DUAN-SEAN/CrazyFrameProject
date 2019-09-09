@@ -488,6 +488,8 @@ namespace GameServer.Battle
         ~Battle()
         {
             Log.Trace("从内存中释放Battle Id = "+Id);
+            base.Dispose();
+            
         }
         public override void Dispose()
         {
@@ -524,7 +526,7 @@ namespace GameServer.Battle
                 
                 m_level.Dispose();
                 m_level = null;
-                base.Dispose();
+                //base.Dispose();
 
                 m_readyWaitTime = DateTime.MaxValue;
                 m_startTime = DateTime.MaxValue;
