@@ -4,7 +4,6 @@ using Box2DSharp.Dynamics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Crazy.Common;
 using Vector2 = System.Numerics.Vector2;
 
 namespace Box2DSharp.External
@@ -47,10 +46,10 @@ namespace Box2DSharp.External
 
             if (cos > 0.8)
             {
-                body.AddForce(body.GetForward() * force);
+                body.AddForce(force * body.GetForward());
             }
 
-            return cos > 0.98;
+            return cos > 0.9;
         }
 
         /// <summary>
@@ -68,20 +67,20 @@ namespace Box2DSharp.External
             bool isClockwise = MathUtils.Cross(tmp, body.GetForward()) > 0;
             float cos = CrazyUtils.IncludedAngleCos(tmp, body.GetForward());
 
-
-            body.ApplyAngularImpulse(-body.AngularVelocity * body.Inertia, true);
-            if (cos > 0.98f)
+            if (cos > 0.95f)
             {
-                //body.SetTransform(body.GetPosition(), (float)Math.Atan2(tmp.Y, tmp.X));
+                body.ApplyAngularImpulse(-body.AngularVelocity * body.Inertia, true);
                 return cos;
             }
 
             if (isClockwise)
             {
+                body.ApplyAngularImpulse(-body.AngularVelocity * body.Inertia, true);
                 body.ApplyAngularImpulse(-angularVelocityProc * body.Inertia, true);
             }
             else
             {
+                body.ApplyAngularImpulse(-body.AngularVelocity * body.Inertia, true);
                 body.ApplyAngularImpulse(angularVelocityProc * body.Inertia, true);
             }
 
@@ -93,8 +92,6 @@ namespace Box2DSharp.External
             targetPoint.Normalize();
             return FowardToTarget(body, targetPoint + body.GetPosition(), angularVelocityProc);
         }
-
-
 
         /// <summary>
         /// 距离检测
@@ -108,7 +105,85 @@ namespace Box2DSharp.External
             return Vector2.DistanceSquared(body.GetPosition(), point) <= distance * distance;
         }
 
-
+        /// <summary>
+        /// 获取各个飞船的质量
+        /// </summary>
+        /// <param name="gameModel"></param>
+        /// <returns></returns>
+        public static float GetSpaceWanderMass(GameModel gameModel)
+        {
+            switch (gameModel)
+            {
+                case GameModel.WaspShip:
+                    {
+                        return 75.3f;
+                    }
+                case GameModel.FighterShipA:
+                    {
+                        return 81.25f;
+                    }
+                case GameModel.FighterShipB:
+                    {
+                        return 63f;
+                    }
+                case GameModel.DroneShip:
+                    {
+                        return 5.54f;
+                    }
+                case GameModel.AnnihilationShip:
+                    {
+                        return 4.5f;
+                    }
+                case GameModel.EliteShipA:
+                    {
+                        return 16100f;
+                    }
+                case GameModel.EliteShipB:
+                    {
+                        return 871f;
+                    }
+                //case GameModel.BaseStation:
+                //    {
+                //        return CreateBaseStationBody(position, angle, userData);
+                //    }
+                case GameModel.MachineGun:
+                    {
+                        return 0.3f;
+                    }
+                //case GameModel.AntiAircraftGun:
+                //    {
+                //        return CreateAntiAircraftGunBody(position, angle, userData);
+                //    }
+                //case GameModel.Torpedo:
+                //    {
+                //        return CreateTorpedoBody(position, angle, userData);
+                //    }
+                //case GameModel.TrackingMissile:
+                //    {
+                //        return CreateTrackingMissileBody(position, angle, userData);
+                //    }
+                //case GameModel.ContinuousLaser:
+                //    {
+                //        return CreateContinuousLaserBody(position, angle, userData);
+                //    }
+                //case GameModel.PowerLaser:
+                //    {
+                //        return CreatePowerLaserBody(position, angle, userData);
+                //    }
+                //case GameModel.TimeBomb:
+                //    {
+                //        return CreateTimeBombBody(position, angle, userData);
+                //    }
+                //case GameModel.TriggerBomb:
+                //    {
+                //        return CreateTriggerBomb(position, angle, userData);
+                //    }
+                default:
+                    {
+                        return 1;
+                    }
+            }
+        }
 
         #region  物体属性
 
@@ -181,85 +256,6 @@ namespace Box2DSharp.External
         public static void SetAngularVelocity(this Body body, float angularVelocity)
         {
             body.AngularVelocity = angularVelocity;
-        }
-        /// <summary>
-        /// 获取各个飞船的质量
-        /// </summary>
-        /// <param name="gameModel"></param>
-        /// <returns></returns>
-        public static float GetSpaceWanderMass(GameModel gameModel)
-        {
-            switch (gameModel)
-            {
-                case GameModel.WaspShip:
-                    {
-                        return 75.3f;
-                    }
-                case GameModel.FighterShipA:
-                    {
-                        return 81.25f;
-                    }
-                case GameModel.FighterShipB:
-                    {
-                        return 63f;
-                    }
-                //case GameModel.DroneShip:
-                //    {
-                //        return CreateDroneShipBody(position, angle, userData);
-                //    }
-                //case GameModel.AnnihilationShip:
-                //    {
-                //        return CreateAnnihilationShipBody(position, angle, userData);
-                //    }
-                //case GameModel.EliteShipA:
-                //    {
-                //        return CreateEliteShipABody(position, angle, userData);
-                //    }
-                //case GameModel.EliteShipB:
-                //    {
-                //        return CreateEliteShipBBody(position, angle, userData);
-                //    }
-                //case GameModel.BaseStation:
-                //    {
-                //        return CreateBaseStationBody(position, angle, userData);
-                //    }
-                case GameModel.MachineGun:
-                    {
-                        return 0.3f;
-                    }
-                //case GameModel.AntiAircraftGun:
-                //    {
-                //        return CreateAntiAircraftGunBody(position, angle, userData);
-                //    }
-                //case GameModel.Torpedo:
-                //    {
-                //        return CreateTorpedoBody(position, angle, userData);
-                //    }
-                //case GameModel.TrackingMissile:
-                //    {
-                //        return CreateTrackingMissileBody(position, angle, userData);
-                //    }
-                //case GameModel.ContinuousLaser:
-                //    {
-                //        return CreateContinuousLaserBody(position, angle, userData);
-                //    }
-                //case GameModel.PowerLaser:
-                //    {
-                //        return CreatePowerLaserBody(position, angle, userData);
-                //    }
-                //case GameModel.TimeBomb:
-                //    {
-                //        return CreateTimeBombBody(position, angle, userData);
-                //    }
-                //case GameModel.TriggerBomb:
-                //    {
-                //        return CreateTriggerBomb(position, angle, userData);
-                //    }
-                default:
-                    {
-                        return 1;
-                    }
-            }
         }
 
         #endregion

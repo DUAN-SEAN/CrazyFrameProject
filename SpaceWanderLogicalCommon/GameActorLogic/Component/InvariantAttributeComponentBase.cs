@@ -30,6 +30,12 @@ namespace GameActorLogic
 
         protected bool isDead;
 
+        /// <summary>
+        /// 生成body前使用 用于判断需要生成多大的形状
+        /// 主要用于激光 蓄力或其他内容
+        /// </summary>
+        protected float time;
+
         public InvariantAttributeComponentBase(int camp = 0,double maxSpeed  = 2,float maxForceProc = 0.0002f)
         {
             this.maxSpeed = maxSpeed;
@@ -100,6 +106,16 @@ namespace GameActorLogic
         public void SetDeadState(bool dead)
         {
             isDead = dead;
+        }
+
+        public float GetActorInitPro()
+        {
+            return time;
+        }
+
+        public void SetActorInitPro(float pro)
+        {
+            time = pro;
         }
 
         #endregion

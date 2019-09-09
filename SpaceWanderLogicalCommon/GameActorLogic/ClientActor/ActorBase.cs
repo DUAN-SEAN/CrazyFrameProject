@@ -227,14 +227,14 @@ namespace GameActorLogic
             return _physicalBase.GetVelocity();
         }
 
-        public float GetDamping()
+        public float GetLinerDamping()
         {
-            return _physicalBase.GetDamping();
+            return _physicalBase.GetLinerDamping();
         }
 
-        public void SetDamping(float damp)
+        public void SetLinerDamping(float damp)
         {
-            _physicalBase.SetDamping(damp);
+            _physicalBase.SetLinerDamping(damp);
         }
 
         public float GetAngleVelocity()
@@ -310,6 +310,17 @@ namespace GameActorLogic
         #endregion
 
         #region InvariantAttributeComponentBase
+
+        public float GetActorInitPro()
+        {
+            return _invariantAttributeComponent.GetActorInitPro();
+        }
+
+        public void SetActorInitPro(float pro)
+        {
+            _invariantAttributeComponent.SetActorInitPro(pro);
+        }
+
 
         public void InitializeInvariantAttributeBase(int camp, double maxSpeed, float maxForceProc)
         {
@@ -399,7 +410,8 @@ namespace GameActorLogic
             _invariantAttributeComponent.SetDeadState(dead);
         }
 
-     
+        
+
 
 
 

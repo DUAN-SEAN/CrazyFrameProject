@@ -14,6 +14,7 @@ namespace GameActorLogic
         public ulong onwerid;
         public Int32 actortype;
         public int camp;
+        public float LinerDamping;
         public float point_x;
         public float point_y;
         public float relatpoint_x;
@@ -24,10 +25,14 @@ namespace GameActorLogic
         public Int32 weapontype_a;
         public Int32 weapontype_b;
         public string name;
+        /// <summary>
+        /// 蓄力时间
+        /// </summary>
+        public float time;
 
-        public InitEventMessage(ulong actorid, int camp, Int32 actortype, float point_x, float point_y, float angle,
+        public InitEventMessage(ulong actorid, int camp, Int32 actortype, float point_x, float point_y, float angle,float LinerDamping,
             bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0, string name = "",
-            ulong ownerid = ulong.MaxValue, float relatpoint_x = 0, float relatpoint_y = 0)
+            ulong ownerid = ulong.MaxValue, float relatpoint_x = 0, float relatpoint_y = 0,float time = 0)
         {
             _eventMessageId = EventMessageConstDefine.InitEvent;
             this.actorid = actorid;
@@ -37,6 +42,7 @@ namespace GameActorLogic
             this.point_x = point_x;
             this.point_y = point_y;
             this.angle = angle;
+            this.LinerDamping = LinerDamping;
             haveId = true;
             IsPlayer = isPlayer;
             this.name = name;
@@ -44,8 +50,10 @@ namespace GameActorLogic
             this.onwerid = ownerid;
             this.relatpoint_x = relatpoint_x;
             this.relatpoint_y = relatpoint_y;
+            this.time = time;
+
         }
-        public InitEventMessage(Int32 actortype,int camp, float point_x, float point_y, float angle,bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0, string name = "", ulong ownerid = ulong.MaxValue, float relatpoint_x = 0, float relatpoint_y = 0)
+        public InitEventMessage(Int32 actortype,int camp, float point_x, float point_y, float angle,float LinerDamp,bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0, string name = "", ulong ownerid = ulong.MaxValue, float relatpoint_x = 0, float relatpoint_y = 0,float time = 0)
         {
             _eventMessageId = EventMessageConstDefine.InitEvent;
             this.actortype = actortype;
@@ -54,6 +62,7 @@ namespace GameActorLogic
             this.point_x = point_x;
             this.point_y = point_y;
             this.angle = angle;
+            this.LinerDamping = LinerDamp;
             haveId = false;
             IsPlayer = isPlayer;
             this.name = name;
@@ -61,6 +70,7 @@ namespace GameActorLogic
             this.onwerid = ownerid;
             this.relatpoint_x = relatpoint_x;
             this.relatpoint_y = relatpoint_y;
+            this.time = time;
         }
     }
 }

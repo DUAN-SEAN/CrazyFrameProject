@@ -135,6 +135,10 @@ namespace GameActorLogic
                     initEvent.weapontype_b,initEvent.name);
                 initEvent.actorid = actor.GetActorID();
             }
+            if(initEvent.time != 0)
+            {
+                actor.SetActorInitPro(initEvent.time);
+            }
 
             if (actor != null)
             {
@@ -144,6 +148,7 @@ namespace GameActorLogic
                 }
 
                 actor.SetRelPosition(initEvent.relatpoint_x, initEvent.relatpoint_y);
+                actor.SetLinerDamping(initEvent.LinerDamping);
                 levelContainer.GetEnvirinfointernalBase().AddActor(actor);
             }
             //Log.Trace("HandlerComponentBase HandlerInitEvent: 生成一个Actor id" + actor.GetActorID() + " " + actor.GetActorType());

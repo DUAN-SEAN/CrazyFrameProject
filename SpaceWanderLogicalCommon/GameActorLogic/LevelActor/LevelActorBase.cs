@@ -99,9 +99,9 @@ namespace GameActorLogic
         {
             var container = this as ILevelActorComponentBaseContainer;
             container.GetEventComponentBase().AddEventMessagesToHandlerForward(
-                new InitEventMessage(actorid:_createComponent.GetCreateID(), actortype:ActorTypeBaseDefine.FighterShipActorA,camp: LevelActorBase.EnemyCamp, point_x:10, point_y:10, angle:0));
+                new InitEventMessage(actorid: _createComponent.GetCreateID(), actortype: ActorTypeBaseDefine.FighterShipActorA, camp: LevelActorBase.EnemyCamp, point_x: 10, point_y: 10, angle: 0, LinerDamping:0.1f));
             container.GetEventComponentBase().AddEventMessagesToHandlerForward(
-                new InitEventMessage(actorid: _createComponent.GetCreateID(), actortype: ActorTypeBaseDefine.EliteShipActorB, camp: LevelActorBase.PlayerCamp, point_x: -10, point_y: -10, angle: 0));
+                new InitEventMessage(actorid: _createComponent.GetCreateID(), actortype: ActorTypeBaseDefine.EliteShipActorB, camp: LevelActorBase.PlayerCamp, point_x: -10, point_y: -10, angle: 0, LinerDamping: 0.1f));
             
         }
 
@@ -173,7 +173,7 @@ namespace GameActorLogic
                 var id = _createComponent.GetCreateID();
                 this.players.Add(player.Item1, id);
                 _eventComponent.AddEventMessagesToHandlerForward(new InitEventMessage(id, LevelActorBase.PlayerCamp,
-                    player.Item3, r.Next(0,400), r.Next(0, 400), 0, true, player.Item4, player.Item5,player.Item1));
+                    player.Item3, r.Next(0, 400), r.Next(0, 400), 0, 0.1f, true, player.Item4, player.Item5, player.Item1));
             }
 
             //开启所有任务

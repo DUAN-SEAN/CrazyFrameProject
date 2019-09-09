@@ -107,6 +107,7 @@ namespace GameActorLogic
             }
         }
 
+        protected long firetime;
         public void SendButtonState(ulong actorid, int skilltype, int skillcontrol)
         {
             //TODO 技能控制 0 按下 1抬起
@@ -117,7 +118,6 @@ namespace GameActorLogic
                     //发射型武器
                     case ActorTypeBaseDefine.AntiAircraftGunActor:
                     case ActorTypeBaseDefine.MachineGunActor:
-                    case ActorTypeBaseDefine.PowerLaserActor:
                     case ActorTypeBaseDefine.TorpedoActor:
                     case ActorTypeBaseDefine.TrackingMissileActor:
                     //持续激光
@@ -126,6 +126,10 @@ namespace GameActorLogic
                     case ActorTypeBaseDefine.TimeBombActor:
                     case ActorTypeBaseDefine.TriggerBombActor:
                         Fire(skilltype);
+                        break;
+
+                    case ActorTypeBaseDefine.PowerLaserActor:
+                        firetime = DateTime.Now.Ticks;
                         break;
 
 
@@ -138,17 +142,21 @@ namespace GameActorLogic
                     //发射型武器
                     case ActorTypeBaseDefine.AntiAircraftGunActor:
                     case ActorTypeBaseDefine.MachineGunActor:
-                    case ActorTypeBaseDefine.PowerLaserActor:
                     case ActorTypeBaseDefine.TorpedoActor:
                     case ActorTypeBaseDefine.TrackingMissileActor:
                         break;
                     //持续激光
                     case ActorTypeBaseDefine.ContinuousLaserActor:
+                    //炸弹
                     case ActorTypeBaseDefine.TimeBombActor:
                     case ActorTypeBaseDefine.TriggerBombActor:
                         Destroy(skilltype);
                         break;
-
+                    case ActorTypeBaseDefine.PowerLaserActor:
+                        firetime = DateTime.Now.Ticks - firetime;
+                        Fire(skilltype);
+                        firetime = 0;
+                        break;
 
                 }
             }
@@ -209,7 +217,7 @@ namespace GameActorLogic
 
                 //level.GetEnvirinfointernalBase().AddActor(weapon as ActorBase);
                 var init = weapon.GetInitData();
-                level.AddEventMessagesToHandlerForward(new InitEventMessage(id, actor.GetCamp(), actor.GetActorType(), init.point_x, init.point_y, init.angle, ownerid: weapon.GetOwnerID(), relatpoint_x: weapon.GetRelPositionX(), relatpoint_y: weapon.GetRelPositionY()));
+                level.AddEventMessagesToHandlerForward(new InitEventMessage(id, actor.GetCamp(), actor.GetActorType(), init.point_x, init.point_y, init.angle,weapon.GetLinerDamping(), ownerid: weapon.GetOwnerID(), relatpoint_x: weapon.GetRelPositionX(), relatpoint_y: weapon.GetRelPositionY()));
 
                 skillInitList.Add(new UserData(id, weapon.GetActorType()));
                 OnFire?.Invoke(weapon);
@@ -241,7 +249,7 @@ namespace GameActorLogic
                     //level.GetEnvirinfointernalBase().AddActor(weapon as ActorBase);
                     //weapon.StartSkill();
                     var init = weapon.GetInitData();
-                    level.AddEventMessagesToHandlerForward(new InitEventMessage(id, actor.GetCamp(), actor.GetActorType(), init.point_x, init.point_y, init.angle, ownerid: weapon.GetOwnerID(), relatpoint_x: weapon.GetRelPositionX(), relatpoint_y: weapon.GetRelPositionY()));
+                    level.AddEventMessagesToHandlerForward(new InitEventMessage(id, actor.GetCamp(), actor.GetActorType(), init.point_x, init.point_y, init.angle, weapon.GetLinerDamping(), ownerid: weapon.GetOwnerID(), relatpoint_x: weapon.GetRelPositionX(), relatpoint_y: weapon.GetRelPositionY(), time: firetime));
                     skillInitList.Add(new UserData(id,weapon.GetActorType()));
                     OnFire?.Invoke(weapon);
                 }

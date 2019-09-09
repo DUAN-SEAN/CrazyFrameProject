@@ -42,7 +42,6 @@ namespace GameActorLogic
         protected float MapWidth;
         public EnvirinfoComponentBase()
         {
-
             _world = new World(Vector2.Zero);
             factory = new Factory(_world);
             m_runner = new Runner(_world);
@@ -72,7 +71,7 @@ namespace GameActorLogic
             for (int i = 0; i < _actorList.Count; i++)
             {
                 _actorList[i].Update();
-                //Log.Trace("EnvirinfoComponentBase: Actorid" + _actorList[i].GetActorID() + " 位置坐标:" + _actorList[i].GetPosition() + " 力" + _actorList[i].GetForce() + " 速度" + _actorList[i].GetVelocity() + " 转矩" + _actorList[i].GetAngleVelocity());
+                Log.Trace("EnvirinfoComponentBase:ActorId"+_actorList[i].GetActorID()+ " ActorType" + _actorList[i].GetActorType() + " 位置坐标:" + _actorList[i].GetPosition() + " 力" + _actorList[i].GetForce() + " 速度" + _actorList[i].GetVelocity() + " 转矩" + _actorList[i].GetAngleVelocity());
             }
             stopwatch?.Stop();
             //if (stopwatch.ElapsedMilliseconds > 0)
@@ -139,10 +138,25 @@ namespace GameActorLogic
 
             IBaseComponentContainer container = actor as IBaseComponentContainer;
             var init = container.GetInitData();
-            //TODO 添加进世界
             //actor.CreateBody(factory.CreateRectangleBody(init.point_x, init.point_y, 10, 10));
-
+            
+            //判断是否是激光
+            if(actor.GetActorType() != ActorTypeBaseDefine.ContinuousLaserActor || actor.GetActorType() != ActorTypeBaseDefine.PowerLaserActor)
             actor.CreateBody(factory.CreateSpaceWonderBody(new Vector2(init.point_x, init.point_y), init.angle, actor.GetGameModelByActorType(), new UserData(actor.GetActorID(), actor.GetActorType())));
+            //是持续激光
+            else if(actor.GetActorType() == ActorTypeBaseDefine.ContinuousLaserActor)
+            {
+                //获取长宽属性
+                var WH = CreateLaser(actor.GetActorType());
+                actor.CreateBody(factory.CreateSpaceWonderLaser(new Vector2(init.point_x, init.point_y), init.angle, new UserData(actor.GetActorID(), actor.GetActorType()), WH.X, WH.Y));
+            }
+            //是蓄力激光
+            else if(actor.GetActorType() == ActorTypeBaseDefine.PowerLaserActor)
+            {
+                var WH = CreatePowerLaser(actor.GetActorType(), actor.GetActorInitPro());
+                actor.CreateBody(factory.CreateSpaceWonderLaser(new Vector2(init.point_x, init.point_y), init.angle, new UserData(actor.GetActorID(), actor.GetActorType()), WH.X, WH.Y));
+            }
+
             //Log.Trace("actor id" + actor.GetActorID() + " 生成一个Actor Position:" + actor.GetPosition() + " Forward:" + actor.GetForward());
 
             _actorList.Add(actor);
@@ -157,7 +171,35 @@ namespace GameActorLogic
             _actorList.Remove(actor);
         }
         #endregion
+        #region 创建Body参数
 
+        /// <summary>
+        /// 输入该激光所属的人是谁
+        /// </summary>
+        /// <param name="actortype"></param>
+        /// <returns></returns>
+        public Vector2 CreateLaser(Int32 actortype)
+        {
+            switch (actortype)
+            {
+                default:
+                    return new Vector2(1,10);
+            }
+        }
+
+        public Vector2 CreatePowerLaser(Int32 actortype, float time)
+        {
+
+            switch (actortype)
+            {
+                default:
+                    return new Vector2(1, 10);
+
+            }
+        }
+
+
+        #endregion
         public void Dispose()
         {
             foreach (var actorBase in _actorList)

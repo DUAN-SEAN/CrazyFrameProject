@@ -58,9 +58,9 @@ namespace GameActorLogic {
 
         UserData GetBodyUserData();
 
-        float GetDamping();
+        float GetLinerDamping();
 
-        void SetDamping(float damp);
+        void SetLinerDamping(float damp);
 
         #region 物理同步
 

@@ -52,6 +52,13 @@ namespace GameActorLogic
         /// 设置死亡信息
         /// </summary>
         void SetDeadState(bool dead);
+
+        /// <summary>
+        /// 主要用于激光
+        /// </summary>
+        float GetActorInitPro();
+
+        void SetActorInitPro(float pro);
     }
 
     public interface IInvariantAttributeInternalBase : IInvariantAttributeBase

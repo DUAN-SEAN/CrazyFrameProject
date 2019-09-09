@@ -36,6 +36,7 @@ namespace GameActorLogic
         protected float Torque_copy;
         protected float angleVelocity_copy;
         protected Vector2 LinearVelocity_copy;
+        protected float Damping_copy;
 
 
 
@@ -74,6 +75,8 @@ namespace GameActorLogic
         /// 标志tick间隔
         /// </summary>
         protected long Flagdely = 100000;
+
+
         //protected PhysicalBase()
         //{
         //m_body = Factory.CreateCircleBody(1, 1, 1);
@@ -160,6 +163,7 @@ namespace GameActorLogic
             angleVelocity_copy = m_body.AngularVelocity;
             LinearVelocity_copy = m_body.LinearVelocity;
             Torque_copy = m_body.GetTorque();
+            Damping_copy = m_body.LinearDamping;
             isColliderMethodEnter = false;
             //Force_copy = m_body.GetForce();
             //if(Force_copy.LengthSquared() > 1000000)
@@ -175,7 +179,7 @@ namespace GameActorLogic
             //Log.Trace("Update Mass" + m_body.Mass);
             Force_copy = Vector2.Zero;
 
-            TickFlag();
+        TickFlag();
         }
 
         public void Dispose()
@@ -348,14 +352,13 @@ namespace GameActorLogic
             return isContactExitFlag;
         }
 
-        protected float Damping_copy;
 
-        public float GetDamping()
+        public float GetLinerDamping()
         {
             return Damping_copy;
         }
 
-        public void SetDamping(float damp)
+        public void SetLinerDamping(float damp)
         {
             Damping_copy = damp;
             if(m_body != null)

@@ -13,9 +13,9 @@ namespace Box2DSharp.External
         /// </summary>
         public World world;
 
-        public Factory(World world1)
+        public Factory(World world)
         {
-            world = world1;
+            this.world = world;
         }
 
         #region BodyDef
@@ -84,7 +84,13 @@ namespace Box2DSharp.External
         internal PolygonShape CreateRectangleShape(float width, float height, float offsetX = 0, float offsetY = 0)
         {
             var bodyShape = new PolygonShape();
-            bodyShape.SetAsBox(width / 2, height / 2);
+            //bodyShape.SetAsBox(width / 2, height / 2);
+            var vertices = new Vector2[4];
+            vertices[0].Set(-width / 2 + offsetX, -height / 2 + offsetY);
+            vertices[1].Set(-width / 2 + offsetX, height / 2 + offsetY);
+            vertices[2].Set(width / 2 + offsetX, height / 2 + offsetY);
+            vertices[3].Set(width / 2 + offsetX, -height / 2 + offsetY);
+            bodyShape.Set(vertices);
             return bodyShape;
         }
 
@@ -97,6 +103,7 @@ namespace Box2DSharp.External
         {
             var bodyShape = new CircleShape();
             bodyShape.Radius = radius;
+            bodyShape.Position = new Vector2(offsetX, offsetY);
             return bodyShape;
         }
 
@@ -111,10 +118,10 @@ namespace Box2DSharp.External
         {
             var bodyShape = new PolygonShape();
             var vertices = new Vector2[4];
-            vertices[0].Set(-top / 2, height / 2);
-            vertices[1].Set(top / 2, height / 2);
-            vertices[2].Set(bottom / 2, -height / 2);
-            vertices[3].Set(-bottom / 2, -height / 2);
+            vertices[0].Set(-top / 2 + offsetX, height / 2 + offsetY);
+            vertices[1].Set(top / 2 + offsetX, height / 2 + offsetY);
+            vertices[2].Set(bottom / 2 + offsetX, -height / 2 + offsetY);
+            vertices[3].Set(-bottom / 2 + offsetX, -height / 2 + offsetY);
             bodyShape.Set(vertices);
             return bodyShape;
         }
@@ -193,42 +200,42 @@ namespace Box2DSharp.External
                     {
                         return CreateFighterShipBBody(position, angle, userData);
                     }
-                //case GameModel.DroneShip:
-                //    {
-                //        return CreateDroneShipBody(position, angle, userData);
-                //    }
-                //case GameModel.AnnihilationShip:
-                //    {
-                //        return CreateAnnihilationShipBody(position, angle, userData);
-                //    }
-                //case GameModel.EliteShipA:
-                //    {
-                //        return CreateEliteShipABody(position, angle, userData);
-                //    }
-                //case GameModel.EliteShipB:
-                //    {
-                //        return CreateEliteShipBBody(position, angle, userData);
-                //    }
-                //case GameModel.BaseStation:
-                //    {
-                //        return CreateBaseStationBody(position, angle, userData);
-                //    }
+                case GameModel.DroneShip:
+                    {
+                        return CreateDroneShipBody(position, angle, userData);
+                    }
+                case GameModel.AnnihilationShip:
+                    {
+                        return CreateAnnihilationShipBody(position, angle, userData);
+                    }
+                case GameModel.EliteShipA:
+                    {
+                        return CreateEliteShipABody(position, angle, userData);
+                    }
+                case GameModel.EliteShipB:
+                    {
+                        return CreateEliteShipBBody(position, angle, userData);
+                    }
+                case GameModel.BaseStation:
+                    {
+                        return CreateBaseStationBody(position, angle, userData);
+                    }
                 case GameModel.MachineGun:
                     {
                         return CreateMachineGunBody(position, angle, userData);
                     }
-                //case GameModel.AntiAircraftGun:
-                //    {
-                //        return CreateAntiAircraftGunBody(position, angle, userData);
-                //    }
-                //case GameModel.Torpedo:
-                //    {
-                //        return CreateTorpedoBody(position, angle, userData);
-                //    }
-                //case GameModel.TrackingMissile:
-                //    {
-                //        return CreateTrackingMissileBody(position, angle, userData);
-                //    }
+                case GameModel.AntiAircraftGun:
+                    {
+                        return CreateAntiAircraftGunBody(position, angle, userData);
+                    }
+                case GameModel.Torpedo:
+                    {
+                        return CreateTorpedoBody(position, angle, userData);
+                    }
+                case GameModel.TrackingMissile:
+                    {
+                        return CreateTrackingMissileBody(position, angle, userData);
+                    }
                 //case GameModel.ContinuousLaser:
                 //    {
                 //        return CreateContinuousLaserBody(position, angle, userData);
@@ -237,19 +244,43 @@ namespace Box2DSharp.External
                 //    {
                 //        return CreatePowerLaserBody(position, angle, userData);
                 //    }
-                //case GameModel.TimeBomb:
-                //    {
-                //        return CreateTimeBombBody(position, angle, userData);
-                //    }
-                //case GameModel.TriggerBomb:
-                //    {
-                //        return CreateTriggerBomb(position, angle, userData);
-                //    }
+                case GameModel.TimeBomb:
+                    {
+                        return CreateTimeBombBody(position, angle, userData);
+                    }
+                case GameModel.TriggerBomb:
+                    {
+                        return CreateTriggerBomb(position, angle, userData);
+                    }
                 default:
                     {
                         return CreateRectangleBody(0, 0, 1, 1, BodyType.StaticBody);
                     }
             }
+        }
+
+        /// <summary>
+        /// 生成激光
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="angle"></param>
+        /// <param name="userData"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <returns></returns>
+        public Body CreateSpaceWonderLaser(Vector2 position, float angle, object userData, float width, float height)
+        {
+            var bodyDef = CreateBodyDef(position.X, position.Y, angle);
+            var body = world.CreateBody(bodyDef);
+
+            var bodyShape = CreateRectangleShape(width, height);
+
+            var fd1 = CreateMissileFixtureDef(bodyShape);
+
+            body.CreateFixture(fd1);
+
+            body.UserData = userData;
+            return body;
         }
 
         private Body CreateTriggerBomb(Vector2 position, float angle, object userData)
@@ -262,15 +293,22 @@ namespace Box2DSharp.External
             throw new NotImplementedException();
         }
 
-        private Body CreatePowerLaserBody(Vector2 position, float angle, object userData)
-        {
-            throw new NotImplementedException();
-        }
+        //private Body CreatePowerLaserBody(Vector2 position, float angle, object userData)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        private Body CreateContinuousLaserBody(Vector2 position, float angle, object userData)
-        {
-            throw new NotImplementedException();
-        }
+        ///// <summary>
+        ///// 持续激光
+        ///// </summary>
+        ///// <param name="position"></param>
+        ///// <param name="angle"></param>
+        ///// <param name="userData"></param>
+        ///// <returns></returns>
+        //private Body CreateContinuousLaserBody(Vector2 position, float angle, object userData)
+        //{
+
+        //}
 
         private Body CreateTrackingMissileBody(Vector2 position, float angle, object userData)
         {
@@ -298,8 +336,10 @@ namespace Box2DSharp.External
         {
             var bodyDef = CreateBodyDef(position.X, position.Y, angle);
             var body = world.CreateBody(bodyDef);
+
             var bodyShape = CreateRectangleShape(0.3f, 1);
             var fd1 = CreateBulletFixtureDef(bodyShape);
+
             body.CreateFixture(fd1);
             body.UserData = userData;
             body.IsBullet = true;
@@ -311,19 +351,135 @@ namespace Box2DSharp.External
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 精英船B
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="angle"></param>
+        /// <param name="userData"></param>
+        /// <returns></returns>
         private Body CreateEliteShipBBody(Vector2 position, float angle, object userData)
         {
-            throw new NotImplementedException();
+            var bodyDef = CreateBodyDef(position.X, position.Y, angle);
+            var body = world.CreateBody(bodyDef);
+
+            var bodyShape = CreateRectangleShape(6, 52);
+
+            var bodyShape2 = CreateRectangleShape(10, 18, -8, -1);
+            var bodyShape3 = CreateRectangleShape(10, 18, 8, -1);
+
+            var bodyShape4 = new PolygonShape();
+            var vertices = new Vector2[3];
+            vertices[0].Set(-3, 10f);
+            vertices[1].Set(-3f, 23f);
+            vertices[2].Set(-14, 23f);
+            bodyShape4.Set(vertices);
+
+            var bodyShape5 = new PolygonShape();
+            vertices[0].Set(3, 10f);
+            vertices[1].Set(3f, 23f);
+            vertices[2].Set(14, 23f);
+            bodyShape5.Set(vertices);
+
+            var bodyShape6 = new PolygonShape();
+            vertices[0].Set(-3, -11f);
+            vertices[1].Set(-3f, -19f);
+            vertices[2].Set(-10, -19f);
+            bodyShape6.Set(vertices);
+
+            var bodyShape7 = new PolygonShape();
+            vertices[0].Set(3, -11f);
+            vertices[1].Set(3f, -19f);
+            vertices[2].Set(10, -19f);
+            bodyShape7.Set(vertices);
+
+
+            var fd1 = CreateShipFixtureDef(bodyShape);
+            var fd2 = CreateShipFixtureDef(bodyShape2);
+            var fd3 = CreateShipFixtureDef(bodyShape3);
+            var fd4 = CreateShipFixtureDef(bodyShape4);
+            var fd5 = CreateShipFixtureDef(bodyShape5);
+            var fd6 = CreateShipFixtureDef(bodyShape6);
+            var fd7 = CreateShipFixtureDef(bodyShape7);
+
+            body.CreateFixture(fd1);
+            body.CreateFixture(fd2);
+            body.CreateFixture(fd3);
+            body.CreateFixture(fd4);
+            body.CreateFixture(fd5);
+            body.CreateFixture(fd6);
+            body.CreateFixture(fd7);
+
+            body.UserData = userData;
+            body.LinearDamping = 0.01f;
+            return body;
         }
 
+
+        /// <summary>
+        /// 精英船A
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="angle"></param>
+        /// <param name="userData"></param>
+        /// <returns></returns>
         private Body CreateEliteShipABody(Vector2 position, float angle, object userData)
         {
-            throw new NotImplementedException();
+            var bodyDef = CreateBodyDef(position.X, position.Y, angle);
+            var body = world.CreateBody(bodyDef);
+
+            var bodyShape = CreateRectangleShape(60, 160);
+            var bodyShape2 = CreateTrapezoidShape(40, 60, 130, 0, 145);
+
+            var fd1 = CreateShipFixtureDef(bodyShape);
+            var fd2 = CreateShipFixtureDef(bodyShape2);
+
+            body.CreateFixture(fd1);
+            body.CreateFixture(fd2);
+
+            body.UserData = userData;
+            body.LinearDamping = 0.01f;
+            return body;
         }
 
+        /// <summary>
+        /// 歼灭船
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="angle"></param>
+        /// <param name="userData"></param>
+        /// <returns></returns>
         private Body CreateAnnihilationShipBody(Vector2 position, float angle, object userData)
         {
-            throw new NotImplementedException();
+            var bodyDef = CreateBodyDef(position.X, position.Y, angle);
+            var body = world.CreateBody(bodyDef);
+
+            var bodyShape = CreateRectangleShape(2, 2);
+
+            var bodyShape2 = new PolygonShape();
+            var vertices = new Vector2[3];
+            vertices[0].Set(-1, 0f);
+            vertices[1].Set(-2f, -0.5f);
+            vertices[2].Set(-1, -0.5f);
+            bodyShape2.Set(vertices);
+
+            var bodyShape3 = new PolygonShape();
+            vertices[0].Set(1, 0f);
+            vertices[1].Set(2f, -0.5f);
+            vertices[2].Set(1, -0.5f);
+            bodyShape3.Set(vertices);
+
+            var fd1 = CreateShipFixtureDef(bodyShape);
+            var fd2 = CreateShipFixtureDef(bodyShape2);
+            var fd3 = CreateShipFixtureDef(bodyShape3);
+
+            body.CreateFixture(fd1);
+            body.CreateFixture(fd2);
+            body.CreateFixture(fd3);
+
+            body.UserData = userData;
+            body.LinearDamping = 0.01f;
+            return body;
         }
 
         /// <summary>
@@ -335,7 +491,24 @@ namespace Box2DSharp.External
         /// <returns></returns>
         private Body CreateDroneShipBody(Vector2 position, float angle, object userData)
         {
-            throw new NotImplementedException();
+            var bodyDef = CreateBodyDef(position.X, position.Y, angle);
+            var body = world.CreateBody(bodyDef);
+
+            var bodyShape = CreateCircleShape(1);
+            var bodyShape2 = CreateRectangleShape(0.3f, 4, -1.15f, 1f);
+            var bodyShape3 = CreateRectangleShape(0.3f, 4, 1.15f, 1f);
+
+            var fd1 = CreateShipFixtureDef(bodyShape);
+            var fd2 = CreateShipFixtureDef(bodyShape2);
+            var fd3 = CreateShipFixtureDef(bodyShape3);
+
+            body.CreateFixture(fd1);
+            body.CreateFixture(fd2);
+            body.CreateFixture(fd3);
+
+            body.UserData = userData;
+            body.LinearDamping = 0.01f;
+            return body;
         }
 
         /// <summary>
@@ -360,12 +533,11 @@ namespace Box2DSharp.External
             bodyShape2.Set(vertices);
 
             var bodyShape3 = new PolygonShape();
-            var vertices2 = new Vector2[4];
-            vertices2[0].Set(-1, 2.5f);
-            vertices2[1].Set(-1f, 5.5f);
-            vertices2[2].Set(1f, 5.5f);
-            vertices2[3].Set(1f, 2.5f);
-            bodyShape3.Set(vertices2);
+            vertices[0].Set(-1, 2.5f);
+            vertices[1].Set(-1f, 5.5f);
+            vertices[2].Set(1f, 5.5f);
+            vertices[3].Set(1f, 2.5f);
+            bodyShape3.Set(vertices);
 
             var fd1 = CreateShipFixtureDef(bodyShape);
             var fd2 = CreateShipFixtureDef(bodyShape2);
@@ -374,6 +546,7 @@ namespace Box2DSharp.External
             body.CreateFixture(fd1);
             body.CreateFixture(fd2);
             body.CreateFixture(fd3);
+
             body.UserData = userData;
             body.LinearDamping = 0.1f;
             return body;
@@ -401,12 +574,11 @@ namespace Box2DSharp.External
             bodyShape2.Set(vertices);
 
             var bodyShape3 = new PolygonShape();
-            var vertices2 = new Vector2[4];
-            vertices2[0].Set(-1.5f, 3.25f);
-            vertices2[1].Set(-0.5f, 7.25f);
-            vertices2[2].Set(0.5f, 7.25f);
-            vertices2[3].Set(1.5f, 3.25f);
-            bodyShape3.Set(vertices2);
+            vertices[0].Set(-1.5f, 3.25f);
+            vertices[1].Set(-0.5f, 7.25f);
+            vertices[2].Set(0.5f, 7.25f);
+            vertices[3].Set(1.5f, 3.25f);
+            bodyShape3.Set(vertices);
 
             var fd1 = CreateShipFixtureDef(bodyShape);
             var fd2 = CreateShipFixtureDef(bodyShape2);
@@ -415,6 +587,7 @@ namespace Box2DSharp.External
             body.CreateFixture(fd1);
             body.CreateFixture(fd2);
             body.CreateFixture(fd3);
+
             body.UserData = userData;
             body.LinearDamping = 0.1f;
             return body;
@@ -430,6 +603,7 @@ namespace Box2DSharp.External
             var bodyDef = CreateBodyDef(position.X, position.Y, angle);
             var body = world.CreateBody(bodyDef);
             var bodyShape = CreateRectangleShape(4.2f, 8.5f);
+
             var bodyShape2 = new PolygonShape();
             var vertices = new Vector2[3];
             vertices[0].Set(1.2f, 4.25f);
@@ -457,13 +631,13 @@ namespace Box2DSharp.External
             body.CreateFixture(fd2);
             body.CreateFixture(fd3);
             body.CreateFixture(fd4);
+
             body.UserData = userData;
             body.LinearDamping = 0.1f;
             return body;
         }
 
         #endregion
-
 
         #region Body(直接创建一个Body，不建议这么做)
 

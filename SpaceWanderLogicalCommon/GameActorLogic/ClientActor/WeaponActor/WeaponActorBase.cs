@@ -136,7 +136,7 @@ namespace GameActorLogic
         {
             var init = GetInitData();
             level.AddEventMessagesToHandlerForward(new InitEventMessage(ActorID, GetCamp(), ActorType, init.point_x,
-                init.point_y, init.angle, ownerid: GetOwnerID(), relatpoint_x: GetRelPositionX(), relatpoint_y: GetRelPositionY()));
+                init.point_y, init.angle,GetLinerDamping(), ownerid: GetOwnerID(), relatpoint_x: GetRelPositionX(), relatpoint_y: GetRelPositionY()));
             _weaponEventComponent.Start();
         }
 
