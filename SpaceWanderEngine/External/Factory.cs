@@ -235,10 +235,10 @@ namespace Box2DSharp.External
                     {
                         return CreateEliteShipBBody(position, angle, userData);
                     }
-                case GameModel.BaseStation:
-                    {
-                        return CreateBaseStationBody(position, angle, userData);
-                    }
+                //case GameModel.BaseStation:
+                //    {
+                //        return CreateBaseStationBody(position, angle, userData);
+                //    }
                 case GameModel.MachineGun:
                     {
                         return CreateMachineGunBody(position, angle, userData);
@@ -273,7 +273,7 @@ namespace Box2DSharp.External
                 //    }
                 default:
                     {
-                        return CreateRectangleBody(0, 0, 1, 1, BodyType.StaticBody);
+                        return CreateRectangleBody(position.X, position.Y, 1, 1, BodyType.DynamicBody);
                     }
             }
         }

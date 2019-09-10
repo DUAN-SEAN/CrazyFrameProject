@@ -71,9 +71,10 @@ namespace GameActorLogic
             for (int i = 0; i < _actorList.Count; i++)
             {
                 _actorList[i].Update();
-                //Log.Trace("EnvirinfoComponentBase:ActorId" + _actorList[i].GetActorID() + " ActorType" + _actorList[i].GetActorType() + " 位置坐标:" + _actorList[i].GetPosition() + " 力" + _actorList[i].GetForce() + " 速度" + _actorList[i].GetVelocity() + " 转矩" + _actorList[i].GetAngleVelocity());
+                if(_actorList[i].IsWeapon())
+                Log.Trace("EnvirinfoComponentBase:ActorId" + _actorList[i].GetActorID() + " ActorType" + _actorList[i].GetActorType() + " 位置坐标:" + _actorList[i].GetPosition() + " 力" + _actorList[i].GetForce() + " 速度" + _actorList[i].GetVelocity() + " 转矩" + _actorList[i].GetAngleVelocity());
                 //if(_actorList[i].GetActorType() == ActorTypeBaseDefine.ContinuousLaserActor)
-                //Log.Trace("EnvirinfoComponentBase:ActorId" + _actorList[i].GetActorID() + " ActorType" + _actorList[i].GetActorType()+"Fixture Count"+ ((IBaseComponentContainer)_actorList[i]).GetPhysicalinternalBase().GetBody().FixtureList.Count + " IsSenior"+((IBaseComponentContainer)_actorList[i]).GetPhysicalinternalBase().GetBody().FixtureList[0].IsSensor);
+                //Log.Trace("EnvirinfoComponentBase:ActorId" + _actorList[i].GetActorID() + " ActorType" + _actorList[i].GetActorType() + "Fixture Count" + ((IBaseComponentContainer)_actorList[i]).GetPhysicalinternalBase().GetBody().FixtureList.Count + " IsSenior" + ((IBaseComponentContainer)_actorList[i]).GetPhysicalinternalBase().GetBody().FixtureList[0].IsSensor);
             }
             stopwatch?.Stop();
             //if (stopwatch.ElapsedMilliseconds > 0)
@@ -158,8 +159,8 @@ namespace GameActorLogic
                 var WH = ActorHelper.GetLaserShapeByShip(actor.GetActorType(), heightpro: actor.GetActorInitPro());
                 actor.CreateBody(factory.CreateSpaceWonderLaser(new Vector2(init.point_x, init.point_y), init.angle, new UserData(actor.GetActorID(), actor.GetActorType()), WH.X, WH.Y));
             }
-
-            //Log.Trace("actor id" + actor.GetActorID() + " 生成一个Actor Position:" + actor.GetPosition() + " Forward:" + actor.GetForward());
+            Log.Trace("AddActor: actorID" + actor.GetActorID() + " InitDate" + init.point_x + " " + init.point_y + " " + init.angle);
+            Log.Trace("actor id" + actor.GetActorID() + " 生成一个Actor Position:" + actor.GetPosition() + " Forward:" + actor.GetForward());
 
             _actorList.Add(actor);
         }

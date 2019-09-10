@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Box2DSharp.External;
 using Crazy.Common;
 
 namespace GameActorLogic
@@ -240,10 +241,10 @@ namespace GameActorLogic
                     var id = level.GetCreateInternalComponentBase().GetCreateID();
                     var weapon = actor as ISkillContainer;
                     weapon.SetRelPosition(0, 0);
-                    //Log.Trace("当前发射者 位置：" + container.GetPhysicalinternalBase().GetBody().GetPosition() + " 朝向：" +
-                    //          container.GetPhysicalinternalBase().GetBody().GetAngle());
-                    //Log.Trace("当前武器箱 位置："+actor.GetBody().Position + " 朝向："+actor.GetBody().Forward);
-                    //Log.Trace("被发射武器"+weapon.GetBody().Id+" 位置：" + weapon.GetBody().Position + " 朝向：" + weapon.GetBody().Forward+" 朝向角度："+weapon.GetBody().Angle);
+                    Log.Trace("当前发射者 位置：" + container.GetPhysicalinternalBase().GetBody().GetPosition() + " 朝向：" +
+                              container.GetPhysicalinternalBase().GetBody().GetAngle());
+                    Log.Trace("当前武器箱 位置：" + actor.GetInitData().point_x + " " + actor.GetInitData().point_y + " 朝向：" + actor.GetInitData().angle);
+                  
 
 
                     //level.GetEnvirinfointernalBase().AddActor(weapon as ActorBase);
