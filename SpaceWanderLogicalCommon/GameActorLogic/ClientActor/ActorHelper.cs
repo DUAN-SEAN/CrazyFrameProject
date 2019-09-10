@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -175,6 +176,19 @@ namespace GameActorLogic
 
 
             return GameModel.ModelNone;
+        }
+
+        /// <summary>
+        /// 用船的类型来找到指定的大小
+        /// 长宽比例默认为1
+        /// </summary>
+        public static Vector2 GetLaserShapeByShip(Int32 shiptype,float heightpro = 1,float widthpro = 1)
+        {
+            switch (shiptype)
+            {
+                default:
+                    return new Vector2(1, 40);
+            }
         }
     }
 }
