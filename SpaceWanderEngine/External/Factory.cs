@@ -243,18 +243,18 @@ namespace Box2DSharp.External
                     {
                         return CreateMachineGunBody(position, angle, userData);
                     }
-                case GameModel.AntiAircraftGun:
-                    {
-                        return CreateAntiAircraftGunBody(position, angle, userData);
-                    }
-                case GameModel.Torpedo:
-                    {
-                        return CreateTorpedoBody(position, angle, userData);
-                    }
-                case GameModel.TrackingMissile:
-                    {
-                        return CreateTrackingMissileBody(position, angle, userData);
-                    }
+                //case GameModel.AntiAircraftGun:
+                //    {
+                //        return CreateAntiAircraftGunBody(position, angle, userData);
+                //    }
+                //case GameModel.Torpedo:
+                //    {
+                //        return CreateTorpedoBody(position, angle, userData);
+                //    }
+                //case GameModel.TrackingMissile:
+                //    {
+                //        return CreateTrackingMissileBody(position, angle, userData);
+                //    }
                 //case GameModel.ContinuousLaser:
                 //    {
                 //        return CreateContinuousLaserBody(position, angle, userData);
@@ -263,14 +263,14 @@ namespace Box2DSharp.External
                 //    {
                 //        return CreatePowerLaserBody(position, angle, userData);
                 //    }
-                case GameModel.TimeBomb:
-                    {
-                        return CreateTimeBombBody(position, angle, userData);
-                    }
-                case GameModel.TriggerBomb:
-                    {
-                        return CreateTriggerBomb(position, angle, userData);
-                    }
+                //case GameModel.TimeBomb:
+                //    {
+                //        return CreateTimeBombBody(position, angle, userData);
+                //    }
+                //case GameModel.TriggerBomb:
+                //    {
+                //        return CreateTriggerBomb(position, angle, userData);
+                //    }
                 default:
                     {
                         return CreateRectangleBody(0, 0, 1, 1, BodyType.StaticBody);
