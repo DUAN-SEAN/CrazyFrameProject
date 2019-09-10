@@ -151,7 +151,7 @@ namespace GameActorLogic
                 actor.SetLinerDamping(initEvent.LinerDamping);
                 levelContainer.GetEnvirinfointernalBase().AddActor(actor);
             }
-            Log.Trace("HandlerComponentBase HandlerInitEvent: 生成一个Actor id" + actor.GetActorID() + " " + actor.GetActorType());
+            Log.Trace("HandlerComponentBase HandlerInitEvent: 生成一个Actor id" + actor.GetActorID() + " " + actor.GetActorType() + "Position" + actor.GetPosition() + " Forward" + actor.GetForward());
             //执行回调生成事件
             OnInitMessageHandler?.Invoke(initEvent.actorid);
             initMessageNum++;
