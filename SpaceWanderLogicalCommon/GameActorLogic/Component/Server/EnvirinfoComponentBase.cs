@@ -14,7 +14,7 @@ using SpaceWanderEngine;
 namespace GameActorLogic
 {
 
-    public class EnvirinfoComponentBase:
+    public class EnvirinfoComponentBase :
         IEnvirinfoBase,
         IEnvirinfoInternalBase
     {
@@ -52,7 +52,7 @@ namespace GameActorLogic
         /// <summary>
         /// engine 应该已经被添加进 runner
         /// </summary>
-        protected EnvirinfoComponentBase(World engine,Runner runner)
+        protected EnvirinfoComponentBase(World engine, Runner runner)
         {
             _world = engine;
             m_runner = runner;
@@ -71,8 +71,8 @@ namespace GameActorLogic
             for (int i = 0; i < _actorList.Count; i++)
             {
                 _actorList[i].Update();
-                if(_actorList[i].IsWeapon())
-                Log.Trace("EnvirinfoComponentBase:ActorId" + _actorList[i].GetActorID() + " ActorType" + _actorList[i].GetActorType() + " 位置坐标:" + _actorList[i].GetPosition() + " 力" + _actorList[i].GetForce() + " 速度" + _actorList[i].GetVelocity() + " 转矩" + _actorList[i].GetAngleVelocity());
+                //if (_actorList[i].IsWeapon())
+                //Log.Trace("EnvirinfoComponentBase:ActorId" + _actorList[i].GetActorID() + " ActorType" + _actorList[i].GetActorType() + " 位置坐标:" + _actorList[i].GetPosition() + " 力" + _actorList[i].GetForce() + " 速度" + _actorList[i].GetVelocity() + " 转矩" + _actorList[i].GetAngleVelocity());
                 //if(_actorList[i].GetActorType() == ActorTypeBaseDefine.ContinuousLaserActor)
                 //Log.Trace("EnvirinfoComponentBase:ActorId" + _actorList[i].GetActorID() + " ActorType" + _actorList[i].GetActorType() + "Fixture Count" + ((IBaseComponentContainer)_actorList[i]).GetPhysicalinternalBase().GetBody().FixtureList.Count + " IsSenior" + ((IBaseComponentContainer)_actorList[i]).GetPhysicalinternalBase().GetBody().FixtureList[0].IsSensor);
             }
@@ -142,25 +142,25 @@ namespace GameActorLogic
             IBaseComponentContainer container = actor as IBaseComponentContainer;
             var init = container.GetInitData();
             //actor.CreateBody(factory.CreateRectangleBody(init.point_x, init.point_y, 10, 10));
-            
+
             //判断是否是激光
-            if(actor.GetActorType() != ActorTypeBaseDefine.ContinuousLaserActor && actor.GetActorType() != ActorTypeBaseDefine.PowerLaserActor)
-            actor.CreateBody(factory.CreateSpaceWonderBody(new Vector2(init.point_x, init.point_y), init.angle, actor.GetGameModelByActorType(), new UserData(actor.GetActorID(), actor.GetActorType())));
+            if (actor.GetActorType() != ActorTypeBaseDefine.ContinuousLaserActor && actor.GetActorType() != ActorTypeBaseDefine.PowerLaserActor)
+                actor.CreateBody(factory.CreateSpaceWonderBody(new Vector2(init.point_x, init.point_y), init.angle, actor.GetGameModelByActorType(), new UserData(actor.GetActorID(), actor.GetActorType())));
             //是持续激光
-            else if(actor.GetActorType() == ActorTypeBaseDefine.ContinuousLaserActor)
+            else if (actor.GetActorType() == ActorTypeBaseDefine.ContinuousLaserActor)
             {
                 //获取长宽属性
                 var WH = ActorHelper.GetLaserShapeByShip(actor.GetActorType());
                 actor.CreateBody(factory.CreateSpaceWonderLaser(new Vector2(init.point_x, init.point_y), init.angle, new UserData(actor.GetActorID(), actor.GetActorType()), WH.X, WH.Y));
             }
             //是蓄力激光
-            else if(actor.GetActorType() == ActorTypeBaseDefine.PowerLaserActor)
+            else if (actor.GetActorType() == ActorTypeBaseDefine.PowerLaserActor)
             {
                 var WH = ActorHelper.GetLaserShapeByShip(actor.GetActorType(), heightpro: actor.GetActorInitPro());
                 actor.CreateBody(factory.CreateSpaceWonderLaser(new Vector2(init.point_x, init.point_y), init.angle, new UserData(actor.GetActorID(), actor.GetActorType()), WH.X, WH.Y));
             }
-            Log.Trace("AddActor: actorID" + actor.GetActorID() + " InitDate" + init.point_x + " " + init.point_y + " " + init.angle);
-            Log.Trace("actor id" + actor.GetActorID() + " 生成一个Actor Position:" + actor.GetPosition() + " Forward:" + actor.GetForward());
+            //Log.Trace("AddActor: actorID" + actor.GetActorID() + " InitDate" + init.point_x + " " + init.point_y + " " + init.angle);
+            //Log.Trace("actor id" + actor.GetActorID() + " 生成一个Actor Position:" + actor.GetPosition() + " Forward:" + actor.GetForward());
 
             _actorList.Add(actor);
         }
@@ -184,9 +184,9 @@ namespace GameActorLogic
             _actorList.Clear();
             _actorList = null;
 
-        
+
             m_runner = null;
-            _world= null;
+            _world = null;
 
 
         }
@@ -196,7 +196,7 @@ namespace GameActorLogic
         /// </summary>
         public void AddAirWall()
         {
-            factory.CreateRectangleBody(0, -MapHeight / 2, MapWidth, 5,bodyType:BodyType.StaticBody);
+            factory.CreateRectangleBody(0, -MapHeight / 2, MapWidth, 5, bodyType: BodyType.StaticBody);
             factory.CreateRectangleBody(0, MapHeight / 2, MapWidth, 5, bodyType: BodyType.StaticBody);
             factory.CreateRectangleBody(MapWidth / 2, 0, 5, MapHeight, bodyType: BodyType.StaticBody);
             factory.CreateRectangleBody(-MapWidth / 2, 0, 5, MapHeight, bodyType: BodyType.StaticBody);
