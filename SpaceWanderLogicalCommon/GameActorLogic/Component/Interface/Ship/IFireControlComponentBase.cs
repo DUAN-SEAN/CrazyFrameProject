@@ -74,9 +74,9 @@ namespace GameActorLogic
     {
         event Action<ISkillContainer> OnFire;
 
-        event Action<ISkillContainer> OnEnd;
+        event Action<ulong> OnEnd;
 
-        event Action<ISkillContainer> OnDestroy;
+        event Action<ulong> OnDestroy;
     }
 
 

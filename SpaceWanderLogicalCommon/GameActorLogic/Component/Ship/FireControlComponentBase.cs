@@ -264,8 +264,9 @@ namespace GameActorLogic
                 if (skillInitList[j].ActorType == i)
                 {
                     var actor = level.GetActor(skillInitList[j].ActorID) as ISkillContainer;
-                    actor.EndSkill();
-                    OnEnd?.Invoke(actor);
+                    //actor.EndSkill();
+                    level.AddEventMessagesToHandlerForward(new DestroyEventMessage(skillInitList[j].ActorID));
+                    OnEnd?.Invoke(skillInitList[j].ActorID);
                 }
             }
         }
@@ -283,10 +284,12 @@ namespace GameActorLogic
             //从集合中删除
             foreach (var weaponBaseContainer in weaponList)
             {
-                var actor = level.GetActor(weaponBaseContainer.ActorID) as ISkillContainer;
+                //var actor = level.GetActor(weaponBaseContainer.ActorID) as ISkillContainer;
                 skillInitList.Remove(weaponBaseContainer);
-                OnDestroy?.Invoke(actor);
-                actor?.DestroySkill();
+                OnDestroy?.Invoke(weaponBaseContainer.ActorID);
+                level.AddEventMessagesToHandlerForward(new DestroyEventMessage(weaponBaseContainer.ActorID));
+
+                //actor?.DestroySkill();
             }
 
         }
@@ -327,8 +330,8 @@ namespace GameActorLogic
         #region IFireControlinternalBase
 
         public event Action<ISkillContainer> OnFire;
-        public event Action<ISkillContainer> OnEnd;
-        public event Action<ISkillContainer> OnDestroy;
+        public event Action<ulong> OnEnd;
+        public event Action<ulong> OnDestroy;
 
 
         #endregion
