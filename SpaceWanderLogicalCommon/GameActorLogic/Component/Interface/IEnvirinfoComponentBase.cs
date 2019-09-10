@@ -36,6 +36,9 @@ namespace GameActorLogic
         /// 获取所有武器Actor
         /// </summary>
         List<ActorBase> GetWeaponActors();
+
+        List<ActorBase> GetShipActorsByCamp(int camp);
+
         /// <summary>
         /// 获取一个Actor
         /// </summary>

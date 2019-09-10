@@ -326,7 +326,10 @@ namespace GameActorLogic
             return _envirinfoComponent.GetActorByBodyUserData(bodyid);
         }
 
-       
+       public List<ActorBase> GetShipActorsByCamp(int camp)
+        {
+            return _envirinfoComponent.GetShipActorsByCamp(camp);
+        }
 
         public void SetDelta(float delta)
         {

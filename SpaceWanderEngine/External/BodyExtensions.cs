@@ -35,6 +35,19 @@ namespace Box2DSharp.External
         }
 
         /// <summary>
+        /// 爆炸冲量
+        /// </summary>
+        /// <param name="body"></param>
+        /// <param name="boomPos"></param>
+        /// <param name="forceProc"></param>
+        public static void Boom(this Body body, Vector2 boomPos, float forceProc)
+        {
+            Vector2 tmp = body.GetPosition() - boomPos;
+            body.ApplyLinearImpulseToCenter(tmp * forceProc, true);
+        }
+
+
+        /// <summary>
         /// 追向目标
         /// </summary>
         /// <param name="body"></param>

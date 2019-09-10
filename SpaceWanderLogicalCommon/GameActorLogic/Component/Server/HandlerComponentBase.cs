@@ -151,7 +151,7 @@ namespace GameActorLogic
                 actor.SetLinerDamping(initEvent.LinerDamping);
                 levelContainer.GetEnvirinfointernalBase().AddActor(actor);
             }
-            Log.Trace("HandlerComponentBase HandlerInitEvent: 生成一个Actor id" + actor.GetActorID() + " " + actor.GetActorType() + "Position" + actor.GetPosition() + " Forward" + actor.GetForward());
+            //Log.Trace("HandlerComponentBase HandlerInitEvent: 生成一个Actor id" + actor.GetActorID() + " " + actor.GetActorType() + "Position" + actor.GetPosition() + " Forward" + actor.GetForward());
             //执行回调生成事件
             OnInitMessageHandler?.Invoke(initEvent.actorid);
             initMessageNum++;
@@ -269,7 +269,7 @@ namespace GameActorLogic
         {
             if (!(command is SkillCommand commanditme)) return;
             if (!(GetActor(commanditme.actorid) is ShipActorBase ship)) return;
-            Log.Debug("HandlerSkillCommand: 处理了一个Skill指令" + commanditme.actorid + " " + commanditme.skilltype + " " + commanditme.skillcontrol);
+            //Log.Debug("HandlerSkillCommand: 处理了一个Skill指令" + commanditme.actorid + " " + commanditme.skilltype + " " + commanditme.skillcontrol);
             ship.SendButtonState(commanditme.actorid,commanditme.skilltype,commanditme.skillcontrol);
             //ship.SendButtonState(commanditme.skillcontrol);
             //switch (commanditme.skillcontrol)

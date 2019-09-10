@@ -11,14 +11,16 @@ namespace GameActorLogic
 {
     public class GogogoAiComponent : AIComponentBase
     {
-      
+        protected float aiforce;
 
-        public GogogoAiComponent(IBaseComponentContainer container) : base(container)
+        public GogogoAiComponent(IBaseComponentContainer container,float aiforce) : base(container)
         {
+            this.aiforce = aiforce;
         }
 
         public GogogoAiComponent(GogogoAiComponent clone, IBaseComponentContainer container) : base(clone, container)
         {
+            this.aiforce = clone.aiforce;
         }
 
         public override AIComponentBase Clone(IBaseComponentContainer container)
@@ -33,7 +35,7 @@ namespace GameActorLogic
             //Log.Trace("武器Actor id"+container.GetActorID()+" Body id："+container.GetBodyId()+" 施加力"+"角度："+container.GetForwardAngle()+"方向:" + container.GetForward() + " 坐标" + container.GetPosition());
             if(i==0)
             {
-                container.AddThrust(15000);
+                container.AddThrust(aiforce);
                 Log.Trace("武器Actor id" + container.GetActorID() + " 施加力" + "角度：" + container.GetForwardAngle() + "方向:" + container.GetForward() + " 坐标" + container.GetPosition());
                 i = 1;
             }

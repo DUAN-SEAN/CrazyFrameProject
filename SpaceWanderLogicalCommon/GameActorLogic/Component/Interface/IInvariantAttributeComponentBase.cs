@@ -63,8 +63,10 @@ namespace GameActorLogic
 
     public interface IInvariantAttributeInternalBase : IInvariantAttributeBase
     {
-        
-
+        /// <summary>
+        /// 获取爆炸范围
+        /// </summary>
+        BoomDataPackage GetBoomData();
 
 
     }

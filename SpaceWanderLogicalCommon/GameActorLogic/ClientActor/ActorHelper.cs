@@ -83,6 +83,19 @@ namespace GameActorLogic
             return actor.GetCamp() == LevelActorBase.PlayerCamp;
         }
 
+        public static bool IsBoomWeapon(this Int32 actortype)
+        {
+            switch (actortype)
+            {
+                case ActorTypeBaseDefine.TorpedoActor:
+                case ActorTypeBaseDefine.TimeBombActor:
+                case ActorTypeBaseDefine.TrackingMissileActor:
+                case ActorTypeBaseDefine.TriggerBombActor:
+                    return true;
+            }
+            return false;
+        }
+
         public static bool isActorTypeNumber(this Int32 num)
         {
             switch (num)
