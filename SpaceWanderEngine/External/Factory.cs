@@ -13,9 +13,9 @@ namespace Box2DSharp.External
         /// </summary>
         public World world;
 
-        public Factory(World world)
+        public Factory(World _world)
         {
-            this.world = world;
+            world = _world;
         }
 
         #region BodyDef
@@ -84,7 +84,6 @@ namespace Box2DSharp.External
         internal PolygonShape CreateRectangleShape(float width, float height, float offsetX = 0, float offsetY = 0)
         {
             var bodyShape = new PolygonShape();
-            //bodyShape.SetAsBox(width / 2, height / 2);
             var vertices = new Vector2[4];
             vertices[0].Set(-width / 2 + offsetX, -height / 2 + offsetY);
             vertices[1].Set(-width / 2 + offsetX, height / 2 + offsetY);
@@ -103,7 +102,6 @@ namespace Box2DSharp.External
         internal PolygonShape CreateRectangleShape2(float width, float height, float offsetX = 0, float offsetY = 0)
         {
             var bodyShape = new PolygonShape();
-            //bodyShape.SetAsBox(width / 2, height / 2);
             var vertices = new Vector2[4];
             vertices[0].Set(-width / 2 + offsetX, offsetY);
             vertices[1].Set(-width / 2 + offsetX, height + offsetY);
@@ -243,18 +241,18 @@ namespace Box2DSharp.External
                     {
                         return CreateMachineGunBody(position, angle, userData);
                     }
-                //case GameModel.AntiAircraftGun:
-                //    {
-                //        return CreateAntiAircraftGunBody(position, angle, userData);
-                //    }
-                //case GameModel.Torpedo:
-                //    {
-                //        return CreateTorpedoBody(position, angle, userData);
-                //    }
-                //case GameModel.TrackingMissile:
-                //    {
-                //        return CreateTrackingMissileBody(position, angle, userData);
-                //    }
+                case GameModel.AntiAircraftGun:
+                    {
+                        return CreateAntiAircraftGunBody(position, angle, userData);
+                    }
+                case GameModel.Torpedo:
+                    {
+                        return CreateTorpedoBody(position, angle, userData);
+                    }
+                case GameModel.TrackingMissile:
+                    {
+                        return CreateTrackingMissileBody(position, angle, userData);
+                    }
                 //case GameModel.ContinuousLaser:
                 //    {
                 //        return CreateContinuousLaserBody(position, angle, userData);
@@ -263,14 +261,14 @@ namespace Box2DSharp.External
                 //    {
                 //        return CreatePowerLaserBody(position, angle, userData);
                 //    }
-                //case GameModel.TimeBomb:
-                //    {
-                //        return CreateTimeBombBody(position, angle, userData);
-                //    }
-                //case GameModel.TriggerBomb:
-                //    {
-                //        return CreateTriggerBomb(position, angle, userData);
-                //    }
+                case GameModel.TimeBomb:
+                    {
+                        return CreateTimeBombBody(position, angle, userData);
+                    }
+                case GameModel.TriggerBomb:
+                    {
+                        return CreateTriggerBomb(position, angle, userData);
+                    }
                 default:
                     {
                         return CreateRectangleBody(position.X, position.Y, 1, 1, BodyType.DynamicBody);
@@ -302,14 +300,46 @@ namespace Box2DSharp.External
             return body;
         }
 
+        /// <summary>
+        /// 触发炸弹
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="angle"></param>
+        /// <param name="userData"></param>
+        /// <returns></returns>
         private Body CreateTriggerBomb(Vector2 position, float angle, object userData)
         {
-            throw new NotImplementedException();
+            var bodyDef = CreateBodyDef(position.X, position.Y, angle);
+            var body = world.CreateBody(bodyDef);
+
+            var bodyShape = CreateRectangleShape(1, 3);
+            var fd1 = CreateBulletFixtureDef(bodyShape);
+
+            body.CreateFixture(fd1);
+            body.UserData = userData;
+            body.IsBullet = true;
+            return body;
         }
 
+        /// <summary>
+        /// 定时炸弹
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="angle"></param>
+        /// <param name="userData"></param>
+        /// <returns></returns>
         private Body CreateTimeBombBody(Vector2 position, float angle, object userData)
         {
-            throw new NotImplementedException();
+            var bodyDef = CreateBodyDef(position.X, position.Y, angle);
+            var body = world.CreateBody(bodyDef);
+
+            var bodyShape = CreateRectangleShape(2, 4);
+            var fd1 = CreateBulletFixtureDef(bodyShape);
+
+            body.CreateFixture(fd1);
+            body.UserData = userData;
+            body.IsBullet = true;
+            return body;
         }
 
         //private Body CreatePowerLaserBody(Vector2 position, float angle, object userData)
@@ -329,19 +359,67 @@ namespace Box2DSharp.External
 
         //}
 
+        /// <summary>
+        /// 跟踪导弹
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="angle"></param>
+        /// <param name="userData"></param>
+        /// <returns></returns>
         private Body CreateTrackingMissileBody(Vector2 position, float angle, object userData)
         {
-            throw new NotImplementedException();
+            var bodyDef = CreateBodyDef(position.X, position.Y, angle);
+            var body = world.CreateBody(bodyDef);
+
+            var bodyShape = CreateRectangleShape(0.5f, 1);
+            var fd1 = CreateBulletFixtureDef(bodyShape);
+
+            body.CreateFixture(fd1);
+            body.UserData = userData;
+            body.IsBullet = true;
+            return body;
         }
 
+        /// <summary>
+        /// 鱼雷
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="angle"></param>
+        /// <param name="userData"></param>
+        /// <returns></returns>
         private Body CreateTorpedoBody(Vector2 position, float angle, object userData)
         {
-            throw new NotImplementedException();
+            var bodyDef = CreateBodyDef(position.X, position.Y, angle);
+            var body = world.CreateBody(bodyDef);
+
+            var bodyShape = CreateCircleShape(0.1f);
+            var fd1 = CreateBulletFixtureDef(bodyShape);
+
+            body.CreateFixture(fd1);
+            body.UserData = userData;
+            body.IsBullet = true;
+            return body;
         }
 
+        /// <summary>
+        /// 高射炮
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="angle"></param>
+        /// <param name="userData"></param>
+        /// <returns></returns>
         private Body CreateAntiAircraftGunBody(Vector2 position, float angle, object userData)
         {
-            throw new NotImplementedException();
+            var bodyDef = CreateBodyDef(position.X, position.Y, angle);
+            var body = world.CreateBody(bodyDef);
+
+            var bodyShape = CreateCircleShape(0.1f);
+            var fd1 = CreateBulletFixtureDef(bodyShape);
+
+            body.CreateFixture(fd1);
+            body.UserData = userData;
+            body.IsBullet = true;
+            return body;
         }
 
         /// <summary>

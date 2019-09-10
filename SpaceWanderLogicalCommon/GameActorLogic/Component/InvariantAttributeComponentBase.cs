@@ -10,7 +10,7 @@ namespace GameActorLogic
     /// <summary>
     /// 基础不变类型组件
     /// </summary>
-    public class InvariantAttributeComponentBase : 
+    public class InvariantAttributeComponentBase :
         IInvariantAttributeBase,
         IInvariantAttributeInternalBase
     {
@@ -30,17 +30,20 @@ namespace GameActorLogic
 
         protected bool isDead;
 
+        protected BoomDataPackage BoomDataPackage;
+
         /// <summary>
         /// 生成body前使用 用于判断需要生成多大的形状
         /// 主要用于激光 蓄力或其他内容
         /// </summary>
         protected float time;
 
-        public InvariantAttributeComponentBase(int camp = 0,double maxSpeed  = 2,float maxForceProc = 0.0002f)
+        public InvariantAttributeComponentBase(int camp = 0, double maxSpeed = 2, float maxForceProc = 0.0002f)
         {
             this.maxSpeed = maxSpeed;
             this.maxForceProc = maxForceProc;
             this.camp = camp;
+            BoomDataPackage = new BoomDataPackage(40, 100);
         }
 
         public InvariantAttributeComponentBase(InvariantAttributeComponentBase clone)
@@ -49,6 +52,7 @@ namespace GameActorLogic
             this.maxForceProc = clone.maxForceProc;
             this.camp = clone.camp;
             this.initData = clone.initData;
+            this.BoomDataPackage = clone.BoomDataPackage;
         }
         #region IInvariantAttributeInternalBase
 
@@ -59,7 +63,7 @@ namespace GameActorLogic
             this.camp = camp;
         }
 
-        
+
 
 
         public double GetMaxSpeed()
@@ -118,8 +122,36 @@ namespace GameActorLogic
             time = pro;
         }
 
+        public BoomDataPackage GetBoomData()
+        {
+            return BoomDataPackage;
+        }
+
         #endregion
 
 
     }
+
+
+
+    public struct BoomDataPackage
+    {
+        /// <summary>
+        /// 爆炸距离
+        /// </summary>
+        public float boomdis;
+
+        /// <summary>
+        /// 爆炸力
+        /// </summary>
+        public float boomForce;
+
+        public BoomDataPackage(float dis,float Force)
+        {
+            boomdis = dis;
+            boomForce = Force;
+        }
+
+    }
+
 }

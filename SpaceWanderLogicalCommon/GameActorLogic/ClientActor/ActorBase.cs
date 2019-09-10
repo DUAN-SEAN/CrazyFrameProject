@@ -410,7 +410,12 @@ namespace GameActorLogic
             _invariantAttributeComponent.SetDeadState(dead);
         }
 
-        
+        public ILevelActorComponentBaseContainer GetLevel()
+        {
+            return level;
+        }
+
+
 
 
 

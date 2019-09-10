@@ -79,21 +79,21 @@ namespace GameActorLogic
             weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.AntiAircraftGunActor, level);
             //weaponactor.CreateBody(factory.CreateRectangleBody(0, 0, 0.3f, 2.725f,isSensor:true));
             weaponactor.CreateInitData(new InitData {});
-            weaponactor.CreateAiComponent(new GogogoAiComponent(weaponactor));
+            weaponactor.CreateAiComponent(new GogogoAiComponent(weaponactor,15000));
             ConfigActors.Add(ActorTypeBaseDefine.AntiAircraftGunActor, weaponactor);
 
             //鱼雷
             weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.TorpedoActor, level);
             //weaponactor.CreateBody(factory.CreateRectangleBody(0, 0, 0.3f, 2.725f, isSensor: true));
             weaponactor.CreateInitData(new InitData());
-            weaponactor.CreateAiComponent(new GogogoAiComponent(weaponactor));
+            weaponactor.CreateAiComponent(new GogogoAiComponent(weaponactor, 10000));
             ConfigActors.Add(ActorTypeBaseDefine.TorpedoActor, weaponactor);
 
             //机关枪
             weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.MachineGunActor, level);
             //weaponactor.CreateBody(factory.CreateRectangleBody(0, 0, 0.3f, 2.725f, isSensor: true));
             weaponactor.CreateInitData(new InitData());
-            weaponactor.CreateAiComponent(new GogogoAiComponent(weaponactor));
+            weaponactor.CreateAiComponent(new GogogoAiComponent(weaponactor, 15000));
             ConfigActors.Add(ActorTypeBaseDefine.MachineGunActor, weaponactor);
             #endregion
 
@@ -130,7 +130,7 @@ namespace GameActorLogic
             weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.TrackingMissileActor, level);
             //weaponactor.CreateBody(factory.CreateRectangleBody(0, 0, 0.3f, 2.725f, isSensor: true));
             weaponactor.CreateInitData(new InitData());
-            weaponactor.CreateAiComponent(null);
+            weaponactor.CreateAiComponent(new FollowAiComponent(level,weaponactor));
             ConfigActors.Add(ActorTypeBaseDefine.TrackingMissileActor, weaponactor);
 
             //蓄力激光

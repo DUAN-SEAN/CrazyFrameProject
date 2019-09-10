@@ -89,8 +89,8 @@ namespace GameActorLogic
         /// </summary>
         IColliderInternal GetColliderinternal();
 
+        ILevelActorComponentBaseContainer GetLevel();
 
-        
     }
 
 

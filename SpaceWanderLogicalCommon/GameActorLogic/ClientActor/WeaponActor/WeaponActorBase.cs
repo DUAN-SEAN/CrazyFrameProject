@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Box2DSharp.Dynamics;
+using Box2DSharp.External;
 using Crazy.Common;
 
 
@@ -55,7 +56,7 @@ namespace GameActorLogic
 
         protected void Collider(UserData body)
         {
-            
+           
             //Log.Trace("武器碰撞");
             if(body == null)
             {
@@ -73,8 +74,19 @@ namespace GameActorLogic
             if (actor.GetCamp() == GetCamp()) return;
 
             if (GetDeadState() == true) return;
-            
+
             //Log.Trace("武器碰撞 敌方 actor id" + actor.GetActorID());
+            if (ActorType.IsBoomWeapon())
+            {
+                var data = _invariantAttributeComponent.GetBoomData();
+                var list = GetBody().CircleDetection(level.GetEnvirinfointernalBase().GetShipActors().ToBodyList(), data.boomdis);
+                foreach (var ibody in list)
+                {
+                    ibody.Boom(GetPosition(), data.boomForce);
+                }
+
+                //Log.Trace("Collider ID" + ActorID + " Boom Data" + data.boomdis + " " + data.boomForce + " 爆炸目标数" + list.Count);
+            }
 
             DestroySkill();
         }
