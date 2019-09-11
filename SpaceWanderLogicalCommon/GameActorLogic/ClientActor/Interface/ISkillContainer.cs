@@ -20,7 +20,7 @@ namespace GameActorLogic
 
 
     public interface ISkillComponentContainer:
-        IBaseComponentContainer
+        IBaseComponentContainer, ISkillContainer
     {
         ISkillAttributeInternalComponent GetSkillAttributeInternalComponent();
 

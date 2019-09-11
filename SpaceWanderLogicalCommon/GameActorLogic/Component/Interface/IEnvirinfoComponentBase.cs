@@ -44,8 +44,14 @@ namespace GameActorLogic
         /// </summary>
         ActorBase GetActor(ulong id);
 
+        /// <summary>
+        /// 通过userdata找到actor
+        /// </summary>
+        /// <param name="userdate"></param>
+        /// <returns></returns>
         ActorBase GetActorByBodyUserData(UserData userdate);
 
+        bool ContainsID(ulong id);
 
         /// <summary>
         /// 设置物理引擎delta

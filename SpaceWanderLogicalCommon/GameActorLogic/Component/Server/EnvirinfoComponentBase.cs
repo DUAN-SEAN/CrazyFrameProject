@@ -71,8 +71,8 @@ namespace GameActorLogic
             for (int i = 0; i < _actorList.Count; i++)
             {
                 _actorList[i].Update();
-                //if(_actorList[i].IsWeapon())
-                //Log.Trace("EnvirinfoComponentBase:ActorId" + _actorList[i].GetActorID() + " ActorType" + _actorList[i].GetActorType() + " 位置坐标:" + _actorList[i].GetPosition() + " 力" + _actorList[i].GetForce() + " 速度" + _actorList[i].GetVelocity() + " 转矩" + _actorList[i].GetAngleVelocity());
+                //if (_actorList[i].IsWeapon())
+                //    Log.Trace("EnvirinfoComponentBase:ActorId" + _actorList[i].GetActorID() + " ActorType" + _actorList[i].GetActorType() + " 位置坐标:" + _actorList[i].GetPosition() + " 力" + _actorList[i].GetForce() + " 速度" + _actorList[i].GetVelocity() + " 转矩" + _actorList[i].GetAngleVelocity());
                 //if(_actorList[i].GetActorType() == ActorTypeBaseDefine.ContinuousLaserActor)
                 //Log.Trace("EnvirinfoComponentBase:ActorId" + _actorList[i].GetActorID() + " ActorType" + _actorList[i].GetActorType() + "Fixture Count" + ((IBaseComponentContainer)_actorList[i]).GetPhysicalinternalBase().GetBody().FixtureList.Count + " IsSenior" + ((IBaseComponentContainer)_actorList[i]).GetPhysicalinternalBase().GetBody().FixtureList[0].IsSensor);
             }
@@ -122,6 +122,10 @@ namespace GameActorLogic
             return _actorList.Find(actor => actor.GetBodyUserData() == bodyid);
         }
 
+        public bool ContainsID(ulong id)
+        {
+            return _actorList.Where(o => o.GetActorID() == id).Count() > 0;
+        }
         #endregion
 
         #region IEnvirinfoInternalBase
