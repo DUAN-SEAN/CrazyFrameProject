@@ -241,9 +241,9 @@ namespace GameActorLogic
                     var id = level.GetCreateInternalComponentBase().GetCreateID();
                     var weapon = actor as ISkillContainer;
                     weapon.SetRelPosition(0, 0);
-                    Log.Trace("当前发射者 位置：" + container.GetPhysicalinternalBase().GetBody().GetPosition() + " 朝向：" +
-                              container.GetPhysicalinternalBase().GetBody().GetAngle());
-                    Log.Trace("当前武器箱 位置：" + actor.GetInitData().point_x + " " + actor.GetInitData().point_y + " 朝向：" + actor.GetInitData().angle);
+                    //Log.Trace("当前发射者 位置：" + container.GetPhysicalinternalBase().GetBody().GetPosition() + " 朝向：" +
+                    //          container.GetPhysicalinternalBase().GetBody().GetAngle());
+                    //Log.Trace("当前武器箱 位置：" + actor.GetInitData().point_x + " " + actor.GetInitData().point_y + " 朝向：" + actor.GetInitData().angle);
                   
 
 
