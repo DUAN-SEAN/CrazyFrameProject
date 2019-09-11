@@ -56,7 +56,7 @@ namespace GameServer.Battle
         /// </summary>
         private void OnReadyBattleFromLevel()
         {
-            Log.Debug("服务器加载关卡配置完成");
+            //Log.Debug("服务器加载关卡配置完成");
             levelReady = true;
             m_readyWaitTime =
                 DateTime.Now.AddMilliseconds(GameServerConstDefine.BattleSystemWaitPlayerReadySuperiorTime);

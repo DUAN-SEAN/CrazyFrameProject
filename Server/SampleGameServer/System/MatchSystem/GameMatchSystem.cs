@@ -565,7 +565,7 @@ namespace GameServer
                 info.State = GetPlayerState(item);
                 response.OnlinePlayers.Add(info);
             }
-            Log.Info(response.ToJson());
+            //Log.Info(response.ToJson());
             message.reply(response);
 
 

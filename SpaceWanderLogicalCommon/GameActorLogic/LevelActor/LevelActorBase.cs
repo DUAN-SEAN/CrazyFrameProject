@@ -43,12 +43,12 @@ namespace GameActorLogic
 
         public LevelActorBase()
         {
-            Log.Trace("LevelActorBase 开始初始化");
+            //dLog.Trace("LevelActorBase 开始初始化");
             players = new Dictionary<string, ulong>();
             Currentframe = 0;
             //初始化组件
             CreateComponent();
-            Log.Trace("LevelActorBase 初始化完成");
+            //Log.Trace("LevelActorBase 初始化完成");
         }
 
         
