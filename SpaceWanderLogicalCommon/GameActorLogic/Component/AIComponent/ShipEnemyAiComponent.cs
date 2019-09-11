@@ -69,7 +69,7 @@ namespace GameActorLogic
             {
                 //Tick 敌人是否在附近
                 var list = container.GetPhysicalinternalBase().GetBody()
-                    .CircleDetection(level.GetEnvirinfointernalBase().GetPlayerActors().ToBodyList(), 1000);
+                    .CircleDetection(level.GetEnvirinfointernalBase().GetShipActorsByCamp(container.GetCamp()).ToBodyList(), 1000);
                 //Log.Trace("ShipEnemyAiComponent 附近敌人数量" + list.Count);
                 if (list.Count <= 0) return;
                 //这个list 里面有敌人

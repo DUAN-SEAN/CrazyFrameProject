@@ -1,6 +1,7 @@
 ﻿using Box2DSharp.Collision.Shapes;
 using Box2DSharp.Common;
 using Box2DSharp.Dynamics;
+using Crazy.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,12 +58,12 @@ namespace Box2DSharp.External
         {
             var cos = FowardToTarget(body, targetPoint, angularVelocityProc);
 
-            if (cos > 0.8)
+            if (cos > 0.95)
             {
                 body.AddForce(force * body.GetForward());
             }
 
-            return cos > 0.9;
+            return cos > 0.95;
         }
 
         /// <summary>
@@ -80,21 +81,55 @@ namespace Box2DSharp.External
             bool isClockwise = MathUtils.Cross(tmp, body.GetForward()) > 0;
             float cos = CrazyUtils.IncludedAngleCos(tmp, body.GetForward());
 
+            body.ApplyAngularImpulse(-body.AngularVelocity * body.Inertia, true);
+
             if (cos > 0.95f)
             {
-                body.ApplyAngularImpulse(-body.AngularVelocity * body.Inertia, true);
                 return cos;
             }
 
             if (isClockwise)
             {
-                body.ApplyAngularImpulse(-body.AngularVelocity * body.Inertia, true);
                 body.ApplyAngularImpulse(-angularVelocityProc * body.Inertia, true);
             }
             else
             {
-                body.ApplyAngularImpulse(-body.AngularVelocity * body.Inertia, true);
                 body.ApplyAngularImpulse(angularVelocityProc * body.Inertia, true);
+            }
+
+            return cos;
+        }
+
+        /// <summary>
+        /// 朝向目标
+        /// </summary>
+        /// <param name="body"></param>
+        /// <param name="targetPoint"></param>
+        /// <param name="angularVelocityProc">角速度系数(0.1 - 1)</param>
+        /// <returns></returns>
+        public static float SomeAreaFowardToTarget(this Body body, Vector2 targetPoint, float angularVelocityProc, float deadArea = 0.95f)
+        {
+            if (Vector2.DistanceSquared(body.GetPosition(), targetPoint) < double.Epsilon) return 0;
+
+            Vector2 tmp = targetPoint - body.GetPosition();
+            bool isClockwise = MathUtils.Cross(tmp, body.GetForward()) > 0;
+            float cos = CrazyUtils.IncludedAngleCos(tmp, body.GetForward());
+            body.ApplyAngularImpulse(-body.AngularVelocity * body.Inertia, true);
+
+            if (cos > deadArea || cos < 0)
+            {
+                return cos;
+            }
+
+            if (isClockwise)
+            {
+                body.ApplyAngularImpulse(-angularVelocityProc * body.Inertia, true);
+                //Log.Trace("SomeAreaFowardToTarget: IsClockwise" + isClockwise);
+            }
+            else
+            {
+                body.ApplyAngularImpulse(angularVelocityProc * body.Inertia, true);
+                //Log.Trace("SomeAreaFowardToTarget: IsClockwise" + isClockwise);
             }
 
             return cos;

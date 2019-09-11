@@ -125,14 +125,14 @@ namespace GameActorLogic
                 actor = levelContainer.GetCreateInternalComponentBase().CreateActor(initEvent.actortype, initEvent.camp,
                     initEvent.point_x,
                     initEvent.point_y, initEvent.angle, initEvent.actorid, initEvent.IsPlayer, initEvent.weapontype_a,
-                    initEvent.weapontype_b,initEvent.name);
+                    initEvent.weapontype_b,initEvent.name,initEvent.time);
             }
             else
             {
                 actor = levelContainer.GetCreateInternalComponentBase().CreateActor(initEvent.actortype, initEvent.camp,
                     initEvent.point_x,
                     initEvent.point_y, initEvent.angle, initEvent.IsPlayer, initEvent.weapontype_a,
-                    initEvent.weapontype_b,initEvent.name);
+                    initEvent.weapontype_b,initEvent.name, initEvent.time);
                 initEvent.actorid = actor.GetActorID();
             }
             if(initEvent.time != 0)

@@ -130,14 +130,14 @@ namespace GameActorLogic
             weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.TrackingMissileActor, level);
             //weaponactor.CreateBody(factory.CreateRectangleBody(0, 0, 0.3f, 2.725f, isSensor: true));
             weaponactor.CreateInitData(new InitData());
-            weaponactor.CreateAiComponent(new FollowAiComponent(level,weaponactor));
+            weaponactor.CreateAiComponent(new FollowAiComponent(level,weaponactor,200,2,1000));
             ConfigActors.Add(ActorTypeBaseDefine.TrackingMissileActor, weaponactor);
 
             //蓄力激光
             weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.PowerLaserActor, level);
             //weaponactor.CreateBody(factory.CreateRectangleBody(0, 0, 0.3f, 2.725f, isSensor: true));
             weaponactor.CreateInitData(new InitData());
-            weaponactor.CreateAiComponent(new DeadAiComponent(5000000, weaponactor));
+            weaponactor.CreateAiComponent(new GogogoAiComponent(weaponactor, 15000));
             ConfigActors.Add(ActorTypeBaseDefine.PowerLaserActor, weaponactor);
 
 
@@ -188,7 +188,7 @@ namespace GameActorLogic
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.FighterShipActorA, level);
             //shipactor.CreateBody(factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
             shipactor.CreateInitData(new InitData());
-            //shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
+            shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
             shipactor.InitializeFireControl(new List<int> // 机关枪 持续激光
             {
                 ActorTypeBaseDefine.MachineGunActor,

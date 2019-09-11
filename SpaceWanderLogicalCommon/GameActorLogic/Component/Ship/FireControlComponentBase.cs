@@ -109,6 +109,7 @@ namespace GameActorLogic
         }
 
         protected long firetime;
+        protected float firepro;
         public void SendButtonState(ulong actorid, int skilltype, int skillcontrol)
         {
             //TODO 技能控制 0 按下 1抬起
@@ -131,6 +132,7 @@ namespace GameActorLogic
 
                     case ActorTypeBaseDefine.PowerLaserActor:
                         firetime = DateTime.Now.Ticks;
+                        Log.Trace("SendButtonState 按钮按下" + firetime);
                         break;
 
                     case ActorTypeBaseDefine.TriggerBombActor:
@@ -181,7 +183,15 @@ namespace GameActorLogic
                         Destroy(skilltype);
                         break;
                     case ActorTypeBaseDefine.PowerLaserActor:
-                        firetime = DateTime.Now.Ticks - firetime;
+                        var now = DateTime.Now.Ticks;
+                        Log.Trace("SendButtonState: 按钮抬起" + now);
+                        firetime = now - firetime;
+                        Log.Trace("SendButtonState: ticks delay" + firetime);
+                        firetime = firetime > 1.5 * 1e7 ? (long)(1.5 * 1e7) : firetime;
+                        Log.Trace("SendButtonState: ticks delay 矫正" + firetime);
+                        firepro = (float)(firetime / (1.5 * 1e7));
+                        Log.Trace("SendButtonState: fire pro" + firepro);
+
                         Fire(skilltype);
                         firetime = 0;
                         break;
@@ -277,7 +287,7 @@ namespace GameActorLogic
                     //level.GetEnvirinfointernalBase().AddActor(weapon as ActorBase);
                     //weapon.StartSkill();
                     var init = weapon.GetInitData();
-                    level.AddEventMessagesToHandlerForward(new InitEventMessage(id, actor.GetCamp(), actor.GetActorType(), init.point_x, init.point_y, init.angle, weapon.GetLinerDamping(), ownerid: weapon.GetOwnerID(), relatpoint_x: weapon.GetRelPositionX(), relatpoint_y: weapon.GetRelPositionY(), time: firetime));
+                    level.AddEventMessagesToHandlerForward(new InitEventMessage(id, actor.GetCamp(), actor.GetActorType(), init.point_x, init.point_y, init.angle, weapon.GetLinerDamping(), ownerid: weapon.GetOwnerID(), relatpoint_x: weapon.GetRelPositionX(), relatpoint_y: weapon.GetRelPositionY(), time: firepro));
                     skillInitList.Add(new UserData(id,weapon.GetActorType()));
                     OnFire?.Invoke(weapon);
                 }

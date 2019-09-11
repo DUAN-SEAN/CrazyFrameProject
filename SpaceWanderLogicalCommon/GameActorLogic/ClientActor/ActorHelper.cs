@@ -200,7 +200,7 @@ namespace GameActorLogic
             switch (shiptype)
             {
                 default:
-                    return new Vector2(1, 40);
+                    return new Vector2(1 * widthpro, 30 * heightpro);
             }
         }
     }

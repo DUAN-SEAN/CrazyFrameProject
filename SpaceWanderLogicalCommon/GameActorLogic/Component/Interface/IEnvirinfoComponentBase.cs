@@ -51,6 +51,9 @@ namespace GameActorLogic
         /// <returns></returns>
         ActorBase GetActorByBodyUserData(UserData userdate);
 
+        /// <summary>
+        /// 是否有包含该id的Actor
+        /// </summary>
         bool ContainsID(ulong id);
 
         /// <summary>

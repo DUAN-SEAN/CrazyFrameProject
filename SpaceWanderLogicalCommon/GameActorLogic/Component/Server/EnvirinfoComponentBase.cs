@@ -64,7 +64,7 @@ namespace GameActorLogic
         protected Stopwatch stopwatch = new Stopwatch();
         /// <summary>
         /// 对物理引擎和Actor对象的逻辑进行Tick
-        /// </summary>
+        /// </summary>\
         public void Tick()
         {
             stopwatch?.Restart();
@@ -72,7 +72,7 @@ namespace GameActorLogic
             {
                 _actorList[i].Update();
                 //if (_actorList[i].IsWeapon())
-                //    Log.Trace("EnvirinfoComponentBase:ActorId" + _actorList[i].GetActorID() + " ActorType" + _actorList[i].GetActorType() + " 位置坐标:" + _actorList[i].GetPosition() + " 力" + _actorList[i].GetForce() + " 速度" + _actorList[i].GetVelocity() + " 转矩" + _actorList[i].GetAngleVelocity());
+                //    Log.Trace("EnvirinfoComponentBase:ActorId" + _actorList[i].GetActorID() + " ActorType" + _actorList[i].GetActorType() + " 位置坐标:" + _actorList[i].GetPosition() + " 朝向" + _actorList[i].GetForward() + " 力" + _actorList[i].GetForce() + " 速度" + _actorList[i].GetVelocity() + " 转矩" + _actorList[i].GetAngleVelocity());
                 //if(_actorList[i].GetActorType() == ActorTypeBaseDefine.ContinuousLaserActor)
                 //Log.Trace("EnvirinfoComponentBase:ActorId" + _actorList[i].GetActorID() + " ActorType" + _actorList[i].GetActorType() + "Fixture Count" + ((IBaseComponentContainer)_actorList[i]).GetPhysicalinternalBase().GetBody().FixtureList.Count + " IsSenior" + ((IBaseComponentContainer)_actorList[i]).GetPhysicalinternalBase().GetBody().FixtureList[0].IsSensor);
             }
@@ -161,7 +161,11 @@ namespace GameActorLogic
             else if(actor.GetActorType() == ActorTypeBaseDefine.PowerLaserActor)
             {
                 var WH = ActorHelper.GetLaserShapeByShip(actor.GetActorType(), heightpro: actor.GetActorInitPro());
+
+                //Log.Trace("AddActor: actorID" + actor.GetActorID() + " InitDate" + init.point_x + " " + init.point_y + " " + init.angle + " WeaponDemage:" + ((IWeaponBaseComponentContainer)actor).GetWeaponDamage() + " WH" + WH.X + " " + WH.Y + " InitPro:" + actor.GetActorInitPro());
+
                 actor.CreateBody(factory.CreateSpaceWonderLaser(new Vector2(init.point_x, init.point_y), init.angle, new UserData(actor.GetActorID(), actor.GetActorType()), WH.X, WH.Y));
+               
             }
             //Log.Trace("AddActor: actorID" + actor.GetActorID() + " InitDate" + init.point_x + " " + init.point_y + " " + init.angle);
             //Log.Trace("actor id" + actor.GetActorID() + " 生成一个Actor Position:" + actor.GetPosition() + " Forward:" + actor.GetForward());

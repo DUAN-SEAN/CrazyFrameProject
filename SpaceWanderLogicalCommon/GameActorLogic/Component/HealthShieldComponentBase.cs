@@ -68,7 +68,7 @@ namespace GameActorLogic
         public HealthShieldComponentBase(ILevelActorComponentBaseContainer level, IShipBaseContainer ActorId)
         {
             _hp = 100;
-            _shieldval = 0;
+            _shieldval = 10;
             _maxshieldVal = 1;
             _shieldrecoverVal = 1;
             _addshieldrecoverVal = 0;

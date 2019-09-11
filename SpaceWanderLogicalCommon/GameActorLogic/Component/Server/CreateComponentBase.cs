@@ -36,13 +36,13 @@ namespace GameActorLogic
             return IDs++;
         }
 
-        public ActorBase CreateActor(int actortype,int camp, float Vector2_x, float Vector2_y, float angle, bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0,string name = "")
+        public ActorBase CreateActor(int actortype,int camp, float Vector2_x, float Vector2_y, float angle, bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0,string name = "",float time = 0)
         {
             return CreateActor(actortype, camp, Vector2_x, Vector2_y, angle, GetCreateID(), isPlayer, weapontype_a,
                 weapontype_b, name);
         }
 
-        public ActorBase CreateActor(int actortype, int camp, float Vector2_x, float Vector2_y, float angle, ulong Id, bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0,string name ="")
+        public ActorBase CreateActor(int actortype, int camp, float Vector2_x, float Vector2_y, float angle, ulong Id, bool isPlayer = false, Int32 weapontype_a = 0, Int32 weapontype_b = 0,string name ="",float time = 0)
         {
             ActorBase actor = null;
             //从配置文件中获取Actor
@@ -90,7 +90,6 @@ namespace GameActorLogic
                 #region 默认向前飞型武器
                 case ActorTypeBaseDefine.AntiAircraftGunActor:
                 case ActorTypeBaseDefine.MachineGunActor:
-                case ActorTypeBaseDefine.PowerLaserActor:
                 case ActorTypeBaseDefine.TorpedoActor:
                 #endregion
 
@@ -113,8 +112,19 @@ namespace GameActorLogic
                     }
                    
                     break;
-
-                #endregion
+                case ActorTypeBaseDefine.PowerLaserActor:
+                    if (actor != null)
+                    {
+                        actor.SetActorId(Id);
+                        actor.PrepareActor(Vector2_x, Vector2_y, angle);
+                        actor.SetCamp(camp);
+                        if (actor is IWeaponBaseComponentContainer weapon)
+                        {
+                            weapon.SetWeaponDamage((int)(weapon.GetWeaponDamage() * time));
+                        }
+                    }
+                    break;
+                    #endregion
             }
 
             return actor;
