@@ -53,18 +53,18 @@ namespace Crazy.Common
 {
 	public static partial class RpcMessageOpcode
 	{
-		 public const ushort C2S_LoginMessage = 1038;
-		 public const ushort S2C_LoginMessage = 1039;
-		 public const ushort C2S_RegisterMessage = 1040;
-		 public const ushort S2C_RegisterMessage = 1041;
-		 public const ushort C2S_UpdateOnlinePlayerList = 1042;
-		 public const ushort S2C_UpdateOnlinePlayerList = 1043;
-		 public const ushort OnlinePlayerInfo = 1044;
-		 public const ushort C2S_ShipInfoReq = 1045;
-		 public const ushort S2C_ShipInfoAck = 1046;
-		 public const ushort C2S_UpLoadShipInfoReq = 1047;
-		 public const ushort S2C_UpLoadShipInfoAck = 1048;
-		 public const ushort C2S_DelayReq = 1049;
-		 public const ushort S2C_DelayAck = 1050;
+		 public const ushort C2S_LoginMessage = 1042;
+		 public const ushort S2C_LoginMessage = 1043;
+		 public const ushort C2S_RegisterMessage = 1044;
+		 public const ushort S2C_RegisterMessage = 1045;
+		 public const ushort C2S_UpdateOnlinePlayerList = 1046;
+		 public const ushort S2C_UpdateOnlinePlayerList = 1047;
+		 public const ushort OnlinePlayerInfo = 1048;
+		 public const ushort C2S_ShipInfoReq = 1049;
+		 public const ushort S2C_ShipInfoAck = 1050;
+		 public const ushort C2S_UpLoadShipInfoReq = 1051;
+		 public const ushort S2C_UpLoadShipInfoAck = 1052;
+		 public const ushort C2S_DelayReq = 1053;
+		 public const ushort S2C_DelayAck = 1054;
 	}
 }

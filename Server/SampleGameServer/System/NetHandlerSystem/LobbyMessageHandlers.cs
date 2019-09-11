@@ -79,4 +79,18 @@ namespace GameServer.System.NetHandlerSystem
             reply(response);
         }
     }
+
+    [MessageHandler]
+    public class C2S_SpeakTeamReqMessageHandler:AMHandler<C2S_SpeakToTeamReq>
+    {
+        protected override void Run(ISession playerContext, C2S_SpeakToTeamReq message)
+        {
+            S2C_SpeakToTeamAck ack = new S2C_SpeakToTeamAck{Data = message.Data,LaunchPlayerId = message.LaunchPlayerId,MatchTeamId = message.MatchTeamId};
+            
+            
+            GameServer.Instance.PlayerCtxManager.BroadcastLocalMessagebyPlayerId(new SystemSendNetMessage{Message = ack}, message.PlayerIds.ToList());
+            
+
+        }
+    }
 }
