@@ -79,21 +79,21 @@ namespace GameActorLogic
             weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.AntiAircraftGunActor, level);
             //weaponactor.CreateBody(factory.CreateRectangleBody(0, 0, 0.3f, 2.725f,isSensor:true));
             weaponactor.CreateInitData(new InitData {});
-            weaponactor.CreateAiComponent(new GogogoAiComponent(weaponactor,15000));
+            weaponactor.CreateAiComponent(new GogogoAiComponent(weaponactor,20000));
             ConfigActors.Add(ActorTypeBaseDefine.AntiAircraftGunActor, weaponactor);
 
             //鱼雷
             weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.TorpedoActor, level);
             //weaponactor.CreateBody(factory.CreateRectangleBody(0, 0, 0.3f, 2.725f, isSensor: true));
             weaponactor.CreateInitData(new InitData());
-            weaponactor.CreateAiComponent(new GogogoAiComponent(weaponactor, 10000));
+            weaponactor.CreateAiComponent(new GogogoAiComponent(weaponactor, 15000));
             ConfigActors.Add(ActorTypeBaseDefine.TorpedoActor, weaponactor);
 
             //机关枪
             weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.MachineGunActor, level);
             //weaponactor.CreateBody(factory.CreateRectangleBody(0, 0, 0.3f, 2.725f, isSensor: true));
             weaponactor.CreateInitData(new InitData());
-            weaponactor.CreateAiComponent(new GogogoAiComponent(weaponactor, 15000));
+            weaponactor.CreateAiComponent(new GogogoAiComponent(weaponactor, 20000));
             ConfigActors.Add(ActorTypeBaseDefine.MachineGunActor, weaponactor);
             #endregion
 
@@ -113,14 +113,14 @@ namespace GameActorLogic
             weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.TimeBombActor, level);
             //weaponactor.CreateBody(factory.CreateRectangleBody(0, 0, 0.3f, 2.725f, isSensor: true));
             weaponactor.CreateInitData(new InitData());
-            weaponactor.CreateAiComponent(new DeadAiComponent(5000000000, weaponactor));
+            weaponactor.CreateAiComponent(new DeadAiComponent(50000000, weaponactor));
             ConfigActors.Add(ActorTypeBaseDefine.TimeBombActor, weaponactor);
 
             //触发炸弹
             weaponactor = new WeaponActorBase(0, ActorTypeBaseDefine.TriggerBombActor, level);
             //weaponactor.CreateBody(factory.CreateRectangleBody(0, 0, 0.3f, 2.725f, isSensor: true));
             weaponactor.CreateInitData(new InitData());
-            weaponactor.CreateAiComponent(new DeadAiComponent(5000000000, weaponactor));
+            weaponactor.CreateAiComponent(null);
             ConfigActors.Add(ActorTypeBaseDefine.TriggerBombActor, weaponactor);
 
             #endregion

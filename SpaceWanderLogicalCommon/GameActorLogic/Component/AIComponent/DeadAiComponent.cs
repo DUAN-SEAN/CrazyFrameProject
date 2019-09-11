@@ -32,14 +32,14 @@ namespace GameActorLogic
         {
             base.TickLogical();
 
-            if (inittime + time > DateTime.Now.Ticks)
+            if (inittime + time < DateTime.Now.Ticks)
             {
                 if(container is IShipComponentBaseContainer ship)
                 {
                     ship.Destroy();
                 }
-                if(container is IWeaponBaseComponentContainer weapon)
-                    weapon.Destroy();
+                if(container is ISkillComponentContainer weapon)
+                    weapon.DestroySkill();
             }
 
         }

@@ -331,6 +331,11 @@ namespace GameActorLogic
             return _envirinfoComponent.GetShipActorsByCamp(camp);
         }
 
+        public bool ContainsID(ulong id)
+        {
+            return _envirinfoComponent.ContainsID(id);
+        }
+
         public void SetDelta(float delta)
         {
             _envirinfoComponent.SetDelta(delta);

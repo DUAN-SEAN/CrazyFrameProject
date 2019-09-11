@@ -125,12 +125,37 @@ namespace GameActorLogic
                     case ActorTypeBaseDefine.ContinuousLaserActor:
                     //炸弹
                     case ActorTypeBaseDefine.TimeBombActor:
-                    case ActorTypeBaseDefine.TriggerBombActor:
+                   
                         Fire(skilltype);
                         break;
 
                     case ActorTypeBaseDefine.PowerLaserActor:
                         firetime = DateTime.Now.Ticks;
+                        break;
+
+                    case ActorTypeBaseDefine.TriggerBombActor:
+                        //var bomblist = skillInitList.Where(o => o.ActorType == ActorTypeBaseDefine.TriggerBombActor);
+                        List<UserData> bomblist = new List<UserData>();
+                        //找到已生成集合中所有触发炸弹的User信息
+                        for (var j = 0; j < skillInitList.Count; j++)
+                        {
+                            if (skillInitList[j].ActorType == ActorTypeBaseDefine.TriggerBombActor)
+                            {
+                                //Log.Trace("SendButtonState: 已找到触发炸弹" + skillInitList[j].ActorID + " 类型" + skillInitList[j].ActorType);
+                                //判断该已生成列表中的对象是否已经在世界中了
+                                if(level.ContainsID(skillInitList[j].ActorID))
+                                    bomblist.Add(skillInitList[j]);
+                            }
+                        }
+                        //如果有触发炸弹则销毁
+                        if (bomblist.Count() >0)
+                        {
+                            Destroy(bomblist);
+                        }
+                        else
+                        {
+                            Fire(skilltype);
+                        }
                         break;
 
 
@@ -145,12 +170,14 @@ namespace GameActorLogic
                     case ActorTypeBaseDefine.MachineGunActor:
                     case ActorTypeBaseDefine.TorpedoActor:
                     case ActorTypeBaseDefine.TrackingMissileActor:
+                    //炸弹
+                    case ActorTypeBaseDefine.TimeBombActor:
+                        //TODO 触发式炸弹单独完成一个状态
+                    case ActorTypeBaseDefine.TriggerBombActor:
                         break;
                     //持续激光
                     case ActorTypeBaseDefine.ContinuousLaserActor:
-                    //炸弹
-                    case ActorTypeBaseDefine.TimeBombActor:
-                    case ActorTypeBaseDefine.TriggerBombActor:
+                  
                         Destroy(skilltype);
                         break;
                     case ActorTypeBaseDefine.PowerLaserActor:
@@ -242,7 +269,7 @@ namespace GameActorLogic
                     var weapon = actor as ISkillContainer;
                     weapon.SetRelPosition(0, 0);
                     //Log.Trace("当前发射者 位置：" + container.GetPhysicalinternalBase().GetBody().GetPosition() + " 朝向：" +
-                    //          container.GetPhysicalinternalBase().GetBody().GetAngle());
+                              //container.GetPhysicalinternalBase().GetBody().GetAngle());
                     //Log.Trace("当前武器箱 位置：" + actor.GetInitData().point_x + " " + actor.GetInitData().point_y + " 朝向：" + actor.GetInitData().angle);
                   
 
@@ -272,6 +299,9 @@ namespace GameActorLogic
             }
         }
 
+        /// <summary>
+        /// 触发删除该类型的所有Actor武器
+        /// </summary>
         public void Destroy(int i)
         {
             List<UserData> weaponList = new List<UserData>();
@@ -279,7 +309,9 @@ namespace GameActorLogic
             {
                 if (skillInitList[j].ActorType == i)
                 {
-                    weaponList.Add(skillInitList[j]);
+                    //判断该生成列表中的对象是否已经在世界中
+                    if (level.ContainsID(skillInitList[j].ActorID))
+                        weaponList.Add(skillInitList[j]);
                 }
             }
             //从集合中删除
@@ -288,11 +320,44 @@ namespace GameActorLogic
                 //var actor = level.GetActor(weaponBaseContainer.ActorID) as ISkillContainer;
                 skillInitList.Remove(weaponBaseContainer);
                 OnDestroy?.Invoke(weaponBaseContainer.ActorID);
-                level.AddEventMessagesToHandlerForward(new DestroyEventMessage(weaponBaseContainer.ActorID));
+                if (level.GetActor(weaponBaseContainer.ActorID) is ISkillComponentContainer weapon)
+                {
+                    weapon.DestroySkill();
+                }
 
                 //actor?.DestroySkill();
             }
 
+        }
+
+        /// <summary>
+        /// 触发删除该集合中的actor武器
+        /// </summary>
+        public void Destroy(IEnumerable<UserData> list)
+        {
+
+            for(int i=0;i<list.Count(); i++)
+            {
+                var weaponBaseContainer = list.ElementAt(i);
+                
+                OnDestroy?.Invoke(weaponBaseContainer.ActorID);
+                
+                if(level.GetActor(weaponBaseContainer.ActorID) is ISkillComponentContainer weapon)
+                {
+                    weapon.DestroySkill();
+                }
+                //Log.Trace("Destory 火控组件销毁一个武器"+weaponBaseContainer.ActorID+" 类型"+weaponBaseContainer.ActorType);
+                skillInitList.Remove(weaponBaseContainer);
+            }
+            //foreach (var weaponBaseContainer in list)
+            //{
+            //    //var actor = level.GetActor(weaponBaseContainer.ActorID) as ISkillContainer;
+            //    skillInitList.Remove(weaponBaseContainer);
+            //    OnDestroy?.Invoke(weaponBaseContainer.ActorID);
+            //    level.AddEventMessagesToHandlerForward(new DestroyEventMessage(weaponBaseContainer.ActorID));
+
+            //    //actor?.DestroySkill();
+            //}
         }
 
         public int GetSkillCapNum(int type)

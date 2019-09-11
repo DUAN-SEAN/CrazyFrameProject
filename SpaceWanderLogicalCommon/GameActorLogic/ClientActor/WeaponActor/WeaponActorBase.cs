@@ -76,17 +76,7 @@ namespace GameActorLogic
             if (GetDeadState() == true) return;
 
             //Log.Trace("武器碰撞 敌方 actor id" + actor.GetActorID());
-            if (ActorType.IsBoomWeapon())
-            {
-                var data = _invariantAttributeComponent.GetBoomData();
-                var list = GetBody().CircleDetection(level.GetEnvirinfointernalBase().GetShipActors().ToBodyList(), data.boomdis);
-                foreach (var ibody in list)
-                {
-                    ibody.Boom(GetPosition(), data.boomForce);
-                }
-
-                //Log.Trace("Collider ID" + ActorID + " Boom Data" + data.boomdis + " " + data.boomForce + " 爆炸目标数" + list.Count);
-            }
+           
 
             DestroySkill();
         }
@@ -160,9 +150,20 @@ namespace GameActorLogic
 
         public void Destroy()
         {
-            //Log.Trace("Destroy: 武器销毁" + ActorID + " 类型" + ActorType);
+            if (ActorType.IsBoomWeapon())
+            {
+                var data = _invariantAttributeComponent.GetBoomData();
+                var list = GetBody().CircleDetection(level.GetEnvirinfointernalBase().GetShipActors().ToBodyList(), data.boomdis);
+                foreach (var ibody in list)
+                {
+                    ibody.Boom(GetPosition(), data.boomForce);
+                }
+
+                //Log.Trace("Collider ID" + ActorID + " Boom Data" + data.boomdis + " " + data.boomForce + " 爆炸目标数" + list.Count);
+            }
             SetDeadState(true);
             level.AddEventMessagesToHandlerForward(new DestroyEventMessage(ActorID));
+            //Log.Trace("Destroy: 武器销毁" + ActorID + " 类型" + ActorType);
             _weaponEventComponent.Destroy();
         }
 
@@ -310,6 +311,7 @@ namespace GameActorLogic
 
         public void DestroySkill()
         {
+            //Log.Trace("DestroySkill: 进入武器销毁" + ActorID + " " + ActorType);
             Destroy();
         }
 
