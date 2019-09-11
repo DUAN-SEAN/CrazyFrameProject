@@ -6,6 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using Crazy.Common;
+using Crazy.ServerBase;
 using GameActorLogic;
 using GameServer.Battle;
 
@@ -85,6 +86,22 @@ namespace GameServer.System.NetHandlerSystem
             S2C_DelayAck response = new S2C_DelayAck();
             response.Time = DateTime.Now.Ticks;
             reply(response);
+
+        }
+    }
+
+
+
+    [MessageHandler]
+    public class C2S_SpeakBattleReqMessageHandler : AMHandler<C2S_SpeakToBattleReq>
+    {
+        protected override void Run(ISession playerContext, C2S_SpeakToBattleReq message)
+        {
+
+            var ack = new S2C_SpeakToBattleAck{BattleId = message.BattleId,Data = message.Data,LaunchPlayerId = message.LaunchPlayerId};
+
+            GameServer.Instance.PlayerCtxManager.BroadcastLocalMessagebyPlayerId(new SystemSendNetMessage { Message = ack }, message.PlayerIds.ToList());
+
 
         }
     }
