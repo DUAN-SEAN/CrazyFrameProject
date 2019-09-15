@@ -12,6 +12,7 @@ namespace GameActorLogic
         public const Int32 Victory = 1002;
         public const Int32 ActivateTask = 1003;
         public const Int32 Fail = 1004;
+        public const Int32 InitActor = 1005;
 
     }
 }

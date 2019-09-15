@@ -78,10 +78,38 @@ namespace GameActorLogic
                 default: return false;
             }
         }
+
+        public static bool IsEnvir(this ActorBase actor)
+        {
+            switch (actor.GetActorType())
+            {
+                case ActorTypeBaseDefine.BaseStation:
+                case ActorTypeBaseDefine.Meteorite_L:
+                case ActorTypeBaseDefine.Meteorite_M:
+                case ActorTypeBaseDefine.Meteorite_S:
+
+                    return true;
+                default: return false;
+            }
+        }
+        public static bool IsEnvir(this Int32 actor)
+        {
+            switch (actor)
+            {
+                case ActorTypeBaseDefine.BaseStation:
+                case ActorTypeBaseDefine.Meteorite_L:
+                case ActorTypeBaseDefine.Meteorite_M:
+                case ActorTypeBaseDefine.Meteorite_S:
+                    return true;
+                default: return false;
+            }
+        }
         public static bool IsPlayer(this ActorBase actor)
         {
             return actor.GetCamp() == LevelActorBase.PlayerCamp;
         }
+
+       
 
         public static bool IsBoomWeapon(this Int32 actortype)
         {
@@ -89,7 +117,6 @@ namespace GameActorLogic
             {
                 case ActorTypeBaseDefine.TorpedoActor:
                 case ActorTypeBaseDefine.TimeBombActor:
-                case ActorTypeBaseDefine.TrackingMissileActor:
                 case ActorTypeBaseDefine.TriggerBombActor:
                     return true;
             }
@@ -137,16 +164,40 @@ namespace GameActorLogic
 
             switch (actor.GetActorType())
             {
+                //None
                 case ActorTypeBaseDefine.ActorNone:
                     return GameModel.ModelNone;
-                case ActorTypeBaseDefine.AnnihilationShipActor:
-                    return GameModel.AnnihilationShip;
-                case ActorTypeBaseDefine.AntiAircraftGunActor:
-                    return GameModel.AntiAircraftGun;
+                case ActorTypeBaseDefine.PropNone:
+                    return GameModel.ModelNone;
+                case ActorTypeBaseDefine.RecoveryNone:
+                    return GameModel.ModelNone;
+                case ActorTypeBaseDefine.ShipActorNone:
+                    return GameModel.ModelNone;
+                case ActorTypeBaseDefine.SummonNone:
+                    return GameModel.ModelNone;
+                case ActorTypeBaseDefine.PlayerShipActor:
+                    return GameModel.ModelNone;
+                case ActorTypeBaseDefine.GainNone:
+                    return GameModel.ModelNone;
+                case ActorTypeBaseDefine.WeaponNone:
+                    return GameModel.ModelNone;
+
+                //基站
                 case ActorTypeBaseDefine.BaseStation:
                     return GameModel.BaseStation;
-                case ActorTypeBaseDefine.ContinuousLaserActor:
-                    return GameModel.ContinuousLaser;
+
+                //环境
+                //陨石
+                case ActorTypeBaseDefine.Meteorite_S:
+                    return GameModel.S_Meteorolite;
+                case ActorTypeBaseDefine.Meteorite_M:
+                    return GameModel.M_Meteorolite;
+                case ActorTypeBaseDefine.Meteorite_L:
+                    return GameModel.L_Meteorolite;
+
+                //船
+                case ActorTypeBaseDefine.AnnihilationShipActor:
+                    return GameModel.AnnihilationShip;
                 case ActorTypeBaseDefine.DroneShipActor:
                     return GameModel.DroneShip;
                 case ActorTypeBaseDefine.EliteShipActorA:
@@ -157,22 +208,18 @@ namespace GameActorLogic
                     return GameModel.FighterShipA;
                 case ActorTypeBaseDefine.FighterShipActorB:
                     return GameModel.FighterShipB;
-                case ActorTypeBaseDefine.GainNone:
-                    return GameModel.ModelNone;
+                case ActorTypeBaseDefine.WaspShipActorA:
+                    return GameModel.WaspShip;
+
+                //武器
+                case ActorTypeBaseDefine.AntiAircraftGunActor:
+                    return GameModel.AntiAircraftGun;
+                case ActorTypeBaseDefine.ContinuousLaserActor:
+                    return GameModel.ContinuousLaser;
                 case ActorTypeBaseDefine.MachineGunActor:
                     return GameModel.MachineGun;
-                case ActorTypeBaseDefine.PlayerShipActor:
-                    return GameModel.ModelNone;
                 case ActorTypeBaseDefine.PowerLaserActor:
                     return GameModel.PowerLaser;
-                case ActorTypeBaseDefine.PropNone:
-                    return GameModel.ModelNone;
-                case ActorTypeBaseDefine.RecoveryNone:
-                    return GameModel.ModelNone;
-                case ActorTypeBaseDefine.ShipActorNone:
-                    return GameModel.ModelNone;
-                case ActorTypeBaseDefine.SummonNone:
-                    return GameModel.ModelNone;
                 case ActorTypeBaseDefine.TimeBombActor:
                     return GameModel.TimeBomb;
                 case ActorTypeBaseDefine.TorpedoActor:
@@ -181,10 +228,8 @@ namespace GameActorLogic
                     return GameModel.TrackingMissile;
                 case ActorTypeBaseDefine.TriggerBombActor:
                     return GameModel.TriggerBomb;
-                case ActorTypeBaseDefine.WaspShipActorA:
-                    return GameModel.WaspShip;
-                case ActorTypeBaseDefine.WeaponNone:
-                    return GameModel.ModelNone;
+                
+                
             }
 
 

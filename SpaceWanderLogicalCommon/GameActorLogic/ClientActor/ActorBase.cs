@@ -29,7 +29,7 @@ using Box2DSharp.Dynamics;
 
 namespace GameActorLogic
 {
-    public abstract class ActorBase:
+    public abstract class ActorBase :
         IBaseContainer,
         IBaseComponentContainer
     {
@@ -42,16 +42,16 @@ namespace GameActorLogic
         protected ulong ActorID;
         protected Int32 ActorType;
         protected string Actorname;
-        protected ActorBase(ulong id,Int32 actortype,ILevelActorComponentBaseContainer level)
+        protected ActorBase(ulong id, Int32 actortype, ILevelActorComponentBaseContainer level)
         {
             ActorID = id;
             //this.envir = envir;
             this.level = level;
             ActorType = actortype;
-            
+
         }
 
-        protected virtual void  CreateBaseComponent()
+        protected virtual void CreateBaseComponent()
         {
             _physicalBase = CreatePhysicalBase();
             //目前只引发移动事件
@@ -62,8 +62,8 @@ namespace GameActorLogic
 
         public virtual void Update()
         {
+            _moveComponent.Update();
             _physicalBase.Update();
-            
         }
 
         public virtual void Dispose()
@@ -113,8 +113,10 @@ namespace GameActorLogic
         public void CreateBody(Body body)
         {
             //body.UserData = new UserData(ActorID, ActorType);
-            _physicalBase.CreateBody(body); 
+            _physicalBase.CreateBody(body);
         }
+
+        
         #endregion
         
         #endregion

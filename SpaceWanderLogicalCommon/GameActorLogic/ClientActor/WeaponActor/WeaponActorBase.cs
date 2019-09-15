@@ -48,6 +48,22 @@ namespace GameActorLogic
             AddColliderFunction();
         }
 
+        #region Helper
+        /// <summary>
+        /// 设置武器的配置属性
+        /// 可添加参数增加配置
+        /// </summary>
+        /// <param name="maxcount"></param>
+        /// <param name="cd"></param>
+        /// <param name="damage"></param>
+        public void InitWeaponAttributeConfig(int maxcount, int cd, int damage)
+        {
+            _weaponAttributeComponent.SetMaxSkillCd(cd);
+            _weaponAttributeComponent.SetWeaponDamage(damage);
+            _weaponAttributeComponent.SetBulletNum(maxcount);
+        }
+        #endregion
+
         protected override void AddColliderFunction()
         {
             if (ActorType != ActorTypeBaseDefine.ContinuousLaserActor)
@@ -153,10 +169,16 @@ namespace GameActorLogic
             if (ActorType.IsBoomWeapon())
             {
                 var data = _invariantAttributeComponent.GetBoomData();
+
                 var list = GetBody().CircleDetection(level.GetEnvirinfointernalBase().GetShipActors().ToBodyList(), data.boomdis);
                 foreach (var ibody in list)
                 {
+                    var actor =level.GetActor(((UserData)ibody.UserData).ActorID) as IShipComponentBaseContainer;
+                    if (actor == null) continue;
                     ibody.Boom(GetPosition(), data.boomForce);
+                    if (actor.GetCamp() == GetCamp()) return;
+                    actor.GetHealthShieldinternalBase().LossBlood(GetWeaponDamage());
+                    //Log.Trace("Collider: ID" + actor.GetActorID() + " 受到碰撞当前 血量：" + actor.GetHealthShieldinternalBase().GetHP() + " 护盾：" + actor.GetHealthShieldinternalBase().GetShieldNum());
                 }
 
                 //Log.Trace("Collider ID" + ActorID + " Boom Data" + data.boomdis + " " + data.boomForce + " 爆炸目标数" + list.Count);

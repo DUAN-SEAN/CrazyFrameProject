@@ -6,6 +6,9 @@ using Vector2 = System.Numerics.Vector2;
 
 namespace Box2DSharp.External
 {
+    /// <summary>
+    /// 工厂
+    /// </summary>
     public class Factory
     {
         /// <summary>
@@ -13,6 +16,10 @@ namespace Box2DSharp.External
         /// </summary>
         public World world;
 
+        /// <summary>
+        /// 构造方法
+        /// </summary>
+        /// <param name="_world"></param>
         public Factory(World _world)
         {
             world = _world;
@@ -237,6 +244,18 @@ namespace Box2DSharp.External
                 //    {
                 //        return CreateBaseStationBody(position, angle, userData);
                 //    }
+                case GameModel.S_Meteorolite:
+                    {
+                        return CreateMeteoroliteBody(position, angle, userData, 10);
+                    }
+                case GameModel.M_Meteorolite:
+                    {
+                        return CreateMeteoroliteBody(position, angle, userData, 20);
+                    }
+                case GameModel.L_Meteorolite:
+                    {
+                        return CreateMeteoroliteBody(position, angle, userData, 40);
+                    }
                 case GameModel.MachineGun:
                     {
                         return CreateMachineGunBody(position, angle, userData);
@@ -296,6 +315,27 @@ namespace Box2DSharp.External
 
             body.CreateFixture(fd1);
 
+            body.UserData = userData;
+            return body;
+        }
+
+
+        /// <summary>
+        /// 陨石
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="angle"></param>
+        /// <param name="userData"></param>
+        /// <returns></returns>
+        private Body CreateMeteoroliteBody(Vector2 position, float angle, object userData, float radius)
+        {
+            var bodyDef = CreateBodyDef(position.X, position.Y, angle, BodyType.StaticBody);
+            var body = world.CreateBody(bodyDef);
+
+            var bodyShape = CreateCircleShape(radius);
+            var fd1 = CreateShipFixtureDef(bodyShape);
+
+            body.CreateFixture(fd1);
             body.UserData = userData;
             return body;
         }
@@ -443,6 +483,13 @@ namespace Box2DSharp.External
             return body;
         }
 
+        /// <summary>
+        /// 基站
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="angle"></param>
+        /// <param name="userData"></param>
+        /// <returns></returns>
         private Body CreateBaseStationBody(Vector2 position, float angle, object userData)
         {
             throw new NotImplementedException();
@@ -511,7 +558,6 @@ namespace Box2DSharp.External
             body.LinearDamping = 0.01f;
             return body;
         }
-
 
         /// <summary>
         /// 精英船A
@@ -875,6 +921,5 @@ namespace Box2DSharp.External
         #endregion
 
     }
-
 
 }

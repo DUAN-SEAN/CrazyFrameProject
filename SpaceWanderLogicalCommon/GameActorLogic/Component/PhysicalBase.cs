@@ -175,6 +175,8 @@ namespace GameActorLogic
             Force_copy_copy = Force_copy;
             
             m_body.AddForce(Force_copy);
+
+
             //Log.Trace("已经添加力量:" + m_body.GetForce()+" "+Force_copy);
             //Log.Trace("Update Mass" + m_body.Mass);
             Force_copy = Vector2.Zero;

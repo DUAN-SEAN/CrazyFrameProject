@@ -54,6 +54,11 @@ namespace GameActorLogic
         /// 基站
         /// </summary>
         public const Int32 BaseStation = 1011;
+
+        public const Int32 Meteorite_L = 1025;
+        public const Int32 Meteorite_M = 1026;
+        public const Int32 Meteorite_S = 1027;
+
         #endregion
 
         #region 武器定义

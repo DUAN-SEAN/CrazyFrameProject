@@ -20,6 +20,7 @@ namespace GameActorLogic
         /// 准备好生成的武器
         /// </summary>
         protected List<ISkillContainer> skills;
+        protected List<long> skillcd;
 
         protected List<UserData> skillInitList;
 
@@ -27,45 +28,60 @@ namespace GameActorLogic
 
         protected IShipComponentBaseContainer container;
 
+        protected long lastframe;
+
         protected int buttonstate = 0;
 
         public FireControlComponentBase(IShipComponentBaseContainer container, ILevelActorComponentBaseContainer create)
         {
             skills = new List<ISkillContainer>();
-            skillInitList= new List<UserData>();
+            skillcd = new List<long>();
+            skillInitList = new List<UserData>();
             this.container = container;
             this.level = create;
+                lastframe = DateTime.Now.Ticks;
         }
 
         public FireControlComponentBase(IShipComponentBaseContainer container, ILevelActorComponentBaseContainer create,List<Int32> weapons)
         {
             this.container = container;
             this.skills = new List<ISkillContainer>();
+            skillcd = new List<long>();
             skillInitList = new List<UserData>();
             this.level = create;
 
             foreach (var weapon in weapons)
             {
                level.GetConfigComponentInternalBase().GetActorClone(weapon, out var actor);
-               if (actor is ISkillContainer weaponBase)
-                   this.skills.Add(weaponBase);
+                if (actor is ISkillContainer weaponBase)
+                {
+                    this.skills.Add(weaponBase);
+                    this.skillcd.Add(0);
+                }
             }
-            
+                lastframe = DateTime.Now.Ticks;
+
         }
 
         public FireControlComponentBase(IShipComponentBaseContainer container, FireControlComponentBase clone)
         {
             this.container = container;
             this.skills = new List<ISkillContainer>();
+            skillcd = new List<long>();
             this.skillInitList = new List<UserData>();
             this.level = clone.level;
 
             foreach (var skillContainer in clone.skills)
             {
                 if(skillContainer.Clone() is ISkillContainer weaponBase)
+                {
                     this.skills.Add(weaponBase);
+                    //Log.Trace("Clone: type:" + weaponBase.GetActorType() + " cd" + weaponBase.GetSkillCd());
+                    this.skillcd.Add(0);
+                }
             }
-            
+                lastframe = DateTime.Now.Ticks;
+
         }
 
         public void Dispose()
@@ -80,6 +96,8 @@ namespace GameActorLogic
             }
             skills.Clear();
             skills = null;
+            skillcd.Clear();
+            skillcd = null;
 
         }
 
@@ -94,6 +112,7 @@ namespace GameActorLogic
         public void InitializeFireControl(List<Int32> containers)
         {
             skills = new List<ISkillContainer>();
+            skillcd = new List<long>();
             foreach (var weapon in containers)
             {
                 if(weapon == 0) continue;
@@ -104,8 +123,10 @@ namespace GameActorLogic
                     weaponBase.SetOwnerID(actor.GetActorID());
                     weaponBase.SetCamp(actor.GetCamp());
                     this.skills.Add(weaponBase);
+                    skillcd.Add(0);
                 }
             }
+                lastframe = DateTime.Now.Ticks;
         }
 
         protected long firetime;
@@ -216,11 +237,26 @@ namespace GameActorLogic
                 //Log.Trace("复制后Actor Body id" + skillContainer.GetBody().Id + " 位置" +
                 //          skillContainer.GetBody().Position + " 朝向" +
                 //          skillContainer.GetBody().Forward);
-                var cd = skillContainer.GetSkillCd();
-                skillContainer.SetSkillCd((cd + 1) % skillContainer.GetMaxSkillCd());
                 skillContainer.SetOwnerID(container.GetActorID());
                 skillContainer.SetCamp(container.GetCamp());
             }
+            //设置技能cd
+            //更新cd集合中的当前cd
+            //Tick集合中所有cd时间
+            for (int i = 0; i < skillcd.Count; i++)
+            {
+                if (skillcd[i] == 0) continue;
+                if (skills[i] == null) continue;
+                //技能cd时间
+                var cd = skills[i].GetSkillCd();
+                if (cd == 0) cd = 1;
+                //当前技能cd等于 当前时间减去发射时时间
+                var currentcd = (DateTime.Now.Ticks - skillcd[i]) / 1e4;
+                //如果当前cd时间大于等于技能cd 则当前cd设置为0
+                if (currentcd >= cd) skillcd[i] = 0;
+                //Log.Trace("TickFire skilltype:" + skills[i].GetActorType() + " MAX CD:" + cd + " " + skills[i].GetSkillCd() + " 发射时间：" + skillcd[i] + " 当前时间" + currentcd);
+            }
+            //lastframe = DateTime.Now.Ticks;
 
             var weaponlist = skillInitList.Where(s => s.ActorType == ActorTypeBaseDefine.ContinuousLaserActor).ToList();
             // 给激光赋值
@@ -228,8 +264,15 @@ namespace GameActorLogic
             {
                 container.RingDetection((level.GetActor(skillContainer.ActorID)));
             }
+
+
         }
 
+        /// <summary>
+        /// AI使用发射槽来控制发射武器
+        /// 普通发射使用发射类型
+        /// </summary>
+        /// <param name="i"></param>
         public void FireAI(int i)
         {
             //Log.Trace("FireAI: 发射槽" + i + " 发射槽总数" + skills.Count);
@@ -240,7 +283,7 @@ namespace GameActorLogic
             }
             if (skills[i] is ISkillContainer actor)
             {
-
+                if (skillcd[i] != 0) return;
                 //var weaponactor = actor.Clone();
                 //weaponactor.SetActorId(level.GetCreateInternalComponentBase().GetCreateID());
                 //var weapon = weaponactor as ISkillContainer;
@@ -259,6 +302,7 @@ namespace GameActorLogic
 
                 skillInitList.Add(new UserData(id, weapon.GetActorType()));
                 OnFire?.Invoke(weapon);
+                skillcd[i] = DateTime.Now.Ticks;
             }
             
         }
@@ -272,6 +316,7 @@ namespace GameActorLogic
 
                 if (skills[j].GetActorType() == i && skills[j] is ISkillContainer actor)
                 {
+                if (skillcd[j] != 0) return;
 
                     //var weaponactor = actor.Clone();
                     //weaponactor.SetActorId(level.GetCreateInternalComponentBase().GetCreateID());
@@ -290,6 +335,7 @@ namespace GameActorLogic
                     level.AddEventMessagesToHandlerForward(new InitEventMessage(id, actor.GetCamp(), actor.GetActorType(), init.point_x, init.point_y, init.angle, weapon.GetLinerDamping(), ownerid: weapon.GetOwnerID(), relatpoint_x: weapon.GetRelPositionX(), relatpoint_y: weapon.GetRelPositionY(), time: firepro));
                     skillInitList.Add(new UserData(id,weapon.GetActorType()));
                     OnFire?.Invoke(weapon);
+                    skillcd[j] = DateTime.Now.Ticks;
                 }
             }
         }

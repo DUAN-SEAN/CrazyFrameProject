@@ -52,7 +52,9 @@
     <Compile Include="Event\TaskUpdateEventMessage.cs" />
     <Compile Include="Event\VictoryEventMessage.cs" />
     <Compile Include="GameActorLogic\ClientActor\ActorHelper.cs" />
+    <Compile Include="GameActorLogic\ClientActor\EnvirActor\EnvirActor.cs" />
     <Compile Include="GameActorLogic\ClientActor\HelperClass\InitData.cs" />
+    <Compile Include="GameActorLogic\ClientActor\Interface\IEnvirBaseContainer.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\ISkillContainer.cs" />
     <Compile Include="GameActorLogic\ClientActor\UserData.cs" />
     <Compile Include="GameActorLogic\Component\AIComponent\DeadAiComponent.cs" />
@@ -123,6 +125,7 @@
     <Compile Include="TaskEvent\ITaskEvent.cs" />
     <Compile Include="TaskEvent\ITaskResult.cs" />
     <Compile Include="TaskEvent\TaskCondition\EnemyInitTaskCondition.cs" />
+    <Compile Include="TaskEvent\TaskCondition\InitByPositionTaskCondition.cs" />
     <Compile Include="TaskEvent\TaskCondition\KillTaskCondition.cs" />
     <Compile Include="TaskEvent\TaskCondition\LevelStartTaskCondition.cs" />
     <Compile Include="TaskEvent\TaskCondition\TimeTaskCondition.cs" />
@@ -132,6 +135,7 @@
     <Compile Include="TaskEvent\TaskResultTypeConstDefine.cs" />
     <Compile Include="TaskEvent\TaskResult\ActivateTaskResult.cs" />
     <Compile Include="TaskEvent\TaskResult\FailTaskResult.cs" />
+    <Compile Include="TaskEvent\TaskResult\InitActorTaskResult.cs" />
     <Compile Include="TaskEvent\TaskResult\VictoryTaskResult.cs" />
   </ItemGroup>
   <ItemGroup>

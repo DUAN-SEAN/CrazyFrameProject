@@ -99,6 +99,9 @@ namespace GameActorLogic
                 case TaskConditionTypeConstDefine.EnemyInitTask:
                     taskcondition = new EnemyInitTaskCondition(this,levelActor);
                     break;
+                case TaskConditionTypeConstDefine.InitByPositionTask:
+                    taskcondition = new InitByPositionTaskCondition(this, levelActor, 0, 1, 2);
+                    break;
                 case TaskConditionTypeConstDefine.LevelStartEvent:
                     taskcondition = new LevelStartTaskCondition(levelActor);
                     break;
@@ -125,6 +128,9 @@ namespace GameActorLogic
                     break;
                 case TaskResultTypeConstDefine.Fail:
                     taskresult = new FailTaskResult(levelActor);
+                    break;
+                case TaskResultTypeConstDefine.InitActor:
+                    taskresult = new InitActorTaskResult(this, levelActor, 0, 1, 2);
                     break;
             }
             return taskresult;
@@ -204,11 +210,11 @@ namespace GameActorLogic
         public void Dispose()
         {
             levelActor = null;
-            taskCondition.Dispose();
+            taskCondition?.Dispose();
             taskCondition = null;
-            taskResult.Dispose();
+            taskResult?.Dispose();
             taskResult = null;
-            taskcondition.Clear();
+            taskcondition?.Clear();
             taskcondition = null;
         }
 
@@ -241,8 +247,8 @@ namespace GameActorLogic
 
         public void StartTaskEvent()
         {
-            taskCondition.StartCondition();
-            taskResult.StartResult();
+            taskCondition?.StartCondition();
+            taskResult?.StartResult();
             m_taskEventState = TaskEventState.UnFinished;
         }
 

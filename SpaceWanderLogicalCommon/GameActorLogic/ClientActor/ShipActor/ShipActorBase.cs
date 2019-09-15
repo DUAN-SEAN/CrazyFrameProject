@@ -59,15 +59,18 @@ namespace GameActorLogic
 
             if (actor is WeaponActorBase weapon)
             {
+                if (actor.GetActorType().IsBoomWeapon()) return;
                 //Log.Trace("船受到武器碰撞" + weapon.GetActorID() + " 伤害" + weapon.GetWeaponDamage());
                 _healthShieldComponent.LossBlood(weapon.GetWeaponDamage());
             }
 
-            if (actor is ShipActorBase ship)
+            if (actor is ShipActorBase)
             {
                 //Log.Trace("船受到船碰撞" + actor.GetActorID());
                 _healthShieldComponent.LossBlood(1);
             }
+
+            //Log.Trace("Collider: ID"+GetActorID()+" 受到碰撞当前 血量：" + _healthShieldComponent.GetHP() + " 护盾：" + _healthShieldComponent.GetShieldNum());
         }
 
         protected void ColliderStay(UserData body)

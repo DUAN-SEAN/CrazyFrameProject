@@ -57,10 +57,11 @@ namespace GameActorLogic
                 int result = barrierTaskConfig.Result;
                 var dict = new Dictionary<int, int>();
                 string des = barrierTaskConfig.Description;
+                //Log.Trace("加载配置 任务id：" + id + " 条件" + condition + " 结果" + result);
                 foreach (var itme in barrierTaskConfig.TaskConditionItemConfig)
                 {
                     dict.Add(itme.ConditionTarget, itme.ConditionValue);
-                    //Log.Trace("加载配置 任务id：" + id + " key" + itme.ConditionTarget + " value" + itme.ConditionValue);
+                    //Log.Trace(" key" + itme.ConditionTarget + " value" + itme.ConditionValue);
                 }
 
                 var task1 = level.GetCreateInternalComponentBase().CreateTaskEvent(
@@ -144,6 +145,26 @@ namespace GameActorLogic
 
             #endregion
 
+            #region 技能属性配置
+
+            foreach (var skillconfig in Skill.DamageSkillConfig)
+            {
+                if (ConfigActors.TryGetValue(skillconfig.SkillType, out var actor))
+                {
+                    if (!(actor is IWeaponBaseComponentContainer skillitem)) return;
+
+                    var cd = skillconfig.CD;
+                    var damage = skillconfig.DamageValue;
+                    var count = skillconfig.MaxCount;
+
+                    skillitem.SetSkillCd(cd);
+                    skillitem.SetWeaponDamage(damage);
+                    skillitem.SetSkillCapacity(count);
+                    //Log.Trace("InitializeActor: CD" + cd + " damage" + damage + " count" + count);
+                }
+            }
+
+            #endregion
 
 
             ShipActorBase shipactor = null;
@@ -188,7 +209,7 @@ namespace GameActorLogic
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.FighterShipActorA, level);
             //shipactor.CreateBody(factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
             shipactor.CreateInitData(new InitData());
-            shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
+            //shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
             shipactor.InitializeFireControl(new List<int> // 机关枪 持续激光
             {
                 ActorTypeBaseDefine.MachineGunActor,
@@ -232,8 +253,39 @@ namespace GameActorLogic
             ConfigActors.Add(ActorTypeBaseDefine.WaspShipActorA, shipactor);
 
             #endregion
+            
+            #region 船配置属性
+            foreach(var shipconfig in ships)
+            {
+                if (ConfigActors.TryGetValue(shipconfig.ShipType, out var actor))
+                {
+                    if (!(actor is IShipComponentBaseContainer shipitem)) return;
+                    var hp = shipconfig.MaxHp;
+                    var shield = shipconfig.MaxShield;
+                    shipitem.SetHP(hp);
+                    shipitem.SetShieldNum(shield);
+                }
+            }
 
-      
+            #endregion
+
+            EnvirActor envirActor = null;
+
+            #region 环境
+            //陨石
+            envirActor = new EnvirActor(0, ActorTypeBaseDefine.Meteorite_L, level);
+            envirActor.CreateInitData(new InitData());
+            ConfigActors.Add(ActorTypeBaseDefine.Meteorite_L, envirActor);
+
+            envirActor = new EnvirActor(0, ActorTypeBaseDefine.Meteorite_S, level);
+            envirActor.CreateInitData(new InitData());
+            ConfigActors.Add(ActorTypeBaseDefine.Meteorite_S, envirActor);
+
+            envirActor = new EnvirActor(0, ActorTypeBaseDefine.Meteorite_M, level);
+            envirActor.CreateInitData(new InitData());
+            ConfigActors.Add(ActorTypeBaseDefine.Meteorite_M, envirActor);
+
+            #endregion
 
         }
 

@@ -1,7 +1,6 @@
 ﻿using Box2DSharp.Collision.Shapes;
 using Box2DSharp.Common;
 using Box2DSharp.Dynamics;
-using Crazy.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +27,7 @@ namespace Box2DSharp.External
                 var distance = Vector2.DistanceSquared(body.GetPosition(), b.GetPosition());
                 if (distance < radius * radius)
                 {
-                    CollisionalBodies.Add(new tempBody(b, Math.Sqrt(distance)));
+                    CollisionalBodies.Add(new tempBody(b, (float)Math.Sqrt(distance)));
                 }
             }
 
@@ -47,7 +46,6 @@ namespace Box2DSharp.External
             body.ApplyLinearImpulseToCenter(tmp * forceProc, true);
         }
 
-
         /// <summary>
         /// 追向目标
         /// </summary>
@@ -58,12 +56,12 @@ namespace Box2DSharp.External
         {
             var cos = FowardToTarget(body, targetPoint, angularVelocityProc);
 
-            if (cos > 0.95)
+            if (cos > 0.9f)
             {
                 body.AddForce(force * body.GetForward());
             }
 
-            return cos > 0.95;
+            return cos > 0.9f;
         }
 
         /// <summary>
@@ -73,7 +71,7 @@ namespace Box2DSharp.External
         /// <param name="targetPoint"></param>
         /// <param name="angularVelocityProc">角速度系数(0.1 - 1)</param>
         /// <returns></returns>
-        public static float FowardToTarget(this Body body, Vector2 targetPoint, float angularVelocityProc)
+        public static float FowardToTarget(this Body body, Vector2 targetPoint, float angularVelocityProc, float deadArea = 0.95f)
         {
             if (Vector2.DistanceSquared(body.GetPosition(), targetPoint) < double.Epsilon) return 0;
 
@@ -83,7 +81,7 @@ namespace Box2DSharp.External
 
             body.ApplyAngularImpulse(-body.AngularVelocity * body.Inertia, true);
 
-            if (cos > 0.95f)
+            if (cos > deadArea)
             {
                 return cos;
             }
@@ -101,40 +99,12 @@ namespace Box2DSharp.External
         }
 
         /// <summary>
-        /// 朝向目标
+        /// 朝向方向（入参为一个代表方向的向量）
         /// </summary>
         /// <param name="body"></param>
         /// <param name="targetPoint"></param>
-        /// <param name="angularVelocityProc">角速度系数(0.1 - 1)</param>
+        /// <param name="angularVelocityProc"></param>
         /// <returns></returns>
-        public static float SomeAreaFowardToTarget(this Body body, Vector2 targetPoint, float angularVelocityProc, float deadArea = 0.95f)
-        {
-            if (Vector2.DistanceSquared(body.GetPosition(), targetPoint) < double.Epsilon) return 0;
-
-            Vector2 tmp = targetPoint - body.GetPosition();
-            bool isClockwise = MathUtils.Cross(tmp, body.GetForward()) > 0;
-            float cos = CrazyUtils.IncludedAngleCos(tmp, body.GetForward());
-            body.ApplyAngularImpulse(-body.AngularVelocity * body.Inertia, true);
-
-            if (cos > deadArea || cos < 0)
-            {
-                return cos;
-            }
-
-            if (isClockwise)
-            {
-                body.ApplyAngularImpulse(-angularVelocityProc * body.Inertia, true);
-                //Log.Trace("SomeAreaFowardToTarget: IsClockwise" + isClockwise);
-            }
-            else
-            {
-                body.ApplyAngularImpulse(angularVelocityProc * body.Inertia, true);
-                //Log.Trace("SomeAreaFowardToTarget: IsClockwise" + isClockwise);
-            }
-
-            return cos;
-        }
-
         public static float MoveForward(this Body body, Vector2 targetPoint, float angularVelocityProc)
         {
             targetPoint.Normalize();
@@ -190,42 +160,46 @@ namespace Box2DSharp.External
                     {
                         return 871f;
                     }
-                //case GameModel.BaseStation:
-                //    {
-                //        return CreateBaseStationBody(position, angle, userData);
-                //    }
+                case GameModel.BaseStation:
+                    {
+                        return 1f;
+                    }
+                case GameModel.S_Meteorolite:
+                    {
+                        return 314.15f;
+                    }
+                case GameModel.M_Meteorolite:
+                    {
+                        return 1256.636f;
+                    }
+                case GameModel.L_Meteorolite:
+                    {
+                        return 5026.548f;
+                    }
                 case GameModel.MachineGun:
                     {
                         return 0.3f;
                     }
-                //case GameModel.AntiAircraftGun:
-                //    {
-                //        return CreateAntiAircraftGunBody(position, angle, userData);
-                //    }
-                //case GameModel.Torpedo:
-                //    {
-                //        return CreateTorpedoBody(position, angle, userData);
-                //    }
-                //case GameModel.TrackingMissile:
-                //    {
-                //        return CreateTrackingMissileBody(position, angle, userData);
-                //    }
-                //case GameModel.ContinuousLaser:
-                //    {
-                //        return CreateContinuousLaserBody(position, angle, userData);
-                //    }
-                //case GameModel.PowerLaser:
-                //    {
-                //        return CreatePowerLaserBody(position, angle, userData);
-                //    }
-                //case GameModel.TimeBomb:
-                //    {
-                //        return CreateTimeBombBody(position, angle, userData);
-                //    }
-                //case GameModel.TriggerBomb:
-                //    {
-                //        return CreateTriggerBomb(position, angle, userData);
-                //    }
+                case GameModel.AntiAircraftGun:
+                    {
+                        return 0.03f;
+                    }
+                case GameModel.Torpedo:
+                    {
+                        return 0.03f;
+                    }
+                case GameModel.TrackingMissile:
+                    {
+                        return 0.5f;
+                    }
+                case GameModel.TimeBomb:
+                    {
+                        return 8f;
+                    }
+                case GameModel.TriggerBomb:
+                    {
+                        return 3f;
+                    }
                 default:
                     {
                         return 1;
@@ -277,7 +251,6 @@ namespace Box2DSharp.External
                     }
             }
         }
-
 
         #region  物体属性
 
@@ -358,8 +331,8 @@ namespace Box2DSharp.External
     public struct tempBody
     {
         public Body Body;
-        public double Distance;
-        public tempBody(Body body, double distance)
+        public float Distance;
+        public tempBody(Body body, float distance)
         {
             Body = body;
             Distance = distance;

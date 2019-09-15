@@ -33,6 +33,7 @@ namespace GameActorLogic
 
         public ulong GetCreateID()
         {
+            //Log.Trace("GetCreateID:"+IDs);
             return IDs++;
         }
 
@@ -66,9 +67,7 @@ namespace GameActorLogic
                 case ActorTypeBaseDefine.PlayerShipActor:
                     if (actor == null)
                         actor = new ShipActorBase(Id, actortype, level);
-                    actor.SetActorId(Id);
-                    actor.PrepareActor(Vector2_x, Vector2_y, angle);
-                    actor.SetCamp(camp);
+                   
                     if (isPlayer)
                     {
                         var ship = (ShipActorBase) actor;
@@ -104,20 +103,12 @@ namespace GameActorLogic
                 case ActorTypeBaseDefine.ContinuousLaserActor:
                 case ActorTypeBaseDefine.TimeBombActor:
                 case ActorTypeBaseDefine.TriggerBombActor:
-                    if (actor != null)
-                    {
-                        actor.SetActorId(Id);
-                        actor.PrepareActor(Vector2_x, Vector2_y, angle);
-                        actor.SetCamp(camp);
-                    }
+                   
                    
                     break;
                 case ActorTypeBaseDefine.PowerLaserActor:
                     if (actor != null)
                     {
-                        actor.SetActorId(Id);
-                        actor.PrepareActor(Vector2_x, Vector2_y, angle);
-                        actor.SetCamp(camp);
                         if (actor is IWeaponBaseComponentContainer weapon)
                         {
                             weapon.SetWeaponDamage((int)(weapon.GetWeaponDamage() * time));
@@ -125,8 +116,15 @@ namespace GameActorLogic
                     }
                     break;
                     #endregion
-            }
 
+
+            }
+            if (actor != null)
+            {
+                actor.SetActorId(Id);
+                actor.PrepareActor(Vector2_x, Vector2_y, angle);
+                actor.SetCamp(camp);
+            }
             return actor;
         }
 

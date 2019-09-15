@@ -13,6 +13,6 @@ namespace GameActorLogic
         public const Int32 KillTaskEvent = 1003;
         public const Int32 LevelStartEvent = 1004;
         public const Int32 EnemyInitTask = 1005;
-
+        public const Int32 InitByPositionTask = 1006;
     }
 }

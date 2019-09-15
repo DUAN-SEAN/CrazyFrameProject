@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Crazy.Common;
 using GameActorLogic;
 
 namespace GameActorLogic
@@ -16,6 +17,7 @@ namespace GameActorLogic
         ISkillAttributeComponent,
         ISkillAttributeInternalComponent
     {
+        //子弹容量
         protected int bulletnum;
 
         protected int weanpontype;
@@ -60,6 +62,7 @@ namespace GameActorLogic
             this.weaponcd = clone.weaponcd;
             this.weaponDamage = clone.weaponDamage;
             this.OwnerActorId = clone.OwnerActorId;
+            //Log.Trace("WeaponAttributeComponent:weaponcd" + weaponcd);
         }
 
         #region IWeaponAttributeBase

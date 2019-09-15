@@ -72,6 +72,7 @@ namespace GameActorLogic
             _maxshieldVal = 1;
             _shieldrecoverVal = 1;
             _addshieldrecoverVal = 0;
+            recoveryinterval = 1000;
             reducerecoveryinterval = 0;
             this.level = level;
             this.Actor = ActorId;
@@ -83,6 +84,7 @@ namespace GameActorLogic
             _shieldval = shieldval;
             _maxshieldVal = maxshield;
             _shieldrecoverVal = shieldrecoverVal;
+            recoveryinterval = 1000;
             _addshieldrecoverVal = 0;
             reducerecoveryinterval = 0;
             lastTime = DateTime.Now.Ticks;
@@ -97,6 +99,7 @@ namespace GameActorLogic
             _maxshieldVal = clone._maxshieldVal;
             _shieldrecoverVal = clone._shieldrecoverVal;
             _addshieldrecoverVal = clone._addshieldrecoverVal;
+            recoveryinterval = clone.recoveryinterval;
             reducerecoveryinterval = clone.reducerecoveryinterval;
             lastTime = DateTime.Now.Ticks;
             level = clone.level;
@@ -107,7 +110,7 @@ namespace GameActorLogic
         public virtual void Tick()
         {
             //TODO 回复护盾功能
-            if (DateTime.Now.Ticks - lastTime > recoveryinterval - reducerecoveryinterval)
+            if (DateTime.Now.Ticks - lastTime > ( recoveryinterval - reducerecoveryinterval ) * 1e4)
             {
                 _shieldval += _shieldrecoverVal + _addshieldrecoverVal;
                 if (_shieldval > _maxshieldVal + _addmaxshieldVal)
