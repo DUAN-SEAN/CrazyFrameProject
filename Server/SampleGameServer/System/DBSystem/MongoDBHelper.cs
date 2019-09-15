@@ -40,7 +40,7 @@ namespace GameServer
                 Log.Fatal("DBConfig is Empty");
                 return null;
             }
-            string connection = $"mongodb://{dBConfigInfo.ConnectHost}:{dBConfigInfo.Port}/{dBConfigInfo.DataBase}";//暂时不需要验证
+            string connection = $"mongodb://{dBConfigInfo.UserName}:{dBConfigInfo.Password}@{dBConfigInfo.ConnectHost}:{dBConfigInfo.Port}/{dBConfigInfo.DataBase}";//暂时不需要验证
             var client = new MongoClient(connection);
             mongoDatabase = client.GetDatabase(dbName);
             _dbEntityDic[dbName] = mongoDatabase;

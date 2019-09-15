@@ -146,8 +146,6 @@ namespace GameServer.Battle
                 m_netHandler?.OnReleaseBattle(Id);
             }
         }
-
-        private Runner runner;
         /// <summary>
         /// 检查是否可以开始游戏
         /// </summary>
