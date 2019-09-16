@@ -36,6 +36,7 @@ namespace GameActorLogic
             clone._invariantAttributeComponent = new InvariantAttributeComponentBase(clone._invariantAttributeComponent);
             clone._physicalBase = new PhysicalBase(clone._physicalBase);
             clone._moveComponent = new MoveComponentBase(clone._physicalBase);
+            clone.aIComponentBase = clone?.aIComponentBase?.Clone(clone);
             return clone;
         }
 

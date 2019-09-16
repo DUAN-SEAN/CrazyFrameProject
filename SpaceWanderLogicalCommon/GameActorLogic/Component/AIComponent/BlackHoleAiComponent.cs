@@ -1,5 +1,6 @@
 ﻿using Box2DSharp.Dynamics;
 using Box2DSharp.External;
+using Crazy.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,14 +43,24 @@ namespace GameActorLogic
 
         public override void TickLogical()
         {
-            if (level == null) return;
-            Body body = container.GetPhysicalinternalBase().GetBody();
-            if (body == null) return;
-            var list = body.CircleDetection(level.GetAllActors().ToBodyList(), attractRadius);
 
+            if (level == null)
+            {
+                Log.Trace("TickLogical level null");
+                return;
+            }
+            
+            Body body = container.GetPhysicalinternalBase().GetBody();
+            if (body == null)
+            {
+                Log.Trace("TickLogical body null");
+                return;
+            }
+            var list = body.CircleDetection(level.GetAllActors().ToBodyList(), attractRadius);
+            //Log.Trace("TickLogical 发现"+attractRadius+"圈内人" + list.Count+"施加力"+attractForce);
             foreach(var b in list)
             {
-                b.Attract(body.GetPosition(), attractForce);
+                b.Attract(body.GetPosition(), attractForce,attractRadius);
             }
 
 

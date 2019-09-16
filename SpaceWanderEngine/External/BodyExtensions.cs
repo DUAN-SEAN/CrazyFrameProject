@@ -52,11 +52,11 @@ namespace Box2DSharp.External
         /// <param name="body"></param>
         /// <param name="attractPos"></param>
         /// <param name="proc"></param>
-        public static void Attract(this Body body, Vector2 attractPos, float forceProc)
+        public static void Attract(this Body body, Vector2 attractPos, float forceProc,float radius)
         {
             Vector2 tmp = body.GetPosition() - attractPos;
-            float distance = tmp.Length();
-            body.ApplyLinearImpulseToCenter(-tmp * distance * forceProc, true);
+            float distance = radius - tmp.Length();
+            body.ApplyLinearImpulseToCenter(-tmp * distance * distance* forceProc, true);
         }
 
         /// <summary>
