@@ -285,6 +285,11 @@ namespace GameActorLogic
             envirActor.CreateInitData(new InitData());
             ConfigActors.Add(ActorTypeBaseDefine.Meteorite_M, envirActor);
 
+            envirActor = new EnvirActor(0, ActorTypeBaseDefine.BlackHole, level);
+            envirActor.CreateInitData(new InitData());
+            envirActor.CreateAiComponent(new BlackHoleAiComponent(envirActor, 40, 1000));
+            ConfigActors.Add(ActorTypeBaseDefine.BlackHole, envirActor);
+
             #endregion
 
         }

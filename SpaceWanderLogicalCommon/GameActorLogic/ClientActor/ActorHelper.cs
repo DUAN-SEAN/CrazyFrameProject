@@ -87,7 +87,7 @@ namespace GameActorLogic
                 case ActorTypeBaseDefine.Meteorite_L:
                 case ActorTypeBaseDefine.Meteorite_M:
                 case ActorTypeBaseDefine.Meteorite_S:
-
+                case ActorTypeBaseDefine.BlackHole:
                     return true;
                 default: return false;
             }
@@ -100,6 +100,7 @@ namespace GameActorLogic
                 case ActorTypeBaseDefine.Meteorite_L:
                 case ActorTypeBaseDefine.Meteorite_M:
                 case ActorTypeBaseDefine.Meteorite_S:
+                case ActorTypeBaseDefine.BlackHole:
                     return true;
                 default: return false;
             }
@@ -194,7 +195,8 @@ namespace GameActorLogic
                     return GameModel.M_Meteorolite;
                 case ActorTypeBaseDefine.Meteorite_L:
                     return GameModel.L_Meteorolite;
-
+                case ActorTypeBaseDefine.BlackHole:
+                    return GameModel.BlackHole;
                 //船
                 case ActorTypeBaseDefine.AnnihilationShipActor:
                     return GameModel.AnnihilationShip;

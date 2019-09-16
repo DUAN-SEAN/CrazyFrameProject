@@ -9,7 +9,8 @@ namespace GameActorLogic
     /// <summary>
     /// 环境用精简Actor
     /// </summary>
-    public interface IEnvirBaseContainer : IBaseContainer
+    public interface IEnvirBaseContainer : IBaseContainer,
+        IAIBase
     {
 
 
@@ -18,6 +19,9 @@ namespace GameActorLogic
 
     public interface IEnvirBaseComponentContainer: IEnvirBaseContainer , IBaseComponentContainer
     {
-
+        /// <summary>
+        /// 获得ai组件对内接口
+        /// </summary>
+        IAIInternalBase GetAIinternalBase();
     }
 }

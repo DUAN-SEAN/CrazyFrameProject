@@ -12,11 +12,23 @@ namespace GameActorLogic
     /// </summary>
     public class EnvirActor : ActorBase, IEnvirBaseContainer, IEnvirBaseComponentContainer
     {
+        private AIComponentBase aIComponentBase;
         public EnvirActor(ulong id, int actortype, ILevelActorComponentBaseContainer level) : base(id, actortype, level)
         {
             CreateBaseComponent();
         }
 
+        public void CreateAiComponent(AIComponentBase aIComponentBase)
+        {
+            this.aIComponentBase = aIComponentBase;
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            aIComponentBase?.Update();
+
+        }
 
         public override ActorBase Clone()
         {
@@ -25,6 +37,25 @@ namespace GameActorLogic
             clone._physicalBase = new PhysicalBase(clone._physicalBase);
             clone._moveComponent = new MoveComponentBase(clone._physicalBase);
             return clone;
+        }
+
+        public bool StartAILogic()
+        {
+            return aIComponentBase.StartAILogic();
+        }
+
+        public bool PauseAILogic()
+        {
+            return aIComponentBase.PauseAILogic();
+        }
+
+        public AIComponentBase Clone(IBaseComponentContainer container)
+        {
+            return aIComponentBase.Clone(container);
+        }
+        public IAIInternalBase GetAIinternalBase()
+        {
+            return aIComponentBase;
         }
     }
 }

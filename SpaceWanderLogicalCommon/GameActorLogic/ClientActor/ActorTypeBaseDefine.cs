@@ -59,6 +59,7 @@ namespace GameActorLogic
         public const Int32 Meteorite_M = 1026;
         public const Int32 Meteorite_S = 1027;
 
+        public const Int32 BlackHole = 1028;
         #endregion
 
         #region 武器定义

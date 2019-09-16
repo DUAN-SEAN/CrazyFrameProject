@@ -57,6 +57,7 @@
     <Compile Include="GameActorLogic\ClientActor\Interface\IEnvirBaseContainer.cs" />
     <Compile Include="GameActorLogic\ClientActor\Interface\ISkillContainer.cs" />
     <Compile Include="GameActorLogic\ClientActor\UserData.cs" />
+    <Compile Include="GameActorLogic\Component\AIComponent\BlackHoleAiComponent.cs" />
     <Compile Include="GameActorLogic\Component\AIComponent\DeadAiComponent.cs" />
     <Compile Include="GameActorLogic\Component\AIComponent\FollowAiComponent.cs" />
     <Compile Include="GameActorLogic\Component\AIComponent\GogogoAiComponent.cs" />

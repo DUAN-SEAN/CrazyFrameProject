@@ -256,6 +256,12 @@ namespace Box2DSharp.External
                     {
                         return CreateMeteoroliteBody(position, angle, userData, 40);
                     }
+
+                case GameModel.BlackHole:
+                    {
+                        return CreateBlackHoleBody(position, angle, userData);
+                    }
+
                 case GameModel.MachineGun:
                     {
                         return CreateMachineGunBody(position, angle, userData);
@@ -315,6 +321,25 @@ namespace Box2DSharp.External
 
             body.CreateFixture(fd1);
 
+            body.UserData = userData;
+            return body;
+        }
+        /// <summary>
+        /// 黑洞
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="angle"></param>
+        /// <param name="userData"></param>
+        /// <returns></returns>
+        private Body CreateBlackHoleBody(Vector2 position, float angle, object userData)
+        {
+            var bodyDef = CreateBodyDef(position.X, position.Y, angle, BodyType.StaticBody);
+            var body = world.CreateBody(bodyDef);
+
+            var bodyShape = CreateCircleShape(30);
+            var fd1 = CreateBulletFixtureDef(bodyShape);
+
+            body.CreateFixture(fd1);
             body.UserData = userData;
             return body;
         }

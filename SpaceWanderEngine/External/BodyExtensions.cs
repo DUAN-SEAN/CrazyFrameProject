@@ -47,6 +47,19 @@ namespace Box2DSharp.External
         }
 
         /// <summary>
+        /// 黑洞吸力
+        /// </summary>
+        /// <param name="body"></param>
+        /// <param name="attractPos"></param>
+        /// <param name="proc"></param>
+        public static void Attract(this Body body, Vector2 attractPos, float forceProc)
+        {
+            Vector2 tmp = body.GetPosition() - attractPos;
+            float distance = tmp.Length();
+            body.ApplyLinearImpulseToCenter(-tmp * distance * forceProc, true);
+        }
+
+        /// <summary>
         /// 追向目标
         /// </summary>
         /// <param name="body"></param>

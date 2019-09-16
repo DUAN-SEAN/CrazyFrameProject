@@ -16,6 +16,8 @@
         M_Meteorolite,       //小陨石
         L_Meteorolite,       //小陨石
 
+        BlackHole,          //黑洞
+
         MachineGun,        //机关枪 ： 半激光 不带自瞄 CD短   200ms  8
         AntiAircraftGun,   //高射炮 : 射的够快  伤害一般 带自瞄   1500ms  15
         Torpedo,           //鱼雷 ：带自瞄 CD长 高伤害 小AOE  4000ms  40
