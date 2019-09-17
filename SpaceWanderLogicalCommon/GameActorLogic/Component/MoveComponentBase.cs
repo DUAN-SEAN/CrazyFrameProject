@@ -34,6 +34,7 @@ namespace GameActorLogic
         public void Update()
         {
             if (physical.GetBody() == null) return;
+            
            if(isRemote == false)
             {
                 var body = physical.GetBody();

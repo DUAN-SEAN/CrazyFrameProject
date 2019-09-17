@@ -56,7 +56,7 @@ namespace Box2DSharp.External
         {
             Vector2 tmp = body.GetPosition() - attractPos;
             float distance = radius - tmp.Length();
-            body.ApplyLinearImpulseToCenter(-tmp * distance * distance* forceProc, true);
+            body.ApplyLinearImpulseToCenter(-tmp * distance * forceProc, true);
         }
 
         /// <summary>

@@ -102,11 +102,11 @@ namespace GameActorLogic
 
         public override void Update()
         {
+            base.Update();
             //护盾恢复逻辑需要被Tick
             _healthShieldComponent.Tick();
             _fireControlComponent.TickFire();
             _aiComponent?.Update();
-            base.Update();
         }
 
         public override void Dispose()

@@ -287,7 +287,7 @@ namespace GameActorLogic
 
             envirActor = new EnvirActor(0, ActorTypeBaseDefine.BlackHole, level);
             envirActor.CreateInitData(new InitData());
-            envirActor.CreateAiComponent(new BlackHoleAiComponent(envirActor, 50, 1));
+            envirActor.CreateAiComponent(new BlackHoleAiComponent(envirActor, 100, 0.5f));
             ConfigActors.Add(ActorTypeBaseDefine.BlackHole, envirActor);
 
             #endregion
