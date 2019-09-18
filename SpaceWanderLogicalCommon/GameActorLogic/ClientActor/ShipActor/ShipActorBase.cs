@@ -70,6 +70,9 @@ namespace GameActorLogic
                 _healthShieldComponent.LossBlood(1);
             }
 
+          
+
+
             //Log.Trace("Collider: ID"+GetActorID()+" 受到碰撞当前 血量：" + _healthShieldComponent.GetHP() + " 护盾：" + _healthShieldComponent.GetShieldNum());
         }
 
@@ -79,7 +82,7 @@ namespace GameActorLogic
             {
                 return;
             }
-            if (body.ActorType != ActorTypeBaseDefine.ContinuousLaserActor) return;
+            if (body.ActorType != ActorTypeBaseDefine.ContinuousLaserActor&&body.ActorType != ActorTypeBaseDefine.BlackHole) return;
             //Log.Trace("船受到碰撞" + body.Id);
             var actor = level.GetEnvirinfointernalBase().GetActor(body.ActorID);
             if (actor == null) return;
@@ -98,6 +101,9 @@ namespace GameActorLogic
                 //Log.Trace("船受到船碰撞" + actor.GetActorID());
                 _healthShieldComponent.LossBlood(1);
             }
+
+            if (actor.GetActorType() == ActorTypeBaseDefine.BlackHole)
+                _healthShieldComponent.LossBlood(20);
         }
 
         public override void Update()

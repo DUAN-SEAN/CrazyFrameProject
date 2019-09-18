@@ -168,13 +168,30 @@ namespace GameActorLogic
             //先执行回调销毁事件
             OnDestroyMessageHandler?.Invoke(destroyEvent.actorid);
             ActorBase actor = null;
+            if (levelContainer == null) return;
+            if (levelContainer.GetEnvirinfointernalBase() == null) return;
+            if (levelContainer.GetEnvirinfointernalBase().GetAllActors() == null) return;
             foreach (var actorBase in levelContainer.GetEnvirinfointernalBase().GetAllActors())
             {
                 if (actorBase.GetActorID() == destroyEvent.actorid)
                     actor = actorBase;
             }
             if(actor == null) return;
-
+            if(actor.IsPlayer() && actor.IsShip())
+            {
+                string i = null;
+                var players = levelContainer.GetPlayerDict();
+                foreach (var p in players)
+                {
+                    if(p.Value == actor.GetActorID())
+                    {
+                        i = p.Key;
+                    }
+                }
+                if (i != null)
+                players.Remove(i);
+                if (players.Count == 0) levelContainer.AddEventMessagesToHandlerForward(new FailEventMessage(levelContainer.GetLevelID()));
+            }
             levelContainer.GetEnvirinfointernalBase().RemoveActor(actor);
             actor.Dispose();
 

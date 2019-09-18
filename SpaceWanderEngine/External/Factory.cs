@@ -336,7 +336,7 @@ namespace Box2DSharp.External
             var bodyDef = CreateBodyDef(position.X, position.Y, angle, BodyType.StaticBody);
             var body = world.CreateBody(bodyDef);
 
-            var bodyShape = CreateCircleShape(30);
+            var bodyShape = CreateCircleShape(15);
             var fd1 = CreateBulletFixtureDef(bodyShape);
 
             body.CreateFixture(fd1);
@@ -662,9 +662,11 @@ namespace Box2DSharp.External
             var bodyDef = CreateBodyDef(position.X, position.Y, angle);
             var body = world.CreateBody(bodyDef);
 
-            var bodyShape = CreateCircleShape(1);
-            var bodyShape2 = CreateRectangleShape(0.3f, 4, -1.15f, 1f);
-            var bodyShape3 = CreateRectangleShape(0.3f, 4, 1.15f, 1f);
+
+            var bodyShape = CreateCircleShape(2);
+            var bodyShape2 = CreateRectangleShape(0.6f, 8, -2.3f, 2f);
+            var bodyShape3 = CreateRectangleShape(0.6f, 8, 2.3f, 2f);
+
 
             var fd1 = CreateShipFixtureDef(bodyShape);
             var fd2 = CreateShipFixtureDef(bodyShape2);

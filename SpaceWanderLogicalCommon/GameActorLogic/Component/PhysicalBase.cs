@@ -152,12 +152,17 @@ namespace GameActorLogic
                 OnColliderExit?.Invoke(null);
             }
 
+            //Log.Trace("物理碰撞 持续数量" + contactActors.Count);
             //新版物理碰撞
-            if(contactActors.Count > 0)
+            if (contactActors.Count > 0)
             {
                 foreach(var i in contactActors)
+                {
                     //持续伤害
                     OnColliderStay?.Invoke(i);
+                    //Log.Trace("物理碰撞 持续" + i);
+
+                }
             }
             //附上值
             angleVelocity_copy = m_body.AngularVelocity;

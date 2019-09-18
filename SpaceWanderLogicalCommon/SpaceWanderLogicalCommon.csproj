@@ -59,6 +59,8 @@
     <Compile Include="GameActorLogic\ClientActor\UserData.cs" />
     <Compile Include="GameActorLogic\Component\AIComponent\BlackHoleAiComponent.cs" />
     <Compile Include="GameActorLogic\Component\AIComponent\DeadAiComponent.cs" />
+    <Compile Include="GameActorLogic\Component\AIComponent\EliteShipAAiComponent.cs" />
+    <Compile Include="GameActorLogic\Component\AIComponent\EliteShipBAiComponent.cs" />
     <Compile Include="GameActorLogic\Component\AIComponent\FollowAiComponent.cs" />
     <Compile Include="GameActorLogic\Component\AIComponent\GogogoAiComponent.cs" />
     <Compile Include="GameActorLogic\Component\AIComponent\ShipEnemyAiComponent.cs" />

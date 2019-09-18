@@ -469,7 +469,12 @@ namespace GameActorLogic
             return _configComponent;
         }
 
-       
+        public Dictionary<string, ulong> GetPlayers()
+        {
+            return players;
+        }
+
+
         #endregion
 
         #region Handler组件

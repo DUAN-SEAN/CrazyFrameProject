@@ -45,7 +45,7 @@ namespace GameActorLogic
 
             //Log.Trace("有计数对象" + actor.GetActorID() + "类型" + actor.GetActorType());
 
-            if (actor.IsShip() && actor.GetCamp() != LevelActorBase.PlayerCamp)
+            if (actor.IsShip() && actor.GetCamp() != LevelActorBase.PlayerCamp && actor.GetActorType() != ActorTypeBaseDefine.DroneShipActor)
             {
                 Currentvalue[key]++;
                 m_event.TryGetValue(key, out int i);

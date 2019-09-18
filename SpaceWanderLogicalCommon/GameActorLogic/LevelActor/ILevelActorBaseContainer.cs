@@ -83,6 +83,10 @@ namespace GameActorLogic
     /// </summary>
     public interface ILevelActorComponentBaseContainer : ILevelActorBaseContainer
     {
+
+        Dictionary<string, ulong> GetPlayers();
+
+
         /// <summary>
         /// 获取事件组件
         /// </summary>

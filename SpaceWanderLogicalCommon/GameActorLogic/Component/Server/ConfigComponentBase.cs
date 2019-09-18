@@ -185,7 +185,7 @@ namespace GameActorLogic
             shipactor = new ShipActorBase(0, ActorTypeBaseDefine.EliteShipActorA, level);
             //shipactor.CreateBody(factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
             shipactor.CreateInitData(new InitData());
-            shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
+            shipactor.CreateAiComponent(new EliteShipAAiComponent(shipactor, 30000, 5));
             shipactor.InitializeFireControl(new List<int> // 鱼雷 高射炮
             {
                 ActorTypeBaseDefine.TorpedoActor,
@@ -198,10 +198,10 @@ namespace GameActorLogic
             //shipactor.CreateBody(factory.CreateTrapezoidBody(0, 0, 6, 14, 3));
             shipactor.CreateInitData(new InitData());
             shipactor.CreateAiComponent(new ShipEnemyAiComponent(level, shipactor));
-            shipactor.InitializeFireControl(new List<int> // 跟踪导弹 高射炮
+            shipactor.InitializeFireControl(new List<int> // 蓄力激光 时间炸弹
             {
-                ActorTypeBaseDefine.TrackingMissileActor,
-                ActorTypeBaseDefine.AntiAircraftGunActor
+                ActorTypeBaseDefine.ContinuousLaserActor,
+                ActorTypeBaseDefine.TimeBombActor
             });
             ConfigActors.Add(ActorTypeBaseDefine.EliteShipActorB, shipactor);
 

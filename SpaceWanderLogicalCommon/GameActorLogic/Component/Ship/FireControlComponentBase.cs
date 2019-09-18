@@ -153,7 +153,7 @@ namespace GameActorLogic
 
                     case ActorTypeBaseDefine.PowerLaserActor:
                         firetime = DateTime.Now.Ticks;
-                        Log.Trace("SendButtonState 按钮按下" + firetime);
+                        //Log.Trace("SendButtonState 按钮按下" + firetime);
                         break;
 
                     case ActorTypeBaseDefine.TriggerBombActor:
@@ -247,14 +247,35 @@ namespace GameActorLogic
             {
                 if (skillcd[i] == 0) continue;
                 if (skills[i] == null) continue;
+                if (skills[i].GetActorType() == ActorTypeBaseDefine.ContinuousLaserActor) continue;
                 //技能cd时间
                 var cd = skills[i].GetSkillCd();
                 if (cd == 0) cd = 1;
                 //当前技能cd等于 当前时间减去发射时时间
                 var currentcd = (DateTime.Now.Ticks - skillcd[i]) / 1e4;
+               
+
                 //如果当前cd时间大于等于技能cd 则当前cd设置为0
                 if (currentcd >= cd) skillcd[i] = 0;
                 //Log.Trace("TickFire skilltype:" + skills[i].GetActorType() + " MAX CD:" + cd + " " + skills[i].GetSkillCd() + " 发射时间：" + skillcd[i] + " 当前时间" + currentcd);
+              
+            }
+            int h = 0;
+            for (int i = 0; i < skillcd.Count; i++)
+            {
+                if (skills[i] == null) continue;
+                if (skills[i].GetActorType() != ActorTypeBaseDefine.ContinuousLaserActor) continue;
+                h = i;
+                //技能cd时间
+                var cd = skills[i].GetSkillCd();
+                if (cd == 0) cd = 1;
+                //当前技能cd等于 当前时间减去发射时时间
+                skillcd[i]++;
+                if (skillcd[i] > cd) skillcd[i] = cd;
+                //Log.Trace(skillcd[i] + "   ++++++");
+                //如果当前cd时间大于等于技能cd 则当前cd设置为0
+                //Log.Trace("TickFire skilltype:" + skills[i].GetActorType() + " MAX CD:" + cd + " " + skills[i].GetSkillCd() + " 发射时间：" + skillcd[i] + " 当前时间" + currentcd);
+
             }
             //lastframe = DateTime.Now.Ticks;
 
@@ -262,7 +283,18 @@ namespace GameActorLogic
             // 给激光赋值
             foreach (var skillContainer in weaponlist)
             {
+                if (skills[h].GetActorType() == ActorTypeBaseDefine.ContinuousLaserActor)
+                {
+                    skillcd[h] = skillcd[h] - 2;
+
+                    //Log.Trace(skillcd[h] + "   ------");
+                }
                 container.RingDetection((level.GetActor(skillContainer.ActorID)));
+            }
+            if (skillcd[h] <= 0 && weaponlist.Count >0)
+            {
+
+                Destroy(ActorTypeBaseDefine.ContinuousLaserActor);
             }
 
 
@@ -283,10 +315,25 @@ namespace GameActorLogic
             }
             if (skills[i] is ISkillContainer actor)
             {
-                if (skillcd[i] != 0) return;
                 //var weaponactor = actor.Clone();
                 //weaponactor.SetActorId(level.GetCreateInternalComponentBase().GetCreateID());
                 //var weapon = weaponactor as ISkillContainer;
+                if(actor.GetActorType() == ActorTypeBaseDefine.ContinuousLaserActor)
+                {
+                    foreach(var s in skillInitList)
+                    {
+                        if (s.ActorType == ActorTypeBaseDefine.ContinuousLaserActor) return;
+                    }
+                }
+                if (actor.GetActorType() == ActorTypeBaseDefine.ContinuousLaserActor)
+                {
+                    if (skillcd[i] == 0) return;
+                }
+                else
+                {
+                    if (skillcd[i] != 0) return;
+
+                }
                 var id = level.GetCreateInternalComponentBase().GetCreateID();
                 var weapon = actor as ISkillContainer;
                 weapon.SetRelPosition(0, 0);
@@ -302,6 +349,7 @@ namespace GameActorLogic
 
                 skillInitList.Add(new UserData(id, weapon.GetActorType()));
                 OnFire?.Invoke(weapon);
+                if (actor.GetActorType() != ActorTypeBaseDefine.ContinuousLaserActor)
                 skillcd[i] = DateTime.Now.Ticks;
             }
             
@@ -310,14 +358,21 @@ namespace GameActorLogic
 
         public void Fire(int i)
         {
-            //Log.Trace("Fire: 发射槽" + i + " 发射槽总数"+ skills.Count);
+            //Log.Trace("Fire: 发射槽" + i + " 发射槽总数" + skills.Count);
             for (var j = 0; j < skills.Count; j++)
             {
 
                 if (skills[j].GetActorType() == i && skills[j] is ISkillContainer actor)
                 {
-                if (skillcd[j] != 0) return;
+                if(i== ActorTypeBaseDefine.ContinuousLaserActor)
+                    {
+                        if (skillcd[j] == 0) return;
+                    }
+                    else
+                    {
+                        if (skillcd[j] != 0) return;
 
+                    }
                     //var weaponactor = actor.Clone();
                     //weaponactor.SetActorId(level.GetCreateInternalComponentBase().GetCreateID());
                     var id = level.GetCreateInternalComponentBase().GetCreateID();
@@ -335,6 +390,7 @@ namespace GameActorLogic
                     level.AddEventMessagesToHandlerForward(new InitEventMessage(id, actor.GetCamp(), actor.GetActorType(), init.point_x, init.point_y, init.angle, weapon.GetLinerDamping(), ownerid: weapon.GetOwnerID(), relatpoint_x: weapon.GetRelPositionX(), relatpoint_y: weapon.GetRelPositionY(), time: firepro));
                     skillInitList.Add(new UserData(id,weapon.GetActorType()));
                     OnFire?.Invoke(weapon);
+                if (actor.GetActorType() != ActorTypeBaseDefine.ContinuousLaserActor)
                     skillcd[j] = DateTime.Now.Ticks;
                 }
             }
@@ -380,7 +436,6 @@ namespace GameActorLogic
                 {
                     weapon.DestroySkill();
                 }
-
                 //actor?.DestroySkill();
             }
 

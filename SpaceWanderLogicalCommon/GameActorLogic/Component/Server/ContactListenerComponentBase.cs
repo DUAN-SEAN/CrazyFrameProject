@@ -26,7 +26,7 @@ namespace GameActorLogic
             UserData userdateA = contact.FixtureA.Body.UserData as UserData;
             UserData userdateB = contact.FixtureB.Body.UserData as UserData;
             //Log.Trace("BeginContact UserDataA:" + userdateA + "    UserDataB" + userdateB);
-            
+
             ActorBase actorA = null;
             ActorBase actorB = null;
 
