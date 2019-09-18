@@ -173,7 +173,7 @@ namespace GameActorLogic
                 var id = _createComponent.GetCreateID();
                 this.players.Add(player.Item1, id);
                 _eventComponent.AddEventMessagesToHandlerForward(new InitEventMessage(id, LevelActorBase.PlayerCamp,
-                    player.Item3, r.Next(0, 400), r.Next(0, 400), 0, 0.1f, true, player.Item4, player.Item5, player.Item1));
+                    player.Item3, r.Next(-300, -100), r.Next(-300, -100), 0, 0.1f, true, player.Item4, player.Item5, player.Item1));
             }
 
             //开启所有任务
