@@ -68,8 +68,9 @@ namespace GameServer.Battle
         /// <param name="players">玩家集合</param>
         /// <param name="barrierId">关卡Id</param>
         /// <param name="handler">通讯句柄</param>
-        public void Init(List<string> players, int barrierId, IBattleSystemHandler handler)
+        public void Init(List<string> players, int barrierId, IBattleSystemHandler handler,List<ulong> teams)
         {
+            m_teams = teams;
             
             foreach (var plyaerId in players)
             {
@@ -176,9 +177,10 @@ namespace GameServer.Battle
                             //playerShips.Add(new Tuple<string, int, int, int, int>(plyaerId, shipInfo.shipId, 1004, 1012, 1013));
 
                         }
-                        m_level.Start(playerShips);
-                        
 
+
+
+                        m_level.Start(playerShips);
                         Log.Debug("服务器确认所有客户端关卡加载完毕完成第二次握手，可以开启战斗 ，发起第三次握手");
                         BroadcastMessage(new S2CM_ReadyBattleBarrierAck { BattleId = Id });
                         _readyDic.Clear();
@@ -593,6 +595,8 @@ namespace GameServer.Battle
         public List<string> Players => m_players;
 
         public bool IsRelease => m_isDispose;
+
+        public List<ulong> Teams => m_teams;
         #endregion
 
         #region 字段
@@ -645,7 +649,7 @@ namespace GameServer.Battle
 
         private bool m_isDispose = false;
 
-        
+        private List<ulong> m_teams;
 
         #endregion
 

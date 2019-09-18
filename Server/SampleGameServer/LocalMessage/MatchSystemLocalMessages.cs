@@ -100,4 +100,16 @@ namespace GameServer
         public List<string> players;//所有在线玩家集合 
         public Action<S2C_UpdateOnlinePlayerList> reply;//回调
     }
+    /// <summary>
+    /// 向玩家发送更新在线玩家状态信息
+    /// ps:由于匹配系统保留着玩家在队伍和战斗中的信息，所以向匹配系统发送一个在线玩家集合
+    /// 然后根据这个集合检查是否由匹配系统管理
+    /// </summary>
+    public class ReleaseBattleToMatchTeamMessage : ILocalMessage
+    {
+        public int MessageId => GameServerConstDefine.ReleaseBattleToMatchTeam;
+        public ulong BattleId;
+        public List<ulong> Teams;//回调
+        public int State;//状态值 0正常 1不正常
+    }
 }

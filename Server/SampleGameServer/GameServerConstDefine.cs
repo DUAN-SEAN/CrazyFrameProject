@@ -57,6 +57,13 @@ namespace GameServer
         /// 更新在线玩家集合，消息为来自客户端rpc请求
         /// </summary>
         public const Int32 UpdateOnlinePlayerList = 1059;
+
+        /// <summary>
+        /// 释放战斗 ，通知匹配系统
+        /// </summary>
+        public const Int32 ReleaseBattleToMatchTeam = 1060;
+
+
         #endregion
         #region BattleSystem 1101-1200
         /// <summary>

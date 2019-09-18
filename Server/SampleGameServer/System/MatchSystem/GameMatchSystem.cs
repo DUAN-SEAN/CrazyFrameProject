@@ -101,6 +101,10 @@ namespace GameServer
                     UpdateOnlinePlayerMessage updateOnlinePlayerMessage = msg as UpdateOnlinePlayerMessage;
                     OnUpdateOnlinePlayerRpc(updateOnlinePlayerMessage);
                     break;
+                case GameServerConstDefine.ReleaseBattleToMatchTeam:
+                    ReleaseBattleToMatchTeamMessage releaseBattleToMatchTeamMessage = msg as ReleaseBattleToMatchTeamMessage;
+                    OnReleaseBattle(releaseBattleToMatchTeamMessage);
+                    break;
                 default:
                     break;
             }
@@ -108,6 +112,22 @@ namespace GameServer
 
             return base.OnMessage(msg);
         }
+        /// <summary>
+        /// 收到释放战斗的消息，读取队伍信息修改队伍状态
+        /// </summary>
+        /// <param name="releaseBattleToMatchTeamMessage"></param>
+        private void OnReleaseBattle(ReleaseBattleToMatchTeamMessage releaseBattleToMatchTeamMessage)
+        {
+            Log.Info("匹配系统收到释放战斗的消息，修改各个队伍的状态 BattleId = "+releaseBattleToMatchTeamMessage.BattleId);
+            foreach (var teamId in releaseBattleToMatchTeamMessage.Teams)
+            {
+                if(m_teamDic.TryGetValue(teamId,out var matchTeam))
+                {
+                    matchTeam.State = MatchTeam.MatchTeamState.OPEN;
+                }
+            }
+        }
+
         /// <summary>
         /// TODO:关闭一个玩家现场在匹配系统的存在
         /// 安全操作，尽管退出
@@ -511,7 +531,8 @@ namespace GameServer
                 //修改队伍状态 并通知GameServer 向战斗系统发送创建战斗模块的消息
                 team.State = MatchTeam.MatchTeamState.INBATTLE;
             }
-           
+
+            createBattleBarrierMessage.Teams = teamIds.ToList();
             createBattleBarrierMessage.BarrierId = barrierId;
             GameServer.Instance.PostMessageToSystem<BattleSystem>(createBattleBarrierMessage);
         }

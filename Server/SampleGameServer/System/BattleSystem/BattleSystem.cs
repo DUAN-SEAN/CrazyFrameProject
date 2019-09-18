@@ -107,7 +107,7 @@ namespace GameServer.Battle
             Battle battleEntity = new Battle();
             battleEntity.Start(BattleGenerateId++);
 
-            battleEntity.Init(msg.Players, msg.BarrierId, this);
+            battleEntity.Init(msg.Players, msg.BarrierId, this,msg.Teams);
             //Log.Debug(m_gameBattleConfig.BattleTickTime+"   "+"Battle Update");
             var timerId = TimerManager.SetLoopTimer(m_gameBattleConfig.BattleTickTime, battleEntity.Update);//设置Tick步长
             battleEntity.SetTimer(timerId);
@@ -203,11 +203,20 @@ namespace GameServer.Battle
         /// </summary>
         public void OnReleaseBattle(ulong battleId)
         {
+
+
+
             if (!m_battleDic.TryGetValue(battleId, out var battleEntity))
             {
                 Log.Error("OnReleaseBattle Find Null");
                 return;
             }
+
+            ReleaseBattleToMatchTeamMessage releaseBattleToMatchTeamMessage = new ReleaseBattleToMatchTeamMessage();
+            releaseBattleToMatchTeamMessage.Teams = battleEntity.Teams;
+            releaseBattleToMatchTeamMessage.State = 0;
+            releaseBattleToMatchTeamMessage.BattleId = battleId;
+            GameServer.Instance.PostMessageToSystem<GameMatchSystem>(releaseBattleToMatchTeamMessage);
             //玩家大于0 说明战斗是正常结束，则计算反给客户端玩家退出战斗
             if (battleEntity.Players.Count > 0)
             {

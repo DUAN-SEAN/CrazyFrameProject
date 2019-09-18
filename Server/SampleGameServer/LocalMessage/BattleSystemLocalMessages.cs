@@ -28,6 +28,7 @@ namespace GameServer
         public int MessageId => GameServerConstDefine.BattleSystemCreateBattleBarrier;
         public int BarrierId;//关卡Id
         public List<string> Players;//玩家Id集合
+        public List<ulong> Teams;//队伍集合
     }
 
 
