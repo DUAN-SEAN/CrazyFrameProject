@@ -75,7 +75,17 @@ namespace Crazy.Common {
             "cnJpZXIuQ3JlYXRlQmF0dGxlQmFycmllckluZm8aPgoXQ3JlYXRlQmF0dGxl",
             "QmFycmllckluZm8SEAoIQmF0dGxlSWQYASABKAQSEQoJUGxheWVySWRzGAIg",
             "AygJIkgKFEMyU19SZUNvbm5lY3RCeUxvZ2luEg0KBVJwY0lkGFogASgFEg8K",
-            "B0FjY291bnQYASABKAkSEAoIUGFzc3dvcmQYAiABKAliBnByb3RvMw=="));
+            "B0FjY291bnQYASABKAkSEAoIUGFzc3dvcmQYAiABKAkicQoSQzJTX1NwZWFr",
+            "VG9UZWFtUmVxEg0KBVJwY0lkGFogASgFEhYKDkxhdW5jaFBsYXllcklkGAEg",
+            "ASgJEhEKCVBsYXllcklkcxgCIAMoCRITCgtNYXRjaFRlYW1JZBgDIAEoBBIM",
+            "CgREYXRhGAQgASgMIl4KElMyQ19TcGVha1RvVGVhbUFjaxINCgVScGNJZBha",
+            "IAEoBRIWCg5MYXVuY2hQbGF5ZXJJZBgBIAEoCRITCgtNYXRjaFRlYW1JZBgC",
+            "IAEoBBIMCgREYXRhGAMgASgMInAKFEMyU19TcGVha1RvQmF0dGxlUmVxEg0K",
+            "BVJwY0lkGFogASgFEhYKDkxhdW5jaFBsYXllcklkGAEgASgJEhEKCVBsYXll",
+            "cklkcxgCIAMoCRIQCghCYXR0bGVJZBgDIAEoBBIMCgREYXRhGAQgASgMIl0K",
+            "FFMyQ19TcGVha1RvQmF0dGxlQWNrEg0KBVJwY0lkGFogASgFEhYKDkxhdW5j",
+            "aFBsYXllcklkGAEgASgJEhAKCEJhdHRsZUlkGAIgASgEEgwKBERhdGEYAyAB",
+            "KAxiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -97,7 +107,11 @@ namespace Crazy.Common {
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2CM_ExitMatchQueue), global::Crazy.Common.S2CM_ExitMatchQueue.Parser, new[]{ "RpcId", "LaunchPlayerId", "MatchTeamId", "State" }, null, new[]{ typeof(global::Crazy.Common.S2CM_ExitMatchQueue.Types.State) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2CM_MatchingFinish), global::Crazy.Common.S2CM_MatchingFinish.Parser, new[]{ "RpcId", "MatchTeamId", "BarrierId", "State" }, null, new[]{ typeof(global::Crazy.Common.S2CM_MatchingFinish.Types.State) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2CM_CreateBattleBarrier), global::Crazy.Common.S2CM_CreateBattleBarrier.Parser, new[]{ "RpcId", "BattleId", "BattleInfo" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2CM_CreateBattleBarrier.Types.CreateBattleBarrierInfo), global::Crazy.Common.S2CM_CreateBattleBarrier.Types.CreateBattleBarrierInfo.Parser, new[]{ "BattleId", "PlayerIds" }, null, null, null)}),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.C2S_ReConnectByLogin), global::Crazy.Common.C2S_ReConnectByLogin.Parser, new[]{ "RpcId", "Account", "Password" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.C2S_ReConnectByLogin), global::Crazy.Common.C2S_ReConnectByLogin.Parser, new[]{ "RpcId", "Account", "Password" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.C2S_SpeakToTeamReq), global::Crazy.Common.C2S_SpeakToTeamReq.Parser, new[]{ "RpcId", "LaunchPlayerId", "PlayerIds", "MatchTeamId", "Data" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SpeakToTeamAck), global::Crazy.Common.S2C_SpeakToTeamAck.Parser, new[]{ "RpcId", "LaunchPlayerId", "MatchTeamId", "Data" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.C2S_SpeakToBattleReq), global::Crazy.Common.C2S_SpeakToBattleReq.Parser, new[]{ "RpcId", "LaunchPlayerId", "PlayerIds", "BattleId", "Data" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Crazy.Common.S2C_SpeakToBattleAck), global::Crazy.Common.S2C_SpeakToBattleAck.Parser, new[]{ "RpcId", "LaunchPlayerId", "BattleId", "Data" }, null, null, null)
           }));
     }
     #endregion
@@ -593,7 +607,7 @@ namespace Crazy.Common {
             break;
           }
           case 16: {
-            state_ = (global::Crazy.Common.S2C_CreateMatchTeamComplete.Types.State) input.ReadEnum();
+            State = (global::Crazy.Common.S2C_CreateMatchTeamComplete.Types.State) input.ReadEnum();
             break;
           }
           case 720: {
@@ -1402,7 +1416,7 @@ namespace Crazy.Common {
             break;
           }
           case 24: {
-            state_ = (global::Crazy.Common.S2CM_JoinMatchTeamComplete.Types.State) input.ReadEnum();
+            State = (global::Crazy.Common.S2CM_JoinMatchTeamComplete.Types.State) input.ReadEnum();
             break;
           }
           case 720: {
@@ -1792,7 +1806,7 @@ namespace Crazy.Common {
       }
       if (other.teamInfo_ != null) {
         if (teamInfo_ == null) {
-          teamInfo_ = new global::Crazy.Common.MatchTeamInfo();
+          TeamInfo = new global::Crazy.Common.MatchTeamInfo();
         }
         TeamInfo.MergeFrom(other.TeamInfo);
       }
@@ -1817,9 +1831,9 @@ namespace Crazy.Common {
           }
           case 26: {
             if (teamInfo_ == null) {
-              teamInfo_ = new global::Crazy.Common.MatchTeamInfo();
+              TeamInfo = new global::Crazy.Common.MatchTeamInfo();
             }
-            input.ReadMessage(teamInfo_);
+            input.ReadMessage(TeamInfo);
             break;
           }
           case 720: {
@@ -2366,7 +2380,7 @@ namespace Crazy.Common {
             break;
           }
           case 24: {
-            state_ = (global::Crazy.Common.S2CM_ExitMatchTeamComplete.Types.State) input.ReadEnum();
+            State = (global::Crazy.Common.S2CM_ExitMatchTeamComplete.Types.State) input.ReadEnum();
             break;
           }
           case 720: {
@@ -2804,7 +2818,7 @@ namespace Crazy.Common {
             break;
           }
           case 24: {
-            state_ = (global::Crazy.Common.S2CM_JoinMatchQueueComplete.Types.State) input.ReadEnum();
+            State = (global::Crazy.Common.S2CM_JoinMatchQueueComplete.Types.State) input.ReadEnum();
             break;
           }
           case 720: {
@@ -3214,7 +3228,7 @@ namespace Crazy.Common {
             break;
           }
           case 24: {
-            state_ = (global::Crazy.Common.S2CM_ExitMatchQueue.Types.State) input.ReadEnum();
+            State = (global::Crazy.Common.S2CM_ExitMatchQueue.Types.State) input.ReadEnum();
             break;
           }
           case 720: {
@@ -3439,7 +3453,7 @@ namespace Crazy.Common {
             break;
           }
           case 24: {
-            state_ = (global::Crazy.Common.S2CM_MatchingFinish.Types.State) input.ReadEnum();
+            State = (global::Crazy.Common.S2CM_MatchingFinish.Types.State) input.ReadEnum();
             break;
           }
           case 720: {
@@ -3622,7 +3636,7 @@ namespace Crazy.Common {
       }
       if (other.battleInfo_ != null) {
         if (battleInfo_ == null) {
-          battleInfo_ = new global::Crazy.Common.S2CM_CreateBattleBarrier.Types.CreateBattleBarrierInfo();
+          BattleInfo = new global::Crazy.Common.S2CM_CreateBattleBarrier.Types.CreateBattleBarrierInfo();
         }
         BattleInfo.MergeFrom(other.BattleInfo);
       }
@@ -3643,9 +3657,9 @@ namespace Crazy.Common {
           }
           case 18: {
             if (battleInfo_ == null) {
-              battleInfo_ = new global::Crazy.Common.S2CM_CreateBattleBarrier.Types.CreateBattleBarrierInfo();
+              BattleInfo = new global::Crazy.Common.S2CM_CreateBattleBarrier.Types.CreateBattleBarrierInfo();
             }
-            input.ReadMessage(battleInfo_);
+            input.ReadMessage(BattleInfo);
             break;
           }
           case 720: {
@@ -3990,6 +4004,910 @@ namespace Crazy.Common {
           }
           case 18: {
             Password = input.ReadString();
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  ///以下为其他通信消息
+  /// </summary>
+  public sealed partial class C2S_SpeakToTeamReq : pb::IMessage<C2S_SpeakToTeamReq> {
+    private static readonly pb::MessageParser<C2S_SpeakToTeamReq> _parser = new pb::MessageParser<C2S_SpeakToTeamReq>(() => new C2S_SpeakToTeamReq());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<C2S_SpeakToTeamReq> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Crazy.Common.MessageReflection.Descriptor.MessageTypes[19]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C2S_SpeakToTeamReq() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C2S_SpeakToTeamReq(C2S_SpeakToTeamReq other) : this() {
+      rpcId_ = other.rpcId_;
+      launchPlayerId_ = other.launchPlayerId_;
+      playerIds_ = other.playerIds_.Clone();
+      matchTeamId_ = other.matchTeamId_;
+      data_ = other.data_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C2S_SpeakToTeamReq Clone() {
+      return new C2S_SpeakToTeamReq(this);
+    }
+
+    /// <summary>Field number for the "RpcId" field.</summary>
+    public const int RpcIdFieldNumber = 90;
+    private int rpcId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "LaunchPlayerId" field.</summary>
+    public const int LaunchPlayerIdFieldNumber = 1;
+    private string launchPlayerId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string LaunchPlayerId {
+      get { return launchPlayerId_; }
+      set {
+        launchPlayerId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "PlayerIds" field.</summary>
+    public const int PlayerIdsFieldNumber = 2;
+    private static readonly pb::FieldCodec<string> _repeated_playerIds_codec
+        = pb::FieldCodec.ForString(18);
+    private readonly pbc::RepeatedField<string> playerIds_ = new pbc::RepeatedField<string>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<string> PlayerIds {
+      get { return playerIds_; }
+    }
+
+    /// <summary>Field number for the "MatchTeamId" field.</summary>
+    public const int MatchTeamIdFieldNumber = 3;
+    private ulong matchTeamId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong MatchTeamId {
+      get { return matchTeamId_; }
+      set {
+        matchTeamId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Data" field.</summary>
+    public const int DataFieldNumber = 4;
+    private pb::ByteString data_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString Data {
+      get { return data_; }
+      set {
+        data_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as C2S_SpeakToTeamReq);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(C2S_SpeakToTeamReq other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (RpcId != other.RpcId) return false;
+      if (LaunchPlayerId != other.LaunchPlayerId) return false;
+      if(!playerIds_.Equals(other.playerIds_)) return false;
+      if (MatchTeamId != other.MatchTeamId) return false;
+      if (Data != other.Data) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (RpcId != 0) hash ^= RpcId.GetHashCode();
+      if (LaunchPlayerId.Length != 0) hash ^= LaunchPlayerId.GetHashCode();
+      hash ^= playerIds_.GetHashCode();
+      if (MatchTeamId != 0UL) hash ^= MatchTeamId.GetHashCode();
+      if (Data.Length != 0) hash ^= Data.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (LaunchPlayerId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(LaunchPlayerId);
+      }
+      playerIds_.WriteTo(output, _repeated_playerIds_codec);
+      if (MatchTeamId != 0UL) {
+        output.WriteRawTag(24);
+        output.WriteUInt64(MatchTeamId);
+      }
+      if (Data.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteBytes(Data);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (LaunchPlayerId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(LaunchPlayerId);
+      }
+      size += playerIds_.CalculateSize(_repeated_playerIds_codec);
+      if (MatchTeamId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(MatchTeamId);
+      }
+      if (Data.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Data);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(C2S_SpeakToTeamReq other) {
+      if (other == null) {
+        return;
+      }
+      if (other.RpcId != 0) {
+        RpcId = other.RpcId;
+      }
+      if (other.LaunchPlayerId.Length != 0) {
+        LaunchPlayerId = other.LaunchPlayerId;
+      }
+      playerIds_.Add(other.playerIds_);
+      if (other.MatchTeamId != 0UL) {
+        MatchTeamId = other.MatchTeamId;
+      }
+      if (other.Data.Length != 0) {
+        Data = other.Data;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            LaunchPlayerId = input.ReadString();
+            break;
+          }
+          case 18: {
+            playerIds_.AddEntriesFrom(input, _repeated_playerIds_codec);
+            break;
+          }
+          case 24: {
+            MatchTeamId = input.ReadUInt64();
+            break;
+          }
+          case 34: {
+            Data = input.ReadBytes();
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  ///以下为其他通信消息
+  /// </summary>
+  public sealed partial class S2C_SpeakToTeamAck : pb::IMessage<S2C_SpeakToTeamAck> {
+    private static readonly pb::MessageParser<S2C_SpeakToTeamAck> _parser = new pb::MessageParser<S2C_SpeakToTeamAck>(() => new S2C_SpeakToTeamAck());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<S2C_SpeakToTeamAck> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Crazy.Common.MessageReflection.Descriptor.MessageTypes[20]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S2C_SpeakToTeamAck() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S2C_SpeakToTeamAck(S2C_SpeakToTeamAck other) : this() {
+      rpcId_ = other.rpcId_;
+      launchPlayerId_ = other.launchPlayerId_;
+      matchTeamId_ = other.matchTeamId_;
+      data_ = other.data_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S2C_SpeakToTeamAck Clone() {
+      return new S2C_SpeakToTeamAck(this);
+    }
+
+    /// <summary>Field number for the "RpcId" field.</summary>
+    public const int RpcIdFieldNumber = 90;
+    private int rpcId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "LaunchPlayerId" field.</summary>
+    public const int LaunchPlayerIdFieldNumber = 1;
+    private string launchPlayerId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string LaunchPlayerId {
+      get { return launchPlayerId_; }
+      set {
+        launchPlayerId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "MatchTeamId" field.</summary>
+    public const int MatchTeamIdFieldNumber = 2;
+    private ulong matchTeamId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong MatchTeamId {
+      get { return matchTeamId_; }
+      set {
+        matchTeamId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Data" field.</summary>
+    public const int DataFieldNumber = 3;
+    private pb::ByteString data_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString Data {
+      get { return data_; }
+      set {
+        data_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as S2C_SpeakToTeamAck);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(S2C_SpeakToTeamAck other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (RpcId != other.RpcId) return false;
+      if (LaunchPlayerId != other.LaunchPlayerId) return false;
+      if (MatchTeamId != other.MatchTeamId) return false;
+      if (Data != other.Data) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (RpcId != 0) hash ^= RpcId.GetHashCode();
+      if (LaunchPlayerId.Length != 0) hash ^= LaunchPlayerId.GetHashCode();
+      if (MatchTeamId != 0UL) hash ^= MatchTeamId.GetHashCode();
+      if (Data.Length != 0) hash ^= Data.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (LaunchPlayerId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(LaunchPlayerId);
+      }
+      if (MatchTeamId != 0UL) {
+        output.WriteRawTag(16);
+        output.WriteUInt64(MatchTeamId);
+      }
+      if (Data.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteBytes(Data);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (LaunchPlayerId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(LaunchPlayerId);
+      }
+      if (MatchTeamId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(MatchTeamId);
+      }
+      if (Data.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Data);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(S2C_SpeakToTeamAck other) {
+      if (other == null) {
+        return;
+      }
+      if (other.RpcId != 0) {
+        RpcId = other.RpcId;
+      }
+      if (other.LaunchPlayerId.Length != 0) {
+        LaunchPlayerId = other.LaunchPlayerId;
+      }
+      if (other.MatchTeamId != 0UL) {
+        MatchTeamId = other.MatchTeamId;
+      }
+      if (other.Data.Length != 0) {
+        Data = other.Data;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            LaunchPlayerId = input.ReadString();
+            break;
+          }
+          case 16: {
+            MatchTeamId = input.ReadUInt64();
+            break;
+          }
+          case 26: {
+            Data = input.ReadBytes();
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  ///以下为其他通信消息
+  /// </summary>
+  public sealed partial class C2S_SpeakToBattleReq : pb::IMessage<C2S_SpeakToBattleReq> {
+    private static readonly pb::MessageParser<C2S_SpeakToBattleReq> _parser = new pb::MessageParser<C2S_SpeakToBattleReq>(() => new C2S_SpeakToBattleReq());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<C2S_SpeakToBattleReq> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Crazy.Common.MessageReflection.Descriptor.MessageTypes[21]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C2S_SpeakToBattleReq() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C2S_SpeakToBattleReq(C2S_SpeakToBattleReq other) : this() {
+      rpcId_ = other.rpcId_;
+      launchPlayerId_ = other.launchPlayerId_;
+      playerIds_ = other.playerIds_.Clone();
+      battleId_ = other.battleId_;
+      data_ = other.data_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C2S_SpeakToBattleReq Clone() {
+      return new C2S_SpeakToBattleReq(this);
+    }
+
+    /// <summary>Field number for the "RpcId" field.</summary>
+    public const int RpcIdFieldNumber = 90;
+    private int rpcId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "LaunchPlayerId" field.</summary>
+    public const int LaunchPlayerIdFieldNumber = 1;
+    private string launchPlayerId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string LaunchPlayerId {
+      get { return launchPlayerId_; }
+      set {
+        launchPlayerId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "PlayerIds" field.</summary>
+    public const int PlayerIdsFieldNumber = 2;
+    private static readonly pb::FieldCodec<string> _repeated_playerIds_codec
+        = pb::FieldCodec.ForString(18);
+    private readonly pbc::RepeatedField<string> playerIds_ = new pbc::RepeatedField<string>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<string> PlayerIds {
+      get { return playerIds_; }
+    }
+
+    /// <summary>Field number for the "BattleId" field.</summary>
+    public const int BattleIdFieldNumber = 3;
+    private ulong battleId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong BattleId {
+      get { return battleId_; }
+      set {
+        battleId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Data" field.</summary>
+    public const int DataFieldNumber = 4;
+    private pb::ByteString data_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString Data {
+      get { return data_; }
+      set {
+        data_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as C2S_SpeakToBattleReq);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(C2S_SpeakToBattleReq other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (RpcId != other.RpcId) return false;
+      if (LaunchPlayerId != other.LaunchPlayerId) return false;
+      if(!playerIds_.Equals(other.playerIds_)) return false;
+      if (BattleId != other.BattleId) return false;
+      if (Data != other.Data) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (RpcId != 0) hash ^= RpcId.GetHashCode();
+      if (LaunchPlayerId.Length != 0) hash ^= LaunchPlayerId.GetHashCode();
+      hash ^= playerIds_.GetHashCode();
+      if (BattleId != 0UL) hash ^= BattleId.GetHashCode();
+      if (Data.Length != 0) hash ^= Data.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (LaunchPlayerId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(LaunchPlayerId);
+      }
+      playerIds_.WriteTo(output, _repeated_playerIds_codec);
+      if (BattleId != 0UL) {
+        output.WriteRawTag(24);
+        output.WriteUInt64(BattleId);
+      }
+      if (Data.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteBytes(Data);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (LaunchPlayerId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(LaunchPlayerId);
+      }
+      size += playerIds_.CalculateSize(_repeated_playerIds_codec);
+      if (BattleId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(BattleId);
+      }
+      if (Data.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Data);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(C2S_SpeakToBattleReq other) {
+      if (other == null) {
+        return;
+      }
+      if (other.RpcId != 0) {
+        RpcId = other.RpcId;
+      }
+      if (other.LaunchPlayerId.Length != 0) {
+        LaunchPlayerId = other.LaunchPlayerId;
+      }
+      playerIds_.Add(other.playerIds_);
+      if (other.BattleId != 0UL) {
+        BattleId = other.BattleId;
+      }
+      if (other.Data.Length != 0) {
+        Data = other.Data;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            LaunchPlayerId = input.ReadString();
+            break;
+          }
+          case 18: {
+            playerIds_.AddEntriesFrom(input, _repeated_playerIds_codec);
+            break;
+          }
+          case 24: {
+            BattleId = input.ReadUInt64();
+            break;
+          }
+          case 34: {
+            Data = input.ReadBytes();
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  ///以下为其他通信消息
+  /// </summary>
+  public sealed partial class S2C_SpeakToBattleAck : pb::IMessage<S2C_SpeakToBattleAck> {
+    private static readonly pb::MessageParser<S2C_SpeakToBattleAck> _parser = new pb::MessageParser<S2C_SpeakToBattleAck>(() => new S2C_SpeakToBattleAck());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<S2C_SpeakToBattleAck> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Crazy.Common.MessageReflection.Descriptor.MessageTypes[22]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S2C_SpeakToBattleAck() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S2C_SpeakToBattleAck(S2C_SpeakToBattleAck other) : this() {
+      rpcId_ = other.rpcId_;
+      launchPlayerId_ = other.launchPlayerId_;
+      battleId_ = other.battleId_;
+      data_ = other.data_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S2C_SpeakToBattleAck Clone() {
+      return new S2C_SpeakToBattleAck(this);
+    }
+
+    /// <summary>Field number for the "RpcId" field.</summary>
+    public const int RpcIdFieldNumber = 90;
+    private int rpcId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "LaunchPlayerId" field.</summary>
+    public const int LaunchPlayerIdFieldNumber = 1;
+    private string launchPlayerId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string LaunchPlayerId {
+      get { return launchPlayerId_; }
+      set {
+        launchPlayerId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "BattleId" field.</summary>
+    public const int BattleIdFieldNumber = 2;
+    private ulong battleId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong BattleId {
+      get { return battleId_; }
+      set {
+        battleId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "Data" field.</summary>
+    public const int DataFieldNumber = 3;
+    private pb::ByteString data_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString Data {
+      get { return data_; }
+      set {
+        data_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as S2C_SpeakToBattleAck);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(S2C_SpeakToBattleAck other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (RpcId != other.RpcId) return false;
+      if (LaunchPlayerId != other.LaunchPlayerId) return false;
+      if (BattleId != other.BattleId) return false;
+      if (Data != other.Data) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (RpcId != 0) hash ^= RpcId.GetHashCode();
+      if (LaunchPlayerId.Length != 0) hash ^= LaunchPlayerId.GetHashCode();
+      if (BattleId != 0UL) hash ^= BattleId.GetHashCode();
+      if (Data.Length != 0) hash ^= Data.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (LaunchPlayerId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(LaunchPlayerId);
+      }
+      if (BattleId != 0UL) {
+        output.WriteRawTag(16);
+        output.WriteUInt64(BattleId);
+      }
+      if (Data.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteBytes(Data);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (LaunchPlayerId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(LaunchPlayerId);
+      }
+      if (BattleId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(BattleId);
+      }
+      if (Data.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Data);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(S2C_SpeakToBattleAck other) {
+      if (other == null) {
+        return;
+      }
+      if (other.RpcId != 0) {
+        RpcId = other.RpcId;
+      }
+      if (other.LaunchPlayerId.Length != 0) {
+        LaunchPlayerId = other.LaunchPlayerId;
+      }
+      if (other.BattleId != 0UL) {
+        BattleId = other.BattleId;
+      }
+      if (other.Data.Length != 0) {
+        Data = other.Data;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            LaunchPlayerId = input.ReadString();
+            break;
+          }
+          case 16: {
+            BattleId = input.ReadUInt64();
+            break;
+          }
+          case 26: {
+            Data = input.ReadBytes();
             break;
           }
           case 720: {

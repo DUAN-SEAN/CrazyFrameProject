@@ -8,7 +8,6 @@ namespace GameServer.Battle
 {
     /// <summary>
     /// 战斗实体，战斗的载体
-    /// 飞船 导弹 子弹 陨石，一切需要通信的实体
     /// </summary>
     public abstract class BEntity
     {
@@ -30,7 +29,7 @@ namespace GameServer.Battle
             if (IsDispose) return;
             m_Id = 0;
             IsDispose = true;
-            BEntityFactory.Recycle(this);
+            //BEntityFactory.Recycle(this);
 
         }
 

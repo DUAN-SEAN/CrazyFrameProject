@@ -69,10 +69,7 @@ namespace GameServer.Battle
             Boolean ret = m_loopTimers.TryRemove(timerId, out timerNode);
 
             // 对timer执行cancel操作
-            if (null != timerNode)
-            {
-                timerNode.CancelTask();
-            }
+            timerNode?.CancelTask();
 
             return ret;
         }
@@ -177,7 +174,8 @@ namespace GameServer.Battle
                         await Task.Delay((int)delayMillSeconds / 10000);
                     }
                 }
-                Log.Info("TimerManager::TimerWorkerProc stop timerid=" + timerNode.m_id);
+                Log.Info("GameTimerManager::TimerWorkerProc stop timerid=" + timerNode.m_id);
+                return ;
             }
             catch (Exception ex)
             {
@@ -206,10 +204,12 @@ namespace GameServer.Battle
         /// </summary>
         private ConcurrentDictionary<Int64, BattleTimerNode> m_loopTimers = new ConcurrentDictionary<long, BattleTimerNode>();
 
+#pragma warning disable CS0169 // 从不使用字段“BattleTimerManager.m_playerCtxTimersCancelTokenSource”
         /// <summary>
         /// Task引用的CancellationToken
         /// </summary>
         private CancellationTokenSource m_playerCtxTimersCancelTokenSource;
+#pragma warning restore CS0169 // 从不使用字段“BattleTimerManager.m_playerCtxTimersCancelTokenSource”
 
         
 
@@ -282,6 +282,7 @@ namespace GameServer.Battle
             m_cts.Cancel();
             m_cts.Dispose();
             m_task.Wait();
+            
         }
 
         /// <summary>

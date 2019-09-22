@@ -147,7 +147,7 @@ namespace Crazy.ServerBase
             client.SetSocketSendBufferSize(m_globalConfigure.Global.Network.SocketOutputBufferLen);
 
             // 将client和ctx关联起来
-            playerCtx.AttachClient(client,OpcodeTypeDic);
+            playerCtx.AttachClient(client);
 
             // 通知玩家现场连接完成
             playerCtx.OnConnected();
@@ -191,7 +191,7 @@ namespace Crazy.ServerBase
         /// <param name="globalConfPath"></param>
         /// <param name="serverDNName"></param>
         /// <returns></returns>
-        protected virtual bool InitlizeServerConfigure<TGlobalConfigClass>(string globalConfPath,
+        public virtual bool InitlizeServerConfigure<TGlobalConfigClass>(string globalConfPath,
             string serverDNName)
             where TGlobalConfigClass :ServerBaseGlobalConfigure, new()
         {
@@ -220,10 +220,6 @@ namespace Crazy.ServerBase
             m_objectPool = new ObjectPool();
             if (m_objectPool == null) return false;
             if (!MessageFactory.Adapting(m_objectPool)) return false;
-
-            var message = MessageFactory.CreateMessage<S2C_LoginMessage>();
-            message.State = S2C_LoginMessage.Types.State.Ok;
-            Log.Info(message.ToString());
             return true;
 
         }
@@ -292,14 +288,16 @@ namespace Crazy.ServerBase
         /// 服务器Id
         /// </summary>
         protected Int32 m_serverId;
+#pragma warning disable CS0169 // 从不使用字段“ServerBase.m_serverName”
         /// <summary>
         /// 服务器名称
         /// </summary>
         private string m_serverName;
+#pragma warning restore CS0169 // 从不使用字段“ServerBase.m_serverName”
         /// <summary>
         ///当前服务器的配置
         /// </summary>
-        private Crazy.Common.Server m_configServer;
+        protected Crazy.Common.Server m_configServer;
         /// <summary>
         /// 消息分发 所有走网络的消息都通过这个进行分发
         /// </summary>

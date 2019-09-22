@@ -1,13 +1,13 @@
 ﻿using Crazy.Common;
 using Crazy.NetSharp;
 using Crazy.ServerBase;
-using GameServer.Battle;
 using MongoDB.Bson;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GameServer.Battle;
 
 namespace GameServer
 {
@@ -83,7 +83,7 @@ namespace GameServer
                     break;
                 case GameServerConstDefine.MatchSystemExitMatchQueue:
                     ExitMatchQueueMessage exitMatchQueueMessage = msg as ExitMatchQueueMessage;
-                    OnExitMatchQueue(exitMatchQueueMessage.teamId, exitMatchQueueMessage.playerId, exitMatchQueueMessage.barrierId);
+                    OnExitMatchQueue(exitMatchQueueMessage.teamId, exitMatchQueueMessage.playerId);
                     break;
                 case GameServerConstDefine.MatchQueueCompleteSingle://来自 MatcingSystemQueue 的消息，通知system匹配完成
                     MatchQueueCompleteSingleMessage matchQueueCompleteSingleMessage = msg as MatchQueueCompleteSingleMessage;
@@ -101,6 +101,10 @@ namespace GameServer
                     UpdateOnlinePlayerMessage updateOnlinePlayerMessage = msg as UpdateOnlinePlayerMessage;
                     OnUpdateOnlinePlayerRpc(updateOnlinePlayerMessage);
                     break;
+                case GameServerConstDefine.ReleaseBattleToMatchTeam:
+                    ReleaseBattleToMatchTeamMessage releaseBattleToMatchTeamMessage = msg as ReleaseBattleToMatchTeamMessage;
+                    OnReleaseBattle(releaseBattleToMatchTeamMessage);
+                    break;
                 default:
                     break;
             }
@@ -108,6 +112,22 @@ namespace GameServer
 
             return base.OnMessage(msg);
         }
+        /// <summary>
+        /// 收到释放战斗的消息，读取队伍信息修改队伍状态
+        /// </summary>
+        /// <param name="releaseBattleToMatchTeamMessage"></param>
+        private void OnReleaseBattle(ReleaseBattleToMatchTeamMessage releaseBattleToMatchTeamMessage)
+        {
+            Log.Info("匹配系统收到释放战斗的消息，修改各个队伍的状态 BattleId = "+releaseBattleToMatchTeamMessage.BattleId);
+            foreach (var teamId in releaseBattleToMatchTeamMessage.Teams)
+            {
+                if(m_teamDic.TryGetValue(teamId,out var matchTeam))
+                {
+                    matchTeam.State = MatchTeam.MatchTeamState.OPEN;
+                }
+            }
+        }
+
         /// <summary>
         /// TODO:关闭一个玩家现场在匹配系统的存在
         /// 安全操作，尽管退出
@@ -127,26 +147,43 @@ namespace GameServer
             {
                 return;
             }
-            //TODO:匹配队伍在战斗中需要向战斗系统发送消息
-            if (matchTeam.State == MatchTeam.MatchTeamState.INBATTLE)
-            {
 
-                return;
-            }
-            //匹配队列正在匹配，需要将队伍从匹配队列中删除
-            if(matchTeam.State == MatchTeam.MatchTeamState.Matching)
+            lock (matchTeam)
             {
+               
+                if (matchTeam.State == MatchTeam.MatchTeamState.INBATTLE)
+                {
 
-                return;
+                    Log.Info("玩家掉线，重连超时，退出队伍  TeamId" + matchTeam.Id + "Team State = " + matchTeam.State);
+                    OnExitMatchTeam(teamId, playerId);
+                    return;
+                }
+                //匹配队列正在匹配，需要将队伍从匹配队列中删除
+                if (matchTeam.State == MatchTeam.MatchTeamState.Matching)
+                {
+                    Log.Info("玩家掉线，重连超时，退出队伍  TeamId" + matchTeam.Id + "Team State = " + matchTeam.State);
+                    
+                    OnExitMatchTeam(teamId, playerId);
+                    return;
+                }
+                //最简单的退出 直接交给退出队伍执行
+                if (matchTeam.State == MatchTeam.MatchTeamState.OPEN)
+                {
+                    Log.Info("玩家掉线，重连超时，退出队伍  TeamId" + matchTeam.Id + "Team State = " + matchTeam.State);
+                    OnExitMatchTeam(teamId, playerId);
+                    return;
+                }
             }
-            //最简单的退出 直接交给退出队伍执行
-            if(matchTeam.State == MatchTeam.MatchTeamState.OPEN)
-            {
-                OnExitMatchTeam(teamId, playerId);
-                return;
-            }
+           
         }
+        /// <summary>
+        /// 玩家重连成功 取得战斗系统玩家实体控制权
+        /// </summary>
+        /// <param name="playerId"></param>
+        public void OnReConnect(ulong battleId,string playerId)
+        {
 
+        }
         public override bool PostLocalMessage(ILocalMessage msg)
         {
             return base.PostLocalMessage(msg);
@@ -213,7 +250,7 @@ namespace GameServer
             }
             if ((teamId = FindMatchTeamById(playerId))!=default)
             {
-                Log.Error("创建队伍失败，因为玩家已经在队伍中了");
+                Log.Info("创建队伍失败，因为玩家已经在队伍中了");
                 state = S2C_CreateMatchTeamComplete.Types.State.HaveTeam;
                 goto Result;
             }
@@ -275,6 +312,7 @@ namespace GameServer
                 goto Result;
             }
 
+            OnExitMatchQueue(matchTeam.Id, playerId);
             if (!matchTeam.Remove(playerId))//从队伍中移除
             {
                 message.State = S2CM_ExitMatchTeamComplete.Types.State.Fail;
@@ -424,7 +462,7 @@ namespace GameServer
         /// 队伍离开匹配队列
         /// 任何队伍中的玩家都能发起队伍离开匹配队列
         /// </summary>
-        public void OnExitMatchQueue(ulong teamId, string playerId, int barrierId)
+        public void OnExitMatchQueue(ulong teamId, string playerId)
         {
             //1 验证 队伍是否存在
             MatchTeam matchTeam = null;
@@ -470,13 +508,11 @@ namespace GameServer
                 {
                     flag = false;
                     Log.Error("找不到id对应的队伍 匹配出错");
-                    return;
                 }
                 if (team.State != MatchTeam.MatchTeamState.Matching)
                 {
                     flag = false;
                     Log.Error("队伍状态错误 匹配出错");
-                    return;
                 }
             }
             if (!flag)
@@ -495,7 +531,8 @@ namespace GameServer
                 //修改队伍状态 并通知GameServer 向战斗系统发送创建战斗模块的消息
                 team.State = MatchTeam.MatchTeamState.INBATTLE;
             }
-           
+
+            createBattleBarrierMessage.Teams = teamIds.ToList();
             createBattleBarrierMessage.BarrierId = barrierId;
             GameServer.Instance.PostMessageToSystem<BattleSystem>(createBattleBarrierMessage);
         }
@@ -549,7 +586,7 @@ namespace GameServer
                 info.State = GetPlayerState(item);
                 response.OnlinePlayers.Add(info);
             }
-            Log.Info(response.ToJson());
+            //Log.Info(response.ToJson());
             message.reply(response);
 
 

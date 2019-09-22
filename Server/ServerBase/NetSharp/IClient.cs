@@ -30,8 +30,7 @@ namespace Crazy.NetSharp
         /// </summary>
         public static ClientOutputBuffer LockSendBuffer(int size)
         {
-            ClientOutputBuffer buf = null;
-            if (!m_outputBufferPool.TryPop(out buf))
+            if (!m_outputBufferPool.TryPop(out var buf))
             {
                 buf = new ClientOutputBuffer(size);
                 m_lastLockTime = DateTime.Now;

@@ -13,6 +13,23 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -23,6 +40,10 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,6 +56,27 @@
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>GameServer.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>3B2930800AB4CBC8BA18ACDFCEB5D0AAA91B887D</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>GameServer_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DnsClient, Version=1.2.0.0, Culture=neutral, PublicKeyToken=4574bb5573c51424, processorArchitecture=MSIL">
@@ -62,6 +104,7 @@
       <HintPath>..\..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
       <Private>True</Private>
@@ -75,20 +118,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsyncActions\DBContextAsyncAction\GameServerContextAsyncAction.cs" />
     <Compile Include="AsyncActions\DBContextAsyncAction\GameServerDBOperationDefine.cs" />
     <Compile Include="AsyncActions\DBDataDefine\GameServerDBarrierRecord.cs" />
     <Compile Include="AsyncActions\DBDataDefine\GameServerDBPlayer.cs" />
-    <Compile Include="Configure\GameServerConfig.cs" />
-    <Compile Include="AsyncActions\DBContextAsyncAction\GameServerContextAsyncAction.cs" />
+    <Compile Include="Helper\GCNotification.cs" />
     <Compile Include="LocalMessage\BattleSystemLocalMessages.cs" />
     <Compile Include="LocalMessage\PlayerContextLocalMessages.cs" />
+    <Compile Include="PlayerContext\GameServerPlayerContext_ShipHouse.cs" />
     <Compile Include="PlayerContext\PlayerContextStateMachine.cs" />
-    <Compile Include="System\BattleSystem\Entity\Battle.cs" />
-    <Compile Include="System\BattleSystem\BattleTimerManager.cs" />
-    <Compile Include="System\BattleSystem\Entity\BEntity.cs" />
     <Compile Include="System\BattleSystem\BattleSystem.cs" />
+    <Compile Include="System\BattleSystem\BattleTimerManager.cs" />
+    <Compile Include="System\BattleSystem\Entity\Battle.cs" />
+    <Compile Include="System\BattleSystem\Entity\BEntity.cs" />
     <Compile Include="System\BattleSystem\Entity\BEntityFactory.cs" />
-    <Compile Include="System\BattleSystem\Entity\BodyEntity.cs" />
     <Compile Include="System\DBSystem\MongoDBHelper.cs" />
     <Compile Include="GameServerConstDefine.cs" />
     <Compile Include="GameServer.cs" />
@@ -107,28 +150,39 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Configure\XML\GameServerConfig.config" />
     <None Include="NLog.config" />
     <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CrazyEngine\CrazyEngine.csproj">
-      <Project>{74C6EF13-2869-4869-932F-698AA795DF34}</Project>
-      <Name>CrazyEngine</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Libs\CommonLib\CommonLib.csproj">
       <Project>{0f3ecc0f-e8f4-434e-aaf9-95a912f2f565}</Project>
       <Name>CommonLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\SpaceShooterLogical\SpaceShooterLogical.csproj">
-      <Project>{0ed02981-b64c-49fa-a7dc-3f0fb6800d39}</Project>
-      <Name>SpaceShooterLogical</Name>
+    <ProjectReference Include="..\..\SpaceWanderEngine\SpaceWanderEngine.csproj">
+      <Project>{b0f2a770-aedb-4fd8-a90b-c533843d393e}</Project>
+      <Name>SpaceWanderEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SpaceWanderLogicalCommon\SpaceWanderLogicalCommon.csproj">
+      <Project>{c7caf6cc-dfeb-489d-be25-770d046b5ad9}</Project>
+      <Name>SpaceWanderLogicalCommon</Name>
     </ProjectReference>
     <ProjectReference Include="..\ServerBase\ServerBase.csproj">
       <Project>{c62bc39f-6932-45f2-a626-4faf7f836e6f}</Project>
       <Name>ServerBase</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.2 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

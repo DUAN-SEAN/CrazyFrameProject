@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Crazy.Common;
 using Crazy.NetSharp;
 using Crazy.ServerBase;
+using GameServer.Battle;
 using MongoDB.Driver;
 
 namespace GameServer
@@ -13,7 +14,7 @@ namespace GameServer
     /// <summary>
     /// 玩家现场
     /// </summary>
-    public sealed class GameServerPlayerContext:PlayerContextBase
+    public sealed partial class GameServerPlayerContext:PlayerContextBase
     {
         public GameServerPlayerContext()
         {
@@ -83,8 +84,6 @@ namespace GameServer
                    
             }
 
-
-            return Task.CompletedTask;
         }
         #region GameServerPlayerContext基础设施
         /// <summary>
@@ -96,13 +95,14 @@ namespace GameServer
         {
             string account = message.Account;
             string password = message.Password;
-            S2C_LoginMessage response = null;
+            S2C_LoginMessage response ;
             S2C_LoginMessage.Types.State result = S2C_LoginMessage.Types.State.Ok;
             //设置现场状态
             if(m_csm.SetStateCheck(PlayerContextStateMachine.EventOnAuthLoginReq) == -1)
             {
-                Log.Info("OnAuthByLogin::PlayerContextStateMachine switch Fail to LoginReq");
+                Log.Trace("OnAuthByLogin::PlayerContextStateMachine switch Fail to LoginReq ");
                 result = S2C_LoginMessage.Types.State.Fail;
+                //PostLocalMessage(new LocalMessageShutdownContext { m_shutdownRightNow = true });
                 goto RETURN;
             }
             // 进行数据库验证
@@ -130,7 +130,7 @@ namespace GameServer
                 goto RETURN;
             }
             //DB的唯一标识符代表着这个玩家应用层的Id
-            m_gameUserId = m_gameServerDBPlayer.userName.ToString();
+            m_gameUserId = m_gameServerDBPlayer.userName;
 
             //将玩家现场注册到应用层上
             var brpc = GameServer.Instance.PlayerCtxManager.RegisterPlayerContextByString(m_gameUserId, this);
@@ -140,13 +140,19 @@ namespace GameServer
                 var oldCtx = GameServer.Instance.PlayerCtxManager.FindPlayerContextByString(m_gameUserId);
                 if (oldCtx != null)
                 {
-                    //TODO:通知旧现场去关闭 逻辑先留着不写
+                    
                     oldCtx.PostLocalMessage(new LocalMessageShutdownContext {  m_shutdownRightNow= true});
+                    var loginMsg = "用户已登录,服务器关闭旧用户，请重新登录";
+                    result = S2C_LoginMessage.Types.State.Fail;
+                    Log.Debug("userName = "+m_gameUserId+"\nMessage = "+loginMsg);
+                    goto RETURN;
+
                 }
             }
             //修改玩家现场状态机
             if(m_csm.SetStateCheck(PlayerContextStateMachine.EventOnAuthLoginOK)== -1)
             {
+                
                 Log.Info("OnAuthByLogin::PlayerContextStateMachine switch Fail To LoginOk");
                 result = S2C_LoginMessage.Types.State.Fail;
                 goto RETURN;
@@ -158,6 +164,7 @@ namespace GameServer
                 result = S2C_LoginMessage.Types.State.Fail;
                 goto RETURN;
             }
+            
             //向客户端发送登陆验证成功
             RETURN:
             if(result == S2C_LoginMessage.Types.State.Ok)
@@ -168,9 +175,6 @@ namespace GameServer
             else
                 response = new S2C_LoginMessage { PlayerGameId = message.Account, State = result };
             reply(response);
-            
-            
-            return ;
         }
         /// <summary>
         /// 当登录成功时触发
@@ -191,7 +195,9 @@ namespace GameServer
         {
             string account = message.Account;
             string password = message.Password;
+#pragma warning disable CS0219 // 变量“response”已被赋值，但从未使用过它的值
             S2C_LoginMessage response = null;
+#pragma warning restore CS0219 // 变量“response”已被赋值，但从未使用过它的值
 
             //设置现场状态
             if (m_csm.SetStateCheck(PlayerContextStateMachine.EventOnSessionLoginReq) == -1)
@@ -215,7 +221,7 @@ namespace GameServer
                 goto RETURN;
             }
             //DB的唯一标识符代表着这个玩家应用层的Id
-            m_gameUserId = m_gameServerDBPlayer._id.ToString();
+            m_gameUserId = m_gameServerDBPlayer.userName.ToString();
 
             //开始验证是否已经存在userid对应的玩家现场
             GameServerPlayerContext oldCtx = (GameServerPlayerContext)GameServer.
@@ -249,7 +255,7 @@ namespace GameServer
         {
             await target.EnterLock();//要操作目标现场需要先把目标现场上锁
 
-
+            //判断状态机
             if (!target.CanAcceptContextTransform())
             {
                 Log.Info("GameServerPlayerContext::ContextTransform can not AcceptContextTransform. target sessionId = "+ target.SessionId+" state = "+  target.m_csm.State);
@@ -273,7 +279,7 @@ namespace GameServer
             // 释放访问权限
             target.LeaveLock();
 
-            Log.Info("GameServerBasePlayerContext::ContextTransform resetSucess="+ resetSucess);
+            Log.Debug("GameServerBasePlayerContext::ContextTransform resetSucess="+ resetSucess);
 
             // 向目标现场发送msg，来执行后续操作
             if (resetSucess)
@@ -396,7 +402,6 @@ namespace GameServer
                     // base.OnPlayerContextTimer(lmsg); 什么也没有做，所以直接返回
                     return;
             }
-            return ;
         }
         /// <summary>
         /// 5秒一次的扫描
@@ -464,7 +469,9 @@ namespace GameServer
         /// <returns></returns>
         private Task OnLMsgOnContextTransformOk(LocalMessageContextTransformOk msg)
         {
+#pragma warning disable CS0168 // 声明了变量“bRet”，但从未使用过
             Boolean bRet;
+#pragma warning restore CS0168 // 声明了变量“bRet”，但从未使用过
          
 
             if (msg == null)
@@ -597,8 +604,11 @@ namespace GameServer
                 Log.Info("neeRelease:" + ContextStringName);
                 Release();//CtxManager Free Context
             }
-
+            if (ContextStringName == null | ContextStringName == default) return Task.CompletedTask;
+            //通知其他独立系统响应
+            Log.Debug("通知各个系统 玩家现场关闭");
             GameServer.Instance.PostMessageToSystem<GameMatchSystem>(new ToMatchPlayerShutdownMessage { playerId = m_gameUserId});
+            GameServer.Instance.PostMessageToSystem<BattleSystem>(new ToBattlePlayerShutdownMessage{playerId =  m_gameUserId});
             return Task.CompletedTask;
 
         }
@@ -608,7 +618,7 @@ namespace GameServer
         /// <returns></returns>
         protected  Task OnDisconnectedWaitTimeOut()
         {
-            Log.Error("GameServerBasePlayerContext::OnDisconnectedWaitTimeOut");
+            Log.Debug("GameServerBasePlayerContext::OnDisconnectedWaitTimeOut");
             ShutdownContext();
             return Task.CompletedTask;
         }
@@ -618,7 +628,7 @@ namespace GameServer
         /// <returns></returns>
         protected Task OnShutDownTimeOut()
         {
-            Log.Error("GameServerBasePlayerContext::OnShutDownTimeOut");
+            Log.Debug("GameServerBasePlayerContext::OnShutDownTimeOut");
             ShutdownContext(true);
             return Task.CompletedTask;
         }
@@ -628,7 +638,7 @@ namespace GameServer
         /// <returns></returns>
         protected Task OnConnectedTimeOut()
         {
-            Log.Error("GameServerBasePlayerContext::OnConnectedTimeOut");
+            Log.Debug("GameServerBasePlayerContext::OnConnectedTimeOut Ps:连接超时、未认证释放");
             ShutdownContext(true);
             return Task.CompletedTask;
         }
@@ -643,7 +653,7 @@ namespace GameServer
             // 由于基类调用了 ServerBase.Instance.PlayerCtxManager.FreePlayerContext(this); 
             // 所以这里要实现延时删除必须覆盖基类实现,在Shutdown中 最终释放现场
 
-            Log.Info("现场感知到玩家断线，进入断线状态 playerId = "+m_gameUserId);
+           
             // 设置状态，等待timer来进行删除
             if (m_csm.SetStateCheck(PlayerContextStateMachine.EventOnDisconnected) == -1)
             {
@@ -652,8 +662,7 @@ namespace GameServer
             }
             // 记录连接断开的时间
             m_disconnectedTime = DateTime.Now;
-            m_disconnetedWaitTimeOutTime = m_disconnectedTime.AddMilliseconds(GameServer.Instance.m_gameServerGlobalConfig.GameServerPlayerContext.DisconnectTimeOut);
-            Log.Debug("GameServerBasePlayerContext::OnDisconnected disconnectedTime"+m_disconnectedTime);
+            
 
             // 如果已经在shutdown过程中 
             if (m_shutdownTime != DateTime.MaxValue)
@@ -664,10 +673,15 @@ namespace GameServer
             // 如果不处于断线等待状态也要关闭现场 也就是已经在断线状态了 也要关闭
             if (m_csm.State == PlayerContextStateMachine.StateDisconnected)
             {
-                
+                Log.Debug("现场感知到玩家未登录断线,直接关闭现场");
                 ShutdownContext();
                 return Task.CompletedTask;
             }
+            Log.Debug("现场感知到玩家断线，进入断线状态 playerId = " + m_gameUserId);
+            //Log.Debug("GameServerBasePlayerContext::OnDisconnected NowTime = " + m_disconnectedTime);
+            //Log.Debug("GameServerBasePlayerContext::OnDisconnected DisconnectTime = " + GameServer.Instance.m_gameServerGlobalConfig.GameServerPlayerContext.DisconnectTimeOut);
+            m_disconnetedWaitTimeOutTime = m_disconnectedTime.AddMilliseconds(GameServer.Instance.m_gameServerGlobalConfig.GameServerPlayerContext.DisconnectTimeOut);
+            Log.Debug("GameServerBasePlayerContext::OnDisconnected disconnectedTime = " + m_disconnetedWaitTimeOutTime);
             return Task.CompletedTask ;
         }
         /// <summary>
@@ -735,7 +749,7 @@ namespace GameServer
         /// <summary>
         /// 数据库代表玩家的实体player
         /// </summary>
-        private GameServerDBPlayer m_gameServerDBPlayer;
+        public GameServerDBPlayer m_gameServerDBPlayer;
         /// <summary>
         /// 玩家现场状态机
         /// </summary>
@@ -747,19 +761,19 @@ namespace GameServer
         /// <summary>
         /// 记录断线的时间
         /// </summary>
-        protected DateTime m_disconnectedTime = DateTime.MaxValue;
+        private DateTime m_disconnectedTime = DateTime.MaxValue;
         /// <summary>
         /// 记录的断线超时时间
         /// </summary>
-        protected DateTime m_disconnetedWaitTimeOutTime = DateTime.MaxValue;
+        private DateTime m_disconnetedWaitTimeOutTime = DateTime.MaxValue;
         /// <summary>
         /// 是否正在断线重联的恢复中
         /// </summary>
-        protected bool m_resumingFromWaitForReconnect;
+        private bool m_resumingFromWaitForReconnect;
         /// <summary>
         /// 玩家连接时间
         /// </summary>
-        protected DateTime m_connectedTime = DateTime.MaxValue;
+        private DateTime m_connectedTime = DateTime.MaxValue;
 
         /// <summary>
         /// 用来tick玩家现场的timerid

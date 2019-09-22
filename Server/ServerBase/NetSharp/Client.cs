@@ -146,7 +146,7 @@ namespace Crazy.NetSharp
             bool sendOk = true;
             try
             {
-                Log.Info("发送一条消息 Count = " + data.m_dataLen);
+                //Log.Info("发送一条消息 Count = " + data.m_dataLen);
                 await m_tcpClient.GetStream().WriteAsync(data.m_buffer, 0, data.m_dataLen, m_cancellationToken);
             }
             catch (Exception)
@@ -164,7 +164,7 @@ namespace Crazy.NetSharp
                 //将buff放入缓存队列中
                 ClientOutputBuffer.UnlockSendBuffer(data);
             }
-            Log.Info($"发送一条消息  {sendOk}  ");
+            ///Log.Info($"发送一条消息  {sendOk}  ");
             return sendOk;
         }
 

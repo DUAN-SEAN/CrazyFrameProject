@@ -21,15 +21,33 @@ namespace SpaceShip.Model
     public class AirCraftInfo
     {
 
+#pragma warning disable CS0169 // 从不使用字段“AirCraftInfo.Hp”
         private float Hp;
+#pragma warning restore CS0169 // 从不使用字段“AirCraftInfo.Hp”
+#pragma warning disable CS0169 // 从不使用字段“AirCraftInfo.Mp”
         private float Mp;
+#pragma warning restore CS0169 // 从不使用字段“AirCraftInfo.Mp”
+#pragma warning disable CS0169 // 从不使用字段“AirCraftInfo.Name”
         private string Name;
+#pragma warning restore CS0169 // 从不使用字段“AirCraftInfo.Name”
+#pragma warning disable CS0169 // 从不使用字段“AirCraftInfo.Weapon”
         private List<Weapon> Weapon;
+#pragma warning restore CS0169 // 从不使用字段“AirCraftInfo.Weapon”
+#pragma warning disable CS0169 // 从不使用字段“AirCraftInfo.AircraftType”
         private int AircraftType;
+#pragma warning restore CS0169 // 从不使用字段“AirCraftInfo.AircraftType”
+#pragma warning disable CS0169 // 从不使用字段“AirCraftInfo.speed”
         private float speed;
+#pragma warning restore CS0169 // 从不使用字段“AirCraftInfo.speed”
+#pragma warning disable CS0169 // 从不使用字段“AirCraftInfo.acceleratedSpeed”
         private float acceleratedSpeed;
+#pragma warning restore CS0169 // 从不使用字段“AirCraftInfo.acceleratedSpeed”
+#pragma warning disable CS0169 // 从不使用字段“AirCraftInfo.Maxspeed”
         private float Maxspeed;
+#pragma warning restore CS0169 // 从不使用字段“AirCraftInfo.Maxspeed”
+#pragma warning disable CS0169 // 从不使用字段“AirCraftInfo.MaxacceleratedSpeed”
         private float MaxacceleratedSpeed;
+#pragma warning restore CS0169 // 从不使用字段“AirCraftInfo.MaxacceleratedSpeed”
 
     }
 

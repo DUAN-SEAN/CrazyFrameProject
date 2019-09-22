@@ -1,37 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Crazy.Common;
-using Crazy.NetSharp;
+﻿using Crazy.Common;
 using Crazy.ServerBase;
 using GameServer.Battle;
+using System;
+using System.Reflection;
+using System.Runtime;
+
 
 namespace GameServer
 {
-    public sealed class GameServer:ServerBase
+    public sealed class GameServer : ServerBase
     {
-        public GameServer():base()
+        public GameServer() : base()
         {
             m_instance = this;
         }
         /// <summary>
         /// 静态实例
         /// </summary>
-        public static new GameServer Instance
-        { get { return (GameServer)(ServerBase.Instance); } }
+        public new static GameServer Instance => (GameServer)(ServerBase.Instance);
 
         public override bool Initialize<GlobalConfigureType, PlayerContextBase>(string globalPath, Type plyaerContextType, IMessagePacker messagePraser, string serverName)
         {
             //初始化程序集
-            TypeManager.Instance.Add(DLLType.Common,Assembly.GetAssembly(typeof(TypeManager)));
+            TypeManager.Instance.Add(DLLType.Common, Assembly.GetAssembly(typeof(TypeManager)));
             TypeManager.Instance.Add(DLLType.ServerBase, Assembly.GetAssembly(typeof(ServerBase)));
             TypeManager.Instance.Add(DLLType.GameServer, Assembly.GetAssembly(typeof(GameServer)));
 
-            if(!base.Initialize<GlobalConfigureType, PlayerContextBase>(globalPath, plyaerContextType, messagePraser, serverName))
+            if (!base.Initialize<GlobalConfigureType, PlayerContextBase>(globalPath, plyaerContextType, messagePraser, serverName))
             {
                 return false;
             }
@@ -42,12 +37,18 @@ namespace GameServer
 
             //数据库配置
             var dbConfig = m_gameServerGlobalConfig.DBConfigInfos[0];
-            Log.Info($"ip:{dbConfig.ConnectHost} port:{dbConfig.Port} serviceName:{dbConfig.DataBase} username:{dbConfig.UserName} password:{dbConfig.Password}");
+            //Log.Info($"ip:{dbConfig.ConnectHost} port:{dbConfig.Port} serviceName:{dbConfig.DataBase} username:{dbConfig.UserName} password:{dbConfig.Password}");
 
+            //GCNotification.GCDone += i =>
+            //{
+            //    Log.Debug("GC = " + i);
 
+            //};
+            Log.Debug("GameServer is running with server GC = " + GCSettings.IsServerGC);
             //MongoDBHelper.CreateDBClient(); //测试
             //mongodb测试
-            MongoDBHelper.Test();
+
+            //MongoDBHelper.Test();
 
 
             //初始化功能服务的各个模块系统
@@ -56,12 +57,7 @@ namespace GameServer
                 Log.Info("初始化模块系统失败");
                 return false;
             }
-
-
-
             //下面可以写启动逻辑线程 将上述游戏逻辑丢到逻辑线程中处理
-
-
             return true;
         }
         /// <summary>
@@ -82,7 +78,7 @@ namespace GameServer
                 return false;
             }
             m_systemDic.Add(gameMatchSystem.GetType(), gameMatchSystem);
-            // 战斗系统初始化
+            //战斗系统初始化
             var battleSystem = new BattleSystem();
             if (!battleSystem.Initialize())
             {
@@ -101,10 +97,14 @@ namespace GameServer
             return true;
         }
 
+        public T GetSystem<T>() where T : BaseSystem
+        {
+            m_systemDic.TryGetValue(typeof(T), out BaseSystem t);
+            return t as T;
+        }
 
 
 
-       
         /// <summary>
         /// 获取当前服务器特定配置数据
         /// </summary>
@@ -114,6 +114,7 @@ namespace GameServer
         /// </summary>
         public SampleGameServerAsyncActionSequenceQueuePool AsyncActionQueuePool { get; private set; }
 
-      
+
+
     }
 }

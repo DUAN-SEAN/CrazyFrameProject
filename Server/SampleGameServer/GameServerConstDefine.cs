@@ -57,18 +57,51 @@ namespace GameServer
         /// 更新在线玩家集合，消息为来自客户端rpc请求
         /// </summary>
         public const Int32 UpdateOnlinePlayerList = 1059;
+
+        /// <summary>
+        /// 释放战斗 ，通知匹配系统
+        /// </summary>
+        public const Int32 ReleaseBattleToMatchTeam = 1060;
+
+
         #endregion
         #region BattleSystem 1101-1200
         /// <summary>
         /// 创建战斗关卡
         /// </summary>
         public const Int32 BattleSystemCreateBattleBarrier = 1101;
+        /// <summary>
+        /// 退出战斗关卡
+        /// </summary>
+        public const Int32 BattleSystemExitBattleBarrier = 1102;
+        /// <summary>
+        /// 上传战斗指令
+        /// </summary>
+        public const Int32 BattleSystemCommandUpLoad = 1103;
+        /// <summary>
+        /// 客户端准备战斗
+        /// </summary>
+        public const Int32 BattleSystemClientReadyBattle = 1104;
+        /// <summary>
+        /// 关闭玩家现场
+        /// </summary>
+        public const Int32 BattleSystemPlayerShutdown = 1105;
+        /// <summary>
+        /// 战斗系统需要释放battleTimer
+        /// </summary>
+        public const Int32 BattleSystemNeedReleaseBattleTimer = 1106;
         #endregion
 
         /// <summary>
         /// 玩家现场上的timer扫描时间间隔，单位毫秒
         /// </summary>
-        public const Int32 GameServerPlayerCtxTimerPeriod = 5000;
+        public const Int32 GameServerPlayerCtxTimerPeriod = 1000;//1s
+        /// <summary>
+        /// Battle最多等待玩家时长
+        /// </summary>
+        public const Int32 BattleSystemWaitPlayerReadySuperiorTime = 60000;//1分钟
+
+
 
 
     }
@@ -114,5 +147,10 @@ namespace GameServer
         /// 玩家创建时间
         /// </summary>
         public const String PLAYER_CREATETIME = "createTime";
+
+        /// <summary>
+        /// 玩家飞船配置
+        /// </summary>
+        public const String PLAYER_SHIPINFO = "playerShip";
     }
 }

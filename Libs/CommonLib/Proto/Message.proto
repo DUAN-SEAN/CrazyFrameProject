@@ -156,3 +156,41 @@ message C2S_ReConnectByLogin  // IMessage
 	string Account = 1;
 	string Password = 2;
 }
+
+//以下为其他通信消息
+message C2S_SpeakToTeamReq  // IMessage
+{
+	int32 RpcId = 90;
+	string LaunchPlayerId = 1;
+	repeated string PlayerIds = 2;
+	uint64 MatchTeamId = 3;
+	bytes Data = 4;
+}
+
+//以下为其他通信消息
+message S2C_SpeakToTeamAck  // IMessage
+{
+	int32 RpcId = 90;
+	string LaunchPlayerId = 1;
+	uint64 MatchTeamId = 2;
+	bytes Data = 3;
+}
+
+//以下为其他通信消息
+message C2S_SpeakToBattleReq  // IMessage
+{
+	int32 RpcId = 90;
+	string LaunchPlayerId = 1;
+	repeated string PlayerIds = 2;
+	uint64 BattleId = 3;
+	bytes Data = 4;
+}
+
+//以下为其他通信消息
+message S2C_SpeakToBattleAck  // IMessage
+{
+	int32 RpcId = 90;
+	string LaunchPlayerId = 1;
+	uint64 BattleId = 2;
+	bytes Data = 3;
+}

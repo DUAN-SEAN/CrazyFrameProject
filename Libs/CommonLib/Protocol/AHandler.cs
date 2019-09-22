@@ -15,20 +15,18 @@ namespace Crazy.Common
 
         public void Handle(ISession sender, object msg)
         {
-            Message message = msg as Message;
-            
-            if (message == null)
+            if (!(msg is Message message))
             {
                 Log.Error($"消息类型转换错误: {msg.GetType().Name} to {typeof(Message).Name}");
                 return;
             }
-            if(sender.SessionId == 0)
+            if (sender.SessionId == 0)
             {
                 Log.Error("Session ID is 0");
                 return;
             }
             Run(sender, message);
-            MessageFactory.Recycle(message as IMessage);
+            //MessageFactory.Recycle(message as IMessage);
         }
     }
 
@@ -72,7 +70,7 @@ namespace Crazy.Common
                     response.RpcId = rpcId;
                     sender.Reply(response);
                 });
-                MessageFactory.Recycle(request as IMessage);//2019 7 17 更新对象池
+                //MessageFactory.Recycle(request as IMessage);//2019 7 17 更新对象池
             }
             catch (Exception e)
             {

@@ -23,13 +23,12 @@ namespace Crazy.ServerBase
         /// </summary>
         /// <param name="client">client对象</param>
         /// <param name="clientProtoDictionary">协议字典</param>
-        public void AttachClient(IClient client,OpcodeTypeDictionary opcodeTypeDictionary)
+        public void AttachClient(IClient client)
         {
             if (m_client != null)
             {
                 m_client.Close();
             }
-            m_OpcodeTypeDictionary = opcodeTypeDictionary;
             m_client = client;
           
         }
@@ -75,6 +74,7 @@ namespace Crazy.ServerBase
 
 
         #region IClientEventHandler
+#pragma warning disable CS1998 // 此异步方法缺少 "await" 运算符，将以同步方式运行。请考虑使用 "await" 运算符等待非阻止的 API 调用，或者使用 "await Task.Run(...)" 在后台线程上执行占用大量 CPU 的工作。
         /// <summary>
         /// 默认网络消息的处理是解析protobuf消息 
         /// </summary>
@@ -82,6 +82,7 @@ namespace Crazy.ServerBase
         /// <param name="dataAvailable"></param>
         /// <returns></returns>
         public virtual async Task<int> OnData(byte[] buffer, int dataAvailable)
+#pragma warning restore CS1998 // 此异步方法缺少 "await" 运算符，将以同步方式运行。请考虑使用 "await" 运算符等待非阻止的 API 调用，或者使用 "await Task.Run(...)" 在后台线程上执行占用大量 CPU 的工作。
         {
             if (buffer == null || dataAvailable < 1)
             {
@@ -105,17 +106,13 @@ namespace Crazy.ServerBase
                 if (dataAvailable - dataOffset < uint16Length * 2)
                     return dataOffset;
 
-                Type msgType = null;
-                Object deserializeObject = null;
-                MemoryStream deserializeBuff = null;
-                bool flag;
-                var byteHandled = ServerBase.Instance.UnpackProtobufObject(buffer, dataAvailable, dataOffset, out msgType, out deserializeObject, out deserializeBuff,out flag);
+                var byteHandled = ServerBase.Instance.UnpackProtobufObject(buffer, dataAvailable, dataOffset, out var msgType, out var deserializeObject, out _,out var flag);
                 if (byteHandled == 0) return dataOffset;
 
+                var message = (IMessage) deserializeObject;
                 try
                 {
                     //这里调用消息处理
-                    IMessage message = deserializeObject as IMessage;
                     if(message == null)
                     {
                         Log.Error($"Message Deserialize FAIL MessageType = {deserializeObject.GetType()}");
@@ -224,7 +221,7 @@ namespace Crazy.ServerBase
 
 
 
-                    IResponse response = rpcmessage.MessageInfo.Message as IResponse;
+                    var response = (IResponse) rpcmessage.MessageInfo.Message;
                     if (response == null)
                     {
                         throw new Exception($"flag is response, but message is not! {rpcmessage.MessageInfo.Opcode}");
@@ -254,7 +251,12 @@ namespace Crazy.ServerBase
                         Log.Debug("要发送的网络消息为空");
                         return;
                     }
-                    Log.Info("系统向玩家发送消息 " + snm.PlayerId + "  " + snm.Message.GetType());
+                    //Log.Info("系统向玩家发送消息 " + snm.PlayerId + "  " + snm.Message.GetType());
+                    //S2C_SyncLevelStateBattleMessage syncLevelStateBattleMessage = snm.Message as S2C_SyncLevelStateBattleMessage;
+                    //if (syncLevelStateBattleMessage != null)
+                    //{
+                    //    Log.Info("服务器转发延迟 = "+(DateTime.Now.Ticks - syncLevelStateBattleMessage.Time)/10000);
+                    //}
                     Send(snm.Message);
                    
                         
@@ -355,8 +357,15 @@ namespace Crazy.ServerBase
             // 客户端代理不可用
             if (m_client == null || m_client.Disconnected)
                 return -1;
-
-            Task t = Send(ServerBase.Instance.PackProtobufObject(message));
+            try
+            {
+                Task t = Send(ServerBase.Instance.PackProtobufObject(message));
+            }
+            catch (Exception e)
+            {
+                Log.Error(e +"  "+message.GetType().ToString()+" opcode = "+OpcodeTypeDictionary.Instance.GetIdByType(message.GetType()));
+            }
+        
             
             
             return 0;
@@ -370,12 +379,12 @@ namespace Crazy.ServerBase
             }
             else
             {
-                Log.Error("SendPackageImpl error buff==null");
+                Log.Error("PlayerContextBase::SendPackageImpl error buff ==null");
             }
             var flag = await m_client.Send(buff);
             if(flag == false)
             {
-                Log.Error("发送消息失败");
+                throw new Exception("发送消息失败");
             }
         }
         public Task<IResponse> Call(IRequest request)
@@ -414,11 +423,6 @@ namespace Crazy.ServerBase
         /// 玩家现场和通信体绑定
         /// </summary>
         protected IClient m_client;
-        /// <summary>
-        /// 协议字典集
-        /// </summary>
-        private OpcodeTypeDictionary m_OpcodeTypeDictionary;
-   
         /// <summary>
         /// 是否已经释放
         /// </summary>

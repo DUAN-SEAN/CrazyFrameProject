@@ -4,8 +4,8 @@ using XMLDataLib;
 using System.IO;
 using SpaceShip.Base;
 using CrazyEngine;
-using SpaceShip.Factory;
-using SpaceShip.AI;
+
+
 namespace SpaceShip.System
 {
 
@@ -72,118 +72,120 @@ namespace SpaceShip.System
                     //LogUI.Log("circledata 赋值"+circles);
                     XmlRectangle[] rectangles = leveldatas.SceneDatasInfo.xmlRectangles;
                     //LogUI.Log("rectangledata 赋值"+rectangles);
-                    if (points != null)
-                    {
-                        foreach (XmlPoint point in points)
-                        {
-                            //TODO 特化物体类型
-                            switch (point.EntityType)
-                            {
-                                case 0:
-                                    levelData.AddEntity(new PointEntity(
-                                        new Vector2(point.position_x, point.position_y)));
-                                    break;
-                                default:
-                                    break;
-                            }
+                    //if (points != null)
+                    //{
+                    //    foreach (XmlPoint point in points)
+                    //    {
+                    //        //TODO 特化物体类型
+                    //        switch (point.EntityType)
+                    //        {
+                    //            case 0:
+                    //                levelData.AddEntity(new PointEntity(
+                    //                    new Vector2(point.position_x, point.position_y)));
+                    //                break;
+                    //            default:
+                    //                break;
+                    //        }
 
-                        }
-                        //LogUI.Log("Point Done" + points.Length);
+                    //    }
+                    //    //LogUI.Log("Point Done" + points.Length);
 
-                    }
+                    //}
 
-                    if (circles != null)
-                    {
-                        foreach (XmlCircle circle in circles)
-                        {
-                            //TODO 特化物体类型
-                            switch (circle.EntityType)
-                            {
-                                case 0:
-                                    levelData.AddEntity(new CircleEntity(
-                                        new Vector2(circle.position_x, circle.position_y),
-                                        circle.Radius));
-                                    break;
-                                case 1:
-                                    levelData.AddEntity(new MeteoriteInBody(
-                                        new Vector2(circle.position_x, circle.position_y),
-                                        circle.Radius)
-                                    {
-                                        Forward = new Vector2(circle.Forward_x, circle.Forward_y),
-                                        Label = (Label)circle.Label
-                                    });
-                                    break;
-                                default:
-                                    break;
-                            }
+                    //if (circles != null)
+                    //{
+                    //    foreach (XmlCircle circle in circles)
+                    //    {
+                    //        //TODO 特化物体类型
+                    //        switch (circle.EntityType)
+                    //        {
+                    //            case 0:
+                    //                levelData.AddEntity(new CircleEntity(
+                    //                    new Vector2(circle.position_x, circle.position_y),
+                    //                    circle.Radius));
+                    //                break;
+                    //            case 1:
+                    //                levelData.AddEntity(new MeteoriteInBody(
+                    //                    new Vector2(circle.position_x, circle.position_y),
+                    //                    circle.Radius)
+                    //                {
+                    //                    Forward = new Vector2(circle.Forward_x, circle.Forward_y),
+                    //                    Label = (Label)circle.Label
+                    //                });
+                    //                break;
+                    //            default:
+                    //                break;
+                    //        }
 
-                        }
+                    //    }
 
-                        //LogUI.Log("Circle Done" + circles.Length);
-                    }
+                    //    //LogUI.Log("Circle Done" + circles.Length);
+                    //}
 
-                    if (rectangles != null)
-                    {
-                        foreach (XmlRectangle rectangle in rectangles)
-                        {
-                            switch (rectangle.EntityType)
-                            {
-                                //TODO 特化物体类型
-                                case 0:
-                                    levelData.AddEntity(new RectangleEntity(
-                                        new Vector2(rectangle.Min_x, rectangle.Min_y),
-                                        new Vector2(rectangle.Max_x, rectangle.Max_y)));
-                                    break;
-                                case 1:
+                    //if (rectangles != null)
+                    //{
+                    //    foreach (XmlRectangle rectangle in rectangles)
+                    //    {
+                    //        switch (rectangle.EntityType)
+                    //        {
+                    //            //TODO 特化物体类型
+                    //            case 0:
+                    //                levelData.AddEntity(new RectangleEntity(
+                    //                    new Vector2(rectangle.Min_x, rectangle.Min_y),
+                    //                    new Vector2(rectangle.Max_x, rectangle.Max_y)));
+                    //                break;
+                    //            case 1:
 
-                                    PlayerInBody body_ship = new PlayerInBody(
-                                        new Vector2(rectangle.Min_x, rectangle.Min_y),
-                                        new Vector2(rectangle.Max_x, rectangle.Max_y))
-                                    {
-                                        Forward = new Vector2(rectangle.Forward_x, rectangle.Forward_y),
-                                        Label = (Label)rectangle.Label
-                                    };
+                    //                PlayerInBody body_ship = new PlayerInBody(
+                    //                    new Vector2(rectangle.Min_x, rectangle.Min_y),
+                    //                    new Vector2(rectangle.Max_x, rectangle.Max_y))
+                    //                {
+                    //                    Forward = new Vector2(rectangle.Forward_x, rectangle.Forward_y),
+                    //                    Label = (Label)rectangle.Label
+                    //                };
 
-                                    levelData.AddEntity(body_ship);
-                                    break;
-                                case 2:
-                                    //LogUI.Log("aiship");
-                                    AISmallShipInBody body_ship2 = new AISmallShipInBody(
-                                        new Vector2(rectangle.Min_x, rectangle.Min_y),
-                                        new Vector2(rectangle.Max_x, rectangle.Max_y))
-                                    {
-                                        Forward = new Vector2(rectangle.Forward_x, rectangle.Forward_y),
-                                        Label = (Label)rectangle.Label
-                                    };
+                    //                levelData.AddEntity(body_ship);
+                    //                break;
+                    //            case 2:
+                    //                //LogUI.Log("aiship");
+                    //                AISmallShipInBody body_ship2 = new AISmallShipInBody(
+                    //                    new Vector2(rectangle.Min_x, rectangle.Min_y),
+                    //                    new Vector2(rectangle.Max_x, rectangle.Max_y))
+                    //                {
+                    //                    Forward = new Vector2(rectangle.Forward_x, rectangle.Forward_y),
+                    //                    Label = (Label)rectangle.Label
+                    //                };
 
-                                    levelData.AddEntity(body_ship2);
-                                    //LogUI.Log("aiship done");
-                                    break;
-                                case 3:
-                                    //LogUI.Log("Boss ship");
-                                    AICarrierShipInBody carrierShipInBody = new AICarrierShipInBody(
-                                        new Vector2(rectangle.Min_x, rectangle.Min_y),
-                                        new Vector2(rectangle.Max_x, rectangle.Max_y))
-                                    {
-                                        Forward = new Vector2(rectangle.Forward_x, rectangle.Forward_y),
-                                        Label = (Label)rectangle.Label
-                                    };
-                                    levelData.AddEntity(carrierShipInBody);
-                                    //LogUI.Log("Boss done");
-                                    break;
+                    //                levelData.AddEntity(body_ship2);
+                    //                //LogUI.Log("aiship done");
+                    //                break;
+                    //            case 3:
+                    //                //LogUI.Log("Boss ship");
+                    //                AICarrierShipInBody carrierShipInBody = new AICarrierShipInBody(
+                    //                    new Vector2(rectangle.Min_x, rectangle.Min_y),
+                    //                    new Vector2(rectangle.Max_x, rectangle.Max_y))
+                    //                {
+                    //                    Forward = new Vector2(rectangle.Forward_x, rectangle.Forward_y),
+                    //                    Label = (Label)rectangle.Label
+                    //                };
+                    //                levelData.AddEntity(carrierShipInBody);
+                    //                //LogUI.Log("Boss done");
+                    //                break;
 
-                                default:
-                                    break;
-                            }
-                        }
+                    //            default:
+                    //                break;
+                    //        }
+                    //    }
                         //LogUI.Log("Rectangle Done" + rectangles.Length);
-                    }
+                //    }
 
-                    levelDatasDict.Add(levelData.id, levelData);
-                    levelnum += 1;
+                //    levelDatasDict.Add(levelData.id, levelData);
+                //    levelnum += 1;
                 }
             }
+#pragma warning disable CS0168 // 声明了变量“e”，但从未使用过
             catch (Exception e)
+#pragma warning restore CS0168 // 声明了变量“e”，但从未使用过
             {
                 //LogUI.LogError(e);
                 //LogUI.Log(path);
@@ -223,7 +225,9 @@ namespace SpaceShip.System
 
         }
 
+#pragma warning disable CS0414 // 字段“LevelDataSystem.levelnum”已被赋值，但从未使用过它的值
         private int levelnum;
+#pragma warning restore CS0414 // 字段“LevelDataSystem.levelnum”已被赋值，但从未使用过它的值
         private readonly Dictionary<int, LevelData> levelDatasDict;
         private static LevelDataSystem m_leveldataSystem;
     }

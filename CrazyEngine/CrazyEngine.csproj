@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{74C6EF13-2869-4869-932F-698AA795DF34}</ProjectGuid>
+    <ProjectGuid>{F0522629-274C-4631-B2F3-7301AA933B4D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CrazyEngine</RootNamespace>
@@ -12,7 +12,6 @@
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,33 +41,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\Body.cs" />
-    <Compile Include="Base\ObjectBase.cs" />
-    <Compile Include="Base\Vector2.cs" />
-    <Compile Include="Common\BaseStruct\Circle.cs" />
-    <Compile Include="Common\BaseStruct\Line.cs" />
-    <Compile Include="Common\BaseStruct\Point.cs" />
-    <Compile Include="Common\BaseStruct\Rectangle.cs" />
-    <Compile Include="Common\Collider.cs" />
-    <Compile Include="Common\Collision.cs" />
-    <Compile Include="Common\Id.cs" />
-    <Compile Include="Common\World.cs" />
-    <Compile Include="Core\Engine.cs" />
-    <Compile Include="Core\TimerManager.cs" />
-    <Compile Include="IGetWorld.cs" />
-    <Compile Include="Interface\IBaseStruct.cs" />
-    <Compile Include="ITickable.cs" />
-    <Compile Include="Model\CircleEntity.cs" />
-    <Compile Include="Model\LineEntity.cs" />
-    <Compile Include="Model\PointEntity.cs" />
-    <Compile Include="Model\RectangleEntity.cs" />
-    <Compile Include="Model\Spaceship.cs" />
+    <Compile Include="CrazyEngine\Base\Body.cs" />
+    <Compile Include="CrazyEngine\Base\Composite.cs" />
+    <Compile Include="CrazyEngine\Base\Constraint.cs" />
+    <Compile Include="CrazyEngine\Base\Factory.cs" />
+    <Compile Include="CrazyEngine\Base\ObjBase.cs" />
+    <Compile Include="CrazyEngine\Base\World.cs" />
+    <Compile Include="CrazyEngine\Common\Axes.cs" />
+    <Compile Include="CrazyEngine\Common\Bound.cs" />
+    <Compile Include="CrazyEngine\Common\Collision.cs" />
+    <Compile Include="CrazyEngine\Common\Contact.cs" />
+    <Compile Include="CrazyEngine\Common\EnumHelper.cs" />
+    <Compile Include="CrazyEngine\Common\Id.cs" />
+    <Compile Include="CrazyEngine\Common\ObjType.cs" />
+    <Compile Include="CrazyEngine\Common\Pair.cs" />
+    <Compile Include="CrazyEngine\Common\Pairs.cs" />
+    <Compile Include="CrazyEngine\Common\Point.cs" />
+    <Compile Include="CrazyEngine\Common\Vertices.cs" />
+    <Compile Include="CrazyEngine\Core\Engine.cs" />
+    <Compile Include="CrazyEngine\Core\Helper.cs" />
+    <Compile Include="CrazyEngine\Core\Runner.cs" />
+    <Compile Include="CrazyEngine\External\BodyExtensions.cs" />
+    <Compile Include="CrazyEngine\External\Collider.cs" />
+    <Compile Include="CrazyEngine\External\CollisionEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="System\CollisionSystem.cs" />
-    <Compile Include="System\MoveSystem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controller\" />
+    <ProjectReference Include="..\Libs\CommonLib\CommonLib.csproj">
+      <Project>{0F3ECC0F-E8F4-434E-AAF9-95A912F2F565}</Project>
+      <Name>CommonLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

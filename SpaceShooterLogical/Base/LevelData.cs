@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CrazyEngine;
+using CrazyEngine.Base;
+
 namespace SpaceShip.Base
 {
     public class LevelData
