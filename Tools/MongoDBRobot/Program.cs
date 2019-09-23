@@ -8,10 +8,17 @@ namespace MongoDBRobot
 {
     class A
     {
-
+        public void Dis()
+        {
+            Console.WriteLine("A");
+        }
     }
     class BB : A
     {
+        public void Dis()
+        {
+            Console.WriteLine("B");
+        }
 
     }
 
@@ -24,11 +31,11 @@ namespace MongoDBRobot
             BB b = new BB();
             A a = b;
             Console.WriteLine(a.GetType());
+            a.Dis();
 
+            //var pre = PredictPosition(Vector2.Zero, new Vector2(0, 1), new Vector2(0, 75), 1f);
 
-            var pre = PredictPosition(Vector2.Zero, new Vector2(0, 1), new Vector2(0, 75), 1f);
-
-            Console.WriteLine(pre.ToString());
+            //.WriteLine(pre.ToString());
 
             //ObjectId
 
