@@ -3,32 +3,16 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Threading.Tasks;
 
 namespace MongoDBRobot
 {
-    class A
-    {
-
-    }
-    class BB : A
-    {
-
-    }
-
+   
+ 
     class Program
     {
         static void Main(string[] args)
         {
-
-            //Test1();
-            BB b = new BB();
-            A a = b;
-            Console.WriteLine(a.GetType());
-
-
-            var pre = PredictPosition(Vector2.Zero, new Vector2(0, 1), new Vector2(0, 75), 1f);
-
-            Console.WriteLine(pre.ToString());
 
             //ObjectId
 
